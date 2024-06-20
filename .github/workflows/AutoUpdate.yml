@@ -16,9 +16,18 @@ jobs:
       - name: Get latest release info
         id: get_release
         run: |
-          latest_release=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/releases/latest)
-          echo "Latest release response: ${latest_release}"  # 디버깅을 위한 출력
+          latest_releases=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/releases)
+          echo "Latest releases response: ${latest_releases}"  # 디버깅을 위한 출력
+          if echo "$latest_releases" | jq -e .message >/dev/null; then
+            echo "Error: $(echo "$latest_releases" | jq -r .message)"
+            exit 1
+          fi
+          latest_release=$(echo "$latest_releases" | jq -r '.[0]')
           asset_url=$(echo "$latest_release" | jq -r '.assets[] | select(.name | endswith(".7z")) | .browser_download_url')
+          if [ -z "$asset_url" ]; then
+            echo "Error: No .7z asset found in the latest release."
+            exit 1
+          fi
           echo "asset_url=${asset_url}" >> $GITHUB_ENV
 
       - name: Download latest release asset
