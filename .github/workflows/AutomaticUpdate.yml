@@ -3,7 +3,7 @@ name: Update HTML from GitLab
 on:
   schedule:
     - cron: "0 0 * * 0"  # 매주 일요일 자정에 실행
-    workflow_dispatch:  # 수동으로 실행할 수 있도록 추가
+  workflow_dispatch:  # 수동으로 실행할 수 있도록 추가
 
 jobs:
   update_html:
@@ -26,6 +26,16 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh
+
+      - name: Authenticate with GitHub CLI
+        run: gh auth login --with-token <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>
 
       - name: Upload HTML files to GitHub
         run: |
