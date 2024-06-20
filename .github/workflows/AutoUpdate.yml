@@ -1,0 +1,58 @@
+name: Update HTML from GitLab
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # 매주 일요일 자정에 실행
+  workflow_dispatch:  # 수동으로 실행할 수 있도록 추가
+
+jobs:
+  update_html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get the latest pipeline ID
+        id: get_pipeline
+        run: |
+          project_id=$(curl -s --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
+              "https://gitlab.com/api/v4/projects?search=dol-kr" \
+              | jq -r '.[0].id')
+          latest_pipeline_id=$(curl -s --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
+              "https://gitlab.com/api/v4/projects/${project_id}/pipelines" \
+              | jq -r '.[0].id')
+          echo "project_id=${project_id}" >> $GITHUB_ENV
+          echo "latest_pipeline_id=${latest_pipeline_id}" >> $GITHUB_ENV
+
+      - name: Get the job ID for build:html
+        id: get_job
+        run: |
+          job_id=$(curl -s --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
+              "https://gitlab.com/api/v4/projects/${{ env.project_id }}/pipelines/${{ env.latest_pipeline_id }}/jobs" \
+              | jq -r '.[] | select(.name=="build:html") | .id')
+          echo "job_id=${job_id}" >> $GITHUB_ENV
+
+      - name: Download artifacts from GitLab
+        run: |
+          curl --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
+          -o build.zip \
+          -L "https://gitlab.com/api/v4/projects/${{ env.project_id }}/jobs/${{ env.job_id }}/artifacts"
+
+      - name: Unzip HTML files
+        run: unzip build.zip -d extracted_html
+
+      - name: Move HTML files to desired path
+        run: mv extracted_html/* ${{ github.workspace }}/DoL/
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Commit and push changes
+        run: |
+          cd ${{ github.workspace }}
+          git add .
+          git commit -m "Update HTML files from latest GitLab pipeline"
+          git push origin main
