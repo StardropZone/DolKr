@@ -20,7 +20,7 @@ jobs:
           latest_pipeline=$(curl -s --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
               "https://gitlab.com/api/v4/projects/${project_id}/pipelines")
           echo "Latest pipeline response: ${latest_pipeline}"  # 디버깅을 위한 출력
-          latest_pipeline_id=$(echo $latest_pipeline | jq -r '.[0].id')
+          latest_pipeline_id=$(echo "$latest_pipeline" | jq -r '.[0].id')
           echo "Extracted latest_pipeline_id: ${latest_pipeline_id}"  # 디버깅을 위한 출력
           echo "latest_pipeline_id=${latest_pipeline_id}" >> $GITHUB_ENV
 
