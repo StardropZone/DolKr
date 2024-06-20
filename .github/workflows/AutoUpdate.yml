@@ -17,11 +17,18 @@ jobs:
         id: get_pipeline
         run: |
           project_id=46941692  # 프로젝트 ID를 명시적으로 설정
-          latest_pipeline_id=$(curl -s --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
-              "https://gitlab.com/api/v4/projects/${project_id}/pipelines" \
-              | jq -r '.[0].id')
-          echo "project_id=${project_id}" >> $GITHUB_ENV
+          latest_pipeline=$(curl -s --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
+              "https://gitlab.com/api/v4/projects/${project_id}/pipelines")
+          echo "Latest pipeline response: ${latest_pipeline}"
+          latest_pipeline_id=$(echo $latest_pipeline | jq -r '.[0].id')
           echo "latest_pipeline_id=${latest_pipeline_id}" >> $GITHUB_ENV
+
+      - name: Validate latest pipeline ID
+        run: |
+          if [ "${{ env.latest_pipeline_id }}" == "null" ]; then
+            echo "Error: Failed to fetch the latest pipeline ID."
+            exit 1
+          fi
 
       - name: Get the job ID for build:html
         id: get_job
