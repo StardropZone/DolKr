@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * 0'  # 매주 일요일 자정에 실행
   workflow_dispatch:  # 수동으로 실행할 수 있도록 추가
 
+permissions:
+  contents: write  # GITHUB_TOKEN에 쓰기 권한 부여
+
 jobs:
   update_files:
     runs-on: ubuntu-latest
@@ -50,6 +53,8 @@ jobs:
           git config --global user.email "toto941002@gmail.com"
 
       - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GITHUB_TOKEN 환경 변수 설정
         run: |
           cd ${{ github.workspace }}
           git add DoL/DoLKr.html
