@@ -11,7 +11,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # 최신 버전으로 업데이트
+        with:
+          fetch-depth: 0  # 전체 히스토리 가져오기
 
       - name: Download artifacts from GitLab
         run: curl -o build.zip -L "https://gitlab.com/NullableSafety/dol-kr/-/jobs/artifacts/main/raw/build.zip?job=build:html"
