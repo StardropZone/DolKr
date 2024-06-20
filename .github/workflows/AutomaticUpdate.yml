@@ -1,0 +1,32 @@
+name: Update HTML from GitLab
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"  # 매주 일요일 자정에 실행
+
+jobs:
+  update_html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download artifacts from GitLab
+        run: curl -o build.zip -L "https://gitlab.com/NullableSafety/dol-kr/-/jobs/artifacts/main/raw/build.zip?job=build:html"
+
+      - name: Unzip HTML files
+        run: unzip build.zip -d extracted_html
+
+      - name: Move HTML files to desired path
+        run: mv extracted_html/* path/to/github/repository/DoL/
+
+      - name: Set up GitHub CLI
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Upload HTML files to GitHub
+        run: |
+          cd path/to/github/repository
+          gh repo upload StardropZone/DolKr --branch main --clobber --file DoL/DoLKr.html
