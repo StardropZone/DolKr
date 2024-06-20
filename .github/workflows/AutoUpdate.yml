@@ -2,7 +2,7 @@ name: Update from dol-kr Release
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # 매주 일요일 자정에 실행
+    - cron: '0 0 */3 * *'  # 3일에 한 번 실행
   workflow_dispatch:  # 수동으로 실행할 수 있도록 추가
 
 permissions:
@@ -26,37 +26,58 @@ jobs:
             exit 1
           fi
           latest_release=$(echo "$latest_releases" | jq -r '.[0]')
+          release_title=$(echo "$latest_release" | jq -r '.name')
           asset_url=$(echo "$latest_release" | jq -r '.assets[] | select(.name | endswith(".7z")) | .browser_download_url')
           if [ -z "$asset_url" ]; then
             echo "Error: No .7z asset found in the latest release."
             exit 1
           fi
+          echo "release_title=${release_title}" >> $GITHUB_ENV
           echo "asset_url=${asset_url}" >> $GITHUB_ENV
 
+      - name: Check if update is needed
+        id: check_update
+        run: |
+          if [ -f "current_version.txt" ]; then
+            current_version=$(cat current_version.txt)
+            if [ "$current_version" == "${{ env.release_title }}" ]; then
+              echo "update_needed=false" >> $GITHUB_ENV
+              exit 0
+            fi
+          fi
+          echo "${{ env.release_title }}" > current_version.txt
+          echo "update_needed=true" >> $GITHUB_ENV
+
       - name: Download latest release asset
+        if: env.update_needed == 'true'
         run: |
           curl -L -o release.7z "${{ env.asset_url }}"
 
       - name: Install 7zip
+        if: env.update_needed == 'true'
         run: sudo apt-get install p7zip-full -y
 
       - name: Unzip release files
+        if: env.update_needed == 'true'
         run: 7z x release.7z -oextracted_release
 
       - name: Move and rename HTML file to desired path
+        if: env.update_needed == 'true'
         run: |
           mv -f extracted_release/*.html DoL/DoLKr.html
 
       - name: Configure Git
+        if: env.update_needed == 'true'
         run: |
           git config --global user.name "StardropZone"
           git config --global user.email "toto941002@gmail.com"
 
       - name: Commit and push changes
+        if: env.update_needed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GITHUB_TOKEN 환경 변수 설정
         run: |
           cd ${{ github.workspace }}
-          git add DoL/DoLKr.html
-          git commit -m "Updated DoLKr.html from latest GitHub release"
+          git add DoL/DoLKr.html current_version.txt
+          git commit -m "Updated ${{ env.release_title }}"
           git push origin main
