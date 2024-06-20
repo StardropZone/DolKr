@@ -1,4 +1,4 @@
-name: Update HTML from GitLab
+name: Update from dol-kr Release
 
 on:
   schedule:
@@ -6,50 +6,34 @@ on:
   workflow_dispatch:  # 수동으로 실행할 수 있도록 추가
 
 jobs:
-  update_html:
+  update_files:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Get the latest pipeline ID
-        id: get_pipeline
+      - name: Get latest release info
+        id: get_release
         run: |
-          project_id=46941692  # 프로젝트 ID를 명시적으로 설정
-          latest_pipeline=$(curl -s --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
-              "https://gitlab.com/api/v4/projects/${project_id}/pipelines")
-          echo "Latest pipeline response: ${latest_pipeline}"  # 디버깅을 위한 출력
-          latest_pipeline_id=$(echo "$latest_pipeline" | jq -r '.[0].id')
-          echo "Extracted latest_pipeline_id: ${latest_pipeline_id}"  # 디버깅을 위한 출력
-          echo "latest_pipeline_id=${latest_pipeline_id}" >> $GITHUB_ENV
+          latest_release=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/releases/latest)
+          echo "Latest release response: ${latest_release}"  # 디버깅을 위한 출력
+          asset_url=$(echo "$latest_release" | jq -r '.assets[] | select(.name | endswith(".7z")) | .browser_download_url')
+          echo "asset_url=${asset_url}" >> $GITHUB_ENV
 
-      - name: Validate latest pipeline ID
+      - name: Download latest release asset
         run: |
-          if [ "${{ env.latest_pipeline_id }}" == "null" ]; then
-            echo "Error: Failed to fetch the latest pipeline ID."
-            exit 1
-          fi
+          curl -L -o release.7z "${{ env.asset_url }}"
 
-      - name: Get the job ID for build:html
-        id: get_job
+      - name: Install 7zip
+        run: sudo apt-get install p7zip-full -y
+
+      - name: Unzip release files
+        run: 7z x release.7z -oextracted_release
+
+      - name: Move and rename HTML file to desired path
         run: |
-          job_id=$(curl -s --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
-              "https://gitlab.com/api/v4/projects/${{ env.project_id }}/pipelines/${{ env.latest_pipeline_id }}/jobs" \
-              | jq -r '.[] | select(.name=="build:html") | .id')
-          echo "job_id=${job_id}" >> $GITHUB_ENV
-
-      - name: Download artifacts from GitLab
-        run: |
-          curl --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
-          -o build.zip \
-          -L "https://gitlab.com/api/v4/projects/${{ env.project_id }}/jobs/${{ env.job_id }}/artifacts"
-
-      - name: Unzip HTML files
-        run: unzip build.zip -d extracted_html
-
-      - name: Move HTML files to desired path
-        run: mv extracted_html/* DoL/
+          mv -f extracted_release/*.html DoL/DoLKr.html
 
       - name: Configure Git
         run: |
@@ -59,6 +43,6 @@ jobs:
       - name: Commit and push changes
         run: |
           cd ${{ github.workspace }}
-          git add DoL/*
-          git commit -m "Updated HTML files from the latest GitLab build:html artifacts"
+          git add DoL/DoLKr.html
+          git commit -m "Updated DoLKr.html from latest GitHub release"
           git push origin main
