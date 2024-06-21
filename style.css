@@ -50,3 +50,11 @@ body {
     font-style: italic;
     color: green;
 }
+
+.checkResultNew {
+    display: none;
+}
+
+.checkResultOld {
+    display: none;
+}
