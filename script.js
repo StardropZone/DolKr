@@ -22,18 +22,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 fetch('https://api.github.com/repos/uotalkie/dol-kr/releases/latest')
                     .then(response => response.json())
                     .then(latestRelease => {
-                        const latestVersion = latestRelease.name;
+                        const latestVersion = latestRelease.name; // 최신 릴리스의 제목을 가져옵니다
                         const versionStatus = document.getElementById('version-status');
-                        if (currentVersion.trim() === latestVersion) {
+                        if (currentVersion.trim() === latestVersion.trim()) {
                             versionStatus.textContent = "최신 버전입니다.";
                         } else {
                             versionStatus.textContent = "업데이트가 존재합니다.";
                             showUpdateButton();
                         }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching the latest release:', error);
                     });
             })
             .catch(error => {
-                console.error('Error fetching the version info:', error);
+                console.error('Error fetching the current version:', error);
             });
     }
 
@@ -48,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // 업데이트 자동화 워크플로우 트리거 함수
     function triggerUpdateWorkflow() {
         const token = process.env.GITHUB_TOKEN; // 환경 변수에서 Personal Access Token을 가져옵니다.
-        fetch('https://api.github.com/repos/StardropZone/DolKr/actions/workflows/update.yml/dispatches', {
+        fetch('https://api.github.com/repos/StardropZone/DolKr/actions/workflows/AutoUpdate.yml/dispatches', {
             method: 'POST',
             headers: {
                 'Accept': 'application/vnd.github.v3+json',
@@ -81,5 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // 체크 버전 버튼에 이벤트 리스너 추가
     document.getElementById('check-version-button').addEventListener('click', checkLatestVersion);
 });
+
 
 
