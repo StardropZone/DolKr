@@ -40,3 +40,15 @@ footer {
     text-align: center;
 
 }
+
+/***버전 체커 스타일***/
+
+.major-version {
+    font-weight: bold;
+    color: blue;
+}
+
+.release-date {
+    font-style: italic;
+    color: green;
+}
