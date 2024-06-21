@@ -1,0 +1,21 @@
+name: GitHub Token
+
+on:
+  workflow_dispatch:  # 수동으로 실행할 수 있도록 추가
+
+permissions:
+  contents: write  # GITHUB_TOKEN에 쓰기 권한 부여
+
+jobs:
+  set_token:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set environment variable
+        run: echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Run script.js
+        run: node script.js
