@@ -47,11 +47,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 업데이트 자동화 워크플로우 트리거 함수
     function triggerUpdateWorkflow() {
+        const token = process.env.GITHUB_TOKEN; // 환경 변수에서 Personal Access Token을 가져옵니다.
         fetch('https://api.github.com/repos/StardropZone/DolKr/actions/workflows/update.yml/dispatches', {
             method: 'POST',
             headers: {
                 'Accept': 'application/vnd.github.v3+json',
-                'Authorization': `token ${process.env.GITHUB_TOKEN}` // 환경 변수에서 Personal Access Token을 가져옵니다.
+                'Authorization': `token ${token}`
             },
             body: JSON.stringify({
                 "ref": "main"
@@ -80,4 +81,5 @@ document.addEventListener("DOMContentLoaded", function() {
     // 체크 버전 버튼에 이벤트 리스너 추가
     document.getElementById('check-version-button').addEventListener('click', checkLatestVersion);
 });
+
 
