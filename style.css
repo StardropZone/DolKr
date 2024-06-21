@@ -34,11 +34,9 @@ body {
     text-align: center;
 }
 
-footer {
-
+.vChecker {
     margin-top: 60px;
     text-align: center;
-
 }
 
 /***버전 체커 스타일***/

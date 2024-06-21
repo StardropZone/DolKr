@@ -17,8 +17,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 버전 정보를 파싱하는 함수
     function parseVersionInfo(versionString) {
-        const [version, date] = versionString.split('-');
-        const [majorVersion, minorChange] = version.split('-0');
+        // 버전 문자열을 파싱하여 주요 버전과 날짜를 분리합니다
+        const versionParts = versionString.split('-');
+        const majorVersion = versionParts.slice(0, 2).join('-'); // "0.4.7.5"
+        const date = versionParts.slice(2).join(''); // "2024.0614"
         return { majorVersion, date };
     }
 
