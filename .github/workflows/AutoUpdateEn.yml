@@ -24,9 +24,11 @@ jobs:
         run: |
           pip install requests beautifulsoup4 selenium
           sudo apt-get install -y xvfb
+          sudo apt-get install -y unzip
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
-          wget https://chromedriver.storage.googleapis.com/90.0.4430.24/chromedriver_linux64.zip
+          LATEST_CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER_VERSION/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
 
