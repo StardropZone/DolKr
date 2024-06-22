@@ -1,0 +1,63 @@
+name: Update dol-en
+
+on:
+  workflow_run:
+    workflows: ["Update from dol-kr Release"] # 첫 번째 워크플로우의 이름
+    types:
+      - completed
+  workflow_dispatch:  # 수동 실행 트리거
+
+jobs:
+  check-version-and-download:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 selenium
+          sudo apt-get install -y xvfb
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+          wget https://chromedriver.storage.googleapis.com/90.0.4430.24/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+
+      - name: Get current version
+        id: get_version
+        run: echo "CURRENT_VERSION=$(cat current_version.txt | cut -d '-' -f 1)" >> $GITHUB_ENV
+
+      - name: Scrape for matching version link
+        id: scrape_version
+        run: python scripts/DoLEnScraper.py ${{ env.CURRENT_VERSION }}
+      
+      - name: Check if link was found
+        if: steps.scrape_version.outputs.download_link == ''
+        run: echo "No matching version found. Skipping download."
+
+      - name: Download and unzip the file
+        if: steps.scrape_version.outputs.download_link != ''
+        run: |
+          xvfb-run -a python scripts/DoLEnScraper2.py ${{ steps.scrape_version.outputs.download_link }}
+          unzip dol.zip
+          mv "Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" DoLEn.html
+          mv DoLEn.html DoL/
+          # Replace or add any other necessary file movements here
+
+      - name: Commit and push changes
+        if: steps.scrape_version.outputs.download_link != ''
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Update DoL En file to version ${{ env.CURRENT_VERSION }}"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
