@@ -28,16 +28,26 @@
 import requests
 import json
 
-# Load the latest versions with download URLs
+# 최신 버전 정보가 포함된 JSON 파일을 다운로드
 response = requests.get("https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json")
 versions_info = response.json()
 
-# Extract latest stable version info
+# 안정 채널(Stable)의 최신 버전 정보 추출
 latest_version_info = versions_info["channels"]["Stable"]["version"]
-chrome_download_url = versions_info["channels"]["Stable"]["downloads"]["chrome-linux64"]
-chromedriver_download_url = versions_info["channels"]["Stable"]["downloads"]["chromedriver-linux64"]
+downloads = versions_info["channels"]["Stable"]["downloads"]
 
-# Print the version and download URLs
+# 안정 버전에 해당하는 Chrome 및 ChromeDriver 다운로드 URL 추출
+try:
+    chrome_download_url = downloads["chrome-linux64"]["url"]
+except KeyError:
+    raise KeyError("No Chrome download URL found for linux64 platform")
+
+try:
+    chromedriver_download_url = downloads["chromedriver-linux64"]["url"]
+except KeyError:
+    raise KeyError("No ChromeDriver download URL found for linux64 platform")
+
+# 최신 버전 및 다운로드 URL을 출력
 print(f"CHROME_VERSION={latest_version_info}")
 print(f"CHROME_DOWNLOAD_URL={chrome_download_url}")
 print(f"CHROMEDRIVER_DOWNLOAD_URL={chromedriver_download_url}")

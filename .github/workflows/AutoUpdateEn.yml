@@ -2,6 +2,7 @@ name: Update dol-en
 
 on:
   workflow_dispatch:
+
   workflow_run:
     workflows: ["Update from dol-kr Release"]
     types:
@@ -12,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Check out the repository
       uses: actions/checkout@v2
 
     - name: Set up Python
@@ -22,39 +23,24 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y xvfb wget unzip
-        pip install requests beautifulsoup4 selenium
+        pip install requests beautifulsoup4
 
-    - name: Run DoLEnScraper3.py
+    - name: Fetch latest Chrome and ChromeDriver versions
       run: |
         cd $GITHUB_WORKSPACE/scripts
         python DoLEnScraper3.py > $GITHUB_WORKSPACE/version_info.txt
         cat $GITHUB_WORKSPACE/version_info.txt
+      id: fetch_versions
 
-    - name: Extract version info
-      id: extract_version_info
+    - name: Download and set up Chrome and ChromeDriver
       run: |
         source $GITHUB_WORKSPACE/version_info.txt
-        echo "CHROME_VERSION=${CHROME_VERSION}"
-        echo "CHROME_DOWNLOAD_URL=${CHROME_DOWNLOAD_URL}"
-        echo "CHROMEDRIVER_DOWNLOAD_URL=${CHROMEDRIVER_DOWNLOAD_URL}"
-        echo "CHROME_VERSION=${CHROME_VERSION}" >> $GITHUB_ENV
-        echo "CHROME_DOWNLOAD_URL=${CHROME_DOWNLOAD_URL}" >> $GITHUB_ENV
-        echo "CHROMEDRIVER_DOWNLOAD_URL=${CHROMEDRIVER_DOWNLOAD_URL}" >> $GITHUB_ENV
-
-    - name: Download and install Chrome
-      run: |
-        wget -O /tmp/chrome.zip ${{ env.CHROME_DOWNLOAD_URL }}
-        unzip /tmp/chrome.zip -d $GITHUB_WORKSPACE
+        wget -O /tmp/chrome.zip $CHROME_DOWNLOAD_URL
+        unzip /tmp/chrome.zip -d $GITHUB_WORKSPACE/chrome-linux64
         sudo mv $GITHUB_WORKSPACE/chrome-linux64/chrome /usr/local/bin/google-chrome
-
-    - name: Download and install ChromeDriver
-      run: |
-        wget -O /tmp/chromedriver.zip ${{ env.CHROMEDRIVER_DOWNLOAD_URL }}
-        unzip /tmp/chromedriver.zip -d $GITHUB_WORKSPACE
+        wget -O /tmp/chromedriver.zip $CHROMEDRIVER_DOWNLOAD_URL
+        unzip /tmp/chromedriver.zip -d $GITHUB_WORKSPACE/chromedriver-linux64
         sudo mv $GITHUB_WORKSPACE/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
-        sudo chmod +x /usr/local/bin/chromedriver
 
     - name: Get current version
       id: get_version
@@ -69,6 +55,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/scripts
         python DoLEnScraper.py ${{ env.CURRENT_VERSION }}
+      continue-on-error: true
 
     - name: Check if link was found and versions match
       if: steps.scrape_version.outputs.download_link == '' || ${{ env.CURRENT_VERSION }} == ${{ env.CURRENT_VERSION_EN }}
