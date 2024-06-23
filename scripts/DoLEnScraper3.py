@@ -15,10 +15,15 @@ downloads = latest_version_info["downloads"]
 
 # Extract the ChromeDriver download URL for Linux 64-bit
 chromedriver_url = None
-for download in downloads["chromedriver"]:
-    if download["platform"] == "linux64":
-        chromedriver_url = download["url"]
-        break
+if "chromedriver" in downloads:
+    for download in downloads["chromedriver"]:
+        if download["platform"] == "linux64":
+            chromedriver_url = download["url"]
+            break
+
+# Check if chromedriver_url was found
+if chromedriver_url is None:
+    raise KeyError("No ChromeDriver download URL found for linux64 platform")
 
 # Print the extracted information
 print(f"Latest Chrome Version: {chrome_version}")
