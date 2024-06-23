@@ -20,7 +20,7 @@ jobs:
           python-version: "3.9"
 
       - name: Install dependencies
-        run: pip install -r $GITHUB_WORKSPACE/requirements.txt
+        run: pip install -r $GITHUB_WORKSPACE/scripts/requirements.txt
 
       - name: Get latest Chrome and ChromeDriver versions
         run: |
