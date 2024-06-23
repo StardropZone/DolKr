@@ -78,12 +78,14 @@ jobs:
           cd $GITHUB_WORKSPACE/scripts
           output_filename="$GITHUB_WORKSPACE/scripts/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.zip"
           python DoLEnScraper2.py "${{ env.download_link }}" "$output_filename"
+          ls -al "$GITHUB_WORKSPACE/scripts"
 
       - name: Verify downloaded file and unzip
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
-          ls -al "$GITHUB_WORKSPACE/scripts"
-          unzip "$output_filename" -d $GITHUB_WORKSPACE/DoL/
+          actual_filename=$(ls "$GITHUB_WORKSPACE/scripts" | grep "Degrees of Lewdity .*\.zip")
+          echo "Actual filename: $actual_filename"
+          unzip "$GITHUB_WORKSPACE/scripts/$actual_filename" -d $GITHUB_WORKSPACE/DoL/
           ls -al "$GITHUB_WORKSPACE/DoL"
           mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" $GITHUB_WORKSPACE/DoLEn.html
           mv $GITHUB_WORKSPACE/DoLEn.html $GITHUB_WORKSPACE/DoL/
