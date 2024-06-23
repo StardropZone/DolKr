@@ -75,7 +75,7 @@ jobs:
           echo "Download Link: ${{ env.download_link }}"
           cd $GITHUB_WORKSPACE/scripts
           python DoLEnScraper2.py "${{ env.download_link }}"
-          unzip "$GITHUB_WORKSPACE/scripts/*.zip" -d $GITHUB_WORKSPACE/DoL/
+          unzip "$GITHUB_WORKSPACE/scripts/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.zip" -d $GITHUB_WORKSPACE/DoL/
           mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" $GITHUB_WORKSPACE/DoLEn.html
           mv $GITHUB_WORKSPACE/DoLEn.html $GITHUB_WORKSPACE/DoL/
 
