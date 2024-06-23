@@ -10,6 +10,8 @@ on:
 jobs:
   update_en_version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 권한 설정
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
