@@ -51,6 +51,7 @@ jobs:
         wget -O /tmp/chromedriver.zip $CHROMEDRIVER_DOWNLOAD_URL
         unzip /tmp/chromedriver.zip -d $GITHUB_WORKSPACE/chromedriver
         sudo mv $GITHUB_WORKSPACE/chromedriver/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+        sudo chmod +x /usr/local/bin/chromedriver
 
     - name: Get current version
       id: get_version
