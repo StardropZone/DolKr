@@ -4,10 +4,12 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'scripts/DoLEnScraper3.py'
+      - 'index.html'
+      - 'scripts/**'
+      - 'style.css'
 
 jobs:
-  build:
+  update-dol-en:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,35 +22,36 @@ jobs:
         python-version: '3.12'
 
     - name: Install dependencies
-      run: |
-        pip install requests
+      run: pip install requests
 
-    - name: Run DoLEnScraper3 script
+    - name: Run DoLEnScraper3.py
       run: |
-        python scripts/DoLEnScraper3.py > version_info.txt
-        cat version_info.txt
+        cd $GITHUB_WORKSPACE/scripts
+        python DoLEnScraper3.py > $GITHUB_WORKSPACE/version_info.txt
+        cat $GITHUB_WORKSPACE/version_info.txt
 
     - name: Extract version info
-      id: version_info
+      id: extract_version_info
       run: |
-        CHROME_VERSION=$(cat version_info.txt | grep 'Latest Chrome Version:' | awk '{print $4}')
-        CHROME_URL=$(cat version_info.txt | grep 'Chrome Download URL:' | awk '{print $4}')
-        CHROMEDRIVER_URL=$(cat version_info.txt | grep 'ChromeDriver Download URL:' | awk '{print $4}')
-        echo "::set-output name=chrome_version::$CHROME_VERSION"
-        echo "::set-output name=chrome_url::$CHROME_URL"
-        echo "::set-output name=chromedriver_url::$CHROMEDRIVER_URL"
+        source $GITHUB_WORKSPACE/version_info.txt
+        echo "CHROME_VERSION=${CHROME_VERSION}"
+        echo "CHROME_DOWNLOAD_URL=${CHROME_DOWNLOAD_URL}"
+        echo "CHROMEDRIVER_DOWNLOAD_URL=${CHROMEDRIVER_DOWNLOAD_URL}"
+        echo "CHROME_VERSION=${CHROME_VERSION}" >> $GITHUB_ENV
+        echo "CHROME_DOWNLOAD_URL=${CHROME_DOWNLOAD_URL}" >> $GITHUB_ENV
+        echo "CHROMEDRIVER_DOWNLOAD_URL=${CHROMEDRIVER_DOWNLOAD_URL}" >> $GITHUB_ENV
 
     - name: Download and install Chrome
       run: |
-        wget ${{ steps.version_info.outputs.chrome_url }} -O chrome-linux64.zip
-        unzip chrome-linux64.zip
-        sudo mv chrome-linux64/chrome /usr/bin/google-chrome
+        wget -O /tmp/chrome.zip ${{ env.CHROME_DOWNLOAD_URL }}
+        unzip /tmp/chrome.zip -d /usr/bin
+        mv /usr/bin/chrome-linux64/chrome /usr/bin/google-chrome
 
     - name: Download and install ChromeDriver
       run: |
-        wget ${{ steps.version_info.outputs.chromedriver_url }} -O chromedriver_linux64.zip
-        unzip chromedriver_linux64.zip
-        sudo mv chromedriver /usr/bin/chromedriver
+        wget -O /tmp/chromedriver.zip ${{ env.CHROMEDRIVER_DOWNLOAD_URL }}
+        unzip /tmp/chromedriver.zip -d /usr/bin
+        mv /usr/bin/chromedriver-linux64/chromedriver /usr/bin/chromedriver
 
     - name: Get current version
       id: get_version

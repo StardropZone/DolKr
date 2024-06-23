@@ -1,23 +1,24 @@
 import requests
 import json
 
-# URL to fetch the last known good versions with downloads
+# Fetch the latest versions with download links
 url = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
-
-# Fetch the data from the URL
 response = requests.get(url)
-data = response.json()
+versions_info = response.json()
 
-# Extract the latest version information
-stable_version_info = data["channels"]["Stable"]
-latest_version = stable_version_info["version"]
+# Extract the latest stable version information
+latest_stable_version_info = versions_info["channels"]["Stable"]
+latest_stable_version = latest_stable_version_info["version"]
+downloads = latest_stable_version_info["downloads"]
 
-# Extract the download URLs for Chrome and ChromeDriver
-downloads = stable_version_info["downloads"]
-chrome_download_url = downloads["chrome"]["linux64"]
-chromedriver_download_url = downloads["chromedriver"]["linux64"]
+# Extract the Chrome and ChromeDriver download URLs for linux64
+try:
+    chrome_download_url = next(item for item in downloads if item["platform"] == "linux64" and item["artifact"] == "chrome")["url"]
+    chromedriver_download_url = next(item for item in downloads if item["platform"] == "linux64" and item["artifact"] == "chromedriver")["url"]
+except StopIteration:
+    raise KeyError("No download URL found for linux64 platform")
 
-# Output the latest version and download URLs
-print(f"Latest Chrome Version: {latest_version}")
-print(f"Chrome Download URL: {chrome_download_url}")
-print(f"ChromeDriver Download URL: {chromedriver_download_url}")
+# Print the results
+print(f"CHROME_VERSION={latest_stable_version}")
+print(f"CHROME_DOWNLOAD_URL={chrome_download_url}")
+print(f"CHROMEDRIVER_DOWNLOAD_URL={chromedriver_download_url}")
