@@ -92,8 +92,14 @@ jobs:
           fi
           unzip "downloaded_file.zip" -d $GITHUB_WORKSPACE/DoL/
           ls -al "$GITHUB_WORKSPACE/DoL"
-          mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "$GITHUB_WORKSPACE/DoLEn.html"
-          mv "$GITHUB_WORKSPACE/DoLEn.html" "$GITHUB_WORKSPACE/DoL/"
+          mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/"* "$GITHUB_WORKSPACE/DoL/"
+
+      - name: Copy img folder to retexture/vanila
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/retexture/vanila/
+          cp -r $GITHUB_WORKSPACE/DoL/img/* $GITHUB_WORKSPACE/retexture/vanila/
+          ls -al $GITHUB_WORKSPACE/retexture/vanila/
 
       - name: Update version file
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
@@ -105,7 +111,9 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
+          git stash
           git pull --rebase origin main
+          git stash pop
           git commit -m "Updated ${{ env.CURRENT_VERSION }}"
           git push
         env:
