@@ -22,7 +22,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install requests beautifulsoup4
+        pip install requests beautifulsoup4 selenium
 
     - name: Get latest Chrome and ChromeDriver versions
       run: |
