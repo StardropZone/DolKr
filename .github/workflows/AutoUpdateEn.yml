@@ -21,7 +21,10 @@ jobs:
         python-version: '3.12'
 
     - name: Install dependencies
-      run: pip install requests beautifulsoup4 selenium
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y xvfb
+        pip install requests beautifulsoup4 selenium
 
     - name: Run DoLEnScraper3.py
       run: |
