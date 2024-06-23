@@ -76,7 +76,7 @@ jobs:
         run: |
           echo "Download Link: ${{ env.download_link }}"
           cd $GITHUB_WORKSPACE/scripts
-          output_filename="$GITHUB_WORKSPACE/scripts/downloaded_file.zip"
+          output_filename="downloaded_file.zip"
           python DoLEnScraper2.py "${{ env.download_link }}" "$output_filename"
           ls -al "$GITHUB_WORKSPACE/scripts"
 
@@ -84,13 +84,13 @@ jobs:
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
           cd "$GITHUB_WORKSPACE/scripts"
-          echo "Checking if file exists: $output_filename"
-          if [ ! -f "$output_filename" ]; then
+          echo "Checking if file exists: downloaded_file.zip"
+          if [ ! -f "downloaded_file.zip" ]; then
             echo "Error: File not found! Files in directory:"
             ls -al
             exit 1
           fi
-          unzip "$output_filename" -d $GITHUB_WORKSPACE/DoL/
+          unzip "downloaded_file.zip" -d $GITHUB_WORKSPACE/DoL/
           ls -al "$GITHUB_WORKSPACE/DoL"
           mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "$GITHUB_WORKSPACE/DoLEn.html"
           mv "$GITHUB_WORKSPACE/DoLEn.html" "$GITHUB_WORKSPACE/DoL/"
