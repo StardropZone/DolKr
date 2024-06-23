@@ -84,8 +84,10 @@ jobs:
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
           cd "$GITHUB_WORKSPACE/scripts"
+          echo "Checking if file exists: $output_filename"
           if [ ! -f "$output_filename" ]; then
-            echo "Error: File not found!"
+            echo "Error: File not found! Files in directory:"
+            ls -al
             exit 1
           fi
           unzip "$output_filename" -d $GITHUB_WORKSPACE/DoL/
