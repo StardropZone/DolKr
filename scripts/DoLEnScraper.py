@@ -23,5 +23,4 @@ if __name__ == "__main__":
     
     version = sys.argv[1]
     download_link = get_download_link(version)
-    print(f"::set-output name=download_link::{download_link}")
-
+    print(f"{download_link}")

@@ -64,6 +64,8 @@ jobs:
           cd $GITHUB_WORKSPACE/scripts
           download_link=$(python DoLEnScraper.py ${{ env.CURRENT_VERSION }})
           echo "download_link=$download_link" >> $GITHUB_ENV
+        env:
+          GITHUB_ENV: $GITHUB_ENV
 
       - name: Check if link was found and versions match
         if: env.download_link == '' || env.CURRENT_VERSION == env.CURRENT_VERSION_EN
