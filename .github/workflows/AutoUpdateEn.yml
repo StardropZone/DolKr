@@ -11,7 +11,7 @@ jobs:
   update_en_version:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 권한 설정
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -95,6 +95,12 @@ jobs:
           unzip "downloaded_file.zip" -d $GITHUB_WORKSPACE/DoL/
           ls -al "$GITHUB_WORKSPACE/DoL"
           rsync -av --remove-source-files "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/" "$GITHUB_WORKSPACE/DoL/"
+
+      - name: Move HTML file and rename
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        run: |
+          mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/${{ env.CURRENT_VERSION }}.html" "$GITHUB_WORKSPACE/DoLEn.html"
+          mv "$GITHUB_WORKSPACE/DoLEn.html" "$GITHUB_WORKSPACE/DoL/"
 
       - name: Copy img folder to retexture/vanila
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
