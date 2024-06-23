@@ -1,24 +1,26 @@
 import requests
-import json
+from bs4 import BeautifulSoup
 
-# Fetch the latest versions with download links
-url = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
+# URL to fetch the latest version information
+url = "https://googlechromelabs.github.io/chrome-for-testing/"
+
+# Send a GET request to the URL
 response = requests.get(url)
-versions_info = response.json()
+response.raise_for_status()
 
-# Extract the latest stable version information
-latest_stable_version_info = versions_info["channels"]["Stable"]
-latest_stable_version = latest_stable_version_info["version"]
-downloads = latest_stable_version_info["downloads"]
+# Parse the HTML content using BeautifulSoup
+soup = BeautifulSoup(response.content, "html.parser")
 
-# Extract the Chrome and ChromeDriver download URLs for linux64
-try:
-    chrome_download_url = next(item for item in downloads if item["platform"] == "linux64" and item["artifact"] == "chrome")["url"]
-    chromedriver_download_url = next(item for item in downloads if item["platform"] == "linux64" and item["artifact"] == "chromedriver")["url"]
-except StopIteration:
-    raise KeyError("No download URL found for linux64 platform")
+# Extract the latest version number and revision from the "Stable" section
+stable_section = soup.find("h2", text="Stable").find_next("p")
+latest_version = stable_section.find("code").text
+revision = stable_section.find_all("code")[1].text
+
+# Generate the download URLs
+chrome_download_url = f"https://storage.googleapis.com/chrome-for-testing-public/{latest_version}/linux64/chrome-linux64.zip"
+chromedriver_download_url = f"https://storage.googleapis.com/chrome-for-testing-public/{latest_version}/linux64/chromedriver-linux64.zip"
 
 # Print the results
-print(f"CHROME_VERSION={latest_stable_version}")
+print(f"CHROME_VERSION={latest_version}")
 print(f"CHROME_DOWNLOAD_URL={chrome_download_url}")
 print(f"CHROMEDRIVER_DOWNLOAD_URL={chromedriver_download_url}")

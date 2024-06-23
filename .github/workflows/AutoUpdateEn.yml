@@ -2,11 +2,10 @@ name: Update dol-en
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'index.html'
-      - 'scripts/**'
-      - 'style.css'
+  workflow_run:
+    workflows: ["Update from dol-kr Release"]
+    types:
+      - completed
 
 jobs:
   update-dol-en:
@@ -22,7 +21,7 @@ jobs:
         python-version: '3.12'
 
     - name: Install dependencies
-      run: pip install requests
+      run: pip install requests beautifulsoup4
 
     - name: Run DoLEnScraper3.py
       run: |
