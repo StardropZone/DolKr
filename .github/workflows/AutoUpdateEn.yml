@@ -29,9 +29,7 @@ jobs:
       - name: Fetch latest ChromeDriver and Chrome version info
         id: fetch_version_info
         run: |
-          cd scripts
-          python DoLEnScraper3.py > ../version_info.txt
-          cd ..
+          python ./scripts/DoLEnScraper3.py > version_info.txt
           cat version_info.txt
 
       - name: Extract version info
@@ -69,7 +67,7 @@ jobs:
 
       - name: Scrape for matching version link
         id: scrape_version
-        run: python scripts/DoLEnScraper.py ${{ env.CURRENT_VERSION }}
+        run: python ./scripts/DoLEnScraper.py ${{ env.CURRENT_VERSION }}
       
       - name: Check if link was found and versions match
         if: steps.scrape_version.outputs.download_link == '' || ${{ env.CURRENT_VERSION }} == ${{ env.CURRENT_VERSION_EN }}
@@ -79,7 +77,7 @@ jobs:
         if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
         run: |
           echo "Download Link: ${{ steps.scrape_version.outputs.download_link }}"
-          xvfb-run -a python scripts/DoLEnScraper2.py ${{ steps.scrape_version.outputs.download_link }}
+          xvfb-run -a python ./scripts/DoLEnScraper2.py ${{ steps.scrape_version.outputs.download_link }}
           unzip dol.zip
           mv "Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" DoLEn.html
           mv DoLEn.html DoL/
