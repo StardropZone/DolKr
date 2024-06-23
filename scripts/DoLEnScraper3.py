@@ -4,6 +4,9 @@ import requests
 response = requests.get("https://googlechromelabs.github.io/chrome-for-testing/latest-versions-per-milestone-with-downloads.json")
 versions_info = response.json()
 
+# Print the API response to understand its structure
+print(versions_info)
+
 # Get the latest stable ChromeDriver version
 latest_version_info = versions_info["milestones"]["Stable"]
 
