@@ -63,29 +63,28 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/scripts
           download_link=$(python DoLEnScraper.py ${{ env.CURRENT_VERSION }})
-          echo "::set-output name=download_link::$download_link"
+          echo "download_link=$download_link" >> $GITHUB_ENV
 
       - name: Check if link was found and versions match
-        if: steps.scrape_version.outputs.download_link == '' || ${{ env.CURRENT_VERSION }} == ${{ env.CURRENT_VERSION_EN }}
+        if: env.download_link == '' || env.CURRENT_VERSION == env.CURRENT_VERSION_EN
         run: echo "No matching version found or versions match. Skipping download."
 
       - name: Download and unzip the file
-        if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
-          echo "Download Link: ${{ steps.scrape_version.outputs.download_link }}"
+          echo "Download Link: ${{ env.download_link }}"
           cd $GITHUB_WORKSPACE/scripts
-          python DoLEnScraper2.py "${{ steps.scrape_version.outputs.download_link }}"
-          cd $GITHUB_WORKSPACE/scripts
+          python DoLEnScraper2.py "${{ env.download_link }}"
           unzip *.zip -d $GITHUB_WORKSPACE/DoL/
           mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" $GITHUB_WORKSPACE/DoLEn.html
           mv $GITHUB_WORKSPACE/DoLEn.html $GITHUB_WORKSPACE/DoL/
 
       - name: Update version file
-        if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: echo ${{ env.CURRENT_VERSION }} > $GITHUB_WORKSPACE/current_version_En.txt
 
       - name: Commit and push changes
-        if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'

@@ -43,7 +43,6 @@
 #     download_file(download_url)
 
 import sys
-import os
 import subprocess
 
 def download_file_from_mega(download_url):
