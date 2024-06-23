@@ -44,13 +44,14 @@ jobs:
       run: |
         wget -O /tmp/chrome.zip ${{ env.CHROME_DOWNLOAD_URL }}
         unzip /tmp/chrome.zip -d $GITHUB_WORKSPACE
-        mv $GITHUB_WORKSPACE/chrome-linux64/chrome $GITHUB_WORKSPACE/google-chrome
+        sudo mv $GITHUB_WORKSPACE/chrome-linux64/chrome /usr/local/bin/google-chrome
 
     - name: Download and install ChromeDriver
       run: |
         wget -O /tmp/chromedriver.zip ${{ env.CHROMEDRIVER_DOWNLOAD_URL }}
         unzip /tmp/chromedriver.zip -d $GITHUB_WORKSPACE
-        mv $GITHUB_WORKSPACE/chromedriver-linux64/chromedriver $GITHUB_WORKSPACE/chromedriver
+        sudo mv $GITHUB_WORKSPACE/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+        sudo chmod +x /usr/local/bin/chromedriver
 
     - name: Get current version
       id: get_version
