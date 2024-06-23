@@ -98,7 +98,7 @@ jobs:
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
           mkdir -p $GITHUB_WORKSPACE/retexture/vanila/
-          cp -r $GITHUB_WORKSPACE/DoL/img/* $GITHUB_WORKSPACE/retexture/vanila/
+          cp -rf $GITHUB_WORKSPACE/DoL/img/* $GITHUB_WORKSPACE/retexture/vanila/
           ls -al $GITHUB_WORKSPACE/retexture/vanila/
 
       - name: Update version file
