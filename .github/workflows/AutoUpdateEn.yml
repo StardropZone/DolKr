@@ -92,7 +92,7 @@ jobs:
           fi
           unzip "downloaded_file.zip" -d $GITHUB_WORKSPACE/DoL/
           ls -al "$GITHUB_WORKSPACE/DoL"
-          mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/"* "$GITHUB_WORKSPACE/DoL/"
+          rsync -av --remove-source-files "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/" "$GITHUB_WORKSPACE/DoL/"
 
       - name: Copy img folder to retexture/vanila
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
