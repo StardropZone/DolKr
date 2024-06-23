@@ -71,13 +71,17 @@ jobs:
         if: env.download_link == '' || env.CURRENT_VERSION == env.CURRENT_VERSION_EN
         run: echo "No matching version found or versions match. Skipping download."
 
-      - name: Download and unzip the file
+      - name: Download the file
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
           echo "Download Link: ${{ env.download_link }}"
           cd $GITHUB_WORKSPACE/scripts
           output_filename="$GITHUB_WORKSPACE/scripts/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.zip"
           python DoLEnScraper2.py "${{ env.download_link }}" "$output_filename"
+
+      - name: Verify downloaded file and unzip
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        run: |
           ls -al "$GITHUB_WORKSPACE/scripts"
           unzip "$output_filename" -d $GITHUB_WORKSPACE/DoL/
           ls -al "$GITHUB_WORKSPACE/DoL"
