@@ -20,7 +20,7 @@ jobs:
           python-version: "3.9"
 
       - name: Install dependencies
-        run: pip install -r $GITHUB_WORKSPACE/scripts/requirements.txt
+        run: pip install -r $GITHUB_WORKSPACE/requirements.txt
 
       - name: Get latest Chrome and ChromeDriver versions
         run: |
@@ -57,7 +57,8 @@ jobs:
         id: scrape_version
         run: |
           cd $GITHUB_WORKSPACE/scripts
-          python DoLEnScraper.py ${{ env.CURRENT_VERSION }}
+          download_link=$(python DoLEnScraper.py ${{ env.CURRENT_VERSION }})
+          echo "::set-output name=download_link::$download_link"
 
       - name: Check if link was found and versions match
         if: steps.scrape_version.outputs.download_link == '' || ${{ env.CURRENT_VERSION }} == ${{ env.CURRENT_VERSION_EN }}
@@ -68,9 +69,9 @@ jobs:
         run: |
           echo "Download Link: ${{ steps.scrape_version.outputs.download_link }}"
           cd $GITHUB_WORKSPACE/scripts
-          xvfb-run -a python DoLEnScraper2.py ${{ steps.scrape_version.outputs.download_link }}
-          unzip $GITHUB_WORKSPACE/dol.zip
-          mv "Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" $GITHUB_WORKSPACE/DoLEn.html
+          xvfb-run -a python DoLEnScraper2.py "${{ steps.scrape_version.outputs.download_link }}"
+          unzip $GITHUB_WORKSPACE/scripts/dol.zip -d $GITHUB_WORKSPACE/DoL/
+          mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" $GITHUB_WORKSPACE/DoLEn.html
           mv $GITHUB_WORKSPACE/DoLEn.html $GITHUB_WORKSPACE/DoL/
 
       - name: Update version file
