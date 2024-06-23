@@ -1,4 +1,4 @@
-name: Update dol-en
+name: Auto Update English Version
 
 on:
   workflow_dispatch:
@@ -8,36 +8,42 @@ on:
       - completed
 
 jobs:
-  update-dol-en:
+  update_en_version:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: "3.9"
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install selenium webdriver_manager
+        run: pip install -r $GITHUB_WORKSPACE/scripts/requirements.txt
 
-      - name: Install Chrome
+      - name: Get latest Chrome and ChromeDriver versions
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget -O /tmp/chrome.zip https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.63/linux64/chrome-linux64.zip
-          unzip /tmp/chrome.zip -d $GITHUB_WORKSPACE/chrome-linux64/
-          sudo mv $GITHUB_WORKSPACE/chrome-linux64/chrome-linux64/chrome /usr/bin/google-chrome
+          cd $GITHUB_WORKSPACE/scripts
+          python DoLEnScraper3.py > $GITHUB_WORKSPACE/version_info.txt
+          cat $GITHUB_WORKSPACE/version_info.txt
+        id: get_latest_versions
 
-      - name: Install ChromeDriver
+      - name: Set environment variables from versions
         run: |
-          wget -O /tmp/chromedriver.zip https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.63/linux64/chromedriver-linux64.zip
-          unzip /tmp/chromedriver.zip -d $GITHUB_WORKSPACE/chromedriver-linux64/
-          sudo mv $GITHUB_WORKSPACE/chromedriver-linux64/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+          source $GITHUB_WORKSPACE/version_info.txt
+          echo "CHROME_VERSION=$CHROME_VERSION" >> $GITHUB_ENV
+          echo "CHROME_DOWNLOAD_URL=$CHROME_DOWNLOAD_URL" >> $GITHUB_ENV
+          echo "CHROMEDRIVER_DOWNLOAD_URL=$CHROMEDRIVER_DOWNLOAD_URL" >> $GITHUB_ENV
+
+      - name: Install Chrome and ChromeDriver
+        run: |
+          wget -O /tmp/chrome.zip $CHROME_DOWNLOAD_URL
+          unzip /tmp/chrome.zip -d $GITHUB_WORKSPACE/chrome
+          sudo mv $GITHUB_WORKSPACE/chrome/chrome-linux64/chrome /usr/bin/google-chrome
+          wget -O /tmp/chromedriver.zip $CHROMEDRIVER_DOWNLOAD_URL
+          unzip /tmp/chromedriver.zip -d $GITHUB_WORKSPACE/chromedriver
+          sudo mv $GITHUB_WORKSPACE/chromedriver/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
 
       - name: Get current version
         id: get_version
