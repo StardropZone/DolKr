@@ -29,7 +29,9 @@ jobs:
       - name: Fetch latest ChromeDriver and Chrome version info
         id: fetch_version_info
         run: |
-          python scripts/DoLEnScraper3.py > version_info.txt
+          cd scripts
+          python DoLEnScraper3.py > ../version_info.txt
+          cd ..
           cat version_info.txt
 
       - name: Extract version info
@@ -96,4 +98,3 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
