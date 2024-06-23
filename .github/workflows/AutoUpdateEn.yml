@@ -1,4 +1,4 @@
-name: Auto Update English Version
+name: Update dol-en
 
 on:
   workflow_dispatch:
