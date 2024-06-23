@@ -22,6 +22,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r $GITHUB_WORKSPACE/scripts/requirements.txt
 
+      - name: Install Mega CLI
+        run: |
+          sudo apt update
+          sudo apt install megatools
+
       - name: Get latest Chrome and ChromeDriver versions
         run: |
           cd $GITHUB_WORKSPACE/scripts
@@ -69,7 +74,7 @@ jobs:
         run: |
           echo "Download Link: ${{ steps.scrape_version.outputs.download_link }}"
           cd $GITHUB_WORKSPACE/scripts
-          xvfb-run -a python DoLEnScraper2.py "${{ steps.scrape_version.outputs.download_link }}"
+          python DoLEnScraper2.py "${{ steps.scrape_version.outputs.download_link }}"
           unzip $GITHUB_WORKSPACE/scripts/dol.zip -d $GITHUB_WORKSPACE/DoL/
           mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" $GITHUB_WORKSPACE/DoLEn.html
           mv $GITHUB_WORKSPACE/DoLEn.html $GITHUB_WORKSPACE/DoL/
