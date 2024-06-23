@@ -29,23 +29,24 @@ jobs:
       - name: Fetch latest ChromeDriver and Chrome version info
         id: fetch_version_info
         run: |
-          python ./scripts/DoLEnScraper3.py > version_info.txt
-          cat version_info.txt
+          cd $GITHUB_WORKSPACE/scripts
+          python DoLEnScraper3.py > $GITHUB_WORKSPACE/version_info.txt
+          cat $GITHUB_WORKSPACE/version_info.txt
 
       - name: Extract version info
         id: extract_version_info
         run: |
-          LATEST_CHROMEDRIVER_VERSION=$(grep 'Latest Chrome Version' version_info.txt | cut -d ' ' -f 4)
-          CHROMEDRIVER_DOWNLOAD_URL=$(grep 'ChromeDriver Download URL' version_info.txt | cut -d ' ' -f 4)
+          LATEST_CHROMEDRIVER_VERSION=$(grep 'Latest Chrome Version' $GITHUB_WORKSPACE/version_info.txt | cut -d ' ' -f 4)
+          CHROMEDRIVER_DOWNLOAD_URL=$(grep 'ChromeDriver Download URL' $GITHUB_WORKSPACE/version_info.txt | cut -d ' ' -f 4)
           echo "LATEST_CHROMEDRIVER_VERSION=$LATEST_CHROMEDRIVER_VERSION" >> $GITHUB_ENV
           echo "CHROMEDRIVER_DOWNLOAD_URL=$CHROMEDRIVER_DOWNLOAD_URL" >> $GITHUB_ENV
 
       - name: Download ChromeDriver
         run: |
           echo "Download URL: ${{ env.CHROMEDRIVER_DOWNLOAD_URL }}"
-          wget ${{ env.CHROMEDRIVER_DOWNLOAD_URL }} -O chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
+          wget ${{ env.CHROMEDRIVER_DOWNLOAD_URL }} -O $GITHUB_WORKSPACE/chromedriver_linux64.zip
+          unzip $GITHUB_WORKSPACE/chromedriver_linux64.zip -d $GITHUB_WORKSPACE
+          sudo mv $GITHUB_WORKSPACE/chromedriver /usr/local/bin/
           chromedriver --version
 
       - name: Download and install Google Chrome
@@ -53,22 +54,24 @@ jobs:
           LATEST_CHROMEDRIVER_VERSION=${{ env.LATEST_CHROMEDRIVER_VERSION }}
           URL="https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${LATEST_CHROMEDRIVER_VERSION}_amd64.deb"
           echo "Trying to download Chrome from $URL"
-          wget $URL -O google-chrome-stable_current_amd64.deb || echo "Download failed"
-          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+          wget $URL -O $GITHUB_WORKSPACE/google-chrome-stable_current_amd64.deb || echo "Download failed"
+          sudo dpkg -i $GITHUB_WORKSPACE/google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
           google-chrome --version
 
       - name: Get current version
         id: get_version
         run: |
-          echo "CURRENT_VERSION=$(cat current_version.txt | cut -d '-' -f 1)" >> $GITHUB_ENV
-          echo "CURRENT_VERSION_EN=$(cat current_version_En.txt)" >> $GITHUB_ENV
+          echo "CURRENT_VERSION=$(cat $GITHUB_WORKSPACE/current_version.txt | cut -d '-' -f 1)" >> $GITHUB_ENV
+          echo "CURRENT_VERSION_EN=$(cat $GITHUB_WORKSPACE/current_version_En.txt)" >> $GITHUB_ENV
           echo "Current Version: ${{ env.CURRENT_VERSION }}"
           echo "Current Version En: ${{ env.CURRENT_VERSION_EN }}"
 
       - name: Scrape for matching version link
         id: scrape_version
-        run: python ./scripts/DoLEnScraper.py ${{ env.CURRENT_VERSION }}
-      
+        run: |
+          cd $GITHUB_WORKSPACE/scripts
+          python DoLEnScraper.py ${{ env.CURRENT_VERSION }}
+
       - name: Check if link was found and versions match
         if: steps.scrape_version.outputs.download_link == '' || ${{ env.CURRENT_VERSION }} == ${{ env.CURRENT_VERSION_EN }}
         run: echo "No matching version found or versions match. Skipping download."
@@ -77,21 +80,22 @@ jobs:
         if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
         run: |
           echo "Download Link: ${{ steps.scrape_version.outputs.download_link }}"
-          xvfb-run -a python ./scripts/DoLEnScraper2.py ${{ steps.scrape_version.outputs.download_link }}
-          unzip dol.zip
-          mv "Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" DoLEn.html
-          mv DoLEn.html DoL/
+          cd $GITHUB_WORKSPACE/scripts
+          xvfb-run -a python DoLEnScraper2.py ${{ steps.scrape_version.outputs.download_link }}
+          unzip $GITHUB_WORKSPACE/dol.zip
+          mv "Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" $GITHUB_WORKSPACE/DoLEn.html
+          mv $GITHUB_WORKSPACE/DoLEn.html $GITHUB_WORKSPACE/DoL/
 
       - name: Update version file
         if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
-        run: echo ${{ env.CURRENT_VERSION }} > current_version_En.txt
+        run: echo ${{ env.CURRENT_VERSION }} > $GITHUB_WORKSPACE/current_version_En.txt
 
       - name: Commit and push changes
         if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
+          git add $GITHUB_WORKSPACE
           git commit -m "Updated ${{ env.CURRENT_VERSION }}"
           git push
         env:
