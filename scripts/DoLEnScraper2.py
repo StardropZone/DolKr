@@ -61,3 +61,4 @@ if __name__ == "__main__":
     
     download_url = sys.argv[1]
     download_file_from_mega(download_url)
+
