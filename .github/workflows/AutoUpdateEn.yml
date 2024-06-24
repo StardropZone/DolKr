@@ -160,7 +160,17 @@ jobs:
       - name: List workspace directories after cleanup
         if: always()
         run: |
-          echo "Listing $GITHUB_WORKSPACE/chrome contents..."
-          ls -al "$GITHUB_WORKSPACE/chrome"
-          echo "Listing $GITHUB_WORKSPACE/chromedriver contents..."
-          ls -al "$GITHUB_WORKSPACE/chromedriver"
+          echo "Checking if $GITHUB_WORKSPACE/chrome exists..."
+          if [ -d "$GITHUB_WORKSPACE/chrome" ]; then
+            echo "$GITHUB_WORKSPACE/chrome exists. Listing contents..."
+            ls -al "$GITHUB_WORKSPACE/chrome"
+          else
+            echo "$GITHUB_WORKSPACE/chrome not found"
+          fi
+          echo "Checking if $GITHUB_WORKSPACE/chromedriver exists..."
+          if [ -d "$GITHUB_WORKSPACE/chromedriver" ]; then
+            echo "$GITHUB_WORKSPACE/chromedriver exists. Listing contents..."
+            ls -al "$GITHUB_WORKSPACE/chromedriver"
+          else
+            echo "$GITHUB_WORKSPACE/chromedriver not found"
+          fi
