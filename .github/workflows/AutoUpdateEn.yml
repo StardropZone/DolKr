@@ -142,6 +142,6 @@ jobs:
           sudo rm -rf /usr/bin/google-chrome
           sudo rm -rf /usr/local/bin/chromedriver
           echo "Deleting Chrome workspace directories..."
-          rm -rf $GITHUB_WORKSPACE/chrome
-          rm -rf $GITHUB_WORKSPACE/chromedriver
+          sudo rm -rf $GITHUB_WORKSPACE/chrome
+          sudo rm -rf $GITHUB_WORKSPACE/chromedriver
           echo "Cleanup completed."
