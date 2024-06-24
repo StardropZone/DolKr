@@ -112,8 +112,8 @@ jobs:
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
           mkdir -p $GITHUB_WORKSPACE/retexture/vanila/
-          cp -rf $GITHUB_WORKSPACE/DoL/img/* $GITHUB_WORKSPACE/retexture/vanila/
-          ls -al $GITHUB_WORKSPACE/retexture/vanila/
+          cp -rf $GITHUB_WORKSPACE/DoL/img $GITHUB_WORKSPACE/retexture/vanila/
+          ls -al $GITHUB_WORKSPACE/retexture/vanila/img
 
       - name: Update version file
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
@@ -156,3 +156,11 @@ jobs:
             echo "$GITHUB_WORKSPACE/chromedriver not found"
           fi
           echo "Cleanup completed."
+
+      - name: List workspace directories after cleanup
+        if: always()
+        run: |
+          echo "Listing $GITHUB_WORKSPACE/chrome contents..."
+          ls -al "$GITHUB_WORKSPACE/chrome"
+          echo "Listing $GITHUB_WORKSPACE/chromedriver contents..."
+          ls -al "$GITHUB_WORKSPACE/chromedriver"
