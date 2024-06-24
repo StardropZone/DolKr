@@ -142,12 +142,15 @@ jobs:
           sudo rm -rf /usr/bin/google-chrome
           sudo rm -rf /usr/local/bin/chromedriver
           echo "Deleting Chrome workspace directories..."
+          echo "GITHUB_WORKSPACE value: $GITHUB_WORKSPACE"
           if [ -d "$GITHUB_WORKSPACE/chrome" ]; then
+            echo "$GITHUB_WORKSPACE/chrome exists. Deleting..."
             sudo rm -rf "$GITHUB_WORKSPACE/chrome"
           else
             echo "$GITHUB_WORKSPACE/chrome not found"
           fi
           if [ -d "$GITHUB_WORKSPACE/chromedriver" ]; then
+            echo "$GITHUB_WORKSPACE/chromedriver exists. Deleting..."
             sudo rm -rf "$GITHUB_WORKSPACE/chromedriver"
           else
             echo "$GITHUB_WORKSPACE/chromedriver not found"
