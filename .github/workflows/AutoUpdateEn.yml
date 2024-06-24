@@ -46,10 +46,10 @@ jobs:
       - name: Install Chrome and ChromeDriver
         run: |
           wget -O /tmp/chrome.zip $CHROME_DOWNLOAD_URL
-          unzip -o /tmp/chrome.zip -d $GITHUB_WORKSPACE/chrome
+          unzip /tmp/chrome.zip -d $GITHUB_WORKSPACE/chrome
           sudo mv $GITHUB_WORKSPACE/chrome/chrome-linux64/chrome /usr/bin/google-chrome
           wget -O /tmp/chromedriver.zip $CHROMEDRIVER_DOWNLOAD_URL
-          unzip -o /tmp/chromedriver.zip -d $GITHUB_WORKSPACE/chromedriver
+          unzip /tmp/chromedriver.zip -d $GITHUB_WORKSPACE/chromedriver
           sudo mv $GITHUB_WORKSPACE/chromedriver/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
 
       - name: Get current version
@@ -64,74 +64,44 @@ jobs:
         id: scrape_version
         run: |
           cd $GITHUB_WORKSPACE/scripts
-          download_link=$(python DoLEnScraper.py ${{ env.CURRENT_VERSION }})
-          echo "download_link=$download_link" >> $GITHUB_ENV
-        env:
-          GITHUB_ENV: $GITHUB_ENV
+          python DoLEnScraper.py ${{ env.CURRENT_VERSION }}
 
       - name: Check if link was found and versions match
-        if: env.download_link == '' || env.CURRENT_VERSION == env.CURRENT_VERSION_EN
+        if: steps.scrape_version.outputs.download_link == '' || ${{ env.CURRENT_VERSION }} == ${{ env.CURRENT_VERSION_EN }}
         run: echo "No matching version found or versions match. Skipping download."
 
-      - name: Download the file
-        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+      - name: Download and unzip the file
+        if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
         run: |
-          echo "Download Link: ${{ env.download_link }}"
+          echo "Download Link: ${{ steps.scrape_version.outputs.download_link }}"
           cd $GITHUB_WORKSPACE/scripts
-          output_filename="downloaded_file.zip"
-          python DoLEnScraper2.py "${{ env.download_link }}" "$output_filename"
-          ls -al "$GITHUB_WORKSPACE/scripts"
-
-      - name: Verify downloaded file and unzip
-        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
-        run: |
-          cd "$GITHUB_WORKSPACE/scripts"
-          echo "Checking if file exists: downloaded_file.zip"
-          if [ ! -f "downloaded_file.zip" ]; then
-            echo "Error: File not found! Files in directory:"
-            ls -al
-            exit 1
-          fi
-          unzip -o "downloaded_file.zip" -d $GITHUB_WORKSPACE/DoL/
-          ls -al "$GITHUB_WORKSPACE/DoL"
-          rsync -av --remove-source-files "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/" "$GITHUB_WORKSPACE/DoL/"
-
-      - name: List files in DoL directory
-        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
-        run: |
-          ls -al "$GITHUB_WORKSPACE/DoL"
-          ls -al "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity"
-
-      - name: Move HTML file and rename
-        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
-        run: |
+          output_filename="$GITHUB_WORKSPACE/scripts/Degrees_of_Lewdity_${{ env.CURRENT_VERSION }}.zip"
+          python DoLEnScraper2.py "${{ steps.scrape_version.outputs.download_link }}" "$output_filename"
+          unzip "$output_filename" -d $GITHUB_WORKSPACE/DoL/
           mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "$GITHUB_WORKSPACE/DoLEn.html"
           mv "$GITHUB_WORKSPACE/DoLEn.html" "$GITHUB_WORKSPACE/DoL/"
 
       - name: Copy img folder to retexture/vanila
-        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
         run: |
           mkdir -p $GITHUB_WORKSPACE/retexture/vanila/
-          cp -rf $GITHUB_WORKSPACE/DoL/img $GITHUB_WORKSPACE/retexture/vanila/
-          ls -al $GITHUB_WORKSPACE/retexture/vanila/img
+          cp -r $GITHUB_WORKSPACE/DoL/img $GITHUB_WORKSPACE/retexture/vanila/
 
       - name: Update version file
-        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
         run: echo ${{ env.CURRENT_VERSION }} > $GITHUB_WORKSPACE/current_version_En.txt
 
       - name: Commit and push changes
-        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        if: steps.scrape_version.outputs.download_link != '' && ${{ env.CURRENT_VERSION }} != ${{ env.CURRENT_VERSION_EN }}
         run: |
-          git config --global http.postBuffer 157286400
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A
+          git add .
           git stash
-          git pull --rebase origin main || true
-          git stash pop || true
-          git add -A
+          git pull --rebase origin main
+          git stash pop
           git commit -m "Updated ${{ env.CURRENT_VERSION }}"
-          git push || git push --force
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -159,6 +129,7 @@ jobs:
           fi
           if [ -f "$GITHUB_WORKSPACE/version_info.txt" ]; then
             echo "Deleting $GITHUB_WORKSPACE/version_info.txt..."
+            sudo chmod 777 "$GITHUB_WORKSPACE/version_info.txt"
             sudo rm -f "$GITHUB_WORKSPACE/version_info.txt"
           else
             echo "$GITHUB_WORKSPACE/version_info.txt not found"
