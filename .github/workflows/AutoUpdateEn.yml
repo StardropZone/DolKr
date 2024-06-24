@@ -145,12 +145,14 @@ jobs:
           echo "GITHUB_WORKSPACE value: $GITHUB_WORKSPACE"
           if [ -d "$GITHUB_WORKSPACE/chrome" ]; then
             echo "$GITHUB_WORKSPACE/chrome exists. Deleting..."
+            sudo chmod -R 777 "$GITHUB_WORKSPACE/chrome"
             sudo rm -rf "$GITHUB_WORKSPACE/chrome"
           else
             echo "$GITHUB_WORKSPACE/chrome not found"
           fi
           if [ -d "$GITHUB_WORKSPACE/chromedriver" ]; then
             echo "$GITHUB_WORKSPACE/chromedriver exists. Deleting..."
+            sudo chmod -R 777 "$GITHUB_WORKSPACE/chromedriver"
             sudo rm -rf "$GITHUB_WORKSPACE/chromedriver"
           else
             echo "$GITHUB_WORKSPACE/chromedriver not found"
