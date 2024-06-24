@@ -135,7 +135,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Clean up Chrome and ChromeDriver
+      - name: Clean up Chrome, ChromeDriver and version_info.txt
         if: always()
         run: |
           echo "Deleting Google Chrome and ChromeDriver..."
@@ -156,6 +156,12 @@ jobs:
             sudo rm -rf "$GITHUB_WORKSPACE/chromedriver"
           else
             echo "$GITHUB_WORKSPACE/chromedriver not found"
+          fi
+          if [ -f "$GITHUB_WORKSPACE/version_info.txt" ]; then
+            echo "Deleting $GITHUB_WORKSPACE/version_info.txt..."
+            sudo rm -f "$GITHUB_WORKSPACE/version_info.txt"
+          else
+            echo "$GITHUB_WORKSPACE/version_info.txt not found"
           fi
           echo "Cleanup completed."
 
