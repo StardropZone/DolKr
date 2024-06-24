@@ -135,57 +135,34 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Clean up Chrome and ChromeDriver
-        if: always()
-        run: |
-          echo "Deleting Google Chrome, ChromeDriver, and version_info.txt..."
-          sudo rm -rf /usr/bin/google-chrome
-          sudo rm -rf /usr/local/bin/chromedriver
-          echo "Deleting Chrome workspace directories..."
-          echo "GITHUB_WORKSPACE value: $GITHUB_WORKSPACE"
-          if [ -d "$GITHUB_WORKSPACE/chrome" ]; then
-            echo "$GITHUB_WORKSPACE/chrome exists. Deleting..."
-            sudo chmod -R 777 "$GITHUB_WORKSPACE/chrome"
-            sudo rm -rf "$GITHUB_WORKSPACE/chrome"
-          else
-            echo "$GITHUB_WORKSPACE/chrome not found"
-          fi
-          if [ -d "$GITHUB_WORKSPACE/chromedriver" ]; then
-            echo "$GITHUB_WORKSPACE/chromedriver exists. Deleting..."
-            sudo chmod -R 777 "$GITHUB_WORKSPACE/chromedriver"
-            sudo rm -rf "$GITHUB_WORKSPACE/chromedriver"
-          else
-            echo "$GITHUB_WORKSPACE/chromedriver not found"
-          fi
-          if [ -d "$GITHUB_WORKSPACE/version_info.txt" ]; then
-            echo "$GITHUB_WORKSPACE/version_info.txt exists. Deleting..."
-            sudo chmod -R 777 "$GITHUB_WORKSPACE/version_info.txt"
-            sudo rm -rf "$GITHUB_WORKSPACE/version_info.txt"
-          else
-            echo "$GITHUB_WORKSPACE/version_info.txt not found"
-          fi
-          echo "Cleanup completed."
+      - name: Clean up Chrome ChromeDriver and version_info
+  if: always()
+  run: |
+    echo "Deleting Google Chrome, ChromeDriver, and version_info.txt..."
+    sudo rm -rf /usr/bin/google-chrome
+    sudo rm -rf /usr/local/bin/chromedriver
+    echo "Deleting Chrome workspace directories..."
+    echo "GITHUB_WORKSPACE value: $GITHUB_WORKSPACE"
+    if [ -d "$GITHUB_WORKSPACE/chrome" ]; then
+      echo "$GITHUB_WORKSPACE/chrome exists. Deleting..."
+      sudo chmod -R 777 "$GITHUB_WORKSPACE/chrome"
+      sudo rm -rf "$GITHUB_WORKSPACE/chrome"
+    else
+      echo "$GITHUB_WORKSPACE/chrome not found"
+    fi
+    if [ -d "$GITHUB_WORKSPACE/chromedriver" ]; then
+      echo "$GITHUB_WORKSPACE/chromedriver exists. Deleting..."
+      sudo chmod -R 777 "$GITHUB_WORKSPACE/chromedriver"
+      sudo rm -rf "$GITHUB_WORKSPACE/chromedriver"
+    else
+      echo "$GITHUB_WORKSPACE/chromedriver not found"
+    fi
+    if [ -f "$GITHUB_WORKSPACE/version_info.txt" ]; then
+      echo "$GITHUB_WORKSPACE/version_info.txt exists. Deleting..."
+      sudo chmod 777 "$GITHUB_WORKSPACE/version_info.txt"
+      sudo rm "$GITHUB_WORKSPACE/version_info.txt"
+    else
+      echo "$GITHUB_WORKSPACE/version_info.txt not found"
+    fi
+    echo "Cleanup completed."
 
-      - name: List workspace directories after cleanup
-        if: always()
-        run: |
-          echo "Checking if $GITHUB_WORKSPACE/chrome exists..."
-          if [ -d "$GITHUB_WORKSPACE/chrome" ]; then
-            echo "$GITHUB_WORKSPACE/chrome exists. Listing contents..."
-            ls -al "$GITHUB_WORKSPACE/chrome"
-          else
-            echo "$GITHUB_WORKSPACE/chrome not found"
-          fi
-          echo "Checking if $GITHUB_WORKSPACE/chromedriver exists..."
-          if [ -d "$GITHUB_WORKSPACE/chromedriver" ]; then
-            echo "$GITHUB_WORKSPACE/chromedriver exists. Listing contents..."
-            ls -al "$GITHUB_WORKSPACE/chromedriver"
-          else
-            echo "$GITHUB_WORKSPACE/chromedriver not found"
-          fi
-          if [ -d "$GITHUB_WORKSPACE/version_info.txt" ]; then
-            echo "$GITHUB_WORKSPACE/version_info.txt exists. Listing contents..."
-            ls -al "$GITHUB_WORKSPACE/version_info.txt"
-          else
-            echo "$GITHUB_WORKSPACE/version_info.txt not found"
-          fi
