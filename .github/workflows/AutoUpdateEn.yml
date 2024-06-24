@@ -96,6 +96,12 @@ jobs:
           ls -al "$GITHUB_WORKSPACE/DoL"
           rsync -av --remove-source-files "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/" "$GITHUB_WORKSPACE/DoL/"
 
+      - name: List files in DoL directory
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        run: |
+          ls -al "$GITHUB_WORKSPACE/DoL"
+          ls -al "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity"
+
       - name: Move HTML file and rename
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
