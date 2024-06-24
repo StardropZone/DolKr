@@ -138,7 +138,10 @@ jobs:
       - name: Clean up Chrome and ChromeDriver
         if: always()
         run: |
+          echo "Deleting Google Chrome and ChromeDriver..."
           sudo rm -rf /usr/bin/google-chrome
           sudo rm -rf /usr/local/bin/chromedriver
+          echo "Deleting Chrome workspace directories..."
           rm -rf $GITHUB_WORKSPACE/chrome
           rm -rf $GITHUB_WORKSPACE/chromedriver
+          echo "Cleanup completed."
