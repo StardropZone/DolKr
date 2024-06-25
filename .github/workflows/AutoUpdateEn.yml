@@ -94,7 +94,7 @@ jobs:
           fi
           unzip -o "downloaded_file.zip" -d $GITHUB_WORKSPACE/DoL/
           ls -al "$GITHUB_WORKSPACE/DoL"
-          rsync -av --remove-source-files "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity/" "$GITHUB_WORKSPACE/DoL/"
+          rm -f "downloaded_file.zip"
 
       - name: List files in DoL directory
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
@@ -105,12 +105,28 @@ jobs:
       - name: Move HTML file and rename
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
-          target_file="$GITHUB_WORKSPACE/DoL/DoLEn.html"
-          if [ -f "$target_file" ]; then
-            rm -f "$target_file"
-          fi
-          mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "$target_file"
+          cd "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity"
+          mv "Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "DoLEn.html"
 
+      - name: Move all files to DoL directory
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        run: |
+          cd "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity"
+          for file in *; do
+            if [ -e "$GITHUB_WORKSPACE/DoL/$file" ]; then
+              if [ -d "$GITHUB_WORKSPACE/DoL/$file" ]; then
+                rm -rf "$GITHUB_WORKSPACE/DoL/$file"
+              else
+                rm -f "$GITHUB_WORKSPACE/DoL/$file"
+              fi
+            fi
+            mv "$file" "$GITHUB_WORKSPACE/DoL/"
+          done
+
+      - name: Remove empty folder
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        run: |
+          rm -rf "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity"
 
       - name: Copy img folder to retexture/vanila
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
