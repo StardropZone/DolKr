@@ -119,27 +119,11 @@ jobs:
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: echo ${{ env.CURRENT_VERSION }} > $GITHUB_WORKSPACE/current_version_En.txt
 
-      - name: Commit and push changes
-        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
-        run: |
-          git config --global http.postBuffer 157286400
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git stash
-          git pull --rebase origin main || true
-          git stash pop || true
-          git add -A
-          git commit -m "Updated ${{ env.CURRENT_VERSION }}"
-          git push || git push --force
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Clean up Chrome ChromeDriver and version_info
+       - name: Clean up Chrome ChromeDriver and version_info
         if: always()
         run: |
           echo "Starting cleanup process..."
-          
+
           echo "Deleting Google Chrome..."
           if [ -f /usr/bin/google-chrome ]; then
             sudo rm -f /usr/bin/google-chrome
@@ -201,5 +185,23 @@ jobs:
           else
             echo "version_info.txt not found."
           fi
-          
+
           echo "Cleanup process completed."
+
+      - name: Commit and push changes
+        if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
+        run: |
+          git config --global http.postBuffer 157286400
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Always touch a file to ensure the commit is registered
+          touch update_timestamp.txt
+          
+          git add -A
+          git stash
+          git pull --rebase origin main || true
+          git stash pop || true
+          git add -A
+          git commit -m "Updated ${{ env.CURRENT_VERSION }} at $(date)"
+          git push || git push --force
