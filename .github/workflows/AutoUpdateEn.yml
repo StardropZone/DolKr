@@ -105,12 +105,20 @@ jobs:
       - name: Move HTML file and rename
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
-          mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "$GITHUB_WORKSPACE/DoLEn.html"
-          mv "$GITHUB_WORKSPACE/DoLEn.html" "$GITHUB_WORKSPACE/DoL/"
+          target_file="$GITHUB_WORKSPACE/DoL/DoLEn.html"
+          if [ -f "$target_file" ]; then
+            rm -f "$target_file"
+          fi
+          mv "$GITHUB_WORKSPACE/DoL/Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "$target_file"
+
 
       - name: Copy img folder to retexture/vanila
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: |
+          target_dir="$GITHUB_WORKSPACE/retexture/vanila/img"
+          if [ -d "$target_dir" ]; then
+            rm -rf "$target_dir"
+          fi
           mkdir -p $GITHUB_WORKSPACE/retexture/vanila/
           cp -rf $GITHUB_WORKSPACE/DoL/img $GITHUB_WORKSPACE/retexture/vanila/
           ls -al $GITHUB_WORKSPACE/retexture/vanila/img
@@ -203,5 +211,5 @@ jobs:
           git pull --rebase origin main || true
           git stash pop || true
           git add -A
-          git commit -m "Updated ${{ env.CURRENT_VERSION }} at $(date)"
+          git commit -m "Updated ${{ env.CURRENT_VERSION }}"
           git push || git push --force
