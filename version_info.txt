@@ -1,3 +1,0 @@
-CHROME_VERSION=126.0.6478.126
-CHROME_DOWNLOAD_URL=https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chrome-linux64.zip
-CHROMEDRIVER_DOWNLOAD_URL=https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chromedriver-linux64.zip
