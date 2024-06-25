@@ -119,7 +119,7 @@ jobs:
         if: env.download_link != '' && env.CURRENT_VERSION != env.CURRENT_VERSION_EN
         run: echo ${{ env.CURRENT_VERSION }} > $GITHUB_WORKSPACE/current_version_En.txt
 
-       - name: Clean up Chrome ChromeDriver and version_info
+      - name: Clean up Chrome ChromeDriver and version_info
         if: always()
         run: |
           echo "Starting cleanup process..."
