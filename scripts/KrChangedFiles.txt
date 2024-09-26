@@ -1,0 +1,14 @@
+game/03-JavaScript/kotrans.js
+game/base-combat/init.twee
+game/base-system/nicknames.twee
+game/base-system/overlays/feats-ui.twee
+game/base-system/overlays/traits.twee
+game/base-system/translate/init/trinit.js
+game/base-system/translate/init/trinit_colours.js
+game/base-system/translate/trListboxItems.twee
+game/overworld-plains/loc-moor/main.twee
+game/overworld-town/loc-street/events.twee
+game/overworld-town/special-avery/main.twee
+game/overworld-town/special-whitney/main.twee
+game/special-masturbation/effects.js
+version.ko
