@@ -42,6 +42,7 @@ jobs:
           else
             echo "Already up to date"
             echo "COPY_NEEDED=false" >> $GITHUB_ENV
+          fi
 
       # 변경된 파일들 추적 (현재 버전과 최신 버전 사이의 커밋 차이 확인)
       - name: Get list of changed files
