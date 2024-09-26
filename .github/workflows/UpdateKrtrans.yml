@@ -1,4 +1,4 @@
-name: GitHub Token
+name: Update Kr Translation
 
 on:
   schedule:
