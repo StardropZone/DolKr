@@ -2,38 +2,74 @@ name: Update Kr Translation
 
 on:
   schedule:
-    - cron: '0 15 * * 6'  # 매주 토요일 UTC 15:00 (한국 시간 자정)
-  workflow_dispatch:  # 수동으로 실행할 수 있도록 설정
-
-permissions:
-  contents: write  # GITHUB_TOKEN에 쓰기 권한 부여
+    - cron: '0 15 * * 6'  # 매주 토요일 UTC 15:00 (한국 시간 일요일 자정에 실행)
+  workflow_dispatch:  # 수동 실행을 위한 옵션
 
 jobs:
-  update_version:
+  update_files:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # 현재 리포지토리 체크아웃
+      - name: Checkout this repository
         uses: actions/checkout@v3
 
-      - name: Set environment variable
-        run: echo "GITHUB_TOKEN=${{ secrets.G_TOKEN }}" >> $GITHUB_ENV
+      # 최신 태그 정보 가져오기
+      - name: Get latest tag from source repository
+        id: get_latest_tag
+        run: |
+          LATEST_TAG=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/tags | jq -r '.[0].name')
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'  # 사용할 Python 버전 설정
+      # 현재 리포지토리에서 scripts 폴더 내 KrVersionChecker.txt에 저장된 버전 가져오기
+      - name: Get current version from this repository
+        id: get_current_version
+        run: |
+          if [ -f scripts/KrVersionChecker.txt ]; then
+            CURRENT_VERSION=$(cat scripts/KrVersionChecker.txt)
+          else
+            CURRENT_VERSION="none"
+          fi
+          echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
 
-      - name: Install dependencies
-        run: pip install PyGithub  # PyGithub 설치
+      # 태그 비교 및 복사 여부 확인
+      - name: Compare versions
+        id: compare_versions
+        run: |
+          if [ "$LATEST_TAG" != "$CURRENT_VERSION" ]; then
+            echo "New version found: $LATEST_TAG"
+            echo "COPY_NEEDED=true" >> $GITHUB_ENV
+          else
+            echo "Already up to date"
+            echo "COPY_NEEDED=false" >> $GITHUB_ENV
 
-      - name: Run Python script
-        run: python ./scripts/KrTransUpdate.py  # Python 스크립트 실행
+      # 변경된 파일들 추적 (현재 버전과 최신 버전 사이의 커밋 차이 확인)
+      - name: Get list of changed files
+        if: env.COPY_NEEDED == 'true'
+        run: |
+          CHANGED_FILES=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/compare/$CURRENT_VERSION...$LATEST_TAG | jq -r '.files[].filename')
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
-      - name: Commit changes # 최신 태그로 커밋 메시지 작성
+      # 변경된 파일을 복사 (경로 유지 및 덮어쓰기)
+      - name: Copy changed files from source repository
+        if: env.COPY_NEEDED == 'true'
+        run: |
+          for file in $CHANGED_FILES; do
+            curl -L -o ./KrTrans/$file https://raw.githubusercontent.com/uotalkie/dol-kr/main/$file
+          done
+
+      # 최신 태그를 scripts 폴더 내 KrVersionChecker.txt에 기록
+      - name: Update version in scripts/KrVersionChecker.txt
+        if: env.COPY_NEEDED == 'true'
+        run: |
+          echo "$LATEST_TAG" > scripts/KrVersionChecker.txt
+          git add scripts/KrVersionChecker.txt
+          git commit -m "$LATEST_TAG"
+
+      # 변경된 파일들 커밋 및 푸시
+      - name: Commit and push changes
+        if: env.COPY_NEEDED == 'true'
         run: |
           git add .
-          git commit -m "${{ steps.run_script.outputs.LATEST_TAG }}"
+          git commit -m "$LATEST_TAG"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}  # GitHub 토큰을 푸시 작업에 사용
