@@ -43,16 +43,25 @@ def get_changed_files_between_versions(repo, old_version, new_version):
 
 def copy_file(source_repo, file_path, destination_folder):
     """원본 리포지토리에서 파일을 복사해서 대상 폴더로 저장"""
-    file_content = source_repo.get_contents(file_path)
-    file_data = file_content.decoded_content
+    # 디렉토리 경로인지 확인
+    content = source_repo.get_contents(file_path)
+    
+    # 만약 디렉토리라면, 내부 파일들을 순회하며 복사
+    if isinstance(content, list):
+        for item in content:
+            copy_file(source_repo, item.path, destination_folder)
+    else:
+        # 파일일 경우에만 내용을 복사
+        file_data = content.decoded_content
 
-    # 목적 경로에 필요한 폴더 생성
-    destination_path = os.path.join(destination_folder, file_path)
-    os.makedirs(os.path.dirname(destination_path), exist_ok=True)
+        # 목적 경로에 필요한 폴더 생성
+        destination_path = os.path.join(destination_folder, file_path)
+        os.makedirs(os.path.dirname(destination_path), exist_ok=True)
 
-    # 파일 복사
-    with open(destination_path, 'wb') as f:
-        f.write(file_data)
+        # 파일 복사
+        with open(destination_path, 'wb') as f:
+            f.write(file_data)
+
 
 def main():
     # 최신 태그 가져오기
