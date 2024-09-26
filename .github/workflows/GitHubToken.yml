@@ -17,5 +17,5 @@ jobs:
       - name: Set environment variable
         run: echo "GITHUB_TOKEN=${{ secrets.G_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Run script.js
-        run: node script.js
+      # - name: Run script.js
+      #   run: node script.js
