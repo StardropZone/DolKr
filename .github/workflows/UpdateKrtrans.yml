@@ -48,7 +48,7 @@ jobs:
       - name: Get list of changed files
         if: env.COPY_NEEDED == 'true'
         run: |
-          CHANGED_FILES=$(curl -s https://api.github.com/repos/owner/source-repo/compare/$CURRENT_VERSION...$LATEST_TAG | jq -r '.files[].filename')
+          CHANGED_FILES=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/compare/$CURRENT_VERSION...$LATEST_TAG | jq -r '.files[].filename')
           echo "$CHANGED_FILES" > scripts/KrChangedFiles.txt
 
 
