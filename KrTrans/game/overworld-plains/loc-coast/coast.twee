@@ -1,0 +1,182 @@
+:: Coast Path Mer
+<<set $outside to 1>><<effects>>
+
+당신은 부두 근처의 좁은 길을 걸어 내려가며, 메르 가에서 점차 멀어진다. 길은 창고로 이어져 있으나, 길 옆으로 모래의 흔적이 뾰족한 잔디밭 사이에 감춰져 있다. 그 길은 마을을 둘러싸고 있는 언덕으로 통하고, 바다를 마주보는 절벽의 꼭대기까지 구불구불하게 이어져 있다.
+<br><br>
+
+여기에 길이 나 있다는 걸 아는 이는 거의 없다.
+<br><br>
+
+<<link [[다음|Coast Path]]>><</link>>
+<br>
+
+:: Coast Path
+<<location "coastpath">><<effects>>
+
+당신은 마을 동쪽, 바다를 마주보는 절벽의 위로 이어져 있는 좁은 해안길을 따라간다.
+
+<<cliff_top_desc>>
+
+백장미 덤불이 바람에도 불구하고, 여기에 피어 있다.
+<br><br>
+
+<<if !$plants_known.includes("white_rose")>>
+	<<icon "tending/white_rose.png">> <<link [[씨앗을 찾는다 (0:30)|Coast Path White Rose]]>><<pass 30>><<pain 6>><<tending 6>><<set $plants_known.push("white_rose")>><</link>><<gpain>><<gtending>>
+	<br>
+<</if>>
+<<if $historytrait gte 3>>
+	<<walkicon>><<link [[해안을 따라 동쪽으로 걷는다 (2:00)|Coast Path East]]>><<athletics 4>><<pass 120>><</link>>
+	<br>
+	<<if currentSkillValue('athletics') gte 300 and (Weather.precipitation is "none") and !$worn.feet.type.includes("heels")>>
+		<<runicon>><<link [[해안을 따라 동쪽으로 조깅한다 (1:30)|Coast Path East]]>><<athletics 5>><<pass 90>><<tiredness 2>><<set $speed to "jog">><</link>><<athleticsdifficulty 250 700>><<gtiredness>>
+		<br>
+		<<if currentSkillValue('athletics') gte 700>>
+			<<runicon>><<link [[해안을 따라 동쪽으로 달린다 (1:00)|Coast Path East]]>><<athletics 6>><<pass 60>><<tiredness 3>><<set $speed to "run">><</link>><<athleticsdifficulty 650 1000>><<gtiredness>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $harpy gte 6 and $birdFly gte 1>>
+		<br>
+		<<flight_time_check 20>>
+		<<glideicon>><<link [[동쪽으로 날아오른다 (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Coast Path East]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<pass _flightTime>><<set $speed to "fly">><</link>><<flight_text>><<gtiredness>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+<<entertownicon>><<link [[마을로 들어간다 (0:30)|Mer Street]]>><<pass 30>><</link>>
+<br>
+
+:: Coast Path White Rose
+<<effects>>
+
+당신은 덤불에서 꽃씨를 찾는다. 당신은 가시를 피하려 조심했지만, 살짝 찔렸다.
+<br><br>
+<span class="gold">당신은 이제 <<icon "tending/white_rose.png">> 백장미를 키울 수 있습니다.</span>
+<br><br>
+<<link [[다음|Coast Path]]>><</link>>
+<br>
+
+
+:: Coast Path Cabbage
+<<effects>>
+
+당신은 절벽 꼭대기 근처에 드문드문 보이는 잎이 풍성한 덤불을 더욱 면밀히 살펴본다. 알고 보니, 그건 야생 양배추였다. 당신은 씨앗을 몇 개 챙겼다.
+<br><br>
+<span class="gold">당신은 이제 <<icon "tending/cabbage.png">> 양배추를 키울 수 있습니다.</span>
+<br><br>
+<<link [[다음|Coast Path Farmland]]>><</link>>
+<br>
+
+
+:: Coast Path Meadow
+<<set $outside to 1>><<effects>>
+
+들판의 숨겨진 모퉁이를 지나면 두 언덕 사이에 자리잡은, 덤불로 들어가는 좁은 길이 나 있다. 길은 북쪽으로 이어져 있고, 그 끝은 바다를 마주보는 절벽 꼭대기로 통한다.
+<br><br>
+
+여기에 길이 나 있다는 걸 아는 이는 거의 없다.
+<br><br>
+
+<<link [[다음|Coast Path Farmland]]>><</link>>
+<br>
+
+:: Coast Path Farmland
+<<location "coastpath">><<effects>>
+
+당신은 농장의 북쪽으로 난 좁은 해안길을 따라 바다를 마주보는 절벽 위로 올라간다.
+
+<<cliff_top_desc>>
+
+<br><br>
+
+<<walkicon "west">><<link [[해안을 따라 서쪽으로 걷는다 (2:00)|Coast Path West]]>><<pass 120>><</link>>
+<br>
+<<if !$plants_known.includes("cabbage")>>
+	<<icon "tending/cabbage.png">> <<link [[씨앗을 찾는다 (0:30)|Coast Path Cabbage]]>><<pass 30>><<tending 6>><<set $plants_known.push("cabbage")>><</link>><<gtending>>
+	<br>
+<</if>>
+<<if currentSkillValue('athletics') gte 300 and (Weather.precipitation is "none") and !$worn.feet.type.includes("heels")>>
+	<<runicon  "west">><<link [[해안을 따라 서쪽으로 조깅한다 (1:30)|Coast Path West]]>><<pass 90>><<tiredness 2>><<set $speed to "jog">><</link>><<athleticsdifficulty 250 700>><<gtiredness>>
+	<br>
+	<<if currentSkillValue('athletics') gte 700>>
+		<<runicon "west">><<link [[해안을 따라 서쪽으로 달린다 (1:00)|Coast Path West]]>><<pass 60>><<tiredness 5>><<set $speed to "run">><</link>><<athleticsdifficulty 650 1000>><<gtiredness>>
+		<br>
+	<</if>>
+<</if>>
+<<if $harpy gte 6 and $birdFly gte 1>>
+	<<flight_time_check 20>>
+	<<glideicon "west">><<link [[서쪽으로 날아오른다 (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Coast Path West]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<pass _flightTime>><<set $speed to "fly">><</link>><<flight_text>><<gtiredness>>
+	<br>
+<</if>>
+
+<br>
+<<farmicon "meadow">><<link [[목초지로 들어간다 (0:30)|Meadow]]>><<pass 30>><</link>>
+<br>
+
+:: Coast Path East
+<<effects>>
+
+<<if $speed is "fly">>
+	<<flight_effects>>
+	당신은 달리다가 뛰어오른다. 바람이 당신을 잡고 길을 따라 실어나른다.
+<</if>>
+<br><br>
+당신은 동쪽으로 난 길을 따라간다. 가끔은 길이 절벽의 맨 꼭대기를 따라 나 있다. 어떨 때는, 길이 아래쪽 깊은 곳으로 푹 들어가, 한쪽 바위 표면과 반대편의 깎아지른 바위 표면을 비집고 내려가는 식으로 되어 있다. 
+<<if $speed is "jog">>
+	<br><br>
+	<<athleticsdifficulty 250 700 true>>
+	<<if $athleticsSuccess>>
+		당신은 바람을 헤치며 조깅한다. <span class="green">바닷바람<<if Weather.is("clear") and Time.dayState is "day">>과 햇살<</if>>이 상쾌하다.</span>
+	<<else>>
+		당신은 바람을 헤치며 조깅한다. <span class="red">살짝 피로해졌다.</span><<gtiredness>><<tiredness 2>>
+	<</if>>
+<<elseif $speed is "run">>
+	<br><br>
+	<<athleticsdifficulty 650 1000 true>>
+	<<if $athleticsSuccess>>
+		당신은 바람을 헤치며 달린다. <span class="green">바닷바람<<if Weather.is("clear") and Time.dayState is "day">>과 햇살<</if>>이 상쾌하다.</span>
+	<<else>>
+		당신은 바람을 헤치며 조깅한다. <span class="red">살짝 피로해졌다.</span><<gtiredness>><<tiredness 5>>
+	<</if>>
+<</if>>
+<<unset $speed>>
+<br><br>
+멀리 들판이 보인다.
+<br><br>
+
+<<link [[다음|Coast Path Farmland]]>><</link>>
+<br>
+
+:: Coast Path West
+<<effects>>
+
+<<if $speed is "fly">>
+	<<flight_effects>>
+	당신은 달리다가 뛰어오른다. 바람이 당신을 잡고 길을 따라 실어나른다.
+	<br><br>
+<</if>>
+당신은 서쪽으로 난 길을 따라간다. 야생의 풀과 다른 식물들이 종종 길에 끼어들어, 때로는 길이 완전히 묻혀 버리기도 한다. 하지만 길을 다시 찾아가기 어렵진 않다. 길은 항상 절벽을 빙 둘러 나 있으니까.
+<br><br>
+<<if $speed is "jog">>
+	<br><br>
+	<<athleticsdifficulty 250 700 true>>
+	<<if $athleticsSuccess>>
+		당신은 바람을 헤치며 조깅한다. <span class="green">바닷바람<<if Weather.is("clear") and Time.dayState is "day">>과 햇살<</if>>이 상쾌하다.</span>
+	<<else>>
+		당신은 바람을 헤치며 조깅한다. <span class="red">살짝 피로해졌다.</span><<gtiredness>><<tiredness 2>>
+	<</if>>
+<<elseif $speed is "run">>
+	<br><br>
+	<<athleticsdifficulty 650 1000 true>>
+	<<if $athleticsSuccess>>
+		당신은 바람을 헤치며 달린다. <span class="green">바닷바람<<if Weather.is("clear") and Time.dayState is "day">>과 햇살<</if>>이 상쾌하다.</span>
+	<<else>>
+		당신은 바람을 헤치며 달린다. <span class="red">살짝 피로해졌다.</span><<gtiredness>><<tiredness 5>>
+	<</if>>
+<</if>>
+<<unset $speed>>
+멀리 마을이 보인다.
+<br><br>
+
+<<link [[다음|Coast Path]]>><</link>>
+<br>

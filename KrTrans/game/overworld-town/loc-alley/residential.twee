@@ -1,0 +1,482 @@
+:: Residential alleyways
+
+<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "residential">><<getTarget true>>
+당신은 거주 지구의 골목길에 있다.
+<<if Time.dayState is "day">>
+	<<if Weather.precipitation is "rain">>
+		많은 사람들이 용감하게 비를 뚫고 간다.
+	<<elseif Weather.precipitation is "snow">>
+		눈이 발자국들을 덮고 있다.
+	<<else>>
+		주변에 사람들이 많이 있다.
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if Weather.precipitation is "rain">>
+		사람들이 비를 뚫고 달려간다.
+	<<elseif Weather.isSnow>>
+		길들이 눈으로 잘 다져져 있다.
+	<<else>>
+		당신은 사방에서 목소리들을 듣는다.
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if Weather.precipitation is "rain">>
+		빗물이 홈통을 가득 채운다.
+	<<elseif Weather.precipitation is "snow">>
+		눈이 지붕을 뒤덮는다.
+	<<else>>
+		당신은 개가 짖는 소리를 듣는다.
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if Weather.precipitation is "rain">>
+		사람들이 일을 하러, 혹은 어딘가로 용감하게 비를 뚫고 간다.
+	<<elseif Weather.isFreezing>>
+		사람들이 일을 하러, 혹은 어딘가로 용감하게 추위를 뚫고 간다.
+	<<else>>
+		이미 많은 보행자들과 자전거 운전자들이 주위에 있다.
+	<</if>>
+<</if>>
+당신의 집이 근처에 있다.
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "alley">>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutalley>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<elseif $town_projects.thicket is 1>>
+		<<set $town_projects.thicket to 2>>
+		당신은 나무들이 작지만 빽빽하게 밀집된 곳을 옆을 지나간다. 이곳은 원래 휴식을 위한 장소였지만, 오랫동안 방치된 끝에 야생 나무딸기 덤불들로 뒤덮였다. 사람들은 매일 이곳을 눈길 한 번 주지 않고 지나친다.
+		<br><br>
+		당신은 멀찍이 거리를 둔다. 덤불들은 바람에 흔들리고, 커다란 가시들은 날카로워 보인다. 그 꼭대기, 손이 닿지 않을 정도로 먼 곳에는 과즙이 많아 보이는 산딸기들이 자라나 있다. 그것들은 마치 물담배 가게 아래 웅덩이의 눈동자들을 떠올리게 한다. <span class="green">어떤 생각이 떠오른다.</span> 이곳이 제대로 관리를 받았다면 기분좋은 장소가 될 수 있었을 것이다.
+		<br><br>
+		<i>당신은 시청에서 덤불에 대한 요청을 할 수 있다.</i>
+		<br><br>
+
+		<<link [[다음|Residential alleyways]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+
+	<<elseif $town_projects.thicket is 3>>
+		<<set $town_projects.thicket to 4>>
+		<<generate1>><<person1>>
+		당신은 덤불에 다가간다. 이제 덤불은 더이상 너무 무성하지 않다. 가지들은 쳐내어졌고, 야생 덤불은 잘 다듬어졌다.
+		<br><br>
+
+		중앙 쪽에는 당신에게 감사하는 마음을 담은 명패가 달린 벤치가 있다. <<person_ i>> 거기에 앉아 샌드위치를 먹고 있다.
+		<br><br>
+		<<earnFeat "Concrete Woodland">>
+		<<link [[다음|Residential alleyways]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "residential">>
+			<br>
+		<</if>>
+		주요 장소
+		<br>
+		<<if $exposed gte 1>>
+			<<homeicon>><<link [[집에 간다 (0:02)->Home Fence]]>><<if $daily.fenceClimb isnot 1>><<set $daily.fenceClimb to 1>><<transform cat 1>><</if>><<pass 2>><</link>>
+			<br>
+		<<else>>
+			<<homeicon>><<link [[집에 간다 (0:02)->Garden]]>><<if $daily.fenceClimb isnot 1>><<set $daily.fenceClimb to 1>><<transform cat 1>><</if>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		/*<<link [[Scavenge (1:00)|Residential Scavenge]]>><<pass 60>><<housekeeping 100>><</link>><<ghousekeeping 100>>
+		<br>*/
+		<<if $town_projects.thicket gte 4>>
+			<<foresticon "bush">><<link [[덤불 (0:01)|Residential Thicket]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+		<<if $cat gte 6 and Time.dayState is "night">>
+			<<ind>><<link [[야옹 (0:30)|Residential Meow]]>><<pass 30>><<stress -3>><</link>><<cat>><<lstress>>
+			<br>
+		<</if>>
+		<<if Time.dayState isnot "night">>
+			<<if $exposed gte 2>>
+				<<if hasSexStat("exhibitionism", 5)>>
+					<<connudatusicon>><<link [[콘누다투스 거리를 건너간다 (0:05)|Road Ex]]>><</link>><<if $daily.ex.road is undefined>><<exhibitionist5>><</if>>
+					<br>
+				<</if>>
+			<<elseif $exposed is 1>>
+				<<if hasSexStat("exhibitionism", 3)>>
+					<<connudatusicon>><<link [[콘누다투스 거리를 건너간다 (0:05)|Road Ex]]>><</link>><<if $daily.ex.road is undefined>><<exhibitionist3>><</if>>
+					<br>
+				<</if>>
+			<</if>>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<add_link "이동<br>">><<hideDisplay>>
+			<<domus>>
+			<<barb>>
+			<<danube>>
+			<<connudatus>>
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>다른 경로<br>">><<hideDisplay>>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<commercial>>
+		<</if>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "residential">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>
+
+:: Residential Meow
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if Weather.precipitation is "rain">>
+	당신은 비와 싸우며 한밤에 야옹하고 울고 있다.
+<<elseif Weather.precipitation is "snow">>
+	당신은 눈 오는 밤에 야옹하고 울고 있다.
+<<else>>
+	당신은 한밤에 야옹하고 울고 있다.
+<</if>>
+<br><br>
+<<if $rng gte 76>>
+	<<beastNEWinit 1 cat>>
+	또 다른 야옹 소리가 대답하며, 작은 <<beasttypePost "이">> 다가온다.<<if $monster is 1>><<bHePost "은">> 순진한 눈으로 당신을 올려다본다.<</if>>
+	<br><br>
+	<<link [[쓰다듬는다|Residential Pet]]>><<stress -6>><</link>><<lstress>>
+	<br>
+	<!-- Modified for Monster People -->
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<link [[흥분하게 만든다|Residential Tease]]>><</link>><<deviant1>>
+		<br>
+		<<if hasSexStat("deviancy", 5)>>
+			<<if playerAwareTheyAreInHeat() and $NPCList[0].penis isnot "none" and (($player.vaginaExist and !playerChastity("vagina")) or (canBeMPregnant() and !playerChastity("anus")))>>
+				<<link [[추파를 던진다|Residential Flirt]]>><</link>><<deviant5>><<heat>>
+				<br>
+			<</if>>
+			<<if playerRutMinArousal() and $NPCList[0].vagina isnot "none" and !playerChastity("penis")>>
+				<<link [[장난치듯 비빈다|Residential Rub]]>><</link>><<deviant5>><<rut>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<elseif $rng gte 51>>
+	산들바람과 멀리서 들리는 경적 소리 외에는 아무 대답이 없다.
+	<br><br>
+	<<link [[다음|Residential alleyways]]>><</link>>
+	<br>
+<<elseif $rng gte 26>>
+	<<beastNEWinit 1 cat>>
+	으르렁거리는 소리가 대답한다. 거대한 <<beasttypePost "이">> 어둠 속에서 서성거리며, 당신을 빤히 쳐다보고 있다.
+	<br><br>
+	<<link [[쓰다듬는다|Residential Big Pet]]>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+	<br>
+	<<if $monster is 1 or $bestialitydisable is "f">><!-- Modified for Monster People -->
+		<<link [[흥분하게 만든다|Residential Big Tease]]>><</link>><<deviant1>>
+		<br>
+		<<if hasSexStat("deviancy", 5)>>
+			<<if playerAwareTheyAreInHeat() and $NPCList[0].penis isnot "none" and (($player.vaginaExist and !playerChastity("vagina")) or (canBeMPregnant() and !playerChastity("anus")))>>
+				<<link [[추파를 던진다|Residential Flirt]]>><</link>><<deviant5>><<heat>>
+				<br>
+			<</if>>
+			<<if playerRutMinArousal() and $NPCList[0].vagina isnot "none" and !playerChastity("penis")>>
+				<<link [[장난치듯 비빈다|Residential Rub]]>><</link>><<deviant5>><<rut>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<else>>
+	위층 방에서 불이 켜진다. 커튼 뒤에서 실루엣이 나타나고, 창문이 열린다. <<generate1>><<person1>><<personPost "이">> 몸을 내민다. "멍청한 고양이가," <<hePost "이">> 소리친다. "좀 닥치라고." <<HePost "은">> 당신에게 뭔가를 던졌고, 당신은 쉬익 하는 소리와 함께 피한다. "드디어," <<hePost "은">> 창문을 닫으며 한숨을 쉰다.
+	<br><br>
+	<<if random(1, 2) is 2>>
+		<<hePost "이">> 던진 물건에서 빛이 번쩍인다. 시계다. 구매자를 찾을 수 있다면, 가치가 있을지도 모른다.
+		<br><br>
+		<<set $blackmoney += 20>>
+	<</if>>
+	<<link [[다음|Residential alleyways]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Residential Pet
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+당신은 몸을 웅크려 <<beasttype_ yi>> 머리를 쓰다듬는다.
+<<if $monster is 1>>
+	<<bHe_ nun>> 갸르릉거리며, <<bhis_ yi>> 머리를 당신의 가슴에 대고 비비적거린다. <<bHe_ nun>> 당신에게 <<bhis_ yi>> 손과 꼬리를 한 번 흔들더니,
+<<else>>
+	<<bHe_ nun>> 갸르릉거리며 당신에게 몸을 비비적거린 후, <<bhis_ yi>> 꼬리를 한 번 흔들더니,
+<</if>>
+근처의 벽 위로 뛰어오른다. <<bHe_ ga>> 벽 너머로 사라진다.
+<br><br>
+<<link [[다음|Residential alleyways]]>><<endevent>><</link>>
+<br>
+
+:: Residential Tease
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+유혹적으로 갸르릉거리며, 당신은 땅에 엎드려 짝짓기 자세를 취한다.
+<<if $monster is 1>>
+	<<beasttypes_ yi>> 눈이 반짝이고, 당신의 몸짓에 열렬히 화답한다. <<bHe_ ga>> 갸르릉거린다. "나를 선택해 줘서 고마워." <<bhe_ ga>> 말한다.
+	<<bHe_ nun>> 당신 위로 기어올라와 발 디딜만한 곳을 찾으려 애쓰며 허리를 흔들기 시작한다. 당신은 <<bhis_ yi>> 팔을 붙잡고, <<bhim_ ul>> 당신의 몸에서 떼어낸다. 당신은 <<bhim_ ul>> 굴려 <<bhis_ yi>> 등이 바닥에 닿도록 눕힌 후 <<bhis_ yi>> 배를 문지른다.
+<<else>>
+	열렬한 모양새로, 고양이는 당신 위로 뛰어올라와 발 디딜만한 곳을 찾으려 애쓰며 허리를 흔들기 시작한다. 당신은 고양이의 목덜미를 붙잡고, 당신의 몸에서 떼어낸다. 그러고는 고양이 등이 바닥에 닿도록 눕힌 후 그것의 배를 문지른다.
+<</if>>
+<<bHe_ ga>> 자유로이 풀려나자, <<bhe_ nun>> 실망스러운 듯 야옹거린 뒤 근처의 벽 위로 뛰어올라 벽 너머로 사라진다.
+<<deviancy1>>
+<<link [[다음|Residential alleyways]]>><<endevent>><</link>>
+<br>
+
+:: Residential Big Pet
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $monster is 1>>
+	당신은 <<bhis_ yi>> 머리에 손을 뻗는다. <<bHe_ nun>> 당신보다 훌쩍 크기에, <<bhe_ nun>> 당신이 <<bhimPost "에게">> 닿을 수 있도록 몸을 숙여준다. <<bHe_ nun>> 당신이 <<bhis_ yi>> 머리를 쓰다듬는 동안 움직이진 않지만, <<bhis_ yi>> 목에서 낮은 울음소리가 울린다.
+	"고마워." <<bhe_ ga>> 갸르릉거린다. <<bHe_ nun>> 당신의 손을 핥고, 돌아서서는 밤 속으로 뛰어들어간다.
+<<else>>
+	당신은 <<bhisPost "의">> 머리로 손을 뻗는다. 당신이 <<bHePost "을">> 만지는 동안 움직이진 않지만, 목에서 낮은 울음소리가 울린다. <<bHePost "은">> 당신의 손을 핥고, 돌아서서는 밤 속으로 뛰어들어간다.
+<</if>>
+<br><br>
+<<link [[다음|Residential alleyways]]>><<endevent>><</link>>
+<br>
+
+:: Residential Big Tease
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+당신은 땅에 엎드려 짝짓기 자세를 취한다. <<beasttypePost "이">> 당신에게 다가오지만, 당신은 손으로 <<bhisPost "의">> 코를 밀고는 살랑살랑 움직이며 장난한다.
+<<deviancy1>>
+<<if $monster is 1>>
+	<<bhis_ yi>> 얼굴에 드러난 표정은 <<bhe_ ga>> 당신의 행동에 짜증을 느꼈음을 나타내고 있지만, 그럼에도 재미는 있었던 것으로 보인다.
+<<else>>
+	<<beasttypePost "은">> 짜증내지만 재미있어하며 으르렁거린다.
+<</if>>
+<br><br>
+<!-- Modified for Beast People -->
+<<if hasSexStat("deviancy", 2)>>
+	<<link [[유혹한다|Residential Beast]]>><<set $sexstart to 1>><</link>><<deviant2>>
+	<br>
+<</if>>
+<<link [[저리 가 훠이|Residential Shoo]]>><</link>>
+<br>
+
+:: Residential Shoo
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+당신은 <<beasttypePost "의">> 머리를 밀어낸다. <<bHePost "은">> 더 세게 으르렁거리며 당신의 손 앞 허공을 살짝 물지만, 돌아서 어둠 속으로 뛰어들어간다.
+<br><br>
+
+<<link [[다음|Residential alleyways]]>><</link>>
+<br>
+
+:: Residential Flirt
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<deviancy5>>
+<<clothesstrip>>
+본능과 흥분에 이끌려, 당신은 옷을 천천히 벗으며 <<bhis_ yi>> 얼굴을 비비며 <<bhis_ yi>> 귀에 갸르릉거리는 소리를 흘려넣는다.
+<br><br>
+<<if $monster is 1>>
+	<<bhis_ yi>> 얼굴에 드러난 표정은 <<bhe_ ga>> 당신의 행동에 즐거워하며, 교미할 준비가 되었음을 나타내고 있다.
+<<else>>
+	<<beasttype_ i>> 즐거워하며, 당신과 교미할 준비가 된 채로 갸르릉거린다.
+<</if>>
+당신은 몸을 돌려 <<if $transformationParts.cat.tail isnot "hidden">>, 꼬리를 옆으로 들어올린 채 <</if>>짝짓기 자세를 취한다.
+<br><br>
+<<link [[다음|Residential Beast]]>><<set $sexstart to 1>><<set $phase to 2>><</link>>
+<br>
+:: Residential Rub
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<deviancy5>>
+본능과 성욕에 이끌려, 당신은 계속해서 <<bhis_ yi>> 얼굴을 누르고 비빈다.
+<br><br>
+<<if $monster is 1>>
+	<<bhis_ yi>> 얼굴에 드러난 표정은 당신의 행동이 <<bhim_ ul>> 흥분시키고 있음을 나타내고 있다. <<bhe_ nun>> 몸을 돌려 당신에게 <<bhis_ yi>> 보지를 보여 준다.
+<<else>>
+	<<beasttype_ un>> 즐겁게 갸르릉거리며, 몸을 돌려 당신에게 <<bhis_ yi>> 보지를 보여 준다.
+<</if>>
+<br><br>
+<<link [[다음|Residential Beast]]>><<set $sexstart to 1>><<set $phase to 1>><</link>>
+<br>
+
+:: Residential Beast
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<if $phase is 0>>
+		당신은 <<beasttype_ yi>> 얼굴과 팔다리를 놓아준다. <<if $monster is 1>>"내겐 충분해," <<bhe_ ga>> 단호히 선언한다.<</if>> <<bhePost "에게">> 필요한 것은 그게 전부다. <<bHe_ ga>> 당신을 덮친다.
+		<<deviancy2>>
+	<<else>>
+		<<set $position to "doggy">>
+		<<set $position_lock to 1>>
+		<<npc_attempt_sex>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Residential Beast Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Residential Beast]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Residential Beast Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+<<beastejaculation>>
+
+<<tearful>> 당신은 정신을 차린다. <<beasttypePost "은">> 어둠 속으로 뛰어들어간다.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Residential alleyways]]>><</link>>
+<br>
+
+<<elseif $enemyhealth lte 0>>
+
+<<beasttypePost "은">> 쉭 소리를 내며 어둠 속으로 달아난다. <<if $monster is 1>>"재미없게."<</if>>
+<br><br>
+
+<<tearful>> 당신은 정신을 차린다.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Residential alleyways]]>><</link>>
+<br>
+
+<<else>>
+
+<<beasttypePost "은">> 으르렁거리지만 <<if $pregnancyspeechdisable is "f">>교미<<else>>짝짓기<</if>>를 시도하는 것은 주저한다. <<if $monster is 1>>"더 잘 눈치챘어야 하는 건데," <<bhe_ nun>> 혼잣말로 중얼거린다.<</if>> <<bHePost "은">> 어둠 속으로 뛰어들어간다.
+<br><br>
+
+<<tearful>> 당신은 정신을 차린다.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Residential alleyways]]>><</link>>
+<br>
+
+<</if>>
+
+:: Residential Thicket
+<<set $outside to 1>><<effects>>
+
+당신은 거주 지구의 덤불에 있다.
+
+<<if Time.dayState is "night">>
+	<<if Weather.precipitation is "rain">>
+		우거진 나뭇가지들에서 커다랗고 차가운 물방울들이 떨어져 내린다.
+	<<elseif Weather.isSnow>>
+		위로 뻗은 나뭇가지들이 눈의 무게에 눌려 휘어져 있다.
+	<<else>>
+		시원한 바람에 나뭇가지들이 흔들린다.
+	<</if>>
+<<else>>
+	<<if Weather.precipitation is "rain">>
+		비가 사람들을 쫓아내고 있다.
+	<<elseif Time.season is "autumn">>
+		<<if Time.schoolDay and Time.hour gte 16>>
+			학교에서 온 학생들이 나무딸기를 따고 있다.
+		<<elseif Time.hour is 12>>
+			나이든 커플이 함께 나무딸기를 따고 있다.
+		<<elseif Time.hour gte 9>>
+			바람이 불 때마다 나뭇잎이 바닥에 흩날린다.
+		<<else>>
+			나무둥치를 타고 올라가는 다람쥐가 보인다.
+		<</if>>
+	<<elseif Weather.isSnow>>
+		<<if Time.schoolDay and Time.hour gte 16>>
+			학교에서 온 학생들이 나무를 사이에 두고 수다를 떨고 있다. 그들 주변에는 눈 천사가 여럿 있다.
+		<<elseif Time.hour is 12>>
+			추위를 막으려 두텁게 껴입은 채, 나이든 커플이 함께 벤치에 앉아 점심을 먹고 있다.
+		<<else>>
+			나무둥치를 타고 올라가는 다람쥐가 보인다.
+		<</if>>
+	<<else>>
+		<<if Time.schoolDay and Time.hour gte 16>>
+			학교에서 온 학생들이 나무를 사이에 두고 수다를 떨고 있다.
+		<<elseif Time.hour is 12>>
+			나이든 커플이 함께 벤치에 앉아 점심을 먹고 있다.
+		<<else>>
+			나무둥치를 타고 올라가는 다람쥐가 보인다.
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $daily.thicketBlackberries isnot 1>>
+	<<icon "tending/blackberry.png">> <<link [[블랙베리를 딴다 (0:20)|Residential Thicket Blackberries]]>><<pass 20>><<set $daily.thicketBlackberries to 1>><</link>><<tendingdifficulty 1 300>>
+	<br>
+<</if>>
+<<if $historytrait gte 2>>
+	<<if $thicket_tunnel_intro is 1>>
+		<<foresticon>><<link [[숲으로 향하는 비밀 터널로 간다 (0:05)|Forest]]>><<pass 5>><<set $forest to 0>><<set $eventskip to 1>><<set $thicket_tunnel_intro to 1>><</link>>
+		<br>
+	<<else>>
+		<<foresticon>><<link [[숲으로 향하는 비밀 터널로 간다 (0:05)|Residential Thicket Tunnel]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+<<getouticon>><<link [[나간다 (0:01)|Residential alleyways]]>><<pass 1>><</link>>
+<br>
+
+:: Residential Thicket Tunnel
+<<effects>>
+
+한 나무딸기 덩굴 아래의 지면이 경사져 있다. 당신이 어둠 속을 들여다보니, 돌로 된 아치형 입구가 보인다. 당신은 그러한 옛날 터널들에 대해 읽어보긴 했지만, 그게 이런 덤불 속에 감춰져 있으리라고는 생각도 하지 못했다.
+<br><br>
+
+입구의 크기에 맞추려면 당신은 몸을 웅크려야 한다. 여기엔 흙이 쌓여 있지만, 흙을 치우고 나면 똑바로 서서 걸을 수 있다.
+<br><br>
+
+터널 안은 칠흑같이 어둡지만 곧게 뻗어 있어, 당신은 그리 어려움 없이 반대편에 도달할 수 있었다. 당신은 숲에 있다.
+<br><br>
+
+<<link [[다음|Forest]]>><<set $forest to 0>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Residential Thicket Blackberries
+<<effects>>
+
+아래쪽에 있는 <<icon "tending/blackberry.png">> 나무딸기들은 이미 다 따갔다. 당신은 까치발을 들고 서서 나무딸기 덤불 꼭대기에 손을 뻗는다.
+<br><br>
+<<if $tendingSuccess>>
+	<span class="green">당신은 과즙이 많아 보이는 나무딸기 여러 개를 채집해냈다.</span>
+	<<tending_pick blackberry 60 180>>
+	<br><br>
+
+	<<link [[다음|Residential Thicket]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<span class="red">온 힘을 다해 보았지만, 닿지 않았다.</span> 그리고 당신은 가시에 찔릴 위험을 감수할 생각은 없다.<<gtending>><<tending 2>>
+	<br><br>
+
+	<<link [[다음|Residential Thicket]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

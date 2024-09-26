@@ -1,0 +1,11 @@
+:: Widgets custom shop electronics [widget nobr]
+<<widget "customShop_electronics">>
+<</widget>>
+
+:: Widgets custom shop furniture [widget nobr]
+<<widget "customShop_furniture">>
+<</widget>>
+
+:: Widgets custom shop bookstore [widget nobr]
+<<widget "customShop_book">>
+<</widget>>

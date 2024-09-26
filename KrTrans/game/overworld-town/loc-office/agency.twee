@@ -1,0 +1,290 @@
+:: Office Agency
+<<location "office">><<effects>>
+<<if Time.hour gte 6 and Time.hour lte 21>>
+	당신은 임시 직원 사무실에 있다. 다른 임시직 직원들이 다양한 업무를 수락하고 돌아오는 중이다.
+	<br><br>
+	<<assignmenticon>><<link [[업무를 받는다|Office Assignment Start]]>><</link>>
+	<br>
+	<<couchicon>><<link [[휴게실에서 쉰다 (0:10)|Office Agency Break]]>><<stress -3>><<tiredness -3>><<pass 10>><</link>><<ltiredness>><<lstress>>
+	<br>
+	<<officeicon>><<trNPCname $per_npc.manager.name>><<link [[_trResult + "의 사무실"|Office Agency Manager]]>><</link>>
+	<br>
+	<<lockericon>><<link [[탈의실|Office Agency Changing Room]]>><</link>>
+<<else>>
+	임시 직원 사무실의 문이 잠겨 있다. 문에 표지판이 걸려있다. " <<ampm 6>> 부터 오픈"
+<</if>>
+<br><br>
+<<getouticon>><<link [[로비로 돌아간다 (0:01)|Office Lobby]]>><<pass 1>><</link>>
+
+:: Office Agency Streak
+<<location "office_building">><<effects>>
+<<if Time.hour gte 6 and Time.hour lte 21>>
+	You to run into the Temp Agency's Office, hoping to get into the changing room before someone sees your <<nudity>>.
+	<br><br>
+	<<if $rng gte 90>>
+		<<generate1>><<person1>> As you enter, you feel a strong grip on your sholders.
+		<br>
+		"I caught the streaker. Escorting <<pher>> to the security office now," a security guards says as into <<his>> radio as <<he>> pulls you out of the Agency Lounge.
+		<br><br>
+		<<link [[다음|Office Security Escort]]>><</link>>
+	<<elseif $rng gte 80>>
+		<<generateManager>><<person1>>
+		Seeing that the coast is clear, you run by <<office_manager>>'s office door when it suddenly swings open, hitting you directly in the face! <<ggpain>><<pain 8>>
+		<br>
+		"My goodness I am so..." <<office_manager>> begins to say, but is shocked by your <<nudity>>. "What has happened to your clothes?" <<office_manager>> says concerningly as <<he>> helps you to your feet.
+		<br>
+		"Here come into my office, I can't have you running around like this."
+		<br><br>
+		<<link [[다음|Office Agency Streak Comfort]]>><</link>>
+	<<elseif $rng gte 50>>
+		<<generateManager>><<person1>>
+		Seeing that the coast is clear, you run by <<office_manager>>'s office door. You hear the door open behind you.
+		<br>
+		"You! Stop right this instant. What has happened to your clothes?" shouts <<office_manager>>. You freeze in your tracks and turn to face <<him>>, covering your <<nudity>>.
+		<br>
+		"Goodness, we can't have you running around the building dressed like that. Come into my office immediately."
+		<br><br>
+		<<link [[다음|Office Agency Streak Comfort]]>><</link>>
+	<<else>>
+		The immediate area is empty, so you should be able to make it into the changing room safely.
+		<br><br>
+		<<lockericon>><<link [[탈의실|Office Agency Changing Room]]>><</link>>
+		<br><br>
+		<<getouticon>><<link [[로비로 돌아간다 (0:01)|Office Lobby]]>><<pass 1>><</link>>
+
+	<</if>>
+<<else>>
+	You attempt to run into the Temp Agency's Office, hoping to get into the changing room, but the door is locked! A sign on the door says "Open at <<ampm 6>>."
+	<<getouticon>><<link [[로비로 돌아간다 (0:01)|Office Lobby]]>><<pass 1>><</link>>
+<</if>>
+<br><br>
+
+:: Office Agency Streak Comfort
+<<effects>>
+<<generateManager>><<person1>>
+<<office_manager>> sits you down and goes to the wardrobe near <<his>> desk. <<He>> pulls out a button down shirt and hands it to you. It's too big for you but covers your <<nudity>>.
+<<upperwear 148>>
+<br>
+<<if $officecomplaints gte 5 and $managerLove gte 100>>
+	<<if $managerGift is 1>>
+		"Be honest with me. Are you having any problems working here with us? I know this place can be really stressful and I only want what's best for you all."
+		<br><br>
+		<<link [[Be honest|Office Agency Streak Confide]]>><</link>>
+		<br>
+		<<link [[Lie|Office Agency Streak Lie]]>><</link>>
+	<<else>>
+		"I know things are really hard for you, but have you thought about a different line of work? This isn't healthy for you."
+		<br>
+		<<office_manager>> stands you up and gives you a big hug. It's overwhelming but oddly comforting at the same time. <<lltrauma>><<trauma -6>> <<llstress>><<stress -10>>
+		<br>
+		"Please take better care of yourself," <<he>> says as <<he>> escorts you out of the office.
+		<br><br>
+		<<link [[다음|Office Agency]]>><</link>>
+	<</if>>
+<<else>>
+	"I don't know what's going on with you, but being in this workplace in that state of dress makes us look really bad. I expect better of you," <<he>> says sadly. <<lllove>><<managerLove -20>>
+	<br>
+	<<office_manager>> escorts you out of the office. "I don't want to have this conversation with you again."
+	<br><br>
+	<<link [[다음|Office Agency]]>><</link>>
+<</if>>
+
+:: Office Agency Streak Confide
+Sensing the sincerity of concern in <<office_manager>>'s voice, you decide to be honest. You tell <<him>> about the abuse and humiliation that the workers in the office subject you to.
+How the security guards are just as devious and abusive, and how you are struggling to make enough money to keep yourself clothed and sheltered.
+<br>
+"You poor thing," <<he>> says, coming around to rest <<his>> strong hand on your shoulder. "I know how tough things can be for you, but I never imagined how bad things were. I wish I could do more for you, but our agency is contracted with this building and my hands are tied."
+<br><br>
+<<He>> walks back to the other side of <<his>> desk and pulls out a wad of cash. "It's not much, but maybe you can use this money to take some time off from working here. It's the least I can do."
+<br>
+<<set $giftMoney = $managerLove * 500>>
+<<office_manager>> hands you <<printmoney $giftMoney >> and escorts you out of <<his>> office. "Please, take care of yourself." <<set $money += $giftMoney>>
+<<set $managerGift to 0>>
+<br><br>
+<<link [[다음|Office Agency]]>><</link>>
+
+:: Office Agency Streak Lie
+You don't feel quite comfortable telling <<office_manager>> about your problems.
+<br>
+"It's nothing, I just spilled some ink on my clothes and needed a fresh change" you say.
+<br>
+<<office_manager>> seems disappointed. "That is not acceptable. You represent this agency and it's important that you dress and behave properly. Please try to maintain these bare minimum standards." <<lllove>><<managerLove -20>>
+<br>
+<<office_manager>> turns <<his>> attention to <<his>> computer and motions towards the door. "You can leave now. Thank you."
+<br><br>
+<<link [[떠난다|Office Agency]]>><</link>>
+
+:: Office Agency Break
+<<effects>>
+<<if $rng gte 81>>
+	당신이 휴게실에서 편안한 의자에 앉아 휴식을 취하고 있는데, 임시 직원인 <<generatey1>><<person1>><<personPost>>, <<generatey2>><<person2>><<person_ gwa>> <<generatey3>><<person3>><<person_ i>> 다가온다.
+	<br>
+	"너 내가 좋아하는 의자에 앉아있네," <<person1>><<person_ i>> 말하며, 당신 앞에 선다. "꺼져."
+	<br><br>
+	<<link [[따른다|Office Agency Chair Comply]]>><<stress 6>><</link>><<gstress>>
+	<br>
+	<<link [[거절한다|Office Agency Chair Refuse]]>><</link>>
+<<else>>
+	<<if $rng gte 71>>
+		<<generatey1>><<person1>> 당신은 <<person1>><<person_ gwa>> 수다를 떨며 시간을 보낸다. <<He_ ga>> 일부 의뢰인의 폭력에 대해 불평한다.
+	<<elseif $rng gte 61>>
+		<<generatey1>><<person1>><<person_ i>> 휴게실에 들어와 비서로부터 받은 쿠키를 나눠먹는다.
+	<<elseif $rng gte 51>>
+		<<generatey1>><<person1>>
+		<<if $pronoun is "f">>
+			<<person1>><<person_ i>> <<his_ yi>> 너덜너덜해진 치마를 허리에 걸친 채, <<his_ yi>> 가슴을 가리고, 휴게실로 뛰어 들어온다.
+			<br>
+			"멍청한 파쇄기가 내 옷을 다 씹어먹었어! 그 괴물같은 건 없어져야 해." <<He_ ga>> 수건을 <<his_ yi>> 가슴에 감고 밖으로 뛰쳐나간다.
+		<<else>>
+			<<person1>><<person_ i>> <<his_ yi>> 너덜너덜해진 바지를 걸친 채, 셔츠가 벗겨져, 라운지로 뛰어 들어온다.
+			<br>
+			"멍청한 파쇄기가 내 옷을 다 씹어먹었어! 그 괴물같은 건 없어져야 해." <<He_ ga>> 수건을 <<his_ yi>> 허리에 감고 밖으로 뛰쳐나간다.
+		<</if>>
+	<<elseif $rng gte 41>>
+		두 명의 임시직원인, <<generatey1>><<person1>><<person_ gwa>> <<generateyp2>><<person2>><<person_ i>> 안으로 들어와, 당신의 존재를 눈치채지 못하고 스킨십을 시작한다.
+		<<arousal 600>><<garousal>>
+		<br><br>
+		몇 초 후, <<person2>><<person_ i>> 당신을 알아차려 <<person1>><<him_ ul>> 멈추게 하고, <<person2>><<his_ yi>> 옷을 고쳐 입는다. 두 사람은 일어나서 머쓱하게 휴게실을 나간다.
+	<<elseif $rng gte 31>>
+		두 명의 임시직원인, <<generatey1>><<person1>><<person_ gwa>> <<generateyp2>><<person2>><<person_ i>> 지나가면서 언쟁을 벌인다.
+		<br><br>
+		"그럴 가치가 없어," <<person1>><<person_ i>> 말한다. "층이 높아질수록 사람들이 점점 더 변태적으로 굴어. 14층에선 누가 날 핥았다고!"
+		<br>
+		"그냥 무시해," <<person2>><<person_ i>> 대답한다. "높은 층에 가면 팁을 훨씬 더 잘 주긴 하잖아."
+		<br>
+		"세상의 모든 팁도 내 안전보다 중요하진 않아. 너도 마찬가지고."
+		<br><br>
+		그들의 소리가 멀어진다.
+	<<else>>
+		다른 임시직 직원들이 소개소 사무실을 분주히 드나들며 다양한 업무를 하는 동안 당신은 혼자 휴게실에서 휴식을 취한다.
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<if Time.hour gte 6 and Time.hour lte 21>>
+		<<link [[업무를 받는다 (1:00)|Office Assignment Start]]>><</link>>
+		<br>
+		<<link [[계속 휴식한다 (0:10)|Office Agency Break]]>><<stress -3>><<tiredness -3>><<pass 10>><</link>><<ltiredness>><<lstress>>
+		<br>
+		<<trNPCname $per_npc.manager.name>><<link [[_trResult + "의 사무실"|Office Agency Manager]]>><</link>>
+		<br>
+	<<else>>
+		경비원이 휴게실로 들어와 안에 있던 모든 사람들을 로비로 안내한다. 건물이 일반인의 출입을 통제한다.
+		<br><br>
+	<</if>>
+	<<getouticon>><<link [[로비로 돌아간다 (0:01)|Office Lobby]]>><<pass 1>><</link>>
+<</if>>
+
+
+:: Office Agency Chair Comply
+<<effects>>
+당신은 당신의 소지품을 챙겨들고 <<person1>><<person_ gwa>> <<his_ yi>> 친구들을 밀어젖히고 나간다.
+<<endevent>>
+<br><br>
+<<link [[다음|Office Agency]]>><</link>>
+
+:: Office Agency Chair Refuse
+<<effects>>
+<<if $speech_attitude is "bratty">>
+	당신은 <<person1>><<person_ ul>> 무시하듯 바라본다. "내가 먼저 앉았어. 다른 데로 가."
+<<elseif $speech_attitude is "meek">>
+	"아니... 아뇨, 제가 먼저 왔어요. 절 내버려 두시면 안될까요." 당신이 온유하게 말한다.
+<<else>>
+	"제가 먼저 왔는데요," 당신이 말한다. "다른 의자도 많아요."
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (8500 - $allure)>>
+	<<person1>><<person_ gwa>> <<his_ yi>> 친구가 당신에게 가까이 다가온다.
+	<br>
+	"한 수 가르쳐줘야 겠군."
+	<br><br>
+	<<link [[다음|Office Agency Molest]]>><<set $molestationstart to 1>><</link>><<nexttext>>
+<<else>>
+	<<person1>><<person_ i>> 투덜거리며 <<his_ yi>> 친구들과 함께 떠난다.
+	<br>
+	"내가 다음에 다시 올 때까진 사라져 있는 게 좋을거야."
+	<br><br>
+	<<endevent>>
+	<<link [[다음|Office Agency]]>><</link>>
+<</if>>
+
+:: Office Agency Molest
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemyanger += 60>>
+	<<set $NPCList[0].lefthand to "mouth">>
+	<<if $rng gte 75>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[다음|Office Agency Molest Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[다음|Office Agency Molest Escape]]>><</link>></span><<nexttext>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	<span id="next"><<link [[다음|Office Agency Molest Rescue]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Office Agency Molest]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Office Agency Molest Ejaculation
+<<effects>>
+<br><br>
+<<ejaculation>>
+After finishing with you, the <<person1>><<person>> lifts you off the ground and shoves you out the door, keeping all of your clothes.<<violence 3>>
+<br>
+"That oughta teach you a lesson."
+<br><br>
+<<tearful>> you look around the lobby. You cover your <<lewdness>>.
+<br><br>
+<<set $stealtextskip to 1>>
+<<clothesruined>>
+<<clotheson>>
+<<endcombat>>
+<<link [[다음|Office Lobby]]>><</link>>
+
+
+:: Office Agency Molest Escape
+<<effects>>
+You manage to break free from your assailants. <<tearful>> you run out of the lounge into the lobby for safety. No one follows you.
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<<link [[다음|Office Lobby]]>><</link>>
+
+:: Office Agency Molest Rescue
+<<effects>>
+<<generateManager 3>><<person4>>
+<<office_manager>> bursts into the breakroom in response to your cries. "What are you doing? Get off of <<pher>>!" <<he>> shouts.
+<br>
+The group lets you go and runs out of the breakroom, but <<office_manager>> grabs the <<person1>><<person>> by the back of <<his>> neck as <<he>> hurries past.
+<br><br>
+"If I ever catch you touching another worker again, I will bury you under this building!" <<office_manager>> says before shoving <<person1>><<him>> out the door.
+<br>
+<<office_manager>> turns to you and helps you to your feet. "I'm so sorry. Some of the workers can be really troublesome, but management doesn't seem to care."
+<br>
+<<if $exposed gte 1>>
+	<<office_manager>> runs to <<person4>><<his>> office and returns with a towel. <<He>> wraps it around your <<lewdness>> with <<his>> strong hands. "Can't have you running around exposed, can we?" <<he>> says, offering a weak smile. <<towelup>>
+	<br>
+<</if>>
+"Please come to me if they give you any more trouble."
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<<link [[다음|Office Lobby]]>><</link>>

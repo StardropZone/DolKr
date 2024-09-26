@@ -1,0 +1,658 @@
+:: Chalets Work Wet Run
+<<effects>>
+
+당신은 최대한 빨리 도망쳐서는, 추격자가 없는 것을 확일할 때까지 별장들 사이를 오간다.
+<br><br>
+<<link [[다음|Chalets]]>><<endevent>><</link>>
+<br>
+
+:: Chalets Work Wet Ask
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+    "저-저는 청소하러 왔습니다." 당신이 말한다. "괜찮으시면 닦을 수건 좀 빌려주실수 있을까요?"
+<<elseif $speech_attitude is "bratty">>
+    "그만 좀 보고." 당신이 말한다. "청소하러 왔는데, 일단 옷부터 말려야겠는데."
+<<else>>
+    "청소하러 왔습니다." 당신이 말한다. "닦을 수건 좀 얻을 수 있을까요?"
+<</if>>
+<br><br>
+
+<<if random(1, 2) is 2>>
+    <<person_ 은>> 자기 턱을 쓰다듬더니, 고개를 끄덕이고 옆으로 비켜선다. 당신은 화장실 안의 선반에서 수건을 챙겨 옷을 말린다. 적어도 속이 비치지는 않을 만큼.
+    <<dry_full>>
+    <br><br>
+
+    조금 멀쩡한 모습이 된 당신은 별장을 청소한다. <<persons_ 이>> 음흉한 눈빛으로 쳐다보며 능글맞게 웃은 것을 제외하면, 별다른 사건 없이 일을 끝마친다.
+    <br><br>
+
+    <<link [[다음|Chalets]]>><<endevent>><</link>>
+    <br>
+<<else>>
+    <<person_ 은>> 자기 턱을 쓰다듬는다. "어디 보자." <<he_ 가>> 말한다. "젖은 채로 들어오지 말고 옷만 넘기면 내가 말려줄게. 여기서 몇 분만 기다려. 어차피 지금도 벌거벗은 거나 다름없어 보이는데."
+    <br><br>
+
+    <<link [[받아들인다|Chalets Work Wet Naked]]>><</link>>
+    <br>
+    <<link [[거절한다|Chalets Work Wet Refuse]]>><</link>>
+    <br>
+<</if>>
+
+:: Chalets Work Wet Naked
+<<effects>>
+
+당신은 몸을 드러내지 않게 조심히 가리면서 옷을 벗는다. <<person_ 이>> 옷을 당신의 손에서 낚아채서 안으로 사라진다.
+<br><br>
+당신은 기다리며 주변 별장들을 살핀다. 밖으로 나오는 사람은 없지만, 시커먼 창문 너머에서 누가 음흉하게 쳐다보고 있을지는 모르는 일이다.
+<br><br>
+<<if random(1, 2) is 2>>
+    당신은 기다린다. 1분, 2분, 3분... 당신이 점점 초조해질 무렵, 문이 열리고 <<person_ 이>> 나온다. "옷은 안에 있어." <<he_ 이>> 말한다. "계속 청소 하는거지?"
+    <br><br>
+
+    별장 깊숙한 곳의 선반에서 당신의 옷을 되찾는다. <<dry_full>> 조금 멀쩡한 모습이 된 당신은 별장을 청소한다. <<persons_ 이>> 음흉한 눈빛으로 쳐다보며 능글맞게 웃은 것을 제외하면, 별다른 사건 없이 일을 끝마친다.
+    <br><br>
+
+    <<link [[다음|Chalets]]>><<endevent>><<pass 60>><<set $chalets_bags += 1>><</link>>
+    <br>
+<<else>>
+    당신은 기다린다. 1분, 2분, 3분... 당신은 점점 초조해지다가 결국 문을 두드린다. 하지만 아무런 대답이 없다. <span class="pink">결국 옷을 돌려받지 못했다.</span>
+    <br><br>
+    <<clothesruined>>
+
+    <<link [[다음|Chalets]]>><<endevent>><</link>>
+    <br>
+<</if>>
+
+:: Chalets Work Wet Refuse
+<<effects>>
+
+"맘대로 해." <<person_ 은>> 그렇게 말하고, 당신은 노출된 모습으로 별장들 사이에 남겨둔 채로, 문을 닫는다.
+<br><br>
+
+<<link [[다음|Chalets]]>><<endevent>><</link>>
+<br>
+
+:: Chalets Work Wet Exhibitionism
+<<effects>>
+<<clothesstrip>>
+"이런," 당신은 팔을 움직여 <<himPost>>에게 "실수로" 몸을 노출시킨다. "저를 청소하라고 보냈는데, 제가 너무 덤벙대서요." 당신은 <<his_ 의>> 가슴팍에 손가락을 갖다댄다. "어쩌면 대신 안에서 몸을 좀 말리게 해 주실 수도 있을 텐데."
+<<exhibitionism4>>
+
+<<He_ 는>> 입맛을 다시고는 옆으로 비켜서서 당신을 별장 안으로 들여보낸다.
+<br><br>
+
+당신은 시간을 들여 젖은 옷을 하나씩 벗어 탈수기에 집어넣는다. <<He_ 의>> 음흉한 시선에 담긴 욕정이 점점 더 커진다.
+<br><br>
+
+<<if hasSexStat("promiscuity", 3)>>
+    <<link [[영업한다|Chalets Work Wet Solicit]]>><</link>><<promiscuous3>>
+    <br>
+<</if>>
+<<link [[옷이 마르길 기다린다|Chalets Work Wet Dried]]>><</link>>
+<br>
+
+
+:: Chalets Work Wet Solicit
+<<effects>>
+
+"어때요? 마음에 들어요?" 당신이 달콤하게 속삭인다. "알겠지만, 저를 사실 수도 있어요. £50에."
+<<promiscuity3>>
+
+<<He_ 는>> 부엌장으로 달려가 허겁지겁 현금을 꺼내와서는, 당신을 소파에 거칠게 밀친다. <<moneyGain 50>>를 받았다.
+<br><br>
+
+<<link [[다음|Chalets Work Wet Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+
+:: Chalets Work Wet Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 30>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[다음|Chalets Work Wet Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Chalets Work Wet Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Chalets Work Wet Sex Finish
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<person_ 은>> 숨을 고르며 소파에서 일어나, 담배에 불을 붙인다.
+	<br><br>
+	<<tearful>> 당신은 탈수기를 확인한다.
+	<br><br>
+	<<endcombat>>
+    <<link [[다음|Chalets Work Wet Dried]]>><<clotheson>><</link>>
+    <br>
+<<elseif $enemyhealth lte 0>>
+	<<person_ 은>> 당신에게서 물러선다. <<tearful>> 당신은 탈수가 끝나지 않은 옷가지를 챙겨 밖으로 도망친다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Chalets]]>><</link>>
+    <br>
+<<else>>
+	<<person_ 은>> 당신을 별장에서 쫒아내고는 문을 쾅 닫는다. <span class="pink">당신은 맨몸으로 밖에 남겨졌다.</span>
+	<br><br>
+	<<tearful>> 당신은 문을 두들겨보지만, 아무런 반응도 돌아오지 않는다.
+	<br><br>
+	<<clotheson>>
+    <<clothesruined>>
+	<<endcombat>>
+	<<link [[다음|Chalets]]>><</link>>
+    <br>
+<</if>>
+
+:: Chalets Work Wet Dried
+<<effects>>
+
+<<dry_full>>
+당신은 마른 옷을 꺼내 입는다. 금 멀쩡한 모습이 된 당신은 별장을 청소한다. <<persons_ 이>> 음흉한 눈빛으로 쳐다보며 능글맞게 웃은 것을 제외하면, 별다른 사건 없이 일을 끝마친다.
+<br><br>
+
+<<link [[다음|Chalets]]>><<pass 60>><<set $chalets_bags += 1>><<endevent>><</link>>
+<br>
+
+:: Chalets Work Cash Count
+<<effects>>
+
+당신은 조심스럽게 주변을 둘러본 뒤 돈을 세어본다. 전부 합해서 <span class="gold">£1000</span>다.
+<br><br>
+
+<<link [[전부 가진다|Chalets Work Cash All]]>><<crimeUp 1000 "thievery">><<moneyGain 1000>><</link>><<gggcrime "thievery">>
+<br>
+<<link [[절반만 가진다|Chalets Work Cash Half]]>><<crimeUp 500 "thievery">><<moneyGain 500>><</link>><<ggcrime "thievery">>
+<br>
+<<link [[£100만 챙긴다|Chalets Work Cash Skim]]>><<crimeUp 100 "thievery">><<moneyGain 100>><</link>><<gcrime "thievery">>
+<br>
+<<link [[그대로 놔둔다|Chalets Work Cash Ignore]]>><</link>>
+<br>
+
+:: Chalets Work Cash All
+<<effects>>
+
+당신은 청소도구 트레이에 돈을 숨기고, 별장 청소를 마무리한 뒤, 밖으로 걸어나간다.
+<br><br>
+
+<<link [[다음|Chalets]]>><</link>>
+<br>
+
+:: Chalets Work Cash Half
+<<effects>>
+
+당신은 절반을 세서 청소도구 트레이에 숨긴다. 이건 2인용 침대다. 이렇게 하면 아마 서로를 의심할지도 모른다.
+<br><br>
+당신은 별장 청소를 마무리한 뒤, 밖으로 걸어나간다.
+<br><br>
+
+<<link [[다음|Chalets]]>><</link>>
+<br>
+
+:: Chalets Work Cash Skim
+<<effects>>
+
+당신은 £100를 세서 청소도구 트레이에 숨긴다. 이 정도는 없어져도 모를 수도 있다.
+<br><br>
+당신은 별장 청소를 마무리한 뒤, 밖으로 걸어나간다.
+<br><br>
+
+<<link [[다음|Chalets]]>><</link>>
+<br>
+
+:: Chalets Work Cash Ignore
+<<effects>>
+
+당신은 돈뭉치를 무시하고, 베개 밑에 대충 숨겨둔다.
+<br><br>
+당신은 별장 청소를 마무리한 뒤, 밖으로 걸어나간다.
+<br><br>
+
+<<link [[다음|Chalets]]>><</link>>
+<br>
+
+:: Chalets Work Plates Note
+<<effects>>
+
+당신은 작은 종이조각에 메모를 적어서 싱크대 옆에 놓는다:
+<br>
+<<if $speech_attitude is "meek">>
+    <i>죄송합니다. 제가 산업 폐기물 처리 자격증은 없어서요."</i>
+<<elseif $speech_attitude is "bratty">>
+    <i>"죄송. 자정 전에 퇴근할거라서."</i>
+<<else>>
+    <i>"죄송합니다. 세제 한 통으로는 다 치울수가 없었네요!"</i>
+<</if>>
+ <i>- 룸 서비스</i>.
+<br><br>
+
+좋아. 작업을 마무리하고, 별장을 떠난다.
+<br><br>
+
+<<link [[다음|Chalets]]>><</link>>
+<br>
+
+:: Chalets Work Plates Clean
+<<effects>>
+
+다소 힘든 일이었지만, 접시와 유리잔, 식기를 모두 반짝거리게 닦는데 성공한다. 작업 완료. 당신은 별장을 나선다.
+<br><br>
+
+<<link [[다음|Chalets]]>><</link>>
+<br>
+
+:: Chalets Work One Endure
+<<effects>>
+
+<<if $arousal gte $arousalmax>>
+
+    당신은 <<persons_ 이>> 만지작 거려도 참으려고 했지만, 몸이 달아오르는 것을 느낀다. 그것은 견디기에는 너무 어렵다.
+    <<orgasm>>
+
+    "이렇게까지 준비된 상태였던 거야?" <<person_ 이>> 중얼거리고는, 절정이 채 끝나기도 전에 당신의 옷깃을 잡아 의자 위로 끌어당긴다.
+    <br><br>
+
+    <<link [[다음|Chalets Work One Sex]]>><<set $molestationstart to 1>><</link>>
+    <br>
+
+<<else>>
+
+    당신은 <<persons_ 이>> 만지작 거려도 <<he_ 이>> 당신을 놓아줄 때까지 얌전히 참는다. 당신은 <<he_ 이>> 작별인사로 엉덩이를 치려는 것을 어떻게든 회피하고는, 별장을 떠났다.
+    <br><br>
+
+    <<link [[다음|Chalets]]>><<endevent>><</link>>
+    <br>
+
+<</if>>
+
+:: Chalets Work One Smack
+<<effects>>
+
+<<if $panicattacks gte 1 and $controlled is 0>>
+    당신은 손을 들어 <<he_ 의>> 손길을 쳐내려고 했지만, <span class="pink">끔찍한 공포가 당신을 움켜쥔다.</span> 당신은 그대로 얼어붙는다.
+    <br><br>
+
+    "이렇게까지 준비된 상태였던 거야?" <<person_ 이>> 중얼거리고는, 저항하지 않는 것을 동의로 받아들인다. <<he_ 는>> 당신을 의자 위로 끌어당긴다.
+    <br><br>
+
+    <<link [[다음|Chalets Work One Sex]]>><<set $molestationstart to 1>><</link>>
+    <br>
+<<else>>
+    당신은 <<persons_ 의>> 손을 쳐낸다. <<he_ 의>> 얼굴에 분노가
+    <<if random(1, 3) is 3>>
+        스치고, <<he_ 는>> 당신을 의자 위로 끌어당긴다.
+        <br><br>
+
+        <<link [[다음|Chalets Work One Sex]]>><<set $molestationstart to 1>><</link>>
+        <br>
+    <<else>>
+        스치지만, <<he_ 는>> 반격하지 않는다.
+        <br><br>
+        당신은 별장을 떠났다.
+        <br><br>
+        <<link [[다음|Chalets]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<</if>>
+
+
+:: Chalets Work One Charge
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+    "만지셔도 되지만," 당신이 말한다. "추가요금을 내셔야 하는데요."
+<<elseif $speech_attitude is "bratty">>
+    "만지지마." 당신이 외친다. "돈줄 생각 없으면 말이지."
+<<else>>
+    "이 서비스는 추가요금을 내셔야 합니다." 당신이 말한다.
+<</if>>
+<br><br>
+<<rng>>
+<<if $rng gte 91>>
+    <<person_ 이>> 당신에게 <span class="gold">£60</span>를 제안한다.
+    <br><br>
+    "그런거면 말이지," <<he_ 이>> 말한다. "이왕이면 다 벗고, 풀 서비스로 즐기고 싶은데."
+    <br><br>
+    <<if hasSexStat("promiscuity", 5)>>
+        <<link [[받아들인다|Chalets Work One Sex Start]]>><</link>><<promiscuous5>>
+        <br>
+    <<elseif $uncomfortable.prostituting is false>>
+        <<link [[받아들인다|Chalets Work One Sex Start]]>><<set $desperateaction to 1>><<trauma 6>><<stress 6>><</link>><<promiscuous5>><<gtrauma>><<gstress>>
+        <br>
+    <<else>>
+        <span class="blue">당신은 <<he_ 의>> 제안을 받아들일 수 있을만큼 음란하지 않다.</span>
+        <br>
+    <</if>>
+    <<link [[거절한다|Chalets Work One Sex Refuse]]>><</link>>
+<<elseif $rng gte 61>>
+    <<person_ 이>> 당신에게 <span class="gold">£50</span>를 제안한다.
+    <br><br>
+    "그런거면 말이지," <<he_ 이>> 말한다. "그 입도 같이 써줘야겠는데."
+    <br><br>
+    <<if hasSexStat("promiscuity", 4)>>
+        <<link [[받아들인다|Chalets Work One Oral Start]]>><</link>><<promiscuous4>>
+        <br>
+    <<elseif $uncomfortable.prostituting is false>>
+        <<link [[받아들인다|Chalets Work One Oral Start]]>><<set $desperateaction to 1>><<trauma 6>><<stress 6>><</link>><<promiscuous4>><<gtrauma>><<gstress>>
+        <br>
+    <<else>>
+        <span class="blue">당신은 <<he_ 의>> 제안을 받아들일 수 있을만큼 음란하지 않다.</span>
+        <br>
+    <</if>>
+    <<link [[거절한다|Chalets Work One Sex Refuse]]>><</link>>
+<<else>>
+    <<person_ 이>> <<moneyGain 40>>를 지불한다.
+    "그렇다면 돈 쓴 보람이 있어야지." <<he_ 가>> 말한다.
+    <br><br>
+    <<if $arousal gte $arousalmax>>
+        당신은 <<persons_ 이>> 만지작 거려도 참으려고 했지만, 도저히 견딜수가 없다.
+        <br><<orgasm>>
+
+        "너도 이걸 좋아할줄 알고 있었다." <<person_ 이>> 히죽거리며 말한다. <<He_ 는>> 당신을 놓아주고, 작별의 의미로 엉덩이를 때린다.
+    <<else>>
+        당신은 <<persons_ 이>> 만지작 거려도 <<he_ 이>> 당신을 놓아줄 때까지 얌전히 참는다. <<he_ 가>> 작별의 의미로 엉덩이를 때린다.
+    <</if>>
+
+    <br><br>
+    <<tearful>> 당신은 돈을 챙겨 별장을 떠난다.
+    <br><br>
+    <<link [[다음|Chalets]]>><<endevent>><</link>>
+<</if>>
+
+:: Chalets Work One Sex Refuse
+<<effects>>
+
+<<if $arousal gte $arousalmax>>
+    당신은 거절하려 했지만, <<he_ 가>> 주무르는 손길을 견디지 못한다.
+    <br><<orgasm>>
+
+    당신이 절정에 빠진 틈을 타서, <<he_ 가>> 당신을 의자 위로 끌어당긴다.
+    <br><br>
+    <<link [[다음|Chalets Work One Sex]]>><<set $molestationstart to 1>><</link>>
+<<else>>
+    "그렇게까지 할 생각은 없어요." 당신이 말한다. "실망시켜드려 죄송합니다."
+    <br><br>
+    <<rng>>
+    <<if $rng gte 81>>
+        "부탁한게 아닌데 말이지." <<person_ 이>> 말한다. <<He_ 이>> 당신의 옷깃을 잡고 의자 위로 끌어당긴다.
+        <br><br>
+        <<link [[다음|Chalets Work One Sex]]>><<set $molestationstart to 1>><</link>>
+    <<else>>
+        <<person_ 은>> 짜증난 것 같다. "맘대로 해라." <<he_ 가>> 말한다. 당신은 그대로 별장을 떠난다.
+        <br><br>
+        <<link [[다음|Chalets]]>><<endevent>><</link>>
+    <</if>>
+<</if>>
+
+:: Chalets Work One Sex Start
+
+<<effects>>
+
+<<He_ 가>> 당신에게 <<moneyGain 60>>를 지불한다.
+
+<<He_ 가>> 얼른 벗으라고 열렬하게 손짓한다. 당신은 옷을 하나씩 벗기 시작한다. <<promiscuity5>>
+<<he_ 는>> 답답하다고 생각했는지, 당신이 벗는 걸 거들기 시작한다.<<strip>>
+
+<br><br>
+<<link [[다음|Chalets Work One Sex]]>><<set $sexstart to 1>><<set $phase to 0>><</link>>
+
+:: Chalets Work One Oral Start
+<<effects>>
+
+<<He_ 가>> 당신에게 <<moneyGain 50>>를 지불한다.
+
+당신은 <<personPost>> 앞에 무릎 꿇는다. 곧이어 <<he_ 가>> 당신의 뒤통수를 움켜잡는다.
+<<promiscuity4>>
+<br>
+<<link [[다음|Chalets Work One Sex]]>><<set $sexstart to 1>><<set $phase to 1>><</link>>
+<br>
+
+:: Chalets Work One Sex
+
+<<effects>>
+<<if $sexstart is 1>>
+    <<set $sexstart to 0>>
+    <<consensual>>
+    <<set $consensual to 1>>
+    <<neutral 1>>
+    <<maninit>>
+    <<set $enemytrust -= 20>>
+    <<if $phase is 1>> /* Oral */
+        <<set $position to "doggy">>
+	    <<npcoral>>
+    <</if>>
+<<elseif $molestationstart is 1>>
+    <<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Chalets Work One Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Chalets Work One Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Chalets Work One Sex Finish
+
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+    <<if $consensual is 1>>
+	    <<He_ 가>> 의자에 기댄다. "다음에도 또 오라고. 같은 걸로 부탁할테니까." <<he_ 가>> 말한다.
+    <<else>>
+        <<He_ 가>> 의자에 기댄다. <<he_ 는>> 이미 당신이 있다는 것을 잊어버린 것처럼 행동한다.
+    <</if>>
+<<elseif $enemyhealth lte 0>>
+	의자가 <<person_ 이>> 앉아있는 채로 뒤로 넘어가버린다. <<He_ 가>> 자신의 무릎을 부여잡고 고통스럽게 바닥을 뒹군다.
+<</if>>
+
+<br><br>
+<<tearful>> 당신은 별장을 떠난다.
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<<link [[다음|Chalets]]>><</link>>
+
+:: Chalets Work Feet Allow
+<<effects>>
+
+당신은 일을 계속한다. <<person2>><<person_ 도>> <<he_ 의>> 발을 당신의 등 위에 올려놓는다. 그들은 딱히 더 심한 짓을 저지르지는 않지만, 추가된 무게 때문에 일하기가 힘들다.
+<br><br>
+
+그들은 당신이 일이 끝났다고 하자 불평했지만, 별장 청소는 충실하게 끝마쳤다. 당신은 일어나서 별장을 나섰다.
+<br><br>
+
+<<link [[다음|Chalets]]>><<endevent>><</link>>
+<br>
+
+:: Chalets Work Feet Charge
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+    "저를 발 받침대로 사용하셔도 됩니다." 당신이 말한다. "그저 돈만 조금 주시면 되요."
+<<elseif $speech_attitude is "bratty">>
+    "지불할 돈은 충분히 있고?" 당신이 투덜댄다.
+<<else>>
+    "그 서비스는 추가요금을 내셔야 합니다." 당신이 말한다.
+<</if>>
+<br><br>
+<<person1>><<person_ 이>> 현금을 당신 앞에 던진다. <<moneyGain 40>>.
+<br>
+"낸 돈값은 충분히 해줘야겠어." <<he_ 는>> 그렇게 말하고는, 당신의 <<bottom_ 을>> 발목으로 내리찍는다.
+<br><br>
+
+<<person2>><<person_ 도>> <<he_ 의>> 발을 당신의 등위에 올려놓는다. 그들은 딱히 더 심한 짓을 저지르지는 않지만, 추가된 무게 때문에 일하기가 힘들다.
+<br><br>
+
+그들은 당신이 일이 끝났다고 하자 불평했지만, 별장 청소는 충실하게 끝마쳤다. 당신은 일어나서 별장을 나섰다.
+<br><br>
+
+<<link [[다음|Chalets]]>><<endevent>><</link>>
+<br>
+
+:: Chalets Work Feet Refuse
+<<effects>>
+
+당신은 일어서서 <<persons_ 의>> 발을 등에서 떨어뜨리고는, 당신의 <<bottom_ 을>> <<himPost>>에게서 멀리 치운다. <<He_ 는>> 불평했지만, 당신은 별장 청소를 끝마치고, 일어나서 별장을 나선다.
+<br><br>
+
+<<link [[다음|Chalets]]>><<endevent>><</link>>
+<br>
+
+:: Chalets Work Collar
+<<effects>>
+<<neckwear 26>>
+<<person_ 이>> 당신의 목에 개목걸이를 채우고, 아래로 잡아끌어 바닥을 기어가게한다. <<He_ 는>> 당신을 데리고 친구에게로 간다.
+<<exhibitionism1>>
+
+"앉아," <<he_ 가>> 명령한다.
+<br><br>
+
+<<link [[앉는다|Chalets Work Collar Sit]]>><</link>>
+<br>
+<<link [[거절한다|Chalets Work Collar Refuse 2]]>><</link>>
+<br>
+
+:: Chalets Work Collar Sit
+<<effects>>
+
+당신은 개처럼 앉는다. "착한 <<girl_ iya>>." <<person1>><<person_ 이>> 말한다. <<He_ 이>> 개목걸이에 목줄을 연결하고, <<person2>><<person_ 의>> 옆으로 끌고간다.
+<br><br>
+
+"키스해."
+<br><br>
+
+<<link [[$NPCList[1].pronouns.his + " 뺨에 키스한다"|Chalets Work Collar Cheek]]>><</link>>
+<br>
+<<link [[$NPCList[1].pronouns.his + " 입에 키스한다"|Chalets Work Collar Kiss]]>><</link>><<kissvirginitywarning>>
+<br>
+<<link [[거절한다|Chalets Work Collar Refuse 2]]>><</link>>
+<br>
+
+:: Chalets Work Collar Cheek
+<<effects>>
+
+당신은 <<person_ 의>> 뺨에 키스한다.
+<br><br>
+<<person1>><<person_ 은>> 당신의 <<bottom_ 을>> 찰싹 두들긴다. "제대로 해. <<person2>><<his_ yi>> 입에 키스해."<<gstress>><<gpain>><<stress 6>><<pain 4>>
+<br><br>
+
+<<link [[$NPCList[1].pronouns.his + " 입에 키스한다"|Chalets Work Collar Kiss]]>><</link>><<kissvirginitywarning>>
+<br>
+<<link [[거절한다|Chalets Work Collar Refuse 2]]>><</link>>
+<br>
+
+:: Chalets Work Collar Kiss
+<<effects>>
+
+당신은 <<person2>><<person_ 의>> 입술에 키스한다. <<He_ 는>> 당신의 뒷통수를 움켜잡고 한동안 놓아주지 않는다.<<gstress>><<stress 6>>
+<<takeKissVirginity $NPCList[1]>>
+<br><br>
+
+<<He_ 가>> 당신을 놓아준다. 침이 긴 실타래가 되어 늘어진다. "이정도면 충분해 <<girl_ a>>." <<person1>><<person_ 이>> 당신의 목걸이를 풀어주며 말한다. "여기," 당신은 <<moneyGain 30>>를 벌었다.
+<br><br>
+
+당신은 별장을 떠난다.
+<br><br>
+<<neckruined true>>
+
+<<link [[다음|Chalets]]>><<endevent>><</link>>
+<br>
+
+:: Chalets Work Collar Refuse 2
+<<effects>>
+
+<<if random(1, 2) is 2>>
+    <<neckruined true>>
+    당신은 자리에서 일어나서, 목걸이를 푼다. <<person2>><<person_ 이>> 탄식하지만, 당신은 <<he_ 를>> 무시하고 별장을 떠난다.
+    <br><br>
+
+    <<link [[다음|Chalets]]>><<endevent>><</link>>
+    <br>
+<<else>>
+    당신은 자리에서 일어나서, 목걸이를 풀려고 한다. <span class="red">하지만 <<person_ 은>> 당신을 바닥으로 끌어내려</span> 일어날 수 없게 목을 붙잡는다. "성급하게 굴지 마, <<bitch_ 야>>."
+    <br><br>
+
+    <<link [[다음|Chalets Work Collar Rape]]>><<set $molestationstart to 1>><</link>>
+    <br>
+<</if>>
+
+:: Chalets Work Collar Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Chalets Work Collar Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Chalets Work Collar Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Chalets Work Collar Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+    <<person1>><<person_ 은>> 당신의 개목걸이를 붙잡고, 정문으로 끌고가 밖으로 걷어찬다.
+	<br><br>
+	<<tearful>> 당신은 힘겹게 일어선다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+    당신은 <<person1>><<person_ 을>> 넘어뜨리고, 그 틈을 타 도망친다.
+	<br><br>
+	<<tearful>> 당신은 별장에서 도망친다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<link [[다음|Chalets]]>><</link>>
+<br>
+
+:: Chalets Work Collar Refuse
+<<effects>>
+
+당신은 <<persons_ 의>> 제안을 거부하고, 별장을 떠난다.
+<br><br>
+
+<<link [[다음|Chalets]]>><<endevent>><</link>>
+<br>

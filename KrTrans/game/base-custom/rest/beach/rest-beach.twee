@@ -1,0 +1,12 @@
+:: Widgets custom rest beach [widget nobr]
+<<widget "customRestBeach">>
+    <<if ["clear","lightClouds"].includes(Weather.name) and Time.dayState isnot "night" and $exposed lte 0>>
+        <br>
+        <<ind>><<link [[휴식한다 (0:10)|custom rest beach]]>><<tiredness -5>><<pass 10>><</link>><<ltiredness>>
+    <</if>>
+<</widget>>
+
+:: custom rest beach [nobr]
+당신은 푸른 바다를 보며 휴식을 취한다.
+<br>
+<<link [[다음|Beach]]>><</link>>

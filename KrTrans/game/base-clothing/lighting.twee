@@ -1,0 +1,26 @@
+:: Character lighting widgets [widget]
+<<widget "charLightCombat">>
+	<<if $options.characterLightEnabled and $options.images is 1 and $options.combatImages is 1>>
+		<<set _position = _args[0] || "">>
+		<<set _props = _args[1] || []>>
+		<<if _position == "doggy">>
+			<<if _props.includes("haybale") or _props.includes("milk")>>
+				<<set _heightOffset = "225px">>
+			<<elseif _props.includes("bench")>>
+				<<set _heightOffset = "240px">>
+			<<elseif _props.includes("table")>>
+				<<set _heightOffset = "277px">>
+			<</if>>
+		<<elseif _position == "missionary">>
+			<<if _props.includes("haybale") or _props.includes("milk")>>
+				<<set _heightOffset = "225px">>
+			<<elseif _props.includes("bench")>>
+				<<set _heightOffset = "228px">>
+			<<elseif _props.includes("table")>>
+				<<set _heightOffset = "265px">>
+			<</if>>
+		<</if>>
+
+		<div @class="'char-light-combat ' + _position" @style="'--light-intensity: ' + $options.lightCombat + (_heightOffset ? '; --height-offset: ' + _heightOffset : '')"></div>
+	<</if>>
+<</widget>>

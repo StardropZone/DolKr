@@ -1,0 +1,114 @@
+:: Temple Bunk
+<<bedclotheson "Temple Bunk Bed">>
+<<effects>>
+
+당신은 사원 숙소의 침대 옆에 있다. 옷을 보관할 수 있는 옷장과 옷을 입을 수 있는 가림막 뒤의 작은 공간이 있다.
+<br><br>
+
+<<if Time.dayState is "night">>
+	밤이 깊어 침실은 고요하다. 가끔씩 들리는 코골이 소리를 제외하고는 아무 소리도 들리지 않는다. 
+<<elseif Time.dayState is "day">>
+	수련생들은 열심히 먼지 털고 청소하고 있다.
+<<elseif Time.dayState is "dawn">>
+	수도사들과 수녀들은 이미 일어나서 활동하고 있다.
+<<elseif Time.dayState is "dusk">>
+	몇몇 수도사와 수녀들이 잠자리에 들 준비를 하고 있다.
+<</if>>
+<br><br>
+<<if $earSlime.event and $earSlime.noSleep>>
+	<<if $possessed>>
+		<<ind>><span class="purple">머릿속의 슬라임은 조용하다.</span>
+	<<else>>
+		<<ind>><span class="red">슬라임이 당신이 자러 가기 전에 <<trSlimeEvent $earSlime.event>> 한다.</span>
+	<</if>>
+	<br>
+<<else>>
+	<<bedicon>><<link [[벌거벗고 침대에 눕는다|Temple Bunk Bed]]>><<undressSleep "Temple Bunk Bed">><</link>>
+	<br>
+	<<listsleepoutfits "Temple Bunk Bed">>
+	<br>
+<</if>>
+<<roomoptions>>
+<<wardrobeicon>><<link [[옷장|Temple Wardrobe]]>><</link>>
+<br>
+<<mirroricon>><<link [[거울|Temple Mirror]]>><<preMirror>><<endevent>><</link>>
+<br><br>
+<<getouticon>><<link [[떠난다|Temple Quarters]]>><</link>>
+
+<br><br>
+<<ind>><<link [[게임 설정|Temple Settings]]>><</link>>
+<br>
+<<attitudesControlCheck>>
+<<if $attitudesControl.showGoldLink is true>>
+	<span class="goldLink"><<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+<<else>>
+	<<ind>><<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+<</if>>
+<br>
+
+
+:: Temple Settings [exitCheckBypass]
+<<effects>>
+
+<<set $settingsExitPassage to "Temple Bunk">>
+<<settings>>
+
+:: Temple Mirror
+<<effects>>
+<<getouticon>><<link [[물러난다|Temple Bunk]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><</link>>
+<br>
+<<mirror "reflection">>
+<br><br>
+
+:: Temple Bunk Bed
+<<effects>>
+<<wearoutfit>>
+
+<<if numberOfEarSlime() and $location is "temple" and random(0,100) lt 3 + Math.floor($earSlime.growth / 100) - $earSlime.eventTimer and !$earSlime.event>>
+	<<set $slimeBedExit to "Temple Bunk Bed">>
+	<<set $slimeBedroomExit to "Temple Bunk">>
+	<<setSlimeSleepEvents>>
+	<<if $earSlimeEvent>>
+		<<slimeSleepEvents>>
+	<</if>>
+<</if>>
+
+<<nightmareCheck "Temple Sleep">>
+<<generateSleepLinks "Temple Sleep">>
+<<link [[침대에서 일어난다|Temple Bunk]]>><<storeon "Temple Bunk Bed">><<set $wardrobe_location to "temple">><<loadTempHairStyle>><<endevent>><</link>>
+
+:: Temple Sleep
+<<set _autosavehere to true>>
+<<sleep>>
+<<if _dreaming>>
+	/* <<earSlimeFocusChoice>> or similar widgets are running */
+<<else>>
+	<<effects>>
+    <<wakingEffects $sleepHoursTotal>>
+    <<if $nightmares gte 1 and $controlled is 0>>
+        당신은 <<if _wakingEffect>>뭔가<<else>>자신이 뭔가<</if>> <<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>창백하고<<else>>어둡고<</if>> 끔찍한 것에 뒤를 쫓기는 꿈을 꾼다.
+    <<else>>
+        <<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+            당신은 추잡한 꿈에 시달린다.
+            <<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+            <<arousal `100 * $sleepHoursTotal`>>
+            <<if $arousal gte $arousalmax>>
+                그 꿈들은 당신을 절정으로 몰아넣는다.
+                <<orgasm>>
+            <</if>>
+        <<elseif !_wakingEffect>>
+            당신은 편안히 잠을 잔다.
+            <br><br>
+        <</if>>
+    <</if>>
+    <<sleepeffects>>
+	<br><br>
+    <<set $wardrobe_location to "temple">>
+    <<wardrobeSelection true>>
+    <<radiooutfits>>
+
+    <br><br>
+    <<link [[일어난다|Temple Bunk]]>><</link>>
+    <br>
+   <<set $phase to 0>>
+<</if>>

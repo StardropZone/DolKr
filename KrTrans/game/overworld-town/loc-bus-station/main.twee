@@ -1,0 +1,239 @@
+:: Bus Station
+
+<<set $outside to 0>><<set $location to "town">><<effects>>
+당신은 버스 터미널에 있다.
+<<if Time.dayState is "day">>
+	대부분의 차량들이 사용중이라, 본 건물은 거의 비어 있다.
+<<elseif Time.dayState is "night">>
+	건물은 주차된 차량들로 가득하다.
+<<else>>
+	대부분의 차량들이 사용중이라, 본 건물은 거의 비어 있다.
+<</if>>
+<br><br>
+<<if $smuggler_location is "bus" and $smuggler_timer is 0 and Time.dayState is "night" and Time.hour gte 18>>
+	<<smugglerdifficultytext>>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passoutstreet>>
+<<else>>
+	<<if $exposed gte 1>>
+		<<exhibitionismbuilding>>
+		<<if Time.dayState is "night">>
+			<<set $danger to random(1, 10000)>><<set $dangerindustrial to 0>>
+			<<if $danger gte (9900 - ($allure)) and $eventskip is 0>>
+				<<set $dangerindustrial to random(1, 100)>>
+				<<if $dangerindustrial gte 1>>
+					<<busstationex1>>
+				<</if>>
+			<<else>>
+				<<if $smuggler_location is "bus" and $smuggler_timer is 0 and Time.hour gte 18>>
+					<<smugglerdifficultyactions>>
+				<</if>>
+				<br>
+				<<exiticon>><<link [[뒷문으로 나간다 (0:02)|Industrial alleyways]]>><<pass 2>><</link>>
+				<br>
+				<<harvesticon>><<link [[하베스트 가 (0:02)->Bus Station Front Door]]>><<pass 2>><</link>>
+				<br><br>
+			<</if>>
+		<<else>>
+			<<set $danger to random(1, 10000)>><<set $dangerindustrial to 0>>
+			<<if $danger gte (9900 - ($allure * 2)) and $eventskip is 0>>
+				<<set $dangerindustrial to random(1, 100)>>
+				<<if $dangerindustrial gte 1>>
+					<<busstationex1>>
+				<</if>>
+			<<else>>
+				<<exiticon>><<link [[뒷문으로 나간다 (0:02)|Bus Station Back Door]]>><<pass 2>><</link>>
+				<br><br>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if Time.dayState is "night">>
+			<<if $smuggler_location is "bus" and $smuggler_timer is 0>>
+				<<smugglerdifficultyactions>>
+			<</if>>
+			<br>
+
+			<<exiticon>><<link [[뒷문으로 나간다 (0:02)|Bus Station Back Door]]>><<pass 2>><</link>>
+			<br>
+			<<harvesticon>><<link [[하베스트 가 (0:02)->Bus Station Front Door]]>><<pass 2>><</link>>
+			<br><br>
+		<<else>>
+			<<exiticon>><<link [[뒷문으로 나간다 (0:02)|Bus Station Back Door]]>><<pass 2>><</link>>
+			<br>
+			<<harvesticon>><<link [[하베스트 가 (0:02)->Harvest Street]]>><<pass 2>><</link>>
+			<br><br>
+		<</if>>
+		<<if $cheatdisable is "f">>
+			밴 한 대가 귀퉁이에 주차되어 있다. 밴의 문은 열려 있고 시동도 걸려 있지만, 주변에는 아무도 보이지 않는다.
+			<br><br>
+			<<investigateicon>><<link [[밴을 살펴본다|Bus Station Livestock]]>><</link>><<dangerousText>> | <i>치트 옵션. 레미의 농장 배드엔드로 이어집니다.</i> <!-- Appears even with blind stats enabled. Intentional -->
+			<br><br>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>
+
+:: Bus Station Livestock
+<<effects>>
+
+<<generate1>><<person1>>
+당신은 밴에 다가가, 안쪽을 살펴본다. 다급한 발걸음 소리만이 당신이 들을 수 있는 경고의 전부였다. 팔 한 쌍이 당신을 앞으로 밀친다.
+<br><br>
+
+당신은 밴 바닥에 나동그라진다. 당신이 고개를 돌리자 <<person_ i>> 문을 쾅 닫는 모습이 딱 보인다.
+<br><br>
+
+당신은 문을 열려고 해 보지만, 문은 잠겨 있다. 주변을 둘러봐도, 다른 탈출구는 없어 보인다. 밴이 덜컹이며 움직이기 시작한다.
+<br><br>
+
+<<link [[다음|Street Van Journey]]>><</link>>
+<br>
+/*
+당신은 밴에 다가간다. 하얀색 드레스를 입은 소녀가 엔진을 수리하고 있다. 당신이 다가오자 그녀는 당신을 올려다보고, 그녀의 눈앞을 가리는 긴 갈색 머리카락을 넘긴다.
+<br><br>
+"안녕." 그녀가 말한다. "소 감옥으로 가는 데 이 낡은 걸 탈 필요는 없어졌어. 이젠 거기로 가는 방법이 많아서, 이건 다른 용도로 바꾸는 중이야. 다른 새로운 지역이 나오면 그때 돌아와 봐. 그러면 거기로 데려다 줄 지도 모르니까."
+<br><br>
+주름진 검은 옷을 입고 키가 큰 금발 소녀가 보닛 주변으로 가서 타이어 하나를 면도날로 긋는다. 다른 소녀는 어리벙벙한 표정을 짓는다.
+<br><br>
+
+<<link [[떠난다|Bus Station]]>><<endevent>><</link>>
+<br>
+*/
+
+:: Bus Station Front Door
+
+<<set $outside to 0>><<effects>><<set $lock to 100>>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
+	<br><br>
+	<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|Harvest Street]]>><<pass 10>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">이 자물쇠는 당신의 자물쇠따기 능력 바깥의 물건이다.</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<getouticon>><<link [[떠난다|Bus Station]]>><</link>>
+<br>
+
+:: Bus Station Back Door
+
+<<set $outside to 0>><<effects>><<set $lock to 0>>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
+	<br><br>
+	<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|Industrial alleyways]]>><<pass 10>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">이 자물쇠는 당신의 자물쇠따기 능력 바깥의 물건이다.</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<getouticon>><<link [[떠난다|Bus Station]]>><</link>>
+<br>
+
+:: Bus Station Entrance
+
+<<set $outside to 1>><<effects>><<set $lock to 100>>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
+	<br><br>
+	<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|Bus Station]]>><<pass 10>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">이 자물쇠는 당신의 자물쇠따기 능력 바깥의 물건이다.</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<harvest>><<link [[떠난다|Harvest Street]]>><</link>>
+<br>
+
+:: Bus Station Back Entrance
+
+<<set $outside to 1>><<effects>><<set $lock to 0>>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
+	<br><br>
+	<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|Bus Station]]>><<pass 10>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">이 자물쇠는 당신의 자물쇠따기 능력 바깥의 물건이다.</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<alleyicon>><<link [[떠난다|Industrial alleyways]]>><</link>>
+<br>
+
+:: Widgets Bus Station Ex [widget]
+
+<<widget "busstationex1">>
+	<<generate1>><<generate2>>
+	<<person1>>당신이 주차되어 있는 버스 뒤에 웅크려 있자, 뒤에서 누군가가 접근한다!
+	<br><br>
+	<<link [[다음|Molestation Bus Station]]>><<set $molestationstart to 1>><</link>>
+<</widget>>
+
+:: Molestation Bus Station
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<br><br>
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[다음->Bus Station Ejaculation]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[다음->Bus Station Escape]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[다음->Molestation Bus Station]]>><</link>></span><<nexttext>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[다음->Bus Station Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[다음->Bus Station Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음->Molestation Bus Station]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Bus Station Ejaculation
+
+<<ejaculation>>
+<<if $enemyanger gte ($enemyangermax / 5) * 3>>
+	그들은 마지막으로 당신의 얼굴을 한 대 때리고, 땅바닥에 당신을 내버려둔 채로 떠난다.
+	<<violence 3>>
+	<br><br>
+<<elseif $enemyanger gte 1>>
+	아무 말 없이, 그들은 땅바닥에 당신을 내버려둔 채로 떠난다.
+	<br><br>
+<<else>>
+	<<person_ i>> 미소지으며 당신의 뺨에 키스한다. "이건 널 위한 선물이야." 그들은 일어나 땅바닥에 당신을 내버려둔 채로 떠난다.
+	<br>
+	당신은 <<moneyGain 5>>를 얻었다.
+	<br><br>
+<</if>>
+<<underlowersteal>>
+<<tearful>> 당신은 두 발로 일어선다.
+<<clotheson>>
+<<endcombat>>
+<<set $eventskip to 1>>
+<<link [[다음|Bus Station]]>><</link>>
+
+:: Bus Station Escape
+
+<<effects>>
+<<He_ ga>> 고통에 몸을 움츠리자, 당신에게 도망칠 기회가 생긴다. <<tearful>> 당신은 기회를 놓치지 않고 운 좋게도 열려 있던 뒷문으로 쏜살같이 튀어나간다.
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<<industrialeventend>>

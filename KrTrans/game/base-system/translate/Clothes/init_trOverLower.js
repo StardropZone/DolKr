@@ -1,0 +1,32 @@
+function init_trOverLower()
+{
+    setup.trClothes.over_lower = [
+        {
+            index: 0,
+            name: "naked",
+            name_ko: "벗음",
+            variable: "naked",
+            post: 0,
+            description: "naked"
+        },
+
+        {
+            index: 1,
+            name: "froggy skirt",
+            name_ko: "개구리 치마",
+            variable: "froggy",
+            post: 1,
+            description: "비를 막아준다."
+        },
+
+        {
+            index: 2,
+            name: "cream",
+            name_ko: "크림",
+            variable: "cream",
+            post: 0,
+            description: "오래 남아있진 않을 것이다."
+        },
+    ];
+}
+window.init_trOverLower = init_trOverLower;

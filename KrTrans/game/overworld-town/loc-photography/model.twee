@@ -1,0 +1,1087 @@
+:: Photo Model
+<<effects>>
+
+<<if numberOfEarSlime()>>
+	<<set $earSlime.knowsAboutPhotoShoot to true>>
+<</if>>
+
+당신은 니키를 따라 계단을 올라가 하얀 스크린이 있는 큰 방으로 들어간다. 조명 몇 개와 카메라 한 대가 기다리고 있다.
+<br><br>
+
+<<set $photo.money to 450>>
+<<if $photo.pubfame>>
+	<<set $photo.money /= 3>>
+<</if>>
+<<set $photo.time to 0>>
+
+"옷은 저쪽에 있어," 니키는 모퉁이 근처의 스크린을 가리키며 말한다.
+
+<<if $worn.face.type.includes("mask")>>
+	"마스크는 벗는 게 좋을거야. 평판을 얻으면 새로운 기회가 생길테니까."
+<</if>>
+<br><br>
+
+스크린 뒤에는 두 벌의 의상이 있다.
+<<set _rng to random(1, 9)>>
+<<if _rng is 1>>
+	거기에는 선드레스와,
+	<<set $photo_upper_f_index to 1>>
+	<<set $photo_lower_f_index to 0>>
+<<elseif _rng is 2>>
+	거기에는 야회복과,
+	<<set $photo_upper_f_index to 7>>
+	<<set $photo_lower_f_index to 0>>
+<<elseif _rng is 3>>
+	거기에는 무도회복과,
+	<<set $photo_upper_f_index to 9>>
+	<<set $photo_lower_f_index to 0>>
+<<elseif _rng is 4>>
+	거기에는 기모노와,
+	<<set $photo_upper_f_index to 10>>
+	<<set $photo_lower_f_index to 0>>
+<<elseif _rng is 5>>
+	거기에는 미니 기모노와,
+	<<set $photo_upper_f_index to 11>>
+	<<set $photo_lower_f_index to 0>>
+<<elseif _rng is 6>>
+	거기에는 깅엄 드레스와,
+	<<set $photo_upper_f_index to 38>>
+	<<set $photo_lower_f_index to 0>>
+<<elseif _rng is 7>>
+	거기에는 치파오와,
+	<<set $photo_upper_f_index to 46>>
+	<<set $photo_lower_f_index to 0>>
+<<elseif _rng is 8>>
+	거기에는 짧은 치파오 드레스와,
+	<<set $photo_upper_f_index to 47>>
+	<<set $photo_lower_f_index to 0>>
+<<elseif _rng is 9>>
+	거기에는 키홀 드레스와,
+	<<set $photo_upper_f_index to 84>>
+	<<set $photo_lower_f_index to 0>>
+<</if>>
+그리고 
+<<set _rng to random(1, 5)>>
+<<if _rng is 1>>
+	턱시도가 있다.
+	<<set $photo_upper_m_index to 15>>
+	<<set $photo_lower_m_index to 16>>
+<<elseif _rng is 2>>
+	검은색 가죽 자켓이 있다.
+	<<set $photo_upper_m_index to 40>>
+	<<set $photo_lower_m_index to 23>>
+<<elseif _rng is 3>>
+	갈색 가죽 자켓이 있다.
+	<<set $photo_upper_m_index to 41>>
+	<<set $photo_lower_m_index to 23>>
+<<elseif _rng is 4>>
+	와이셔츠가 있다.
+	<<set $photo_upper_m_index to 37>>
+	<<set $photo_lower_m_index to 23>>
+<<elseif _rng is 5>>
+	가라테 도복이 있다.
+	<<set $photo_upper_m_index to 55>>
+	<<set $photo_lower_m_index to 50>>
+<</if>>
+<br><br>
+
+또한 레이스 팬티 한벌과, 남성용 팬티 한벌이 있다.
+<<set $photo_under_f_index to 3>>
+<<set $photo_under_m_index to 4>>
+<<exhibitionism1>>
+
+<<if $worn.face.type.includes("mask")>>
+	<<if $earSlime.forcedDressing and $earSlime.forcedDressing.type is "m">>
+		<span class="red">귓속의 슬라임은 당신이 여성복을 입는 것을 허락하지 않는다.</span>
+	<<else>>
+		<<link [[마스크는 계속 착용하고 여성복을 입는다|Photo Model 2]]>>
+			<<undressKeepFace "photo">>
+			<<set $photo_upper_index to $photo_upper_f_index>>
+			<<set $photo_lower_index to $photo_lower_f_index>>
+			<<set $photo_under_index to $photo_under_f_index>>
+			<<underlowerwear $photo_under_index>>
+			<<lowerwear $photo_lower_index>>
+			<<upperwear $photo_upper_index>>
+		<</link>>
+	<</if>>
+	<br>
+	<<if $earSlime.forcedDressing and $earSlime.forcedDressing.type is "f">>
+		<span class="red">귓속의 슬라임은 당신이 남성복을 입는 것을 허락하지 않는다.</span>
+	<<else>>
+		<<link [[마스크는 계속 착용하고 남성복을 입는다|Photo Model 2]]>>
+			<<undressKeepFace "photo">>
+			<<set $photo_upper_index to $photo_upper_m_index>>
+			<<set $photo_lower_index to $photo_lower_m_index>>
+			<<set $photo_under_index to $photo_under_m_index>>
+			<<underlowerwear $photo_under_index>>
+			<<lowerwear $photo_lower_index>>
+			<<upperwear $photo_upper_index>>
+		<</link>>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $earSlime.forcedDressing and $earSlime.forcedDressing.type is "m">>
+	<span class="red">귓속의 슬라임은 당신이 여성복을 입는 것을 허락하지 않는다.</span>
+<<else>>
+	<<link [[옷을 모두 벗고 여성복을 입는다|Photo Model 2]]>>
+		<<undress "photo">>
+		<<set $photo_upper_index to $photo_upper_f_index>>
+		<<set $photo_lower_index to $photo_lower_f_index>>
+		<<set $photo_under_index to $photo_under_f_index>>
+		<<underlowerwear $photo_under_index>>
+		<<lowerwear $photo_lower_index>>
+		<<upperwear $photo_upper_index>>
+	<</link>>
+<</if>>
+<br>
+<<if $earSlime.forcedDressing and $earSlime.forcedDressing.type is "f">>
+	<span class="red">귓속의 슬라임은 당신이 남성복을 입는 것을 허락하지 않는다.</span>
+<<else>>
+	<<link [[옷을 모두 벗고 남성복을 입는다|Photo Model 2]]>>
+		<<undress "photo">>
+		<<set $photo_upper_index to $photo_upper_m_index>>
+		<<set $photo_lower_index to $photo_lower_m_index>>
+		<<set $photo_under_index to $photo_under_m_index>>
+		<<underlowerwear $photo_under_index>>
+		<<lowerwear $photo_lower_index>>
+		<<upperwear $photo_upper_index>>
+	<</link>>
+<</if>>
+<br><br>
+
+:: Photo Model 2
+<<effects>>
+<<endevent>>
+당신은 <<worn_upper_name_ ul>> 집어들고 스크린 뒤쪽으로 향한다.
+<<if random(1, 2) is 2 and $fame.model gte 100>>
+	<!-- Audience generation -->
+	<<set _maxAudience to Math.clamp(Math.floor($fame.model / 100), 0, 6)>> <!-- 1 for 100, 6 for 600 or higher, etc -->
+	<<if $photo.audienceSize lt _maxAudience and $photo.timesWithThisAudienceSize gte 2>>
+		<<set $photo.audienceSize += 1>>
+		<<set $photo.timesWithThisAudienceSize to 0>>
+	<</if>>
+	<!-- Incrase audience size if we've had the previous audience size AT LEAST twice (and we've enough fame) -->
+	<<set $photo.timesWithThisAudienceSize += 1>> <!-- Increase the number of times we've had this audience size -->
+	<<for _audienceGenIndex to 1; _audienceGenIndex lte $photo.audienceSize; _audienceGenIndex++>>
+		<<generateNPC _audienceGenIndex>>
+	<</for>>
+	<!-- Generate the needed number of audience members, and texts for them -->
+
+	<!-- Adding new lines is as simple as inputting it into the right group below. End your line with a , for better diffs handling -->
+	<!-- Lines below will be picked from at random per audience encounter -->
+	<<set _audienceText to [
+		[
+			"" /* audience size zero, no text */
+		], [ /* Audience size 1 strings */
+			"<<person1>><<person_ ga>> 스튜디오 구석에 앉아 있다. <<He_ nun>> 당신을 보고는 싱긋 웃는다.",
+			"<<person1>><<person_ ga>> 스튜디오 구석에 앉아 있다. <<His_ yi>> 시선은 당신에게 달라붙어 있으며 약간 기분나쁜 모습으로 웃는다.",
+		], [ /* Audience size 2 strings */
+			"A <<person2>><<person_ gwa>> <<person1>><<person_ ga>> 스튜디오 구석에 앉아서 이야기를 나누고 있다가 멈추고 당신의 몸 전체를 훑듯이 바라본다.",
+			"A <<person2>><<person_ gwa>> <<person1>><<person_ ga>> 스튜디오 구석에 앉아서 당신을 바라보며 이야기를 나눈다. <<person_ ga>> 살짝 곁눈질한다.",
+		], [ /* Audience size 3 strings */
+			"<<enumeratedGroup_ un>> 구석에 앉아 당신을 바라본다. 그 중 가운데에 앉아 있는 <<person1>><<person_ ga>> 싱긋 웃는다.",
+			"<<enumeratedGroup_ un>> 구석에 앉아 당신을 바라본다. 그 중 <<person1>><<person_ ga>> 노골적으로 곁눈질한다.",
+		], [ /* Audience size 4 strings */
+			"<<enumeratedGroup_ un>> 구석에 앉아 당신을 바라본다. 그 중 <<person1>><<person_ ga>> 당신의 <<bottom_ ul>> 바라보며 머리를 빗는다.",
+			"<<enumeratedGroup_ un>> 구석에 앉아 당신을 바라본다. 그 중  <<person1>><<person_ ga>> 와인잔에 입을 댄다.",
+		], [ /* Audience size 5 strings */
+			"<<enumeratedGroup_ un>> 구석에 앉아 이야기를 나누고 있다. 그 중 <<person1>><<person_ ga>> 대화하는 내내 쉬지 않고 당신을 쳐다본다.",
+			"<<enumeratedGroup_ un>> 구석에 앉아 이야기를 나누고 있다. 그 중 <<person1>><<person_ ga>> 근처 사람들을 무시하면서 당신을 쳐다본다.",
+		], [ /* Audience size 6 strings */
+			"<<enumeratedGroup_ un>> 구석에 앉아 당신을 바라본다. 그 중 <<person1>><<person_ ga>> 옆에 앉아 있는 <<person2>><<personPost>>하고 대화하는 내내 당신을 바라보는 것을 멈추지 않는다.",
+			"<<enumeratedGroup_ un>> 구석에 앉아 당신을 바라본다. 그 중 <<person1>><<person_ ga>> <<His_ yi>> 입술을 핥는다.",
+		],
+	].select($photo.audienceSize).random()>>
+
+	<<print _audienceText>>
+
+	<<if $photo.audienceSize is 1 and $photo.timesWithThisAudienceSize is 1>>
+		<!-- First time we've seen an audience -->
+		<br><br>
+		니키는 삼각대의 카메라를 조정하다가 고개를 들어 올려다본다. "가끔은 업계 사람들이 와서 촬영에 참관하기도 할거야." <<nnpc_hePost "Niki" "가">> 말한다. "이쪽 업계에선 흔해. 그렇게 되면 1명당 <span class="gold">£50</span> 만큼 더 줄게. 네가 더 잘 알려진다면 더 많은 사람들이 흥미를 가지게 될 거야."
+	<</if>>
+
+	<br><br>
+	<<link [[참관객과 함께 촬영한다|Photo Model 3]]>><<set $photo.money += ( 50 * $photo.audienceSize )>><</link>>
+	<br>
+	<<link [[참관객과 촬영하는 것을 거부한다|Photo Model Refuse]]>><<npcincr Niki love -1>><</link>><<llove "Niki">>
+	<br>
+<<else>>
+	니키는 삼각대의 카메라를 조정한다. "거의 준비됐어." <<nnpc_HePost "Niki" "가">> 당신의 옷을 흘끗 쳐다본다. "자." <<nnpc_HePost "Niki" "는">> 삼각대에서 물러나 테이블에서 다른 카메라를 들어올린다. 
+	<br><br>
+
+	<<nnpc_HePost "Niki" "가">> 카메라를 들어올리고 포즈를 취하라고 요청한다.
+	<br><br>
+
+	<<link [[조언을 따른다|Photo Model 3]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[당신의 센스를 더한다|Photo Model 3]]>><<set $phase to 1>><</link>>
+	<br>
+<</if>>
+
+:: Photo Model Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"저-정말 죄송해요." 당신은 말한다. "하지만 참관객 분들이랑 촬영하고 싶지 않아요."
+<<elseif $speech_attitude is "bratty">>
+	"믿음이 안 가는데요" 당신은 말한다. "함께 촬영하지 않겠어요."
+<<else>>
+	"보는 눈이 있으면 진정할 수가 없어요" 당신은 말한다.
+<</if>>
+<br><br>
+
+<<if $enemyno gte 2>>
+	니키는 고개를 끄덕이고 문을 가리킨다. 아무도 나가면서 불평하지 않는다.
+<<else>>
+	니키는 고개를 끄덕이고 문을 가리킨다. <<personPost "가">> 불평하지만, 항의하지는 않고 빠져나간다.
+<</if>>
+<br><br>
+
+<<link [[다음|Photo Model 3]]>><<endevent>><</link>>
+<br>
+
+:: Photo Model 3
+<<effects>>
+
+<<set $photo.time += 30>>
+
+<<if $phase is 0>>
+	당신은 니키의 지시에 따른다.
+<<elseif $phase is 1>>
+	당신은 니키의 지시에 따르면서도 무언가가 떠오를 떄마다 자신의 센스를 더한다. 니키는 감동하지도, 짜증내지도 않는 것 같다.
+<<else>>
+	니키가 당신에게 지시사항을 알려준다.
+<</if>>
+<<nnpc_HePost "Niki" "는">> 당신이 다른 포즈를 잡을 때마다 주위를 돌며, 가끔은 몸을 낮추고 다른 각도에서 사진을 찍는다.
+<br><br>
+
+대부분의 촬영이 당신의 <<bottomPost>>에 집중되는 것 같다.
+<br><br>
+
+<<link [[프로답게 참는다|Photo Model 4]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[항의한다|Photo Model 4]]>><<def 1>><<set $phase to 1>><</link>>
+<br>
+<<if hasSexStat("exhibitionism", 2)>>
+	<<link [[과시한다|Photo Model 4]]>><<set $phase to 2>><</link>><<exhibitionist2>>
+<</if>>
+<br>
+
+:: Photo Model 4
+<<effects>>
+
+<<set $photo.time += 30>>
+
+<<if $phase is 0>>
+	당신은 참는다. 이것은 그냥 참아야 할 일이다. 니키는 계속해서 사진을 찍는다.
+	<br><br>
+<<elseif $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"제-제발요." 당신은 말한다. "너무 야한 것 같아요."
+	<<elseif $speech_attitude is "bratty">>
+		"난 이 의상의 모델을 하고 있는 건데요." 당신은 말한다. "제 엉덩이 모델이 아니라."
+	<<else>>
+		"그런 식으로 사진 찍으시면 불편해요." 당신은 말한다.
+	<</if>>
+	<br><br>
+	니키는 대답하지 않지만, 더 이상 당신의 <<bottomPost>>에 근접해서 찍지는 않는다.
+	<br><br>
+<<elseif $phase is 2>>
+	당신은 <<bottomPost "를">> 내민다. 니키는 성큼 다가와서 사진을 찍는다.
+	<<exhibitionism2>>
+<</if>>
+
+
+
+<<if $photo.evidence gte 1 and $photo.refused gte 1 and $enemyno gte 1>>
+
+	"거의 다 됐어." <<hePost "가">> 말한다. "사무실에 필요한게 있어서, 금방 다시 돌아올게." <<nnpc_HePost "Niki" "는">> 방을 떠나면서 작은 카메라는 가져갔지만 삼각대의 카메라는 그대로 둔다.
+	<br><br>
+
+	<<link [[다음|Photo Model Blackmail]]>><</link>>
+	<br>
+<<else>>
+	피곤한 일이다. 니키가 중간에 걸상을 가져오긴 했지만 그 위에 "앉아" 이상한 포즈를 잡는 것은 그다지 편하지 않다.
+	<br><br>
+
+	<<link [[다음|Photo Model 5]]>><</link>>
+	<br>
+<</if>>
+
+:: Photo Model Blackmail
+<<effects>>
+
+니키가 나가자, <<personPost "가">> 삼각대 카메라 쪽으로 걸어가더니 <<hisPost "의">> 핸드폰을 주머니에서 꺼낸다. "여기 뭐가 좀 있는지 볼까?" <<hePost "는">> 그렇게 말하고는 케이블 한쪽 끝을 카메라에 꽃고, 반대쪽을 <<hisPost "의">> 핸드폰에 꽂는다.
+<br><br>
+
+<<link [[항의한다|Photo Model Blackmail 2]]>><<def 1>><<set $phase to 1>><</link>>
+<br>
+<<link [[침묵한다|Photo Model Blackmail 2]]>><<set $phase to 0>><</link>>
+<br>
+
+:: Photo Model Blackmail 2
+<<effects>>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"그-그걸 건드리면 안 될 것 같아요." 당신은 말한다.
+	<<elseif $speech_attitude is "bratty">>
+		"손 떼시지." 당신은 말한다.
+	<<else>>
+		"멋대로 만지시면 안 될 텐데요." 당신은 말한다.
+	<</if>>
+	<br><br>
+	"호기심에 좀 그럴 수도 있지." <<hePost "가">> 대답한다.
+<<else>>
+	당신은 조용히 <<personPost "가">> 계속하게 둔다. "여기에 뭐가 있는지 좀 볼까?" <<hePost "가">> 말한다.
+<</if>>
+<<if $photo.evidence is 2>>
+	<<hisPost "가">> 환하게 웃는다. <span class="pink">"여기 저 <<slut_ i>> 강간당하는 동영상이 있어!"</span>
+<<elseif $photo.evidence is 1>>
+	<<hisPost "가">> 환하게 웃는다. <span class="purple">"여기 재밌는 동영상이 있어. 쟤가 옷 갈아입는 동안 스크린이 무너지는 영상!"</span>
+<</if>>
+<br><br>
+<<if $enemyno gte 3>>
+	다른 참관객들이 <<himPost>>에게 몰려들어 <<hisPost "의">> 어깨 너머로 들여다본다.
+<<elseif $enemyno is 2>>
+	다른 참관객인 <<person2>> <<person_ i>> 달려간다. "나도 좀 보자고."
+<</if>>
+<br><br>
+
+그 <<personPost "는">> 당신을 올려다본다. "난 너 같은 타입을 잘 알아. 아무 데나 붙어먹는 타입. 자, 이렇게 해 볼까? <span class="purple">니키가 시키는 대로 전부 따라.</span> <span class="pink">안 그러면 이 동영상 업로드 해버릴테니까.</span> 너 이 근처 학교 다니는 거 맞지? 네 친구들이 볼 수 있는 곳에 올려버릴 거야. 알아들었어?"
+<br><br>
+
+<<if $enemyno is 6>>
+	당신은 <<himPost "를">> 막으려 할 수 있지만, <<hePost "를">> 다른 5명이 도울 것이다.
+<<elseif $enemyno is 5>>
+	당신은 <<himPost "를">> 막으려 할 수 있지만, <<hePost "를">> 다른 4명이 도울 것이다.
+<<elseif $enemyno is 4>>
+	당신은 <<himPost "를">> 막으려 할 수 있지만, <<hePost "를">> 다른 3명이 도울 것이다.
+<<elseif $enemyno is 3>>
+	당신은 <<himPost "를">> 막으려 할 수 있지만, <<hePost "를">> 다른 2명이 도울 것이다.
+<<elseif $enemyno is 2>>
+	당신은 <<himPost "를">> 막으려 할 수 있지만, <<hePost "를">> 다른 사람이 도울 것이다.
+<<else>>
+	당신은 <<himPost "를">> 막으려 할 수 있다.
+<</if>>
+<br><br>
+
+<<link [[끄덕인다|Photo Model Blackmail 3]]>><<def 1>><<set $phase to 0>><</link>>
+<br>
+<<link [[애원한다|Photo Model Blackmail 3]]>><<sub 1>><<set $phase to 1>><</link>>
+<br>
+<<link [[침묵한다|Photo Model Blackmail 3]]>><<set $phase to 2>><</link>>
+<br>
+<<link [[싸운다|Photo Model Blackmail Attack]]>><<set $phase to 2>><<def 1>><</link>>
+<br>
+
+
+:: Photo Model Blackmail Attack
+<<effects>>
+당신은 <<personPost>>에게 달려들어 <<hisPost "의">> 손에서 핸드폰을 쳐낸다. <<HePost "는">> 소매를 걷어 올린다.
+<br><br>
+
+<<link [[다음|Photo Model Blackmail Fight]]>><<set $fightstart to 1>><</link>>
+<br>
+
+:: Photo Model Blackmail Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Photo Model Blackmail Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Photo Model Blackmail Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Photo Model Blackmail Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	<<tearful>> 당신은 그들이 정신을 못 차리는 동안 핸드폰을 낚아채 니키가 돌아오기 직전에 영상을 삭제한다. <<nnpc_HePost "Niki" "가">> 그 광경을 확인한다.
+	<<if $enemyno gte 2>>
+		<<peoplePost "는">>
+	<<else>>
+		<<personPost "는">>
+	<</if>>
+	쓰러진 카메라 옆의 바닥에 누워 있다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	"나가." <<nnpc_hePost "Niki" "가">> 말한다. "촬영을 방해하지 마. 그게 유일한 룰이다."
+	<br><br>
+
+	당신은 <<personPost "이">> 나갈 때 <<hisPost>>의 핸드폰을
+	<<if $speech_attitude is "meek">>
+		눈을 마주치지 못하고 돌려준다.
+	<<else>>
+		돌려주며 혀를 내밀고 싶은 마음을 꾹 참는다.
+	<</if>>
+	<br><br>
+
+<<elseif $enemyhealth lte 0>>
+	<<tearful>> 당신은 <<personsPost "의">> 손에서 핸드폰을 낚아채 니키가 돌아오기 직전에 영상을 삭제한다. <<nnpc_HePost "Niki" "가">> 그 광경을 확인한다.
+	<<if $enemyno gte 2>>
+		<<peoplePost "는">>
+	<<else>>
+		<<personPost "는">>
+	<</if>>
+	쓰러진 카메라 옆의 바닥에 누워 있다.
+	<br><br>
+	"나가." <<nnpc_hePost "Niki" "가">> 말한다. "촬영을 방해하지 마. 그게 유일한 룰이다."
+	<br><br>
+
+	당신은 <<personPost "이">> 나갈 때 <<hisPost "의">> 핸드폰을
+	<<if $speech_attitude is "meek">>
+		눈을 마주치지 못하고 돌려준다.
+	<<else>>
+		돌려주며 혀를 내밀고 싶은 마음을 꾹 참는다.
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+<<elseif $rescue is 1 and $alarm is 1>>
+
+	문이 열리고 니키가 들어온다. 그 <<personPost "는">> 당신에게서 떨어졌지만 여전히 <<hisPost "의">> 핸드폰을 잡고 있다. <<nnpc_HePost "Niki" "가">> 그 광경과 쓰러진 카메라를 확인한다.
+	<br><br>
+	"나가." <<nnpc_hePost "Niki" "가">> 말한다. "촬영을 방해하지 마. 그게 유일한 룰이다."
+	<br><br>
+
+	<<personPost "는">> 순수히 응한다, <span class="pink">그러나 <<hePost "는">> 여전히 영상을 가지고 있다.</span> <<photo_evidence_upload>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+
+	당신은 너무 다쳐서 더 이상 싸우지 못하고 땅에 쓰러진다. <<personPost "는">> 핸드폰을 든 채 당신을 보며 서 있다. <<photo_evidence_upload>>
+	<br><br>
+	니키가 돌아와 바닥에 쓰러진 당신과 카메라의 모습을 확인한다. "나가." <<nnpc_hePost "Niki" "가">> <<personPost>>에게 말한다. "촬영을 방해하지 마. 그게 유일한 룰이다."
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+
+<</if>>
+<<link [[다음|Photo Model Blackmail Fight End]]>><</link>>
+<br>
+<<set $photo.blackmail to 0>>
+
+:: Photo Model Blackmail Fight End
+<<effects>>
+
+"미안해." 니키는 그렇게 말하며 당신이 일어날 수 있게 도와준다.
+
+<<if $exposed gte 1>>
+	<<nnpc_HePost "Niki" "가">> 당신의 옷차림을 확인하더니 시선을 피한다. 여분의 옷이 있어. 원한다면 촬영을 계속할게. 강요하는건 아니야."
+<<else>>
+	"촬영을 계속할 수도 있고, 그만할 수도 있어. 강요하지 않을게."
+<</if>>
+<br><br>
+
+<<link [[계속한다|Photo Model Continue]]>><</link>>
+<br>
+<<link [[그만둔다|Photo Model Stop]]>><</link>>
+<br>
+
+
+:: Photo Model Continue
+<<effects>>
+
+<<underlowerwear $photo_under_index>>
+<<lowerwear $photo_lower_index>>
+<<upperwear $photo_upper_index>>
+스크린 뒤에서 옷을 갈아입고 나오자 카메라가 제대로 설치되어 있고, 니키가 준비된 것이 보인다.
+<br><br>
+
+<<link [[다음|Photo Model 5]]>><</link>>
+<br>
+
+
+:: Photo Model Stop
+<<effects>>
+
+<<famemodel 20 "pic">>
+<<if playerBellyVisible()>><<famepregnancy `Math.ceil(playerBellySize() / 10)`>><</if>>
+<<storeon "photo">>
+스크린 뒤에서 옷을 갈아입고 나오면 니키가 모델료를 정산하고 있다. 당신은 <<moneyGain $photo.money>>를 얻었다.
+<br><br>
+"잘 해줬어." <<nnpc_hePost "Niki" "가">> 말한다. "다음 주에도 너와 함께 촬영하고 싶어."
+<<if $phase is 2>><<nnpc_hePost "Niki" "는">> 멈칫한다. "다시 한번, 그런 일이 일어나게 해서 정말 미안해."<</if>>
+<br><br>
+
+<<if $photo.pubfame>>
+	"<span class="red">저 사진을 줄 수는 없어.</span>" <<hePost "가">> 덧붙인다. "나도 그러고 싶긴 한데, 저걸 대체할 만한 것이 없거든. 다음 주에 다시 오면 뭘 할 수 있을지 알아볼게."
+	<br><br>
+<</if>>
+
+당신은 돈을 받고 스튜디오를 떠난다.
+<br><br>
+
+<<link [[다음|Nightingale Street]]>><<photo_end>><</link>>
+<br>
+
+:: Photo Model Blackmail 3
+<<effects>>
+<<set $photo.blackmail to $photo.evidence>>
+<<if $phase is 2>>
+	당신은 입다물고 있는다. <<personPost "는">> 입을 열려고 하지만 밖에서 들려온 쾅 하는 소리에 방해받는다.
+<<elseif $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"부-부탁이니까 그러지 마세요." 당신은 말한다.
+	<<elseif $speech_attitude is "bratty">>
+		"그만해." 당신은 말한다.
+	<<else>>
+		"그러지 마세요." 당신은 말한다.
+	<</if>>
+	<br><br>
+	<<personPost "는">> 무시하며 코웃음을 치려는 것 같지만 밖에서 들려온 쾅 하는 소리에 방해받는다.
+<<else>>
+	당신은 끄덕인다. <<personPost "는">> 입을 열려고 하지만 밖에서 들려온 쾅 하는 소리에 방해받는다.
+<</if>>
+<<HePost "는">> 핸드폰을 손에 들고 서둘러 <<hisPost "의">> 의자로 돌아간다.
+<br><br>
+
+니키가 걸상을 들고 돌아온다. 당신은 그 소품 위에 앉아 어색하게 포즈를 취한다. <<personsPost "의">> 말이 당신의 마음을 무겁게 짓누른다.
+<br><br>
+
+<<link [[다음|Photo Model 5]]>><</link>>
+<br>
+
+
+:: Photo Model 5
+<<effects>>
+
+<<if $photo.pubfame>>
+	"아직 더 남았어." 니키가 말한다. <<nnpc_HePost "Niki" "는">> 조명을 조정한다. "이 다음은 상의를 전부 벗고 촬영할 거야."
+<<else>>
+	"거의 다 끝났어." 마침내 니키가 말한다. <<nnpc_HePost "Niki" "는">>  조명을 조정한다. "상의를 전부 벗고 하는 촬영도 좋을 것 같은데. 모델료는 2배로 줄게. <span class="gold">£<<print $photo.money * 2>>가 되겠네.</span>"
+<</if>>
+<br><br>
+<<set $photo.time += 30>>
+
+<<if $enemyno gte 2>>
+	<<if $photo.blackmail gte 1>>
+		<span class="pink"> <<personPost "는">> 비스듬히 <<hisPost "의">> 의자에 앉아 <<hisPost "의">> 핸드폰을 들고 당신의 눈을 똑바로 쳐다보고 있다.</span>
+	<<else>>
+		<<personPost "는">> 비스듬히 <<hisPost "의">> 의자에 앉아 있고, <<person2>><<personPost "는">> <<hisPost "의">> 입술을 핥고 있다.<<person1>>
+	<</if>>
+	<br><br>
+<<elseif $enemyno is 1>>
+	<<if $photo.blackmail gte 1>>
+		<span class="pink"><<personPost "는">> 비스듬히 <<hisPost "의">> 의자에 앉아 <<hisPost "의">> 핸드폰을 들고 당신의 눈을 똑바로 쳐다보고 있다.</span>
+	<<else>>
+		<<personPost "는">> 비스듬히 <<hisPost "의">> 의자에 앉아 있다.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<link [[거절한다|Photo Model Topless Refuse]]>><<set $photo.refused += 1>><</link>>
+<br>
+<<if hasSexStat("exhibitionism", 4)>>
+	<<link [[받아들인다|Photo Model Topless]]>><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<elseif $uncomfortable.prostituting is false>>
+	<<link [[받아들인다|Photo Model Topless]]>><<set $desperateaction to 1>><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<elseif $photo.blackmail gte 1>>
+	<<link [[받아들인다|Photo Model Topless]]>><<trauma 12>><<stress 12>><<set $phase to 1>><</link>><<ggtrauma>><<ggstress>><<glove "Niki">>
+<<elseif $photo.pubfame>>
+	<<link [[받아들인다|Photo Model Topless]]>><<set $desperateaction to "당신은 사진이 필요하다">><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<elseif $earSlime.event.includes("fully expose yourself while working as a model in town")>>
+	<<link [[받아들인다|Photo Model Topless]]>><<set $desperateaction to "당신은 몸을 노출해야만 한다">><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<else>>
+	<span class="blue">당신은 그럴수 있을 만큼 음란하거나 절박하지 않다.</span>
+<</if>>
+<br>
+
+:: Photo Model Topless Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"죄-죄송해요." 당신은 말한다. "그러기에는 너무 불편해요."
+<<elseif $speech_attitude is "bratty">>
+	"흥미 없어요." 당신은 말한다.
+<<else>>
+	"그러기에는 너무 불편해요." 당신은 말한다.
+<</if>>
+<<if $enemyno gte 1 and $photo.blackmail gte 1>>
+	<<personPost "가">> 고개를 흔든다. <<photo_evidence_upload>>
+<</if>>
+<<if $earSlime.event.includes("fully expose yourself while working as a model in town")>>
+	<<set $earSlime.event to "">>
+	<span class="red">귓속의 슬라임이 임무를 완수하지 못한 것에 대한 처벌을 내린다.</span>
+	<<ggpain>><<ggtrauma>><<ggstress>><<pain 16>><<stress 12>><<trauma 12>>
+	<<if hasSexStat("exhibitionism", 5) and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+<</if>>
+<br><br>
+<<if $photo.refused gte 2>>
+	니키는 고개를 끄덕이고, 군말 없이 촬영을 마무리한다.
+	<br><br>
+	<<set $photo.refused to 0>>
+	<<exposure>>
+	<<set $photo.evidence to 1>>
+	당신은 스크린 뒤로
+	<<if $worn.upper.name isnot "naked">>
+		걸어가서 <<worn_upper_name_ ul>> 벗는다
+	<<else>>
+		걸어간다.
+	<</if>>
+	그러나 갈아입는 도중에 <span class="purple">무언가 갈라지는 소리가 들려오더니</span> 스크린이 넘어져버리고 <span class="pink">방 전체에 당신의 모습이 드러난다.</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+	<<set $worn.upper to clone(setup.clothes.upper[0])>>
+	<<set $worn.lower to clone(setup.clothes.lower[0])>>
+	<<set $worn.under_upper to clone(setup.clothes.under_upper[0])>>
+	<<set $worn.under_lower to clone(setup.clothes.under_lower[0])>>
+	<<if $enemyno gte 2>>
+		여전히 앉아 있는 참관객들이 환호한다. 삼각대 카메라의 표시등은 여전히 녹색이다. <<covered>>
+	<<elseif $enemyno gte 1>>
+		여전히 앉아 있는 <<personPost "가">> 환호한다. 삼각대 카메라의 표시등은 여전히 녹색이다. <<covered>>
+	<<else>>
+		삼각대 카메라의 표시등은 여전히 녹색이다. <<covered>>
+	<</if>>
+	<br><br>
+	니키는 눈을 가린 채로 달려온다. <<nnpc_HePost "Niki" "가">> 쓰러져있는 스크린을 들어 올려 다시 방의 나머지 부분과 당신을 분리시킨다. <<nnpc_HePost "Niki" "는">> 반대편에서 사과한다.
+	<br><br>
+
+	<<link [[다음|Photo Model Topless End]]>><</link>>
+	<br>
+<<else>>
+	니키는 고개를 끄덕이고, 군말 없이 촬영을 마무리한다.
+	<br><br>
+	<<famemodel 20 "pic">>
+	<<if playerBellyVisible()>><<famepregnancy `Math.ceil(playerBellySize() / 10)`>><</if>>
+	<<storeon "photo">>
+	당신이 스크린 뒤에서 옷을 갈아입고 나오면 니키가 모델료를 정산하고 있다. 당신은 <<moneyGain $photo.money>>를 얻었다.
+	<br><br>
+	<<if $photo.pubfame>>
+		"잘 해줬어." <<nnpc_hePost "Niki" "가">> 말한다. "<span class="red">그 사진을 줄 수는 없어.</span> 하지만 다음 주에 다시 오면 뭘 할 수 있을지 알아볼게"
+	<<else>>
+		"잘 해줬어." <<nnpc_hePost "Niki" "가">> 말한다. "다음 주에도 너와 함께 촬영하고 싶어."
+	<</if>>
+	<br><br>
+
+	당신은 돈을 받고 스튜디오를 떠난다.
+	<br><br>
+
+	<<link [[다음|Nightingale Street]]>><<photo_end>><</link>>
+	<br>
+<</if>>
+
+
+:: Photo Model Topless End
+<<effects>>
+
+<<famemodel 20 "pic">>
+<<if playerBellyVisible()>><<famepregnancy `Math.ceil(playerBellySize() / 10)`>><</if>>
+<<storeon "photo">>
+여전히 얼굴을 붉힌 채로 옷을 갈아입고 나가면 니키가 모델료를 정산하고 있다.
+<<if $enemyno gte 2>>
+	참관객들이 비웃지만 당신은 무시하려고 최선을 다한다.
+<<elseif $enemyno is 1>>
+	<<personPost "가">> 비웃지만 당신은 <<him_ ul>> 무시하려고 최선을 다한다.
+<</if>>
+당신은 <<moneyGain $photo.money>>를 얻었다.
+<br><br>
+<<if $photo.pubfame>>
+	<<if $phase is 1>>
+		"잘 해줬어." <<nnpc_hePost "Niki" "가">> 말한다. "여기 부탁한 사진이야." <<nnpc_HePost "Niki" "는">> 프레임에서 빼낸 사진을 건네준다. "인쇄되면 네 사진으로 교체할게. 다음 주에도 너와 함께 촬영하고 싶어, 물론 네가 괜찮다면 말이지."
+		<br><br>
+		<<pubfameComplete "niki" 0 true>>
+	<<else>>
+		"잘 해줬어." <<nnpc_hePost "Niki" "가">> 말한다. "<span class="red">그 사진을 줄 수는 없어.</span> 하지만 다음 주에 다시 오면 뭘 할 수 있을지 알아볼게"
+	<</if>>
+<<else>>
+	"잘 해줬어." <<nnpc_hePost "Niki" "가">> 말한다. "다음 주에도 너와 함께 촬영하고 싶어."
+<</if>>
+<br><br>
+
+당신은 돈을 받고 스튜디오를 떠난다.
+<br><br>
+
+<<link [[다음|Nightingale Street]]>><<photo_end>><</link>>
+<br>
+
+:: Photo Model Topless
+<<effects>>
+
+<<set $photo.time += 30>>
+<<set $photo.money *= 2>>
+<<famemodel 10 vid>>
+<<fameexhibitionism 10 vid>>
+<<if playerBellyVisible()>><<famepregnancy `Math.ceil(playerBellySize() / 10)`>><</if>>
+<<npcincr Niki love 1>>
+
+<<if setup.clothes.upper[clothesIndex('upper', $worn.upper)].strap is 1>>
+	<<flaunting>> 당신은 목 뒤의 끈을 푼다. 가슴을 가리고 있던 천이 흘러내려 <<breasts_ ul>> 드러낸다.
+<<elseif $worn.upper.set is $worn.lower.set>>
+	<<flaunting>> 당신은 <<worn_upper_name_ ul>> 내려 <<breasts_ ul>> 드러낸다.
+<<else>>
+	<<flaunting>> 당신은 <<worn_upper_name_ ul>> 벗고 <<breasts_ ul>> 드러낸다.
+<</if>>
+<<set $worn.upper to clone(setup.clothes.upper[0])>>
+
+<<if $phase is 1>>
+	<br><br>
+<<else>>
+	<<exhibitionism4>>
+<</if>>
+
+<<if $enemyno gte 2>>
+	참관객들은 당신이 가슴을 드러낸 채로 다른 포즈를 취하는 것을 지켜본다.
+<<elseif $enemyno gte 1>>
+	<<personPost "는">> 당신이 가슴을 드러낸 채로 다른 포즈를 취하는 것을 지켜본다.
+<<else>>
+	당신은 가슴을 드러낸 채로 다른 포즈를 취한다.
+<</if>>
+니키는 당신의 가슴과 얼굴에 초점을 맞춰 사진들을 찍는다. <<nnpc_HePost "Niki" "는">> 프로페셔널한 태도를 유지한다. 당신의 뺨이 붉어진다.
+<br><br>
+
+<<link [[다음|Photo Model Topless 2]]>><</link>>
+<br>
+
+:: Photo Model Topless 2
+<<effects>>
+
+<<if $photo.pubfame>>
+	"이 다음에는 속옷만으로 촬영하자." <<nnpc_hePost "Niki" "가">> 당신을 바라보며 말한다. "강요하지는 않을게. 네가 하고 싶지 않다면, 여기서 끝내도 괜찮아."
+<<else>>
+	니키가 멈칫한다. "여기서 마무리하면 되겠네" <<nnpc_hePost "Niki" "가">> 말한다. "하지만 속옷만으로 더 촬영한다면 추가로 <span class="gold">£400</span>를 줄게. 30분만 더 진행하자."
+<</if>>
+<br><br>
+
+<<if $enemyno gte 2>>
+	<<if $photo.blackmail gte 1>>
+		<span class="pink">앉아 있는 <<personPost "는">> 여전히 핸드폰을 들고 당신을 바라보고 있다. <<hisPost "의">> 엄지손가락은 증거를 업로드할 준비가 되어 있다.</span>
+	<<else>>
+		앉아 있는 <<personPost "는">> <<hisPost "의">> 의자에 기대어 앉아 있다, 그리고 <<person2>><<personPost "는">> <<hisPost "의">> 입술을 핥고 있다.<<person1>>
+	<</if>>
+	<br><br>
+<<elseif $enemyno is 1>>
+	<<if $photo.blackmail gte 1>>
+		<span class="pink">앉아 있는 <<personPost "는">> 여전히 핸드폰을 들고 당신을 바라보고 있다. <<hisPost "의">> 엄지손가락은 증거를 업로드할 준비가 되어 있다.</span>
+	<<else>>
+		앉아있는<<personPost "는">> <<hisPost "의">> 의자에 기대어 앉아 있다.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<link [[거절한다|Photo Model Topless Refuse]]>><<set $photo.refused += 1>><</link>>
+<br>
+<<if hasSexStat("exhibitionism", 4)>>
+	<<link [[받아들인다|Photo Model Undies]]>><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<elseif $uncomfortable.prostituting is false>>
+	<<link [[받아들인다|Photo Model Undies]]>><<set $desperateaction to 1>><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<elseif $photo.blackmail gte 1>>
+	<<link [[받아들인다|Photo Model Undies]]>><<trauma 12>><<stress 12>><<set $phase to 1>><</link>><<ggtrauma>><<ggstress>><<glove "Niki">>
+<<elseif $photo.pubfame>>
+	<<link [[받아들인다|Photo Model Undies]]>><<set $desperateaction to "당신은 사진이 필요하다">><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<elseif $earSlime.event.includes("fully expose yourself while working as a model in town")>>
+	<<link [[받아들인다|Photo Model Undies]]>><<set $desperateaction to "당신은 몸을 노출해야만 한다">><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<else>>
+	<span class="blue">당신은 그럴수 있을 만큼 음란하거나 절박하지 않다.</span>
+<</if>>
+<br>
+
+:: Photo Model Undies
+<<effects>>
+
+<<set $photo.time += 30>>
+<<set $photo.money += 400>>
+<<famemodel 10 vid>>
+<<fameexhibitionism 10 vid>>
+<<if playerBellyVisible()>><<famepregnancy `Math.ceil(playerBellySize() / 10)`>><</if>>
+<<npcincr Niki love 1>>
+
+당신은 <<worn_lower_name_ ul>> 아래로 잡아당긴다. "잠깐만." 니키가 말한다. "그 포즈를 유지해 줘." 니키는 몇 가지 다른 각도에서 사진을 찍고, 당신은 <<worn_under_lower_name>>만을 남긴 채로 천을 끝까지 잡아당긴다.
+
+<<if $phase is 1>>
+	<br><br>
+<<else>>
+	<<exhibitionism4>>
+<</if>>
+
+<<set $worn.lower to clone(setup.clothes.lower[0])>>
+
+니키는 당신 주위를 빙글빙글 돌면서 허벅지 사이에 손을 대고 등을 굽히라고 요청한다. 그런 다음 한쪽 다리를 다른 쪽 다리 위로 꼬고 의자에 앉게 한다. 그 후에는 <<bottom_ ul>> 내밀고 걸상에 기대라고 한다.
+
+<<if $enemyno gte 2>>
+	참관객들은 간신히 욕망을 참으며 지켜본다.
+<<elseif $enemyno gte 1>>
+	<<personPost "는">> 간신히 욕망을 참으며 지켜본다.
+<</if>>
+<br><br>
+
+<<if $photo.evidence gte 1 and $photo.refused gte 1 and $enemyno gte 2>>
+	<<set $photo.refused to 0>>
+	"거의 다 됐어." <<hePost "가">> 말한다. "사무실에 필요한게 있어서, 금방 다시 돌아올게." <<nnpc_HePost "Niki" "는">> 방을 떠나면서 작은 카메라는 가져갔지만 삼각대의 카메라는 그대로 둔다.
+	<br><br>
+
+	<<link [[다음|Photo Model Assault]]>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Photo Model Undies 2]]>><</link>>
+	<br>
+<</if>>
+
+:: Photo Model Undies 2
+<<effects>>
+
+<<if $photo.pubfame>>
+	니키는 결과물을 살펴본다. "곧 있으면 끝날 거야. 혹시 <<worn_under_lower_name_ ul>> 벗고 촬영한다면, 그 사진을 줄게."
+<<else>>
+	니키는 결과물을 살펴본다. "혹시 <<worn_under_lower_name_ ul>> 벗고 촬영해도 될까? <<nnpc_hePost "Niki" "가">> 당신을 바라보지 않고 묻는다. "그러면 추가 모델료 <span class="gold">£500</span>를 줄게. 30분 정도 더 걸릴 거야."
+<</if>>
+
+<br><br>
+<<if $enemyno gte 2>>
+	참관객들은 가장자리에 앉아 있다.
+	<br><br>
+<<elseif $enemyno is 1>>
+	<<personPost "는">> 가장자리에 앉아 있다.
+	<br><br>
+<</if>>
+
+<<if $photo.blackmail is 1>>
+	이것은 <<personPost "가">> 당신을 협박하는데 쓰는 증거보다도 더 과할 것 같다.
+	<br><br>
+<<elseif $photo.blackmail is 2>>
+	<<personPost "는">> 니키의 뒤에 앉아서 <<hisPost "의">> 핸드폰을 당신 얼굴에 들이댄다. <span class="pink">당신은 영상에서 눈을 돌린다.</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+<</if>>
+
+<<link [[거절한다|Photo Model Topless Refuse]]>><<set $photo.refused += 1>><</link>>
+<br>
+<<if hasSexStat("exhibitionism", 5)>>
+	<<link [[받아들인다|Photo Model Nude]]>><<set $phase to 0>><</link>><<exhibitionist5>><<glove "Niki">>
+<<elseif $uncomfortable.prostituting is false>>
+	<<link [[받아들인다|Photo Model Nude]]>><<set $desperateaction to 1>><<set $phase to 0>><</link>><<exhibitionist5>><<glove "Niki">>
+<<elseif $photo.blackmail gte 1>>
+	<<link [[받아들인다|Photo Model Nude]]>><<trauma 12>><<stress 12>><<set $phase to 1>><</link>><<ggtrauma>><<ggstress>><<glove "Niki">>
+<<elseif $photo.pubfame>>
+	<<link [[받아들인다|Photo Model Nude]]>><<set $desperateaction to "당신은 사진이 필요하다">><<set $phase to 0>><</link>><<exhibitionist5>><<glove "Niki">>
+<<elseif $earSlime.event.includes("fully expose yourself while working as a model in town")>>
+	<<link [[받아들인다|Photo Model Nude]]>><<set $desperateaction to "당신은 몸을 노출해야만 한다">><<set $phase to 0>><</link>><<exhibitionist5>><<glove "Niki">>
+<<else>>
+	<span class="blue">당신은 그럴수 있을 만큼 음란하거나 절박하지 않다.</span>
+<</if>>
+<br>
+
+
+:: Photo Model Nude
+<<effects>>
+
+<<set $photo.time += 30>>
+<<set $photo.money += 500>>
+<<famemodel 10 vid>>
+<<fameexhibitionism 10 vid>>
+<<if playerBellyVisible()>><<famepregnancy `Math.ceil(playerBellySize() / 10)`>><</if>>
+<<npcincr Niki love 1>>
+
+<<worn_under_lower_name_ i>> 벗겨져 다리 아래로 당신의 <<genitalsPost "가">> 드러나자 니키의 카메라가 찰칵 하고 플래쉬를 터뜨린다. 당신은 잠깐 동안 발목에 천을 감은 채로 포즈를 잡은 후 발로 차서 아예 벗어버린다.
+
+<<if $enemyno gte 2>>
+	<<personPost "는">> <<npcUndressText $NPCList[$index] "lower" "self" "but">>,
+	하지만 옆에 앉은 <<person2>><<personPost "가">> <<person1>><<himPost "를">> 붙잡고는, 니키의 등에 턱짓을 한다.
+<<elseif $enemyno is 1>>
+	<<personPost "는">> <<npcUndressText $NPCList[$index] "lower" "self" "but">>,
+	<<himselfPost "를">> 자제하고는, 니키의 뒷모습에 신경질적인 시선을 던진다
+<</if>>
+
+<<if $phase is 1>>
+	<br><br>
+<<else>>
+	<<exhibitionism5>>
+<</if>>
+
+<<set $photo.nude_footage to 1>>
+<<set $worn.under_upper to clone(setup.clothes.under_upper[0])>>
+<<set $worn.under_lower to clone(setup.clothes.under_lower[0])>>
+
+당신은 몸을 돌려 니키가 다른 각도에서 촬영하게 한다. <<nnpc_HePost "Niki" "의">> 움직임이 빨라진다. 위쪽의 하얀 조명이 <<nnpc_hisPost "Niki" "의">> 이마에 맺힌 땀방울을 반짝이게 한다.
+<<if $earSlime.event.includes("fully expose yourself while working as a model in town")>>
+	<<set $earSlime.event to "">>
+	<span class="green">귓속 슬라임이 당신이 노출하라는 명령을 이행한 것에 기뻐하고 있다.</span>
+	<<pain -4>><<stress -6>><<trauma -12>><<lpain>><<lltrauma>><<lstress>>
+<</if>>
+<br><br>
+
+마침내 니키는 한숨을 쉬며 물러난다. "고마워." <<nnpc_hePost "Niki" "가">> 숨을 헐떡인다. "이제 옷 갈아입어도 돼." 당신은 스크린 뒤쪽으로 걸어간다.
+<br><br>
+
+<<link [[다음|Photo Model Topless End]]>><<set $phase to 1>><</link>>
+<br>
+
+
+:: Photo Model Assault
+<<effects>>
+
+니키는 <<nnpc_himPost "Niki">> 뒤의 두꺼운 문을 닫는다.
+<<if $enemyno gte 3>>
+	참관객들은 문을 잠시 바라보더니 <span class="pink">자리에서 일어나 당신 쪽으로 걸어온다.</span>
+<<else>>
+	The <<fullGroup>> 문을 잠시 바라보더니 <span class="pink">자리에서 일어나 당신 쪽으로 걸어온다.</span>
+<</if>>
+<br><br>
+
+"우리끼리 촬영하는 건 어때?" <<person1>><<personPost "가">> 당신 주위로 다가와 몸을 훑어보며 말한다. <<covered>>
+<br>
+<<person2>><<personPost "가">> 삼각대 카메라에 가까이 다가가 살펴본다. "켜져 있어."
+<br>
+"편하게 가려면 어떻게 해야 하는지 네 스스로도 알고 있지?" <<personPost "가">> 묻는다. <<HePost "는">> 뒤에서 당신의 어깨를 잡고 목 위로 <<his_ yi>> 코를 훑는다.
+<br><br>
+
+<<link [[싸운다|Photo Model Assault Attack]]>><<def 1>><</link>>
+<br>
+<<link [[위협한다|Photo Model Assault Threaten]]>><<def 1>><</link>><<englishdifficulty 1 `500 * $enemyno`>>
+<br>
+<<link [[애원한다|Photo Model Assault Plead]]>><</link>>
+<br>
+
+:: Photo Model Assault Plead
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"그-그러지 마세요." 당신은 말한다. "전 그저 돈이 필요해서 여기 왔을 뿐이예요."
+<<elseif $speech_attitude is "bratty">>
+	"그 손 치우시지." 당신은 말한다. "난 모델을 하기 위해 돈을 받는 거지, 다른 사람이 나를 더듬으라고 받는 것은 아니야."
+<<else>>
+	"전 그냥 돈 벌려고 여기 온 거예요." 당신은 말한다. "상황을 더 악화시키지 마시죠."
+<</if>>
+<br><br>
+
+"오, 충분히 대가를 받게 될거야." <<personPost "가">> 말한다. "너처럼 귀여운 <<girl_ ul>> 따먹는 영상으로 멋지게 입소문을 타게 될 거거든."
+<br><br>
+
+<<link [[다음|Photo Model Blackmail Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+
+
+:: Photo Model Assault Threaten
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"저-저를 해치지 말아주세요." 당신은 말한다. "그러면 니키가 화낼 거예요."
+<<elseif $speech_attitude is "bratty">>
+	"개소리 집어치워." 당신은 말한다. "그리고 니키가 곧 돌아올걸."
+<<else>>
+	"니키가 좋아하진 않을 텐데요." 당신은 경고한다.
+<</if>>
+<br><br>
+<<if $englishSuccess>>
+	<<personPost "는">> 문을 흘끗 노려보더니, <span class="green">당신을 풀어준다.</span> "니키가 항상 딱 붙어서 지켜주진 않을 걸," <<hePost "가">> 그렇게 말하면서 당신의 <<bottom_ ul>> 때리고는 자리로 돌아가 앉는다.
+	<br><br>
+
+	몇 분 후 니키가 돌아와 삼각대 카메라 쪽으로 다가간다.
+	<br><br>
+
+	<<link [[다음|Photo Model Undies 2]]>><</link>>
+	<br>
+<<else>>
+	<span class="red">그 <<personPost "는">> 웃음을 터뜨리고</span>
+	<<if $enemyno gte 3>>
+		다른 사람들과 함께 다가온다.
+	<<else>>
+		<<person2>><<person_ gwa>> 함께 다가온다.
+	<</if>>
+	<br><br>
+
+	<<link [[다음|Photo Model Blackmail Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+
+:: Photo Model Assault Attack
+<<effects>>
+
+당신은 <<personPost "을">> 털어내고 주먹을 날린다. <<HePost "는">> 비틀거리며 물러나서는 <<hisPost "의">> 소매를 걷는다.
+<br><br>
+
+<<link [[다음|Photo Model Blackmail Rape]]>><<set $fightstart to 1>><</link>>
+<br>
+
+:: Photo Model Blackmail Rape
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 50>>
+	<<set $enemyanger += 100>>
+	<<set $enemyhealth -= 150>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+녹화하고 있는 카메라의 표시등이 깜빡인다.
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Photo Model Blackmail Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Photo Model Blackmail Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Photo Model Blackmail Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<set $photo.evidence to 2>>
+	당신은 밖에서 쾅 하는 소리를 듣는다. 그들은 일어서려고 몸부림치는 당신을 남겨둔 채, 자신의 자리로 돌아간다.
+	<br><br>
+	니키가 들어오려 하다가 반쯤 들어온 채로 멈춘다. <<nnpc_HePost "Niki" "는">> 당신의 흐트러진 모습을 확인하고는 <<personPost "를">> 노려본다.
+	<br><br>
+	"나가." <<nnpc_hePost "Niki" "가">> 말한다. <<personPost "는">> 불만을 토하려 하지만, 니키는 단호하게 말을 자른다. "썩 나가라고."
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	"미안해." 니키는 당신과 단 둘이서만 남아 계속한다. "여기서 마무리하자." 니키가 세트를 해체하는 동안 당신은 스크린 뒤쪽으로 걸어간다.
+	<br><br>
+<<else>>
+	문이 열리는 순간 <<personPost "는">> 당신에게서 멀어지며 삼각대 카메라를 넘어뜨린다. 니키가 반쯤 들어온 채로 멈춰서는 그 참상을 확인한다.
+	<br><br>
+	"나가." <<nnpc_hePost "Niki" "가">> 말한다. <<personPost "는">> 불만을 토하려 하지만, 니키는 단호하게 말을 자른다. "썩 나가라고."
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	"미안해." 니키는 당신과 단 둘이서만 남아 계속한다. "여기서 마무리하자." 니키가 세트를 해체하는 동안 당신은 스크린 뒤쪽으로 걸어간다.
+	<br><br>
+
+<</if>>
+
+<<link [[다음|Photo Model Topless End]]>><</link>>

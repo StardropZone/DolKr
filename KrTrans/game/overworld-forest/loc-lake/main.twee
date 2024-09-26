@@ -1,0 +1,1569 @@
+:: Lake Shore
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set _earSlimeEnableSwimwear to true>>
+<<set $forest to 30>><<set $bus to "lakeshore">><<wearoutfit>>
+
+당신은 <<= Weather.isFrozen("lake") ? "얼어붙은 호숫가" : "호숫가">>에 서 있다.
+
+<<if Time.hour gte 15 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>
+	 거기에는 몇몇 사람들이 할로윈 파티를 하고 있다.
+<<elseif $laketeenspresent is 1>>
+	<<if Weather.isFrozen("lake")>>
+		학생들이 주변에서 놀거나, 아이스 스케이팅을 연습하고 있다.
+	<<else>>
+		<<if Time.season isnot "winter">>거기에는 물놀이를 하는 사람이 몇몇 있다. <</if>>몇 명의 학생들이 수영용 부두에 앉아있는 것이 보인다.
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if Time.isWeekEnd()>>
+		호수 건너편 캠핑장의 불꽃에서 희미한 빛이 보인다.
+	<<else>>
+		어두운 물이 보이지 않게 잔물결을 일으킨다.
+	<</if>>
+<<elseif Time.dayState is "dusk" or Time.dayState is "dawn">>
+	<<if Weather.isFrozen("lake")>>
+		햇빛이 얼음에 반사된다.
+	<<else>>
+		모래와 바위에 파도가 부딪혀 깨진다. 맞은편 둑에 곰이 물고기를 잡아먹고 있다.
+	<</if>>
+<<else>>
+	수면에 비친 당신의 얼굴이 보인다.
+	<<if Weather.isFrozen("lake")>>
+		원한다면 수영용 부두까지 걸어갈 수 있다.
+	<<else>>
+		수영용 부두가 물 위에 유유히 올라 있다.
+	<</if>>
+<</if>>
+<<if Weather.precipitation is "rain">>
+	비가 <<= Weather.isFrozen("lake") ? "얼어붙은 수면에서 튀어오르며" : "수면을 치며">> <<= Weather.isFrozen("lake") ? "얼음" : "물">>이 생동감 있게 움직인다.
+<<elseif Weather.precipitation is "snow">>
+	눈이 <<= Weather.isFrozen("lake") ? "얼음 표면에 앉는다" : "냉랭한 물 속으로 떨어져 내린다">>.
+<<elseif Weather.isFrozen("lake")>>
+	얼음은 평온하다.
+<<else>>
+	물은 잔잔하다.
+<</if>>
+<br><br>
+
+<<if $exposed gte 1 and $laketeenspresent is 1>>
+	당신은 <<lewdnessPost "을">> 숨기기 위해 나무 사이에서 몸을 낮춘다.
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1 and !$possessed>>
+	<<eventlake>>
+<<elseif $town_projects.diving is 1 and $exposed lte 0 and !$possessed>>
+	<<set $town_projects.diving to 2>>
+	<<npc Winter>><<person1>>
+	<<if Weather.precipitation is "rain">>
+		윈터 선생님이 물가에 서 있는 게 보인다. 바람이 검은 우산 아래 <<his_ yi>> 회색 머리칼을 살랑이게 하고 있다.
+	<<else>>
+		윈터 선생님이 물가에 서 있는 게 보인다. 바람이 <<his_ yi>> 회색 머리칼을 살랑이게 하고 있다.
+	<</if>>
+	<<He_ nun>> 당신 쪽을 흘끗 바라본다.
+	<<if Time.dayState is "night">>
+		"이 시간에 다른 사람이 있을 줄은 몰랐구나." <<he_ ga>> 말한다.
+	<<elseif Time.schoolDay and Time.hour gte 9 and Time.hour lt 15>>
+		"학교에 있어야 하는 거 아니니?" <<he_ ga>> 묻더니, 씩 웃는다. "생각해보니 내게도 똑같은 질문을 할 수 있겠구나."
+	<<elseif Time.schoolDay>>
+		"다른 사람이 있을 줄은 몰랐구나." <<he_ ga>> 말한다.
+	<<elseif Time.weekDay is 7 or Time.weekDay is 1>>
+		"걱정하지 마라." <<he_ ga>> 말한다. "박물관을 오래 떠나 있지는 않을 거니까."
+	<<else>>
+		"다른 사람이 있을 줄은 몰랐구나." <<he_ ga>> 말한다.
+	<</if>>
+	<br><br>
+
+	<<He>> looks out over the lake.
+	<<if $winterlakeknown is 1>>
+		"호수 아래에 옛 건축물들이 있다고 말했던 거 기억하니?
+	<<else>>
+		"호수 아래에는 옛 건축물들이 있단다.
+	<</if>>
+	아주 오래된 것이야. 풍부한 유산이지. 한때 난 여기에 현장 사무소를 두어 조사를 해볼 계획을 세웠단다. 하지만 내 신청서는 받아들여지지 않더구나."
+	<br><br>
+
+	<<He_ ga>> 마을 방향의 숲 쪽으로 돌아선다. "두서없는 소리를 늘어놓아 미안하구나. 여기서 안전히 있으렴."
+	<br><br>
+
+	<i>당신은 시청에서 현장 사무소에 대해 문의할 수 있습니다.</i>
+	<br><br>
+
+	<<link [[다음|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $town_projects.diving is 3 and $exposed lte 0 and !$possessed>>
+	<<set $town_projects.diving to 4>>
+	<<npc Winter>><<person1>>
+	앞쪽에서 여러 목소리가 들려온다. 여러 사람들이 진녹색 텐트 주변에 강철못을 박고 있다. 윈터 선생님은 멀찍이 떨어진 곳에 서 있다. <<He_ ga>> 당신의 존재를 알아차리고, 빠르게 달려온다.
+	<br><br>
+
+	"고맙구나." <<he_ ga>> <<his_ yi>> 두 손으로 당신의 손을 잡은 채 위아래로 흔들며 말한다. "시장이 나를 개인적으로 불렀단다. 어떤 사람이 내 현장 사무소를 설치할 자금을 기부했다고 말하더구나."
+	<br><br>
+
+	<<earnFeat "Field Work">>
+	<<link [[다음|Lake Shore Diving]]>><</link>>
+	<br>
+<<elseif Time.season isnot "winter" and !Time.isBloodMoon() and numberOfEarSlime() and !$daily.earSlimeStroll and random(0,100) gte 92 and (($exposed lte 1 and earSlimeMakingMundaneRequests()) or ($laketeenspresent isnot 1 and $exposed gte 2 and $earSlime.growth gte 20 - $earSlime.exhibitionism) or ($laketeenspresent is 1 and $exposed gte 2 and $earSlime.growth gte 50 - $earSlime.exhibitionism))>>
+	<<set $daily.earSlimeStroll to true>>
+	<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">당신은 머릿속의 슬라임이 호숫가를 산책하라고 명령하는 것을 느낀다.</span> 응한다면 보답을 할거라 약속<<if $earSlime.startedThreats>>하지만, 따르지 않는다면 어떤 일이 벌어질지 모른다며 협박한다<<else>>한다<</if>>.
+	<br><br>
+	/* Link decreases stress by both the ear slime and taking a stroll */
+	<<link [[복종한다|Lake Stroll]]>>
+		<<pass 60>><<set $earSlimeLakeStroll to true>>
+		<<if $exposed gte 2>>
+			<<arousal 1000>><<rng>>
+			<<if $laketeenspresent is 1>>
+				<<set $phase to 2>>
+			<<else>>
+				<<set $phase to 3>>
+			<</if>>
+		<<else>>
+			<<set $phase to 1>>
+		<</if>>
+		<<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>>
+	<</link>><<gcorruption>><<lpain>><<lltrauma>><<llstress>><<if $exposed gte 2>><<garousal>><</if>>
+	<br>
+	<<if $earSlime.startedThreats>>
+		<<link [[반항한다|Lake Stroll Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<<else>>
+		<<link [[무시한다|Lake Shore]]>><</link>>
+	<</if>>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+
+	<<if clothingInStorage("lakeshore").length lt 1>>
+		옷을 보관할 수 있게 움푹하게 파인 공간이 있는 바위가 있다.
+		<br>
+	<</if>>
+	<<lakeclothes>>
+
+		호수는 당신의 반영을 비추며,
+		<<if Weather.bloodMoon>>
+			핏빛으로 물들어 희미하게 빛나고 있다.
+		<<elseif Time.dayState is 'dawn'>>
+			새벽의 호박색 잔광으로 희미하게 빛나고 있다.
+		<<elseif Time.dayState is 'day'>>
+			그 모습에 어떤 불순물도 없이 희미하게 빛나고 있다.
+		<<elseif Time.dayState is 'dusk'>>
+			황혼의 호박색 잔광으로 희미하게 빛나고 있다.
+		<<else>>
+			그 표면을 달빛이 비추며 희미하게 빛나고 있다.
+		<</if>>
+		<br>
+		<<mirroricon>><<link [[당신의 반영을 확인한다|Lake Shore Mirror]]>><<preMirror>><</link>>
+		<br><br>
+
+		<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>
+			<<socialiseicon "party">><<link [[파티에 동참한다 (0:10)|Lake Halloween Party]]>><<pass 10>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+			<br>
+		<<elseif $laketeenspresent is 1 and $exposed lte 0 and Time.hour isnot 20 and Time.season isnot "winter">>
+			<<socialiseicon>><<link [[어울려 논다 (0:30)|Lake Hang]]>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+			<br>
+		<</if>>
+		<<if Weather.isFrozen("lake")>>
+			<<if $nextPassageCheck is "Lake Shallows Ice">>
+				<span class="nextLink"><<lakeicon>><<link [[걸어라.|Lake Shallows Ice]]>><<pass 2>><</link>></span>
+			<<else>>
+				<<lakeicon>><<link [[얼음 위를 걸어간다 (0:02)|Lake Shallows Ice]]>><<pass 2>><</link>>
+			<</if>>
+			<br>
+		<<else>>
+			<<if $nextPassageCheck is "Lake Shallows">>
+				<span class="nextLink"><<swimicon>><<link [[수영해라.|Lake Shallows]]>><<pass 2>><</link>></span>
+			<<else>>
+				<<swimicon>><<link [[수영한다 (0:02)|Lake Shallows]]>><<pass 2>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+		<<if $town_projects.diving gte 4>>
+			<<if $exposed gte 2>>
+				지금 상태로 고고학 현장 사무소에 가는 것은 좋은 생각이 아닌 것 같다.
+			<<else>>
+				<<lakeicon "field office">><<link [[고고학 현장 사무소 (0:02)|Lake Office]]>><<pass 2>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+		<<if !Weather.isFrozen("lake") and !Time.isBloodMoon()>>
+			<<if $exposed gte 2>>
+				<<if hasSexStat("exhibitionism", 5) and $laketeenspresent is 1>>
+					<<walkicon>><<link [[산책한다 (1:00)|Lake Stroll]]>><<pass 60>><<stress -6>><<arousal 1000>><<rng>><<set $phase to 2>><</link>><<exhibitionist5>><<garousal>><<lstress>>
+					<br>
+				<<elseif hasSexStat("exhibitionism", 4) and $laketeenspresent isnot 1>>
+					<<walkicon>><<link [[산책한다 (1:00)|Lake Stroll]]>><<pass 60>><<stress -6>><<arousal 1000>><<rng>><<set $phase to 3>><</link>><<exhibitionist4>><<garousal>><<lstress>>
+					<br>
+				<</if>>
+			<<else>>
+				<<walkicon>><<link [[산책한다 (1:00)|Lake Stroll]]>><<pass 60>><<stress -6>><<set $phase to 1>><</link>><<lstress>>
+				<br>
+			<</if>>
+		<</if>>
+
+		<<if $debug is 1>>
+			<<ind>><<link [[북쪽 모닥불 구덩이로 간다 (0:10)|Lake Firepit]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<if $earSlime.forcedCommando isnot undefined and $worn.under_lower.name isnot "naked">>
+		<<elseif $town_projects.road gte 4>>
+			<<busicon>><<link [[북쪽 버스 정류장으로 간다|Lake Bus]]>><</link>>
+			<br>
+		<</if>>
+	<<if $nextPassageCheck is "Lake Waterfall">>
+		<span class="nextLink"><<lakeicon "waterfall">><<link [[남쪽 폭포로 간다 (0:10)|Lake Waterfall]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<lakeicon "waterfall">><<link [[남쪽 폭포로 간다 (0:10)|Lake Waterfall]]>><<pass 10>><</link>>
+	<</if>>
+	<br><br>
+	/* Added $exhibitionism due to situations where the player can be soft locked and unsure how best to deal with it */
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked") and hasSexStat("exhibitionism", 3)>>
+		<span class="red">귓속의 슬라임이 <<underwearTypeText "을">> 입은 채 나가는 것을 허락하지 않는다.</span>
+	<<else>>
+		<<foresticon>><<link [[숲 (0:10)|Forest]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>
+
+:: Lake Shore Diving
+<<effects>>
+
+"그럴 것 같지 않아 보여도," 윈터 선생님이 말한다. "이 늙은 뼈다귀들의 온기를 지키는 데는 충분하단다. 네게 한 번 보여주마."
+<br><br>
+
+윈터 선생님이 당신을 텐트 안쪽으로 안내한다. 내부는 꽤나 넓다. 길쭉한 테이블이 늘어서 있고, 덮개로 분리된 공간 근처의 옷걸이에는 잠수복이 걸려 있다. 잠수복은 최근에 사용된 듯이 축축해 보인다.
+<br><br>
+
+"저것들은 전원 케이블에 연결되어 있단다." <<he_ ga>> 말한다. <span class="green">"주중에 학교가 끝나면 여기서 나를 찾을 수 있을 게다."</span>
+<br><br>
+
+<<if Time.dayState is "night">>
+	"빨리 시작하고 싶어 기다릴 수가 없지만, 시간이 늦었구나. 다시 한 번 고맙다고 말하고 싶단다. 정말 시작하고 싶어 못 견디겠어!"
+<<elseif Time.weekDay gte 1 and Time.weekDay lte 5>>
+	<<if Time.schoolDay and Time.hour gte 9 and Time.hour lt 15>>
+		"빨리 시작하고 싶어 기다릴 수가 없지만, 내 학생을 방치해 둘 수는 없겠구나. 다시 한 번 고맙다고 말하고 싶단다. 정말 시작하고 싶어 못 견디겠어!"
+	<<else>>
+		"빨리 시작하고 싶어 기다릴 수가 없지만, 다시 한 번 고맙다고 말하고 싶단다. 정말 시작하고 싶어 못 견디겠어!"
+	<</if>>
+<<else>>
+	<<He_ ga>> 테이블 위에 가방을 올려놓더니, 내용물을 꺼내기 시작한다. "다시 한 번 고맙다고 말하고 싶단다. 정말 시작하고 싶어 못 견디겠어!"
+<</if>>
+<br><br>
+
+<<link [[다음|Lake Office]]>><<endevent>><</link>>
+<br>
+
+:: Lake Office
+<<set $outside to 0>><<effects>>
+
+당신은 호숫가의 고고학 현장 사무소에 있다. 녹색 텐트의 벽이 넓은 내부를 감싸고 있다.
+<<if Time.schoolDay and Time.hour gte 16 and Time.hour lte 20 or !Time.schoolDay and Time.hour gte 6 and Time.hour lte 20>>
+	<<npc Winter>><<person1>>
+	윈터 선생님이 테이블 앞에 앉아, 연구에 몰두하고 있다.
+<</if>>
+<br><br>
+
+<<if (Time.schoolDay and Time.hour gte 16 and Time.hour lte 20 or !Time.schoolDay and Time.hour gte 6 and Time.hour lte 20)>>
+	<<if !$weekly.winterLakeTalk>>
+		<<askicon>><<link [[Ask about Winter's research|Lake Office Ask]]>><</link>>
+		<br>
+	<</if>>
+	<<if $winterLakeTalk is 1 and $bogProgress is 1>>
+		<<ind>><<link [[Tell Winter about the bog|Lake Office Ask Bog]]>><<npcincr Winter love 2>><</link>><<glove>>
+		<br>
+	<</if>>
+<</if>>
+<<getouticon>><<link [[떠난다|Lake Shore]]>><<endevent>><</link>>
+<br>
+
+:: Lake Office Ask
+<<set $outside to 0>><<effects>>
+<<set $winterLakeTalk = ($winterLakeTalk || 0)>>
+<<if $winterLakeTalk is 0>>
+	<<if $speech_attitude is "meek">>
+		"Was... was this worth it? Have you learned anything?"
+	<<elseif $speech_attitude is "bratty">>
+		"So, was this whole project worth the money? Did you learn anything?"
+	<<else>>
+		"Has the office been helpful? Did you learn anything?"
+	<</if>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"H-have you learned anything new?"
+	<<elseif $speech_attitude is "bratty">>
+		"Anything new?"
+	<<else>>
+		"What's new?"
+	<</if>>
+<</if>>
+You ask.
+<br><br>
+
+<<switch $winterLakeTalk>>
+	<<case 0>>
+		<<set $winterLakeTalk to 1>><<set $weekly.winterLakeTalk to true>>
+		<<His>> head tilts slightly. "Normally I wouldn't be so inclined to share new and potentially flawed information, but you're to thank for all of this. I can make an exception." <<npcincr Winter love 1>><<glove>>
+		<br><br>
+
+		"Manmade interference is obvious, even beyond the submerged ruins. Erosion patterns show that the channel leading north towards the town is at least partially artificial. The former natural waterway that leads east became a small brook due to the redirection."
+		<br><br>
+
+		<<He>> pauses for a moment. "We can't place a definitive date, and nothing about the northern waterway exists in the town's records. However, the stagnation caused by the reduced flow may have led to the formation of the bog to the east. <span class="green">One could possibly traverse the dry section of the riverbed to bypass the dense foliage between here and there</span>. I may have more information for you soon, depending on whether or not I can find someone to <span class="blue">scout the brook for me.</span>"
+		<br><br>
+
+		<<if !$brookIntro>>
+			<<set $brookIntro to 1>>
+			<span class="gold">You've discovered the offshoot brook near the waterfall.</span>
+			<br><br>
+		<</if>>
+
+		<<link [[다음|Lake Office]]>><</link>>
+		<br>
+	<<case 1>>
+		<<if $bogProgress gte 2>>
+			<<set $winterLakeTalk to 2>><<set $weekly.winterLakeTalk to true>>
+			<<He>> turns to you. "The lake is fed by a tributary river that forms in the mountain to the west. However, the lake wasn't always here. That much is made obvious by the old ruins. The questions are when, and why? Where did the river lead to before then?"
+			<br><br>
+
+			<<He>> pauses. "I'll be sending a group to take notes on the bog. <span class="green">We finally have some volunteers thanks to your scouting.</span> Come see me in a week, and I may have more for you."
+		<<else>>
+			<<set $weekly.winterLakeTalk to true>>
+			<<He>> frowns. "Afraid not. <span class="blue">I need someone to investigate the brook's path.</span> Until then, we're stuck."
+		<</if>>
+		<br><br>
+
+		<<link [[다음|Lake Office]]>><</link>>
+		<br>
+	<<case 2>>
+		<<set $winterLakeTalk to 3>>
+		<<set $bogTeam to {
+			state: "active",
+			robinKnown: false,
+			robinPresent: false,
+			timer: 0
+		}>>
+		<<He>> nods. "My team has collected samples-"
+		<br><br>
+
+		As if on cue, someone enters the tent. It's Sirris. <<npc Sirris 2>><<person2>> <<He>> drops a large backpack onto the desk beside Winter, smiling. "Branch trimmings, a sketch of the heartwood rings, and a small jar of sap," <<he>> says proudly before smiling at you.
+		<br><br>
+
+		<<npc Niki 3>><<npc Wren 4>>
+		<<run getRobinLocation()>>
+		<<if _robin_location isnot $robinmissing>>
+			<<npc Robin 5>><<set $bogTeam.robinKnown to true>><<set $bogTeam.robinPresent to true>>
+			Two more enter. You first notice Robin shuffling awkwardly and looking downtrodden. <<person5>><<He>> lightens up upon seeing you. "Hey. Winter said <<person1>><<he>> needed help, so I volunteered!"
+			Behind <<person5>><<him>> is a <<person4>><<personsimple>> with <<if $pronoun is "m">>short<<else>>shoulder-length<</if>> hair. There's a pistol holstered on <<his>> belt.
+			<<if ["cards", "letter", "prison", "catsuit"].includes($wren_seen)>>
+				<span class="gold">It's Wren.</span>
+				<br><br>
+
+				"Well, if it isn't my favourite troublemaker," <<he>> says with a grin. <<He>> places a hand on Robin's head, ruffling <<person5>><<his>> hair.
+				<<if $robinromance is 1>>
+					"Never guessed this would be your <<girlfriend>>, Ro." Robin pushes Wren's hand away. The emotion on <<his>> face is hard to read, but you think you catch a mixture of disgust and 'help me'.
+				<<else>>
+					"Never guessed this would be the friend you were telling me all about, Ro." Robin pushes Wren's hand away and takes a step out of reach. The emotion on <<his>> face is hard to read.
+				<</if>>
+			<<else>>
+				<br><br>
+				<<if $robinromance is 1>>
+					"Oh, is this your <<girlfriend>>, Ro? <span class="gold">The name's Wren,</span>" <<he>> says, ruffling Robin's hair as <<he>> looks at you. Robin pushes Wren's hand away. The emotion on <<person5>><<his>> face is hard to read, but you think you catch a mixture of disgust and 'help me'.
+				<<else>>
+					"Oh, is this the friend you were telling me about, Ro? <span class="gold">The name's Wren,</span>" <<he>> says, ruffling Robin's hair as <<he>> looks at you. Robin pushes Wren's hand away and takes a step out of reach. The emotion on <<person5>><<his>> face is hard to read.
+				<</if>>
+			<</if>>
+			Wren frowns, but is cut off by
+		<<else>>
+			Two more enter the tent. You first notice a <<person4>><<personsimple>> with <<if $pronoun is "m">>short<<else>>shoulder-length<</if>> hair. There's a pistol holstered on <<his>> belt.
+			<<if ["cards", "letter", "prison", "catsuit"].includes($wren_seen)>>
+				<span class="gold">It's Wren.</span>
+				<br><br>
+
+				"Well, if it isn't my favourite troublemaker," <<he>> says with a grin.
+			<<else>>
+				"Damn, how much more help are you planning on pulling in, Winter?" <<He>> regards you with a grin. <span class="gold">"The name's Wren."</span>
+			<</if>>
+			<<Hes>> cut off by
+		<</if>>
+		a young <<person3>><<personsimple>> with a stick in <<his>> mouth pushing in, looking down at a camera.
+		<br><br>
+
+		<<if $niki_seen is undefined>>
+			"That's Niki," Sirris says. "A photographer who works in town. When Winter came calling, I thought <<he>> would be interested." Niki acknowledges you with a nod.
+		<<elseif $niki_seen is "adult_shop_opening">>
+			It's Niki, the photographer. "You remember Niki, right?" Sirris asks. "From the opening of the shop." Niki acknowledges you with a nod.
+		<<elseif $niki_seen is "farm">>
+			<span class="red">It's Niki,</span> the photographer from Remy's farm. <<He>> looks alarmed to see you. "That's Niki," Sirris says. "A photographer who works in town. When Winter came calling, I thought <<he>> would be interested." <<gtrauma>><<trauma 6>>
+		<<else>>
+			It's Niki, the photographer. <<He>> acknowledges you with a nod. "That's Niki," Sirris says. "A photographer who works in town. When Winter came calling, I thought <<he>> would be interested."
+		<</if>>
+		<br><br>
+
+		<<set $wren_seen to "winter">>
+		<<set $niki_seen to "winter">>
+
+		<<link [[다음|Lake Office Volunteers]]>><</link>>
+		<br>
+	<<case 3>>
+		"Nothing new, yet. It may be some time before we make any meaningful progress."
+		<br><br>
+
+		<<link [[다음|Lake Office]]>><</link>>
+		<br>
+	<<default>>
+		"Nothing yet," <<he>> says with a hint of regret. "We've hit something of a standstill."
+		<br><br>
+
+		<<link [[다음|Lake Office]]>><</link>>
+		<br>
+<</switch>>
+
+:: Lake Office Ask Bog
+<<set $outside to 0>><<effects>>
+<<set $bogProgress to 2>><<set $weekly.winterLakeTalk to false>>
+<<if $speech_attitude is "meek">>
+	"You were right about that brook, it leads into a scary bog," you say. "It looks dangerous."
+<<elseif $speech_attitude is "bratty">>
+	"You're right on the money about the brook, it leads into a bog," you say. "I went and looked for you. Aren't I sweet?"
+<<else>>
+	"You were right about the brook. It leads into a bog," you say.
+<</if>>
+You also tell <<him>> how it can be safely traversed, and about the one-way drop into the bog.
+<br><br>
+
+You see a smile cross <<his>> face, but only for a moment. "You didn't have to do that. It could have been dangerous. But this is valuable information. Thank you." <<glove>>
+<br><br>
+
+<<He>> pauses. "I'm sure I'll be able to find volunteers now that they won't have to go in completely blind, or go all the way around through the moor."
+<br><br>
+
+<<link [[다음|Lake Office]]>><</link>>
+<br>
+
+:: Lake Office Volunteers
+<<set $outside to 0>><<effects>>
+
+<<person1>>Winter clears <<his>> throat. "Thank you, you <<if $bogTeam.robinKnown>>four<<else>>three<</if>>. You look like you've worked hard today. I appreciate excellence, but remember not to overdo it."
+<<if !$bogTeam.robinKnown>>
+	Winter turns to you. "I had hoped to ask your classmate Robin for aid as well, but I haven't seen <<nnpc_him "Robin">>."
+<</if>>
+<br><br>
+
+The group leaves the tent, saying their goodbyes. "I may ask you to join them on one of their trips in the future. However, to answer your initial question..." <<he>> begins to dig through Sirris' backpack.
+"This lake should not exist. More water drains than is fed into it. The only explanation currently feasible is that the lake is connected to an underground aquifer or aqueduct that feeds it. But the divers have found no such passage."
+<br><br>
+
+<<He>> examines a jar of tree sap. "Patterns of old-growth trees show that the area around the lake was logged heavily. Sirris' current theory is that the lack of sturdy vegetation, combined with an unseasonably warm spring and rapid snowmelt, led to the river bursting its banks and forming a large sinkhole some centuries ago."
+<br><br>
+
+<<He>> continues. "The persistence of such dense vegetation around the brook still eludes me. Perhaps it's an invasive species that requires less water. This is all we've learned as of now."
+
+<<endevent>><<npc Winter>><<person1>>
+<br><br>
+
+<<link [[다음|Lake Office]]>><</link>>
+<br>
+
+:: Lake Shore Mirror
+
+<<effects>>
+<<link [[물러난다|Lake Shore]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><</link>>
+<br>
+<<mirror "reflection">>
+<br><br>
+
+:: Lake Bus
+<<set $outside to 1>><<set $location to "lake">><<set $bus to "lakebus">><<effects>><<lakeeffects>>
+
+당신은 호수 옆의 버스 정류장에 있다. 도시로부터의 길은, 여기서 원형 포장도로로 끝나 있다. 능선 너머로 호수가 보인다.
+<br><br>
+
+<<if $exposed lte 0>>
+	<<busicon>><<link [[버스를 기다린다 (0:02)|Bus]]>><<pass 2>><</link>><br>
+<</if>>
+
+<<lakeicon>><<link [[남쪽 호숫가로 간다|Lake Shore]]>><</link>>
+<br>
+
+:: Lake Waterfall
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 40>><<set $bus to "lakewaterfall">>
+
+당신은 폭포에 있다.
+
+<<if Weather.isFrozen("lake")>>
+	폭포는 얼음의 틈바구니 사이로 호수를 채운다.
+<<elseif $laketeenspresent is 1>>
+	<<set _in to Time.season is "winter" ? "근처" : "안">>
+	학생들 몇몇이 폭포 _in에서 놀고 있다. 다른 사람들은 저 위의 연못 _in에 앉아 있다.
+<<elseif Time.dayState is "night">>
+	달빛 아래에서 폭포는 마치 은색 장막 같다.
+<<else>>
+	바위 위의 연못에서 물이 아래로 흘러내린다. 상쾌한 안개가 피어난다.
+<</if>>
+
+<<if Weather.precipitation is "snow">>
+	눈이 <<= Weather.isFrozen("lake") ? "얼음 표면에 내려앉는다" : "냉랭한 물 속으로 떨어져 내린다">>.
+<<elseif Weather.isFrozen("lake")>>
+	얼음<<= Weather.precipitation is "rain" ? " 위로 냉랭한 빗줄기가 쏟아지고 있다" : "은 고요하다">>.
+<<else>>
+	물은 <<= Weather.precipitation is "rain" ? "비가 수면을 치면서 생동감 있게 움직인다" : "잔잔하다">>.
+<</if>>
+
+<br><br>
+<<if $exposed gte 1 and $laketeenspresent is 1>>
+	<<if hasSexStat("exhibitionism", 5)>>
+		당신은 자세를 낮추고 나무 사이에 숨는다. 당신은 당신의 <<lewdnessPost "을">> 정말 보여 주고 싶지만, 스스로 자제하고 있다.
+	<<else>>
+		당신은 자세를 낮추고 나무 사이에 숨어 당신의 <<lewdnessPost "을">> 보이지 않도록 조심한다.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<elseif !$brookIntro and $historytrait gte 4 and $sciencetrait gte 2 and $tending gte 200 and !$possessed>>
+	<<set $brookIntro to 1>>
+	You let yourself listen to the trickle of water for a moment. Curiosity gets the better of you. You look at the waterfall, and follow the stream that runs off. It slowly but gradually gets weaker as it disappears into a nearly impassible wall of foliage. <span class="green">Nearly.</span>
+	<br><br>
+
+	You remember your science and history lessons. This is an offshoot distributary of the lake. It flows east towards the moor, instead of north towards the ocean. All rivers end somewhere, and this one must flow sharply downwards into the bog between the forest and moor.
+	<br><br>
+
+	<span class="gold">With some care, you could traverse the brook's channel deeper into the forest, and eventually into the bog and moor.</span> <span class="red">But it would be a one-way trip.</span>
+	<br><br>
+
+	<<link [[다음|Lake Waterfall]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+	<<if $pregnancyStats.parasiteDoctorEvents gte 2>>
+		<<investigateicon>><<containersLink>>
+	<</if>>
+	<<if $mason_count gte 2 and !Weather.isFrozen("lake")>>
+		<<lakeicon "pond">><<link [[메이슨의 연못 (0:05)|Mason Pond]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Shore">>
+		<<lakeicon>><span class="nextLink"><<link [[호수.|Lake Shore]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<lakeicon>><<link [[북쪽 호숫가로 간다 (0:10)|Lake Shore]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<lakeicon "fishing">><<link [[남쪽 바위낚시터로 간다 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>
+	<br>
+	<<if $brookIntro gte 1>>
+		<<if $worn.feet.type.includes("heels")>>
+			<span class="red">하이힐을 신고 개울을 건너는 것은 불가능할 것이다.</span>
+		<<else>>
+			<<foresticon "river">><<link [[개울을 따라 동쪽으로 간다 (0:10)|Forest Brook]]>><<pass 10>><<tiredness 4>><</link>><<gtiredness>>
+		<</if>>
+		<br>
+	<</if>>
+	<br>
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked") and hasSexStat("exhibitionism", 3)>>
+		<span class="red">귓속의 슬라임이 <<underwearTypeText "을">> 입은 채 나가는 것을 허락하지 않는다.</span>
+	<<else>>
+		<<foresticon>><<link [[숲 (0:10)|Forest]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>
+
+:: Lake Fishing Rock
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 50>><<set $bus to "lakefishingrock">>
+당신은 바위낚시터에 있다.
+<<if $laketeenspresent is 1>>
+	사람들이 <<= Weather.isFrozen("lake") ? "얼어붙은 호수 반대편에 보인다" : "호수 반대편에 보인다. 물고기가 벌레를 잡아먹기 위해 수면 위로 뛰어오른다. 주변 나무들은 불길하게 생겼지만, 분위기는 평화롭다">>.
+<<elseif Time.dayState is "night">>
+	어두운 물이 <<= Weather.isFrozen("lake") ? "얼음" : "호수의 수면">> 아래에서 보이지 않게 잔물결을 일으킨다.
+<<elseif Time.dayState is "dusk" or Time.dayState is "dawn">>
+	<<= Weather.isFrozen("lake") ? "어두운 불빛에 호수의 얼음이 반짝인다" : "물고기가 벌레를 잡아먹기 위해 수면 위로 뛰어오른다">>. 주변 나무들은 불길하게 생겼지만, 분위기는 평화롭다.
+<<else>>
+	여기에서 당신은 호수 전체를 볼 수 있다. 당신은 물고기들이 <<= Weather.isFrozen("lake") ? "얼음 아래에서" : "물 속에서">> 헤엄치는 것을 본다.
+<</if>>
+<<if Weather.isFrozen("lake")>>
+	<<= Weather.precipitation is "snow" ? "눈이 얼음 위에 내려앉는다" : "얼음은 고요하다">>.
+<<else>>
+	물은 <<= Weather.precipitation is "rain" ? "비가 수면을 치면서 생동감 있게 움직인다" : "잔잔하다">>.
+<</if>>
+<br><br>
+
+<<if $exposed gte 1 and $laketeenspresent is 1>>
+	<<if hasSexStat("exhibitionism", 5)>>
+		당신은 자세를 낮추고 나무 사이에 숨는다. 당신은 당신의 <<lewdnessPost "을">> 정말 보여 주고 싶지만, 스스로 자제하고 있다.
+	<<else>>
+		당신은 자세를 낮추고 나무 사이에 숨어 당신의 <<lewdnessPost "을">> 보이지 않도록 조심한다.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+	<<lakeicon "meditate">><<link [[명상한다|Lake Meditate]]>><<set $phase to 1>><</link>>
+	<br>
+	<<if $nextPassageCheck is "Lake Waterfall">>
+		<<lakeicon>><span class="nextLink"><<link [[호수.|Lake Waterfall]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<lakeicon "waterfall">><<link [[북쪽 폭포로 간다 (0:10)|Lake Waterfall]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<lakeicon "campfire">><<link [[남쪽 캠핑장으로 간다 (0:20)|Lake Campsite]]>><<pass 20>><</link>>
+	<br><br>
+
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked") and hasSexStat("exhibitionism", 3)>>
+		<span class="red">귓속의 슬라임이 <<underwearTypeText "을">> 입은 채 나가는 것을 허락하지 않는다.</span>
+	<<else>>
+		<<foresticon>><<link [[숲 (0:10)|Forest]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>
+
+:: Lake Firepit
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 30>><<set $bus to "lakefirepit">>
+
+당신은 모닥불 구덩이에 있다.
+<<if $laketeenspresent is 1>>
+	몇몇 학생들이 돌 벤치에 둘러앉아 있다. <<= Weather.isFrozen("lake") ? "다른 사람들은 근처 빙판에서 스케이트를 타려고 하고 있다" : "당신은 몇몇 사람들이 아래 기슭에서 첨벙거리는 것을 볼 수 있다">>.
+<<elseif Time.dayState is "night">>
+	<<if $laketeensfire is 1>>
+		사람들이 모닥불 주위에 앉아 그것이 타는 것을 보며, 대화하거나 술을 마시고 있다. 호수의 <<= Weather.isFrozen("lake") ? "얼음" : "표면">>에 불이 반사되는 모습은 거의 매혹적이다.
+	<<else>>
+		어두운 물이 호수의 <<= Weather.isFrozen("lake") ? "얼음" : "표면">> 아래에서 보이지 않게 잔물결을 일으킨다.
+	<</if>>
+<<else>>
+	구덩이를 둘러싸고 돌 벤치가 원형으로 배치되어 있다.
+<</if>>
+<<if Weather.isFrozen("lake")>>
+	<<= Weather.precipitation is "snow" ? "눈이 아래의 얼음에 내려앉는다" : "얼음은 고요하다">>.
+<<else>>
+	물은 <<= Weather.precipitation is "rain" ? "비가 수면을 치면서 생동감 있게 움직인다" : "잔잔하다">>.
+<</if>>
+<br><br>
+
+<<if $exposed gte 1 and ($laketeenspresent is 1 or $laketeensfire is 1)>>
+	<<if hasSexStat("exhibitionism", 5)>>
+		당신은 자세를 낮추고 나무 사이에 숨는다. 당신은 당신의 <<lewdnessPost "을">> 정말 보여 주고 싶지만, 스스로 자제하고 있다.
+	<<else>>
+		당신은 자세를 낮추고 나무 사이에 숨어 당신의 <<lewdnessPost "을">> 보이지 않도록 조심한다.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "lake" `$laketeenspresent isnot 1`>>
+	<</if>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+	<<link [[남쪽 호숫가로 간다 (0:10)|Lake Shore]]>><<pass 10>><</link>>
+	<br><br>
+
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked") and hasSexStat("exhibitionism", 3)>>
+		<span class="red">귓속의 슬라임이 <<underwearTypeText "을">> 입은 채 나가는 것을 허락하지 않는다.</span>
+	<<else>>
+		<<foresticon>><<link [[숲 (0:10)|Forest]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>
+
+:: Lake Campsite
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 50>><<set $bus to "lakecampsite">>
+
+당신은 캠핑장에 있다.
+<<if Time.dayState is "night">>
+	<<if Weather.precipitation is "none" and Time.hour gte 18 and $daily.lakeCouple isnot 1>>
+		작은 불 옆에서 연인이 서로 포옹하고 있다. 근처에는 작은 텐트가 세워져 있다.
+	<<elseif Weather.precipitation is "rain" or Weather.precipitation is "snow">>
+		빈터 가운데에 불 꺼진 모닥불이 놓여 있다. <<weather_ ga `Weather.precipitation`>> 야영객들을 쫓아 낸 모양이다.
+	<<else>>
+		 불이 텐트 옆에서 타오른다.
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	최근에 사용되었던 것 같다.
+<<else>>
+	빈터 가운데에 불 꺼진 모닥불이 놓여 있다.
+<</if>>
+<br><br>
+
+<<if Weather.precipitation is "none" and Time.hour gte 18 and $exposed gte 1 and $daily.lakeCouple isnot 1>>
+	<<if hasSexStat("exhibitionism", 5)>>
+		당신은 자세를 낮추고 나무 사이에 숨는다. 당신은 당신의 <<lewdnessPost "을">> 정말 보여 주고 싶지만, 스스로 자제하고 있다.
+	<<else>>
+		당신은 자세를 낮추고 나무 사이에 숨어 당신의 <<lewdnessPost "을">> 보이지 않도록 조심한다.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "campsite">>
+	<</if>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+	<<if Weather.precipitation is "none" and Time.hour gte 18 and $exposed lte 0 and $daily.lakeCouple isnot 1>>
+		<<ind>><<link [[연인에게 다가간다|Lake Couple]]>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Fishing Rock">>
+		<<lakeicon>><span class="nextLink"><<link [[호수.|Lake Fishing Rock]]>><</link>></span>
+	<<else>>
+		<<lakeicon "fishing">><<link [[북쪽 바위낚시터로 간다 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>
+	<</if>>
+	<br><br>
+
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked") and hasSexStat("exhibitionism", 3)>>
+		<span class="red">귓속의 슬라임이 <<underwearTypeText "을">> 입은 채 나가는 것을 허락하지 않는다.</span>
+	<<else>>
+		<<foresticon>><<link [[숲 (0:10)|Forest]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>
+
+:: Lake Shallows
+
+<<set $outside to 1>><<set $location to "lake">><<set $bus to "lakeshallows">><<water>><<effects>><<lakeeffects>>
+<<if $laketeenspresent is 1>>
+	당신은 뭍 근처 호수에서 수영을 한다. 호숫가는 활기가 넘친다. <<if Time.season isnot "winter">>사람들이 모래와 물에서 놀고 있다.<</if>>
+<<else>>
+	<<if Weather.precipitation is "rain">>
+		당신은 뭍 근처 호수에서 수영을 한다. 빗줄기가 숲의 소리를 잠식한다.
+	<<else>>
+		당신은 뭍 근처 호수에서 수영을 한다. 오늘 호숫가엔 사람이 한 명도 없다. 숲의 소리가 대기를 채운다.
+	<</if>>
+<</if>>
+<<if !Time.schoolDay and Weather.precipitation is "rain" and Time.dayState is "day">>
+	누군가 부두를 지나쳐 더 멀리 헤엄쳐 나가고 있다.
+<</if>>
+<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
+	연꽃이 당신 옆에 떠 있다.
+<</if>>
+<br><br>
+
+<<if $laketeenspresent is 1 and $exposed gte 1>>
+	<<if hasSexStat("exhibitionism", 5)>>
+		당신은 물 속에 몸을 숨긴다. 당신은 당신의 <<lewdnessPost "을">> 정말로 보여주고 싶지만, 스스로 자제하고 몸을 가릴 만한 것을 찾는다.
+	<<else>>
+		당신은 물 속에 숨어 당신의 <<lewdnessPost "을">> 보이지 않게 숨긴다. 가릴만한 것을 찾아야 할 것이다.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<if $lakeswim is 1>>
+	<<set $lakeswim to 0>>
+	당신은 호수에서 수영 연습을 한다.
+	<<if Weather.dayState is "night">>
+		<<if Weather.precipitation is "rain">>
+			어두운 물이 떨어지는 빗방울에 춤춘다. 무섭긴 하지만, 재밌어 보이기도 한다.
+		<<else>>
+			어두운 물은 고요하다.
+		<</if>>
+	<<elseif Weather.dayState is "dusk">>
+		<<if Weather.precipitation is "rain">>
+			비가 시원한 물을 뒤흔든다.
+		<<else>>
+			나무 너머로 해가 지며, 물 위에 분신을 남긴다.
+		<</if>>
+	<<elseif Weather.dayState is "dawn">>
+		<<if Weather.precipitation is "rain">>
+			비가 시원한 물을 뒤흔든다.
+		<<else>>
+			아침 해가 나무 너머로 떠오르며, 물 위에 분신을 남긴다.
+		<</if>>
+	<<else>>
+		<<if Weather.precipitation is "rain">>
+			비가 따뜻한 물을 뒤흔든다.
+		<<else>>
+			물은 따뜻하고 고요하다.
+		<</if>>
+	<</if>>
+	<<physique 3>><<swimmingskilluse>><<pass 30>>
+	<br><br>
+<</if>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	당신은 즉석으로 갈대와 백합을 엮어 가슴에 두른다. 약하고 노출이 심하며, 부수지 않고는 벗기 어려울 것 같지만, 아무것도 없는 것보다는 낫다.
+	<<plantupper>>
+	<br><br>
+	<<if $rng gte 91 and $parasite.nipples.name is undefined and $parasitedisable is "f">>
+		당신의 만족감은 <<nipplesPost>>에 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 옷을 들어올린다. 두 마리의 작고 부드러운 무척추동물이 당신의 가슴에 달라붙어 있다. 그들은 수유하는 것처럼 당신의 젖꼭지를 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
+		<<parasite nipples urchin>><<garousal>><<arousal 600 "breasts">>
+		<br><br>
+	<</if>>
+	<<exposure>>
+<</if>>
+<<if $phase is 2>>
+	<<set $phase to 0>>
+	당신은 즉석으로 갈대와 백합을 엮어 허리에 두른다. 약하고 노출이 심하며, 부수지 않고는 벗기 어려울 것 같지만, 아무것도 없는 것보다는 낫다.
+	<<plantlower>>
+	<br><br>
+	<<if $parasite.penis.name is "parasite" or $parasite.clit.name is "parasite">>
+		/* Prevents the 2 types of parasites from interacting */
+	<<elseif $rng gte 91 and $parasite.penis.name is undefined and $player.penisExist and $parasitedisable is "f" and !playerChastity("penis")>>
+		당신의 만족감은 <<penisPost "에">> 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 스커트를 들어올린다. 작고 부드러운 무척추동물이 달라붙어 있다. 그것은 젖을 빠는 것처럼 당신을 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
+		<<parasite penis urchin>><<garousal>><<arousal 600 "genitals">>
+		<br><br>
+	<<elseif $rng gte 91 and $parasite.clit.name is undefined and $player.vaginaExist and $parasitedisable is "f" and !playerChastity("hidden") and !$player.penisExist>>
+		당신의 만족감은 <<pussyPost>>에 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 스커트를 들어올린다. 작고 부드러운 무척추동물이 당신의 클리토리스에 달라붙어 있다. 그것은 젖을 빠는 것처럼 당신을 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
+		<<parasite clit urchin>><<garousal>><<arousal 600 "genitals">>
+		<br><br>
+	<</if>>
+	<<exposure>>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
+	<<eventlakewater>>
+<<else>>
+	<<swimicon "back">><<link [[수영 연습을 한다 (0:30)|Lake Shallows]]>><<stress -6>><<tiredness 6>><<set $lakeswim to 1>><<slimeEventEnd "swimming">><</link>><<gswimming>><<lstress>><<gtiredness>>
+	<br>
+	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1
+	or $worn.upper.exposed gte 2 and $underupperwetstage gte 3
+	or $upperwetstage gte 3 and $worn.under_upper.exposed gte 1
+	or $upperwetstage gte 3 and $underupperwetstage gte 3>>
+		<<beachicon "seaweed">><<link [[식물로 상의을 만들어 입는다 (0:20)|Lake Shallows]]>><<pass 20>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1
+	or $worn.lower.exposed gte 2 and $underlowerwetstage gte 3
+	or $lowerwetstage gte 3 and $worn.under_lower.exposed gte 1
+	or $lowerwetstage gte 3 and $underlowerwetstage gte 3>>
+		<<beachicon "seaweed">><<link [[식물로 스커트를 만들어 입는다 (0:20)|Lake Shallows]]>><<pass 20>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+	<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
+		<<icon "tending/lotus.png">> <<link [[씨앗을 찾는다 (0:30)|Lake Lotus]]>><<set $plants_known.push("lotus")>><<pass 30>><<tending 6>><</link>><<gtending>>
+		<br>
+	<</if>>
+	<<if $exposed gte 1 and $laketeenspresent is 1>>
+		<br>
+	<<elseif $debug is 1>>
+		<<lakeicon "dock">><<link [[부두까지 헤엄친다 (0:10)|Lake Dock]]>><<pass 10>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Depths">>
+		<span class="nextLink"><<link [[더 멀리.|Lake Depths]]>><<pass 12>><</link>></span>
+	<<else>>
+		<<swimicon>><<link [[더 멀리 헤엄친다 (0:12)|Lake Depths]]>><<pass 12>><</link>>
+	<</if>>
+	<br>
+	<<if $exposed gte 1 and $laketeenspresent is 1>>
+		<<if $exposed gte 2 and hasSexStat("exhibitionism", 5)>>
+			<<lakeicon>><<link [[헐벗은 상태로 물에서 나온다 (0:02)|Lake Shore Exposed]]>><<set $phase to 0>><<pass 2>><</link>><<exhibitionist5>>
+		<<elseif $exposed gte 1 and hasSexStat("exhibitionism", 4)>>
+			<<lakeicon>><<link [[헐벗은 상태로 물에서 나온다 (0:02)|Lake Shore Exposed]]>><<set $phase to 1>><<pass 2>><</link>><<exhibitionist4>>
+		<</if>>
+	<<else>>
+		<<lakeicon>><<link [[호숫가 (0:02)|Lake Shore]]>><<pass 2>><</link>>
+		<br>
+	<</if>>
+	<<set $eventskip to 0>>
+<</if>>
+
+:: Lake Shore Exposed
+<<effects>>
+<<fameschoolex 5>>
+<<generatey1>><<generatey2>>
+<<if ($phase is 0 and ($uncomfortable.nude is false) or ($phase is 1 and $uncomfortable.underwear is false))>>
+	In a moment of daring, you casually emerge from the lake despite your <<lewdness>>. <<flaunting>> you stroll right past a group of students.
+	It takes a moment for anyone to notice, but eventually a <<person1>><<person>> gasps and points at you, drawing the attention of several more.
+	<br><br>
+
+	A few avert their eyes in embarrassment, but many more have their eyes glued to you as you stride over to the rocky alcove.
+	A <<person2>><<person>> especially takes an interest in you, but seems to hesitate before doing anything. You decide to increase your pace.
+	<br><br>
+
+	You sit by the rocky alcove, just out of sight. You wonder how many are still looking in your direction.
+<<else>>
+	In a moment of daring, you emerge from the lake despite your <<lewdness>>. You run right past a group of students, attempting to cover yourself however you can.
+	A <<person1>><<person>> points and laughs as you run, drawing the attention of several more. <<status -10>><<lcool>>
+	<br><br>
+
+	A few avert their eyes in embarrassment, but many more have their eyes glued to you as you stride over to the rocky alcove.
+	A <<person2>><<person>> especially takes an interest in you, and for a moment, you think <<hes>> going to chase you. You increase your pace.
+	<br><br>
+
+	You sit by the rocky alcove, just out of sight. You wonder how many are still looking in your direction.
+<</if>>
+<<if $phase is 0>>
+	<<exhibitionism5>>
+<<else>>
+	<<exhibitionism4>>
+<</if>>
+<<link [[다음|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Lake Shallows Ice
+<<effects>>
+
+<<set $outside to 1>><<set $location to "lake">><<set $bus to "lakeshallows">><<effects>><<lakeeffects>>
+<<if $laketeenspresent is 1>>
+	당신은 호숫가 근처 얼어붙은 호수 위에 서 있다. 학생들이 근처에서 아이스 스케이팅을 연습한다.
+<<else>>
+	<<if Weather.precipitation is "snow">>
+		당신은 호숫가 근처 얼어붙은 호수 위에 서 있다. 눈이 얼음을 덮어서, 당신의 걸음을 부드럽게 해 준다.
+	<<else>>
+		당신은 호숫가 근처 얼어붙은 호수 위에 홀로 서 있다. 숲의 소리가 대기를 채운다.
+	<</if>>
+<</if>>
+<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
+	당신은 연꽃이 얼음 안에 갇혀있는 것을 본다.
+<</if>>
+<br><br>
+
+<<if $laketeenspresent is 1 and $exposed gte 1>>
+	숨을 곳이 없다. <<covered>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
+	<<eventlakeice>>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+
+	<<lakeicon "skate">><<link [[스케이트를 탄다 (0:30)|Lake Skate]]>><<pass 30>><<tiredness 5>><<danceskill 5>><</link>><<gtiredness>><<gdanceskill>>
+	<br>
+	<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
+		<<icon "tending/lotus.png">> <<link [[씨앗을 찾는다 (0:30)|Lake Lotus Ice]]>><<set $plants_known.push("lotus")>><<pass 30>><<tending 6>><</link>><<gtending>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Depths Ice">>
+		<<ind>><span class="nextLink"><<link [[더 멀리 나간다 (0:12)|Lake Depths Ice]]>><<pass 12>><</link>></span>
+	<<else>>
+		<<getinicon>><<link [[더 멀리 걸어간다 (0:12)|Lake Depths Ice]]>><<pass 12>><</link>>
+	<</if>>
+	<br>
+	<<lakeicon>><<link [[호숫가 (0:02)|Lake Shore]]>><<pass 2>><</link>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>
+
+:: Lake Lotus
+<<effects>>
+
+당신은 연꽃 사이에서 헤엄치며, 씨앗을 모은다. <span class="gold">이제 당신은 <<icon "tending/lotus.png">> 연꽃을 키울 수 있다.</span> <i>연꽃은 비싸지만, 키우기 위해 특별한 환경이 필요합니다.</i>
+<br><br>
+
+<<link [[다음|Lake Shallows]]>><</link>>
+<br>
+
+:: Lake Lotus Ice
+<<effects>>
+
+당신은 연꽃을 얼음에서 꺼내며, 씨앗을 모은다. <span class="gold">이제 당신은 <<icon "tending/lotus.png">> 연꽃을 키울 수 있다.</span> <i>연꽃은 비싸지만, 키우기 위해 특별한 환경이 필요합니다.</i>
+<br><br>
+
+<<link [[다음|Lake Shallows Ice]]>><</link>>
+<br>
+
+:: Lake Depths
+
+<<set $outside to 1>><<set $location to "lake">><<set $bus to "lakedepths">><<water>><<effects>><<lakeeffects>>
+<<if $laketeenspresent is 1>>
+	당신은 부두 근처 호수 한 가운데에서 헤엄치고 있다. 몇몇 학생들이 주변에서 모여 놀고 있는 것이 보인다.
+<<else>>
+	<<if Weather.precipitation is "rain">>
+		당신은 뭍 근처 호수에서 수영을 한다. 빗줄기가 너무 굵어 뭍이 보이지 않는다. 끝없는 폭우가 당신을 둘러싼다.
+	<<else>>
+		당신은 부두 근처 호수 한 가운데에서 헤엄치고 있다.
+	<</if>>
+<</if>>
+<<if !Time.schoolDay and Weather.precipitation is "rain" and Time.dayState is "day">>
+	<span class="lblue">메이슨이 근처에서 수영하고 있다.</span>
+<</if>>
+<br><br>
+
+<<if $laketeenspresent is 1 and $exposed gte 1>>
+	<<if hasSexStat("exhibitionism", 5)>>
+		당신은 물 속에 몸을 숨긴다. 당신은 당신의 <<lewdnessPost "을">> 정말로 보여주고 싶지만, 스스로 자제하고 몸을 가릴 만한 것을 찾는다.
+	<<else>>
+		당신은 물 속에 숨어 당신의 <<lewdnessPost "을">> 보이지 않게 숨긴다. 가릴만한 것을 찾아야 할 것이다.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<if $lakeswim is 1>>
+	<<set $lakeswim to 0>>
+	당신은 호수에서 수영 연습을 한다.
+	<<if Weather.dayState is "night">>
+		<<if Weather.precipitation is "rain">>
+			어두운 물이 떨어지는 빗방울에 춤춘다. 무섭긴 하지만, 재밌어 보이기도 한다.
+		<<else>>
+			어두운 물은 고요하다.
+		<</if>>
+	<<elseif Weather.dayState is "dusk">>
+		<<if Weather.precipitation is "rain">>
+			비가 시원한 물을 뒤흔든다.
+		<<else>>
+			저녁 해가 나무 너머로 지며, 물 위에 분신을 남긴다.
+		<</if>>
+	<<elseif Weather.dayState is "dawn">>
+		<<if Weather.precipitation is "rain">>
+			비가 시원한 물을 뒤흔든다.
+		<<else>>
+			아침 해가 나무 너머로 떠오르며, 물 위에 분신을 남긴다.
+		<</if>>
+	<<else>>
+		<<if Weather.precipitation is "rain">>
+			비가 따뜻한 물을 뒤흔든다.
+		<<else>>
+			물은 따뜻하고 고요하다.
+		<</if>>
+	<</if>>
+	<<physique 3>><<swimmingskilluse>><<pass 30>>
+	<br><br>
+<</if>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	당신은 즉석으로 갈대와 백합을 엮어 가슴에 두른다. 약하고 노출이 심하며, 부수지 않고는 벗기 어려울 것 같지만, 아무것도 없는 것보다는 낫다.
+	<<plantupper>>
+	<br><br>
+	<<if $rng gte 91 and $parasite.nipples.name is undefined and $parasitedisable is "f">>
+		당신의 만족감은 <<nipplesPost>>에 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 옷을 들어올린다. 두 마리의 작고 부드러운 무척추동물이 당신의 가슴에 달라붙었다. 그들은 수유하는 것처럼 당신의 젖꼭지를 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
+		<<parasite nipples urchin>><<garousal>><<arousal 600 "breasts">>
+		<br><br>
+	<</if>>
+<</if>>
+<<if $phase is 2>>
+	<<set $phase to 0>>
+	당신은 즉석으로 갈대와 백합을 엮어 허리에 두른다. 약하고 노출이 심하며, 부수지 않고는 벗기 어려울 것 같지만, 아무것도 없는 것보다는 낫다.
+	<<plantlower>>
+	<br><br>
+	<<if $parasite.penis.name is "parasite" or $parasite.clit.name is "parasite">>
+		/* Prevents the 2 types of parasites from interacting */
+	<<elseif $rng gte 91 and $parasite.penis.name is undefined and $player.penisExist and $parasitedisable is "f" and !playerChastity("penis")>>
+		당신의 만족감은 <<penisPost "에">> 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 스커트를 들어올린다. 작고 부드러운 무척추동물이 달라붙어 있다. 그것은 젖을 빠는 것처럼 당신을 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
+		<<parasite penis urchin>><<garousal>><<arousal 600 "genitals">>
+		<br><br>
+	<<elseif $rng gte 91 and $parasite.clit.name is undefined and $player.vaginaExist and $parasitedisable is "f" and !playerChastity("hidden")>>
+		당신의 만족감은 <<pussyPost>>에 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 스커트를 들어올린다. 작고 부드러운 무척추동물이 당신의 클리토리스에 달라붙어 있다. 그것은 젖을 빠는 것처럼 당신을 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
+		<<parasite clit urchin>><<garousal>><<arousal 600 "genitals">>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - ($allure + 1000)) and $eventskip is 0 and $lakesurface is 1>>
+	<span class="purple">저 깊은 곳에서 무언가 당신을 따라왔다.</span> <<eventlakewater>>
+<<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
+	<<eventlakewater>>
+<<else>>
+	<<swimicon>><<link [[수영 연습을 한다 (0:30)|Lake Depths]]>><<stress -6>><<tiredness 6>><<set $lakeswim to 1>><<slimeEventEnd "swimming">><</link>><<gswimming>><<lstress>><<gtiredness>>
+	<br>
+	<<if !Time.schoolDay and Weather.precipitation is "rain" and Time.dayState is "day" and $daily.masonSpoken isnot 1 and !$possessed>>
+		<<if $mason_count gte 1>>
+			<<swimicon>><<link [[메이슨을 향해 헤엄친다 (0:05)|Lake Mason]]>><<pass 5>><<set $daily.masonSpoken to 1>><</link>>
+			<br>
+		<<else>>
+			<<swimicon>><<link [[메이슨을 향해 헤엄친다 (0:05)|Lake Mason Intro]]>><<pass 5>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1
+	or $worn.upper.exposed gte 2 and $underupperwetstage gte 3
+	or $upperwetstage gte 3 and $worn.under_upper.exposed gte 1
+	or $upperwetstage gte 3 and $underupperwetstage gte 3>>
+		<<beachicon "seaweed">><<link [[식물로 상의을 만들어 입는다 (0:20)|Lake Depths]]>><<pass 20>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1
+	or $worn.lower.exposed gte 2 and $underlowerwetstage gte 3
+	or $lowerwetstage gte 3 and $worn.under_lower.exposed gte 1
+	or $lowerwetstage gte 3 and $underlowerwetstage gte 3>>
+		<<beachicon "seaweed">><<link [[식물로 스커트를 만들어 입는다 (0:20)|Lake Depths]]>><<pass 20>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Underwater">>
+		<<swimicon "down">><span class="nextLink"><<link [[아래로.|Lake Underwater]]>><<pass 1>><</link>></span>
+	<<else>>
+		<<swimicon "dive">><<link [[잠수한다 (0:01)|Lake Underwater]]>><<pass 1>><</link>>
+	<</if>>
+	<br>
+	<<swimicon "back">><<link [[호숫가를 향해 헤엄친다 (0:12)|Lake Shallows]]>><<pass 12>><</link>>
+	<br><br>
+
+	<<if $exposed gte 1 and $laketeenspresent is 1>>
+	<<elseif $debug is 1>>
+		<<lakeicon "dock">><<link [[부두까지 헤엄친다 (0:02)|Lake Dock]]>><<pass 2>><</link>>
+		<br>
+	<</if>>
+	<<set $eventskip to 0>>
+<</if>>
+<<set $lakesurface to 0>>
+
+:: Lake Depths Ice
+<<set $outside to 1>><<set $location to "lake">><<set $bus to "lakedepths">><<effects>><<lakeeffects>>
+
+당신은 수영용 부두 근처 얼어붙은 호수 한 가운데에 서 있다.
+<<if Weather.precipitation === "snow">>
+	굵은 눈발 때문에 주변의 숲을 보기 어렵다.
+<</if>>
+<br><br>
+
+<<if !Weather.isFrozen("lake")>>
+	기온이 높아짐에 따라, 얼음이 갑자기 산산조각이 난다. 당신은 얼음물에 빠진다.<<ggstress>><<stress 18>>
+	<br><br>
+	<<link [[다음|Lake Underwater]]>><</link>>
+	<<exit>>
+<</if>>
+
+<<if !Time.schoolDay and Weather.isFrozen("lake") and Time.dayState is "day">>
+	누군가 부두 옆에 구멍을 뚫어 놓았다.
+<<else>>
+	<<if $lake_ice_broken is undefined>>
+		누군가 부두 옆에 삽을 포함해서 장비를 놓고 갔다. 이곳의 얼음은 얇다. 조금만 힘을 들이면 뚫을 수 있을 것이다.
+	<<else>>
+		물 속으로 들어갈 수 있는 구멍이 뚫려 있다.
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>> 이곳에는 숨을 곳 하나 없다.
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - ($allure + 1000)) and $eventskip is 0 and $lakesurface is 1>>
+	<span class="purple">저 깊은 곳에서 무언가 당신을 따라왔다.</span> <<eventlakewater>>
+<<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
+	<<eventlakeice>>
+<<else>>
+	<<if !Time.schoolDay and Weather.isSnow and Time.dayState is "day">>
+		<<set $lake_ice_broken to 1>>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Depths Ice Break">>
+		<<swimicon "down">><span class="nextLink"><<link [[아래로.|Lake Depths Ice Break]]>><<pass 12>><</link>></span>
+		<br>
+	<<elseif $lake_ice_broken is undefined>>
+		<<swimicon "break">><<link [[얼음을 깬다 (0:30)|Lake Ice Break]]>><<pass 30>><<set $lake_ice_broken to 2>><<tiredness 3>><</link>><<gtiredness>>
+		<br>
+	<<else>>
+		<<swimicon "dive">><<link [[잠수한다 (0:01)|Lake Underwater]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+
+	<<lakeicon>><<link [[호숫가를 향해 걸어간다 (0:12)|Lake Shallows Ice]]>><<pass 12>><</link>>
+	<br><br>
+
+	<<set $eventskip to 0>>
+<</if>>
+<<set $lakesurface to 0>>
+
+
+:: Lake Ice Break
+<<effects>>
+
+당신은 삽을 들고 얼음에 힘껏 박는다. 힘들었지만, 꽤 큰 구멍을 뚫는 데 성공했다.
+<br><br>
+
+<<link [[다음|Lake Depths Ice]]>><</link>>
+<br>
+
+
+:: Lake Dock
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $laketeenspresent is 1>>
+	당신은 수영용 부두에 서 있다. 몇몇 학생들이 당신과 함께 부두에 있다. 주인을 알 수 없는 비키니가 가장자리에 걸쳐져 있다.
+<<elseif Weather.precipitation is "rain">>
+	당신은 수영용 부두에 서 있다. 빗방울이 수면을 치는 소리에 거의 귀가 멀 것 같다. <<if $hallucinations gte 1>>멀리 볼 수는 없지만, 무언가 당신을 지켜보고 있는 느낌이 든다.<</if>>
+<<elseif Time.dayState is "day">>
+	당신은 수영용 부두에 서 있다. 호수는 잔잔해 보인다. 당신이 이 세상에 유일한 사람인 것처럼 느껴진다.
+<<elseif Time.dayState is "night">>
+	<<if $laketeensfire is 1>>
+		당신은 수영용 부두에 서 있다. 조금 떨어진 파티에서 불꽃이 보인다. 별들이 수면 위에 점점이 박혀 있다. 마치 별들과 함께 둥둥 떠 있는 느낌이 든다.
+	<<else>>
+		당신은 수영용 부두에 서 있다. 별들이 수면 위에 점점이 박혀 있다. 마치 별들과 함께 둥둥 떠 있는 느낌이 든다. <<if $hallucinations gte 1>>감시당하는 느낌이 든다.<</if>>
+	<</if>>
+<<else>>
+	당신은 수영용 부두에 서 있다. 부두 양 옆에 물결이 치는 소리만 들려온다.
+<</if>>
+<br><br>
+
+<<link [[수영하러 간다|Lake Depths]]>><</link>>
+<br>
+
+:: Lake Meditate
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	당신은 바위에 앉아 호수를 바라본다.
+	<<if !Weather.isFreezing>>
+		<<if Time.dayState is "night">>
+			<<if Weather.precipitation is "rain">>
+				사나운 어둠이 당신의 앞에 어른거린다.
+			<<else>>
+				어둠이 네 앞에 펼쳐져 있다.
+			<</if>>
+		<<else>>
+			<<if Weather.precipitation is "rain">>
+				물이 빗방울과 함께 춤춘다.
+			<<else>>
+				물은 거의 완벽하게 고요하다.
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if Time.dayState is "night">>
+			<<if Weather.precipitation is "snow">>
+				고요한 눈이 어둠 속에 자리를 잡는다.
+			<<else>>
+				어둠이 네 앞에 펼쳐져 있다.
+			<</if>>
+		<<else>>
+			<<if Weather.isSnow is "snow">>
+				눈이 얼음 위를 덮는다.
+			<<else>>
+				얼음이 세상을 반사해 비춘다.
+			<</if>>
+		<</if>>
+	<</if>>
+	<i>명상의 효과는 의지에 따라 달라집니다.</i>
+<<elseif $phase is 2>>
+	<<set $phase to 0>>
+	약간의 노력으로 당신의 생각이 고요해질 때까지 조용히 기다렸다.
+	<br><br>
+
+	한 시간이 지나고, 조금 가벼워진 느낌이 든다.
+<<elseif $phase is 3>>
+	<<set $phase to 0>>
+	당신은 당신의 생각에서 벗어난다. 다른 무언가에 의해 소환된 것처럼 생각들이 왔다갔다 하는 것을 느낀다.
+
+	<<if $awareness gte 400>>
+		<br><br>
+		<<if Weather.isFrozen("lake")>>얼음<<else>>물<</if>>이 갈라지면서, 깊은 심연이 드러난다. 공포가 당신의 등을 따라 흐르고, 집중을 흐뜨러트린다.
+		<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<</if>>
+<<elseif $phase is 4>>
+	<<set $phase to 0>>
+	당신의 생각은 당신의 <<penisPost "과">>, 사람들이 그것을 비웃는 방식으로 모인다. 괴로움이 되살아난다. 당신은 생각에서 벗어나려고 노력한다.
+	<br><br>
+
+	한 시간이 지나고, 잠깐 동안 가벼워지는 것을 느낀다.
+	<<if $acceptance_penis_tiny gte 1000>>
+		<br><br>
+		뒤로 기대면서 깨달음이 찾아온다. 당신의 <<penisPost "은">> 아름답다. 왜 다른 사람들이 그것에 대해 뭐라고 말하든 신경써야 하는 걸까? 당신은 <span class="green">수용: 조그마한 자지</span> 특성을 얻었다.
+	<</if>>
+<<elseif $phase is 5>>
+	<<set $phase to 0>>
+	당신의 생각은 당신의 <<penisPost "과">>, 사람들이 그것을 비웃는 방식으로 모인다. 괴로움이 되살아난다. 당신은 생각에서 벗어나려고 노력한다.
+	<br><br>
+
+	한 시간이 지나고, 잠깐 동안 가벼워지는 것을 느낀다.
+	<<if $acceptance_penis_small gte 1000>>
+		<br><br>
+		뒤로 기대면서 깨달음이 찾아온다. 당신의 <<penisPost "은">> 아름답다. 왜 다른 사람들이 그것에 대해 뭐라고 말하든 신경써야 하는 걸까? 당신은 <span class="green">수용: 작은 자지</span> 특성을 얻었다.
+	<</if>>
+<<elseif $phase is 6>>
+	<<set $phase to 0>>
+	당신의 생각은 당신의 <<penisPost "과">>, 사람들이 그것을 비웃는 방식으로 모인다. 괴로움이 되살아난다. 당신은 생각에서 벗어나려고 노력한다.
+	<br><br>
+
+	한 시간이 지나고, 잠깐 동안 가벼워지는 것을 느낀다.
+	<<if $acceptance_penis_big gte 1000>>
+		<br><br>
+		뒤로 기대면서 깨달음이 찾아온다. 당신의 <<penisPost "은">> 아름답다. 왜 다른 사람들이 그것에 대해 뭐라고 말하든 신경써야 하는 걸까? 당신은 <span class="green">수용: 큰 자지</span> 특성을 얻었다.
+	<</if>>
+<<elseif $phase is 7>>
+	<<set $phase to 0>>
+	당신의 생각은 당신의 평평한 가슴과, 사람들이 그것을 비웃는 방식으로 모인다. 괴로움이 되살아난다. 당신은 생각에서 벗어나려고 노력한다.
+	<br><br>
+
+	한 시간이 지나고, 잠깐 동안 가벼워지는 것을 느낀다.
+	<<if $acceptance_breasts_tiny gte 1000>>
+		<br><br>
+		뒤로 기대면서 깨달음이 찾아온다. 당신의 가슴은 아름답다. 왜 다른 사람들이 그것에 대해 뭐라고 말하든 신경써야 하는 걸까? 당신은 <span class="green">수용: 평평한 가슴</span> 특성을 얻었다.
+	<</if>>
+<<elseif $phase is 8>>
+	<<set $phase to 0>>
+	당신의 생각은 당신의 <<breastsPost "과">>, 사람들이 그것을 비웃는 방식으로 모인다. 괴로움이 되살아난다. 당신은 생각에서 벗어나려고 노력한다.
+	<br><br>
+
+	한 시간이 지나고, 잠깐 동안 가벼워지는 것을 느낀다.
+	<<if $acceptance_breasts_small gte 1000>>
+		<br><br>
+		뒤로 기대면서 깨달음이 찾아온다. 당신의 <<breastsPost "은">> 아름답다. 왜 다른 사람들이 그것에 대해 뭐라고 말하든 신경써야 하는 걸까? 당신은 <span class="green">수용: 작은 가슴</span> 특성을 얻었다.
+	<</if>>
+<<elseif $phase is 9>>
+	<<set $phase to 0>>
+	당신의 생각은 당신의 <<breastsPost "과">>, 사람들이 그것을 비웃는 방식으로 모인다. 괴로움이 되살아난다. 당신은 생각에서 벗어나려고 노력한다.
+	<br><br>
+
+	한 시간이 지나고, 잠깐 동안 가벼워지는 것을 느낀다.
+	<<if $acceptance_breasts_big gte 1000>>
+		<br><br>
+		뒤로 기대면서 깨달음이 찾아온다. 당신의 <<breastsPost "은">> 아름답다. 왜 다른 사람들이 그것에 대해 뭐라고 말하든 신경써야 하는 걸까? 당신은 <span class="green">수용: 큰 가슴</span> 특성을 얻었다.
+	<</if>>
+<<elseif $phase is 10>>
+	<<set $phase to 0>>
+	당신의 생각은 당신의 <<print playerAwareTheyArePregnant() ? "임신한 배" : "임신한 것처럼 보이는 배">>와, 사람들이 그것을 비웃는 방식으로 모인다. 괴로움이 되살아난다. 당신은 생각에서 벗어나려고 노력한다.
+	<br><br>
+
+	한 시간이 지나고, 잠깐 동안 가벼워지는 것을 느낀다.
+	<<if $acceptance_pregnancy gte 1000>>
+		<br><br>
+		뒤로 기대면서 깨달음이 찾아온다. 당신의 배는 아름답다. 왜 다른 사람들이 그것에 대해 뭐라고 말하든 신경써야 하는 걸까? 당신은 <span class="green"><<print playerAwareTheyArePregnant() ? "수용: 임신한 배" : "수용: 임신한 것처럼 보이는 배">></span> 특성을 얻었다.
+	<</if>>
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<else>>
+	<<meditateoptions>>
+<</if>>
+<<set $eventskip to 0>>
+
+:: Lake Halloween Invite Inquire
+<<effects>>
+
+You approach the pair.
+<<if $speech_attitude is "meek">>
+	"A party?" you ask. "May I come?"
+<<elseif $speech_attitude is "bratty">>
+	"Whatever you're doing," you say. "I want in."
+<<else>>
+	"What's this about a party?" you ask. "Sounds fun."
+<</if>>
+<br><br>
+
+<<if $cool gte 240>>
+	The <<person1>><<person>> perks up at your approach. "We're having a party at the lake," <<he_ ga>> 말한다. "Halloween night. Everyone's invited."
+	<br><br>
+
+	<<His>> friend grabs your arm in excitement. "You should come!" <<person2>><<he>> says, before backing off with a blush. "I-if you want to."
+	<br><br>
+
+	They wave over their shoulders as they continue <<if $location is "school">>down the hall<<else>>into the woods<</if>>.
+<<elseif $cool gte 120>>
+	The <<person2>><<person>> glances over, holding <<his>> phone aside. "There's gonna be a Halloween party at the lake," <<he_ ga>> 말한다.
+	<br><br>
+
+	<<His>> friend nods. "It's open-invite." <<person1>><<He>> pauses, <<his>> gaze crawling up your body. "You should come."
+	<br><br>
+
+	They bid you goodbye and continue <<if $location is "school">>down the hall<<else>>into the woods<</if>>.
+<<else>>
+	The <<person1>><<person>> regards you with a sneer. "Party at the lake," <<he_ ga>> 말한다. "On Halloween."
+	<br><br>
+
+	"Don't think about crashing it," the <<person2>><<person>> butts in. "A freak like you'd scare everyone away."
+	<br><br>
+
+	Their mocking laughter fades as they <<if $location is "school">>round a corner<<else>>disappear past the trees<</if>>.
+<</if>>
+<br><br>
+
+<<if $location is "school">>
+	<<link [[다음|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+:: Lake Halloween Invite Ignore
+<<effects>>
+
+You continue past the pair.
+<<if $cool gte 240>>
+	The <<person1>><<person>> gives you a smile, but doesn't stop to chat.
+<<elseif $cool gte 120>>
+	They ignore you, too caught up in their conversation.
+<<else>>
+	The <<person1>><<person>> spits in your direction, but doesn't stop to harass you further.<<trauma 2>><<gtrauma>>
+<</if>>
+<br><br>
+
+As you pass, you can't help overhearing the <<person2>><<person>>. "Don't be chicken," <<he>> laughs. "We won't go past the lake. You'd rather spend the night trick-or-treating?"
+<br><br>
+
+You don't catch the rest as the two <<if $location is "school">>round a corner<<else>>disappear past the trees<</if>>.
+<br><br>
+
+<<if $location is "school">>
+	<<link [[다음|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+:: Lake Halloween Party
+<<set $outside to 1>><<set $location to "lake">><<effects>>
+
+<<if $phase is 0>>
+	You settle down by the bonfire, surrounded by raucous youths.
+	<<if $cool gte 240>>
+		They greet you with a cheer, drunkedly stumbling over each other for a seat beside you.
+	<<elseif $cool gte 120>>
+		They greet you warmly. You suspect the alcohol has something to do with that.
+	<<else>>
+		No one pays you any mind, not even to pester you. Perhaps they don't recognise you in the dim light. Or they're too drunk to care.
+	<</if>>
+	<br><br>
+<</if>>
+
+<<if playerAwareTheyArePregnant()>>
+	You sit and chat under the moonlight, though you refrain from any drinks.
+<<else>>
+	You sit, chat, and drink under the moonlight.
+<</if>>
+The others try to entertain themselves with ghost stories.
+<<generatey1>><<person1>>
+<<switch random(1, 5)>>
+	<<case 5>>They're not very scary, but a <<person>> is still shaking by the end.
+	<<case 4>>A <<person>> claims the lake itself is haunted. The others laugh <<him>> off.
+	<<case 3>>They're not very scary. Most of the fun comes from jokes at the storytellers' expense.
+	<<case 2>>A <<persons>> story leaves the whole party howling with ridicule. <<He>> washes down the shame with another beer.
+	<<case 1>>One drives a <<person>> to tears, to the amusement of the group. <<He>> sniffles and retreats to the woods, drawing further laughter.
+<</switch>>
+<<endevent>>
+<br><br>
+
+<<if $syndromewolves is 1 and !$halloweenWolves>><<set $halloweenWolves to 1>>
+	The party is suddenly silenced by a cry from the woods. A howl, followed by cursing, then a pained yelp.
+	<br><br>
+
+	<<investigateicon>><<link [[조사한다|Lake Halloween Wolves Investigate]]>><</link>>
+	<br>
+	<<ind>><<link [[Stay seated|Lake Halloween Wolves Ignore]]>><</link>>
+	<br>
+<<elseif Time.monthDay isnot 31>>
+	It's getting late, and the shadows of the forest are lengthening. People are preparing to return to town. No one wants to be left to travel alone.
+	<br><br>
+	<<set _storedClothes to clothingInStorage("lakeshore")>>
+
+	<<if $earSlime.forcedCommando isnot undefined and _storedClothes.find(item => item.slot is "under_lower" and !item.type.includes("naked"))>>
+		<span class="red">귓속의 슬라임이 <<underwearTypeText "을">> 입은 채 나가는 것을 허락하지 않는다.</span>
+		<<set _earSlimeText to true>>
+	<<elseif _storedClothes.length>>
+		<<ind>><<link [[Get changed, then go with them (0:40)|Lake Return Journey]]>><<storeload "lakeshore">><<set $foresthunt to 0>><<pass 30>><</link>>
+		<br>
+	<</if>>
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked")>>
+		<<if _earSlimeText>><span class="red">귓속의 슬라임이 <<underwearTypeText "을">> 입은 채 나가는 것을 허락하지 않는다.</span><</if>>
+	<<elseif $exposed lte 0>>
+		<<ind>><<link [[Go with them (0:30)|Lake Return Journey]]>><<set $foresthunt to 0>><<pass 30>><</link>>
+		<br>
+	<</if>>
+
+	<<ind>><<link [[Stay|Lake Shore]]>><</link>>
+	<br>
+<<else>>
+	<<if playerAwareTheyArePregnant()>>
+		<<socialiseicon "party">><<link [[Keep partying (0:10)|Lake Halloween Party]]>><<set $phase to 1>><<stress -4>><<status 1>><<pass 10>><</link>><<lstress>><<gcool>>
+	<<else>>
+		<<socialiseicon "party">><<link [[Keep partying (0:10)|Lake Halloween Party]]>><<set $phase to 1>><<stress -4>><<alcohol 20>><<status 1>><<pass 10>><</link>><<lstress>><<gcool>><<galcohol>>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[떠난다|Lake Shore]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>
+
+:: Lake Halloween Wolves Investigate
+<<set $outside to 1>><<set $location to "lake">><<effects>>
+<<beastNEWinit 1 wolf>><<generatey2>>
+
+You peer between the trees, where you find a <<beasttype 0>> hounded by a gang of delinquents. From the look of <<bhis 0>>
+<<if $monster is 1>>
+	mussed hair and the bruises lining <<bhis 0>> body,
+<<else>>
+	patchy fur and haggard stance,
+<</if>>
+<<bhes>> fighting a losing battle.
+<br><br>
+
+"Piss off, mutt," a <<person2>><<person>> slurs. <<He>> hurls a rock at the <<beasttype 0>>, hitting <<bhim 0>> dead in the <<if $monster is 1>>face<<else>>snout<</if>>. <<bHe 0>> howls in pain. The onlookers cheer.<<stress 6>><<gstress>>
+<br><br>
+
+Guilt takes you as you watch the <<beasttype 0>> limp <<bhis 0>> way into the brush, towards the cave. <span class="blue">You should check up on them.</span>
+<br><br>
+
+<<endevent>>
+<<link [[다음|Lake Shore]]>><</link>>
+<br>
+
+:: Lake Halloween Wolves Ignore
+<<set $outside to 1>><<set $location to "lake">><<effects>>
+<<beastNEWinit 1 wolf>><<generatey2>>
+
+Leaves rustle behind you. You turn in time to catch a <<beasttype 0>> rushing past. <<bHis 0>> eyes are wild with fear, and <<bhe 0>> doesn't stop to regard you.
+<br><br>
+
+The others scream at the intrusion and scurry away in a panic. Until a <<person2>><<person>> bursts through, armed with a heavy branch. <<He>> swings it, hitting the <<beasttype 0>> dead in the chest. <<bHe 0>> howls in pain. The onlookers cheer.<<stress 6>><<gstress>>
+<br><br>
+
+Guilt takes you as you watch the <<beasttype>> limp <<bhis 0>> way into the brush, towards the cave. <span class="blue">You should check up on them.</span>
+<br><br>
+
+<<endevent>>
+<<socialiseicon "party">><<link [[Keep partying (0:10)|Lake Halloween Party]]>><<set $phase to 1>><<pass 10>><<status 1>><</link>><<gcool>>
+<br>
+<<getouticon>><<link [[떠난다|Lake Shore]]>><</link>>
+<br>

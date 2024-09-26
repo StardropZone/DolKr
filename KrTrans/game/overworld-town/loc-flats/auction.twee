@@ -1,0 +1,279 @@
+:: Flats Auction
+<<set $outside to 0>><<effects>>
+<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+
+당신은 창문이 없는 어두운 방바닥에서 눈을 뜬다. 흰색 페인트가 칠해진 나무문 너머에서 비명소리가 들린다.
+<br><br>
+당신의 팔은 꽁꽁 묶여있<<if $worn.handheld.name isnot "naked">>고 <<worn_handheld_name_ un>> 어디에도 없<</if>><<bind>>지만, 문이 열리고 <<person_ i>> 나타나자, 당신은 힘겹게 몸을 일으켜 세워 발을 딛고 서는 것에 성공한다.
+<br><br>
+"일어났군," <<he_ ga>> 말한다. "좋아." <<He_ nun>> 당신의 어깨를 붙잡고 <<him_ yi>> 앞으로 밀친다. "지금은 얌전히 있어."
+<br><br>
+
+<<link [[다음|Flats Auction 2]]>><</link>>
+<br>
+
+:: Flats Auction 2
+<<effects>>
+
+<<person1>><<person_ i>> 당신의 등을 밀어, 흰색 문이 줄지어 있는 밝은 복도로 내보낸다. 고함소리가 점점 커진다.
+<br><br>
+"최고가!" <<person2>><<personsimple_ yi>> 목소리가 울려 퍼진다. "더 없으십니까? 낙찰되셨습니다!" 누군가가 울부짖고, 뒤이어 둔탁한 쿵 소리가 들리더니, 곧 고요해진다.
+<br><br>
+<<person1>><<person_ ga>> 당신을 어두운 방으로 밀어 넣는다.
+<br><br>
+
+<<link [[다음|Flats Auction 3]]>><</link>>
+<br>
+
+
+:: Flats Auction 3
+<<effects>>
+
+<<person1>><<person_ i>> 당신을 거칠게 밀치자, 사방에서 웅성거리는 소리가 들린다. 당신의 무릎이 허리 높이의 단상에 부딪힌다. "올라가," <<he_ ga>> 당신의 귀에 속삭인다. "얌전히 따르는 게 좋을 거야."
+<br><br>
+
+<<link [[올라간다|Flats Auction Climb]]>><</link>>
+<br>
+<<link [[거절한다|Flats Auction Refuse]]>><<stress 6>><<pain 4>><</link>><<gstress>><<gpain>>
+<br>
+
+
+:: Flats Auction Climb
+<<effects>>
+
+당신은 단상 위로 기어 올라간다. 강렬하게 내리꽂히는 스포트라이트가 당신의 눈 앞을 가린다. 당신은 눈을 가늘게 뜨고 주변을 살펴본다. 무대는 작은 정사각형 모양이며 그 바깥은 어둠으로 둘러싸여 있다. 사방에서 목소리가 들린다.
+<br><br>
+
+<<link [[다음|Flats Auction 4]]>><</link>>
+<br>
+
+:: Flats Auction Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+    "제-제발 이러지 마세요," 당신이 말한다. "절 보내주세요."
+<<elseif $speech_attitude is "bratty">>
+    "나한테 왜 이러는 거야?" 당신이 말한다.
+<<else>>
+    "싫어요," 당신이 말한다. "절 보내주세요."
+<</if>>
+<br><br>
+
+어둠 속에서 묵직한 무언가가 날아와 당신의 등을 가격하고, 당신은 단상에 부딪힌다. 한 쌍 이상의 팔이 당신의 다리를 붙잡고 단상 위로 끌어 올린다. 강렬하게 내리 꽂히는 스포트라이트가 당신의 눈앞을 가린다. 당신은 눈을 가늘게 뜨고 주변을 살펴본다. 무대는 작은 정사각형 모양이며 그 바깥은 어둠으로 둘러싸여 있다. 사방에서 목소리가 들린다.
+<br><br>
+
+<<link [[다음|Flats Auction 4]]>><</link>>
+<br>
+
+:: Flats Auction 4
+<<effects>>
+
+"다음 물건입니다," 당신의 뒤쪽 어딘가에서 <<person2>><<personsimple_ yi>> 목소리가 울린다. "이번에는 천한 출신의 <<girl_ ul>> 준비했습니다. 하지만 그 사실에만 너무 집중하지 마십시오. 보시다시피,
+<<set $flats_auction to 0>>
+<<if $beauty gte $beautymax>>
+    <<set $flats_auction += 6>>
+    <<pshe_ nun>> 가장 완벽한 예술품과 다름없습니다."
+<<elseif $beauty gte ($beautymax * 0.8)>>
+    <<set $flats_auction += 5>>
+    <<pshe_ nun>> 최고의 미인입니다."
+<<elseif $beauty gte ($beautymax * 0.6)>>
+    <<set $flats_auction += 4>>
+    <<pshe_ nun>> 정말로 아름답습니다."
+<<elseif $beauty gte ($beautymax * 0.4)>>
+    <<set $flats_auction += 3>>
+    <<pshe_ nun>> 아주 매력적입니다."
+<<elseif $beauty gte ($beautymax * 0.2)>>
+    <<set $flats_auction += 2>>
+    <<pshe_ nun>> 꽤 예쁘장합니다."
+<<else>>
+    <<set $flats_auction += 1>>
+    <<pshe_ nun>> 꽤 귀엽습니다.
+<</if>>
+동의하는 듯한 속삭임이 되돌아온다.
+<br><br>
+
+<<set $flats_auction_fame to ["none"]>>
+<<if $fameexhibitionism gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("exhibitionism")>>
+<</if>>
+<<if $fame.prostitution gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("prostitution")>>
+<</if>>
+<<if $fame.bestiality gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("bestiality")>>
+<</if>>
+<<if $fame.rape gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("rape")>>
+<</if>>
+<<if $fame.sex gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("sex")>>
+<</if>>
+<<if $fame.pregnancy gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("pregnancy")>>
+<</if>>
+<<if $fame.impreg gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("impreg")>>
+<</if>>
+<<if $fame.good gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("good")>>
+<</if>>
+<<if $fame.business gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("business")>>
+<</if>>
+<<if $fame.pimp gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("pimp")>>
+<</if>>
+<<if $fame.scrap gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("scrap")>>
+<</if>>
+<<if $fame.social gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("social")>>
+<</if>>
+<<if $fame.model gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("model")>>
+<</if>>
+<<if $fame.dance gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("dance")>>
+<</if>>
+<<person3>>
+"전에 어디서 <<phim_ ul>> 본 것 같은데," <<personsimple_ i>> 말한다.
+<<set $flats_auction_select to $flats_auction_fame.pluck()>>
+<<switch $flats_auction_select>>
+    <<case "exhibitionism">>
+        <<if $exposed gte 2>>
+            "어디서든 그 <<genitals_ rul>> 알아볼 수 있을 것 같아."
+        <<else>>
+            <<if $player.gender isnot $player.gender_appearance>>
+                "<i><<pShe_ nun>></i> 겉으로 보이는 것과는 다르던데."
+            <<else>>
+                "<<pShe_ nun>> 역시 옷을 입지 않은 모습이 더 보기 좋은걸."
+            <</if>>
+        <</if>>
+    <<case "prostitution">>
+        "<<phim_ ul>> 산 적이 있었던 것 같아."
+    <<case "bestiality">>
+        "좀 이상성욕적이던데, 나중에 말해줄게."
+    <<case "rape">>
+        "공짜로 할 수 있는데 왜 내가 돈을 줘야 하지?"
+    <<case "sex">>
+        "쟤랑 잔 사람이 마을의 절반이나 된다던데. 이제 내 차례가 온 걸지도 모르겠군."
+    <<case "pregnancy" "impreg">>
+        "<<pShe_ nun>> 아이들을 남겨두고 떠났다던데. 아마 <<pshe_ nun>> 더 많은 아이들을 만들고 싶은 걸 지도 몰라."
+    <<case "good">>
+        "<<pShe_ nun>> 온순한 녀석이었어. 통제하기 쉽더라고."
+    <<case "business">>
+        "<<pShe_ ga>> 결국 여기까지 올 정도로 무너졌다니."
+    <<case "pimp">>
+        "<<phim_ ul>> 이렇게 보니까 아주 맛있어 보이는걸."
+    <<case "scrap">>
+        "규칙을 지키게 하려면 꽤 힘이 들겠군."
+    <<case "social">>
+        "<<pShe_ nun>> 고위층 사람들과 친분이 있어. 이거 흥미로운데."
+    <<case "model">>
+        "내 꿈이 이루어지다니."
+    <<case "dance">>
+        "<<pShe_ nun>> 이런 스포트라이트에는 익숙하지."
+    <<default>>
+        "<<pShe_ nun>> 고아원에서 살아, 아니면 살았었거나."
+<</switch>>
+<br><br>
+"잘 들으셨겠죠," <<person2>><<person_ i>> 소리친다. "그리고 <<pshe_ yi>> 모든 것을 당신이 가질 수 있습니다. 입찰을 시작합니다," <<he_ ga>> 잠시 멈칫한다. "£<<print Math.trunc($flats_auction * 100)>>!"
+<br><br>
+
+<<link [[다음|Flats Auction 5]]>><</link>>
+<br>
+
+:: Flats Auction 5
+<<effects>>
+
+조명이 켜지고 방에 모인 청중들이 분명하게 보인다. 그들은 모두 가면을 쓴 채로, 당신을 중심으로 넓은 원을 그리고 서 있다.
+<br><br>
+
+<<person3>><<person_ i>> <<his_ yi>> 팔을 들어 올린다. 다른 단상에 서 있던 <<person2>><<person_ i>> <<phim_ ul>> 가리킨다. "£<<print Math.trunc($flats_auction * 120)>> 확인합니다!" <<he_ ga>> 소리친다.
+<br>
+<<person4>><<person_ i>> <<his_ yi>> 손을 든다. "£<<print Math.trunc($flats_auction * 140)>>! 더 없으십니까?"
+<br>
+£<<print Math.trunc($flats_auction * 160)>>!
+<br>
+£<<print Math.trunc($flats_auction * 180)>>!
+<br>
+£<<print Math.trunc($flats_auction * 200)>>!
+<br>
+£<<print Math.trunc($flats_auction * 220)>>!
+<br><br>
+"£<<print Math.trunc($flats_auction * 500)>>," 새로운 목소리가 들려온다. 고개를 돌려, 목소리의 주인인 <<person5>><<person_ ul>> 바라본다.
+<br><br>
+
+"최고가입니다. 더 없으십니까? 낙찰되셨습니다!"
+<br><br>
+
+<<person1>><<person_ un>> 옆구리에 봉을 끼고, 기대에 찬 표정으로 당신을 바라본다.
+<br><br>
+
+<<link [[다음|Flats Auction 6]]>><</link>>
+<br>
+
+:: Flats Auction 6
+<<effects>>
+
+<<person5>><<person_ i>> 단상으로 다가온다. <<person1>><<person_ un>> 당신의 머리에 포대기를 씌운 뒤, <<person5>><<he_ ga>> 도착하자 당신을 무대 아래로 밀친다. 누군가가 당신을 품에 안는다. "발밑 조심해." <<person5>><<person_ yi>> 목소리다. "안 그러면 오래 버티지 못할 테니까."
+<br><br>
+
+<<He_ nun>> 당신의 결박된 팔을 붙잡고, 당신이 움직이도록 밀어붙인다. 당신은 모퉁이를 돌고, 또 돈다. 경매장의 소리가 등 뒤로 점점 멀어져 곧 사라진다.
+<<pass 5>>
+<br><br>
+
+몇 분 동안의 여정 도중에 때때로 기계가 윙윙거리는 소리가 들려오지만, 신선한 공기는 전혀 느껴지지 않는다.
+<br><br>
+
+
+<<link [[다음|Flats Auction 7]]>><</link>>
+<br>
+
+
+:: Flats Auction 7
+<<location "mines">><<effects>>
+
+"거의 다 왔어," <<person5>><<person_ i>> 말한다. "멈춰."
+<br><br>
+쿵쿵대는 소리와 금속을 갈아내는 듯한 찢어지는 소음이 들리고, 땅이 흔들리기 시작한다.
+<<if $leftarm is "bound" or $rightarm is "bound">>
+    누군가가 당신의 머리에 씌워진 포대기를 벗겨내고 결박을 풀어준다.
+    <<unbind>>
+<<else>>
+    누군가가 당신의 머리에 씌워진 포대기를 벗겨낸다.
+<</if>>
+당신은 문이 열린 승강기 안에 있다. 희미한 불빛 아래로 사방을 둘러싼 암벽이 보인다. 승강기는 하강하는 중이다.
+<br><br>
+"다시는 태양을 볼 수 없을 거야," <<person_ i>> 말한다. 저 아래에서 목소리가 들려온다.
+<br><br>
+
+<<link [[다음|Flats Auction 8]]>><</link>>
+<br>
+
+:: Flats Auction 8
+<<effects>>
+
+승강기가 멈추고 문이 열리자 넓은 동굴이 나온다. <<person6>><<person_ ga>> <<his_ yi>> 어깨에 지휘봉을 얹은 채로 기다리고 있다. <<He_ ga>> 숨을 들이마신다. "신선한 고기로군. 가자." <<He_ nun>> 동굴의 맨 끝을 향해 지휘봉을 휘두른다. 동굴은 보이지 않는 먼 곳까지 구불거리며 뻗어있다.
+<br><br>
+
+<<person5>><<person_ i>> 당신을 밀쳐 승강기에서 내보낸다.
+<br><br>
+
+
+<<link [[다음|Mines Intro]]>><<endevent>><<flats_auction_end>><</link>>
+<br>

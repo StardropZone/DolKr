@@ -1,0 +1,402 @@
+:: English Classroom
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $schoolstate is "third">>
+	<<classRoomEarSlime "english">>
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+		<<outfitChecks>>
+		/*Check for when the pc is only wearing an overcoat*/
+		<<if $worn.under_upper.name isnot "naked" and $worn.under_lower.name isnot "naked">>
+			<<set _naked to ($worn.under_upper.type.includes("swim") or $worn.under_lower.type.includes("swim")) ? "수영복만 입고 있다는" : "속옷만 입고 있다는">>
+		<<else>>
+			<<set _naked to "아무것도 입지 않고 있다는">>
+		<</if>>
+		<br><br>
+		<<npc Doren>><<person1>>
+		도렌이 웃는다. "뭔가 잘못됐니? 교복을 입지 않으면 내 수업을 들을 수 없단다. 내 규칙상으론 그래. 교장 선생님에게 예비 교복이 있을 거야."
+		<br><br>
+		<!--<<link [[Hang up coat|]]>><<endevent>><</link>>
+		<br><br> good starting point for when you can go to class naked-->
+		<<link [[다음|Hallways]]>><<endevent>><</link>>
+		<br><br>
+		<<exit>>
+	<</if>>
+	<<if $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+		도렌이 걱정스러운 표정을 짓는다. "<<= $player.gender_appearance is "m" ? "청년" : "아가씨">>, 누가 그렇게 묶어놓은 거야? 괜찮니? 교장 선생님께 그걸 자를 도구가 있을 거야. 어서 교장실로 가보렴."
+		<br><br>
+
+		<<link [[다음|Hallways]]>><<endevent>><</link>>
+		<br><br>
+		<<exit>>
+	<</if>>
+	<<if !$worn.upper.type.includes("school") or !$worn.lower.type.includes("school")>>
+		<<npc Doren>><<person1>>
+		도렌이 웃는다. "교복을 입지 않으면 내 수업을 들을 수 없단다. 내 규칙상으론 그래. 교장 선생님에게 예비 교복이 있을 거야."
+		<br><br>
+
+		<<link [[다음|Hallways]]>><<endevent>><</link>>
+		<br><br>
+		<<exit>>
+	<</if>>
+	<<if $daily.school.attended.english>>
+		당신은 영어 수업에 다시 들어와,
+		<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+			교실 뒷편에 코트를 건 뒤
+			<<undressOverClothes "englishClassroom">>
+		<</if>>
+		자리에 앉는다.
+		<br><br>
+		<<englishstart>>
+		<<exit>>
+	<</if>>
+	<<if Time.minute lte 5>>
+		당신은 영어 교실에 들어간다.
+		<<npc Doren>><<person1>>
+		학생들이 자리에 앉는 동안 도렌이 교실 앞쪽에서 수업 준비를 하고 있다.
+		<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+			<<undressOverClothes "englishClassroom">>
+			당신은 교실 뒷편에 코트를 건 뒤 자리에 앉는다.
+		<</if>>
+		<br><br>
+		<<englishstart>>
+		<<exit>>
+	<</if>>
+
+	당신은
+	<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+		교실 뒷편에 코트를 건 뒤
+		<<undressOverClothes "englishClassroom">>
+	<</if>>
+	영어 교실에 들어간다.
+	<<npc Doren>><<person1>>
+	도렌이 말을 하다 말고 당신에게 미소를 지어보인다.
+	<<if $daily.school.englishExcused>>
+		<<run delete $daily.school.englishExcused>>
+		"걱정 말거라, <<lassPost>>. 괜찮다."
+	<<else>>
+		"안 오는 것보다는 늦는게 낫지! 앉으렴, 늦어서 못 들은 내용을 설명할테니 말이야."
+		<<gdelinquency>>
+		<<detention 1>>
+	<</if>>
+	<br><br>
+	당신이 자리에 앉자, 도렌이 수업을 계속한다.
+	<br><br>
+
+	<<englishstart>>
+	<<exit>>
+<</if>>
+
+<<if $schoollesson is 1>>
+	<<if $daily.school.englishInterrupted is 1>>
+		<<npc Doren>><<person1>>당신은 영어 교실에 들어간다. 도렌이 갑자기 말을 멈추고는 당신을 바라본다. "하! 내 수업에 대한 열정이 넘치는 건 기쁘다만, 다른 수업을 듣고 있어야 하는 거 아니니? 징계 처리를 해야겠구나. 안 그러면 내가 레이턴에게 한소리 듣게 되니까 말이야." <<HePost "은">> 당신을 문 밖으로 쫓아낸다.
+		<<gdelinquency>>
+		<br><br>
+		<<detention 1>>
+
+		<<link [[다음|Hallways]]>><<endevent>><</link>>
+	<<else>>
+		<<npc Doren>><<person1>>당신은 영어 교실에 들어간다. 도렌이 갑자기 말을 멈추고는 당신을 바라본다. "내가 뭔가 도와줄 거라도 있을까, <<lassPost>>?" 보아하니 당신이 수업을 방해한 모양이다.
+		<br><br>
+		<<set $daily.school.englishInterrupted to 1>>
+
+		<<link [[사과한다|English Classroom Apology]]>><<trauma 1>><<stress 1>><</link>><<gstress>><<gtrauma>>
+		<br>
+		<<if $trauma gte 1>>
+			<<link [[조롱한다|English Classroom Mock]]>><<status 1>><<stress -12>><</link>><<lstress>><<gcool>><<gdelinquency>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $schoolstate is "afternoon" and $englishPlay is "ongoing">>
+	영어 교실은 여러가지 연극을 연습하려는 학생들로 가득하다.
+	<br><br>
+
+	<<if $englishPlayLate>>
+		<<link [[연극에 지원한다|English Play Late Signup]]>><</link>>
+		<br><br>
+	<</if>>
+	당신은 학생들 무리 근처에서 시드니를 발견한다.
+	<<if !$englishPlayLate>>
+		<<set _kylarLocation to getKylarLocation()>>
+		<<if _kylarLocation.area is "english" and _kylarLocation.state is "dual_rehearsal">>
+			<span class="blue">카일라가 <<nnpc_him_ gwa "Sydney">> 함께 있다.</span>
+			<br>
+			<<link [[카일라와 시드니와 함께 연습한다 (2:00)|English Play Rehearse Both]]>><<pass 30>><<englishskill 18>><</link>><<gggenglish>><<gggreadiness>>
+		<<elseif $englishPlayRoles.SydneyKnown and $englishPlayRoles.Player isnot "none">>
+			<br>
+			<<link [[시드니와 함께 연습한다 (2:00)|English Play Rehearse Sydney]]>><<pass 2 hours>><<englishskill 18>><<npcincr Sydney love 5>><</link>><<gggenglish>><<ggreadiness>><<gglove>>
+		<<elseif $englishPlayRoles.SydneyKnown>>
+			<br>
+			<<link [[시드니의 연습을 돕는다 (2:00)|English Play Rehearse Sydney No Role]]>><<pass 2 hours>><<englishskill 12>><<npcincr Sydney love 5>><</link>><<ggenglish>><<gglove>>
+		<<elseif $englishPlayRoles.Player isnot "none">>
+			<br>
+			<<link [[시드니에게 다가간다|English Play Intro Sydney]]>><</link>>
+		<</if>>
+		<br>
+		<<if _kylarLocation.area is "english" and _kylarLocation.state is "rehearsal">>
+			카일라가 구석에 혼자 서 있다. 다른 학생들은 <<nnpc_him_ ul "Kylar">> 피하는 듯하다.
+			<br>
+			<<link [[카일라에게 다가간다|English Play Intro Kylar]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<br>
+	<<link [[다른 학생들의 연습을 돕는다 (2:00)|English Play Rehearse Others]]>><<pass 2 hours>><<englishskill 6>><<status 8>><<trauma -12>><</link>><<genglish>><<ggcool>><<lltrauma>>
+	<br>
+	<<link [[교실에서 나온다 (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
+<<else>>
+	당신은 영어 교실에 있다. 벽에 책장들이 늘어서있다.
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "emptyClassroom">>
+	<</if>>
+	<<storeon "englishClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "englishClassroom">>
+		당신은 교실 뒷편에서 코트를 집어든다.
+		<br><br>
+	<</if>>
+	<<exhibitionclassroom>>
+
+	<<emptyClassroomMasturbationIntro>>
+
+	<<link [[교실에서 나온다 (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
+<</if>>
+
+:: English Lesson
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $daily.school.attended.english to true>>
+
+
+<<if Time.weekDay is 6 and Time.minute gte 37>>
+	<<npc Doren>><<person1>>
+	"한 주의 그 시간이 왔단다." 탁상에 작은 책자가 가득 담긴 상자를 들어올리며 도렌이 안내한다. <<HePost "은">> 각 학생들 앞에 하나씩 놓으며 반을 돌아다닌다. "걱정마. 난 너희들이 모두 잘할거라 확신한단다."<<gstress>><<stress 6>>
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<exam english>>
+	<br><br>
+
+	학생들이 첫 페이지를 넘기는 소리가 뒤섞인다. 도렌은 통로를 배회한다. 
+	<br><br>
+	<<endevent>>
+	<<exam_cheat english>>
+	<<if !$daily.earSlimeCheatExam and numberOfEarSlime() and earSlimeMakingMundaneRequests() and random(0,200) gte 150 - $earSlime.corruption>>
+		<<set $daily.earSlimeCheatExam to true>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">당신은 머릿속의 슬라임이 부정행위를 하라고 명령하는 것을 느낀다.</span> 그것은 당신이 응한다면 보답을 할거라 약속<<if $earSlime.startedThreats>>하며,  따르지 않는다면 어떤 일이 벌어질지 모른다며 협박<</if>>한다.
+		<br><br>
+		<<link [[복종한다|English Exam]]>><<set $phase to 4>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[반항한다|English Exam]]>><<set $phase to 6>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[무시한다|English Exam]]>><<set $phase to 5>><</link>>
+		<</if>>
+		<br>
+	<<else>>
+		<<link [[집중한다|English Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>><<passPercent 5>>
+		<br>
+		<<link [[긴장을 푼다|English Exam]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[부정행위|English Exam]]>><<set $phase to 2>><</link>><<skulduggerydifficulty>>
+		<br>
+		<<if $kylarenglishstate is "active">>
+			<<link [[카일라를 베낀다|English Exam]]>><<set $phase to 3>><<npcincr Kylar lust 3>><<set $exam_chance += 5>><</link>><<glust>> <<passPercent 5>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $kylarenglishstate is "active">>
+
+	<<if Time.minute lte 5>>
+		영어 수업이 시작되었다. 무엇을 할까?
+		<br><br>
+	<<else>>
+		영어 수업이 계속된다. 무엇을 할까?
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<englishicon>><<link [[수업에 집중한다|English Lesson Focus]]>><</link>><<gstress>><<genglish>>
+	<br>
+	<<socialiseicon>><<link [[반 친구들과 어울린다|English Lesson Socialise]]>><</link>><<ltrauma>><<lstress>><<gharass>>
+	<br>
+	<<daydreamicon>><<link [[몽상한다|English Lesson Daydream]]>><</link>><<lstress>> <<lharass>>
+	<br>
+	<<if $tiredness gte (C.tiredness.max / 5) * 3>>
+		<<bedicon "zzz">><<link [[책상에 엎드려 잔다|English Lesson Sleep]]>><</link>><<ltiredness>>
+		<br>
+	<</if>>
+	<<if hasSexStat("exhibitionism", 5)>>
+		<<ind>><<link [[자위한다|English Lesson Masturbate]]>><<set $masturbationstart to 1>><<npcincr Kylar lust 5>><</link>><<exhibitionist5>><<glust>>
+		<br>
+	<</if>>
+<<else>>
+
+	<<if Time.minute lte 5>>
+		영어 수업이 시작되었다. 무엇을 할까?
+		<br><br>
+		<<classgrades>>
+	<<else>>
+		영어 수업이 계속된다. 무엇을 할까?
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<englishicon>><<link [[수업에 집중한다|English Lesson Focus]]>><</link>><<gstress>><<genglish>>
+	<br>
+	<<socialiseicon>><<link [[반 친구들과 어울린다|English Lesson Socialise]]>><</link>><<gcool>><<ltrauma>><<lstress>><<gharass>>
+	<br>
+	<<daydreamicon>><<link [[몽상한다|English Lesson Daydream]]>><</link>><<lstress>> <<lharass>>
+	<br>
+	<<if $tiredness gte (C.tiredness.max / 5) * 3>>
+		<<bedicon "zzz">><<link [[책상에 엎드려 잔다|English Lesson Sleep]]>><</link>><<ltiredness>>
+		<br>
+	<</if>>
+	<<if hasSexStat("exhibitionism", 4)>>
+		<<ind>><<link [[자위한다|English Lesson Masturbate]]>><<set $masturbationstart to 1>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
+<</if>>
+
+:: English Classroom Apology
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+당황하며, 당신은 사과를 한 뒤 나온다.
+<br><br>
+
+<<link [[다음|Hallways]]>><<endevent>><</link>>
+
+:: English Classroom Mock
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+당신은 선생님을 조롱한다. "방해해서 죄송합니다 선생님, 제발 절 먹지 말아주세요!" 앉아있던 학생들이 웃음을 터트린다.
+<br><br>
+
+도렌도 웃는다. "네 교실로 가렴. 안 그러면 진짜로 먹어버릴지도 몰라!" <<HePost "이">> 문을 열어준다.
+<<gdelinquency>>
+<br><br>
+<<detention 1>>
+<<link [[다음|Hallways]]>><<endevent>><</link>>
+
+:: English Lesson Focus
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $kylarenglishstate is "active">>
+	당신은 선생님의 말과 수업 자료에 집중한다. 카일라가 집중을 방해하기는 해도, 성과가 있는 것 같다.
+	<br><br>
+<<else>>
+	당신은 선생님의 말과 수업 자료에 집중한다. 이해하기 어렵기는 해도, 성과가 있는 것 같다.
+	<br><br>
+<</if>>
+
+<<towelup>>
+
+<<advancelesson>>
+<<englishskill _lesson_progress>>
+<<stress _lesson_progress>>
+
+<<if $phase is 1>>
+	<<lessonEnd "englishClassroom">>
+<<else>>
+	<<lessonEvents "english">>
+<</if>>
+
+:: English Lesson Socialise
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $kylarenglishstate is "active">>
+	당신은 공부는 최소한으로만 하며, 반 친구들과 어울리는 데에 더 집중한다. 카일라의 존재가 이를 어렵게 만든다.
+<<elseif $cool gte ($coolmax / 5 * 2)>>
+	당신은 공부는 최소한으로만 하며, 반 친구들과 어울리는 데에 더 집중한다. 곧 당신에게 관심이 쏠린다.
+<<elseif $cool gte ($coolmax / 5)>>
+	당신은 공부는 최소한으로만 하며, 반 친구들과 어울리는 데에 더 집중한다.
+<<else>>
+	당신은 공부는 최소한으로만 하며, 반 친구들과 어울리는 데에 더 집중한다. 대부분은 당신과 어울리기를 꺼려한다.
+<</if>>
+<br><br>
+
+<<if $kylarenglishstate is "active">>
+<<else>>
+	<<status 1>>
+<</if>>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+<<set _trauma to _lesson_progress * -0.5>>
+<<trauma _trauma>>
+
+<<if $phase is 1>>
+	<<lessonEnd "englishClassroom">>
+<<else>>
+	<<lessonEvents "english">>
+<</if>>
+
+:: English Lesson Daydream
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $kylarenglishstate is "active">>
+	당신은 창문 밖을 내다보며 몽상한다. 카일라가 <<nnpc_his_ yi "Kylar">> 스케치북에 당신의 그림을 그린다.
+<<elseif $trauma gte (($traumamax / 10) * 7)>>
+	당신은 뭐 하나라도 행동을 잘못할 경우 반 전체가 당신을 괴롭힐까 무서워 혼자 지낸다.
+<<elseif $trauma gte (($traumamax / 10) * 2)>>
+	불안감이 스멀스멀 기어오르는 걸 막으며, 당신은 자신만의 생각에 잠긴다.
+<<else>>
+	당신은 수업에 딱히 집중하지 않으며, 그 대신 하릴없이 창문 밖을 내다보며 방과후에 무엇을 할지 생각한다.
+<</if>>
+<br><br>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+
+<<if $phase is 1>>
+	<<lessonEnd "englishClassroom">>
+<<else>>
+	<<lessonEvents "english">>
+<</if>>
+
+:: English Lesson Sleep
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+당신은 도렌 선생님이 <<print either("부사의 적절한 사용에 대해 논하는", "활기차게 책의 내용을 크게 읽는", "노란 커튼의 상징성에 대해 이야기하는", "서로 다른 종류의 시들에 대한 예를 공유하는", "두 학생에게 연극을 재연하도록 하는")>> 동안 책상에 머리를 기댄다. 당신의 눈은 곧 감기고, 잠시 후, 눈을 뜬다. 당신은 깨어 있으려고 몸부림치지만, 책상은 너무나도 편안하다.
+<br><br>
+<<towelup>>
+<<tiredness -12>>
+<<advancelesson>>
+
+<<if $phase is 1>>
+	<<lessonEnd "englishClassroom" "sleep">>
+<<else>>
+	<<eventsenglishsleep>>
+<</if>>
+
+:: English Kylar Move
+
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if C.npc.Kylar.love gte 90>>
+	당신은 다른 자리로 가기 위해 물건을 챙긴다. 카일라가 당신의 허벅지 위에 손을 올린다. <<hisPost "의">> 손에는 칼 한 자루가 들려있다. "어-어딜 가는 거야, 내 사랑?" <<HePost "이">> 말한다. "이미 우리 자리가 있잖아."
+	<br><br>
+	<<link [[다음|English Lesson]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<set $kylarenglishstate to "watching">>
+	당신은 물건을 챙겨서 다른 자리로 간다. 카일라는 따라오지는 않지만, 펜으로 제 손을 쿡쿡 찌르기 시작한다.
+	<br><br>
+	<<link [[다음|English Lesson]]>><<endevent>><</link>>
+	<br>
+<</if>>

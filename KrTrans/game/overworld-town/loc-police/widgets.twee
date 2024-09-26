@@ -1,0 +1,64 @@
+:: Widgets Police [widget]
+
+<<widget "police_computer_action">>
+	경찰 컴퓨터를 사용해 범죄자 기록에 접근할 수 있다. 당신 자신의 이름을 찾아보니
+
+	<<if crimeSumCurrent() gte 6000>>
+		<span class="red">당신의 이름은 "특급 수배 중"이라는 명단에 올라 있고, 당신을 혹독하게 처벌할 거라는 계획이 짜여 있다.</span>
+	<<elseif crimeSumCurrent() gte 4500>>
+		<span class="red">당신을 체포하는 것은 우선 순위에 올라 있고, 당신을 극심하게 처벌할 만한 충분한 증거를 모아 두었다.</span>
+	<<elseif crimeSumCurrent() gte 4000>>
+		<span class="red">당신은 적극적으로 수색되고 있고,</span> <span class="red">중대한 처벌</span>을 집행할 수 있을 만한 충분한 증거가 모여 있다.
+	<<elseif crimeSumCurrent() gte 3000>>
+		당신에 대한 <span class="red">체포 영장이</span> 발급되어 있고, <span class="red">무거운 처벌</span>을 집행할 수 있을 만한 충분한 증거가 모여 있다.
+	<<elseif crimeSumCurrent() gte 2000>>
+		당신에 대한 <span class="red">체포 영장이</span> 발급되어 있고, 만만찮은 처벌을 집행할 수 있을 만한 충분한 증거가 모여 있다.
+	<<elseif crimeSumCurrent() gte 1000>>
+		당신에 대한 <span class="red">체포 영장이</span> 발급되어 있고, 처벌을 집행할 수 있을 만한 충분한 증거가 모여 있다.
+	<<elseif crimeSumCurrent() gte 500>>
+		<span class="gold">곧 당신에 대한 체포 영장을 발급할 수 있을지도 모를 만한 증거를 모아 두었다.</span>
+	<<else>>
+		<span class="teal">당신 이름으로는 특별한 기록이 없다.</span>
+	<</if>>
+	<br><br>
+
+	<<if crimeSumCurrent() gte 6000>>
+		Options:
+		<br>
+		<span class="teal">와이퍼 웜을 심으면</span> 모든 이들의 경찰 기록이 상당량 파괴될 것입니다. 당신 것도 포함해서요.
+		<br>
+		<span class="teal">누군가에게 죄를 뒤집어 씌우면</span> 당신의 이름으로 되어 있던 모든 증거가 다른 사람에게로 이동합니다. 이렇게 하면 분명 경찰을 교란시킬 것입니다.
+		하지만, 시스템에 이미 범죄 기록이 있었던 사람에게만 뒤집어 씌울 수 있습니다.
+		<br><br>
+		<<link [[와이퍼 웜을 심는다 (0:10)|Police Computer]]>><<pass 10>><<set $phase to 11>><<crimeDown 0.5 "all">><<set _randomCrime to ((random(5,35) + 20)/100)>><<crimeDown _randomCrime "all">><</link>>
+		<!-- Original crime calculation as follows:
+		<<set $crime /= 2>><<set $crime *= (random(5,35)/100)>> -->
+		<br>
+		<<if C.npc.Whitney.init is 1 and C.npc.Whitney.state isnot "dungeon" and $framed is 0>>
+			<<link [[휘트니에게 뒤집어 씌운다 (0:10)|Police Computer]]>><<pass 10>><<set $phase to 12>><<crimeClear "all">><</link>>
+			<br>
+		<</if>>
+		<<if $headpolice is 1 and $framed is 0>>
+			<<link [[레이턴에게 뒤집어 씌운다 (0:10)|Police Computer]]>><<pass 10>><<set $phase to 13>><<crimeClear "all">><</link>>
+			<br>
+		<</if>>
+		<<if $framed isnot 0>>
+			<span class="red">당신은 이미 <<trNamedNPC $framed>>_trResult에게 당신의 죄를 뒤집어 씌웠습니다. 그 사람이 당신의 범죄에 대해 대가를 치를 때까진 다시 뒤집어 씌울 수 없습니다.</span>
+		<</if>>
+	<<elseif crimeSumCurrent() gte 1000>>
+		선택지:
+		<br>
+		<span class="teal">전자적인 기록을 지우면</span> 경찰이 당신을 용의자로 지목할 수 있는 범죄 기록이 상당량 줄어들 것이고, 경찰이 당신을 잘 알아보지 못할 것입니다.
+		<br>
+		<span class="teal">와이퍼 웜을 심으면</span> 모든 이들의 경찰 기록이 상당량 파괴될 것입니다. 당신 것도 포함해서요.
+		<br>
+		<<link [[증거를 지운다 (0:15)|Police Computer]]>><<pass 15>><<set $phase to 10>><<set _randomCrime to ((random(5,35) + 20)/100)>><<crimeDown _randomCrime "all">><</link>>
+		<!-- Original crime calculation as follows:
+		<<set $crime -= $crime * ((random(5,35) + 20)/100)>> -->
+		<br>
+		<<link [[와이퍼 웜을 심는다 (0:10)|Police Computer]]>><<pass 10>><<set $phase to 11>><<crimeDown 0.5 "all">><</link>>
+		<br>
+
+	<</if>>
+	<br>
+<</widget>>

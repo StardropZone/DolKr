@@ -1,0 +1,1051 @@
+:: Temple Cloister
+<<set $location to "temple">><<set $outside to 0>><<effects>>
+
+당신은 일반인의 출입이 금지된 사원 회랑에 있다. <<if $malechance is 100>>수도사들이<<elseif $malechance is 0>>수녀들이<<else>>수도사와 수녀들이<</if>> 외곽을 배회하며 여러 통로에서 나타났다가 사라지는 모습을 볼 수 있다.
+<br><br>
+
+여섯 개의 팔과 여섯 개의 날개를 가진 천사상이 중앙에 의연하게 서 있다. 아래쪽 두 팔은 바닥에 있는 대형 거울을 들고 있다.
+<br><br>
+
+<<if isPregnancyEnding() and !$possessed>>
+	<<pregnancyPassout "temple">>
+<<elseif $stress gte $stressmax>>
+	<<passouttemple>>
+<<elseif $exposed gte 1>>
+    당신은 발소리가 들릴 때마다 가고일 기둥 뒤로 나체를 숨긴 채 회랑을 기어 다니며 돌아다닌다.
+    <br><br>
+    <<if $temple_cloister_progress>>
+        <<link [[숙소로 가는 비밀 통로 (0:01)|Temple Quarters]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <<link [[공개 홀 (0:01)|Temple]]>><<pass 1>><</link>>
+    <br>
+<<elseif $temple_monk_days gte 7 and $temple_cloister_week_event is undefined>>
+    <<generateTemple 1>><<person1>>
+    <<monk_ nun desc>> 조각 앞에서 기도하는 자세로 무릎을 꿇고 있다. 너무 움직이지 않아 <<hePost>> 자체가 동상일수도 있다고 느낀다. <<His_ ga>> 입을 움직이다, 눈을 뜨고 일어난다.
+    <br><br>
+    "아," <<he_ ga>> 웃으며 말한다. "처음 뵙는군요." <<He_ ga>> 고개를 숙인다. "우리 사원에 오신 것을 환영합니다."
+    <br><br>
+    <<link [[다음|Temple Loris]]>><<saveNPC 0 "loris_younger">><<set $temple_cloister_week_event to 1>><</link>>
+    <br>
+<<elseif $temple_monk_days gte 14 and $temple_cloister_week_event is 1>>
+    <<generateTemple 1>><<person1>>
+    헐떡이는 소리가 들린다. <<monk_ ga desc>> 풀숲 한가운데서 불규칙하게 채찍을 휘저으며 휘두르고 있다. <<He_ nun>> 당황한 기색이 역력하다.
+    <br><br>
+    <<His_ yi>> 눈이 당신의 눈과 마주치자, <<he_ nun>> 놀라서 비명을 지르며 <<his_ ga>> 들고 있던 채찍을 제어하지 못한다. 채찍이 <<his_ yi>> 몸을 휘감고, <<his_ yi>> 팔과 다리를 묶는다. <<He_ ga>> 바닥으로 넘어진다.
+    <br><br>
+
+    <<link [[도와준다|Temple Lemur Help]]>><<saveNPC 0 "lemur_plum">><<set $temple_cloister_week_event to 2>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+    <br>
+    <<link [[지켜본다 (0:02)|Temple Lemur Watch]]>><<pass 2>><<saveNPC 0 "lemur_plum">><<set $temple_cloister_week_event to 2>><</link>>
+    <br>
+
+<<else>>
+    <<if $temple_cloister_progress is undefined>>
+        <<link [[탐색한다 (1:00)|Temple Cloister Explore]]>><<set $temple_cloister_progress to 1>><<pass 60>><</link>>
+        <br>
+    <<else>>
+        <<link [[훈련실 (0:01)|Temple Cloister Training]]>><<pass 1>><</link>>
+        <br>
+        <<if $temple_confessor_intro>>
+            <<link [[처녀자리 조각상을 살펴본다|Temple Cloister Statue]]>><</link>>
+            <br>
+        <<else>>
+            <<link [[팔이 여섯 개인 조각상을 살펴본다|Temple Cloister Statue]]>><</link>>
+            <br>
+        <</if>>
+        <<link [[거울을 들여다본다|Temple Cloister Mirror]]>><<preMirror>><</link>>
+        <br>
+        <<link [[샤워한다 (0:01)|Temple Cloister Showers]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <br>
+    <<if $temple_cloister_progress>>
+        <<link [[숙소로 가는 비밀 통로 (0:01)|Temple Quarters]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <<link [[공개 홀 (0:01)|Temple]]>><<pass 1>><</link>>
+    <br>
+<</if>>
+
+:: Temple Cloister Explore
+<<set $outside to 0>><<effects>>
+
+<<npc "Jordan">><<person1>>
+<<generateTemple 2>>
+<<generateTemple 3>>
+<<generateTemple 4>>
+<<generateTemple 5>>
+<<generateTemple 6>>
+
+회랑을 벗어나 이어지는 터널을 탐험한다. <<Monks_and_Nuns_ ga>> 여러 방에서 나오거나 복도에서 지나가면서 정중하게 고개를 끄덕여 준다. 오래된 기도실과 현대적인 편의시설도 있다.
+<br><br>
+
+그러나 다른 복도는 뱀 모양의 미로로 이어진다. 여기서는 방의 기능이 명확하지 않는다. 기이한 복장, 이상한 제단, 낯선 행렬을 엿볼 수 있다.
+<br><br>
+
+당신은 회랑으로 돌아가는 길을 찾지 못해, 한참을 헤맨다. 어느 누구도 당신을 반갑게 맞아주지 않으니, 두려움보다는 당황스러움에, 당신은 길을 묻는 것을 망설인다. 하지만 결국은, 회랑과 그 안에 있는 쾌활한 가고일상 앞으로 다시 돌아온다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 2]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 2
+<<effects>>
+
+
+가장 가까운 가고일을 바라본다. 석상이 당신을 향해 미소를 짓는다. 한 손은 그 아래 석상에 얹혀 있고, 꼬리는 위의 석상을 감싸고 있다. 위의 천장에서 지지대를 떼어내고 날아오를 준비가 된 것처럼 보인다.
+<br><br>
+
+"<<sisterPost>>님." 조던이다. <<He_ nun>> 수도자의 모자를 뒤집어 쓴 채 당신을 향해 미소 짓고 있다.  "당신은 너무 빨리 돌아다니고 있어요. 이리오세요, 제가 구경시켜드릴게요."
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 3]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 3
+<<effects>>
+
+조던이 지하 통로 중 하나를 따라 내려가더니 나무 문 앞에서 멈춘다.  "기억하세요," <<he_ ga>> 금속이 부딪히는 소리 너머로 말한다. 여기서 배우는 모든 것은 바깥 세상에 알려지지 않는 비밀입니다." 무거운 문이 열리자 삐걱거리는 소리는 훨씬 더 커진다.
+<br><br>
+
+<<person2>><<monk_ wa desc>> <<person3>><<monk_ ga desc>> 원형의 방 한가운데서 춤을 춘다. 두 사람은 피루엣으로 서로 멀어졌다가 가까워졌다 돌진하며 모래 흔적을 남긴다. 그리고 반복한다. 그럴 때마다 금속성 소리가 울려 퍼진다. 그들은 춤추는 게 아니다. 싸우는 것이다.
+<br><br>
+
+다른 세 명이 팔짱을 끼고 서서 지켜본다. 조던이 <<person1>><<his_ yi>> 손뼉을 치자 전투가 멈춘다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 4]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 4
+<<effects>>
+<<person1>>
+"여기가 우리 훈련실 중 하나에요," 조던이 말한다. <<person2>><<He_ ga>> <<monkPost desc>>에게 말한다. "<<if $pronoun is "m">>형제여<<else>>자매여<</if>>. 무기를 준비하세요."
+<br><br>
+
+<<monk_ ga desc>> 양 손에 곤봉을 쥐고 앞으로 나아가며 당신이 볼 수 있도록 한다. 그 지팡이는 두꺼운 나무 막대를 중심으로 금속 고리가 둘러싸여져 있다.
+<br><br>
+
+"우리는 임무 중 이곳에서 두 가지 무기를 사용합니다."라고 조던은 계속 말한다. "이 곤봉이 그 중 하나죠." <<person1>><<He_ nun>> <<his_ yi>> 수도복 아래에 손을 뻗어, 꼬인 채찍을 꺼낸다. <<He_ nun>> 당신에게 확인해볼 수 있도록 내민다. "이것이 다른 무기입니다. 하나를 선택하세요."
+<br><br>
+
+<<set $prof.baton to 0>>
+<<set $prof.whip to 0>>
+
+<<link [[곤봉|Temple Cloister Baton]]>><<set $temple_weapon to "baton">><</link>>
+<br>
+<<link [[채찍|Temple Cloister Whip]]>><<set $temple_weapon to "whip">><</link>>
+<br>
+
+
+:: Temple Cloister Baton
+<<effects>>
+
+<<person2>><<monk_ ga desc>> 곤봉을 건네준다. 보기보다 무겁고, 특히 끝부분이 더 무겁다.
+<br><br>
+
+"<<sisterPost>>님, 이제 경기장으로 들어오세요." 조던이 당신에게 말을 건넨다. "걱정하지 마세요. 이건 그냥 시범일 뿐이니까요."
+<br><br>
+
+당신은 조던과 함께 모래 위로 올라간다. <<person3>><<monk_ nun desc>> <<person1>><<himPost>>에게 <<hisPost>> 자신의 곤봉을 건네준다. "스파링을 통해, 우리는 서로 더 가까워집니다. 타격에 너무 많은 힘을 넣지 마십시오. 여기서는 안됩니다." 예고 없이, <<he_ ga>> 앞으로 뛰어들어 <span class="red">당신의 엉덩이에 고통스러운 강타를 가하고</span> 당신 뒤에 착지한다.<<pain 1>><<gpain>>
+<br><br>
+
+<<link [[반격한다|Temple Cloister Baton Counterattack]]>><</link>>
+<br>
+<<link [[방어한다|Temple Cloister Baton Guard]]>><</link>>
+<br>
+
+:: Temple Cloister Baton Counterattack
+<<effects>>
+
+당신은 더 이상 기다리지 않는다. 조던이 등을 돌린 상태에서 <<hisPost "에게">> 뛰어들고, 당신의 곤봉을 그의 엉덩이에 조준한다. <<He_ nun>> 기적 같은 민첩성으로 몸을 숙이고 돌아 서서 제자리에서 회전하며, 당신의 타격을 피하면서 당신의 발목에 타격을 가한다.
+<br><br>
+
+당신이 넘어지는 순간, 본능이 작동하여 <<his_ yi>> 수도복 끝자락을 움켜쥔다. 당신은 <<his_ yi>> 얼굴에서 놀라움을 보았고, <<he_ nun>> 이내 당신 위로 쓰러진다. 다른 <<monks_and_nuns_ ga>> 웃는다.
+<br><br>
+
+조던은 쑥스럽게 일어나면서 당신을 일으켜 준다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 5]]>><</link>>
+<br>
+
+:: Temple Cloister Baton Guard
+<<effects>>
+
+당신은 곤봉을 들고 또 다른 공격을 준비한다. 조던은 모래를 발로 차며 피루엣 동작을 취하지만, 다른 공격은 하지 않는다. 대신, <<he_ nun>> 목례한다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 5]]>><</link>>
+<br>
+
+:: Temple Cloister Whip
+<<effects>>
+
+조던이 채찍을 당신에게 준다. 당신은 손잡이로 채찍을 잡고, 채찍끈을 땅에 떨어뜨린다.
+<br><br>
+
+"이제 경기장으로 들어오세요." 조던이 당신에게 말한다. "걱정하지 마세요. 이건 그냥 시범일 뿐이니까요."
+<br><br>
+
+당신은 조던과 함께 모래 위를 밟는다. <<He_ nun>> <<his_ yi>> 채찍을 꺼내든다. "스파링을 하면 서로 더 가까워지죠." <<He_ ga>> 채찍끈을 땅에 떨어뜨린다. "저희는 대련할 때 발만 노립니다." 예고도 없이 <<he_ nun>> 앞으로 돌진한다. 채찍이 <<him_ yi>> 주위를 춤을 추며 움직이고, <<he_ ga>> 당신의 뒤로 도착했을땐 이미 당신의 발목은 채찍에 감겨있다.
+<br><br>
+
+<<link [[반격한다|Temple Cloister Whip Counterattack]]>><</link>>
+<br>
+<<link [[채찍을 풀어낸다|Temple Cloister Whip Guard]]>><</link>>
+<br>
+
+:: Temple Cloister Whip Counterattack
+<<effects>>
+
+당신은 조던의 발을 향해 채찍을 날린다. <<He_ nun>> 우아하고 능숙하게 당신의 채찍질을 피하곤 자신의 무기를 들어 당신을 걸려 넘어지게 한다.
+<br><br>
+
+당신이 넘어지는 순간, 본능이 작동하여 <<his_ yi>> 수도복 끝자락을 움켜쥔다. 당신은 <<his_ yi>> 얼굴에서 놀라움을 보았고, <<he_ nun>> 이내 당신 위로 쓰러진다. 다른 <<monks_and_nuns_ ga>> 웃는다.
+<br><br>
+
+조던은 쑥스럽게 일어나면서 당신을 일으켜 준다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 5]]>><</link>>
+<br>
+
+:: Temple Cloister Whip Guard
+<<effects>>
+
+당신은 발목에 감긴 채찍을 풀어내려하지만, 그것은  너무 꽉 조여있다. 조던은 급회전하며, <<his_ yi>> 채찍을 높이 들고 있다가, 손목을 한 번 꺾으면서 당신을 풀어준다.
+<br><br>
+
+<<He_ nun>> 추가 공격은 하지않고, 목례한다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 5]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 5
+<<effects>>
+
+"이 무기들은 연습이 필요합니다."라고 조던은 말한다. "원하시면 언제든 이곳에 오셔서 훈련하셔도 됩니다. 시간이 너무 늦지 않았다면, 스파링 상대가 있을 겁니다. 사원에서 무기를 가지고 나와도 되지만, 규칙이 있습니다."
+<br><br>
+
+"첫번째 규칙. 사람이든 동물이든 <span class="pink">다른 생명체에게 무기를 사용하지 마세요.</span>"
+<br>
+"두 번째 규칙. 한 번에 하나의 무기만 휴대할 수 있습니다."
+<br><br>
+
+"언제든지 이곳에서 무기를 교체할 수 있습니다. 곤봉은 마스터하기가 더 어려워 보일 수 있지만 그렇지 않습니다. 어떤 사람들은 초보자에게 더 쉽다고 주장합니다만 저는 잘 모르겠습니다."
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 6]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 6
+<<effects>>
+
+경기장에 불안한 침묵이 내려앉는다.  <<monks_and_nuns_ ga>> 서로를 힐끗 쳐다봅니다. "있어요." 조던이 말한다. "당신이 봐야 할 게 있어요. 날 따라와요."
+<br><br>
+
+<<endevent>>
+<<npc "Jordan">><<person1>>
+<<generateTemple 2>>
+<<generateTemple 3>>
+
+조던이 방에서 다시 회랑으로 안내한다. <<He_ rul>> 따라 가장자리를 돌아 다른 통로로 내려간다. 여기 복도에는 끝을 제외하고는 문이 없다. 조던이 문을 열어준다.
+<br><br>
+
+내부에는 벽을 따라 항아리들과 병들이 가득한 선반들이 줄지어 늘어 서 있고, <<person2>><<monk_ wa desc>> <<person3>><<monk_ ga desc>>, 불이 붙은 화로 옆에 서 있다. 천장의 구멍을 통해 연기가 피어오른다.
+<br><br>
+
+두 사람은 조던에게 목례를 하고 호기심 어린 눈으로 당신을 관찰한다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 7]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 7
+<<effects>>
+<<person1>>
+<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+	"평소라면, 지금이 당신이 우리의 성스러운 와인을 마셔야 할 때 입니다. 하지만, 당신이 임신하고 있으니 우리는 강요하지 않을 거에요," <<he_ ga>> 미소를 지으며 말한다. "화로에 불을 붙이세요. 평소의 양보다 두 배를 사용할 거에요," 조던이 말한다. 화로에 이미 불이 켜져 있는 상황에서, 다소 기이한 명령이다. "우리의 새로운 <<sisterPost>>님에게 시범을 보여줘야겠어요."
+	<br><br>
+
+	<<person2>><<monk_ ga desc>> 한쪽 벽을 따라 늘어선 선반에 다가가서, 항아리 하나에 양손을 뻗는다. <<He_ nun>> 이제 양손을 꽉 쥔 채로, 손을 뺀 후, 화로로 돌아온다.
+	<br><br>
+
+	<<He_ ga>> 불에 가루 두 주먹을 튕기고 나니 달콤한 향기가 방 안을 가득 채운다.<<garousal>><<ghallucinogens>><<hallucinogen 60>><<arousal 600>>
+<<else>>
+	"한 줌 가져 와 화로에 불을 붙이세요." 조던이 말한다. 화로에 이미 불이 켜져 있는 상황에서, 다소 기이한 명령이다. "우리의 새로운 <<sisterPost>>님에게 시범을 보여줘야겠어요."
+	<br><br>
+
+	<<person3>><<monk_ ga desc>> 허리를 굽혀 절하고 벽에서 조심스럽게 병 하나를 고른다. <<He_ ga>> 그것을 조던에게 넘기고, 조던은 숙련된 움직임으로 그것을 열고 당신에게 준다. "단 한 모금이면 충분해요. 이것은 모든 신참 <<sisterPost>>들이 해야하는 관례죠."
+	<br><br>
+
+	당신은 그것을 입술에 가져간다. 그것이 주는 감각은 이상하다; 처음에는 그것은 차가웠지만, 당신의 입술과 목구멍은 빠르게 무감각함과 따뜻함 사이를 오간다. 그 맛은 달콤하고, 당신은 당신 자신이 그것을 더 마시고 싶은 욕구에 저항하고 있다는 것을 알아차린다. <<garousal>><<galcohol>><<ghallucinogens>><<hallucinogen 30>><<alcohol 60>><<arousal 300>>
+	<br><br>
+
+	<<person2>><<monk_ ga desc>> 반대쪽 벽을 따라 늘어선 선반에 다가가서, 항아리 하나에 손을 뻗는다. <<He_ nun>> 이제 손을 꽉 쥔 채로, 손을 뺀 후, 화로로 돌아온다.
+	<br><br>
+
+	<<He_ ga>> 불에 가루 한 주먹을 튕기고 나니 달콤한 향기가 방 안을 가득 채운다.<<garousal>><<ghallucinogens>><<hallucinogen 30>><<arousal 300>>
+<</if>>
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 8]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 8
+<<effects>>
+
+<<person1>>조던이 화로 옆을 지나 방의 빈 공간에 서 있다. 두 사람은 <<He_ yi>> 좌우로 걸어가 서로 마주본다. "당신의 도움이 필요해요." 조던이 말한다. "여기 좀 봐요."
+<br><br>
+
+당신은 돌로 만든 함정 문처럼 바닥에 홈이 있는 것을 알아챈다. 당신은 <<brothers_and_sistersPost>> 옆에 자리를 잡고 함께 무거운 석판을 들어 올린다.
+<br><br>
+
+다른 사람들은 기다렸다는 듯이 가만히 서 있다. 그러다 불빛에 반쯤 비치는 것을 발견한다. 그림자의 촉수 하나가 깊은 곳에서 솟아오르며 깜빡였다가 사라지기를 반복한다. 마치 이 존재가 진짜인지 아닌지를 두고 마음속에서 전투가 벌어지는 것 같다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 9]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 9
+<<effects>>
+
+"이것이 적입니다" 조던은 약간 당황스럽지만 일상적인 어조로 말한다. 마치 <<he_ ga>> 당신에게 시설의 화장실을 보여주는 것처럼요. "이 마을 곳곳에 이런 것들이 스며드는 균열이 있다. 그것이 이곳에 사원이 있는 이유입니다. 그리고 우리가 싸우는 법을 배우는 이유입니다."
+<br><br>
+
+<<He_ nun>> <<his_ yi>> 수도복에서 채찍을 꺼내 채찍끈을 머리위로 휘두르다 그 생물 주위로 채찍을 내려친다. 유령 같은 빛이 방을 비추고, 그 생물은 증발한다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 10]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 10
+<<effects>>
+
+석판이 쿵 소리와 함께 복원된다. "경험이 많은 <<brothers_and_sisters_ ga>> 이 괴물들과 싸우는 임무를 맡게 될 겁니다." 조던이 말한다. "당신도 우리 중 한 명이지만 아직은 너무 풋내기예요. 하지만 당신에게는 다른 임무가 있어요. 가시죠."
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 11]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 11
+<<effects>>
+<<generate4>>
+조던을 따라 회랑을 지나 사원으로 돌아간다. <<He_ ga>> 고해성사실로 안내한다. 그 순간 <<person4>><<monk_ ga desc>> 평온한 표정으로 나타난다.
+<br><br>
+조던은 잠시 멈춰서서, <<him_ ga>> 건물 밖으로 나가는 것을 지켜본다. 
+<br><br>
+<<link [[다음|Temple Cloister Explore 12]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 12
+<<effects>>
+
+"이제 당신 다른 사람의 고해성사를 들어야 할 의무가 있습니다."라고 조던은 말한다. "대부분의 사람들은 단순히 용서가 필요합니다. 안심시켜 주세요. 특히 죄를 지은 사람들은 회개가 필요할 것이다." <<person1>><<He_ yi>> 얼굴이 붉어진다. "그 일이 어떻게 진행되는지는 말해주지 않았지만, 굉장히 힘들다고 들었어요. 당신의 역할은 단순히 고해성사를 듣는 이들을 위해 이름을 적어두는 것일 테니 걱정할 필요는 없어요."
+<br><br>
+
+<<He_ ga>> 잠시 멈춘다. 그러고는 미소 짓는다. "나중에 더 설명드릴게요. 일단 숙소로 따라오세요. 당신의 침대를 지정해두었습니다."
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 13]]>><</link>>
+<br>
+
+
+:: Temple Cloister Explore 13
+<<effects>>
+
+조던이 계단을 따라 숙소로 안내한다. "당신은 이제 더 이상 청소만 하러 여기에 오지 않을 겁니다." <<he_ nun>> 계속 걸으며 말한다. <<He_ nun>> 방 맨 끝 근처에 있는 침대에서 멈춘다. "이거요. 이쪽 창문으로 숲의 아름다운 경치를 볼 수 있어요."
+<br><br>
+
+침대에 무릎을 꿇고 앉아야 잘 볼 수 있지만, <<he_ ga>> 맞았다. 사원은 생각보다 높습니다. 나무 꼭대기가 수평선까지 뻗어 있다.
+<br><br>
+
+"여기에는 옷을 보관할 수 있는 수납장과 옷을 갈아입을 수 있는 가림막이 있습니다."
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 14]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 14
+<<effects>>
+
+"보여드릴 게 하나 더 있습니다." 조던이 말한다. "또 다른 비밀이 있어요."
+<br><br>
+
+입구로 걸어가는 대신, <<He_ nun>> 숙소의 끝, 보이지 않는 골방으로 계속 들어간다. 당신은 뒤를 따라가고, 근엄한 표정의 사제가 그려져 있는 대형 초상화를 마주한다.
+<br><br>
+
+"무서운 표정을 두려워하지 마세요." 조던이 손가락을 벽에 대며 말한다. "수련생들을 겁주려는 거예요." <<He_ ga>> 돌벽돌 중 하나를 손바닥으로 누른다. 손바닥이 살짝 움직이더니 초상화가 열리면서 근엄한 인물이 그려진 초상화가 반으로 갈라진다. 이내 비밀 계단이 드러나면서 초상화가 시야에서 사라진다.
+<br><br>
+
+조던은 당신이 앞장서 달라고 부탁한다.
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 15]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 15
+<<effects>>
+
+계단을 내려가면 또 다른 큰 그림이 있다. 나무에 둘러싸여 달빛에 흠뻑 젖은 은색 문이 그려져 있다.
+<br><br>
+
+잠시 더듬거리던 조던이 벽돌을 누르자 문이 열리면서 좌우로 이어지는 복도가 드러났다. "알아보시겠어요?" 조던이 묻는다. "회랑 밑에 있는 터널이에요. 유용하죠, 왜냐하면..." <<he_ ga>> 잠시 멈춘다. "보여드릴게요."
+<br><br>
+
+<<He_ ga>> 복도에 들어서서 맞은편 문을 연다. 그와 동시에 물 흐르는 소리가 들린다. "샤워실에 도착했어요." <<He_ ga>> 미소 짓는다. "우리의 진흙 투성이 <<brothers_and_sisters_ ga>> 먼 길을 돌아가게 해서는 안되죠!"
+<br><br>
+
+<<link [[다음|Temple Cloister Explore 16]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 16
+<<effects>>
+
+조던이 가볍게 목례한다. "기본 사항을 알려드렸습니다." <<he_ ga>> 말한다. "저는 제 임무로 돌아가야 합니다. 환영합니다, <<sisterPost>>님."
+<br><br>
+
+수도복의 가장자리가 <<he_ ga>> 돌아서 떠날 때 넓게 퍼져나간다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Training
+<<effects>><<set $outside to 0>>
+
+<<if Time.dayState isnot "night">>
+    <<generateTemple 1>>
+    <<generateTemple 2>>
+    <<person1>>
+    훈련실 중 한 곳에 들어가면, <<monk_ ga desc>> <<person2>><<monk_ wa desc>> 스파링하고 있는 것을 발견할 수 있다. 방 뒤쪽에는 흉포해 보이는 채찍과 봉이 놓인 무기 선반이 있다.
+    <br><br>
+<<else>>
+    훈련실 중 한 곳에 들어간다. 텅 비어 있다. 낮에 많이 사용했음에도 불구하고 중앙의 경기장 바깥에는 모래 한 톨도 보이지 않는다. 방 뒤쪽에는 흉포해 보이는 채찍과 봉이 놓인 무기 선반이 있다.
+    <br><br>
+    낮에 여기서 스파링을 할 수 있다.
+    <br><br>
+<</if>>
+<<if Time.dayState isnot "night">>
+	<<set _bound to []>>
+	<<if $leftarm is "bound" or $rightarm is "bound">><<run _bound.push("팔")>><</if>>
+	<<if $feetuse is "bound" or $worn.feet.type.includes("shackle")>><<run _bound.push("다리")>><</if>>
+    <<if _bound.length>>
+		<span class="blue">당신은 <<print formatList(_bound, "그리고")>>?ga 묶여있는 상태로는 스파링을 할 수 없다.</span>
+		<br>
+    <<elseif $temple_spar is 1>>
+        <<link [[스파링|Temple Cloister Spar Fail]]>><</link>>
+        <br>
+    <<else>>
+        <<if $temple_weapon is "baton">>
+            <<if $prof.baton gte 1000>>
+                <<link [[스파링 (1:00)|Temple Cloister Spar Baton]]>><<prof baton 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 3 bishop>><<pass 60>><</link>><<gtiredness>><<gbaton>><<gphysique>><<gggrace bishop>>
+            <<else>>
+                <<link [[스파링 (1:00)|Temple Cloister Spar Baton]]>><<prof baton 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 1 priest>><<pass 60>><</link>><<gtiredness>><<gbaton>><<gphysique>><<ggrace priest>>
+            <</if>>
+        <<elseif $temple_weapon is "whip">>
+            <<if $prof.whip gte 1000>>
+                <<link [[스파링 (1:00)|Temple Cloister Spar Whip]]>><<prof whip 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 3 bishop>><<pass 60>><</link>><<gtiredness>><<gwhip>><<gphysique>><<gggrace bishop>>
+            <<else>>
+                <<link [[스파링 (1:00)|Temple Cloister Spar Whip]]>><<prof whip 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 1 priest>><<pass 60>><</link>><<gtiredness>><<gwhip>><<gphysique>><<ggrace priest>>
+            <</if>>
+        <</if>>
+        <br>
+    <</if>>
+<</if>>
+<<if $temple_weapon is "baton">>
+    <<link [[무기를 채찍으로 바꾼다|Temple Training Whip]]>><<set $temple_weapon to "whip">><</link>>
+    <br>
+<<elseif $temple_weapon is "whip">>
+    <<link [[무기를 곤봉으로 바꾼다|Temple Training Baton]]>><<set $temple_weapon to "baton">><</link>>
+    <br>
+<</if>>
+<br><br>
+<<link [[떠난다|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Training Whip
+<<effects>>
+
+무기 선반으로 다가간다. 다양한 종류의 야만적인 채찍과 결정적인 곤봉이 당신을 맞이한다.
+<br><br>
+
+곤봉을 놓고 채찍을 선택한다. 기대감에 채찍끈이 흔들린다.
+<br><br>
+
+<<link [[다음|Temple Cloister Training]]>><<endevent>><</link>>
+<br>
+
+:: Temple Training Baton
+<<effects>>
+
+무기 선반으로 다가간다. 다양한 종류의 야만적인 채찍과 결정적인 곤봉이 당신을 맞이한다.
+<br><br>
+
+채찍을 두고 곤봉을 잡는다. 금속이 열심히 빛난다.
+<br><br>
+
+<<link [[다음|Temple Cloister Training]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Fail
+<<effects>>
+
+"<<sisterPost>>님! 오늘 하루동안 충분히 스파링했습니다." <<person1>><<monk_ i desc>> 말한다. "우리 몸은 그렇게 많이 견딜 수 없어요. 저는 조던에게 제가 친선 경기 도중 당신을 다치게 했다는 것을 알리고 싶지 않아요."
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><</link>>
+<br>
+
+:: Temple Cloister Spar Baton
+<<effects>>
+
+<<person1>><<monk_ gwa desc>> <<person2>><<monk_ i desc>> 서로에게 맞절을 한 다음 <<monk_ i desc>> 경기장에 발을 내딛는다. <<He_ ga>> 모래 위를 밟는 모습을 옆에서 지켜본다.
+<br><br>
+
+<<person1>><<monk_ ga desc>> 당신에게 목례 후 준비 자세를 취한다.
+<br><br>
+
+<<if $prof.baton gte 1000>>
+    <<if $temple_spar_baton is 5>>
+        <<link [[다음|Temple Cloister Spar Baton 6]]>><<set $temple_spar_baton to 6>><</link>>
+        <br>
+    <<else>>
+        서로에게 달려든다. <<He_ ga>> 첫 타격을 막아냈지만, <<he_ nun>> 모든 힘을 다 해야 한다. <<he_ ga>> 당신의 기술을 따라갈 수 없다는 것은 분명하지만, 당신은 <<him_ ga>> 향상되도록 도울 수 있다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.baton gte 800>>
+    <<if $temple_spar_baton is 4>>
+        <<link [[다음|Temple Cloister Spar Baton 5]]>><<set $temple_spar_baton to 5>><</link>>
+        <br>
+    <<else>>
+서로 일격을 주고 받는다. 당신은 대부분의 시합에서 승리하지만 상대는 결코 만만치 않는다. 상대방의 사소한 집중력 저하를 이용해, <<monk_ gwa desc>> 가끔 무승부가 나기도 한다.        
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.baton gte 600>>
+    <<if $temple_spar_baton is 3>>
+        <<link [[다음|Temple Cloister Spar Baton 4]]>><<set $temple_spar_baton to 4>><</link>>
+        <br>
+    <<else>>
+        당신은 <<himPost "에">> 맞서기 위해 몇번이고 도약한다. 두 사람 중 한 명이 흔들릴 때까지 시합의 강도는 점점 더 세진다. 당신은 맞은 만큼 돌려 주고, 맞지 않은 만큼 자주 이긴다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.baton gte 400>>
+    <<if $temple_spar_baton is 2>>
+        <<link [[다음|Temple Cloister Spar Baton 3]]>><<set $temple_spar_baton to 3>><</link>>
+        <br>
+    <<else>>
+        서로에게 달려들고 곤봉이 부딪친다. 시합에서 몇번이고 주고받는다. 보통은 <<monk_ ga desc>> 우위를 점하지만, 가끔 무승부가 날 때도 있다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.baton gte 200>>
+    <<if $temple_spar_baton is 1>>
+        <<link [[다음|Temple Cloister Spar Baton 2]]>><<set $temple_spar_baton to 2>><</link>>
+        <br>
+    <<else>>
+        최선을 다해 자신을 방어한다. 가끔씩 <<monk_ yi desc>> 공격을 막아내지만, 계속 따라잡기는 힘들다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<else>>
+    <<if $temple_spar_baton is undefined>>
+        <<link [[다음|Temple Cloister Spar Baton 1]]>><<set $temple_spar_baton to 1>><</link>>
+        <br>
+    <<else>>
+        최선을 다해 방어하지만, 계속 따라잡기는 힘들다. 간간이 <<monkPost desc>>에게 반격을 가하지만, <<he_ ga>> 매번 회피한다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<</if>>
+
+:: Temple Cloister Spar Baton 1
+<<effects>>
+
+아무런 경고도 없이, <<he_ ga>> 당신에게 달려든다. 당신은 곤봉으로 자신을 보호하려 하지만, <span class="pink"><<he_ nun>> 너무 빠르다.</span> <<He_ ga>> 당신의 엉덩이를 가볍게 치곤, 방어 자세로 변경한다.
+<br><br>
+
+당신이 정신을 차리기도 전에 <<he_ ga>> 몇 번이고 다시 공격한다. 매번 다른 각도에서 공격이 가해지며, 방어할 준비가 된 상태에서 곤봉을 잡을 수도 없다.
+<br><br>
+
+당신은 공격하기로 결심한다. <<he_ nun>> 잠시 충격을 받은 듯 보였지만, 다시 정신을 차리고 당신의 공격을 옆으로 피한다. 당신은 비틀거렸고, <<he_ ga>> 지나가면서 당신의 정강이를 치고간다.
+<br><br>
+
+"자네는 느끼지 못할 수도 있겠지." <<person2>><<monk_ ga desc>> 여전히 옆에서 지켜보며 말한다. "하지만 당신은 발전하고 있습니다."
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Spar Baton 2
+<<effects>>
+
+<<He_ ga>> 당신에게 달려든다. 당신은 <<he_ yi>> 공격을 피하면서 당신의 곤봉을 움직여 <<he_ yi>> 무기와 맞서지만, <<he_ nun>> 한 공격에서 회복하여 당신이 회복하기 전에 다음 공격으로 넘어가 당신의 허벅지를 때린다.
+<br><br>
+<<He_ ga>> 목례를 하고, 다시 한번 방어 태세를 취한다. 당신도 마찬가지다. 다음에 <<he_ ga>> 달려들 때, 당신은 그 자리에서 발을 단단히 고정하고 곤봉이 맞닿는다. 그 힘으로 인해 당신은 바닥에 쓰러진다.
+<br><br>
+<<He_ ga>> 당신을 일으켜 세우고 목례를 한다음 다시 공격을 반복한다. 그떄마다 <<he_ ga>> 너무 빨리 공격해 두번째 공격은 방어가 불가능하거나, 그 힘에 밀려 모래 바닥에 쓰러진다.
+<br><br>
+당신은 더 공격적이 되기로 결심한다. 당신은 <<his_ yi>> 타격을 막아내고, <<his_ yi>> 힘을 이용해 <<he_ rul>> 넘어트린다. 당신은 반격을 위해 곤봉을 들어 올린다. <<he_ ga>> 집중력을 잃고 인상을 찌푸리더니, <<he_ yi>> 무기를 들어 당신의 무기를 막으려다가 뒤로 물러난다.
+<br><br>
+<<person2>><<monk_ ga desc>> 박수 친다. "당신은 타고났어요. 계속하세요."
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Baton 3
+<<effects>>
+
+<<He_ nun>> 당신을 관찰하고, 당신의 의도와 다른 근육의 움직임을 확인한다. 두 사람은 서로에게 달려들고, 곤봉이 '쾅'하는 소리와 함께 부딪친다.
+<br><br>
+때때로 당신은 <<he_ wa>> 만날 수 있을 만큼 빠르게 다시 전투에 뛰어들 수 있지만, <span class="blue">일관성이 없다.</span> 실패할 때마다 타격을 받는다. 잠시 후 좋은 리듬을 찾을 수 있다. 열 번, 열한 번, 열두 번 실패하지 않고 막아낸다.
+<br><br>
+집중력이 약간 흐트러지고 회복이 너무 느리다. 자신이 충분히 빠르게 대응하지 못한다는 것을 깨닫는다. 그 순간, 당신은 그 자리를 지키기로 결심하고 특별한 방어동작으로 상대를 잡으려고 노력한다.
+<br><br>
+당신은 <<he_ yi>> 돌진을 간신히 피했지만 힘이 너무 크다. 둘 다 모래에 떨어진다.
+<br><br>
+"특이한 무승부"라고 <<person2>><<monk_ ga desc>> 말한다.
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Baton 4
+<<effects>>
+
+공격의 신호가 될 수 있는 작은 움직임, 근육의 비틀림 하나하나를 의식하며 서로를 주시한다.
+<br><br>
+<span class="lblue">타격을 주고받는다,</span> 모래를 발로 차 공중제비를 하며 다시 한 번 서로에게 날아간다. 어느 한쪽이 조금만 실수해도 싸움이 끝날 것 이다. 대신 강도가 높아지고 속도가 빨라져 마침내 <<monk_ yi desc>>집중력이 흔들린다. <<He_ nun>> 당신의 일격을 막아내는 데는 성공했지만, 착지에 실패해 <<he_ yi>> 뒤로 떨어진다.
+<br><br>
+<<person2>><<monk_ i desc>> 박수를 보낸다. 당신은 <<person1>><<monk_ ul desc>> 일으켜 세우고 목례를 한다. 
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Baton 5
+<<effects>>
+
+당신은 먼저 공격하여 상대의 반응을 유도한다. 두 곤봉이 만나고, 착지하고, 공중제비를 하며, 다시 돌진한다. <<he_ ga>> 매번 당신이 공격하는 타이밍에 움직인다. 너무 빨리 움직여서 날아오는 모래를 피하려면 눈을 감고 있어야 한다.
+<br><br>
+한참을 이렇게 서로를 누르고 있지만, <span class="teal"><<monk_ i desc>> 더 빨리 지쳐가는게 분명하다.</span> <<He_ do>> 그걸 알고 있다. <<He_ nun>> <<he_ yi>> 남은 힘을 모두 쏟아 부어 필사적으로 거칠게 공격한다.
+<br><br>
+두 사람의 곤봉이 만났습니다. 조금만 실수해도 패배할 수 있다. 대신 여느 때와 다름없이 곤봉을 막아낸다. 상대방은 모래 위에서 미끄러지면서 공중으로 던져지며 멈춘다.
+<br><br>
+<<person2>><<monk_ i desc>> 박수를 두번 친다. "저는 전문가들간의 한판 승부가 좋습니다."
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Spar Baton 6
+<<effects>>
+상대의 움직임을 살피며 근육의 경련을 눈치 채고 기다린다. <<He_ ga>> 움직이면 공중제비를 하며 다시 공격한다.
+<br><br>
+<<His_ yi>> 회복이 느리고, 당신의 공격은 강하다. <<His_ yi>> 등은 여전히 돌아가 있는 동안, 당신은 다시 한번 돌진공격을 준비한다. <<he_ nun>> 그것을 알고 막으려는 시도대신 회피한다. 당신은 <<him_ yi>> 옆으로 날아가 착지하고 다시 한 번 <<himPost "에">>게 돌진한다. <<his_ yi>> 상당 부분은 단순히 당신의 공격을 피하는 것에 집중되어 있다.
+<br><br>
+<span class="green">어쩔 수 없는 일이다.</span> <<He_ ga>> 지쳐서, 당신은 <<his_ yi>> 엉덩이에 일격을 가한다. 당신은 목례를 하고 <<he_ nun>> 몇 번이고 공격을 시도한다. 매번 <<he_ ga>> 공격을 성공할 때까지 회피하거나, <<he_ ga>> 회피를 시도하면 당신은 힘으로 <<he_ rul>> 바닥에 쓰러트린다.
+<br><br>
+잠시 후 <<he_ ga>> 조금 익숙해지기 시작하면서 공격의 방향을 바꾸고 빠르게 회복할 수 있게 된다. 당신은 <<he_ yi>> 반격을 튕겨내고 자신의 공격으로 <<he_ rul>> 때린다.
+<br><br>
+지친 두 사람은 서로에게 목례를 한다. <<person2>><<monk_ ga desc>> 박수를 보낸다.
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Spar Whip
+<<effects>>
+
+<<person1>><<monk_ gwa desc>> <<person2>><<monk_ i desc>> 서로에게 목례를 한 다음, <<monk_ i desc>> 경기장으로 발을 내딛는다. 당신은 <<He_ ga>> 모래 위를 밟는 모습을 옆에서 지켜본다.
+<br><br>
+
+<<person1>><<monk_ ga desc>> 당신에게 목례를 한 뒤, 채찍을 휘두르기 시작한다.
+<br><br>
+
+<<if $prof.whip gte 1000>>
+    <<if $temple_spar_whip is 5>>
+        <<link [[다음|Temple Cloister Spar Whip 6]]>><<set $temple_spar_whip to 6>><</link>>
+        <br>
+    <<else>>
+        당신은 채찍을 휘두른다. <<His_ yi>> 눈은 당신의 채찍의 패턴을 파악하려고 주위를 훑고, <<he_ ga>> 뒤로 물러나며 경기장 가장자리에 걸려 넘어질 뻔 한다. <<he_ ga>> 당신의 실력을 따라잡을 수 없는 것은 분명하지만, 당신은 <<him_ yi>> 실력 향상을 도울 수 있다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.whip gte 800>>
+   <<if $temple_spar_whip is 4>>
+        <<link [[다음|Temple Cloister Spar Whip 5]]>><<set $temple_spar_whip to 5>><</link>>
+        <br>
+    <<else>>
+        당신은 채찍을 휘두르며 <<him_ gwa>> 만나 <<him_ yi>> 공격을 막는다. 일반적으로 당신의 채찍이 <<his_ yi>> 다리를 감싸 <<he_ rul>> 땅바닥으로 넘어트린다, 그러나 가끔 <<hePost "에게">> 호의를 베풀기도한다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.whip gte 600>>
+    <<if $temple_spar_whip is 3>>
+        <<link [[다음|Temple Cloister Spar Whip 4]]>><<set $temple_spar_whip to 4>><</link>>
+        <br>
+    <<else>>
+        당신과 대련자는 서로 채찍을 휘두르며, 나란히 돌아가다가, 결국 누군가 비틀거려 모래 위에 넘어진다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.whip gte 400>>
+    <<if $temple_spar_whip is 2>>
+        <<link [[다음|Temple Cloister Spar Whip 3]]>><<set $temple_spar_whip to 3>><</link>>
+        <br>
+    <<else>>
+        <<He_ nun>> 기운을 차린다. 당신은 <<his_ yi>> 채찍의 움직임을 분별할 수 있지만 당신의 몸은 따라갈 수 없다. <<He_ nun>> 당신을 많이 넘어뜨리지만 때때로 호의를 베풀기도한다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.whip gte 200>>
+    <<if $temple_spar_whip is 1>>
+        <<link [[다음|Temple Cloister Spar Whip 2]]>><<set $temple_spar_whip to 2>><</link>>
+        <br>
+    <<else>>
+        <<His_ yi>> 채찍이 소용돌이 친다. <<monk_ ga desc>> 그의 채찍질을 끊지 않고 회피하지만, 그 움직임을 간간이 파악하여 회피하거나 반격을 가할 수 있을 정도다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<else>>
+    <<if $temple_spar_whip is undefined>>
+        <<link [[다음|Temple Cloister Spar Whip 1]]>><<set $temple_spar_whip to 1>><</link>>
+        <br>
+    <<else>>
+        <<His_ yi>> 채찍이 빙글빙글 돌며 발에 채찍질을 해 경기장 가장자리로 밀어붙인다. 간혹 덫을 피할 수 있지만, 대부분은 넘어지고 만다.
+        <br><br>
+        당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+        <br><br>
+
+        <<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<</if>>
+
+:: Temple Cloister Spar Whip 1
+<<effects>>
+
+채찍이 <<himPost>> 주위를 , <span class="pink">눈동자로 따라잡을 수 없을 정도로 빠르게 돌며,</span> 한걸음 한걸음 내딛을 때마다 점점 더 가까이 다가온다. <<He_ ga>> 당신을 뒤로 밀쳐 경기장 가장자리로 넘어뜨려 <<bottom_ ro>> 보내버린다.
+<br><br>
+당신이 일어서자 <<He_ ga>> 맞절을 하고는 다시 시작위치로 돌아간다. 당신은 몇번이고 다시 시도하지만, 매번 <<monk_ ga desc>> 휘두르는 채찍의 격렬한 소용돌이를 이겨내기에는 역부족이다. 상대는 첫 번째 시합을 하는것처럼 진지하게 각 시합에 임한다.
+<br><br>
+그러다 잠시 혼돈 속에서 패턴을 엿볼 수 있다. 당신은 뒤로 물러서지 않고 앞으로 나아가 <<hisPost "에게">> 채찍을 휘둘러, <<him_ ga>> 반응하도록 만든다. <<He_ ga>> 당신의 공격을 피하고 몸을 돌려 반격에 나서며 <<his_ yi>> 채찍이 당신의 다리를 휘감는다. 당신은 바닥에 쓰러진다. <<person2>><<monk_ ga desc>> 박수를 보낸다.
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 2
+<<effects>>
+
+흐릿한 부분이 눈에 띄는 패턴으로 합쳐진다. 당신은 <<his_ wa>> 맞서기 위해 채찍을 뻗었지만, <<he_ ga>> <<his_ yi>> 움직임 템포를 바꾸며, <span class="purple">당신의 공격을 피하고 공격을 계속한다.</span> <<his_ ga>> 경기장을 가로질러 오는 속도를 늦출 수 있는 것은 당신이 코너에 몰리기 전까지 뿐이다.
+<br><br>
+
+더 이상 기댈 곳이 없는 당신은 채찍을 휘둘러 <<monk_ yi desc>> 다리를 맞춘다. <<He_ ga>> 뛰어 넘었지만, 잠시 틈이 생깁니다. 당신은 그 순간을 놓치지 않고 틈새로 돌진하여 함정을 빠져나온다. <<person2>><<monk_ ga desc>> 미소를 짓지만, 이 작은 승리에 감사할 시간이 없다.
+<br><br>
+
+<<person1>><<He_ ga>> 계속해서 당신을 궁지로 몰아넣는다. 매번 벽에 부딪힐 때마다 당신은 갑자기 절박한 의지를 발견하고 탈출에 성공한다. 하지만 공격은 멈추지 않고 계속되며, 마침내 지친 당신은 그런 도박을 할 수 있는 속도를 내지 못한다. <<He_ ga>> <<his_ yi>> 채찍을 당신의 무릎을 휘감아 당신을 모래밭으로 끌고 간다.
+<br><br>
+
+<<he_ ga>> 당신을 일으켜 세울 때, 당신은 <<his_ yi>> 가슴이 오르내리고, <<his_ yi>> 뺨에 한 줄기 땀방울이 흘러내리는 것을 알아차린다.
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 3
+<<effects>>
+
+<<His_ yi>> 공격은 공격적이고, 당신이 어디까지 할 수 있는지 테스트한다. 당신은 <<his_ yi>> 움직임을 따라잡을 수 있지만, 몸이 정신보다 뒤처집니다. <<he_ ga>> 당신을 무력화시키려 할 때 마다, 당신은 그것을 예상하지만, <span class="blue">충분히 빠르게 대응하지 못한다.</span>
+<br><br>
+<<He_ ga>> 계속해서 당신의 뒤를 잡지만 단신은 패배를 두려워하지 않는다. 넘어질 때마다 조금씩 더 많은 것을 배웁니다. 모래를 털어내고 다음 시합을 준비한다.
+<br><br>
+때때로 당신은 공격을 시도한다. 상대는 마지막까지 쉽게 회피한다. <<His_ yi>> 섬세한 발놀림이 실패하고, <<he_ ga>> 거의 비틀거립니다. 당신은 기회를 놓치지 않고 채찍을 <<his_ yi>> 허벅지에 휘두르며 온 힘을 다해 잡아당긴다.
+<br><br>
+
+그때서야 당신은 <<his_ yi>> 채찍이 자신의 허벅지를 감싸고 있는 것을 알아차린다. 두 사람은 서로를 모래사장으로 끌어당긴다.
+<br><br>
+
+<<person2>><<monk_ ga desc>> 박수 친다. "무승부입니다."
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 4
+<<effects>>
+
+당신은 채찍을 휘두르며 <<him_ wa>> 맞서고, 한 번의 타격 아래에서 몸을 피하고 다음 타격 위로 뛰어오른다. <<He_ ga>> 차례로 당신의 공격을 피한다. 두 사람은 폭풍의 눈 속에서 서로 나란히 회전하고, 점프하고, 피하고, 피루엣을 취한다. 아무도 당신이 싸우고 있다는 사실을 눈치채지 못하며, 당신의 공격성은 주위를 날아다니는 줄에 고스란히 전달된다.
+<br><br>
+심장이 두근거리고 <span class="lblue">정신이 집중된 채</span> 한동안 이런 상황이 계속된다. 마침내 당신이 우위를 점할 때까지 <<person2>><<monk_ ga desc>> 긴장한 채 조용히 지켜본다. 시합에 지친 상대는 당신의 마지막 일격을 넘지 못한다. <<person1>><<his_ yi>> 신발 끝을 잡아 <<him_ ga>> 비틀거리게 만든다. <<His_ yi>> 채찍이 <<him_ yi>> 주위를 빙글빙글 돌며 <<his_ yi>> 다리를 묶는다. <<He_ ga>> 모래에 쓰러진다.
+<br><br>
+<<person2>><<monk_ ga desc>> 박수를 두번 친다.
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 5
+<<effects>>
+
+당신은 채찍을 휘두르며 <<him_ wa>> 맞선다. <<His_ ga>> <span class="teal">단숨에 방어에 나서자</span> <<his_ yi>> 이마에 집중력이 쏠리고, <<he_ ga>> 공격을 시도할 때마다 당신은 우아하게 회피하며 한 치의 오차도 없이 공격을 이어간다.
+<br><br>
+
+<<He_ ga>> 더 이상 당신의 페이스를 따라잡을 수 없을 때까지 지쳐간다. <<His_ yi>> 집중력이 잠시 흐트러지고, 당신의 채찍이 <<his_ yi>> 발목에 걸린다. 당신은 끈을 돌리고 잡아당겨 <<him_ rul>> 모래사장으로 끌어당긴다.
+<br><br>
+<<person2>><<monk_ ga desc>> 고개를 끄덕인다.
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 6
+<<effects>>
+
+당신은 채찍을 휘두르며 <<himPost "에">>게 다가가고, <<him_ rul>> 단 한번에 방어태세로 만든다.  당신과 채찍이 서로 독립적으로 춤을 추는 것처럼 보일 정도로 빠른 속도다.  <span class="green">소용돌이치는 폭력에 둘러싸인 우아한 춤꾼의 모습이다.</span>
+<br><br>
+당신은 <<him_ rul>> 구석으로 밀어붙여, <<him_ ga>> <<his_ yi>> 발밑에 남기 위해 필사적인 도박을 하도록 만든다. <<He_ ga>> 성공하여 온 힘을 다해 당신의 공격을 뚫고 넓은 공간으로 도망친다. 당신은 <<him_ ga>> <<his_ yi>> 발끝에 붙잡히지 않도록 공격을 가한다.
+<br><br>
+<<he_ ga>> 더 이상 그런 도박을 할 힘이 없을 때까지 한동안 계속한다. 채찍 끝으로 <<him_ rul>> 넘어뜨리고 <<he_ ga>> 모래 위에 널브러진 채로 놔둔다.
+<br><br>
+당신은 <<his_ rul>> 일으켜 세우고 목례한다. <<person2>><<monk_ ga desc>> 박수를 보낸다.
+<br><br>
+
+당신은 온몸이 쑤시고 아픈 채로 경기장을 떠난다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Showers
+<<effects>>
+
+사원 회랑 안에 있는 샤워실이다. 각각 별도의 칸막이가 있으며, 옷을 벗을 수 있는 공간이 인접해 있다.
+<br><br>
+
+<<bathroomicon "shower">><<link [[샤워한다 (0:20)|Temple Cloister Shower Take]]>><<undress>><<pass 20>><</link>>
+<br>
+<<ind>><<link [[떠난다|Temple Cloister]]>><</link>>
+<br>
+
+:: Temple Cloister Shower Take
+<<effects>>
+
+<<wash>>
+칸막이 안에 몸을 감싸고 옷을 벗고 샤워실에 들어간다. 따뜻한 물로 더러움을 씻어낸다.
+<br><br>
+
+몸을 말리고 옷을 입고 회랑으로 돌아간다.
+<br><br>
+
+<<link [[떠난다|Temple Cloister]]>><<clotheson>><</link>>
+<br>
+
+:: Temple Cloister Statue
+<<effects>>
+<<if $temple_confessor_intro>>
+    처녀자리 동상에 다가간다.
+<<else>>
+    동상에게 다가간다.
+<</if>>
+대리석으로 만들어진 것으로 보인다. 날개를 활짝 펴고 가운데 팔을 벌린 채 누군가를 사랑스럽게 안아주려는 듯이 포즈를 취하고 있다.
+<br><br>
+<<if $world_corruption_soft lte 25>>
+    그 몸짓이 당신을 향한 것처럼 느껴진다. 상체가 황홀감에 젖어 올라가고, 얼굴을 들여다보면 그것이 당신에게 미소를 짓고 있다는 느낌을 떨칠 수 없다.
+    <br><br>
+
+    당신은 위로 손을 뻗어 아래쪽 손 중 하나를 만진다.
+    <<if $world_corruption_hard gte 3>>
+        <span class="blue">당신은 마치 폭풍이 몰려오는 동안 부모에게 안겨 있는 아이처럼 안심하면서도 걱정되는 감정이 든다. 이것은 폭풍 전의 고요일 뿐이다.</span>
+    <<elseif $world_corruption_hard gt 0>>
+        <span class="teal">마치 칭찬을 받는것처럼 안심이 되는 동시에 경계를 늦추지 말라는 말을 듣는 것처럼 느껴진다. 오염처럼 퍼질 것이다.</span>
+    <<else>>
+        <span class="green">마치 세상 모든 일이 잘 풀리는 것처럼 따뜻하고 안전한 기분이 든다.</span>
+    <</if>>
+<<elseif $world_corruption_soft lte 99>>
+    그 몸짓은 따뜻하지만 엄격하다. 경계심을 소홀히 한 흔적이 역력하다. 오른쪽 아래 팔은 실제로 조각상에 붙어 있지 않으며, 어느 순간 큰 균열이 생겨서 떨어져 나갔다. 오직 거울에 달린 그립만이 그것을 고정한다.
+    <br><br>
+
+    날개 중 하나도 부러지기 직전인 것 같고, 다른 날개는 작은 조각이 빠져 있다.
+    <br><br>
+
+    <span class="purple">잃어버린 팔. 부러진 날개. 잃어버린 깃털 하나.</span>
+    <<if $world_corruption_hard gte 3>>
+       <span class="purple">오염은 빠르게 퍼진다. 상황이 바뀌지 않으면 곧 끔찍한 일이 일어날 것만 같은 기분이 든다.</span>
+    <<elseif $world_corruption_hard gt 0>>
+        하지만 모든 것을 잃은 것은 아니다. <span class="teal">오염이 천천히 퍼지고 있다.</span>
+    <<else>>
+        피해에도 불구하고 당신은 희망을 잃지 않는다. <span class="teal">일시적이지만 타락은 멈췄다.</span>
+    <</if>>
+<<else>>
+    가까이서 보자, 당신은 차갑고 공허한 느낌이 든다. 팔은 마치 찢겨져 느슨하게 떠 있는 것처럼, 본체의 일부가 아니다. 더 이상 전체의 일부가 아니다.
+    동상의 중앙부를 가로지르는 균열이 있다. 몇몇 곳들에서는 작은 대리석 덩어리만이 조각상을 연결하고 있기에, 당신은 균열을 통해 반대쪽을 볼 수 있다.
+    <br><br>
+
+    많은 균열이 가 있음에도 불구하고 크고 장엄한 날개는, 색이 바래 가는 것 같다. 마치 살아있는 것처럼.
+    <br><br>
+
+    한때 사랑스러웠던 존재의 묘사가 이제 자신을 숭배하는 사람들을 따뜻하게 맞이할 수 없거나 할 의사가 없는 것 같다. 당신은 그 얼굴을 올려다본다.
+    <br><br>
+
+    <span class="red">공포의 소용돌이가 당신을 스치고 지나간다. 세상의 표면 아래에서 끔찍한 무언가가 부글부글 끓어오르는 것처럼 설명할 수 없는 긴박감이 느껴진다.</span>
+    <<if $world_corruption_hard gte 3>>
+        <span class="red">무장 해제된 채 무력감에 빠진 당신 앞의 형상은 마치 도움을 구걸하는 것처럼 느껴진다.</span>
+    <<elseif $world_corruption_hard gt 0>>
+        거의 공허할 정도로 작은 안심이 가득한다. <span class="purple">세상을 바꿀 시간은 아직 있다.</span>
+    <<else>>
+        당신은 작은 안도감으로 가득 차 있다. 그러나, <span class="teal">일시적으로 타락이 멈췄다.</span> 아직 세상이 치유될 수 있을지도 모른다.
+    <</if>>
+<</if>>
+<br><br>
+
+<<link [[떠난다|Temple Cloister]]>><</link>>
+<br>
+
+:: Temple Cloister Mirror
+<<effects>>
+<<if $temple_confessor_intro>>
+    당신은 처녀자리 동상 앞에 서 있다.
+<<else>>
+    당신은 동상 앞에 서 있다.
+<</if>>
+거울은 방 전체를 볼 수 있을 정도로 넓다.
+<br><br>
+<<link [[물러난다|Temple Cloister]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>
+<br>
+<<mirror>>
+<br><br>
+
+
+:: Temple Loris
+<<effects>>
+
+"무기 기술을 연습하고 계십니까??" <<monk_ ga desc>> 묻는다. "조던이 당신을 위험으로부터 보호하고 있는 것 같아요, 하지만 <<nnpc_he_ i "Jordan">> 당신을 영원히 붙잡아두지는 못할 것입니다. 정신을 바짝 차려야 할겁니다."
+<br><br>
+
+<<He_ nun>> 엉덩이에 손을 얹고 그의 곤봉을 드러냈다. "제 이름은 로리스 영거. 때가 되면 나는 경기장에서 당신과 맞닥뜨릴 것입니다. 당신이 시합에서 증명하기를 바랍니다."
+<br><br>
+
+<<He_ ga>> 석상 사이로 사라진다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Lemur Help
+<<effects>>
+
+당신은 <<monk_ ga desc>> <<himself_ yi>> 채찍에서 해방되는 것을 돕는다. "고마워요," <<he_ ga>> 눈을 피하며 말한다. "저는 레머 플럼입니다. 싸움을 더 잘하고 싶은데 경기장이 무서워요. 혼자 연습하는 게 자신감을 키우는 데 도움이 될 것 같았어요. 누가 보고 있는지도 몰랐어요."
+<br><br>
+
+<<He_ ga>> <<his_ yi>> 손에 들린 채찍을 본 다음, 당신을 바라본다. "이제야 이게 안 되겠다는 걸 알겠군요. 조던에게 조언을 구해볼게요. 고마워요." <<He_ ga>> 고개를 숙이고 석상 사이로 사라진다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Lemur Watch
+<<effects>>
+
+당신은 <<monk_ ga desc>> 벗어나려고 몸을 꿈틀거리지만, 점점 더 <<his_ yi>> 몸을 조여오는 것을 목격한다. <<he_ nun>>  잠시 멈칫한다. 거의 포기한 것처럼 보이지만, <<he_ nun>> 더 체계적인 접근 방식을 취하고 자신을 해방하는 데 성공한다.
+<br><br>
+
+"놀라지 않았으면 좋겠군요." <<he_ ga>> 눈을 마주치지 않으며 말한다. "저는 레머 플럼입니다. 싸움을 더 잘하고 싶은데 경기장이 무서워요. 혼자 연습하는 게 자신감을 키우는 데 도움이 될 것 같았어요. 누가 보고 있는지도 몰랐어요."
+<br><br>
+
+<<He_ ga>> <<his_ yi>> 손에 들린 채찍을 본 다음, 당신을 바라본다. "이제야 이게 안 되겠다는 걸 알겠군요. 조던에게 조언을 구해볼게요. 고마워요." <<He_ ga>> 고개를 숙이고 석상 사이로 사라진다.
+<br><br>
+
+<<link [[다음|Temple Cloister]]>><<endevent>><</link>>
+<br>

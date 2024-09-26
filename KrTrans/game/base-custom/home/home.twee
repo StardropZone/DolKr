@@ -1,0 +1,71 @@
+:: Widget custom home [widget nobr]
+<<widget "customHome">>
+    <<set _location to _args[0]>>
+    <<init_customHome>>
+    <<if $custom.homeActive is true>>
+        <<switch _location>>
+            <<case "cliff">>
+                <<customHomeCliff>>
+            <<default>>
+                <<print "customHome 버그입니다: "+_args[0]>>
+        <</switch>>
+    <</if>>
+<</widget>>
+
+
+<<widget "init_customHome">>
+    <<if $custom.home is undefined>>
+        <<set $custom.home to {
+            version : 2,
+
+            cliff : {
+                firstdetect:true,
+                buy : false,
+                price : 12000000,
+				flowers_intro : 1,
+                haveitem : {
+                tv : false,
+                computer : false,
+                book : false,
+
+                }
+            }
+        }>>
+	
+		<<if $custom.home.flowers_intro is undefined>>
+			<<set $custom.home.flowers_intro to 1>>
+		<</if>>
+
+    <<else>>
+        <<update_customHome>>
+    <</if>>
+<</widget>>
+
+<<widget "update_customHome">>
+<<set _custom_home_version to 2>>
+<<if $custom.home.version lt _custom_home_version>>
+    /*bugfix*/
+    <<if $custom.home.version is 0 and $custom.home.cliff.buy is true and $custom.home.cliff.price is 120000>>
+        <<set $custom.home.cliff.price to 12000000>>
+        <<set $custom.home.cliff.buy to false>>
+        <<set $money += 240000>>
+        <<print "사기거래로 집의 소유 권리를 빼앗겼다. 당신은 £2400를 보상받았다.">><br>
+    <</if>>
+
+    /*update*/
+    <<set _temp to $custom.home>>
+    <<delete "$custom.home">>
+    <<init_customHome>>
+    <<overwrite _temp "$custom.home">>
+
+    /*set*/
+
+    <<set $custom.home.version to _custom_home_version>>
+<</if>>
+<<if !$custom.home.cliff.hasOwnProperty("flowers_intro")>>
+	<<set $custom.home.cliff.flowers_intro to 1>>
+	<<if $custom.home.flowers_intro isnot undefined>>
+		<<delete "$custom.home.flowers_intro">>
+	<</if>>
+<</if>>
+<</widget>>

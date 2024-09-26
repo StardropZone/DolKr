@@ -1,0 +1,3166 @@
+:: Pound
+<<set $outside to 0>><<location "pound">><<effects>>
+
+<<if $pound is undefined>>
+	<<pound_init>>
+<</if>>
+당신은 스타피쉬 가에 있는 개 보호소에 있다. <<pound_text_ ga>> 우리를 채우고 있다.
+<<if $stress gte $stressmax>>
+	<br><br>
+
+	<<passoutshop>>
+<<elseif Time.hour is $closinghour>>
+	폐장 시간이다. 직원들이 퇴근 준비를 하고 있다.
+	<<if $exposed gte 1>>
+		이런 노출이 심한 복장을 하고 있다가 발각될 경우 어떻게 될지 생각하니 공포감이 엄습해 온다.
+	<</if>>
+	<br><br>
+	<<starfishicon>><<link [[떠난다|Starfish Street]]>><<endevent>><</link>>
+	<br>
+	<<link [[숨는다 (1:00)|Pound]]>><<pass 60>><</link>>
+	<br>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "pound">>
+	<</if>>
+	<<if $openinghours is 0>>
+		당신은 어둠 속에 홀로 있다.
+		<br><br>
+	<<elseif $exposed gte 1>>
+		<<if $uncomfortable.nude is false>>
+		당신은 다른 사람들에게 노출되는 것을 별로 신경 쓰지 않지만, 찬장에 숨어 있다. 이번에는 가만히 숨는다.
+		<<else>>
+		당신은 존엄성을 지키기 위해 찬장에 숨어 있다.
+		<</if>>
+		<br><br>
+	<</if>>
+	<br>
+	<<stray_happiness_text>>
+	<br>
+	<<beastNEWinit 1 dog>>
+	한 <<beasttype_ i>> 창살 너머로 당신을 지켜본다.
+	<br>
+	<<if $openinghours is 0 and Time.hour isnot $closinghour>>
+		<<if hasSexStat("deviancy", 2) and $pound.sneak is 0 and ($bestialitydisable is "f" or $monster is 1)>>
+			<<ind>><<link [[희롱한다 (0:05)|Pound Tease]]>><<pass 5>><<set $pound.sneak to 1>><<arousal 600>><</link>><<deviant2>><<garousal>>
+			<br>
+		<</if>>
+		<<if $pound.progress is 4>>
+			<<ind>><<link [[검은 개를 풀어준다|Pound Free]]>><<set $pound.progress to 5>><</link>><<dangerousText>>
+			<br>
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<if $openinghours is 1 and $exposed lt 1>>
+		직원들은 각자 업무에 집중하고 있다.
+		<<if Time.hour gte 18>>
+			일부는 더 이상 할 일이 없다는 듯 뒤뜰에서 수다를 떨고 있다.
+		<<elseif Time.hour gte 14>>
+			단정한 차림의 한 부부가 입양을 고려하며 뒷마당에서 <<pound_text_ yi>> 라인업을 살펴보고 있다.
+		<<elseif Time.hour gte 10>>
+			일부 <<pound_text_ ga>> 뒤뜰에 풀려나 있다.
+		<<else>>
+
+		<</if>>
+		<br>
+		<<if $pound.progress is 0>>
+			<<askicon>><<link [[도울 일이 있는지 묻는다|Pound Ask]]>><<set $pound.progress to 1>><<endevent>><</link>>
+			<br><br>
+		<<else>>
+			<<ind>><<link [[일한다 (1:00)|Pound Work]]>><<endevent>><</link>>
+			<br><br>
+		<</if>>
+
+		<<if $pound.progress lte 3>>
+		그림자가 드리워진 우리 안에서 낮게 으르렁거리는 소리가 들린다.
+		<br>
+			<<if $pound.progress gte 2 and $pound.status gte 100>>
+				<<wolfcaveicon "black dog">><<link [[짐승에게 접근한다|Pound Work Brute]]>><<endevent>><</link>><<tendingdifficulty 1 1000>>
+				<br><br>
+			<<else>>
+				<span class="blue">당신은 가까이 다가가지 않는다.</span>
+				<br><br>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<starfishicon>><<link [[떠난다|Starfish Street]]>><<endevent>><</link>>
+	<br><br>
+<</if>>
+
+:: Pound Free
+<<effects>>
+<<endevent>>
+<<loadNPC 0 "black_dog">>
+열쇠는 늘 있던 자리에 있다. 철창을 열고 그 안에 있는 <<beasttype_ ul>> 위해 철창을 활짝 열어둔다. 방해할 수 있는 것은 아무것도 없다. <<bHis_ yi>> 노란 눈이 어둠 속에서 나타난다. <<bHe_ nun 0>> 잠시 당신을 바라보다가 빛 속으로 걸어 들어온다.
+<br><br>
+
+<<bHe_ nun>> 마치 함정을 기대하는 것처럼 머뭇거리다, 다시 걸어온다.
+<br><br>
+
+<<link [[안심시킨다|Pound Free Reassure]]>><</link>>
+<br>
+<<link [[밖으로 내보낸다|Pound Free Lead]]>><</link>>
+<br>
+
+:: Pound Free Reassure
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"나-나는 널 구하러 왔어," 당신이 말한다. "겁먹지 마."
+<<elseif $speech_attitude is "bratty">>
+	"여기서 나가게 해줄게," 당신이 말한다. "너무 화내지 마."
+<<else>>
+	"널 풀어줄게," 당신이 말한다. "어서, 서둘러야 해."
+<</if>>
+<br><br>
+
+<<if $monster is 1>>
+	"네 말을 따를게," <<bhePost "가">> 말한다. "난 숲으로 도망칠 거야, 다시는 이곳으로 돌아오지 않겠어."
+<<else>>
+	<<bHePost "는">> 새로운 여정을 기대하는 것 처럼, <<bhisPost "의">> 몸을 쫙 편다.
+<</if>>
+<<bhimPost "는">> 새롭게 활력을 얻는다.
+<br><br>
+
+<<link [[다음|Pound Free Lead]]>><</link>>
+<br>
+
+
+:: Pound Free Lead
+<<effects>>
+<<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person2>>
+당신은 바로 옆의 <<beasttype_ wa 0>> 출구를 향해 걷는다. <span class="red">빨간 불이 깜빡이며 경보음이 울린다.</span> 방 끝의 출구 맞은편에 있는 금속 문이 덜컥 열린다. <<personPost "가">> 달려온다. 손에는 핸드폰을 들고 있고 <<hisPost "의">> 셔츠에는 커피 얼룩이 묻어 있다.
+<br><br>
+
+"경찰이죠? 침입자가 있습니다. 네, 보입니다. 알겠습니다." <<HePost "는">> 핸드폰을 땅에 떨어뜨린다. "그 자리에 멈춰!" <<hePost "는">> 말한다. "곧 경찰이 올 거다. 허튼수작 말고-"
+<br><br>
+
+<<HePost "는">> <<beasttype_ i 0>> 돌아서서 <<himPost "를">> 노려보자, 말을 멈춘다. <<HePost "는">> 서둘러 도망치느라 거의 걸려 넘어질 뻔했다. 금속 문이 <<himPost "의">> 뒤로 닫힌다.
+<br><br>
+
+<<link [[다음|Pound Free 2]]>><</link>>
+<br>
+
+
+:: Pound Free 2
+<<effects>>
+
+경보음에 깨어난 <<pound_text_ ga>> 당신이 지나가는 것을 지켜본다. 정문이 원격으로 잠겨서 맞는 열쇠를 찾느라 당신은 소중한 시간을 낭비하고 만다.
+<br><br>
+
+당신은 바깥 마당으로 나와 문 너머의 어두운 길로 돌진한다. <span class="red">정면과 양쪽 옆에서 눈부신 불빛이 비춘다.</span> "경찰이다," 목소리가 크게 울려 퍼진다. "너는 포위됐다."
+<br><br>
+
+<<beasttype_ ga 0>> 울부짖는다.
+<br><br>
+
+<<link [[검은 개가 도망갈 수 있도록 주의를 분산시킨다|Pound Free Distract]]>><</link>>
+<br>
+<<link [[도망간다|Pound Free Run]]>><</link>>
+<br>
+
+
+:: Pound Free Distract
+<<effects>>
+
+"도망쳐," 당신은 그렇게 속삭이고 <<beasttype_ yi 0>> 털을 쓰다듬는다. "나는 안전해." 당신은 <<bhe_ i 0>> 이해했는지 알 수 없지만, 확인할 시간은 없다.
+<br><br>
+당신은 우렁차게 소리를 내지르고 빛을 향해 돌격한다.
+<br><br>
+
+<<link [[다음|Pound Free 3]]>><</link>>
+<br>
+
+
+
+:: Pound Free Run
+<<effects>>
+
+당신은 <<beasttype_ yi 0>> 개 목걸이를 잡고 빛 사이의 틈을 노려 달린다.
+<br><br>
+
+<<link [[다음|Pound Free 3]]>><</link>>
+<br>
+
+
+
+:: Pound Free 3
+<<effects>>
+<<bind>>
+그러나 승리의 기회는 없었다. 당신은 눈치채지도 못한 사이에 바닥으로 넘어지고, 무게로 움직일 수 없게 짓눌린다. "<<phimPost "를">> 확보했다," <<person3>><<personsimplePost>>의 목소리가 말한다. "그 똥개는 어디로 간 거야?"
+<br>
+그들은 멈칫한다. "그놈은 어디로 갔지?"
+<br>
+"죄송합니다, 경사님. <span class="green">도망쳤습니다."</span>
+<br>
+"빌어먹을. 이 <<bitch_ rul>> 안으로 데려가."
+<br><br>
+
+<<link [[다음|Pound Free 4]]>><</link>>
+<br>
+
+
+:: Pound Free 4
+<<effects>>
+<<earnFeat "Pound Liberator">>
+경찰들은 당신에게 수갑을 채우고 직원들이 기다리고 있는 보호소 안으로 데려간다. <<person2>><<personPost "가">> 먼저 금속 문 뒤에서 멋쩍은 표정으로 나타난다. <<HePost "는">> <<beasttype_ i 0>> <<himPost "를">> 얼마나 겁먹게 했는지에 대해서는 언급하지 않는다.
+<br><br>
+
+직원들은 곧 도착하고 한밤중에 방해를 받은 것에 짜증을 낸다. 하지만 당신이 한 일에 대해 듣고 화를 낸 것에 비하면 별 것 아니었다. 한 <<person5>><<personPost "는">> <<beasttype_ yi 0>> 우리로 걸어간다. "안돼 안돼 안돼," <<hePost "는">> 말한다. "우리 완전 엿 먹었어." <<HePost "가">> 당신을 바라본다. "이 빌어먹을 꼬맹아."
+<br><br>
+
+그들은 경찰에게 모든 법을 뒤져서라도, 법의 허용 범위 내에서 최대한 당신을 엄격하게 처벌할 것을 요구한다. 그들 중 <<person6>><<personPost "가">> 당신을 바라보며 조용히 웃고 있다는 것을 눈치채기 전까지는 말이다.
+<br><br>
+"모두 진정하세요," <<hePost "가">> 말한다. "저희에겐 대신할 만한 것이 있잖아요." 다른 사람들도 <<hisPost "의">> 시선을 따라가더니 화를 누그러뜨린다. "감사합니다, 경찰분들. 고소하지는 않겠습니다."
+<br><br>
+
+<<link [[다음|Pound Free 5]]>><</link>>
+<br>
+
+
+:: Pound Free 5
+<<effects>>
+
+<<endevent>>
+<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+나가는 경찰 뒤로 문이 쾅 소리를 내며 닫히고, 보호소 직원들이 움직이기 시작한다. <<personPost "는">> 창고에서 입마개를, 다른 사람은 목줄과 개 목걸이를 가져온다. "<<person2>><<pherPost "의">> 옷을 벗겨," <<personPost "가">> 말한다. <span class="red">"개가 옷을 입으면 안 되잖아."</span>
+<br><br>
+
+그들은 당신을 둘러싸고 있다. 탈출하려면 싸워야 한다. 적의 수는 많고, 당신의 손은 묶여 있으며, 실패한다면 당신은 취약해질 것이다.
+<br><br>
+
+<<link [[싸운다|Pound Free Fight]]>><<set $fightstart to 1>><<def 1>><</link>>
+<br>
+<<link [[굴복한다|Pound Free Submit]]>><<sub 1>><<endevent>><</link>>
+<br>
+
+
+:: Pound Free Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Pound Free Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Free Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Free Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	당신은 비틀거리는 직원들 사이로 몸을 피하며, 바깥마당으로 탈출한다. 경찰이 앞문을 열어두었다.
+	<br><br>
+	<<tearful>> 당신은 밤의 어둠 속으로 탈출한다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Starfish Street]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	당신의 공격성에 당황한 직원들이 물러난다. 기회를 놓치지 않고 당신은 바깥마당으로 탈출한다. 경찰이 앞문을 열어두었다.
+	<br><br>
+	<<tearful>> 당신은 밤의 어둠 속으로 탈출한다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Starfish Street]]>><</link>>
+	<br>
+<<else>>
+	<<tearful>> 당신은 바닥에 쓰러진다. 당신은 계속 싸우기에는 너무 다쳤다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Pound Free Submit]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Free Submit
+<<effects>>
+
+<<unbind>>
+<<clothesruined>>
+<<pound_muzzle>>
+<<leash 26>>
+<<set $worn.neck.cursed to 1>>
+
+사방에서 손이 뻗어와 몸에서 옷을 찢는다. 그들이 당신을 엎드리게 한다. 누군가는 당신의 어깨에 발을 올려놓고 힘으로 억누르며, 입에 재갈을 물리고 목에는 개 목걸이와 목줄을 채운다. 적어도, 그들이 수갑은 제거해 주었다.
+<br><br>
+
+<<generate1>><<person1>>
+"<<phimPost "를">> 일으켜," <<personPost "가">> 말한다. 누군가가 당신의 목줄을 휙 잡아당겨 무릎을 꿇게 한다. <<personPost "가">> 몸을 가까이 기울인다. "착한 <<girlPost "가">> 되는 게 좋을 거다," <<hePost "는">> 당신의 목줄을 붙잡고 속삭인다. "그리고 시키는 대로 해." <<HePost "가">> 움직이기 시작한다. "걸어."
+<br><br>
+
+<<link [[기어간다|Pound Free Crawl]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>>
+<br>
+<<link [[일어난다|Pound Free Stand]]>><<pain 4>><<stress 6>><</link>><<gpain>><<gstress>>
+<br>
+<<link [[거절한다|Pound Free Refuse]]>><<pain 8>><</link>><<ggpain>>
+<br>
+
+
+:: Pound Free Crawl
+<<effects>>
+
+당신은 네 발로 방을 기어 다니며, <<personPost "는">> 손에 목줄을 들고 뒤에서 따라온다. 직원들은 당신의 몸을 바라보며 굴욕을 즐기고 있다. 그뿐만이 아니다. <<pound_text_>>도 깨어서는, 우리 안에서 당신을 지켜보고 있다.<<lllpound_status>><<pound_status -10>>
+<br><br>
+
+<<link [[다음|Pound Free 6]]>><</link>>
+<br>
+
+
+:: Pound Free Stand
+<<effects>>
+
+당신은 일어선다. 혹은 일어서려고 했다. <<personPost "는">> 당신을 발로 차 넘어뜨린다. "개는 그런 식으로 걷지 않는다고," <<hePost "는">> 말한다. "알았으면 기어, 아니면 강제로 기게 해 줄 테니까."
+<br><br>
+
+당신은 네 발로 방을 기어 다니며, <<personPost "는">> 손에 목줄을 들고 뒤에서 따라온다. 직원들은 당신의 몸을 바라보며 굴욕을 즐기고 있다. 그뿐만이 아니다. <<pound_text_>>도 깨어서는, 우리 안에서 당신을 지켜보고 있다.<<lllpound_status>><<pound_status -10>>
+<br><br>
+
+<<link [[다음|Pound Free 6]]>><</link>>
+<br>
+
+
+
+:: Pound Free Refuse
+<<effects>>
+
+당신은 거부하며 꿈쩍도 하지 않는다, 그러나 <<personPost "가">> 당신의 <<bottomPost "를">> 강하게 발로 차 앞으로 무너지게 만든다. <<HePost "는">> 계속해서 몇 번이나 발로 찬다. 직원들은 당신의 몸을 바라보며 굴욕을 즐기고 있다. 그뿐만이 아니다. <<pound_text_>>도 깨어서는 우리 안에서 당신을 지켜보고 있다.<<lllpound_status>><<pound_status -10>>
+<br><br>
+
+<<link [[다음|Pound Free 6]]>><</link>>
+<br>
+
+:: Pound Free 6
+<<effects>>
+
+<<HePost "는">> 당신을 우리의 아래쪽 줄로 끌고 가서 녀석들이 당신을 더 잘 볼 수 있게 한다.<<lllpound_status>><<pound_status -10>>
+<br><br>
+
+<<endevent>><<generate1>><<person1>>
+"못 참겠네," <<personPost "가">> 말하고는 가까이 다가온다. "<<phimPost "를">> 좀 따먹어야겠어."
+<br><br>
+다른 사람들이 웃는다. "개랑 떡 치고 싶다고? 마음대로 해."
+<br><br>
+<<personPost "는">> 목줄을 받는다. <<HePost "는">> 목줄을 팽팽하게 잡아당기면서 당신의 옆에 무릎을 꿇고 앉아, 당신의 <<bottom_ ul>> 가까이 잡아당긴다.
+<br><br>
+
+<<link [[다음|Pound Free Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Pound Free Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<pound_text_ ga>> 지켜보고 있다.<<lpound_status>><<pound_status -1>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Free Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Free Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Free Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<personPost "가">> 만족한 듯 비틀거리며 당신에게 떨어진다.<<llpound_status>><<pound_status -5>>
+	<br><br>
+	<<tearful>> 당신은 더 많은 학대에 대비한다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+	<<personPost "는">> 뒤로 물러난다. 다른 직원들이 웃는다. "아-아직 길들여지지 않아서 그래."
+	<br><br>
+	<<tearful>> 당신은 더 많은 학대에 대비한다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+<<link [[다음|Pound Free 7]]>><</link>>
+<br>
+
+:: Pound Free 7
+<<effects>>
+
+<<generate1>><<person1>>
+<<personPost "가">> 당신의 목줄을 잡고 몸을 기울인다. "저 녀석들은 예전에는 널 존중했는데," <<hePost "가">> 우리 안에 있는 <<pound_text_>>에 대해 말한다. "하지만 이제는 녀석들도 네가 자신들과 같은 <<bitch_ ra dog>>는 걸 잘 알겠지." <<if $worn.handheld.name isnot "naked">>직원들 중 하나가 당신의 <<worn_handheld_name_ ul>> 빼앗는다. "그리고 멍청한 개들은 물건을 들고 다니지 못해." <<HePost "는">> 당신의 <<worn_handheld_name_ ul>> <<hisPost "의">> 팔 아래에 밀어넣는다. 당신은 그것을 되찾을 수 있을지 확신하지 못한다. <<handheldruined>><</if>>
+<br><br>
+
+<<endevent>>
+
+<<beastNEWinit 6 dog>>
+<<if $bestialitydisable is "f" or $monster is 1>>
+	"우리를 열어!"
+	<br><br>
+	<<bind>>
+	직원은 당신의 팔에 목줄을 묶고 우리의 쇠창살에 고정한다. 누군가가 당신의 <<bottomPost "를">> 때린다. "어서, 똥개야. 저항할 수 없다는 거 잘 알아."
+	<br><br>
+
+	<span class="teal"><<beastspluralPost "는">> 는 확신을 가지지 못하는 듯 하지만</span> 다가오는 것을 멈추지는 않는다.
+	<br><br>
+
+	<<link [[다음|Pound Free Beast]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<endevent>>
+	<<generate1>><<person1>>
+	직원들은 계속 당신을 학대한다. 물건을 물어오게 하며 놀거나, 개 밥그릇의 먹이를 먹게 하거나, 다른 여러 가지 수모를 준다. 마침내 그들은 목줄을 떼어내고 당신을 우리 중 하나에 밀어 넣고는 잠근다. "잘 자." 그들은 웃고는 떠나간다. <<lllpound_status>><<pound_status -30>><<gggtrauma>><<gggstress>><<trauma 18>><<stress 18>><<detach_leash>>
+	<br><br>
+	<<link [[다음|Pound Cage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+<br><br>
+
+:: Pound Free Beast
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<beastTrainGenerate>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Free Beast End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Free Beast]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Free Beast End
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttypePost "는">> 고통과 두려움으로 움츠러들지만 다른 녀석이 갈망하듯이 다가온다.
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Free Beast]]>><</link>>
+	<<else>>
+		<<beasttypePost "는">> 고통과 두려움으로 움츠러든다.
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Free Beast End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		만족한 듯, <<beasttypePost "는">> 물러나고 다른 녀석이 그 자리를 대신한다.<<llpound_status>><<pound_status -5>>
+		<br><br>
+
+		<<combatTrainAdvance>>
+
+		<<switch $enemyejaculated>>
+			<<case 6>>
+				<<beasttypePost "가">> 다가온다,<span class="red"> 당신이 육변기인 것처럼 바라본다.</span>
+			<<case 5>>
+				<<beasttypePost "가">> 다가온다,<span class="pink"> 당신이 처벌이 필요한 새끼인 것처럼 바라본다.</span>
+			<<case 4>>
+				<<beasttypePost "가">> 다가온다,<span class="purple"> 당신이 발정기의 <<bitchPost dog>>인 것처럼 바라본다.</span>
+			<<case 3>>
+				<<beasttypePost "가">> 다가온다,<span class="blue"> 당신을 유린하고 싶어 하는 것처럼 보인다.</span>
+			<<case 2>>
+				<<beasttypePost "가">> 다가온다,<span class="lblue"> 당신을 범하고 싶어 하는 것처럼 보인다.</span>
+			<<case 1>>
+				<<beasttypePost "가">> 다가온다,<span class="teal"> 당신을 이용하고 싶어 하는 것처럼 보인다.</span>
+			<<default>>
+				<<beasttypePost "가">> 다가온다,<span class="green"> 하지만 확신이 서지 않는 것처럼 보인다.</span>
+		<</switch>>
+		<br><br>
+		<<link [[다음|Pound Free Beast]]>><</link>>
+	<<else>>
+		만족한 듯, <<beasttypePost "는">> 당신에게서 물러난다.<<llpound_status>><<pound_status -5>>
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Free Beast End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<unbind>>
+	<<endcombat>>
+	<<generate1>><<person1>>
+	<<tearful>> 당신은 더 많은 학대에 대비한다. "이제 그만하면 됐어," <<personPost "가">> 말한다. "똥개들을 우리로 돌려보내."
+	<br><br>
+
+	<<clotheson>>
+	직원들은 계속 당신을 학대한다. 물건을 물어오게 하며 놀거나, 개 밥그릇의 먹이를 먹게 하거나, 다른 여러 가지 수모를 준다. 마침내 그들은 목줄을 떼어내고 당신을 우리 중 하나에 밀어 넣고는 잠근다. "잘 자.", <<personPost "가">> 말한다. "내일부터 훈련이 시작될 거야." 직원은 웃고는 떠나간다.<<detach_leash>>
+	<<pass 60>>
+	<br><br>
+	<<link [[다음|Pound Cage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Pound Work
+<<effects>>
+
+<<if $pound.progress is 1>>
+	<<set $pound.progress to 2>>
+	<<beastNEWinit 1 dog>>
+	<<saveNPC 0 "black_dog">>
+	<<generate2>><<person2>><<generate3>>
+	여긴 작은 시설이 아니며, 예상보다 직원이 많다. 긴장한 한 <<person_ i>> 목줄을 들고 그림자가 드리워진 철창에 다가간다. 주변 우리들은 텅 비어있다. <<He_ nun>> 낮은 으르렁거리는 소리에 얼어버린다.
+	<br><br>
+	"저 <span class="purple">짐승</span>은 <<bhis_ yi 0>> 주인을 흉포하게 공격했어." <<person3>><<person_ i>> 당신 옆에 서서 <<his_ yi>> 팔을 접으며 말했다. "주인은 복수를 하길 원해. 하지만, 먼저 저 똥개한테 복종을 가르쳐줘야 하는데 아무도 목줄을 채우지 못하고 있어."
+	<br><br>
+	<<person2>><<person_ i>> 철창을 빠져나와 <<him_ yi>> 뒤로 문을 쾅 닫는다. <<He_ nun>> 반토막 난 목줄을 들고 있다. 나머지는 찢어져 있다. "난 저거 근처에도 안 갈 거야." <<person3>><<person_ i>> 웃는다.
+	<br><br>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<<elseif $pound.progress is 2 and $pound.status gte 10>>
+	<<set $pound.progress to 3>>
+	<<beastNEWinit 1 dog>>
+	<<generate2>><<person2>>
+	당신은 낑낑대는 소리를 듣는다. 한 <<person_ i>> 철창에 갇힌 <<beasttypePost 0>> 위에 서서 벨트로 <<bhim_ ul 0>> 때리고 있다. 그 <<beasttype_ un 0>> <<bhimself_ rul 0>> 방어하려는 시도조차 하지 않는다.
+	<br><br>
+
+	<<link [[개입한다|Pound Work Intervene]]>><<pound_status 3>><<stress 6>><</link>><<gstress>><<ggpound_status>><<gstray_happiness>>
+	<br>
+	<<link [[무시한다|Pound Work Intervene Ignore]]>><</link>>
+	<br>
+<<else>>
+	<<if $slimePoundIgnored>>
+		당신은 슬라임의 명령을 무시하고 하고 싶은 일을 선택한다.
+		<<unset $slimePoundIgnored>>
+		<br><br>
+		<<stray_happiness_text>>
+	<<elseif $slimePoundDefy>>
+		<<if $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+			<<set $earSlime.defyCooldown += 2>>
+			슬라임이 통제권을 가져가려 한다. <span class="red">녀석은 당신의 의지를 압도하여</span> 명령한 일을 하도록 한다.
+			<<ggwillpower>><<willpower 1>>
+			<br><br>
+			<<earSlimePoundLinks>>
+		<<else>>
+			당신은 슬라임의 명령을 무시하려 한다. 그것은 당신이 특정한 일을 하도록 강제하려 하지만, <span class="green">실패한다</span>.
+			<br><br>
+			<<stray_happiness_text>>
+			<<unset $slimePoundDefy>>
+			<<unset $slimePoundTask>>
+		<</if>>
+	<<else>>
+		<<generate1>><<person1>>
+		다른 직원들은 각자의 업무를 처리하고 있다. 한 <<person_ i>> 건물 반대편에 있는 금속 문으로 들어가, <<him_ yi>> 뒤에 있는 문을 잠근다.
+		<<endevent>>
+		<br><br>
+		<<stray_happiness_text>>
+	<</if>>
+	<<if $slimePoundDefy>>
+		<<unset $slimePoundDefy>>
+	<<elseif !$daily.earSlimePoundTask and numberOfEarSlime() and earSlimeMakingMundaneRequests() and random(0,100) gte 75>>
+		<br><br>
+		<<set $daily.earSlimePoundTask to true>>
+		<<set _slimePoundTask to ["Sweep"]>>
+		<<if $pound.status gte 10>><<run _slimePoundTask.push("Feed")>><</if>>
+		<<if $pound.status gte 20>><<run _slimePoundTask.push("Brush")>><</if>>
+		<<if $pound.status gte 40>><<run _slimePoundTask.push("Wash")>><</if>>
+		<<if $pound.status gte 60>><<run _slimePoundTask.push("Walk")>><</if>>
+		<<set $slimePoundTask to _slimePoundTask.random()>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">You feel the slime in your head command you to <<print $slimePoundTask.toLowerCase()>>
+		<<if $slimePoundTask is "Sweep">>
+			the floor.
+		<<else>>
+			the dogs.
+		<</if>>
+		</span> It promises rewards if you comply<<if $earSlime.startedThreats>>, and threatens consequences if you do not<</if>>.
+		<br><br>
+		<<earSlimePoundLinks "Obey">>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[반항한다|Pound Work]]>><<set $slimePoundDefy to true>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[무시한다|Pound Work]]>><<unset $slimePoundTask>><<set $slimePoundIgnored to true>><</link>>
+		<</if>>
+	<<else>>
+		<br><br>
+		<<link [[청소한다 (£5)|Pound Work Sweep]]>><<if !$pound.tasks.includes("sweep")>><<stray_happiness 1>><<set $pound.tasks.push("sweep")>><</if>><<set $pound.money to 5>><</link>><<if !$pound.tasks.includes("sweep")>><<gstray_happiness>><</if>>
+		<br>
+		<<if $pound.status gte 10>>
+			<<link [[먹이를 준다 (£8)|Pound Work Feed]]>><<set $pound.tasks.push("feed")>><<set $pound.money to 8>><</link>><<if !$pound.tasks.includes("feed")>><<gstray_happiness>><</if>>
+		<<else>>
+			<span class="blue"> <<pound_text_ nun>> 음식을 가지고 있더라도, 당신을 가까이 오게 할 만큼 당신을 존중하지 않는다.</span>
+		<</if>>
+		<br>
+		<<if $pound.status gte 20>>
+			<<link [[빗질한다 (£10)|Pound Work Brush]]>><<if !$pound.tasks.includes("brush")>><<stray_happiness 1>><<set $pound.tasks.push("brush")>><</if>><<set $pound.money to 10>><</link>><<if !$pound.tasks.includes("brush")>><<gstray_happiness>><</if>>
+		<<else>>
+			<span class="blue"> <<pound_text_ nun>> 당신이 빗질을 하도록 가까이 오게 할 만큼 당신을 존중하지 않는다.</span>
+		<</if>>
+		<br>
+		<<if $pound.status gte 40>>
+			<<link [[씻긴다 (£12)|Pound Work Wash]]>><<if !$pound.tasks.includes("wash")>><<stray_happiness 1>><<set $pound.tasks.push("wash")>><</if>><<set $pound.money to 12>><</link>><<if !$pound.tasks.includes("wash")>><<gstray_happiness>><</if>>
+		<<else>>
+			<span class="blue"> <<pound_text_ nun>> 물통을 들고 가까이 오게 할 만큼 당신을 존중하지 않는다. </span>
+		<</if>>
+		<br>
+		<<if $pound.status gte 60>>
+			<<link [[산책시킨다 (£15)|Pound Work Walk]]>><<if !$pound.tasks.includes("walk")>><<stray_happiness 1>><<set $pound.tasks.push("walk")>><</if>><<set $pound.money to 15>><</link>><<if !$pound.tasks.includes("walk")>><<gstray_happiness>><</if>>
+		<<else>>
+			<span class="blue">The <<pound_text_ nun>> 목줄을 들고 가까이 오게 할 만큼 당신을 존중하지 않는다. </span>
+		<</if>>
+	<</if>>
+	<br>
+
+	<<getouticon>><<link [[떠난다|Pound ]]>><</link>>
+	<br>
+<</if>>
+
+:: Pound Work Intervene
+<<effects>>
+
+당신은 철창을 덜컹거린다.
+
+<<if $speech_attitude is "meek">>
+	"멈춰," 당신이 말한다. "너-너는 <<bhim_ ul 0>> 아프게 하고 있어."
+<<elseif $speech_attitude is "bratty">>
+	"벨트 내려놔," 당신이 말한다. "이 사이코패스야."
+<<else>>
+	"멈춰." 당신이 말한다. "이건 잔인하잖아."
+<</if>>
+<br><br>
+
+그 <<personPost "는">> <<beasttypePost 0 "을">> 마지막으로 내려치기 전에 당신을 본다. "알겠어," <<hePost "가">> 숨을 헐떡이며 그렇게 말한다. <<HePost "는">> 우리를 떠나려다가 당신 옆에 멈추어 선다. <span class="pink">"조심하는 것이 좋을 거다 <<lass_ ya>>.</span> 건수가 생긴다면 너 같은 <<bitch_ rul>> 우리가 가만히 내버려 둘 거라곤 생각하지 말라고."
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Pound Work Intervene Ignore
+<<effects>>
+
+당신은 계속 걸으며 낑낑거리는 소리를 무시하려고 최선을 다한다.
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Pound Work Sweep
+<<effects>>
+<<if $slimePoundTask>>당신은 특정한 일을 하라는 <<= numberOfEarSlime() gte 2 ? "슬라임들의" : "슬라임의">> 명령을 따른다.<<unset $slimePoundTask>><</if>>
+당신은 빗자루를 들고 우리에서 털을 쓸어낸다. 깔끔하게 쌓아 쓰레받기에 쓸어 담는다.
+<br><br>
+<<beastNEWinit 1 dog>>
+<<if random(1, 2) is 2>>
+	<<beasttype_ i>> 빗자루를 물어 빗자루가 <<bHis_ yi>> 이빨 사이에 걸려있다.
+	<br><br>
+
+	<<link [[꾸짖는다|Pound Work Sweep Scold]]>><</link>><<tendingdifficulty 1 200>>
+	<br>
+	<<link [[힘으로 빼낸다|Pound Work Sweep Wrestle]]>><</link>><<physiquedifficulty 1 6000>>
+	<br>
+<<else>>
+	<<endevent>><<generate1>><<person1>>
+	<<personPost "는">> 당신이 지나가려 할 때 빗자루 손잡이를 붙잡고 멈추게 한다. <<HePost "가">> 다가와 손을 당신의 <<bottomPost>>에 올린다.<<gstress>><<stress 6>>
+	<br><br>
+	"제대로 빗자루질하는 법을 알려주도록 할게," <<hePost "는">> 계속 가까워지며 말한다.
+	<<if $NPCList[0].penissize gte 3>>
+		<<hisPost "가">> <<his_ yi>><<penisdesc_ rul $NPCList[0].penisdesc>> 당신에게 누르는 것이 느껴진다.
+	<</if>>
+	<br><br>
+
+	<<if $anxiety gte 2>>
+		<span class="red">공황에 빠져,</span> 당신은 <<personPost "를">> 후려친다. 그가 움켜쥔 손을 놓는 순간 고통스러운 울음소리가 들리고 붉은빛이 번쩍인다. 당신은 마당의 아무도 없는 장소로 도망치고 호흡이 진정될 때까지 기다린다. 당신은 <<himPost "를">> 너무 심하게 다치게 했다고는 생각하지 않는다.<<crime "assault">><<crimeUp 10 "assault">>
+		<br><br>
+
+		당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+		<br><br>
+
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<elseif $anxiety gte 1>>
+		<span class="red">공황에 빠져</span> 당신은 공포로 얼어붙는다. <<personPost "는">> 그 모습을 동의하는 것으로 간주한다.<<trauma 6>><<gtrauma>>
+		<br><br>
+
+		<<link [[다음|Pound Work Sweep Go]]>><</link>><<if $tending lt 200>><<gtending>><</if>>
+		<br>
+	<<else>>
+		<<link [[따라간다|Pound Work Sweep Go]]>><<trauma 6>><</link>><<if $tending lt 200>><<gtending>><</if>>
+		<br>
+		<<link [[밀어낸다|Pound Work Sweep Shove]]>><<pound_status 1>><<stress 6>><</link>><<gstress>><<gpound_status>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Pound Work Sweep Go
+<<effects>>
+
+그 <<personPost "는">> 당신의 팔을 붙잡고 <<hisPost "의">> 몸을 아주 가까이 밀착시킨 채로 <<hisPost "의">> 빗자루질 테크닉을 선보인다. <<HePost "는">> <<pound_text_>>에 대해 말하며, 어떻게 그들을 안심시킬 수 있는지 이야기한다.
+
+<<if $tending lt 200>>
+	<<hisPost "의">> 행동은 소름이 끼쳤지만, 그럼에도 당신은 한두 가지 새로운 것들을 배운다. "감사할 필요는 없어," <<hePost "는">> 말하며 당신의 <<bottomPost "을">> 찰싹 때린다.<<tending 2>>
+<<else>>
+	<<HesPost "는">> 무척 자신에 넘치지만, 당신에게 새로운 것을 전혀 가르치지 못한다. "감사할 필요는 없어," <<hePost "는">> 말하며 당신의 <<bottomPost "을">> 찰싹 때린다.
+	<br><br>
+<</if>>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Pound Work Sweep Shove
+<<effects>>
+
+You shove the <<person>> away from you. <<He>> glares at you, then glances at the supervisor, before deciding not to press things.
+<br><br>
+
+The <<pound_text>> watch with blank expressions.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Work Sweep Scold
+<<effects>>
+
+<<if $tendingSuccess>>
+	"Let go," you say, <span class="green">your voice firm and sure.</span> The <<beasttype>> relents, and chews on a bar instead.<<gpound_status>><<pound_status 1>>
+	<br><br>
+<<else>>
+	"L-let go," you say, <span class="red">but it's hard to keep your voice steady while the <<beasttype>> jerks the broom around.</span> <<bHe>> only gives up <<bhis>> grip when satisfied, leaving teeth marks on the wood.<<lpound_status>><<pound_status -1>><<if $tending lt 200>><<tending 1>><<gtending>><</if>>
+	<br><br>
+<</if>>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Pound Work Sweep Wrestle
+<<effects>>
+
+<<if $physiqueSuccess>>
+	You push a foot against the bars for purchase, and twist the shaft <span class="green">as you pull the handle from the <<beasttype>>'s mouth.</span> <<bHe>> lies down, dejected.<<gpound_status>><<pound_status 1>>
+	<br><br>
+<<else>>
+	You push a foot against the bar for purchase, <span class="red">but the <<beasttype>> pulls you off balance,</span> smacking your shoulder against the metal. <<bHe>> only gives up <<bhis>> grip when satisfied, leaving teeth marks on the wood.<<gpain>><<pain 4>>
+	<br><br>
+<</if>>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Work Feed
+<<effects>>
+<<if $slimePoundTask>>당신은 특정한 일을 하라는 <<= numberOfEarSlime() gte 2 ? "슬라임들의" : "슬라임의">> 명령을 따른다.<<unset $slimePoundTask>><</if>>
+당신이 뒤뜰에 있는 그릇을 채우자, 열성적인 <<pound_text_>> 무리가 우리에서 풀려난다.
+<br><br>
+
+<<if random(1, 2) is 2>>
+	그들은 당신과 다른 직원들을 무시하고 그릇을 향해 달려든다.
+	<<beastNEWinit 2 dog>>
+	An emaciated <<beasttype 0>> tries to push <<bhis 0>> way through, but is too weak. Another <<beasttype 1>> jostles <<bhim 0>> aside. <<bHe 0>> lies down, defeated.
+	<br><br>
+
+	<<link [[공평하게 먹도록 만든다|Pound Work Feed Soothe]]>><</link>><<tendingdifficulty 1 400>>
+	<br>
+	<<link [[진정시킨다|Pound Work Feed Comfort]]>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+	<br>
+	<<link [[아무것도 하지 않는다|Pound Work Feed Nothing]]>><</link>>
+	<br>
+<<else>>
+	그들은 순식간에 먹어 치우고는 음식에 대해 감사하는 것처럼 보인다. <<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+
+:: Pound Work Feed Soothe
+<<effects>>
+
+<<if $tendingSuccess>>
+	You crouch beside the <<beasttype 1>>, and stroke <<bhis 1>> ear. "Will you let your friend have some?" you ask. "For me?"
+	<br><br>
+	<<if $monster is 1>>
+		<span class="green">The <<beasttype 1>> is enthralled by your touch,</span> and clears a space for the <<beasttype 0>>. <<bHe 1>> goes as far as to guard <<bhim 0>> from other <<pound_text>>, allowing the <<beasttype 0>> to eat <<bhis 0>> fill. <<bHe 0>> smiles at you with gratitude.
+	<<else>>
+		<span class="green">The <<beasttype 1>> is soothed by your touch,</span> and allows the <<beasttype 0>> to feed beside <<bhim 1>>. <<bHe 0>> eats <<bhis 0>> fill, and collapses in satisfaction.
+	<</if>>
+	<<gpound_status>><<pound_status 1>>
+	<br><br>
+<<else>>
+	You crouch beside the <<beasttype 1>>, <span class="red">but <<bhe 1>> wards you away with a warning snap.</span> The other staff laugh.<<lpound_status>><<pound_status -1>><<if $tending lt 400>><<tending 1>><<gtending>><</if>>
+	<br><br>
+<</if>>
+
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Work Feed Comfort
+<<effects>>
+
+You crouch beside the <<beasttype 0>>, and stroke <<bhis 0>> fur. <<bHe 0>> exhales, but doesn't move until the other <<pound_text>> are done. <<bHe 0>> licks the bowls clean.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Pound Work Feed Nothing
+<<effects>>
+
+You watch the feeding frenzy with the other staff. The <<beasttype 0>> licks the bowls clean.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Pound Work Brush
+<<effects>>
+
+<<beastNEWinit 1 dog>>
+<<if $slimePoundTask>>당신은 특정한 일을 하라는 <<= numberOfEarSlime() gte 2 ? "슬라임들의" : "슬라임의">> 명령을 따른다.<<unset $slimePoundTask>><</if>>
+빗을 손에 들고 우리 중 하나에 들어간다.
+
+<<if random(1, 2) is 2 and ($bestialitydisable is "f" or $monster is 1)>>
+	안에 있는 <<beasttype_ un>> 친절하다. 너무 친절한지도 모른다.
+	<<if $monster is 1>>
+		<<bHe_ nun>> <<bHis_ yi>> 팔을 당신의 허리에 감고 허벅지를 치댄다.
+	<<else>>
+		<<bHe_ nun>> <<bHis_ yi>> 뒷다리를 뻗어 허벅지를 치댄다.
+	<</if>>
+	<br><br>
+
+	<<link [[Tell off|Pound Work Brush Tell]]>><</link>><<tendingdifficulty 1 600>>
+	<br>
+	<<if hasSexStat("deviancy", 2)>>
+		<<link [[Allow|Pound Work Brush Allow]]>><</link>><<deviant2>>
+		<br>
+	<</if>>
+<<else>>
+	안에 있는 <<beasttype_ i>> 낮게 으르렁거리며 당신을 맞이한다. <<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[진정시킨다|Pound Work Brush Soothe]]>><</link>><<tendingdifficulty 1 600>>
+	<br>
+	<<link [[빗질할만한 온순한 동물을 찾는다|Pound Work Brush Find]]>><</link>>
+	<br>
+	<<if $bestialitydisable is "f" or $monster is 1>>
+		<<link [[친근하게 개처럼 행동한다|Pound Work Brush Act]]>><</link>><<deviant1>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Pound Work Brush Tell
+<<effects>>
+
+<<if $tendingSuccess>>
+	"Clear off," you say. "Shoo!"
+	<br><br>
+	<<if $monster is 1>>
+		"Yes!" the <<beasttype>> responds, leaving your leg alone. "Brush me now?"
+	<<else>>
+		The <<beasttype>> responds to your tone, and leaves your leg alone.
+	<</if>>
+	<<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	<<bHe>> lies down, and you brush <<bhim>>. <<bHis>> leg is kicking the air by the end.
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	"St-stop," you manage. It's hard to maintain your composure, <span class="red">and the <<beasttype>> ignores you.</span>
+	<br><br>
+	You try to push <<bhim 0>> off. You're still struggling when the <<beasttype>> reaches orgasm, and a wet warmth coats your leg.<<garousal>><<arousal 600>>
+	<br><br>
+	<<if $NPCList[0].penis isnot "none">>
+		<<bodyliquid "thigh" "semen">>
+	<<else>>
+		<<bodyliquid "thigh" "goo">>
+	<</if>>
+	<<if $arousal gte 10000>>
+		It's too much. <<orgasm>>
+
+		You fall to the ground. Either the <<beasttype>> isn't satisfied, or <<bhes>> driven into a new frenzy by this display. <<bHe>> mounts you before the spasms subside.
+		<br><br>
+		<<link [[다음|Pound Work Brush Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<bHes>> calm while you brush <<bhim>>, at least.
+		<br><br>
+
+		당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+		<br><br>
+
+		<<if Time.hour gte $closinghour>>
+			<<link [[다음|Pound]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[다음|Pound Work]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>
+
+:: Pound Work Brush Allow
+<<effects>>
+
+You endure the <<beasttype>>'s humping, until <<bhe>> reaches orgasm.
+<<if $NPCList[0].penis isnot "none">>
+	A warm fluid sprays from <<bhis>> genitals, coating your thigh.
+	<<bodyliquid "thigh" "semen">>
+<<else>>
+	Sticky fluid drips from <<bhis>> genitals, clinging to your thigh.
+	<<bodyliquid "thigh" "goo">>
+<</if>>
+<<deviancy2>>
+<<if $arousal gte 10000>>
+	It's too much. <<orgasm>>
+
+	You fall to the ground. Either the <<beasttype>> isn't satisfied, or <<bhes>> driven into a new frenzy by this display. <<bHe>> mounts you before the spasms subside.
+	<br><br>
+	<<link [[다음|Pound Work Brush Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	Satisfied, the <<beasttype>> rolls onto <<bhis>> back, and allows you to brush. <<bHis>> leg is kicking the air by the end.
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+
+:: Pound Work Brush Soothe
+<<effects>>
+
+<<if $tendingSuccess>>
+	With slow but confident movements, you crouch beside the <<beasttype>> and stroke behind <<bhis>> ear. "There there," you say. "I'm not going to hurt you. I promise."
+	<br><br>
+	The <<beasttype>> huffs, <span class="green">but lets you brush <<bhim>>.</span> <<bHes>> lying on <<bhis>> back with one leg kicking the air by end.<<gpound_status>><<lstress>><<pound_status 1>><<stress -6>>
+	<br><br>
+<<else>>
+	You make soothing noises as you move closer, but hesitate every time the <<beasttype>> huffs. You get close enough to brush, <span class="red">but <<bhe>> snaps at your hand.</span> You find a gentler creature to brush instead.<<lpound_status>><<pound_status -1>><<if $tending lt 600>><<tending 1>><<gtending>><</if>>
+	<br><br>
+<</if>>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Work Brush Find
+<<effects>>
+
+<<endevent>>
+<<beastNEWinit 1 dog>>
+You find a gentler creature to brush instead. Mostly because <<bhe>>'s asleep.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+
+<<link [[다음|Pound Work]]>><<endevent>><</link>>
+<br>
+
+
+:: Pound Work Brush Act
+<<effects>>
+
+You glance around to ensure you're not being watched, then drop to all fours. "Ruff," you say, quiet. The <<beasttype>> cocks <<bhis>> head as <<bhe>> regards you. You crawl closer, and remain on the ground as you brush <<bhim>>.
+<<deviancy1>>
+
+<<if $arousal gte 10000>>
+	Acting in such a way pushes you over the edge. <<orgasm>>
+
+	Emboldened, the <<beasttype>> mounts you from behind while you still shudder.
+	<br><br>
+
+	<<link [[다음|Pound Work Brush Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<bHe>> lies on <<bhis>> back by the time you're done, one leg kicking the air.
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Pound Work Brush Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $NPCList[0].stance to "top">>
+	<<set $position to "doggy">>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Work Brush Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Work Brush Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Work Brush Rape Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+<<beastejaculation knot>>
+	<<if _knotted>>
+		<<pass 5>>
+		The <<beasttype>> tries to wriggle <<bhis>> <<print $NPCList[0].penisdesc>> free, but to no avail. <<bHe>> instead returns to the corner of <<bhis>> cage, dragging you along on all fours behind <<bhim>>. <<bHe>> lies down to sleep, leaving you to lie on the ground.<<lllpound_status>><<pound_status -10>>
+		<br><br>
+		<<tearful>> you try to work yourself free.
+		<br><br>
+			It takes a while. So long, in fact, that you're still trying when you hear footsteps approach. <span class="red">Someone is coming.</span>
+			<br><br>
+			<<clotheson>>
+			<<endcombat>>
+			<<generate1>><<person1>><<generate2>><<generate3>><<generate4>>
+			You grab hold of the bars of the cage for leverage, but it's no use. A <<person>> walks into view, and stops at the sight of you. "Everyone!" <<he>> shouts. "Come get a look at this!"<<ggtrauma>><<ggstress>><<famebestiality 4>>
+			<br><br>
+
+			<<link [[다음|Pound Assault Caught]]>><<set $phase to 1>><</link>>
+			<br>
+
+	<<else>>
+		The <<beasttype>> returns to the corner of <<bhis>> cage, and lies down to sleep. <<tearful>> you close the door.
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<if $exposed gte 1>>
+			<<covered>> <span class="pink">You'll be in danger if you're caught like this.</span>
+			<br><br>
+
+			<<link [[다음|Pound Exposed]]>><</link>>
+			<br>
+		<<else>>
+			당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+			<br><br>
+			<<if Time.hour gte $closinghour>>
+				<<link [[다음|Pound]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<link [[다음|Pound Work]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+
+
+<<elseif $enemyhealth lte 0>>
+
+	You shove the <<beasttype>> away from you. <<bHe>> whimpers, and hides in the corner.
+	<br><br>
+
+	<<tearful>> you leave the cage.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+
+	<<if $exposed gte 1>>
+		<<covered>> <span class="pink">You'll be in danger if you're caught like this.</span>
+		<br><br>
+
+		<<link [[다음|Pound Exposed]]>><</link>>
+		<br>
+	<<else>>
+		당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+		<br><br>
+
+		<<if Time.hour gte $closinghour>>
+			<<link [[다음|Pound]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[다음|Pound Work]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+
+<<else>><<set $rescued += 1>>
+
+		You hear footsteps approach. <span class="red">Someone is coming,</span> alerted by your cry.
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<generate1>><<person1>><<generate2>><<generate3>><<generate4>>
+		A <<person>> walks into view, and stops at the sight of you. "Everyone!" <<he>> shouts. "Come get a look at this!"<<ggtrauma>><<ggstress>><<famebestiality 4>>
+		<br><br>
+
+		<<link [[다음|Pound Assault Caught]]>><<set $phase to 0>><</link>>
+		<br>
+
+<</if>>
+
+
+:: Pound Exposed
+<<effects>>
+
+You walk down the space between cages, ignoring the watching <<pound_text>>. You arrive at two doors, a walk-in cupboard, and another leading deeper into the building. You see a stack of freshly-cleaned towels on a trolley through the second, but you also hear voices.
+<br><br>
+
+A <<generateSweaterWearer 1>><<person1>><<person>> leans on the wall outside the front corridor. Maybe it's safer to just ask for help.
+<br><br>
+
+<<link [[찬장을 살펴본다|Pound Exposed Search]]>><<endevent>><</link>><<difficulty 50>>
+<br>
+<<set $skulduggerydifficulty to 700>>
+<<link [[카트로 몰래 이동한다|Pound Exposed Sneak]]>><<endevent>><</link>><<skulduggerydifficulty>>
+<br>
+<<link [[도움을 요청한다|Pound Exposed Help]]>><</link>>
+<br>
+
+
+:: Pound Exposed Search
+<<effects>>
+
+The cupboard door squeaks as it opens.
+<<if random(1, 2) is 2>>
+	You feel around the dark interior, <span class="green">and find a stack of towels.</span> You <<if $upperwet gte 1>>dry<<else>>cover<</if>> yourself before leaving the cupboard. <<dry_towel>>
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<link [[다음|Pound]]>><</link>>
+	<br>
+<<else>>
+	You feel around the dark interior, <span class="red">knocking something hard off an unseen shelf.</span> It crashes against another object, causing a noisy cascade.
+	<br><br>
+	<<generate1>><<generate2>><<person1>>
+	You escape the cupboard, only to run into the arms of a <<person>>. "What we got here then?"
+	<br>
+	"Running around dressed like that," says the <<person2>><<person>> flanking <<person1>><<him>>. <<He>> shakes <<his>> head.
+	<br><br>
+	<<link [[다음|Pound Exposed Caught]]>><</link>>
+	<br>
+<</if>>
+
+:: Pound Exposed Sneak
+<<effects>>
+
+<<generate1>><<generate2>><<person1>>
+You drop to your knees and peek around the door. A <<person>> and <<person2>><<person>> stand with their backs to you, chatting.
+<br><br>
+
+It's only a short distance, but your heart thunders regardless.
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	You grab the towels, and crawl the way you came. You <<if $upperwet gte 1>>dry<<else>>cover<</if>> yourself in a hurry.<<dry_towel>>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	You try to grab the towels, but your shaking hand collides with the trolley instead, knocking it further from reach.
+	<br><br>
+
+	You catch up to it again, just as the <<person1>><<person>> turns and spots you. "What we got here then?" <<he>> says, alerting <<his>> friend.
+	<br>
+	"Crawling around dressed like that," says the <<person2>><<person>>. <<He>> shakes <<his>> head.
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	<<link [[다음|Pound Exposed Caught]]>><</link>>
+	<br>
+
+<</if>>
+
+
+
+:: Pound Exposed Caught
+<<effects>>
+<<fameexhibitionism 2>>
+The <<person1>><<person>> circles around you, and grasps your arms from behind.
+
+<<if $leftarm is "bound" and $rightarm is "bound">>
+
+<<else>>
+	<<He>> holds them either side of your head, preventing you from covering.
+<</if>>
+<br><br>
+
+The <<person2>><<person>> leers at you from the front. "We'll let you cover," <<he>> says. "Once we've had our fun."
+<br><br>
+<<link [[무릎으로 사타구니를 찍어올린다|Pound Exposed Knee]]>><</link>><<physiquedifficulty 1 16000>>
+<br>
+<<link [[내버려둔다|Pound Exposed Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+
+
+:: Pound Exposed Knee
+<<effects>>
+
+<<if $physiqueSuccess>>
+	You raise your knee into the <<person2>><<persons>> groin, <span class="green">and hear a sickening crunch.</span> <<His>> eyes widen, and <<he>> drops to the floor, clutching <<his>> crotch.
+	<br><br>
+	The <<person1>><<person>>, meanwhile, breaks into a fit of laughter. You seize the opportunity, and snatch some towels before making your escape. You <<if $upperwet gte 1>>dry<<else>>cover<</if>> yourself in a hurry.<<dry_towel>>
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	You raise your knee into the <<person2>><<persons>> crotch, <span class="red">but <<he>> doesn't react.</span> "Bitch!" <<he>> says, before
+	<<if playerBellySize(true) gte 8>>
+		kicking out your legs.
+	<<else>>
+		delivering a punch to your gut.
+	<</if>>
+	"We'll do this the hard way then."<<gpain>><<gstress>><<pain 4>><<stress 6>>
+	<br><br>
+
+	<<link [[다음|Pound Exposed Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Pound Exposed Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "Someone arrives to investigate your cry, <span class='pink'>but decides to turn a blind eye when they see what's happening.</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Exposed Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Exposed Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Exposed Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	The <<person>> drops a handful of towels on you, and <<he>> saunters away.
+	<br><br>
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<dry_towel>>
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<link [[다음|Pound]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	You shove the <<person1>><<person>> into the trolley. <<He>> grasps the <<person2>><<person>>'s arm as <<he>> falls, and they both tumble to the ground, with towels landing atop.
+	<br><br>
+	<<tearful>> you snatch some towels. You make your escape.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<dry_towel>>
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+	<<link [[다음|Pound]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Exposed Help
+<<effects>>
+
+You keep your body hidden around the corner.
+<<if $speech_attitude is "meek">>
+	"E-excuse me?" you say. "Can you help me?"
+<<elseif $speech_attitude is "bratty">>
+	"Hey," you say. "Could you give me a hand?"
+<<else>>
+	"Hello," you say. "Could you help me?"
+<</if>>
+<br>
+The <<person>> looks over and frowns. "What you hiding there?" <<he>> asks.
+<br>
+"Could you give me something to cover with?" you continue.
+<br>
+<<His>> smile becomes a grin. "Sure. Just let me see you first. So I know your size."
+<br><br>
+
+<<link [[Step into view|Pound Exposed Step]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+<br>
+<<link [[거절한다|Pound Exposed Refuse]]>><</link>>
+<br>
+
+:: Pound Exposed Step
+<<effects>>
+<<fameexhibitionism 1>>
+<<covered>>
+You step from your hiding place. The <<person>>'s eyes flicker over your body. "Give me a twirl."
+<br><br>
+<<exposure>>
+You turn on the spot as instructed. The <<person>> seems satisfied. <<He>> tugs <<his>> sweater over <<his>> head, unconcerned about <<his>>
+
+<<if $pronoun is "f">>
+	exposed bra.<<upperwear 29>>
+<<else>>
+	exposed chest.<<upperwear 24>>
+<</if>>
+<<He>> holds it out to you. It's a little big, which is probably for the best.
+<br><br>
+
+The <<person>> leaves you to dress, and enters the pound proper. Probably on the hunt for a replacement.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+<<link [[다음|Pound]]>><<endevent>><</link>>
+<br>
+
+:: Pound Exposed Refuse
+<<effects>>
+<<fameexhibitionism 2>>
+"Suit yourself," the <<person>> says. "Hey guys! Look what I've found!"
+<br><br>
+<<endevent>><<generate1>><<generate2>><<person1>>
+You turn to find somewhere to hide, only to run into a <<person>>'s arms. "What we got here then?"
+<br>
+"Running around dressed like that," says a <<person2>><<person>> flanking <<person1>><<him>>. <<He>> shakes <<his>> head.
+<br><br>
+<<link [[다음|Pound Exposed Caught]]>><</link>>
+<br>
+
+
+:: Pound Work Wash
+<<effects>>
+
+<<beastNEWinit 1 dog>>
+<<if $slimePoundTask>>당신은 특정한 일을 하라는 <<= numberOfEarSlime() gte 2 ? "슬라임들의" : "슬라임의">> 명령을 따른다.<<unset $slimePoundTask>><</if>>
+<<if random(1, 2) is 2 and ($bestialitydisable is "f" or $monster is 1)>>
+	You enter one of the cages, bucket in hand. The <<beasttype>> within lets you approach. You wash <<bhim>> with soapy water.
+	<br><br>
+
+	<<bHe>> shakes <<bhis>> fur dry before you're done, almost getting you wet.
+	<br><br>
+
+	<<link [[계속 씻긴다|Pound Work Wash Wet]]>><</link>><<dancedifficulty 1 400>>
+	<br>
+	<<link [[꾸짖는다|Pound Work Wash Scold]]>><</link>><<tendingdifficulty 1 800>>
+	<br>
+<<else>>
+	You enter one of the cages, bucket in hand. The <<beasttype>> within recoils into the corner.
+	<<if $monster is 1>>
+		"No," <<bhe>> says. "Hate wet."
+	<<else>>
+		<<bHe>> looks cautiously at the water.
+	<</if>>
+	<br><br>
+
+	<<link [[진정시킨다|Pound Work Wash Soothe]]>><</link>><<tendingdifficulty 1 800>>
+	<br>
+	<<if hasSexStat("deviancy", 3) and ($bestialitydisable is "f" or $monster is 1)>>
+		<<link [[손을 사용한다|Pound Work Wash Hand]]>><</link>><<deviant3>>
+	<</if>>
+<</if>>
+
+
+:: Pound Work Wash Wet
+<<effects>>
+
+<<if $danceSuccess>>
+	You continue washing the <<beasttype>>, backing away when you suspect <<bhe>>'s gonna splash you. <span class="green">You manage to stay dry.</span>
+	<br><br>
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	You continue washing the <<beasttype>>. <span class="red">Without warning</span>, <<bhe>> shakes <<bhis>> fur, <span class="red">drenching you in water.</span><<gstress>><<stress 6>>
+	<br><br>
+	<<wet_all>>
+	<br><br>
+	<<exposure>>
+	<<covered>> The <<beasttype>> cocks <<bhis>> head innocently.
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<link [[다음|Pound Exposed]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+		<br><br>
+
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Pound Work Wash Scold
+<<effects>>
+
+<<if $tendingSuccess>>
+	You hold the <<beasttype>>'s collar, and give <<bhim>> a word of warning. <<bHe 0>> seems to understand, <span class="green">and waits until you're finished before drying <<bhimself>> again.</span><<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	You hold the <<beasttype>>'s collar, and adopt a firm tone. You think it's working, until <<bhe>> shakes <<bhis>> fur with violent force, <span class="red">drenching you in water.</span>
+	<<wet_all>>
+	<br><br>
+	<<exposure>>
+	<<covered>> The <<beasttype>> cocks <<bhis>> head innocently.
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<link [[다음|Pound Exposed]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+		<br><br>
+
+		<<if Time.hour gte $closinghour>>
+			<<link [[다음|Pound]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[다음|Pound Work]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>
+
+
+:: Pound Work Wash Soothe
+<<effects>>
+
+<<if $tendingSuccess>>
+	"It's okay," you croon as you step closer. "The water is warm, and you'll feel better after. I promise."
+	<br><br>
+	<<if $monster is 1>>
+		<span class="green">"O-okay," <<bhe>> says, <<bhis>> nerves somewhat soothed.</span>
+	<<else>>
+		<span class="green">Your tone soothes <<bhis>> nerves,</span> and <<bhe>> allows you to approach.
+	<</if>>
+	<<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	You wash <<bhim>> from head to foot. <<bHe>> doesn't like the water at first, but soon gets used to it. You take the bucket and leave the cage, leaving <<bhim>> to shake off the water.
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	"Don't be scared," you say. You hold the sponge out to show <<bhim>> there's nothing to be afraid of, <span class="red">but <<bhe>> only recoils further.</span><<gtending>><<tending 1>>
+	<br><br>
+
+	<<bHe>> relents eventually, but whines the whole time. When done, <<bhe>> shakes <<bhis>> head and fur with force enough to splash the <<pound_text>> in neighbouring cages. <span class="pink">You're drenched.</span>
+	<<wet_all>>
+	<br><br>
+	<<exposure>>
+	<<covered>> The <<beasttype>> cocks <<bhis>> head innocently.
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<link [[다음|Pound Exposed]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+		<br><br>
+
+		<<if Time.hour gte $closinghour>>
+			<<link [[다음|Pound]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[다음|Pound Work]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>
+
+:: Pound Work Wash Hand
+<<effects>>
+
+You put the bucket aside, and crouch beside the <<beasttype>>. "If you promise to be a good <<if $NPCList[0].pronoun is "m">>boy<<else>>girl<</if>>," you say. "I'll give you a treat."
+<<if $NPCList[0].penis isnot "none">>
+	You reach for <<bhis>> <<print $NPCList[0].penisdesc>>, and stroke it to attention.
+<<else>>
+	You reach for <<bhis>> pussy, and run a finger over it.
+<</if>>
+<<deviancy3>>
+
+<<bHe>> allows you to rub with increasing speed.
+<<if $NPCList[0].penis isnot "none">>
+	<<bHis>> body shudders, and <<bhe>> ejaculates on the floor.
+<<else>>
+	<<bHis>> body shudders in orgasm.
+<</if>>
+<br><br>
+
+<<bHe>>'s unconcerned as you approach <<bhim>> with the bucket. You wash <<bhim>> from head to foot. <<bHe>> doesn't like the water at first, but soon gets used to it. You take the bucket and leave the cage, leaving <<bhim>> to shake off the water.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Work Walk
+<<effects>>
+
+<<beastNEWinit 5 dog>>
+<<if $slimePoundTask>>당신은 특정한 일을 하라는 <<= numberOfEarSlime() gte 2 ? "슬라임들의" : "슬라임의">> 명령을 따른다.<<unset $slimePoundTask>><</if>>
+You attach leashes to five <<beastsplural>>. They're eager for the exercise, and don't resist. Tails wagging, they pull you through the front yard and onto the street beyond.
+<br><br>
+<<link [[힘으로 가도록 한다|Pound Work Walk Wrestle]]>><</link>><<physiquedifficulty 1 19000>>
+<br>
+<<rng 4>>
+<<switch $rng>>
+	<<case 1>>
+		<<link [[녀석들이 목적지를 선택하게 한다|Pound Work Walk Beach]]>><</link>>
+		<br>
+	<<case 2>>
+		<<link [[녀석들이 목적지를 선택하게 한다|Pound Work Walk Forest]]>><</link>>
+		<br>
+	<<case 3>>
+		<<link [[녀석들이 목적지를 선택하게 한다|Pound Work Walk Hills]]>><</link>>
+		<br>
+	<<default>>
+		<<link [[녀석들이 목적지를 선택하게 한다|Pound Work Walk Road]]>><</link>>
+		<br>
+<</switch>>
+
+
+:: Pound Work Walk Wrestle
+<<effects>>
+
+<<if $physiqueSuccess>>
+	The <<beastsplural>> tug and pull in multiple directions, but an iron grip and stern word are <span class="green">able to get them under control.</span> Where shall you take them?
+	<br><br>
+	<<set $phase to 1>>
+	<<link [[해변으로 간다|Pound Work Walk Beach]]>><</link>>
+	<br>
+	<<link [[숲으로 간다|Pound Work Walk Forest]]>><</link>>
+	<br>
+	<<link [[언덕으로 간다|Pound Work Walk Hills]]>><</link>>
+	<br>
+	<<link [[마을을 나가는 도로로 간다|Pound Work Walk Road]]>><</link>>
+	<br>
+<<else>>
+	The <<beastsplural>> tug and pull in multiple directions. You try to get them under control, but your tugs go ignored, your words unheeded. <span class="red">They pull you behind them.</span>
+	<br><br>
+	<<rng 4>>
+	<<switch $rng>>
+		<<case 1>>
+			<<link [[다음|Pound Work Walk Beach]]>><</link>>
+			<br>
+		<<case 2>>
+			<<link [[다음|Pound Work Walk Forest]]>><</link>>
+			<br>
+		<<case 3>>
+			<<link [[다음|Pound Work Walk Hills]]>><</link>>
+			<br>
+		<<default>>
+			<<link [[다음|Pound Work Walk Road]]>><</link>>
+			<br>
+	<</switch>>
+<</if>>
+
+
+:: Pound Work Walk Beach
+<<set $outside to 1>><<location "beach">><<effects>>
+
+<<if $phase is 1>>
+	You lead the
+<<else>>
+	You are led by the
+<</if>>
+<<beastsplural>> down to the beach. It's safe to let them off their leashes here.
+
+<<if Weather.precipitation is "rain">>
+	They bound and frolic, unbothered by the rain.
+<<elseif Weather.precipitation is "snow">>
+	They bound and frolic on the sand.
+<<elseif !Weather.isOvercast>>
+	They bound and frolic in the sun.
+<<else>>
+	They bound and frolic on the sand.
+<</if>>
+<br><br>
+
+<<if random(1, 2) is 2>>
+	<<generate6>><<person6>>A <<person>> approaches you, arms folded. "Cute pups," <<he>> says. "They belong to you?"
+	<br><br>
+	<<link [[추파를 던진다|Pound Work Walk Beach Flirt]]>><</link>><<promiscuous1>>
+	<br>
+	<<link [[예의 바르게 행동한다|Pound Work Walk Beach Polite]]>><</link>>
+	<br>
+	<<link [[무시한다|Pound Work Walk Beach Dismiss]]>><</link>>
+	<br>
+<<else>>
+	<<link [[함께 달린다|Pound Work Walk Beach Run]]>><<athletics 1>><<tiredness 1>><<pass 10>><</link>><<gtiredness>><<gathletics>>
+	<br>
+	<<link [[본다|Pound Work Walk Beach Watch]]>><<stress -6>><</link>><<lstress>>
+	<br>
+<</if>>
+
+:: Pound Work Walk Beach Flirt
+<<effects>>
+
+"They are," you say. "But they're not as cute as you."
+<<promiscuity1>>
+
+<<if random(1, 100) is 100>>
+	<<He>> chuckles and calls you a flirtatious vagabond, but doesn't seem upset.
+<<elseif random(1, 2) is 2>>
+	<<He>> smiles and thanks you, seeming upbeat for the rest of the conversation.
+<<else>>
+	You catch <<him>> off guard, and <<he>> spends the rest of the conversation awkwardly shuffling between feet.
+<</if>>
+<br><br>
+
+The <<beastsplural>> run until they're worn down enough to accept the leashes back on their collars. You lead them back to the pound.
+<br><br>
+
+<<pound_walk_end>>
+
+
+:: Pound Work Walk Beach Polite
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"N-no," you say. "I just work at the pound."
+<<elseif $speech_attitude is "bratty">>
+	"No," you say. "This is my job."
+<<else>>
+	"No," you say. "I work at the pound."
+<</if>>
+<br><br>
+
+The <<person>> nods. "I wanted to see the pups once, maybe adopt one, but they stopped me at the gate. I swear I've seen others enter. Maybe they didn't like my face."
+<br><br>
+
+The <<beastsplural>> run until they're worn down enough to accept the leashes back on their collars. You lead them back to the pound.
+<br><br>
+
+<<pound_walk_end>>
+
+:: Pound Work Walk Beach Dismiss
+<<effects>>
+
+You turn away from the <<person>>. <<He>> takes the hint and leaves you be.
+<br><br>
+
+The <<beastsplural>> run until they're worn down enough to accept the leashes back on their collars. You lead them back to the pound.
+<br><br>
+
+<<pound_walk_end>>
+
+
+:: Pound Work Walk Beach Run
+<<effects>>
+
+You run with <<beastsplural>>, keeping up with them as they cross the sand. The wind is invigorating.
+<br><br>
+
+The <<beastsplural>> run until they're worn down enough to accept the leashes back on their collars. You lead them back to the pound.
+<br><br>
+
+<<pound_walk_end>>
+
+
+:: Pound Work Walk Beach Watch
+<<effects>>
+
+You watch as the <<beastsplural>> run and play on the sand, shouting if they get too bitey with one another. They soon tire out enough to accept the leashes back on their collars. You lead them back to the pound.
+<br><br>
+
+<<pound_walk_end>>
+
+
+
+:: Pound Work Walk Forest
+<<set $outside to 1>><<location "forest">><<effects>>
+
+<<if $phase is 1>>
+	You lead the
+<<else>>
+	You are led by the
+<</if>>
+<<beastsplural>> through the town's streets. Some pedestrians give your pack a wide berth, but others stop to pet.
+<br><br>
+
+You arrive at the forest. You keep the <<beastsplural>> on their leashes, as getting lost in here could be dangerous, even this close to town.
+<br><br>
+
+<<if random(1, 2) and ($bestialitydisable is "f" or $monster is 1)>>
+	One <<beasttype 0>> sniffs a strange pink flower.
+	<<if $tending gte 600>>
+		<span class="green">You recognise it,</span> <span class="purple">and know it's dangerous.</span>
+		<br><br>
+
+		<<link [[개를 불러 꽃에서 떨어뜨린다|Pound Work Walk Forest Call]]>><</link>><<tendingdifficulty 600 1000>>
+		<br>
+		<<link [[따라간다|Pound Work Walk Forest Allow]]>><</link>>
+		<br>
+	<<else>>
+		<span class="red">You don't recognise it.</span>
+		<br><br>
+
+		<<link [[다음|Pound Work Walk Forest Allow]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	 You stick to a trail that snakes along the forest's edge. They frequently stop to sniff bushes and the bottom of trees. You keep them away from any mushrooms or strange-looking flowers. They are suitably tired by the time the road emerges back on the street.
+	 <br><br>
+
+	 You lead them back to the pound, and return them to their cages.
+	 <br><br>
+
+	 당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	 <br><br>
+	 <<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Pound Work Walk Forest Call
+<<effects>>
+
+<<if $tendingSuccess>>
+	"Here <<if $NPCList[0].pronoun is "m">>boy<<else>>girl<</if>>," you say. The <<beasttype 0>> responds, <span class="green">and leaves the flower be.</span>
+	<br><br>
+
+	Once suitably exhausted, you lead the <<beastsplural>> back through town, to the pound.
+	<br><br>
+
+	<<pound_walk_end>>
+<<else>>
+	"H-here," you stammer, <span class="red">but the <<beasttype 0>> ignores you.</span> <<bHe 0>> buries <<bhis 0>> nose in the flower, <span class="lewd">spreading pollen all around.</span> It smells sweet, and fills you with a strange warmth.<<ggarousal>><<arousal 1200>><<drugs 120>>
+	<br><br>
+
+	The warmth builds, and your knees tremble. The <<beastsplural>> are also affected. They sniff and lick you. You're filled with a terrible urge to drop to the grass and let them do as they will.
+	<br><br>
+
+	<<link [[저항한다|Pound Work Walk Forest Resist]]>><</link>><<willpowerdifficulty 1 1000>>
+	<br>
+	<<link [[굴복한다|Pound Work Walk Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Pound Work Walk Forest Resist
+<<effects>>
+
+<<if $willpowerSuccess>>
+	You lean against a tree and focus on your breathing, waiting for the yearning to pass. It takes all your will, <span class="green">but you manage to last until the feelings subside.</span>
+	<br><br>
+
+	You make sure the <<beastsplural>> aren't fooling around with each other, then lead them back to town, and the pound.
+	<br><br>
+
+	<<pound_walk_end>>
+<<else>>
+	You pull the <<beastsplural>> away from the flower, <span class="red">but only make a few steps before collapsing on the grass,</span> and writhing in desperate longing. The <<beastsplural>> surround you, as overcome as you.<<ggwillpower>><<willpower 12>>
+	<br><br>
+	<<link [[다음|Pound Work Walk Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Pound Work Walk Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<beastTrainGenerate>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Work Walk Rape End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Work Walk Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Work Walk Rape End
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		The <<beasttype>> recoils in pain and fear, but another is eager for a go.<<gpound_status>><<pound_status 1>>
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Rape]]>><</link>>
+	<<else>>
+		The <<beasttype>> recoils in pain and fear.
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Rape End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		Satisfied, the <<beasttype>> moves and another takes its turn.<<lpound_status>><<pound_status -1>>
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Rape]]>><</link>>
+	<<else>>
+		Satisfied, the <<beasttype>> moves away from you.
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Rape End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	The yearning subsides, and you rise to your feet. You feel exhausted, but so do the <<beastsplural>>, and they don't resist as you pull them towards town.
+	<br><br>
+	<<clotheson>>
+	<<pass 60>>
+	<<exposure>>
+	<<if $exposed gte 1>>
+		You see buildings through the trees ahead. <<tearful>> you look down at your body. <<covered>>
+		<br><br>
+
+		<<link [[도움을 요청한다|Pound Work Walk Ask]]>><</link>><<difficulty 50>>
+		<br>
+		<<if hasSexStat("deviancy", 3)>>
+			<<link [[Hide amongst the pack|Pound Work Walk Hide]]>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<if $exposed gte 2 and hasSexStat("exhibitionism", 5)>>
+			<<link [[Walk as you are|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist5>>
+			<br>
+		<<elseif $exposed gte 1 and hasSexStat("exhibitionism", 4)>>
+			<<link [[Walk as you are|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist4>>
+			<br>
+		<</if>>
+	<<else>>
+		<<endcombat>>
+		<<set $phase to 2>>
+		<<pound_walk_end>>
+	<</if>>
+<</if>>
+
+:: Pound Work Walk Forest Allow
+<<effects>>
+
+The <<beasttype 0>> buries <<bhis 0>> nose in the flower, <span class="lewd">spreading pollen all around.</span> It smells sweet, and fills you with a strange warmth.<<ggarousal>><<arousal 1200>><<drugs 120>>
+<br><br>
+
+The warmth builds, and your knees tremble. The <<beastsplural>> are also affected, and leer at you. You're filled with a terrible urge to drop to the grass and let them do as they will.
+<br><br>
+
+<<link [[저항한다|Pound Work Walk Forest Resist]]>><</link>><<willpowerdifficulty 1 1000>>
+<br>
+<<link [[굴복한다|Pound Work Walk Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Pound Work Walk Ask
+<<effects>>
+
+You linger in a copse of trees near the street. The <<beastsplural>> don't understand what's got you so anxious.
+<br><br>
+
+A <<generate6>><<person6>><<person>> walks by.
+<<if $speech_attitude is "meek">>
+	"E-excuse me," you call out. "I've had an accident. Could you give me something to cover with?"
+<<elseif $speech_attitude is "bratty">>
+	"Had an accident in the forest," you call out. "Could you give me something to cover with?"
+<<else>>
+	"Hello," you call out. "I've had an accident. Could you give me something to cover with?"
+<</if>>
+<br><br>
+The <<person>> stops and peers at you. The trees conceal you well enough,
+<<upperwear 39>>
+<<if random(1, 2) is 2>>
+	but <<he>> leers at what <<he>> can see. "Sure," <<he>> says. "I live nearby. Give me a few minutes, and I'll bring you something."
+	<br><br>
+
+	<<He>> returns as promised, holding a set of overalls. "All I have that'll fit you," <<he>> says, holding it out. You lean forward, and snatch the fabric from <<his>> grasp. It's cold to the touch.
+	<br><br>
+
+	You dress behind the trees. The fabric is really cold for some reason, though you suppose it'll warm up before long. The <<person>> is still there when you emerge, wearing <<his>> grin. You walk out onto the street, towards the pound.
+	<br><br>
+
+	<<link [[다음|Pound Work Walk Ask 2]]>><</link>>
+	<br>
+<<else>>
+	but <<he>> blushes anyway. "S-sure," <<he>> says. "I live nearby. Give me a few minutes, and I'll bring you something."
+	<br><br>
+
+	<<He>> returns as promised, holding a set of overalls. "Sorry it's not more comfortable," <<he>> says, holding it out with eyes averted. "It's all I have in your size. It should get you where you're going."
+	<br><br>
+
+	You thank the <<person>>, and dress behind the trees. The <<person>> is gone when you emerge.
+	<br><br>
+
+	The journey back to the pound is uneventful, though you attract some looks.
+	<br><br>
+
+	당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+	<br><br>
+	<<endcombat>>
+	<<if Time.hour gte $closinghour>>
+		<<link [[다음|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+
+:: Pound Work Walk Ask 2
+<<effects>>
+
+You turn onto another street, this one more crowded. You smell a whiff of raw meat. Odd, as there are no butchers you know of near here. You get another whiff, then another. Soon the smell of meat becomes constant.
+<br><br>
+
+You jump as you feel a nose presses into your groin from behind. It's a <<beasttype 0>>, eager to smell you. The others join in. The <<beasttype 0>> licks your bottom next. You lean down and sniff one of the straps of your overalls. <span class="pink">They reek of meat.</span>
+<br><br>
+
+The <<beasttype 0>> grasps part of the fabric between <<bhis 0>> teeth, <span class="pink">tearing it.</span> You tighten <<bhis 0>> leash and pull <<bhim 0>> away, but you're attracting glances from other pedestrians.
+<br><br>
+
+<<set $worn.upper.integrity -= 50>>
+<<set $worn.lower.integrity -= 50>>
+
+
+<<link [[다음|Pound Work Walk Ask 3]]>><</link>>
+<br>
+
+
+:: Pound Work Walk Ask 3
+<<effects>>
+
+You hasten your pace. You're not strong enough to keep them all at bay, not when they're so eager. You're able to chasten the worst of them, but can't stop them all from nipping and biting.
+<br><br>
+
+You glance over your shoulder. A few people follow in amusement, the <<person>> among them.
+<br><br>
+
+<<set $worn.upper.integrity -= 50>>
+<<set $worn.lower.integrity -= 50>>
+
+
+
+<<link [[Move faster|Pound Work Walk Ask 4]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[Take a shortcut|Pound Work Walk Ask 4]]>><<set $phase to 1>><</link>>
+<br>
+
+:: Pound Work Walk Ask 4
+<<effects>>
+
+<<if $phase is 0>>
+	You start jogging. You feel the overalls split apart further as you move, but it's harder for the <<beastsplural>> to get a grip.
+	<br><br>
+	You round a corner, and see the pound up ahead. You're almost there!
+<<else>>
+	You duck into an alley, out of sight. Your pursuers keep up however, hounding you until you emerge on the street opposite. You see the pound up ahead. You're almost there!
+<</if>>
+<br><br>
+
+It happens so fast. As you step out onto the street, the <<beasttype 0>> grabs the fabric around your ankle, and pulls. The straps dig into your shoulders, <span class="pink">then snap.</span> The fabric covering your chest begins to fall forward.
+<br><br>
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	With your arms bound, you can't stop your <<breasts>> being barred. On top of that, the <<beastsplural>> tug your overalls further down your body as you walk, right over your feet. <span class="pink">You trip,</span> and land half-naked in the middle of the street.
+<<else>>
+	You push the fabric against your chest with one arm, but the <<beastsplural>> tug your overalls further down your body as you walk, right over your feet. <span class="pink">You trip,</span> and land half-naked in the middle of the street.
+<</if>>
+<br><br>
+<<upperruined>>
+<<exposure>>
+<<set $worn.lower.integrity -= 50>>
+
+People stand around gawking. Several pull out phones.
+<br><br>
+
+
+<<link [[다음|Pound Work Walk Ask 5]]>><</link>>
+<br>
+
+
+:: Pound Work Walk Ask 5
+<<effects>>
+
+The <<beastsplural>> surround you, each with a mouthful of your overalls. They pull and tug, until the fabric at last yields, <span class="pink">tearing it from your body in all directions.</span><<gstress>><<gtrauma>><<fameexhibitionism 10>><<stress 6>><<trauma 6>>
+<br><br>
+
+<<upperruined>>
+<<lowerruined>>
+<<exposure>>
+<<covered>> The audience stand around gawking and filming. The <<person6>><<person>> stands closest. "Don't worry," the <<person>> laughs. "I didn't expect those clothes back."
+<br><br>
+
+<<link [[도망간다|Pound Work Walk Ask Run]]>><</link>>
+<br>
+<<link [[Get revenge|Pound Work Walk Ask Revenge]]>><</link>><<tendingdifficulty 600 1000>>
+<br>
+
+
+
+
+:: Pound Work Walk Ask Run
+<<effects>>
+
+You climb to your feet and dash across the rest of the street. The <<beastsplural>> seem happy to follow, chewing on what remains of your overalls as they run.
+<br><br>
+
+The other staff laugh and leer as you enter the building. You snatch some cleaned towels from a trolley near the entrance. You <<if $upperwet gte 1>>dry<<else>>cover<</if>> yourself in a hurry, then return the <<beastsplural>> to their cages.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+<<endcombat>>
+<<link [[다음|Pound]]>><<dry_towel>><</link>>
+<br>
+
+
+:: Pound Work Walk Ask Revenge
+<<effects>>
+
+You sic the <<beastsplural>> on the <<person>>.
+
+<<if $tendingSuccess>>
+	Perhaps the meat-smelling fabric is disappointing. Perhaps they remember where the overalls came from. Regardless of their reasons, <span class="green">they lunge at <<him>>,</span> and drag <<him>> to the ground.<<lltrauma>><<trauma -12>><<gcontrol>><<control 10>>
+	<br><br>
+
+	 They make quicker work of <<his>> clothes than they did yours, and soon have <<him>> completely naked. "Y-you stupid mutts!" <<he>> says, covering <<himself>> as the <<beastsplural>> ravage what remains of the fabric, as if searching for any morsel of food.
+	<br><br>
+
+	With the audience's attention now on the <<person>>, you make your escape. The <<beastsplural>> seem happy to follow, chewing on what remains of the <<persons>> clothes as they run.
+	<br><br>
+<<else>>
+	The tattered remains of your meat-smelling overalls prove more interesting, however, <span class="red">and they ignore your command.</span> You're left to struggle to your feet, and hobble across the rest of the street. The <<beastsplural>> seem happy to follow, chewing on what remains of your overalls as they run.
+	<br><br>
+<</if>>
+
+
+The other staff laugh and leer as you enter the building. You snatch some cleaned towels from a trolley near the entrance, and cover yourself before returning the <<beastsplural>> to their cages.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+<<endcombat>>
+<<link [[다음|Pound]]>><<towelup>><</link>>
+<br>
+
+
+
+:: Pound Work Walk Hide
+<<effects>>
+
+You drop to your knees and peer around the edge of the trees. If you keep low and don't get too close to anyone, perhaps you won't be spotted among the pack. It would be even more humiliating if you were, though.
+<br><br>
+
+You take a deep breath, and crawl out onto the street, surrounded by the <<beastsplural>>.
+<<deviancy3>>
+
+You navigate using the street signs and buildings above. You know the streets well enough to navigate to the pound even with such limited vision.
+<br><br>
+
+You somehow make it back without being spotted. The other staff laugh and leer as you enter the building. You snatch some cleaned towels from a trolley near the entrance, and cover yourself before returning the <<beastsplural>> to their cages.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+<<endcombat>>
+<<link [[다음|Pound]]>><<towelup>><</link>>
+<br>
+
+
+:: Pound Work Walk Exhibitionism
+<<effects>>
+
+<<flaunting>> you emerge from your hiding place, and walk down the busy street. Heads turn. Throats gasp. A monocle falls into a glass.
+<<if $exposed gte 2>>
+	<<exhibitionism5>>
+<<else>>
+	<<exhibitionism4>>
+<</if>>
+
+You endure leers and catcalls, but no one harasses you physically. Perhaps the <<beastsplural>> ward them off.
+<br><br>
+
+You arrive at the pound. The other staff laugh and leer as you enter the building. You snatch some cleaned towels from a trolley near the entrance, and cover yourself before returning the <<beastsplural>> to their cages.
+<br><br>
+
+당신은 <<moneyGain $pound.money>>를 얻었다.<<pass 60>>
+<br><br>
+<<endcombat>>
+<<link [[다음|Pound]]>><<towelup>><</link>>
+
+
+:: Pound Work Walk Hills
+<<set $outside to 1>><<location "moor">><<effects>>
+
+<<if $phase is 1>>
+	You lead the
+<<else>>
+	You are led by the
+<</if>>
+<<beastsplural>> west through town, along the small trails leading through the residential outskirts, into the winding hills beyond. It's colder here, but the wind is brisk and fresh, particularly as you crest the hills.
+<br><br>
+
+<<if random(1, 2) is 2>>
+	The <<beastsplural>> have a lot of energy, and it's a job to keep them from running off in different directions.
+	<<if hasSexStat("deviancy", 5) and ($monster is 1 or $bestialitydisable is "f")>>
+		<span class="lewd">A lewd thought strikes you.</span> You're alone out here, well-hidden from view. You know one way you could tire the <<beastsplural>> out.
+		<br><br>
+
+		<<link [[유혹한다|Pound Work Walk Sex]]>><<set $sexstart to 1>><</link>><<deviant5>>
+		<br>
+		<<link [[계속 걷는다|Pound Work Walk Hills 2]]>><</link>>
+		<br>
+	<<else>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Hills 2]]>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	You pass beneath a stone archway. There aren't many ruins this close to town, and those that remain have been worn down, their inscriptions faded or wiped entirely.
+	<br><br>
+	<<if currentSkillValue("history") gte 1000>>
+		<<link [[Try to read an inscription|Pound Work Walk Hills Read]]>><</link>><<willpowerdifficulty 600 1000>>
+		<br>
+	<<else>>
+		<<link [[Try to read an inscription|Pound Work Walk Hills Read 2]]>><<historyskill 3 "no_star">><</link>><<ghistory>>
+		<br>
+	<</if>>
+	<<link [[Just enjoy the walk|Pound Work Walk Hills 2]]>><<stress -6>><</link>><<lstress>>
+	<br>
+<</if>>
+
+:: Pound Work Walk Hills Read
+<<effects>>
+
+You run your fingers over the inscriptions. You recognise the events they mention, but something isn't right. This isn't what they teach at school, and there's something else, some connection forming at the edge of your mind.
+<br><br>
+<<if $willpowerSuccess>>
+	<span class="green">You focus,</span> and a rogue musing blossoms. It connects the different stories in a searing web. <span class="pink">Your mind recoils from a forgotten horror,</span> but some parts will remain. <<ggawareness>><<ggtrauma>><<gstress>><<awareness 12>><<trauma 12>><<stress 6>>
+	<br><br>
+	You find yourself lying in the grass. The <<beastsplural>> whine. It's time to move on.
+<<else>>
+	<span class="red">The thoughts disappear before you can grasp them,</span> leaving an uneasy sensation in their place.<<ggstress>><<stress 12>><<gwillpower>><<willpower 6>>
+	<br><br>
+	The <<beastsplural>> whine, eager to move on. You continue your walk.
+<</if>>
+<br><br>
+
+<<link [[다음|Pound Work Walk Hills 2]]>><</link>>
+<br>
+
+:: Pound Work Walk Hills Read 2
+<<effects>>
+
+You run your fingers over the faded inscriptions. They're written in an archaic English, but you can understand it a little.
+
+<<if $rng gte 81>>
+	It mentions a festival that took place in the city here. Or perhaps its destruction, you can't tell which.
+<<elseif $rng gte 61>>
+	It warns of the danger of sea. Of a violent flood, or perhaps a flood of reavers.
+<<elseif $rng gte 41>>
+	It celebrates the triumphs of a local ruler. Or maybe it's mocking the failures of a foreign ruler. Some ruler did something, and it was worth engraving it, apparently.
+<<elseif $rng gte 21>>
+	It's confusing though, mentioning both a great harvest that saved a city from starvation, and a cataclysm that brought the city to ruin, as if they were the same thing. Maybe it's just poetic.
+<<else>>
+	It mentions a departing army that would never be seen again. However, it contradicts this at once, continuing onto the army's return. You must be misunderstanding something.
+<</if>>
+<br><br>
+
+The <<beastsplural>> grow restless, so you continue on your way.
+<br><br>
+
+<<link [[다음|Pound Work Walk Hills 2]]>><</link>>
+<br>
+
+
+:: Pound Work Walk Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<beastTrainGenerate>>/* - Delete if there aren't multiple beasts*/
+
+	You drop to the ground, and present yourself to the <<beastsplural>>. They don't need a bigger hint than that.<<deviancy5>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Work Walk Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Work Walk Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Work Walk Sex Finish
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		The <<beasttype>> recoils in pain and fear, but another is eager for a go.
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Sex]]>><</link>>
+	<<else>>
+		The <<beasttype>> recoils in pain and fear.
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Sex Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		Satisfied, the <<beasttype>> moves and another takes its turn.
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Sex]]>><</link>>
+	<<else>>
+		Satisfied, the <<beasttype>> moves away from you.
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Pound Work Walk Sex Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<if $enemywounded gte 1 and $enemyejaculated gte 1>>
+		The <<beastsplural>> snap at each other, until you give them a firm word.
+	<<elseif $enemywounded gte 1>>
+		<<tearful>> you stand triumphant before the <<beastsplural>>.
+	<<else>>
+		<<tearful>> you lie for a while atop a satisfied pile of <<beastsplural>>.
+	<</if>>
+	<br><br>
+
+	<br><br>
+	<<clotheson>>
+	<<pass 60>>
+	<<exposure>>
+	<<if $exposed gte 1>>
+		You walk back through the hills, until you see buildings through the trees ahead. <<tearful>> you look down at your body. <<covered>>
+		<br><br>
+
+		<<link [[Ask for help|Pound Work Walk Ask]]>><</link>><<difficulty 50>>
+		<br>
+		<<if hasSexStat("deviancy", 3)>>
+			<<link [[Hide amongst the pack|Pound Work Walk Hide]]>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<if $exposed gte 2 and hasSexStat("exhibitionism", 5)>>
+			<<link [[Walk as you are|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist5>>
+			<br>
+		<<elseif $exposed gte 1 and hasSexStat("exhibitionism", 4)>>
+			<<link [[Walk as you are|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist4>>
+			<br>
+		<</if>>
+	<<else>>
+
+		<<set $phase to 2>>
+		<<link [[다음|Pound Work Walk Hills 2]]>><</link>>
+		<br>
+	<</if>>
+
+<</if>>
+
+:: Pound Work Walk Hills 2
+<<effects>>
+
+You walk back through the hills. The town looks closer each time you crest a peak, until at last the trail passes between buildings. You lead the <<beastsplural>> back to the pound.
+<br><br>
+<<endcombat>>
+<<pound_walk_end>>
+
+:: Pound Work Walk Road
+<<set $outside to 1>><<location "moor">><<effects>>
+
+<<if $phase is 1>>
+	You lead the
+<<else>>
+	You are led by the
+<</if>>
+<<beastsplural>> east through town, through the commercial and industrial areas, until you reach the road connecting to the outside world. Horses are sometimes ridden along here, so drivers are used to slowing for the occasional animal.
+<br><br>
+
+<<if random(1, 2) is 2>>
+	A squirrel emerges from a bush on the other side of the road. A <<beasttype 0>> spots it, and is overcome by an all-consuming urge to chase it. <span class="pink">Heedless of any danger, <<bhe 0>> rushes in front of an oncoming car.</span>
+	<br><br>
+
+	<<link [[Attempt rescue|Pound Work Walk Road Rescue]]>><</link>><<athleticsdifficulty 1 1100>>
+	<br>
+	<<link [[Close your eyes|Pound Work Walk Road Close]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+	<br>
+<<else>>
+	A few drivers leer at you as they pass, but no one stops to harass you. Perhaps the array of <<beastsplural>> dissuades them. You return to town via a different route, a trail leading between fields. You lead the <<beastsplural>> back to the pound.
+	<br><br>
+
+	<<pound_walk_end>>
+<</if>>
+
+:: Pound Work Walk Road Rescue
+<<effects>>
+
+You abandon the other leashes and run out into the road, grabbing the <<beasttype 0>> by the collar and pulling it to safety.
+<<if $athleticsSuccess>>
+	The approaching car drives by with a honk, <span class="green">but you, the <<beasttype 0>>, and the others are all safe.</span><<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	You walk a little further before heading back to town. The journey to the pound is uneventful.
+	<br><br>
+
+	<<pound_walk_end>>
+<<else>>
+	You make it in time, but the car catches your
+	<<if $rng gte 67 and $worn.upper.name isnot "naked" and $worn.lower.name isnot "naked">>
+		<<print $worn.upper.name>>
+		<<set $worn.upper.integrity -= 25>>
+		<<set $worn.lower.integrity -= 25>>
+	<<elseif $rng gte 33 and $worn.upper.name isnot "naked">>
+		<<print $worn.upper.name>>
+		<<set $worn.upper.integrity -= 25>>
+	<<else>>
+		<<print $worn.lower.name>>
+		<<set $worn.lower.integrity -= 25>>
+	<</if>>
+	as it passes. <<integritycheck>>
+	<br>
+	The fabric trails after the car like a flag. The driver honks.
+	<br><br>
+
+	<<pass 60>>
+	<<exposure>>
+	You travel back to town via the trails that run between fields, and don't run into anybody.
+	<br><br>
+
+	<<if $exposed gte 1>>
+		You hide in a copse of trees at the outskirts, and look out at the street beyond. There are buildings through the trees ahead. <<tearful>> you look down at your body. <<covered>>
+		<br><br>
+
+		<<link [[Ask for help|Pound Work Walk Ask]]>><</link>><<difficulty 50>>
+		<br>
+		<<if hasSexStat("deviancy", 3)>>
+			<<link [[Hide amongst the pack|Pound Work Walk Hide]]>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<if $exposed gte 2 and hasSexStat("exhibitionism", 5)>>
+			<<link [[Walk as you are|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist5>>
+			<br>
+		<<elseif $exposed gte 1 and hasSexStat("exhibitionism", 4)>>
+			<<link [[Walk as you are|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist4>>
+			<br>
+		<</if>>
+	<<else>>
+		<<pound_walk_end>>
+	<</if>>
+<</if>>
+
+:: Pound Work Walk Road Close
+<<effects>>
+
+You cover your eyes and pull the remaining <<beastsplural>> to safety. You hear a screech of tires as the car swerves in your direction. You pull the remaining <<beastsplural>> to safety, but the car catches your
+<<if $rng gte 67 and $worn.upper.name isnot "naked" and $worn.lower.name isnot "naked">>
+	<<print $worn.upper.name>>
+	<<set $worn.upper.integrity -= 25>>
+	<<set $worn.lower.integrity -= 25>>
+<<elseif $rng gte 33 and $worn.upper.name isnot "naked">>
+	<<print $worn.upper.name>>
+	<<set $worn.upper.integrity -= 25>>
+<<else>>
+	<<print $worn.lower.name>>
+	<<set $worn.lower.integrity -= 25>>
+<</if>>
+as it passes. <<integritycheck>>
+<br>
+The fabric trails after the car like a flag. The driver honks.
+<br><br>
+
+<<pass 60>>
+<<exposure>>
+You travel back to town via the trails that run between fields, and don't run into anybody.
+<br><br>
+
+<<if $exposed gte 1>>
+	You hide in a copse of trees at the outskirts, and look out at the street beyond. There are buildings through the trees ahead. <<tearful>> you look down at your body. <<covered>>
+	<br><br>
+
+	<<link [[Ask for help|Pound Work Walk Ask]]>><</link>><<difficulty 50>>
+	<br>
+	<<if hasSexStat("deviancy", 3)>>
+		<<link [[Hide amongst the pack|Pound Work Walk Hide]]>><</link>><<deviant3>>
+		<br>
+	<</if>>
+	<<if $exposed gte 2 and hasSexStat("exhibitionism", 5)>>
+		<<link [[Walk as you are|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist5>>
+		<br>
+	<<elseif $exposed gte 1 and hasSexStat("exhibitionism", 4)>>
+		<<link [[Walk as you are|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
+<<else>>
+	<<pound_walk_end>>
+<</if>>
+
+:: Pound Work Brute
+<<effects>>
+
+<<loadNPC 0 "black_dog">>
+<<generate2>><<generate3>>
+A <<person2>><<person>> and <<person3>><<person>> notice you take that particular key from the shelf, and eagerly watch you approach the cage. You open it, and step inside.
+<br><br>
+
+A pair of yellow eyes open in the corner, and regard you with suspicion.
+
+<<if $tendingSuccess>>
+
+	"It's okay," you say. "I'm just here to make sure you're okay."
+	<br><br>
+
+	The dark stirs, and a colossal black <<beasttype 0>> steps into view. <<bHis 0>> black fur is matted and unkempt, and <<bhe 0>> resembles no breed of dog you're aware of. <<bHe 0>> could almost be a wolf.
+	<br><br>
+	<<if $monster is 1>>
+		"Leave," <<bhe 0>> says. "I know your plan. Leave or I eat!"
+	<<else>>
+		It growls again.
+	<</if>>
+	<br><br>
+	<span class="green">"That's further than anyone's gotten,"</span> the <<person2>><<person>> says from outside the cage. "See if you can get <<bhis 0>> fur looking presentable." <<He>> throws you a brush.
+	<br><br>
+
+	<<link [[다음|Pound Work Brute Brush]]>><<set $pound.progress to 4>><</link>>
+	<br>
+<<else>>
+	"G-good doggy," you say. "I'm-"
+	<br><br>
+	<span class="red">A flash of white teeth strikes you with terror.</span> You flee the cage. The <<person2>><<person>> and <<person3>><<person>> laugh, but you don't care, you just need to be away.
+	<br><br>
+
+	Your hands shake as you lock the cage, and return the key to its place.
+	<br><br>
+
+	<<link [[다음|Pound]]>><<trauma 6>><<stress 6>><<endevent>><</link>><<gtrauma>><<gstress>>
+	<br>
+<</if>>
+
+
+:: Pound Work Brute Brush
+<<effects>>
+
+You step closer, brush in hand. The <<beasttype 0>> doesn't react as you brush <<bhis 0>> back, trying to loosen the tangle. <<bHe 0>> exhales, then collapses, as if <<bhis 0>> strength has given out.
+<<if $monster is 1>>
+	"Don't care anymore," <<bhe 0>> says. "Just want it over."
+<<else>>
+	It looks defeated.
+<</if>>
+<br><br>
+
+"The <<girl>> did it!" the <<person>> shouts. More staff arrive to observe. "Someone get the hose." They enter the cage, jostling you aside to get close to the creature. One of them carries a collar.
+<br><br>
+
+"Good job," the <<person2>><<person>> says. "Here's a little something." <<He>> hands you a wad of cash. "Now get going. We got lots to do."
+
+당신은 <<moneyGain $pound.money>>를 얻었다.
+<br><br>
+
+You turn as you leave the cage, and make contact with the <<beasttype 0>>'s sad eyes for just a moment before a body blocks your vision.
+<br><br>
+
+<span class="gold">If you wanted to help, you'd have to break in at night.</span>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Ask
+<<effects>>
+
+<<generate1>><<person1>>
+한 <<person_ i>> 빗자루로 털을 쓸며 우리 사이의 통로를 지나가고 있다. <<He_ nun>> 당신이 <<himPost>>에게 다가가자 멈춰서서 당신을 위아래로 쳐다본다. "원하는게 뭐지?"
+<br><br>
+<<if $speech_attitude is "meek">>
+	"저-저는 일자리를 찾고 있어요," 당신이 말한다. "도울 일이 있나요?"
+<<elseif $speech_attitude is "bratty">>
+	"일자리 있나요?" 당신이 말한다.
+<<else>>
+	"일자리를 찾고 있어요," 당신이 말한다. "채용 중이신가요?"
+<</if>>
+<br><br>
+그 <<person_ un>> 침을 뱉더니 고개를 끄덕인다. "전에도 이런 일 해본 적 있나?" <<he_ ga>> 묻는다. <<He_ nun>> 당신의 대답을 끊어버리고는 "상관 없어. 우린 일손이 필요해. 빗질하고, 먹이고, 씻기고, 산책하고. 손이 많이 간단 말이야."
+<br><br>
+"시간당 <span class="gold">£5</span> 줄게. 많지는 않지만 일을 잘 하면 더 많이 받을 수 있어. 아무때나 시작해."
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[다음|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Pound Tease
+<<effects>>
+
+You crouch beside the <<beasttype>>'s cage, and reach through the bars. "Who's a poor pooch?" you coo. "All locked up. I bet you want to fuck me, don't you?"
+<<deviancy2>>
+<<if $monster is 1>>
+	<<bHe>> rattles the bars, eyes alight with lust. "Yes," <<bhe>> woofs. <<bHe>> reaches for you, but you step away.
+<<else>>
+	<<bHe>> pokes <<bhis>> nose through the bars and sniffs, straining for your scent.
+<</if>>
+<br><br>
+
+<<if $arousal gte 10000>>
+	<<orgasm>> <span class="red">Driven wild by lust,</span> the <<beasttype>> rams against the cage door.
+	<br><br>
+	<<link [[다음|Pound Assault]]>><</link>>
+	<br>
+<<else>>
+	<<if hasSexStat("deviancy", 3)>>
+		<<if $pound.sneak is 1>>
+			<<if $player.penisExist and !playerChastity("penis")>>
+				<<link [[Press your penis against the bars (0:05)|Pound Penis]]>><<pass 5>><<set $pound.sneak to 2>><<arousal 1200 "genitals">><</link>><<deviant3>><<ggarousal>>
+				<br>
+			<</if>>
+			<<if $player.vaginaExist and !playerChastity("hidden")>>
+				<<link [[Press your pussy against the bars (0:05)|Pound Pussy]]>><<pass 5>><<set $pound.sneak to 2>><<arousal 1200 "genitals">><</link>><<deviant3>><<ggarousal>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		<span class="blue">You're not deviant enough to take things further.</span>
+		<br><br>
+	<</if>>
+	<<link [[떠난다|Pound]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Pound Assault
+<<effects>>
+
+<span class="red">The cage swings open,</span> and the <<beasttype>> leaps out, blocking your path.
+<br><br>
+
+<<if $monster is 1>>
+	"You mine," <<bhe>> growls. "Get on ground."
+<<else>>
+	<<bHe>> growls.
+<</if>>
+<br><br>
+
+<<link [[굴복한다|Pound Assault Rape]]>><<set $molestationstart to 1>><<set $phase to 0>><</link>>
+<br>
+<<link [[싸운다|Pound Assault Rape]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+<br>
+
+:: Pound Assault Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<if $phase is 1>>
+		<<set $enemyanger += 100>><<set $enemyhealth -= 20>>
+		You kick the <<beasttype>> away from you.
+	<<else>>
+		You drop to the ground.
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Assault Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Assault Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Assault Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation knot>>
+	<<if _knotted>>
+		<<pass 60>>
+		The <<beasttype>> tries to wriggle <<bhis>> <<print $NPCList[0].penisdesc>> free, but to no avail. <<bHe>> instead returns to the corner of <<bhis>> cage, dragging you along on all fours behind <<bhim>>. <<bHe>> lies down to sleep, leaving you to lie on the ground.<<lllpound_status>><<pound_status -10>>
+		<br><br>
+		<<tearful>> you try to work yourself free.
+		<<if $openinghours is 1>>
+			It takes a while. So long, in fact, that you're still trying when you hear the front door open. <span class="red">The staff have arrived for work.</span>
+			<br><br>
+			<<clotheson>>
+			<<endcombat>>
+			<<generate1>><<person1>><<generate2>><<generate3>><<generate4>>
+			You grab hold of the bars of the cage for leverage, but it's no use. A <<person>> walks into view, and stops at the sight of you. "Everyone!" <<he>> shouts. "Come get a look at this!"<<ggtrauma>><<ggstress>><<famebestiality 4>>
+			<br><br>
+
+			<<link [[다음|Pound Assault Caught]]>><<set $phase to 1>><</link>>
+			<br>
+		<<else>>
+			It takes a while, but you at last remove the cock with a plop. You leave the cage, closing the door behind you.
+			<br><br>
+			<<clotheson>>
+			<<endcombat>>
+			<<link [[다음|Pound]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		The <<beasttype>> returns to the corner of <<bhis>> cage, and lies down to sleep. <<tearful>> you close the door.
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<link [[다음|Pound]]>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	You kick the <<beasttype>> back into <<bhis>> cage, and lock it before it can recover.
+	<br><br>
+	<<tearful>> you walk away. The <<beasttype>> barks in anger behind you.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Pound]]>><</link>>
+	<br>
+
+<</if>>
+
+:: Pound Assault Caught
+<<effects>>
+
+A <<person2>><<person>>, <<person3>><<person>>, and <<person4>><<person>> arrive to gawk. "Well well," a <<person>> says. "A stray mutt snuck in for a bit of slap and tickle."
+<br>
+"Usually we have to go hunting you <<bitch>>es," the <<person3>><<person>> says. "Nice of you to capture yourself."
+<br>
+"I got just the thing," the <<person4>><<person>> adds, producing a collar and leash.
+<br><br>
+
+<<if $phase is 1>>
+	They surround you while you're helpless and grasp you by the shoulders and waist, before giving you a hefty tug. The cock comes free with a plop. You try to stand, but they hold you down while running hands over your body. The <<person1>><<person>> squeezes your <<breasts>>.
+<<else>>
+	They surround you while you're helpless and grasp you by the shoulders and waist. They pull you away from the attacker. You try to stand, but they hold you down while running hands over your body. The <<person1>><<person>> squeezes your <<breasts>>.
+<</if>>
+<br><br>
+
+<<if $exposed lt 2>>
+	The <<person4>><<person>> tries to affix the collar around your neck while the others tear at your clothes.
+<<else>>
+	The <<person4>><<person>> tries to affix the collar around your neck.
+<</if>>
+<br><br>
+
+<<link [[싸운다|Pound Assault Caught Fight]]>><<set $fightstart to 1>><</link>>
+<br>
+<<link [[굴복한다|Pound Assault Caught 2]]>><</link>>
+<br>
+
+:: Pound Assault Caught Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Assault Caught Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Assault Caught Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Assault Caught Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	They're too distracted by their orgasms to stop you running from the cage. You shut the door behind you, locking it in place. You don't wait to see if they can get out.
+	<br><br>
+	<<tearful>> you run from the premises.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Starfish Street]]>><</link>>
+
+<<elseif $enemyhealth lte 0>>
+	They back away from you, giving you enough space to escape the cage. You shut the door behind you, locking it in place. You don't wait to see if they can get out.
+	<br><br>
+	<<tearful>> you run from the premises.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Starfish Street]]>><</link>>
+
+<<else>>
+	<<tearful>> you fall to the ground. You're too hurt to resist.
+	<br><br>
+	<<link [[굴복한다|Pound Assault Caught 2]]>><</link>>
+	<br>
+
+<</if>>
+
+:: Pound Assault Caught 2
+<<effects>>
+
+<<clothesruined>>
+<<pound_muzzle>>
+<<leash 26>>
+<<set $worn.neck.cursed to 1>>
+
+The <<person4>><<person>> places the collar around your neck, and affixes a muzzle. <<He>> tugs as the <<person1>><<person>> gives your <<bottom>> a hard smack, pushing you along.
+<br><br>
+
+You crawl down the corridor. The <<pound_text>> watch you crawl by, towards an empty cage at the end of the room. The <<person4>><<person>> shuts the door behind you, <span class="pink">locking you inside.</span> "Welcome to your new home <<bitch>>," <<he>> says. "The other mutts are gonna love you." The staff laugh as they walk away.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Pound Cage]]>><</link>>
+
+:: Pound Penis
+<<effects>>
+
+You expose your <<penis>>, and push it between the bars. The <<beasttype>> gives you an exploratory sniff before running <<bhis>> tongue up your length, making you shudder.
+<<deviancy3>>
+
+<<if $arousal gte 10000>>
+	The sensation is too much. <<orgasm>> <span class="red">Driven wild by lust,</span> the <<beasttype>> rams against the cage door.
+	<br><br>
+
+	<<link [[다음|Pound Assault]]>><</link>>
+	<br>
+<<else>>
+	The <<beasttype>> <<print $monster ? "stands upright" : "rears on <<bhis>> hind legs">>, pressing against the bars of the cage.
+	<br><br>
+
+	<<if hasSexStat("deviancy", 4) and $pound.sneak is 2>>
+		<<link [[Break into a cage|Pound Deviant]]>><<set $pound.sneak to 3>><</link>><<deviant4>>
+		<br>
+	<<else>>
+		<span class="blue">You're not deviant enough to take things further.</span>
+		<br>
+	<</if>>
+	<<link [[물러난다|Pound]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Pound Pussy
+<<effects>>
+
+You expose your <<pussy>>, and push it against the bars. The <<beasttype>> gives you an exploratory sniff before running <<bhis>> tongue over your slit, making you shudder.
+<<deviancy3>>
+
+<<if $arousal gte 10000>>
+	The sensation is too much. <<orgasm>> <span class="red">Driven wild by lust,</span> the <<beasttype>> rams against the cage door.
+	<br><br>
+
+	<<link [[다음|Pound Assault]]>><</link>>
+	<br>
+<<else>>
+	The <<beasttype>> <<print $monster ? "stands upright" : "rears on <<bhis>> hind legs">>, pressing against the bars of the cage.
+	<br><br>
+
+	<<if hasSexStat("deviancy", 4) and $pound.sneak is 2>>
+		<<link [[Break into a cage|Pound Deviant]]>><<set $pound.sneak to 3>><</link>><<deviant4>>
+		<br>
+	<<else>>
+		<span class="blue">You're not deviant enough to take things further.</span>
+		<br>
+	<</if>>
+	<<link [[물러난다|Pound]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Pound Deviant
+<<effects>>
+
+You fiddle with the primitive lock, and manage to open the cage. The <<beasttype>> runs through, and tries to mount you at once.
+<<deviancy4>>
+
+<<link [[다음|Pound Deviant Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Pound Deviant Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Pound Deviant Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Pound Deviant Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Pound Deviant Sex Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation knot>>
+	<<if _knotted>>
+		<<pass 60>>
+		The <<beasttype>> tries to wriggle <<bhis>> <<print $NPCList[0].penisdesc>> free, but to no avail. <<bHe>> instead returns to the corner of <<bhis>> cage, dragging you along on all fours behind <<bhim>>. <<bHe>> lies down to sleep, leaving you to lie on the ground.
+		<br><br>
+		<<tearful>> you try to work yourself free.
+		<<if $openinghours is 1>>
+			It takes a while. So long, in fact, that you're still trying when you hear the front door open. <span class="red">The staff have arrived for work.</span>
+			<br><br>
+			<<clotheson>>
+			<<endcombat>>
+			<<generate1>><<person1>><<generate2>><<generate3>><<generate4>>
+			You grab hold of the bars of the cage for leverage, but it's no use. A <<person>> walks into view, and stops at the sight of you. "Everyone!" <<he>> shouts. "Come get a look at this!"<<ggtrauma>><<ggstress>><<famebestiality 4>>
+			<br><br>
+
+			<<link [[다음|Pound Assault Caught]]>><<set $phase to 1>><</link>>
+			<br>
+		<<else>>
+			It takes a while, but you at last remove the cock with a plop. You leave the cage, closing the door behind you.
+			<br><br>
+			<<clotheson>>
+			<<endcombat>>
+			<<link [[다음|Pound]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+
+		The <<beasttype>> returns to <<bhis>> cage, and curls up in the corner.
+		<br><br>
+
+		<<tearful>> you close and lock the door.
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<link [[다음|Pound]]>><</link>>
+		<br>
+	<</if>>
+
+
+<<elseif $enemyhealth lte 0>>
+
+	The <<beasttype>> runs into <<bhis>> cage, and curls up in the shadowed corner.
+	<br><br>
+
+	<<tearful>> you close and lock the door.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Pound]]>><</link>>
+	<br>
+
+<<else>>
+
+	The <<beasttype>> returns to <<bhis>> cage, apparently uninterested in an escape attempt.
+	<br><br>
+
+	<<tearful>> you close and lock the door.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Pound]]>><</link>>
+	<br>
+
+<</if>>
+
+:: Pound Lock
+<<set $outside to 1>><<effects>><<set $lock to 200>>
+<<openinghours>>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">이 자물쇠는 따기 쉬워 보인다.</span>
+	<br><br>
+	<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|Pound]]>><<pass 10>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">이 자물쇠는 당신의 자물쇠따기 능력 바깥의 물건이다.</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<starfishicon>><<link [[떠난다|Starfish Street]]>><</link>>

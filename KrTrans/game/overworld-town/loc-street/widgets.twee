@@ -1,0 +1,4066 @@
+:: Widgets Street [widget]
+
+<<widget "streetstray">>
+	<<beastNEWinit 1 dog>>
+	<<if $stray_happiness gte 80>>
+		A <<beasttype>> emerges from beneath a skip. <<bHis>> tail wags at the sight of you.
+		<<if $monster is 1>>
+			"I know you," <<bhe>> says. "Friends say you nice."
+		<</if>>
+		<br><br>
+
+		<<link [[쓰다듬는다|Street Stray Pet]]>><<stress -6>><</link>><<lstress>>
+		<br>
+		<<link [[무시한다|Street Stray Ignore]]>><</link>>
+		<br>
+	<<elseif $stray_happiness gte 20>>
+		You see a pair of eyes follow you from beneath a skip. It looks like a <<beasttype>>, but <<bhe>> retreats at your glance.
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		A <<beasttype>> emerges from beneath a skip, teeth bared.
+		/*cult*/
+		<<if $hallucinations gte 1 and $controlled isnot 1>>
+			<span class="pink"><<bHis>> eyes glimmer with unholy light.</span>
+			<<if $monster is 1>>
+				"Masters command," <<bhe>> says. "I obey."
+			<</if>>
+		<</if>>
+		<br><br>
+		<<if $bestialitydisable is "f" or $monster is 1>>
+			<<link [[다음|Street Stray Rape]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			You turn and run, the <<beasttype>> snapping at your heels. You manage to escape, disheveled.
+			<br><br>
+
+			<<endevent>>
+			<<destinationeventend>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "streetdog">>
+	<<beastNEWinit 1 dog>><<generate2>><<person2>>
+	당신은 <<beasttypePost "의">> 목줄을 쥐고 있는 <<person_ ul>> 마주친다. <<beasttypePost "은">> 멈춰 서서 당신을 본다.
+	<<if $monster is 1>>
+		"친구?"
+	<</if>>
+	<br><br>
+
+	<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<link [[앞발을 내밀어보라고 한다|Street Dog Paw]]>><</link>><<tendingdifficulty 1 300>> <<if $player.virginity.handholding is true>><<note "성공한다면 처음 손 잡은 상대가 됩니다" "red">><</if>>
+		<br>
+		<<link [[쓰다듬는다|Street Dog Pet]]>><<stress -6>><</link>><<lstress>>
+		<br>
+	<</if>>
+	<<if $wolfgirl gte 6>>
+		<<link [[으르렁거린다|Street Dog Growl]]>><<stress -6>><<transform wolf 1>><</link>><<wolfgirl>>
+		<br>
+	<</if>>
+	<<if $cat gte 6>>
+		<<link [[쉬익거린다|Street Dog Hiss]]>><<def 1>><<transform cat 1>><</link>><<cat>>
+		<br>
+	<</if>>
+	<<if $fox gte 6>>
+		<<link [[캥캥거린다|Street Dog Yipp]]>><<transform fox 1>><</link>><<fox>>
+		<br>
+	<</if>>
+	<<link [[무시한다|Street Dog Ignore]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetoffer">>
+	<<generate1>><<person1>>
+	누군가의 손이 당신의 팔에 얹어진다. "우와." 손의 주인인 <<person_ i>> 말한다. "너 정말 귀엽구나. 관심이 있다면 일할 거리를 좀 줄 수 있는데, 어떠니?"
+	<br><br>
+
+	<<link [[들어본다|Street Offer Listen]]>><</link>>
+	<br>
+	<<link [[계속 걷는다|Street Offer Walk]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetfriendly1">>
+	<<generate1>><<person1>>
+	당신은 <<person_ ul>> 지나친다.
+
+	<<if Time.hour lte 3 or Time.hour gte 18>>
+		"안녕." <<he_ ga>> 미소지으며 말한다.
+	<<elseif Time.hour lte 12>>
+		"안녕." <<he_ ga>> 미소지으며 말한다.
+	<<else>>
+		"안녕." <<he_ ga>> 미소지으며 말한다.
+	<</if>>
+	<br><br>
+
+	<<if $anxiety gte 2>>
+		곧 닥칠 공격에 대한 생각이 당신의 정신을 침범하며, 공포와 절망이 당신을 덮친다.
+		<<gstress>>
+		<br><br>
+
+		당신은 걸음을 빨리한다.
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<<elseif $anxiety gte 1>>
+		<<person_ yi>> 친절한 태도에도 불구하고, 공포가 당신을 사정없이 찌른다.
+		<br><br>
+
+		<<link [[인사로 화답한다|Street Friendly Respond]]>><<trauma -6>><<stress 6>><</link>><<gstress>><<ltrauma>>
+		<br>
+		<<link [[그냥 계속 걷는다|Street Friendly Walk]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[인사로 화답한다|Street Friendly Respond]]>><<trauma -6>><</link>><<ltrauma>>
+		<br>
+		<<link [[그냥 계속 걷는다|Street Friendly Walk]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "streetfootbridge">>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.under_lower.type.includes("naked")>>
+		당신은 차량이 붐비는 도로를 지나는 육교에 도착했다. 당신은 계단을 오르다가, 꼭대기에서 멈춘다. 육교의 바닥은 금속 그물망으로 되어 있고, 당신은 여기에서 아래의 차량들을 훤히 볼 수 있다. 아래에 있는 사람이라면 누구나 고개를 들어 당신의 치마 아래를 볼 수 있을 것이고, <span class="lewd">당신은 속옷을 입고 있지 않다.</span>
+		<br><br>
+		<<if $earSlime.growth gte 200 and $earSlime.exhibitionism gte 2 and hasSexStat("exhibitionism", 2)>>
+			<span class="red">You know the ear slimes wouldn't let you do anything but expose yourself.</span>
+			<br>
+			<<link [[천천히 건너간다|Street Footbridge Cross]]>><<set $phase to 2>><</link>>
+		<<elseif numberOfEarSlime() and $earSlime.growth gte 30 - ($earSlime.exhibitionism * 10) and $earSlime.corruption gte random(0, 80)>>
+			<span class="lewd">당신은 머릿속의 슬라임이 어떤 경우에도 아래를 내려다보지 말고, 천천히 다리를 건너라고 명령하는 것을 느낀다.</span> 응한다면 보답을 할거라 약속<<if $earSlime.startedThreats>>하지만, 따르지 않는다면 어떤 일이 벌어질지 모른다며 협박<</if>>한다.
+			<br><br>
+			<<link [[복종한다|Street Footbridge Cross]]>><<set $phase to 1>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+			<br>
+			<<if $earSlime.startedThreats>>
+				<<link [[반항한다|Street Footbridge Defy]]>>
+					<<set $phase to 1>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>>
+					<<if $earSlime.defyCooldown or $earSlime.corruption lt (currentSkillValue('willpower') / 10)>><<pass 10>><</if>>
+				<</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+			<<else>>
+				<<link [[무시하고 돌아갈 다른 방법을 찾는다 (0:10)|Street Footbridge Detour]]>><<pass 10>><</link>><<gtrauma>><<gstress>>
+			<</if>>
+		<<else>>
+			<<link [[우회로를 찾아본다 (0:10)|Street Footbridge Detour]]>><<pass 10>><</link>>
+			<br>
+			<<link [[어쨌든 건너간다|Street Footbridge Cross]]>><<set $phase to 0>><</link>>
+		<</if>>
+		<br>
+	<<else>>
+		당신은 붐비는 도로를 지나기 위해 육교를 건넜다.
+		<br><br>
+
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetwanted">>
+	당신은 걸어가다가 포스터 한 장을 발견했다. 포스터에 있는 건 당신의 사진으로, 사진 아래에는 "수배 중"이라는 문구가 적혀 있다.
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetbottomgrope">>
+	당신은 모퉁이를 돌아, <<generate1>><<person1>><<person_ gwa>> 거의 부딪힐 뻔 했다.
+	<br><br>
+
+	<<if playerIsPregnant() and playerAwareTheyArePregnant() and playerBellyVisible() and $rng gte 70>>
+		<<He_ nun>> 당신의 임신한 배를 알아차리고 진심으로 사과한다.
+		<<if $NPCList[0].pronoun is "f">>
+			<<He_ nun>> <<his_ ga>> 했던 임신에 대해 당신의 귀가 닳도록 얘기해준다. 특히 <<his_ yi>> 출산 경험에 대한 생생한 설명이 당신의 몸을 쑤시게 하고, 당신은 정중하게 자리를 뜬다.
+		<<else>>
+			<<He_ nun>> <<his_ yi>> 아내가 했던 임신에 대해 당신의 귀가 닳도록 얘기해준다. 특히 <<his_ yi>> 와이프가 출산하는 동안 <<he_ ga>> 본 것에 대한 생생한 설명이 당신의 몸을 쑤시게 하고, 당신은 정중하게 자리를 뜬다.
+		<</if>>
+		<<stress 6>><<gstress>>
+		<br><br>
+
+		<<destinationeventend>>
+	<<else>>
+		"우와 <<girl_ a>>," <<he_ ga>> 말하며, 당신의 <<bottom_ ul>> 양손으로 움켜잡는다. "앞을 잘 보고 다녀야지." <<He_ nun>> 당신의 몸을 움켜쥐고 주물거린다.
+		<br><br>
+
+		<<if $submissive gte 1500 and hasSexStat("promiscuity", 2)>>
+			<<link [[굴복한다 (0:02)|Street Bottom Submit]]>><<pass 2>><<sub 2>><<arousal 1200 "bottom">><<trauma 6>><</link>><<gtrauma>><<garousal>><<promiscuous2>>
+			<br>
+		<</if>>
+		<<link [[참는다 (0:02)|Street Bottom Endure]]>><<pass 2>><<sub 1>><<trauma 6>><<stress 6>><<arousal 600 "bottom">><</link>><<gtrauma>><<gstress>><<garousal>>
+		<br>
+		<<if $earSlime.growth gte 200 and $earSlime.promiscuity gte 2 and hasSexStat("promiscuity", 2)>>
+			<span class="red">당신은 귀의 슬라임이 <<him_ ul>> 밀치게 두지 않을걸 안다.</span>
+		<<else>>
+			<<link [[밀친다|Street Bottom Shove]]>><<def 1>><<pain 4>><<stress -6>><</link>><<lstress>><<gpain>>
+		<</if>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "streetlurker">>
+	당신은 끔찍하게 불안한 기분이 든다.
+	<<if $hallucinations gte 2 and $tentacledisable is "f">>
+		<br><br>
+		<<link [[무시한다|Street Lurker Ignore]]>><</link>>
+		<br>
+		<<link [[도망친다|Street Lurker Run]]>><</link>><<athleticsdifficulty 1 1200>>
+		<br>
+		<<set $skulduggerydifficulty to 1000>>
+		<<link [[숨는다|Street Lurker Hide]]>><</link>><<skulduggerydifficulty>>
+		<br>
+		<<if $worn.neck.type.includes("holy")>>
+			<<link [[당신의 성표를 밤거리에 내밀어 보인다|Street Lurker Holy]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		불안한 기분은 곧 사라졌지만, 당신이 그림자 하나하나에 흠칫하도록 했다.
+		<<gawareness>><<awareness 1>>
+		<br><br>
+
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetbodywriting">>
+	<<generate1>><<person1>>당신은 <<person_ i>> 당신의 <<bodypart _bodypart>> 위에 새겨진 <<tattooPost _bodypart "을">> 빤히 쳐다보고 있다는 걸 알아차린다.
+	<br><br>
+
+	<<if $skin[_bodypart].special is "bestiality" or $skin[_bodypart].special is "Black Wolf" or $skin[_bodypart].special is "Great Hawk">>
+		<<if hasSexStat("deviancy", 2)>>
+			<<link [[과시한다|Street Bodywriting Deviant]]>><</link>><<deviant2>>
+			<br>
+		<</if>>
+	<<elseif $skin[_bodypart].lewd is 1>>
+		<<if hasSexStat("promiscuity", 2)>>
+			<<link [[과시한다|Street Bodywriting Promiscuous]]>><</link>><<promiscuous2>>
+			<br>
+		<</if>>
+	<<else>>
+		<<link [[보여준다|Street Bodywriting Show]]>><<trauma -6>><</link>><<ltrauma>>
+		<br>
+	<</if>>
+	<<link [[무시한다|Street Bodywriting Ignore]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetwhorebodywriting">>
+	<<generate1>><<person1>><<person_ i>> 당신에게로 걸어온다. "너 매춘부냐?" <<he_ ga>> 당신의 <<bodypart _bodypart>> 위에 새겨진 <<tattooPost _bodypart "을">> 보면서 말한다.
+
+	<<if $skin[_bodypart].degree gte 2600>>
+		<<if $attractiveness gte random(1, 10000)>>
+			"꽤 비싸긴 한데, 너 진짜 존나 귀엽다. 그럼 좋아." <<He_ ga>> 가까이에 있는 골목으로 가자는 신호를 보낸다.
+			<br><br>
+
+			<<if hasSexStat("promiscuity", 3)>>
+				<<capture _bodypart>>
+					<<link [[받아들인다|Street Bodywriting Accept]]>><<set $phase to clone($skin[_bodypart].degree)>><</link>><<promiscuous3>>
+				<</capture>>
+				<br>
+			<</if>>
+			<<link [[사과한다|Street Bodywriting Apologise]]>><<sub 1>><<stress 6>><</link>><<gstress>>
+			<br>
+			<<link [[화를 낸다|Street Bodywriting Angry]]>><<def 1>><<stress 6>><</link>><<gstress>>
+			<br>
+		<<else>>
+			"너무 비싼데. £25로는 안 되나?"
+			<br><br>
+			<<if hasSexStat("promiscuity", 3)>>
+				<<link [[받아들인다|Street Bodywriting Accept]]>><<set $phase to 2500>><</link>><<promiscuous3>>
+				<br>
+			<</if>>
+			<<link [[사과한다|Street Bodywriting Apologise]]>><<sub 1>><<stress 6>><</link>><<gstress>>
+			<br>
+			<<link [[화를 낸다|Street Bodywriting Angry]]>><<def 1>><<stress 6>><</link>><<gstress>>
+			<br>
+		<</if>>
+	<<elseif $skin[_bodypart].degree gte 100>>
+		"합리적인 가격이군. 그럼 좋아." <<He_ ga>> 가까이에 있는 골목으로 가자는 신호를 보낸다.
+		<br><br>
+
+		<<if hasSexStat("promiscuity", 3)>>
+			<<capture _bodypart>>
+				<<link [[받아들인다|Street Bodywriting Accept]]>><<set $phase to clone($skin[_bodypart].degree)>><</link>><<promiscuous3>>
+			<</capture>>
+			<br>
+		<</if>>
+		<<link [[사과한다|Street Bodywriting Apologise]]>><<sub 1>><<stress 6>><</link>><<gstress>>
+		<br>
+		<<link [[화를 낸다|Street Bodywriting Angry]]>><<def 1>><<stress 6>><</link>><<gstress>>
+		<br>
+	<<else>>
+		"얼마냐?"
+		<br><br>
+		<<if hasSexStat("promiscuity", 3)>>
+			<<link [[£100을 제시한다|Street Bodywriting Seduce]]>><<set $phase to 10000>><</link>><<promiscuous3>>
+			<br>
+			<<link [[£50을 제시한다|Street Bodywriting Seduce]]>><<set $phase to 5000>><</link>><<promiscuous3>>
+			<br>
+			<<link [[£20을 제시한다|Street Bodywriting Seduce]]>><<set $phase to 2000>><</link>><<promiscuous3>>
+			<br>
+		<</if>>
+		<<link [[사과한다|Street Bodywriting Apologise]]>><<sub 1>><<stress 6>><</link>><<gstress>>
+		<br>
+		<<link [[화를 낸다|Street Bodywriting Angry]]>><<def 1>><<stress 6>><</link>><<gstress>>
+	<</if>>
+<</widget>>
+
+<<widget "streetcriminalbodywriting">>
+	<<generate1>><<person1>><<person_ i>> <<bodypart _bodypart>> 위에 새겨진 <<tattooPost _bodypart "을">> 보더니, 당신의 발에 침을 퉤 뱉는다. "너 같은 쓰레기들은 어디 가둬놓고, 열쇠는 구경도 못하게 해야 해." <<he_ ga>> 말한다.<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[항의한다|Street Criminal Protest]]>><</link>>
+	<br>
+	<<link [[무시한다|Street Criminal Ignore]]>><</link>>
+	<br>
+	<<if $submissive lte 500>>
+		<<link [[위협한다|Street Criminal Threaten]]>><<trauma -6>><<stress -6>><</link>><<defianttext>><<ltrauma>><<lstress>>
+	<</if>>
+<</widget>>
+
+<<widget "streetbox">>
+	당신은 밴에서 떨어진 상자를 발견한다. 아무도 여기에 신경쓰지 않고 있다.
+	<br><br>
+
+	<<link [[열어본다|Street Box]]>><</link>>
+	<br>
+	<<link [[내버려둔다|Street Box Leave]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetvan">>
+	<<generate1>><<person1>>
+	"'거기 <<girlPost>>." 당신의 오른편에서 목소리가 들린다. <<person1>><<person_ i>> 문짝이 열린 밴에 기대어 헉헉거리고 있다. "돈 좀 벌어볼 생각 없나? 평소에 도와주던 사람이 나타나지 않아서, 혼자 이 상자들 모두를 옮기고 있던 중이었거든. 도와준다면 원래 시급의 3배를 주지. 그러니까, <span class="gold">£30</span> 이겠군. 한 시간 정도 걸릴 거야."
+	<br><br>
+
+	<<link [[돕는다 (1:00)|Street Van Help]]>><<tiredness 6>><</link>><<gtiredness>>
+	<br>
+	<<link [[거절한다|Street Van Refuse]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetbullies">>
+	<<generatey1>><<generatey2>><<generatey3>><<generatey4>>
+	당신은 벽에 등을 대고 서 있는 <<person1>><<person_ i>> <<person2>><<person_ gwa>> <<person3>><<personPost>>, <<person4>><<personPost "에게">> 둘러싸여 있는 걸 목격한다. <<person1>><<person_ yi>> 시선은 <<his_ yi>> 발에 고정되어 있다.
+	<br><br>
+
+	당신이 가까이 걸어가자, 당신은 그 세 명이 <<him_ ul>> 보고 비웃는 것을 들을 수 있다. <<person3>><<person_ i>> <<person1>><<persons_ yi>> 가방을 낚아채, 그 내부를 뒤지기 시작한다.
+	<br><br>
+
+	<<link [[간섭한다|Street Bullies Intervene]]>><<stress 6>><<def 1>><<famegood 1>><<famescrap 1>><</link>><<gstress>>
+	<br>
+	<<if $submissive lte 500>>
+		<<link [[불량배를 공격한다|Street Bullies Attack]]>><<def 1>><<famegood 1>><<famescrap 1>><<stress -6>><</link>><<lstress>><<defianttext>>
+		<br>
+	<</if>>
+	<<link [[무시한다|Street Bullies Ignore]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetrocks">>
+	<<outfitChecks>>
+	<<if $worn.feet.type.includes("naked")>>
+		당신의 맨발이 뭔가 뾰족한 것을 밟는다. 느슨한 돌멩이다.
+		<<gpain>><<pain 4>>
+		<br><br>
+		<<dancedifficulty -200 200 true>>
+		<<if $danceSuccess>>
+			당신은 거의 걸려 넘어질 뻔 했지만, <span class="green">가까스로 균형을 잡는 데 성공한다.</span>
+			<br><br>
+		<<else>>
+			<span class="red">당신은 무릎부터 바닥에 닿도록 넘어진다.</span>
+			<<gpain>><<gstress>><<pain 4>><<stress 6>>
+			<br><br>
+			<<if _bottom>>
+				당신의 <<bottom_name_ i>> 바닥에 쓸린다. 당신은 찢어지는 소리를 들었다.
+				<<set _bottom.integrity -= 10>>
+				<br><br>
+				<<if _bottom.integrity lte 0>>
+					<<integritycheck>><<exposure>>
+
+					당신은 해진 옷을 한데 잡아두려고 하지만, 소용이 없다.
+					<br><br>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<dancedifficulty -200 200 true>>
+		<<if $danceSuccess>>
+			당신은 돌멩이에 거의 걸려 넘어질 뻔 했지만, <span class="green">가까스로 균형을 잡는 데 성공한다.</span>
+			<br><br>
+		<<else>>
+			당신은 돌멩이에 걸려 넘어져, <span class="red">무릎부터 바닥에 닿도록 넘어진다.</span>
+			<<gpain>><<gstress>><<pain 4>><<stress 6>>
+			<br><br>
+			<<if _bottom>>
+				당신의 <<bottom_name_ i>> 바닥에 쓸린다. 당신은 찢어지는 소리를 들었다.
+				<<set _bottom.integrity -= 10>>
+				<br><br>
+				<<if _bottom.integrity lte 0>>
+					<<integritycheck>><<exposure>>
+
+					당신은 해진 옷을 함께 잡아두려고 하지만, 소용이 없다.
+					<br><br>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetex1">>
+	<<generate1>><<person1>>
+	당신은 그림자와 그림자를 옮겨 다니며, 드문드문 빛이 비추는 곳을 최대한 빨리 지나간다.
+	<br><br>
+
+	앞에서 발소리가 들린다!
+	<br><br>
+
+	<<link [[숨어서 행인이 지나가기를 기다린다 (0:04)|StreetEx1]]>><<pass 4>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[그림자 속에 숨어 계속 움직인다|StreetEx1]]>><<set $phase to 1>><</link>>
+	<br><br>
+<</widget>>
+
+<<widget "streetex2">>
+	<<generate1>><<person1>>당신은 그림자와 그림자를 옮겨 다니며, 드문드문 빛이 비추는 곳을 최대한 빨리 지나간다.
+	<br><br>
+
+	앞이 잘 보이지 않는 어둠 속에서, 당신은 무언가에 걸려 땅바닥에 넘어진다. <<person_ i>> 그림자 속에서 나타나 당신이 미처 몸을 일으키기 전에 당신의 몸 위에 올라탄다.
+
+	<<pain 1>><<set $molestationstart to 1>>
+	<br><br>
+
+	<<link [[다음|StreetEx2]]>><</link>>
+	<br><br>
+<</widget>>
+
+<<widget "streetex3">>
+	당신은 그림자와 그림자를 옮겨 다니며, 드문드문 빛이 비추는 곳을 최대한 빨리 지나간다.
+	<br><br>
+	<<beastNEWinit 1 dog>>
+
+	<<if $stray_happiness gte random(1, 100)>>
+		당신은 가까이의 골목에서 으르렁거리는 소리를 듣고, 본능적으로 그 자리에 얼어붙는다. 눈 한쌍이 어둠 속에서 반짝이는 것을 보자 그제서야 몸이 움직인다.<<gstress>><<stress 6>>
+		<br><br>
+		당신은 빠르게 도망친다.
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		당신은 가까이의 골목에서 으르렁거리는 소리를 듣고, 본능적으로 그 자리에 얼어붙는다. 털복숭이의 검은 <<beasttypePost "이">> 이빨을 드러낸 채 어둠 속에서 나타나자 그제서야 몸이 움직인다.
+		<br><br>
+
+		<<if $monster is 1 or $bestialitydisable is "f">>
+			<<link [[도망친다|StreetEx3]]>><<set $phase to 0>><</link>><<athleticsdifficulty 1 600>>
+			<br>
+
+			<!-- Modified for Beast People -->
+			<<link [[친구가 되려고 해 본다|StreetEx3]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+			<br>
+		<<else>>
+			<<link [[도망친다|StreetEx3]]>><<set $phase to 0>><<set $athleticsSuccess to true>><</link>>
+			<br>
+		<</if>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "streetex4">>
+	<<generate1>><<generate2>><<generateyv3>><<person1>><<rng>>
+	당신은 그림자와 그림자를 옮겨 다니며, 드문드문 빛이 비추는 곳을 최대한 빨리 지나간다. 당신은 아주 가까이서 난 소리를 듣고 수풀 사이에서 그대로 얼어붙는다. 처음에는 끼익 하는 소리, 다음엔 입이 막힌 채 비명을 지르는 듯한 소리와 발버둥치는 소리가 나고, 마치 누군가가 땅바닥에 몸을 던진 것 같은 큰 충돌음이 이어진다. 그리고, 낮고 화난 듯한 목소리들이 들려온다.
+	<br><br>
+
+	살금살금 가까이 다가가, 당신은 수풀 뒤에서 <<person1>><<person_ i>> 두 손으로 <<person3>><<persons_ yi>> 목을 조르는 한편 <<person2>><<person_ un>> <<person3>><<personsimple_ yi>> 옷을 거칠게 찢어발기는 모습을 목격한다. <<person_ un>> 당신의 또래로 보인다. <<He_ nun>> 미친듯이 공격자들을 주먹으로 때리고 할퀴고 있지만, 금세 지쳐가는 것이 당신의 눈에 보인다. <<he_ nun>> 숨을 쉬려 애쓰고 있으면, <<his_ yi>> 눈에 눈물이 고이기 시작한다.
+	<br><br>
+
+	목표를 달성하기 직전이어서인지, 공격자들은 공격에 취약하고 정신이 팔려 있다.
+	<br><br>
+
+	<<link [[구경한다|StreetEx4]]>><<set $phase to 0>><</link>><<gtrauma>><<if $speech_attitude is "meek">><<garousal>><<else>><<gstress>><</if>>
+	<br>
+	<<link [[가만히 있는다|StreetEx4]]>><<set $phase to 1>><<trauma 6>><</link>><<gtrauma>>
+	<br>
+	<<link [[몰래 빠져나간다|StreetEx4]]>><<set $phase to 2>><</link>>
+	<br>
+	<<link [[구출을 시도한다|StreetEx4]]>><<set $phase to 3>><<famegood 3>><</link>><<dangerousText>>
+	<br>
+<</widget>>
+
+<<widget "streetex5">>
+	당신은 앞쪽에서 목소리를 듣고, 지하실로 연결되는 계단참 아래로 몸을 숨긴다.
+
+	<<if $rng gte 51>>
+		당신은 목소리들이 지나가기까지 숨죽여 기다린다.
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		<<generate1>><<generate2>><<generate3>><<generate4>>
+		목소리는 점점 커지다가, 그들이 당신이 숨어있는 곳 바로 위까지 오자 더이상 커지지 않는다. 그들은 그 자리에서 움직이지 않고 있다. 당신은 누군가가 계단 난간 위에 앉아있는 게 보인다.
+		<<gstress>><<stress 6>>
+		<br><br>
+
+		그들이 가까이 있기에, 그들의 목소리가 더 잘 들린다.
+		<br>
+		<<if random(1, 2) is 2>>
+			"농담하지 마." <<person2>><<personsimple_ i>> 말한다.
+		<<else>>
+			"그래, 그러시겠지." <<person2>><<personsimple_ i>> 말한다.
+		<</if>>
+		<br>
+		<<if random(1, 2) is 2>>
+			"정말이라고." <<person1>><<personsimple_ i>> 대답한다. "여기가 한 명 건지기에 최적의 장소라니까."
+		<<else>>
+			"거짓말하는 거 아냐." <<person1>><<personsimple_ i>> 대답한다. "예전에도 여기에서 하나 건진 적 있어."
+		<</if>>
+		<br>
+		<<if random(1, 2) is 2>>
+			"그래서, 교복을 입고 있다고?"
+		<<else>>
+			"그렇게 거의 아무것도 안 입고 다닌단 말이야?"
+		<</if>>
+		<br>
+		<<if random(1, 2) is 2>>
+			"그래야 손님을 더 받을 수 있나보지."
+		<<else>>
+			"몇몇은 다른 놈들보다 더 용감하거든."
+		<</if>>
+		<br>
+		<<if random(1, 2) is 2>>
+			"직접 눈으로 보면 믿을게."
+		<<else>>
+			"난 아직도 네가 날 놀리는 것 같은데."
+		<</if>>
+		<br><br>
+
+		두 명이서만 말하고 있지만, 실제로는 더 많은 사람들이 있는 것처럼 들린다.
+		<br><br>
+
+		<<link [[기다린다 (0:10)|Street Ex Wait]]>><<pass 10>><</link>>
+		<br>
+		<<if hasSexStat("promiscuity", 5)>>
+			<<link [[호객 행위를 한다|Street Ex Solicit]]>><</link>><<promiscuous5>><<dangerousText>>
+			<br>
+		<</if>>
+
+	<</if>>
+<</widget>>
+
+<<widget "street1">>
+	<<outfitChecks>>
+	<<generate1>>당신의 등 뒤에서 <<person1>><<person_ i>> 부르는 소리가 들린다. <<catcall>>
+	<br><br>
+	<<if numberOfEarSlime() and $earSlime.growth gte 80 - ($earSlime.promiscuity * 10)>>
+		<<if $earSlime.corruption gte 80 and $earSlime.growth gte 100 - ($earSlime.promiscuity * 10) and random(0, 100) lte $earSlime.corruption>>
+			<span class="lewd">당신은 머릿속의 슬라임이 <<personPost "뿐">> 아니라 </span> <span class="red">거리에 있는 모든 사람들, 도시의 모든 사람들에게</span> <span class="lewd">몸을 주도록 명령하는 것을 느낀다.</span> 그것은 당장은 그 대가로 아무것도 약속하지 않는다. 그것은 그 의지를 강요하고 있으며, 당신이 그대로 따르리라고 예상하고 있다.
+			<br><br>
+
+			<<if hasSexStat("promiscuity", 5) and $submissive gte 1900>>
+				<<link [[기꺼이 굴복한다|Street Slime Extreme Submit willingly]]>><<corruption 5>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>><</link>><<promiscuous5>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+				<br>
+			<</if>>
+			<<link [[복종한다|Street Slime Extreme Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+			<br>
+			<<link [[반항한다|Street Slime Extreme Defy]]>><<corruption -3>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<llcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+			<br>
+		<<else>>
+			<span class="lewd">당신은 머릿속의 슬라임이 <<himPost "에게">> 몸을 주도록 명령하는 것을 느낀다.</span> 응한다면 보답을 할거라 약속하지만, 따르지 않는다면 어떤 일이 벌어질지 모른다며 협박한다.
+			<br><br>
+
+			<<if hasSexStat("promiscuity", 4) and $submissive gte 1900>>
+				<<link [[기꺼이 굴복한다|Street Slime Submit willingly]]>><<corruption 3>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>><</link>><<promiscuous4>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+				<br>
+			<</if>>
+			<<link [[복종한다|Street Slime Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+			<br>
+			<<link [[반항한다|Street Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $submissive gte 1200>>
+			<<link [[무시한다|Catcall Ignore Sub]]>><</link>><<gstress>>
+			<br>
+		<<elseif $submissive lte 800>>
+			<<link [[무시한다|Catcall Ignore]]>><</link>><<gstress>><<gtrauma>>
+			<br>
+			<<link [[마주본다|Catcall Glare]]>><</link>><<lstress>>
+			<br>
+			<<if $submissive lte 500>>
+			<<link [[그들을 비하한다|Catcall Defy]]>><<rng>><</link>><<llstress>><<ltrauma>>
+			<br>
+			<</if>>
+		<<else>>
+			<<link [[무시한다|Catcall Ignore]]>><</link>><<gstress>><<gtrauma>>
+			<br>
+		<</if>>
+		<<outfitChecks>>
+		<<if _skirtExposed>>
+			<<if hasSexStat("exhibitionism", 5) and $worn.under_lower.type.includes("naked")>>
+				<<link [[몸을 보여준다|Catcall Skirt]]>><</link>><<exhibitionist5>><<lstress>><<garousal>>
+				<br><br>
+			<<elseif hasSexStat("exhibitionism", 2) and !$worn.under_lower.type.includes("naked") and !playerChastity()>>
+				<<link [[몸을 보여준다|Catcall Skirt]]>><</link>><<exhibitionist2>><<lstress>><<garousal>>
+				<br><br>
+			<</if>>
+		<<elseif _middleOutfit is false and _overOutfit is false>>
+			<<if hasSexStat("exhibitionism", 3) and $worn.under_lower.type.includes("naked")>>
+				<<link [[몸을 보여준다|Catcall Shorts]]>><</link>><<exhibitionist3>><<lstress>><<garousal>>
+				<br><br>
+			<<elseif hasSexStat("exhibitionism", 3) and playerChastity()>>
+				<<link [[몸을 보여준다|Catcall Shorts]]>><</link>><<exhibitionist3>><<lstress>><<garousal>>
+				<br><br>
+			<<elseif hasSexStat("exhibitionism", 2) and !$worn.under_lower.type.includes("naked") and !playerChastity()>>
+				<<link [[몸을 보여준다|Catcall Shorts]]>><</link>><<exhibitionist2>><<lstress>><<garousal>>
+				<br><br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "street2">>
+	당신 뒤편에서 발소리가 들린다. <span class="blue">누군가 따라오는 듯한 느낌이 든다.</span>
+	<br><br>
+	<<rngWraith 2 "noBlood">>
+	<<if _wraithEvent and $wraithIntro and $rng gte 51>>
+		<<generateWraith 1 true>><<person1>>
+		<<set $NPCList[0].skills to {athletics: random(300,500) + C.npc["Ivory Wraith"].lust * 25, security: random(300,500) + C.npc["Ivory Wraith"].lust * 25}>>
+		<<set $combatgoal to "confront">>
+		<<link [[다음|Wraith Stalk]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		<<generate1>><<person1>>
+		<<link [[다음|Street Stalk]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+
+	<br>
+<</widget>>
+
+<<widget "street3">>
+	<<generate1>><<generate2>><<person1>>당신 뒤편에서 두 명 이상의 발소리가 들린다. <span class="blue">누군가 따라오는 듯한 느낌이 든다.</span>
+	<br><br>
+
+	<<link [[다음|Street Stalk Group]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</widget>>
+
+<<widget "street4">>
+	<<rng>>
+	<<generate1>><<person1>> <<person1>><<person_ i>> 당신에게 다가온다.
+	<<if $watersportsdisable is "f" and $rng lte 20 and $fame.exhibitionism gte 400 and $location isnot "alley">>
+		"이봐 <<girlPost>>, 돈 좀 벌 생각 없니?" <<He_ ga>> <<his_ yi>> 호주머니에서 지폐 몇 장을 꺼낸다. "£30, 네가 오줌 누는 것을 내게 보여 준다면." <<He_ nun>> 진지하다.
+		<br><br>
+
+		<<if $exhibitionism lte 54>>
+			당신은 이런 제안을 받아들이기엔 아직 충분히 음란하지 않다.
+			<br><br>
+		<<else>>
+			<<link [[승낙한다|Street Urination Show]]>><<set $phase to 1 >><</link>>
+			<br>
+		<</if>>
+		<<link [[거절한다|Street Urination Show]]>><<set $phase to 2 >><</link>><<gstress>>
+		<br>
+	<<elseif $rng gte 65 and $fame.exhibitionism gte 400>>
+		"이봐, 나는 네가 누군지 알아! 맨살 보여주길 좋아하는 <<girl_ iji>>. 돈 좀 벌 생각 없니? 네 <<if $player.gender_appearance is "m">>자지<<else>>보지<</if>> 사진을 몇 장 찍어서 내... 컬렉션에 더할 수 있게 해 주면 £50을 주지."
+		<br><br>
+
+		<<if $exhibitionism lte 54>>
+			당신은 이런 제안을 받아들이기엔 아직 충분히 음란하지 않다.
+			<br><br>
+		<<elseif !playerChastity()>>
+			<<link [[승낙한다|Street Panties Photo]]>><<set $phase to 1>><</link>><<exhibitionist4>>
+			<br>
+			<<if hasSexStat("exhibitionism", 5) and $player.vaginaExist and $street4test>>
+			<<link [[전부 보여준다|Street Panties Photo]]>><<set $phase to 4>><</link>><<exhibitionist5>>
+			<br>
+			<</if>>
+		<<else>>
+			당신이 <<worn_genitals_name_ ul>> 착용한 상태에서는 그럴 수 없다.
+			<br><br>
+		<</if>>
+
+		<<link [[거절한다|Street Panties Photo]]>><<set $phase to 3>><</link>><<gstress>>
+		<br>
+	<<else>>
+		"거기 <<girlPost>>, 돈 좀 벌고 싶지 않니? 네 속옷을 £30에 살게."
+		<br><br>
+
+		<<if $exhibitionism lte 34>>
+			당신은 <<his_ yi>> 제안을 받아들이기엔 아직 충분히 음란하지 않다.
+			<br><br>
+		<<else>>
+			<<if $worn.under_lower.one_piece is 1>>
+				당신이 <<worn_under_upper_name_ ul>> 착용한 상태에서는 그럴 수 없다.
+				<br><br>
+			<<else>>
+				<<if $earSlime.growth gte 200 and $earSlime.exhibitionism gte 2>>
+					<span class="red">당신은 귓속의 슬라임이 당신 자신을 노출하지 않은 상태로 나가도록 허락하지 않으리라는 것을 안다.</span>
+					<<set _slimeNoExit to true>><br>
+				<</if>>
+				<<if $worn.under_lower.name is "naked">>
+					<<link [["속옷을 입고 있지 않다고 말한다"|Street Panties]]>><<set $phase to 2>><</link>><<exhibitionist2>>
+					<br>
+					<<if hasSexStat("exhibitionism", 4)>>
+						<<link [["속옷을 입고 있지 않다는 걸 증명한다"|Street Panties]]>><<set $phase to 4>><</link>><<exhibitionist4>>
+					<</if>>
+				<<else>>
+					<<link [[승낙한다|Street Panties]]>><<set $phase to 1>><<rng>><</link>><<exhibitionist3>>
+				<</if>>
+			<</if>>
+			<br>
+		<</if>>
+		<<if !_slimeNoExit>>
+			<<link [[거절한다|Street Panties]]>><<set $phase to 3>><</link>><<gstress>>
+		<</if>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "street5">>
+	<<rng>>
+	<<generate1>><<person1>>차 한 대가 당신 곁에 멈춰 선다. 운전자인 <<person_ i>> 당신에게 돈 뭉치를 흔든다. "같이 좋은 시간 보내주면 값을 치르지. 타."
+	<br><br>
+
+	<<if $earSlime.growth gt 50 and ($earSlime.growth gte 80 - ($earSlime.promiscuity * 10))>>
+		<span class="lewd">You feel the slime in your head command you to get in the car and give yourself to <<him>>.</span> It promises rewards if you comply, and threatens consequences if you do not.
+		<br><br>
+
+		<<link [[복종한다|Street Car Slime Obey]]>>
+			<<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>>
+			<<if $promiscuity lte 14>><<set $desperateaction to "귓속 슬라임이 그렇게 하라고 명령하고 있다">><</if>>
+		<</link>><<promiscuous2>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<link [[반항한다|Street Car Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br>
+	<<else>>
+		<<if $promiscuity lte 14>>
+			<<if $uncomfortable.prostituting>>
+				당신은 <<his_ yi>> 제안을 받아들이기엔 아직 충분히 음란하지 않다.
+			<<else>>
+				<<His_ yi>> 제안은 꺼림칙하지만, 당신에겐 돈이 필요하다.
+			<</if>>
+			<br><br>
+		<</if>>
+
+		<<if hasSexStat("promiscuity", 2)>>
+			<<if $rng lte 15 and (crimeSumCurrent() gte 1000 or $fame.prostitution gte 400)>>
+				<<link [[차에 탄다|Street Car]]>><<set $phase to 10>><</link>><<promiscuous2>>
+				<br>
+			<<else>>
+				<<link [[차에 탄다|Street Car]]>><<set $phase to 1>><</link>><<promiscuous2>>
+				<br>
+			<</if>>
+		<</if>>
+
+		<<if $promiscuity lte 14 and $uncomfortable.prostituting is false>>
+			<<if $rng lte 15 and (crimeSumCurrent() gte 1000 or $fame.prostitution gte 400)>>
+				<<link [[마지못해 차에 탄다|Street Car]]>><<set $desperateaction to 1>><<set $phase to 10>><</link>><<promiscuous2>>
+				<br>
+			<<else>>
+				<<link [[마지못해 차에 탄다|Street Car]]>><<set $desperateaction to 1>><<set $phase to 1>><</link>><<promiscuous2>>
+				<br>
+			<</if>>
+		<</if>>
+		<<link [[거절한다|Street Car]]>><<set $phase to 2>><</link>><<gstress>>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget "street6">>
+	<<outfitChecks>>
+	<<set $_tornItem to _bottomIsSkirt ? _bottom : !_shirtless ? _top : "none">><<set $_tornItem_name_i to _bottomIsSkirt ? bottomNamePost("이") : !_shirtless ? topNamePost("이") : "">>
+	<<if $_tornItem is "none">>
+		<<generate1>><<person1>>지나가던 차에서 <<person_ i>> 당신의 노출된 가슴을 음흉한 눈빛으로 보며 외친다. "스트립쇼 고마워." 당신은 <<his_ yi>> 시선에 부끄러움을 느낀다.
+		<<gtrauma>><<gstress>><<garousal>><<trauma 1>><<stress 1>><<arousal 100>>
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		당신의 $_tornItem_name_i 지나가던 차에 걸려, <<set $_tornItem.integrity -= 10>>
+		<<if $_tornItem.integrity lte 0>>
+			<<integritycheck no_text>>
+			<<clothesruinstat>>
+			<<if $worn.lower.exposed gte 1>><<set $loweroff to 0>><<elseif $worn.upper.exposed gte 1>><<set $upperoff to 0>><</if>>
+			<span class="lewd">당신의 몸에서 깔끔하게 찢겨져</span> 나<<outfitChecks>><<if _bottomExposed or _shirtless>>가며, 길 한복판에서 당신의 <<lewdness_ rul>> 드러낸다<<else>>간다<</if>>.
+		<<else>>
+			찢어지면서 옷 상태가 나빠졌다.
+		<</if>>
+	<</if>>
+	<br><br>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "street7">>
+	당신은 <<generate1>><<person1>><<person_ i>> 당신을 쳐다보는 걸 눈치챘지만, 당신이 눈을 마주치려 하면 <<he_ nun>> 시선을 돌려 버린다.
+	<br><br>
+
+	<<if ($leftarm isnot "bound" or $rightarm isnot "bound") and numberOfEarSlime() and (($earSlime.growth gte 90 - ($earSlime.exhibitionism * 10))) and !$weekly.earSlimeStreetBondage and random(0,100) gte 90>>
+		<<set $weekly.earSlimeStreetBondage to true>>
+		You spot a rope on the floor near <<his>> feet. <span class="lewd">You feel the slime in your head command you to ask <<him>> to bind your hands together.</span> It promises rewards if you comply, and threatens consequences if you do not.
+		<br><br>
+
+		<<link [[복종한다|Street Bind Slime Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<link [[반항한다|Street Bind Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br>
+	<<else>>
+		<<link [[추파를 던진다|Street Flirt]]>><<set $phase to 1>><</link>><<promiscuous1>>
+		<br>
+
+		<<link [[무시한다|Street Flirt]]>><<set $phase to 2>><</link>>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget "street8">>
+	<<beastNEWinit 1 dog>>
+	<<beasttype_ i>> 당신에게 낑낑댄다. <<bHis_ yi>> 꼬리는 좌우로 흔들리고 있다. <<bHe_ nun>> 골목을 쭉 뛰어내려가더니 당신 쪽을 돌아본다. 당신이 <<bhim_ ul>> 따라오길 바라는 것 같다.
+	<br><br>
+
+	<<link [[따라간다|Street Follow]]>><</link>>
+	<br>
+	<<link [[무시한다|Street Follow Ignore]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "street9">>
+	당신은 <<generate1>><<person1>><<person_ i>> 지나가며 당신의 가슴을 슬쩍 훔쳐보는 걸 눈치챘다.
+	<br><br>
+
+	<<if $earSlime.growth gte 200 and $earSlime.exhibitionism gte 2 and hasSexStat("exhibitionism", 2)>>
+		<span class="red">You know the ear slimes wouldn't let you leave without flaunting your chest.</span>
+	<<else>>
+		<<link [[무시한다|Street Breast]]>><<set $phase to 1>><</link>>
+	<</if>>
+	<br>
+
+	<<if hasSexStat("exhibitionism", 2)>>
+		<<link [[과시한다|Street Breast]]>><<set $phase to 2>><</link>><<exhibitionist2>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "street10">>
+	지나가는 차의 창문에서 <<generates1>><<person1>><<person_ i>> 몸을 내밀어 당신에게 큰 물풍선을 던진다.
+	<br><br>
+	<<athleticsdifficulty 0 500 true>>
+	<<if $athleticsSuccess>>
+		<span class="green">당신은 반사적으로 물풍선을 가볍게 잡아내고,</span> <span class = "pink">지나가던 차에 도로 던진다.</span>
+		<br><br>
+		<<switch random(1, 3)>>
+		<<case 1 2>>
+			물풍선이 <<person_ yi>> 뒤통수에 명중하여, <<him_ gwa>> 차에 타고 있던 사람들을 흠뻑 적신다. 차는 계속 달려가 사라진다.
+			<br><br>
+		<<default>>
+			<<set $_carcash to random(50, 100)>>
+			물풍선이 차의 앞유리에 맞아, 운전자의 시야를 가린다. 차는 비틀대더니 주차되어 있던 차와 충돌한다. 차에 타고 있던 사람들이 도망치는 와중에, 당신은 <<person_ i>> 도망치며 <<his_ yi>> 지갑을 떨어트리는 걸 목격한다. 당신은 지갑을 집어 들고, 지갑 안에서 <<moneyGain $_carcash>>를 발견한다.
+			<br><br>
+		<</switch>>
+	<<elseif (currentSkillValue('danceskill') + $rng) gte 500>><<generate2>><<person2>>
+		무용수의 유연함과 순발력으로 <span class = "green">당신은 물풍선을 피하고, 풍선은 당신에게 어떠한 해도 미치지 못한 채 지나간다.</span>
+		<br><br>
+		<<if ($rng % 3) is 0>>당신 뒤에 있던 <<person_ un>> 그리 운이 좋지 못했다. <<He_ nun>> 완전히 흠뻑 젖어 <<his_ yi>> 옷 일부가 투명하게 비쳐 그 몸이 드러난다. 차에서 큰 환호성이 들려온다.
+		<br>
+			<<if $rng % 2>>
+				<<person_ un>> 분노의 괴성을 지르며 도로에 뛰어들어 전속력으로 차를 쫓아간다.
+			<<else>>
+				<<he_ nun>> 필사적으로 <<his_ yi>> 가방으로 몸을 가리며, 사람이 덜 붐비는 곳으로 서둘러 달아난다.
+			<</if>>
+			<br><br>
+		<</if>>
+	<<elseif $player.gender_appearance is "f">>
+		물풍선이 <span class = "red">당신의 가슴 정중앙에 맞아 터지면서 상반신을 흠뻑 적신다.</span>
+		<<if !$worn.upper.type.includes("swim") and !$worn.upper.type.includes("naked")>>
+			<<set $upperwet to 200>>
+		<</if>>
+		<<if !$worn.under_upper.type.includes("swim") and !$worn.under_upper.type.includes("naked") and !$worn.under_upper.type.includes("chastity")>>
+			<<set $underupperwet to 200>>
+		<</if>>
+		<<effectswater>>
+		<<if $exposed gte 1>>
+			속도를 올려 멀어지는 차에서 큰 환호성이 들려온다.
+		<</if>>
+		<br><br>
+	<<else>>
+		물풍선이 <span class = "red">당신의 사타구니에 맞아 터지면서 하반신을 흠뻑 적신다.</span>
+		<<if !$worn.lower.type.includes("swim") and !$worn.lower.type.includes("naked")>>
+			<<set $lowerwet to 200>>
+		<</if>>
+		<<if !$worn.under_lower.type.includes("swim") and !$worn.under_lower.type.includes("naked") and !playerChastity()>>
+			<<set $underlowerwet to 200>>
+		<</if>>
+		<<effectswater>>
+		<<if $exposed gte 1>>
+			속도를 올려 멀어지는 차에서 큰 환호성이 들려온다.
+		<</if>>
+		<br><br>
+	<</if>>
+	<<endevent>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetnight1">>
+	<!-- Modified for Beast People -->
+	<<beastNEWinit 3 dog>>
+	<<if $stray_happiness lte random(1, 100) and $monster is 1 or $bestialitydisable is "f">>
+		어둠 속에서 들려오는, 사납게 으르렁거리는 소리가 당신의 여정을 가로막는다. 당신은 그걸 피하려 몸을 돌렸지만, 빛나는 눈 한 쌍과 마주칠 뿐이다. 당신은 포위당했다.
+		<br><br>
+		<<link [[다음|Street Dogs]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		어둠 속에서 들려오는, 사납게 으르렁거리는 소리가 당신의 여정을 가로막는다. 당신은 그걸 피하려 몸을 돌렸지만, 당신에게로 다가오는 빛나는 눈 한 쌍과 마주칠 뿐이다. 당신은 포위당했다.
+		<br><br>
+
+		당신은 가까스로 도망칠 수 있었지만, 상처를 좀 입었다.
+		<<beastescape>>
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetnight2">>
+	<<if $tower_creature_intro gte 1>>
+		<<loadNPC 0 tower_creature>>
+	<<else>>
+		<<set $tower_creature_intro to 1>>
+		<<set _tower_creature to true>>
+		<<beastNEWinit 1 creature>>
+		<<if $NPCList[0].monster is "monster">>
+			<<set $NPCList[0].fullDescription to "horned " + ($NPCList[0].gender is "m" ? "boy" : "girl")>>
+			<<set $NPCList[0].type to "horned " + ($NPCList[0].gender is "m" ? "boy" : "girl")>>
+		<</if>>
+		<<saveNPC 0 tower_creature>>
+	<</if>>
+	<<if $NPCList[0].monster is "monster" or $bestialitydisable is "f">>
+		무언가가 당신 뒤에 착지하는 소리가 들리고, 낮게 으르렁거리는 소리가 이어진다. 당신이 몸을 돌리자, 노랗게 빛나는 눈 한 쌍과 마주친다. <<bHe_ ga>> 가로등의 불빛으로 걸어나오자, 머리에 난 뿔 한 쌍이
+
+		<<if $NPCList[0].monster is "monster">>
+			<<bhis_ yi>> 지저분한 머리카락을 가르고 있는 것이 드러난다. <<bHe_ nun>> 뾰족한 이빨을 번쩍거리며, 위협적인 웃음을 지으며 당신에게로 달려든다.
+		<<else>>
+			털 한 오라기 없이 비늘로 덮인 머리 위에 드러난다. 그것은 거대한 입을 쩍 벌리고서 당신에게로 달려든다.
+		<</if>>
+		<br><br>
+
+		<<link [[물러서지 않는다|Street Monster]]>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<link [[도망친다|Street Monster Run]]>><</link>><<athleticsdifficulty 400 1400>>
+		<br>
+	<<else>>
+		무언가가 당신 뒤에 착지하는 소리가 들리고, 낮게 으르렁거리는 소리가 이어진다. 당신은 공포에 질려 달려가다가, 발을 헛디디고 넘어진다. 아무것도 따라오지 않는다.<<beastescape>>
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetexday1">>
+	주변에 사람이 너무 많다. 당신은 당신이 누군가에게 보이리라 확신한다.
+	<br><br>
+	<<link [[자동차 아래에 숨는다 (0:10)|Street Ex Day1 Car]]>><<pass 10>><</link>>
+	<br>
+	<<link [[뛰어간다|Street Ex Day1 Sprint]]>><<stress 2>><<trauma 2>><<fameexhibitionism 10>><</link>><<gtrauma>><<gstress>>
+	<br>
+<</widget>>
+
+<<widget "streetexday2">>
+	당신이 버스 정류장에 몸을 숨기자마자, 버스가 모퉁이를 돌아 다가온다. 다가오면서 버스가 속도를 늦춘다.
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[계속 몸을 숨긴다|Street Ex Day2 Stay]]>><</link>>
+	<br>
+	<<link [[도망친다|Street Ex Day2 Run]]>><</link>><<athleticsdifficulty 1 1000>>
+	<br>
+<</widget>>
+
+<<widget "streetedenrage">>
+	<<npc Eden>><<person1>><<set $edendays to 0>>
+	<<set $NPCList[0].skills to {athletics: random(750, 1500), security: random(750, 1500)}>>
+
+	당신은 뒤에서 무거운 발소리를 듣는다. <span class="red">누군가가 당신을 사냥하고 있다.</span>
+	<br><br>
+
+	<<link [[다음|Street Stalk Eden]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetedenangry">>
+	당신은 에덴이 길을 건너는 걸 목격한다.<<npc Eden>><<person1>> <<He_ nun>> 길거리의 사람들을 멈춰세우며 당신을 조잡하게 그린 그림을 보여주고 있다. 사람들은 <<him_ ul>> 무서워하는 기색이 역력하지만, <<he_ ga>> 그 사실을 눈치챈다고 해도 신경쓰지 않을 것 같다.
+	<br><br>
+	<<link [[에덴에게 간다|Street Eden Angry]]>><</link>>
+	<br>
+	<<link [[숨는다 (0:25)|Street Eden Angry Hide]]>><<pass 25>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetedenworried">>
+	<<npc Eden>><<person1>>
+
+	<<switch random(2)>>
+		<<case 0>>
+			누군가가 당신의 어깨를 두드린다. 당신이 돌아보자, 에덴이 거기 있다.
+		<<case 1>>
+			당신이 모퉁이를 돌자, 에덴의 얼굴과 딱 마주친다.
+		<<case 2>>
+			당신은 잠시 멍해져 있다가 누군가와 거의 부딪힐 뻔 한다. 깜짝 놀라며, 당신은 그 사람이 에덴이라는 걸 알아챈다.
+	<</switch>>
+	<br><br>
+	<<if $edenvisitedtown isnot 1>>
+		<<set $edenvisitedtown to 1>>
+		<<him_ i>> 이렇게 도시에 있는 걸 보니 놀랍다. 당신은 <<he_ ga>> 높은 확률로 <<his_ yi>> 장총을 가져 왔으리라고 생각한다. 그렇다면 문제가 될 지도 모른다.
+		<br><br>
+		<<He_ nun>> 이 환경이 영 어색하지만, 당신을 만나 안심한 것 같다.
+	<<else>>
+		<<He_ nun>> 당신을 찾아내 안심한 것 같다.
+	<</if>>
+
+	<<He>> steps closer.
+	<<switch random(2)>>
+		<<case 0>>
+			"여기 있었구나." <<he_ ga>> 말한다. "걱정했잖니."
+		<<case 1>>
+			"마침내 널 찾았구나." <<he_ ga>> 말한다. "괜찮니?"
+		<<case 2>>
+			"괜찮니?" <<he_ ga>> 묻는다. "계속 널 찾아다니고 있었어."
+	<</switch>>
+	<br><br>
+
+	<<if $pain gte 20>>
+		당신은 <<himPost "에게">> 당신이 괜찮다고 재차 강조했지만, <<he_ ga>> 당신의 눈물을 못 보고 지나칠리가 없다.
+		"혹시 다쳤니? 어디 좀 보자."
+		<br><br>
+		<<He_ nun>> 당신의 몸을 살펴보면서, 멍든 부분을 주목한다. 길 한복판에서 <<himPost "에게">> 모든 걸 보여줄 수 있을지 확신하지는 못하겠다.
+		<br><br>
+		"네가 이렇게 된 걸 보니 마음이 아프구나. 그러게 내가 여기에 대해 뭐라고 말했니? 숲만으로는 네게 충분히 위험하지 않았던 거니?" <<he_ ga>> 여기서 할 수 있는 건 그리 많지 않지만, 당신은 <<he_ ga>> 걱정해 주니 안심이 된다.
+		<<lpain>><<ltrauma>><<lstress>><<trauma -1>><<pain -5>><<stress -10>>
+	<<else>>
+		당신은 <<himPost "에게">> 당신이 괜찮다고 재차 강조했다. <<He_ nun>> 안심한 것 같다.
+	<</if>>
+	<br><br>
+	"오두막에 오지 않았잖니. 걱정했단다." <<he_ ga>> 얼굴을 찌푸리며 말한다.
+	<<if Time.schoolDay and Time.hour gte 7 and Time.hour lte 14>>
+		"지금 시간이면 학교<<if Time.hour lte 9>>로 가고<<else>>에<</if>> 있어야 하지 않니? 그건 나도 어쩔 수가 없겠구나. 이따가 보러 와, 알겠지?"
+		<br><br>
+		<<link [[포옹한다|Street Eden Worried Hug]]>><<npcincr Eden love 1>><</link>><<glove>>
+		<br>
+		<<link [[끄덕인다|Street Eden Worried Leave]]>><</link>>
+	<<elseif Time.hour lte 4 or Time.hour gte 21>>
+		"시간이 늦었구다. 나와 함께 오두막으로 돌아가자. 오두막에서 자면 밤에 안전하게 있을 수 있어."
+		<br><br>
+		<<link [[동의한다 (1:00)|Street Eden Worried Go To Cabin]]>><<pass 60>><<set $edendays to 0>><<npcincr Eden dom 1>><</link>>
+		<br>
+		<<link [[거절한다|Street Eden Worried Refuse Cabin]]>><<npcincr Eden love -2>><<npcincr Eden dom -1>><</link>><<llove>>
+		<br>
+
+		<<if C.npc.Eden.love gte 80>>
+			<<link [[공원에서 산책하자고 제안한다 (1:00)|Street Eden Worried Suggest Park]]>><<npcincr Eden love 1>><</link>><<glove>>
+		<<else>>
+			<br>
+			<span class="pink">당신은 마을에서 시간을 같이 보내자고 할 만큼 에덴과 깊은 관계를 맺었다고는 생각하지 않는다. <<He_ nun>> 여기에 있는 걸 싫어한다.</span>
+		<</if>>
+	<<else>>
+		"나와 함께 오두막으로 돌아가자. 거긴 따뜻하고 안전해. 우린 함께 시간을 보내야만 해."
+		<br><br>
+		<<link [[동의한다 (1:00)|Street Eden Worried Go To Cabin]]>><<pass 60>><<set $edendays to 0>><<npcincr Eden dom 1>><</link>>
+		<br>
+		<<link [[거절한다|Street Eden Worried Refuse Cabin]]>><<npcincr Eden love -2>><<npcincr Eden dom -1>><</link>><<llove>>
+		<br>
+
+		<<if C.npc.Eden.love gte 80>>
+			<<link [[공원에서 산책하자고 제안한다 (1:00)|Street Eden Worried Suggest Park]]>><<npcincr Eden love 1>><</link>><<glove>>
+
+			<<if Time.hour gte 6 and Time.hour lte 20 and $edenshopping is 0>>
+				<br>
+				<<link [[쇼핑을 하자고 제안한다 (1:00)|Street Eden Worried Suggest Shopping]]>><<npcincr Eden love 1>><</link>><<glove>>
+			<</if>>
+		<<else>>
+			<br>
+			<span class="pink">당신은 마을에서 시간을 같이 보내자고 할 만큼 에덴과 깊은 관계를 맺었다고는 생각하지 않는다. <<He_ nun>> 여기에 있는 걸 싫어한다.</span>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "streetpolice">>
+	<<set $rng1 to random(1, 100)>><<set $rng2 to random(1, 100)>><<set $rng3 to random(1, 100)>><<set $rng4 to random(1, 100)>>
+	<<if currentSkillValue('skulduggery') gte 700 and $rng4 gte 40 and $policemolestation gte 4>>
+		<<if $streetpoliceintro isnot 1>>
+			<<set $streetpoliceintro to 1>>
+			주변에는 거의 볼 수 없는 사람들이 있다. 소매치기, 약탈자, 노상강도, 납치범, 도둑, 비열하고 허기에 찬 눈빛의, 기회만 되면 강간범으로 돌변하는 인간들. 이들은 아마추어처럼 그림자 속에 숨어다니지 않는다.
+			그들은 빤히 보이는 곳에 숨는다. 벤치에서 신문을 읽고, 세차를 하며, 강아지를 산책시키거나, 고객을 만나는 것에 대해 끝나지 않는 '통화'를 이어가기도 한다. 창문을 닦고, 정원을 가꾸고, 밴으로 텅 빈 상자들을 나른다. 그들은 풍경에 녹아든다. 그들은 지켜본다. 그리고 그 누구도 그들을 발견하지 못한다.
+			<br><br>
+
+			당신을 제외하면 말이다.
+			<br><br>
+			속임수, 은신, 도둑질과 기만에 대한 당신의 지식으로, 당신은 이제 그들을 볼 수 있다. 당신은 그들의 세계를 보고, 그들이 무엇인지를 인식한다.
+			지금처럼, 당신은 그들이 싹 사라졌다는 것을 알아차렸고,
+		<<else>>
+			당신은 소매치기, 도둑들, 길거리의 악한들이 갑자기 사라졌음을 알아차렸고,
+		<</if>>
+		<<set $outside to 1>><<set $location to "town">>
+		<span class = "green">당신은 이게 뭘 뜻하는지 안다.</span>
+		<br><br>
+		경찰이 온다.
+		<br><br>
+		페이스를 잃지 않고, 당신은 시야 밖으로 부드럽게 빠져나와 멈춰서, 거리를 바라본다.
+		<br><br>
+
+		얼마 지나지 않아, 경찰차 한 대가 길을 지나간다. 차창이 내려가고, 경찰관의 눈이 냉정하게 거리를 뜯어보며 괴롭힐 부주의한 범죄자를 고른다.
+		<br><br>
+
+		경찰차는 속도를 올려
+		<<if $rng4 lte 20>>
+		<<generateyv1>>
+		아직 그들을 눈치채지 못한 소매치기 <<personsimple_ ul>> 쫓아간다.
+		<br>
+		당신은 수 차례의 고함 소리를 들으며
+		<<elseif $rng4 lte 40>>
+		근처의 도넛 가판대를 향한다.
+		<br>
+		당신은 경찰관 한 명이 차에서 내리는 것을 보며
+		<<elseif $rng4 lte 60>>
+		<<generateyv1>>
+		기절한 <<if $pronoun is "m">>호스트<<else>>창녀<</if>>에게 다가간다.
+		<br>
+		당신은 경찰관들이 <<personsimple_ ul>> 들어올려 경찰차 뒷좌석에 태우는 것을 보며
+		<<elseif $rng4 lte 80>>
+		떠들썩한 길거리 고아 패거리를 쫓아간다.
+		<br>
+		당신은 수 차례의 고함 소리를 들으며
+		<<else>>
+		거리의 끝으로 다가간다.
+		<br>
+		당신은 범죄자 무리가 숨어있던 곳에서 나오는 걸 알아차리며
+		<</if>>당신은 신속히 현장을 뜬다.
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		<<generatePolice 1>><<generatePolice 2>><<generates3>><<person1>>
+		<<set $weekly.streetPolice to true>>
+		<<if $policemolestation gte 5 and $rng1 gte 50>>
+			경찰차가 끼익 소리를 내며 당신 옆에 멈춰선다. <<person_ gwa>> <<person2>><<person_ i>> 차에서 내린다.
+			<br>
+			"거기 서라!" <<person2>><<person_ i>> 명령한다. 그들은 빠르게 다가와, 그들의 몸이 당신을 짓누르자, 당신의 뒷목을 거칠게 잡아 머리를 뒤로 잡아당기는 손이 느껴진다.
+			<br><br>
+
+			"뭔가 멍청한 짓 좀 해 봐라, 도둑놈아." <<person1>><<person_ i>> 당신의 귀에 속삭인다. "날 즐겁게 해 봐."
+			<br><br>
+
+			당신은 지금껏 당신이 저지른 온갖 말썽을 떠올린다. 당신이 저지른 범죄들을.
+
+			<<if crimeSumCurrent() gte 1000>>
+				저들이 과연 알까? 당신을 체포하러 온 것일까? 당신이 뭔가 말하면 저들의 의심을 확신으로 바꿀까 두려워, 당신은 아무 말도 하지 않는다. 대신 당신은 그들의 얼굴을 본다. 그들의 두 눈에서 성욕이 불타고 있다. 성욕과 권력. 당신이 이전에 본 적이 있는 모습이다.
+			<<else>>
+				하지만 이미 해결된 문제다. 당신은 그들의 얼굴을 본다. 그들의 두 눈에서 성욕이 활활 불타고 있다. 성욕과 권력. 당신이 이전에 본 적이 있는 모습이다.
+			<</if>>
+			<br><br>
+
+			<<if $player.gender_appearance is "m">>
+				"거기 남자분,
+			<<else>>
+				"거기 여자분,
+			<</if>>"<<person2>><<person_ i>> 말한다. "저희는 이 근방에서 주거 침입과 기물 파손, 절도, 소매치기 등 여러 범죄를 저지른 범죄자에 대한 보고를 받았는데, 그게 당신의 인상과 일치하는군요. 그런 관계로, 우리에겐 당신이 불법 물건을 가지고 있는지 신체를 수색할 법적 권한이 있습니다. 그러니 문제가 되지 않겠죠?" 경찰관은 사건이 진행되는 것을 바라보는 사람들에게 큰 목소리로 가짜 이야기를 둘러댄다.
+			<br><br>
+
+			당신은 이에 어떻게 대답해야 하는지 확신하지 못한다. <<person1>><<person_ un>> 마치 당신을 안심시키는 말을 속삭이는 듯이 몸을 숙인다. 하지만 대중에게 이 상황을 납득시키려는 행동일 뿐이다. "순순히 협조하신다면 금세 끝날 겁니다. 하지만 저항하신다면.." 쉽게 알아볼 수 있는 위협이 계속 이어진다.
+			<br><br>
+
+			"잘못한 게 아무것도 없다면 두려워하실 필요가 없습니다." <<person2>><<person_ i>> 나이 든 부부가 당신을 쏘아보려 멈춰서자 말한다. "그래서, 수색해도 괜찮을까요?"
+			<br>
+			당신 또래로 보이는 <<person3>><<person_ un>> 이미 <<his_ yi>> 휴대폰을 꺼내 모든 걸 촬영할 준비를 마쳤다.
+			<br><br>
+			<<link [[마음대로 하게 둔다|Street Police Extreme]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[도망친다|Street Police Run Extreme]]>><<crimeUp 100 "resisting">><</link>><<athleticsdifficulty 1 1200>><<crime "resisting">>
+			<br>
+			<<if $money gte 30000>>
+				<<link [[뇌물을 준다 (£300)|Street Police Bribe]]>><<set $money -= 30000>><</link>>
+				<br>
+			<</if>>
+		<<elseif $policemolestation gte 4 and $rng2 gte 50>>
+			경찰차가 당신 옆에 멈춰 선다. <<person_ gwa>> <<person2>><<person_ i>> 경찰차에서 걸어나온다. 그들은 당신을 꽉 누르고 한 손으로 당신 목덜미를 붙잡는다.
+			<br><br>
+
+			"가만히 있어라, 이 도둑놈아." <<person1>><<person_ i>> 당신의 귀 옆에 대고 조용히 말한다. "멍청한 짓 할 생각일랑 하지도 마."
+			<br><br>
+
+			당신은 지금껏 당신이 저지른 온갖 말썽을 떠올린다. 당신이 저지른 범죄들을.
+
+			<<if crimeSumCurrent() gte 1000>>
+				저들이 과연 알까? 당신을 체포하러 온 것일까? 당신이 뭔가 말하면 저들의 의심을 확신으로 바꿀까 두려워, 당신은 아무 말도 하지 않는다. 대신 당신은 그들의 얼굴을 본다. 그들의 두 눈에서 성욕이 불타고 있다. 성욕과 권력.
+			<<else>>
+				하지만 이미 해결된 문제다. 당신은 그들의 얼굴을 본다. 그들의 두 눈에서 성욕이 활활 불타고 있다. 성욕과 권력.
+			<</if>>
+			<br><br>
+
+			<<if $player.gender_appearance is "m">>
+				"거기 젊은 남자분,
+			<<else>>
+				"거기 젊은 여자분,
+			<</if>>"<<person2>><<person_ i>> 말한다. "저희는 이 근방에서 주거 침입과 기물 파손, 절도, 소매치기 등 여러 범죄를 저지른 범죄자에 대한 보고를 받았는데, 그게 당신의 인상과 일치하는군요. 그런 관계로, 우리에겐 당신이 불법 물건을 가지고 있는지 신체를 수색할 법적 권한이 있습니다. 그러니 문제가 되지 않겠죠?" 경찰관은 사건이 진행되는 것을 바라보는 사람들에게 큰 목소리로 가짜 이야기를 둘러댄다.
+			<br><br>
+
+			당신은 이에 어떻게 대답해야 하는지 확신하지 못한다. <<person1>><<person_ un>> 마치 당신을 안심시키는 말을 속삭이는 듯이 몸을 숙인다. 하지만 대중에게 이 상황을 납득시키려는 행동일 뿐이다. "순순히 협조하신다면 금세 끝날 겁니다. 하지만 저항하신다면.." 쉽게 알아볼 수 있는 위협이 계속 이어진다.
+			<br><br>
+
+			"그래서, 수색해도 괜찮을까요?" <<person2>><<person_ i>> 나이 든 부부가 걸어가며 당신들 세 명을 찬찬히 살펴보자 말한다. 당신 또래로 보이는 <<person3>><<person_ i>> <<his_ yi>> 휴대폰을 꺼낸다.
+			<br><br>
+
+			<<link [[마음대로 하게 둔다|Street Police Full]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[도망친다|Street Police Run]]>><<crimeUp 100 "resisting">><</link>><<athleticsdifficulty 1 1200>><<crime "resisting">>
+			<br>
+			<<if $money gte 30000>>
+				<<link [[뇌물을 준다 (£300)|Street Police Bribe]]>><<set $money -= 30000>><</link>>
+				<br>
+			<</if>>
+		<<elseif $policemolestation gte 3 and $rng3 gte 50>>
+			경찰차가 당신 옆에 멈춰 선다. <<person_ gwa>> <<person2>><<person_ i>> 경찰차에서 걸어나온다. 그들은 재빨리 다가와 손으로 당신의 어깨를 붙잡는다.
+			<br><br>
+
+			"가만히 있어." <<person1>><<person_ i>> 당신의 귀 옆에 대고 조용히 말한다. "우린 네가 무슨 일을 했는지 알고 있으니까."
+			<br><br>
+
+			당신은 지금껏 당신이 저지른 온갖 말썽을 떠올린다. 당신이 저지른 범죄들을.
+
+			<<if crimeSumCurrent() gte 1000>>
+				저들이 과연 알까? 당신을 체포하러 온 것일까? 당신이 뭔가 말하면 저들의 의심을 확신으로 바꿀까 두려워, 당신은 아무 말도 하지 않는다. 대신 당신은 그들의 얼굴을 본다. 그들의 두 눈에서 성욕이 불타고 있다.
+			<<else>>
+				하지만 이미 해결된 문제다. 당신은 그들의 얼굴을 본다. 그들은 두 눈에서 불타는 성욕을 감추려는 노력도 하지 않고 있다.
+			<</if>>
+			<br><br>
+
+			<<if $player.gender_appearance is "m">>
+				"거기 젊은 남자분,"
+			<<else>>
+				"거기 젊은 여자분,"
+			<</if>>
+			<<person2>><<person_ i>> 말한다. "저희는 이 근방에서 주거 침입과 기물 파손, 절도, 소매치기 등 여러 범죄를 저지른 범죄자에 대한 보고를 받았는데, 그게 당신의 인상과 일치하는군요. 그런 관계로, 우리에겐 당신이 불법 물건을 가지고 있는지 신체를 수색할 법적 권한이 있습니다." 경찰관은 사건이 진행되는 것을 바라보는 사람들에게 큰 목소리로 가짜 이야기를 둘러댄다. "여기서 수색을 허가해 주시겠습니까, 아니면 서로 같이 가셔야 할까요?"
+			<br><br>
+
+			당신은 이에 어떻게 대답해야 하는지 확신하지 못한다. <<person1>><<person_ un>> 마치 당신을 안심시키는 말을 속삭이는 듯이 몸을 숙인다. 하지만 대중에게 이 상황을 납득시키려는 행동일 뿐이다.
+			<br>
+			"순순히 협조해 주신다면 곧 풀려나실 수 있을 겁니다. 아니면 '서'에서 온 밤을 함께 지새야 할 수도 있고요... 둘 중 어느 것을 고르실 지는 당신 마음입니다."
+			<br><br>
+
+			"수색에 동의하십니까?" <<person2>><<person_ i>> 나이 든 부부가 걸어가며 당신들 세 명에게로 눈을 흘기자 고함친다. 당신 또래로 보이는 <<person3>><<person_ i>> <<his_ yi>> 휴대폰을 꺼내 들고, 뭔가 흥미로운 게 생기면 바로 찍을 생각으로 이쪽을 보고 있다.
+			<br><br>
+			<<link [[마음대로 하게 둔다|Street Police Mid]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[도망친다|Street Police Run Mid]]>><<crimeUp 100 "resisting">><</link>><<physiquedifficulty 4500 12000>><<crime "resisting">>
+			<br>
+			<<if $money gte 30000>>
+				<<link [[뇌물을 준다 (£300)|Street Police Bribe]]>><<set $money -= 30000>><</link>>
+				<br>
+			<</if>>
+		<<elseif $policemolestation gte 2 and $rng4 gte 50>>
+			경찰차가 당신 옆에 멈춰 선다. <<person_ gwa>> <<person2>><<person_ i>> 경찰차에서 걸어나온다.
+			<br>
+			"거기 너!
+			<<if $player.gender_appearance is "m">>
+				소년. 거기 멈춰 서."
+				<br><br>
+				그들이 다가와 당신의 어깨에 손을 올려놓는다.
+				<br><br>
+				"거기 남자분,"
+			<<else>>
+				소녀. 거기 멈춰 서."
+				<br><br>
+				그들이 다가와 당신의 어깨에 손을 올려놓는다.
+				<br><br>
+				"거기 여자분,"
+			<</if>>
+			<<person2>><<person_ i>> 크게 말한다. "이 근방에서 당신의 인상착의와 완벽히 일치하는 범죄자에 대한 신고를 받았습니다. 강도 및 절도 근절법 제4조에 따라, 우리에겐 당신이 불법 물건을 가지고 있는지 신체를 수색할 법적인 권한이 있습니다. 이에 동의하십니까?"
+			<br><br>
+
+			당신은 이에 어떻게 대답해야 하는지 확신하지 못한다. <<person1>><<person_ un>> 마치 안심시키려는 듯 몸을 굽혔다.
+			<br>
+			"긴장 풀어." <<He_ ga>> 당신의 귀 옆에다 대고 조용히 속삭인다. "우린 네가 무슨 짓을 해왔는지 알아.
+
+			<<if crimeSumCurrent() gte 1000>>
+				그리고 우리가 원한다면 널 언제든 체포할 수 있지. 하지만 그러려고 온 게 아냐. 적어도 지금 당장은. 현명하게 그냥 같이 어울려 달라고. 너도 좋아할지도 모르잖아?"
+			<<else>>
+				그리고 넌 우리가 그걸 증명할 수 없다는 걸 알지. 하지만 우린 경찰이고, 네가 누군지 알아. 그러니 우린 네 삶을 힘들게 만들어 줄 수 있어. 현명하게 같이 어울려 달라고, 꼬마."
+			<</if>>
+			<br>
+			<<He_ nun>> 당신의 어깨를 토닥이고는 한 걸음 물러난다.
+			<br><br>
+
+			얼핏 보면 그들의 의도는 순수하게 직업적인 것으로 보이지만, 그들의 눈에 있는 무언가가 성욕과 권력을 무의식적으로 드러내고 있다. 경찰들은 그걸 잘 감추고 있다. 
+			<br>
+			당신은 이에 어떻게 대답해야 하는지 확신하지 못한다.
+			<br><br>
+
+			"수색에 협조해 주시겠습니까?" <<person2>><<person_ i>> 요구한다.
+			<br>
+			당신 또래로 보이는 <<person3>><<person_ un>> 근처에 서서 뭔가 음란한 장면을 보기를 바라며 흥분에 차 이쪽을 대놓고 보고 있다.
+			<br><br>
+			<<link [[허락한다|Street Police Lite]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[도망친다|Street Police Run Mid]]>><<crimeUp 50 "resisting">><</link>><<physiquedifficulty 4500 12000>><<crime "resisting">>
+			<br>
+			<<if $money gte 30000>>
+				<<link [[뇌물을 준다 (£300)|Street Police Bribe]]>><<set $money -= 30000>><</link>>
+				<br>
+			<</if>>
+		<<elseif $policemolestation gte 1 and $rng1 gte 50>>
+			경찰차가 당신 옆에 멈춰 선다. <<person_ gwa>> <<person2>><<person_ i>> 경찰차에서 걸어나온다.
+			<br>
+			"거기 너!
+			<<if $player.gender_appearance is "m">>
+				소년, 거기 멈춰 서."
+				<br><br>
+				그들이 다가와 당신의 어깨에 손을 올려놓는다.
+				<br><br>
+				"거기 남자분,"
+			<<else>>
+				소녀, 거기 멈춰 서."
+				<br><br>
+				그들이 다가와 당신의 어깨에 손을 올려놓는다.
+				<br><br>
+				"거기 여자분,"
+			<</if>>
+			<<person2>><<person_ i>> 크게 말한다. "이 근방에서 당신의 인상착의와 완벽히 일치하는 범죄자에 대한 신고를 받았습니다. 강도 및 절도 근절법 제4조에 따라, 우리에겐 당신이 불법 물건을 가지고 있는지 신체를 수색할 법적인 권한이 있습니다. 이에 동의하십니까?"
+			<br><br>
+
+			얼핏 보면 그들의 의도는 순수하게 직업적인 것으로 보이지만, 그들의 눈에 있는 무언가가 성욕과 권력을 무의식적으로 드러내고 있다. 경찰들은 그걸 잘 감추고 있다.
+			<br><br>
+
+			당신은 이에 어떻게 대답해야 하는지 확신하지 못한다. <<person1>><<person_ un>> 마치 안심시키려는 듯 몸을 굽혔다.
+			<br>
+			"긴장 풀어." <<He_ ga>> 당신의 귀 옆에다 대고 조용히 속삭인다. "오래 걸리지 않아. 어쩌면 너도 좋아할지도 모르잖아?"
+			<br><br>
+
+			<<He_ nun>> 당신의 어깨를 토닥이고는 한 걸음 물러난다.
+			<br><br>
+
+			"수색에 협조해 주시겠습니까?" <<person2>><<person_ i>> 요구한다.
+			<br>
+			당신 또래로 보이는 <<person3>><<person_ un>> 근처에 서서 뭔가 음란한 장면을 보기를 바라며 흥분에 차 이쪽을 대놓고 보고 있다.
+			<br><br>
+			<<link [[허락한다|Street Police Search Lewd]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[도망친다|Street Police Run Lite]]>><<crimeUp 50 "resisting">><</link>><<physiquedifficulty 3000 8000>><<crime "resisting">>
+			<br>
+			<<if $money gte 30000>>
+				<<link [[뇌물을 준다 (£300)|Street Police Bribe]]>><<set $money -= 30000>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			경찰차가 당신 옆에 멈춰 선다. <<person_ gwa>> <<person2>><<person_ i>> 경찰차에서 걸어나온다.
+			<br>
+			"거기 너!
+			<<if $player.gender_appearance is "m">>
+				소년, 거기 멈춰 서."
+				<br><br>
+				그들이 다가와 당신을 양쪽으로 마주보고 선다.
+				<br><br>
+				"거기 남자분,"
+			<<else>>
+				소녀, 거기 멈춰 서."
+				<br><br>
+				그들이 다가와 당신을 양쪽으로 마주보고 선다.
+				<br><br>
+				"거기 여자분,"
+			<</if>>
+			<<person2>><<person_ i>> 크게 말한다. "이 근방에서 당신의 인상착의와 완벽히 일치하는 범죄자에 대한 신고를 받았습니다. 강도 및 절도 근절법 제4조에 따라, 우리에겐 당신이 불법 물건을 가지고 있는지 신체를 수색할 법적인 권한이 있습니다. 이에 동의하십니까?"
+			<br><br>
+
+			당신은 지금껏 당신이 저지른 온갖 말썽을 떠올린다. 당신이 저지른 범죄들을.
+
+			<<if crimeSumCurrent() gte 1000>>
+				저들이 과연 알까? 당신을 체포하러 온 것일까? 당신이 뭔가 말하면 저들의 의심을 확신으로 바꿀까 두려워, 당신은 아무 말도 하지 않는다. 대신 당신은 그들의 얼굴을 본다. 안심되게도 그들은 공무를 수행하고 있는 것으로 보이고 지루해하고 있는 듯하다. 이건 그저 평범한 순찰일 뿐이다.
+			<<else>>
+				하지만 이미 해결된 문제다. 당신은 그들의 얼굴을 본다. 안심되게도 그들은 공무를 수행하고 있는 것으로 보인다. 표정에서는 지루함이 엷게 드러난다. 이건 그저 평범한 순찰일 뿐이다. 평범하게 낮은 강도의 희롱. 경찰관들이 매일을 보내는 방식이다.
+			<</if>>
+			<br><br>
+
+			<<if $player.gender_appearance is "m">>
+				"거기 젊은 남자분,"
+			<<else>>
+				"거기 젊은 여자분,"
+			<</if>>
+			<<person2>><<person_ i>> 말한다. "아무것도 잘못한 게 없으시면, 무서워하실 필요가 없습니다. 그러니 문제가 되지 않겠죠?"
+			<br><br>
+
+			당신은 이에 어떻게 대답해야 하는지 확신하지 못한다. <<person1>><<person_ un>> 몸을 굽혀 당신의 귀에 안심시키는 말을 속삭인다. "그냥 수색일 뿐이예요. 바로 여기서 주머니만 좀 살펴볼 겁니다. 이 많은 사람들 앞에서 저희가 당신을 서로 끌고 가도록 만들지 마세요..."
+			<br><br>
+
+			"수색에 동의하십니까?" <<person2>><<person_ i>> 나이 든 부부가 걸어 지나가자 말한다. 당신 또래로 보이는 <<person3>><<person_ un>> 뭔가 흥미로운 일을 보기를 바라는 듯 관심어린 눈으로 이쪽을 보고 있다.
+			<br><br>
+			<<link [[승낙한다|Street Police Search]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[도망친다|Street Police Run Lite]]>><<crimeUp 50 "resisting">><</link>><<physiquedifficulty 3000 8000>><<crime "resisting">>
+			<br>
+			<<if $money gte 30000>>
+				<<link [[뇌물을 준다 (£300)|Street Police Bribe]]>><<set $money -= 30000>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "streettentacle">>
+	<<set $phase to 0>>
+	<<set _target to 'none'>>
+	<<outfitChecks>>
+
+	당신은 허벅지에 무언가가 닿는 걸 느낀다. 내려다보자 물컹한 촉수가 열려 있는 맨홀에서 뻗어나와 있는 것을 발견한다. 촉수는 당신의 
+
+	<<if _bottomIsSkirt and _skirtExposed>>
+		<<if !playerChastity() and !$worn.under_lower.type.includes("naked")>>
+			다리와 <<bottom_name_ ul>> 휘감아 오른다. 그것은 당신의 <<worn_under_lower_name_ ul>> 휘감는다.
+		<<elseif $worn.under_lower.type.includes("naked")>>
+			다리와 <<bottom_name_ ul>> 휘감아 오른다. 그것은 천 안으로 파고들어 당신의
+			<<set $phase to 1>>
+			<<rng>>
+			<<if $analdisable is "f" and $rng gte 60>>
+				항문에 닿는다.
+				<<set _target to 'anus'>>
+			<<else>>
+				<<if $player.penisExist>>
+					<<penisPost "에">> 닿는다.
+					<<set _target to 'penis'>>
+				<<elseif $player.vaginaExist>>
+					<<pussyPost "에">> 닿는다.
+					<<set _target to 'pussy'>>
+				<<else>>
+					엉덩이에 닿는다.
+					<<set _target to 'none'>><<set $phase to 0>>
+				<</if>>
+			<</if>>
+			당신은 촉수를 타고 흐르는 흥분된 떨림을 느낄 수 있다.
+		<<else>>
+			다리와 <<bottom_name_ ul>> 휘감아 오른다. 그것은 한데 뭉쳐 천 안으로 파고든다.
+		<</if>>
+	<<elseif $worn.lower.type.includes("naked")>>
+		<<if !playerChastity() and !$worn.under_lower.type.includes("naked")>>
+			다리를 휘감아 올라 당신의 <<worn_lower_name_ ul>> 휘감는다.
+		<<else>>
+			다리를 휘감아 올라 허벅지를 둘러싸기 시작한다.
+			<<set $phase to 2>>
+		<</if>>
+	<<else>>
+		다리를 휘감아 올라 당신의 <<bottom_name_ ul>> 휘감는다.
+	<</if>>
+	<br><br>
+
+	<<if $phase is 0>>
+		<<link [[촉수가 옷에 못 들어가도록 막는다|Street Tentacle Hold]]>><</link>><<physiquedifficulty 5000 16000>>
+	<</if>>
+	<br>
+
+	<<if $leftarm isnot "bound" or $rightarm isnot "bound">>
+		<<link [[촉수를 붙잡는다|Street Tentacle Grab]]>><</link>><<physiquedifficulty 5000 16000>><<deviant1>>
+		<br>
+		<<if ($phase isnot 1) and hasSexStat("deviancy", 4)>>
+			<<link [[촉수를 애무한다|Street Tentacle Stroke]]>><</link>><<deviant3>>
+			<br>
+		<</if>>
+	<</if>>
+
+	<<if hasSexStat("deviancy", 5) and $phase is 1>>
+		<<if _target is 'anus'>>
+			<<link [[촉수가 계속하도록 둔다|Street Tentacle Sex]]>><<set $phase to 0>><<set $sexstart to 1>><</link>><<deviant5>>
+		<<elseif _target is 'pussy'>>
+			<<link [[촉수가 계속하도록 둔다|Street Tentacle Sex]]>><<set $phase to 1>><<set $sexstart to 1>><</link>><<deviant5>>
+		<<elseif _target is 'penis'>>
+			<<link [[촉수가 계속하도록 둔다|Street Tentacle Sex]]>><<set $phase to 2>><<set $sexstart to 1>><</link>><<deviant5>>
+		<</if>>
+		<br>
+	<</if>>
+
+	<<link [[도망치려 시도한다|Street Tentacle Run]]>><<stress 3>><<trauma 3>><</link>><<gtrauma>><<gstress>>
+	<br>
+<</widget>>
+
+<<widget "streetfamerape">>
+	<<generate1>><<generate2>>두건을 눌러쓴 형체가 그림자에서 튀어나와 당신의 길을 막아선다. 당신이 뒤를 돌아보자 뒤편에서 한 명이 더 다가오는 게 보인다.
+	<br><br>
+
+	<<link [[도망친다|Street Stalk Group Run]]>><<set $molestationstart to 1>><</link>>
+	<br>
+	<<link [[물러서지 않는다|Street Fame Rape Stand]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "streetheeltrip">>
+	당신은 당신의 구두 힐에 걸려 앞으로 넘어진다. 땅바닥이 점점 당신의 얼굴과 가까워지던 그 때, 어쩌면 스스로를 구할 수 있을지도 모른다는 생각이 든다.
+	<br><br>
+
+	<<link [[다시 균형을 잡아 본다|Street Heel Trip Balance]]>><<tiredness 6>><</link>><<athleticsdifficulty 1 800>>
+	<br>
+	<<link [[얼굴을 땅바닥에 박는다|Street Heel Trip Fall]]>><</link>><<ggpain>>
+	<br>
+<</widget>>
+
+<<widget "kylarwatched">>
+	<<run statusCheck("Kylar")>>
+
+	<<if _kylarStatus.includes("Love") and $kylar_mad is 1 and $syndromekylar isnot 1>>
+		<<npc Kylar>><<person1>>
+		<span class="red">날카로운 고통이 당신의 목을 찌른다.</span> 당신은 힘빠진 손을 올려보고, 다트 화살이 당신의 살에 꽂혀있는 것을 느낀다. 당신은 정신을 잃는다.
+		<br><br>
+		<<link [[다음|Kylar Abduction Intro]]>><<endevent>><<unset $kylar_mad>><</link>>
+		<br>
+	<<elseif $dangerevent gte 81>>
+		<<set $kylarwatchedtimer -= 1>>
+		<<generate1>><<person1>>당신은 <<person_ i>> 당신 뒤에 서 있는 걸 알아차린다. <<catcall>> 당신이 뭐라 하기도 전에, 두 손이 튀어나와 당신을 붙잡는다. 하지만 그러는 것도 잠시, <<He_ nun>> 움찔하더니 <<his_ yi>> 목을 손으로 붙잡는다. <<He_ ga>> 작은 다트를 꺼내, 잠시 그걸 바라보다가 쓰러져 버린다.
+		<br><br>
+
+		<<link [[훔친다|Street Kylar Rob]]>><</link>><<crime "petty">>
+		<br>
+		<<link [[도와준다 (0:10)|Street Kylar Help]]>><<pass 10>><<famegood 2>><</link>>
+		<br>
+		<<link [[떠난다|Street Kylar Leave]]>><</link>>
+		<br>
+
+	<<elseif $dangerevent gte 61>>
+		<<set $kylarwatchedtimer -= 1>>
+
+		<<generate1>><<person1>>당신은 <<person_ i>> 당신을 지켜보고 있다는 걸 발견한다. <<He_ nun>> 당신에게 윙크한다.
+		<br><br>
+
+		<<link [[도로 윙크한다|Street Kylar Wink]]>><<npcincr Kylar rage 5>><</link>><<promiscuous1>><<gksuspicion>>
+		<br>
+		<<link [[무시한다|Street Kylar Ignore]]>><</link>>
+		<br>
+
+	<<elseif $dangerevent gte 41>>
+		<<set $kylarwatchedtimer -= 1>>
+
+		<<if $worn.over_lower.name isnot "naked">>
+			당신은 당신의 <<worn_over_lower_name_ i>> 무언가에게 잡아당겨지는 것을 느꼈고,
+			<<set $lowercoloursaved to $worn.over_lower.colour>><<set $worn.over_lower.integrity -= 30>>
+			<<if $worn.over_lower.integrity lte 0>>
+				<<trClothes "lower" $worn.lower.name "name" "이">><<set _name to _trResult>>
+				<<overlowerruined>><<exposure>>
+				<<if $exposed gte 1>>
+					그러더니 마치 보이지 않는 힘에 의해 찢어지기라도 한 듯이 당신의 몸에서 뜯겨 나간다. <<covered>> 천이 당신으로부터 멀리 날아간다.
+					<br><br>
+
+					<<link [[쫓아간다|Street Kylar Chase]]>><<fameexhibitionism 10>><<trauma 6>><<stress 6>><</link>><<athleticsdifficulty 1 600>><<gtrauma>><<gstress>>
+					<br>
+					<<link [[숨는다|Street Kylar Hide]]>><</link>>
+					<br>
+				<<else>>
+					그러더니 마치 보이지 않는 힘에 의해 찢어지기라도 한 듯 당신의 _name 뜯겨나간다. 그것은 허공으로 날아가 열린 창문으로 빠져나가 버린다.
+					<br><br>
+
+					<<destinationeventend>>
+				<</if>>
+			<<else>>
+				그러더니 마치 보이지 않는 힘에 의해 찢어지기라도 한 듯 뜯겨나간다. 그것은 허공으로 날아가 열린 창문으로 빠져나가 버린다.
+				<br><br>
+
+				<<destinationeventend>>
+			<</if>>
+		<<elseif $worn.lower.name isnot "naked">>
+			당신은 당신의 <<worn_lower_name_ i>> 무언가에게 잡아당겨지는 것을 느꼈고,
+			<<set $lowercoloursaved to $worn.lower.colour>><<set $worn.lower.integrity -= 30>>
+			<<if $worn.lower.integrity lte 0>>
+				<<lowerruined>><<exposure>>
+				그러더니 마치 보이지 않는 힘에 의해 찢어지기라도 한 듯이 당신의 몸에서 뜯겨 나간다. <<covered>> 천이 당신으로부터 멀리 날아간다.
+				<br><br>
+
+				<<link [[쫓아간다|Street Kylar Chase]]>><<fameexhibitionism 10>><<trauma 6>><<stress 6>><</link>><<athleticsdifficulty 1 600>><<gtrauma>><<gstress>>
+				<br>
+				<<link [[숨는다|Street Kylar Hide]]>><</link>>
+				<br>
+			<<else>>
+				그러더니 마치 보이지 않는 힘에 의해 찢어지기라도 한 듯 뜯겨나간다. 그것은 허공으로 날아가 열린 창문으로 빠져나가 버린다.
+				<br><br>
+
+				<<destinationeventend>>
+			<</if>>
+		<<else>>
+			<<destinationeventend>>
+		<</if>>
+
+	<<elseif _kylarStatus.includesAll("Love","Lust")>>
+		<<set $kylarwatchedtimer to 0>><<rngWraith 2 "night">>
+
+		<<npc Kylar>><<person1>>무언가가 당신의 팔을 잡아당긴다. 카일라다. "아- 안녕." <<he_ nun>> 침을 꿀꺽 삼킨다. <<He_ ga>> 당신을 어두운 골목으로 끌고 가려고 한다. "그, 우린 사적인 장소가 필요해. 너랑.. 같이 해야 할 일이 있어."
+		<br><br>
+		<<if $wraith.state and _wraithEvent and (["haunt", "despair"].includes($wraith.state) or ["dead","sold"].includes($wraith.offspring))>>
+			<<set $wraith.mimic to "Kylar">><<set $wraith.exit to "town">>
+			<<link [[카일라와 함께 간다|Wraith Mimic Fight]]>><<set $sexstart to 1>><</link>><<promiscuous1>><<gglove>><<llksuspicion>>
+			<br>
+			<<link [[거절한다|Wraith Mimic Kylar]]>><</link>><<lllove>><<gggksuspicion>>
+		<<else>>
+			<<link [[카일라와 함께 간다|Street Kylar Sex]]>><<set $sexstart to 1>><<npcincr Kylar love 5>><<npcincr Kylar rage -10>><</link>><<promiscuous1>><<gglove>><<llksuspicion>>
+			<br>
+			<<link [[거절한다|Street Kylar Refuse]]>><<npcincr Kylar love -5>><<npcincr Kylar rage 20>><</link>><<lllove>><<gggksuspicion>>
+		<</if>>
+		<br><br>
+
+	<<else>>
+		<<npc Kylar>><<person1>>당신은 길 건너편에서 카일라가 당신을 빤히 바라보고 있는 걸 알아차린다. 버스 한 대가 당신 둘 사이로 지나간다. 버스가 떠나자, <<he_ nun>> 사라져 있었다.
+		<<gstress>><<stress 6>>
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetsexfame">>
+	<<rng>>
+	<<if $rng gte 81>>
+		<<generate1>><<generate2>><<person1>><<person_ gwa>> <<person2>><<person_ i>> 걸어가며 당신을 지나친다. <<person1>><<person_ un>> 당신을 돌아보고 <<his_ yi>> 친구에게 고개를 가까이 한다. "나 <<phim_ ul>> 알아, 마을 걸레라던데." <<person2>><<person_ i>> 당신을 보더니 웃음을 터뜨린다. 당신은 얼굴을 붉힌다.
+	<<elseif $rng gte 61>>
+		<<generate1>><<person1>><<person_ i>> 길을 건너는 당신에게 소리친다. "어이, 너 내 친구랑 전부 섹스했잖아. 내 차례는 언제냐?" 그건 사람들의 주의를 끌었다. 사람들은 당신을 보고는 서로에게 뭔가 속삭인다. 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 41>>
+		<<generate1>><<person1>><<person_ i>> 당신을 스쳐지나다 당신의 팔을 붙잡는다. "난 널 알아." 당신이 <<his_ yi>> 손을 뿌리치려 애쓰는 동안, <<he_ ga>> 말한다. "모든 사람들이 말하는 걸레가 바로 너잖아." 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 21>>
+		<<generatey1>><<person1>><<personsimplePost>> 한 무리가 당신을 지나치며 당신을 보고 실실 웃는다. 그들은 당신을 계속 돌아보며 서로에게 뭔가 속삭인다. 당신은 '쉬운'과 '걸레'라는 단어를 알아듣는다. 당신은 얼굴을 붉힌다.
+	<<else>>
+		<<generate1>><<generate2>><<person1>><<person_ i>> 길을 건너는 당신을 가리키더니 <<his_ yi>> 친구들을 돌아본다. "쟤야." <<he_ ga>> 말한다. "내가 말했던 걸레가 바로 쟤라고." 당신은 얼굴을 붉힌다.
+	<</if>>
+	<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetprostitutionfame">>
+	<<rng>>
+	<<if $rng gte 81>>
+		<<generate1>><<generate2>><<person1>><<person_ gwa>> <<person2>><<person_ i>> 걸어가며 당신을 지나친다. <<person1>><<person_ un>> 당신을 돌아보고 <<his_ yi>> 친구에게 고개를 가까이 한다. "나 <<phim_ ul>> 알아, <<pshe_ nun>> 돈만 주면 무엇이든 할 거야. 무엇이든." <<person2>><<person_ i>> 당신을 보더니 웃음을 터뜨린다. 당신은 얼굴을 붉힌다.
+	<<elseif $rng gte 61>>
+		<<generate1>><<person1>><<person_ i>> 길을 건너는 당신에게 소리친다. "어이, 너 내 친구랑 전부 섹스했잖아. 입으로 하는 건 얼마냐?" 그건 사람들의 주의를 끌었다. 사람들은 당신을 보고는 서로에게 뭔가 속삭인다. 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 41>>
+		<<generate1>><<person1>><<person1>><<person_ i>> 당신을 스쳐지나다 당신의 팔을 붙잡는다. "난 널 알아." 당신이 <<his_ yi>> 손을 뿌리치려 애쓰는 동안, <<he_ ga>> 말한다. "모든 사람들이 말하는 <<whore_ ga>> 바로 너잖아." 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 21>>
+		<<generatey1>><<person1>><<personsimplePost>> 한 무리가 당신을 지나치며 당신을 보고 실실 웃는다. 그들은 당신을 계속 돌아보며 서로에게 뭔가 속삭인다. You make out the words "<<whorePost "과" "sep">>"_trPost "<<slutPost "이라" "sep">>"_trPost는 단어를 알아듣는다. 당신은 얼굴을 붉힌다.
+	<<else>>
+		<<generate1>><<generate2>><<person1>><<person_ i>> 길을 건너는 당신을 가리키더니 <<his_ yi>> 친구들을 돌아본다. "쟤야." <<he_ ga>> 말한다. "내가 말했던 <<whore_ ga>> 바로 쟤라고." 당신은 얼굴을 붉힌다.
+	<</if>>
+	<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetrapefame">>
+	<<rng>>
+	<<if $rng gte 81>>
+		<<generate1>><<generate2>><<person1>><<person_ gwa>> <<person2>><<person_ i>> 걸어가며 당신을 지나친다. <<person1>><<person_ un>> 당신을 돌아보고 <<his_ yi>> 친구에게 고개를 가까이 한다. "나 <<phim_ ul>> 알아, 마을 공용 육변기라던데." <<person2>><<person_ i>> 당신을 보더니 웃음을 터뜨린다. 당신은 얼굴을 붉힌다.
+	<<elseif $rng gte 61>>
+		<<generate1>><<person1>><<person_ i>> 길을 건너는 당신에게 소리친다. "어이, 내 친구들이 널 다 따먹었잖아. 곧 내 몫을 받으러 가겠어." 그건 사람들의 주의를 끌었다. 사람들은 당신을 보고는 서로에게 뭔가 속삭인다. 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 41>>
+		<<generate1>><<person1>><<person1>><<person_ i>> 당신을 스쳐지나다 당신의 팔을 붙잡는다. "난 널 알아." 당신이 <<his_ yi>> 손을 뿌리치려 애쓰는 동안, <<he_ ga>> 말한다. "모든 사람들이 말하는 육변기가 바로 너잖아." 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 21>>
+		<<generatey1>><<person1>><<personsimplePost>> 한 무리가 당신을 지나치며 당신을 보고 실실 웃는다. 그들은 당신을 계속 돌아보며 서로에게 뭔가 속삭인다. 당신은 '육변기'와 '쓰레기'라는 단어를 알아듣는다. 당신은 얼굴을 붉힌다.
+	<<else>>
+		<<generate1>><<generate2>><<person1>><<person_ i>> 길을 건너는 당신을 가리키더니 <<his_ yi>> 친구들을 돌아본다. "쟤야." <<he_ ga>> 말한다. "내가 말했던 육변기가 바로 쟤라고." 당신은 얼굴을 붉힌다.
+	<</if>>
+	<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetbestialityfame">>
+	<<rng>>
+	<<if $rng gte 81>>
+		<<generate1>><<generate2>><<person1>><<person_ gwa>> <<person2>><<person_ i>> 걸어가며 당신을 지나친다. <<person1>><<person_ un>> 당신을 돌아보고 <<his_ yi>> 친구에게 고개를 가까이 한다. "나 <<phim_ ul>> 알아, 동물들을 진짜 밝힌다던데." <<person2>><<person_ i>> 당신을 보더니 웃음을 터뜨린다. 당신은 얼굴을 붉힌다.
+	<<elseif $rng gte 61>>
+		<<generate1>><<person1>><<person_ i>> 길을 건너는 당신에게 소리친다. "어이, 저기 개 사육장에서 너를 찾더라. 개들 '우유를 짜 줄' 사람이 필요하다던데?" 그건 사람들의 주의를 끌었다. 사람들은 당신을 보고는 서로에게 뭔가 속삭인다. 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 41>>
+		<<generate1>><<person1>><<person1>><<person_ i>> 당신을 스쳐지나다 당신의 팔을 붙잡는다. "난 널 알아." 당신이 <<his_ yi>> 손을 뿌리치려 애쓰는 동안, <<he_ ga>> 말한다. "모든 사람들이 말하는 수간충이 바로 너잖아." 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 21>>
+		<<generatey1>><<person1>><<personsimplePost>> 한 무리가 당신을 지나치며 당신을 보고 실실 웃는다. 그들은 당신을 계속 돌아보며 서로에게 뭔가 속삭인다. 당신은 '개'와 '걸레'라는 단어를 알아듣는다. 당신은 얼굴을 붉힌다.
+	<<else>>
+		<<generate1>><<generate2>><<person1>><<person_ i>> 길을 건너는 당신을 가리키더니 <<his_ yi>> 친구들을 돌아본다. "쟤야." <<he_ ga>> 말한다. "내가 말했던 걸레가 바로 쟤라고. 완전 동물들 육변기라니까." 당신은 얼굴을 붉힌다.
+	<</if>>
+	<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetpregnancyfame">>
+	<<rng>>
+	<<if $rng gte 81>>
+		<<generate1>><<generate2>><<person1>><<person_ gwa>> <<person2>><<person_ i>> 걸어가며 당신을 지나친다. <<person1>><<person_ un>> 당신을 돌아보고 <<his_ yi>> 친구에게 고개를 가까이 한다. "나 <<phim_ ul>> 알아, 항상 임신한 채로 다닌다던데.<<if playerBellyVisible()>> 너 혹시 다른 정액 기증자가 필요하니?<</if>>" <<person2>><<person_ i>> 당신을 보더니 웃음을 터뜨린다. 당신은 얼굴을 붉힌다.
+	<<elseif $rng gte 61>>
+		<<generate1>><<person1>><<person_ i>> 길을 건너는 당신에게 소리친다. "어이, 내 친구들 중 몇 명이나 너를 임신시킨 거냐? <<if playerBellyVisible()>>몇 달 후에<<else>>곧<</if>> 나도 내 애를 만들러 갈게." 그건 사람들의 주의를 끌었고, 사람들은 당신을 보고는 서로에게 뭔가 속삭인다. 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 41>>
+		<<generate1>><<person1>><<person1>><<person_ i>> 당신을 스쳐지나다 당신의 팔을 붙잡는다. "난 널 알아." 당신이 <<his_ yi>> 손을 뿌리치려 애쓰는 동안, <<he_ ga>> 말한다. "항상 애를 배고 싶어하는 것처럼 보인다고, 모든 사람들이 말하는 사람이 바로 너잖아. 애들은 어떻게 지내냐?" 당신은 얼굴을 붉히고 발걸음을 재촉한다.
+	<<elseif $rng gte 21>>
+		<<generatey1>><<person1>><<personsimplePost>> 한 무리가 당신을 지나치며 당신을 보고 실실 웃는다. 그들은 당신을 계속 돌아보며 서로에게 뭔가 속삭인다. 당신은 "산모"와 "<<slutPost "이라" "sep">>"_trPost는 단어를 알아듣는다. 당신은 얼굴을 붉힌다.
+	<<else>>
+		<<generate1>><<generate2>><<person1>><<person_ i>> 길을 건너는 당신을 가리키더니 <<his_ yi>> 친구들을 돌아본다. "그게 쟤야." <<he_ ga>> 말한다. "내가 말했던 <<slut_ i>> 바로 쟤라고. <<if playerBellyVisible()>>항상 임신해 있는<<else>>항상 임신하고 싶어하는<</if>> 육변기 말야." 당신은 얼굴을 붉힌다.
+	<</if>>
+	<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "famesalute">>
+	<<print either("브이 사인을 만든다",
+	"키스를 날린다",
+	"손을 흔든다",
+	"살짝 허리굽혀 인사한다",
+	"윙크한다")>>
+<</widget>>
+
+<<widget "sayexhibproud">>
+	<<print either("저도 제 몸이 자랑스러워요.",
+	"당신이 제 몸을 좋아한다니 기쁘네요.",
+	"저도 제 몸이 사람들에게 보여줄 만하다고 생각해요.",
+	"저도 제 몸을 보여주는 것을 좋아해요.",
+	"벗은 몸이 보여지는 것이 저를 흥분시키거든요.",
+	"제 몸을 노출시키면 흥분되거든요.",
+	"제 벗은 몸이 보기 좋지요, 그렇게 생각하지 않아요?",
+	"저도 제 몸이 대단히 멋지다고 느껴요.")>>
+<</widget>>
+
+<<widget "streetexhibitionismfame">>
+	<<rng>>
+	<<outfitChecks>>
+	<<if $rng gte 81>>
+		<<generate1>><<generate2>><<person1>><<person_ gwa>> <<person2>><<person_ i>> 걸어가며 당신을 지나친다. <<person1>><<person_ un>> 당신을 돌아보고 <<his_ yi>> 친구에게 고개를 가까이 한다. "나 <<phim_ ul>> 알아, <<pshe_ nun>> 벗은 몸이 정말 멋져." <<person2>><<person_ i>> 당신을 보더니 웃음을 터뜨린다.
+		<<set $phase to 1>>
+	<<elseif $rng gte 61>>
+		<<generate1>><<person1>><<person_ i>> 길을 건너는 당신에게 소리친다. "어이, 옷 입은 채로는 못 알아볼 뻔했다고." 그건 사람들의 주의를 끌었다. 사람들은 당신을 보고는 서로에게 뭔가 속삭인다.
+		<<set $phase to 2>>
+	<<elseif $rng gte 41>>
+		<<generate1>><<person1>><<person1>><<person_ i>> 당신을 스쳐지나다 당신의 팔을 붙잡는다. "난 널 알아." 당신이 <<his_ yi>> 손을 뿌리치려 애쓰는 동안, <<he_ ga>> 말한다. "네가 공공장소에서 벌거벗고 다니기 좋아한다는 <<slut_ iji>>."
+		<<set $phase to 3>>
+	<<elseif $rng gte 21>>
+		<<generates1>><<person1>><<personsimplePost>> 한 무리가 당신을 지나치며 당신을 보고 실실 웃는다. 그들은 당신을 계속 돌아보며 서로에게 뭔가 속삭인다. 당신은 '<<whorePost "과" "sep">>'_trPost '걸레'라는 단어를 알아듣는다.
+		<<set $phase to 4>>
+	<<else>>
+		<<generate1>><<generate2>><<person1>><<person_ i>> 길을 건너는 당신을 가리키더니 <<his_ yi>> 친구들을 돌아본다. "쟤야." <<he_ ga>> 말한다. "내가 벌거벗고 다니는 것을 본 게 쟤라고."
+		<<set $phase to 5>>
+	<</if>>
+	<br><br>
+	<<set _avaliableActions to []>>
+	<<if hasSexStat("exhibitionism", 4) and ($uncomfortable.underwear is false or $uncomfortable.nude is false)>>
+		<<run _avaliableActions.push("flaunt")>>
+	<</if>>
+	<<if _skirtExposed>>
+		<<if hasSexStat("exhibitionism", 5) and $worn.under_lower.type.includes("naked") and $uncomfortable.nude is false>>
+			<<run _avaliableActions.push("flashSkirt1")>>
+		<<elseif hasSexStat("exhibitionism", 3) and playerChastity() and $uncomfortable.nude is false>>
+			<<run _avaliableActions.push("flashSkirt2")>>
+		<<elseif hasSexStat("exhibitionism", 2) and !$worn.under_lower.type.includes("naked") and !playerChastity() and $uncomfortable.underwear is false>>
+			<<run _avaliableActions.push("flashSkirt3")>>
+		<</if>>
+	<<elseif _middleOutfit or _overOutfit>>
+		<<if hasSexStat("exhibitionism", 3) and $worn.under_lower.type.includes("naked") and $uncomfortable.nude is false>>
+			<<run _avaliableActions.push("flashBottom1")>>
+		<<elseif hasSexStat("exhibitionism", 3) and playerChastity() and $uncomfortable.nude is false>>
+			<<run _avaliableActions.push("flashBottom2")>>
+		<<elseif hasSexStat("exhibitionism", 2) and !$worn.under_lower.type.includes("naked") and !playerChastity() and $uncomfortable.underwear is false>>
+			<<run _avaliableActions.push("flashBottom3")>>
+		<</if>>
+	<</if>>
+	<<if $player.gender_appearance is "f" or $player.breastsize gt 2>>
+		<<if hasSexStat("exhibitionism", 4) and $worn.under_upper.type.includes("naked") and $uncomfortable.nude is false>>
+			<<run _avaliableActions.push("flashBreasts1")>>
+		<<elseif hasSexStat("exhibitionism", 2) and !$worn.under_upper.type.includes("naked") and $uncomfortable.underwear is false>>
+			<<run _avaliableActions.push("flashBreasts2")>>
+		<</if>>
+	<</if>>
+
+	<<if $earSlime.growth gte 200 and _avaliableActions.length>>
+		<span class="red">당신은 슬라임이 당신을 노출하지 않고 가게 두지 않을 것을 안다.</span>
+	<<elseif numberOfEarSlime() and $earSlime.growth gt 30 - ($earSlime.exhibitionism * 10) and _avaliableActions.length>>
+		<<set $earSlimeForcedExposure to _avaliableActions.random()>>
+		<span class="lewd">당신은 머리에 있는 슬라임이
+			<<switch $earSlimeForcedExposure>>
+				<<case "flaunt">>그들에 동의하라 명령하는 것을 느낀다.
+				<<case "flashSkirt1" "flashSkirt2" "flashSkirt3">>당신의 스커트를 들춰보여라 명령하는 것을 느낀다.
+				<<case "flashBottom1" "flashBottom2" "flashBottom3">>당신의 엉덩이를 내보여라 명령하는 것을 느낀다.
+				<<case "flashBreasts1" "flashBreasts2">>당신의 가슴을 내보여라 명령하는 것을 느낀다.
+			<</switch>>
+		</span> 그것은 당신이 복종하면 보상해줄 것이라 약속<<if $earSlime.startedThreats>>하고, 그러지 않으면 결과를 기대하라 위협한다<<else>>한다<</if>>.
+		<br><br>
+
+		<<link [[복종한다|Street Exhibitionism Fame Flaunt]]>>
+			<<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>>
+			<<switch $earSlimeForcedExposure>>
+				<<case "flaunt">><<set $flaunt_type to 'words'>><<set $flaunt_part to 'none'>>
+				<<case "flashSkirt1" "flashSkirt2" "flashSkirt3">>
+					<<set $flaunt_type to 'skirt'>>
+					<<if $earSlimeForcedExposure.includes("1")>>
+						<<set $flaunt_part to 'genitals'>>
+					<<elseif $earSlimeForcedExposure.includes("2")>>
+						<<set $flaunt_part to 'chastity'>>
+					<<else>>
+						<<set $flaunt_part to 'lowerunderwear'>>
+					<</if>>
+				<<case "flashBottom1" "flashBottom2" "flashBottom3">>
+					<<set $flaunt_type to 'moon'>>
+					<<if $earSlimeForcedExposure.includes("1")>>
+						<<set $flaunt_part to 'bottom'>>
+					<<elseif $earSlimeForcedExposure.includes("2")>>
+						<<set $flaunt_part to 'chastity'>>
+					<<else>>
+						<<set $flaunt_part to 'lowerunderwear'>>
+					<</if>>
+				<<case "flashBreasts1" "flashBreasts2">>
+					<<set $flaunt_type to 'top'>>
+					<<if $earSlimeForcedExposure.includes("1")>>
+						<<set $flaunt_part to 'breasts'>>
+					<<else>>
+						<<set $flaunt_part to 'upperunderwear'>>
+					<</if>>
+			<</switch>>
+		<</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[반항한다|Street Exhibitionism Fame Flaunt Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[무시한다|Street Exhibitionism Fame Shamed]]>><<unset $earSlimeForcedExposure>><</link>><<gtrauma>><<gstress>>
+		<</if>>
+	<<else>>
+		<<link [[무시한다|Street Exhibitionism Fame Shamed]]>><</link>><<gtrauma>><<gstress>>
+	<</if>>
+	<br>
+	<<if !$earSlimeForcedExposure>>
+		<<if _avaliableActions.includes("flaunt")>>
+			<<link [[과시한다|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'words'>><<set $flaunt_part to 'none'>><</link>><<lstress>>
+			<br>
+		<</if>>
+		<<if _avaliableActions.includes("flashSkirt1")>>
+			<<link [[스커트를 들춰보인다|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'skirt'>> <<set $flaunt_part to 'genitals'>><</link>><<exhibitionist5>><<lstress>><<garousal>>
+			<br>
+		<<elseif _avaliableActions.includes("flashSkirt2")>>
+			<<link [[스커트를 들춰보인다|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'skirt'>> <<set $flaunt_part to 'chastity'>><</link>><<exhibitionist3>><<lstress>><<garousal>>
+			<br>
+		<<elseif _avaliableActions.includes("flashSkirt3")>>
+			<<link [[스커트를 들춰보인다|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'skirt'>> <<set $flaunt_part to 'lowerunderwear'>><</link>><<exhibitionist2>><<lstress>><<garousal>>
+			<br>
+		<<elseif _avaliableActions.includes("flashBottom1")>>
+			<<link [[엉덩이를 내보인다|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'moon'>> <<set $flaunt_part to 'bottom'>><</link>><<exhibitionist3>><<lstress>><<garousal>>
+			<br>
+		<<elseif _avaliableActions.includes("flashBottom2")>>
+			<<link [[엉덩이를 내보인다|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'moon'>> <<set $flaunt_part to 'chastity'>><</link>><<exhibitionist3>><<lstress>><<garousal>>
+			<br>
+		<<elseif _avaliableActions.includes("flashBottom3")>>
+			<<link [[엉덩이를 내보인다|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'moon'>> <<set $flaunt_part to 'lowerunderwear'>><</link>><<exhibitionist2>><<lstress>><<garousal>>
+			<br>
+		<</if>>
+		<<if _avaliableActions.includes("flashBreasts1")>>
+			<<link [[가슴을 내보인다|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'top'>> <<set $flaunt_part to 'breasts'>><</link>><<exhibitionist4>><<lstress>><<garousal>>
+			<br>
+		<<elseif _avaliableActions.includes("flashBreasts2")>>
+			<<trClothes "under_upper" $worn.under_upper.name "name" "을">><<link [[_trResult + " 내보인다"|Street Exhibitionism Fame Flaunt]]>><<set $flaunt_type to 'top'>> <<set $flaunt_part to 'upperunderwear'>><</link>><<exhibitionist2>><<lstress>><<garousal>>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "streetExhibitionismFameShamed">>
+	<<if $phase is 1>>
+		그 <<person2>><<person_ un>> 당신을 보고 비웃는다.
+	<<elseif $phase is 3>>
+		당신은 <<he_ ga>> 당신의 <<bottom_ ul>> 곁눈질하자 얼굴을 붉히고 더 빨리 걷는다.
+	<</if>>
+
+	<<if $phase isnot 3>>
+		<<rng>>
+		<<if $rng gte 81>>
+			당신은 얼굴을 붉히고 눈을 마주치지 않으려 노력한다.
+		<<elseif $rng gte 61>>
+			당신은 얼굴을 붉히고 성급히 지나간다.
+		<<elseif $rng gte 41>>
+			당신의 얼굴을 붉어지고 당신은 속도를 올린다.
+		<<elseif $rng gte 21>>
+			옷을 입었음에도, 당신은 벌거벗은 느낌을 받으며 서둘리 도망친다.
+		<<else>>
+			당신은 얼굴을 붉힌다.
+		<</if>>
+	<</if>>
+	<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+<</widget>>
+
+<<widget "streetcollared">>
+	<<if Time.dayState is "night">>
+		<<rng>>
+		<<beastNEWinit 1 dog>>
+		<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+			<<generate2>><<generate3>><<person2>><<person_ gwa>> <<person3>><<person_ i>> 당신에게 다가온다. <<person_ un>> <<beasttypePost 0 "의">> 목줄을 붙잡고 있다. "완벽해. 우리 애완동물을 위해 너 같은 <<bitch_ rul>> 찾아다니고 있었거든. 너힌테 뭐가 좋을 지 알고 있다면 무릎을 꿇겠지." <<he_ ga>> 말하자, <<person2>><<person_ i>> 당신의 목줄을 붙잡는다.
+			<br><br>
+
+			<<link [[무릎꿇는다|Street Collar Dog]]>><<set $molestationstart to 1>><<sub 1>><</link>>
+			<br>
+			<<link [[거절한다|Street Collar Molestation]]>><<set $molestationstart to 1>><<def 1>><<set $phase to 1>><</link>>
+			<br>
+		<<else>>
+			<<endevent>>
+			<<generate1>><<generate2>><<person1>><<person_ i>> 당신의 고간을 더듬기 시작하자 <<person2>><<person_ i>> 어둠 속에서 나타나 당신 목에 걸린 목줄을 붙잡는다. "이게 누구야?" <<person1>><<person_ i>> 말한다. "탁 트인 장소에 홀로 나와 있는, 목줄 찬 걸레네. 네가 쓸모있는 곳이 딱 하나 있지."
+			<br><br>
+
+			<<link [[다음|Street Collar Molestation]]>><<set $molestationstart to 1>><<set $phase to 2>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<generate1>><<person1>><<person_ i>> 당신의 목줄을 보고 웃는다. "누가 널 개집에서 풀어줬니?" <<he_ ga>> 말한다.
+		<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetbound">>
+	<<generate1>><<person1>>
+	<<if Time.dayState is "night">>
+	당신은 어두운 곳 어딘가에서, 당신 뒤편으로 다가오는 발걸음 소리를 듣는다. 당신의 묶인 팔로 인해 당신은 너무나도 무력하다고 느낀다. <span class="blue">당신은 쫓기고 있다.</span>
+	<br><br>
+
+	<<link [[다음|Street Stalk]]>><<set $molestationstart to 1>><</link>>
+	<br>
+	<<else>>
+	<<personPost>> 하나가 당신에게 다가온다. "누가 너를 그렇게 묶어 놓았지? 자." <<He_ nun>> 당신 뒤로 돌아가 당신의 팔을 묶은 것을 풀어준다.<<unbind>>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetlowertowel">>
+	<<if Time.dayState is "night">>
+		<<generate1>><<generate2>><<generate3>><<person1>>
+		당신은 어두운 곳 어딘가에서, 당신 뒤편으로 다가오는 발걸음 소리를 듣는다. 당신은 당신의 허리를 두른 수건을 의식한다. <span class="blue">당신은 쫓기고 있다.</span>
+		<br><br>
+
+		<<link [[다음|Street Stalk Group]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<generatey1>><<person1>>당신은 당신 뒤편으로 다가오는 가벼운 발걸음 소리를 듣는다. 당신은 당신의 허리를 두른 수건을 의식한다. <span class="blue">당신은 쫓기고 있다.</span>
+		<br><br>
+
+		<<link [[다음|Street Stalk]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "streetuppertowel">>
+	<<if Time.dayState is "night">>
+		<<generate1>><<generate2>><<generate3>><<person1>>
+		당신은 어두운 곳 어딘가에서, 당신 뒤편으로 다가오는 발걸음 소리를 듣는다. 당신은 당신의 가슴을 두른 수건을 의식한다. <span class="blue">당신은 쫓기고 있다.</span>
+		<br><br>
+
+		<<link [[다음|Street Stalk Group]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<generatey1>><<person1>>당신은 당신 뒤편으로 다가오는 가벼운 발걸음 소리를 듣는다. 당신은 당신의 가슴을 두른 수건을 의식한다. <span class="blue">당신은 쫓기고 있다.</span>
+		<br><br>
+
+		<<link [[다음|Street Stalk]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "whitneyposter">>
+	<<set $whitneyposter to 1>>
+	<<generatey1>><<person1>>당신은 휘트니의 친구 하나가 실종자를 찾는다는 포스터를 붙이는 것을 본다. 거기에는 휘트니의 사진이 붙어있다. <<He_ nun>> 당신과 눈을 마주치지 않으려 한다.
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetexoffer">>
+	<<set $exhibitionismrunon to 0>>
+
+	<<set $exhibitionismrun to "danube">>
+	후드를 쓴 인영 하나가 당신에게 부딪힌다. 쪽지 하나가 그자의 코트 주름에서 떨어져 나와, 당신 앞에 떨어진다. 그 인영은 골목길로 성큼성큼 걸어가더니 사라진다. 당신은 그 쪽지를 집는다.
+	<br><br>
+
+	<i>네가 돈이 필요하면. 다뉴브 가로 가라. 온천 뒤의 참나무로 가라. 그리고 옷을 벗어라. 그게 끝이다. £100.</i>
+	<br><br>
+
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetexoffer2">>
+
+	<<set $exhibitionismrun to "danube">><<set $exhibitionismrunon to 1>>
+
+	당신은 거리를 걸어 내려가고 있다. 후드를 쓴 인영 하나가 반대쪽에서 걸어오며 당신을 지나친다.
+	<br><br>
+
+	그자가 당신을 지나치기 바로 전에, 그자는 봉투 하나를 당신 앞에 던진다. 당신이 그자를 불러세우기도 전에, 그자는 골목길을 따라 사라진다. 당신은 그 봉투를 집어들고 연다. 거기에는 쪽지 하나가 들어있다.
+	<br><br>
+
+	<i>저번에는 잘 해 주었다. 온천 뒤의 참나무로 돌아가라. 옷을 벗고 네 자신을 절정시켜라. £300.</i>
+	<br><br>
+
+	그것은 다시 당신에게 왔다. 당신은 스파 밖에서 옷을 벗고 사진을 찍고선, 낙하산으로 돈을 받은 것을 기억한다. 영상이 어떻게 되었을진 잘 모르겠지만, 아마도 많은 사람들이 보았을 것이다. 이번엔 더 많은 돈을 받게 된다.
+	<br><br>
+
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetexoffer3">>
+
+	<<set $exhibitionismrun to "starfish">><<set $exhibitionismrunon to 2>>
+
+	당신은 거리를 걸으며, 모서리 쪽으로 다가가고 있다. 후드를 쓴 인영 하나가 모서리에서 돌아 당신에게 다가온다.
+	<br><br>
+
+	그들은 당신에게 봉투를 내민다. 당신은 그들의 얼굴을 볼 순 없지만, 당신은 전의 후드를 쓴 인영은 기억한다. 당신은 봉투를 받는다. 당신이 무슨 말을 하기도 전에, 그 인영은 거리로 달려가 당신으로부터 멀어진다. 당신은 그 봉투를 열고 쪽지를 읽는다. 당신은 다뉴브 가에 관한 일일것이라 예상한다. 그 노트엔 이렇게 적혀있다:
+	<br><br>
+
+	<i>저번에도 잘 해 주었다. 이번엔 스타피쉬 가에 가서 오락실 앞에 서라. 15분 동안 도로를 향해 엉덩이를 까고 내보여라. 이번엔 £500이다.</i>
+	<br><br>
+
+	당신의 맥박이 빨라진다. 이번엔 스파 뒤에서 옷을 벗는 것보다 한 단계 더 올라갔다. 이번엔 당신은 공공장소에서 엉덩이를 보여야 할것이다.
+	<br><br>
+
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetexoffer4">>
+
+	<<set $exhibitionismrun to "cliff">><<set $exhibitionismrunon to 3>>
+
+	당신이 거리를 걷고 있을 때 익숙한 후드를 쓴 인영 하나가 모서리를 돌아 당신을 향해 걸어온다.
+	<br><br>
+
+	이때 쯤 되자 당신은 무엇을 기대해야하는지 알고 있다. 당신은 멈춰서서 그 인영이 당신에게 다가오길 기다린다. 이전과 다르게, 그들은 서두르지 않는다. 그들은 당신에게 걸어와 봉투를 당신에게 건낸다. 당신은 그걸 받는다. 당신은 그들의 얼굴을 보려 하지만, 후드 때문에 그들의 얼굴이 그림자에 가려진다.
+	<br><br>
+
+	"저번에도 잘 해 주었다," 그 인영이 말한다. 그들은 그들의 목소리를 변조해서 말한다; 당신은 그들이 누구인지 예측할수가 없다. "이번걸 하면, 너에겐 어떤 일이든 믿고 맏길 수 있을것 같아."
+	<br><br>
+
+	"잠만요," 당신이 말한다, "당신은 누구에요?" 그 인영은 당신을 무시하고 아무렇지 않게 걸어간다. 당신은 봉투를 열고 쪽지를 읽는다.
+	<br><br>
+
+	<i>날씨가 좋은 날에 클리프 가에 가라. 카페에서 시작해라. 옷을 벗고 블록을 한 바퀴 돌아라. 클리프 가에서 하이 가로, 그리고 다시 클리프 가로 돌아가라. 이번건 £1000이다.</i>
+	<br><br>
+
+	당신은 침을 삼킨다. 이번건 저번에 했던 3개보다 더 어렵다.
+	<br><br>
+
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "shadyFan">>
+	당신은 모퉁이를 돌자마자 <<generate1>><<person1>><<person_ gwa>> 부딪혀, 그 사람이 들고 있던 커다란 상자가 땅에 떨어진다.
+	<br><br>
+	<<if ($fame.exhibitionism gte 400 or $fame.sex gte 400 or $fame.prostitution gte 400 or $fame.rape gte 400) and ($player.gender_appearance is "f" or $forcedcrossdressingdisable is "f")>>
+		"조심해라 <<girl_ a>>," <<he_ ga>> 말하며 상자를 확인한다. 그것이 손상되지 않은 것에 기뻐하며, <<he_ nun>> 당신을 다시 한번 보고는 계속 말한다,
+		"너 낯이 익은데. 내가 너를 어디선가 만났던가?"
+		<br><br>
+		<<He_ ga>> 당신에게 불편할 정도로 가까이 다가와 당신을 유심히 본다. "갑작스럽다는 것은 알지만, 이 상자 안의 옷이 네게 어울릴 것 같은데. 가지고 싶니?"
+		<br><br>
+		<<if hasSexStat("exhibitionism", 5)>>
+			<<link [[그 자리에서 옷을 벗고 그것을 입어본다|Shady Fan Strip]]>><</link>><<exhibitionist5>>
+			<br>
+		<</if>>
+		<<if hasSexStat("exhibitionism", 3)>>
+			<<link [[골목길 안에서 옷을 벗고 그것을 입어본다|Shady Fan Alley]]>><</link>><<exhibitionist3>>
+			<br>
+		<</if>>
+		<<link [[상자를 받고 헤어진다|Shady Fan Take]]>><</link>>
+		<br>
+		<<link [[상자를 받는 것을 거절헌다|Shady Fan Refuse]]>><</link>>
+	<<else>>
+		"조심해라 <<girl_ a>>," <<he_ ga>> 말하며 상자를 확인한다. 그것이 손상되지 않은 것에 기뻐하며, <<he_ nun>> 당신에게 미소지으며 계속 말한다,
+		"앞을 잘 보고 다닐 필요가 있겠구나, 그렇지 않으면 사고를 당할 거야."
+		<br><br>
+		당신은 길을 계속 간다.
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetexshow">>
+	<<generate1>><<generate2>><<generate3>><<person1>>
+	<<if $fame.exhibitionism gte 1000>>
+		당신은 멏몇 <<group_ i>> 당신에게 다가오는 것을 알아차린다. 그들 중 하나인, <<person_ i>>, 당신을 가리키며, 무언가를 다른 둘과 이야기한다. 당신의 첫번째 본능은 도망가는 것이었지만, 그들은 벌써 너무나도 가까이 있었다. 그들은 주의를 끌지 않으려 노력하며, 당신을 둘러싼다.
+		<br><br>
+
+		“이봐 <<girlPost>>,” <<person_ i>> 말한다. “네가 옷을 벗고 다니기 좋아한다는 그 <<slut_ iji>>, 그렇지?” <<He_ nun>> 한 손을 <<his_ yi>> 호주머니에 넣는다. 당신은 긴장했지만, <<he_ ga>> 지폐 몇 장을 꺼내자 약간 긴장을 푼다. “작은 비공개 쇼를 해주면 안될까?”
+		<br><br>
+
+		<<if hasSexStat("exhibitionism", 5)>>
+			<span class="lewd">특별히 외설적인 발상이 당신을 스친다.</span> 바로 여기에서, 열린 공간에서 옷을 벗으면, 더 흥분되지 않을까.
+			<br>
+			<<link [[여기에서 옷을 벗는다|Street Private Show Strip]]>><</link>><<exhibitionist5>>
+			<br>
+		<</if>>
+		<<if hasSexStat("exhibitionism", 4)>>
+			<<link [[골목길 안에서 옷을 벗는다|Street Private Show Alley]]>><<set $phase to 0>><</link>><<exhibitionist4>>
+			<br>
+		<</if>>
+		<<link [[거절한다|Street Private Show Refuse]]>><</link>>
+		<br>
+	<<else>>
+		<<groupPost>> 한 무리가 휴대폰을 들고 있는 한 <<personPost>> 주위에 모여, 서로 시끌벅적하게 웃어대고 있다. 당신이 그들을 지나치려 하자 그들 중 하나가 당신을 쳐다본다.
+		<br><br>
+		"귀여운 옷차림이야," <<he_ ga>> 큰 소리로 말한다. "하지만 그게 없는 게 더 보기 좋을 거야."
+		<br><br>
+
+		그 사람들이 웃음을 터뜨린다. 당신의 얼굴이 붉어지며 당신은 발걸음을 빨리 하고, 그들을 지나치자 그들의 상스러운 논평이 당신 뒤에서 들려온다.<<stress 3>><<trauma 3>><<gstress>><<gtrauma>>
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetkidnap">>
+	<<generate1>><<person1>>
+	당신은 가로등 아래 두건을 눌러쓴 형체가 숨어있는 걸 알아차린다.
+	<<if fameSum("sex","rape","bestiality") gte random(1000, 4000)>>
+		당신은 그 앞을 지나치며 형체에 신경을 쓰지 않지만, 갑자기 뭔가 당신의 어깨를 붙잡는 게 느낀다. 당신은 공포로 얼어붙어 숨을 깊이 들이마신다.
+		<br>
+		당신이 고개를 돌리자, 팔 하나가 당신의 허리를 꽉 둘러감는다. 축축한 천이 거칠게 당신의 입과 코를 막는다.
+		<br><br>
+
+		<<link [[발버둥친다|Street Kidnap Struggle]]>><</link>><<physiquedifficulty 2000 12000>>
+		<br>
+		<<link [[항복한다|Street Kidnap Give]]>><<stress 6>><<trauma 6>><</link>><<gstress>><<gtrauma>>
+		<br>
+	<<else>>
+		그 형체는 급하게 발걸음을 다른 방향으로 돌리기 전 당신을 보고 지나간다.<<stress 3>><<gstress>>
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetorphancookie">>
+	<<generatey1>><<generate2>><<person1>><<rng>>
+	갓 구운 빵 냄새와 함께 근처 문에 노크하는 소리가 들려온다. 당신은 과자로 가득한 상자를 들고 주택들 중 하나 앞에 서 있는, 같은 고아원에 사는 <<personsimple_ ul>> 알아본다.
+	<br><br>
+
+	<<if $loft_river>>
+		당신은 <<he_ ga>> 다락에 설치한 것들을 이용해 과자를 구웠으리라 짐작한다.
+		<br><br>
+
+		<<if $rng gte 51>>
+			짧은 대화가 오간 끝에, 집주인은 지폐 몇 장을 꺼내 <<personsimplePost "에게">> 건넨다. <<He_ nun>> 활짝 웃으며, 다른 집으로 떠나기 전에 집주인에게 감사를 표한다. <<stress -12>><<llstress>><<hope 1>><<ghope>>
+		<<else>>
+			<<if $bus is "domus">>
+				집주인으로 보이는, <<person2>><<person_ i>> <<person1>><<him_ ul>> 잠깐 살피더니, <<personsimple_ yi>> 얼굴이 붉어질만한 무언가를 말한다. <<He_ nun>> 재빨리 뒤로 물러나, 돌아보지 않고 다른 집으로 떠난다.<<if $awareness gte 200>> 당신은 <<he_ ga>> 몸을 팔라는 제안을 받고, 거절했다고 짐작한다.<</if>> 당신은 <<his_ yi>> 완고함에 고무되었다. <<stress -6>><<lstress>>
+			<<else>>
+				집주인으로 보이는, <<person2>><<person_ i>> <<person1>><<him_ ul>> 잠깐 살피더니, 두툼한 돈뭉치를 꺼낸다. <<personsimple_ un>> 깜짝 놀란 것 같다. 여기서 보기에도 확실히 많아 보인다. <<He_ nun>> 박스 전체를 <<person2>><<personPost "에게">> 건네며 감사를 표하고, 순수한 즐거움으로 가득한 눈빛으로 쏜살같이 고아원으로 달려간다. 당신은 <<he_ ga>> 과자를 더 구우리라고 짐작한다. <<stress -12>><<llstress>><<ghope>><<hope 2>>
+			<</if>>
+		<</if>>
+
+	<<else>>
+		당신은 어떻게 <<he_ ga>> 집에 있는 허술한 장비로 과자를 구워냈을까 하고 생각한다.
+		<br><br>
+
+		<<if $rng gte 51>>
+			짧지만 격렬한 대화가 오간 끝에, 집주인은 <<his_ yi>> 면전에 대고 문을 쾅 닫아 버린다. 하지만 <<personsimple_ un>> <<his_ yi>> 노력을 아까워하지 않고, 다른 집으로 떠난다. 당신은 <<his_ yi>> 완고함에 고무되었다. <<stress -6>><<lstress>>
+		<<else>>
+			<<if $bus is "domus">>
+				집주인으로 보이는, <<person2>><<person_ i>> <<person1>><<him_ ul>> 잠깐 살피더니, <<personsimple_ yi>> 얼굴이 붉어질만한 무언가를 말한다. <<He_ nun>> 재빨리 뒤로 물러나, 돌아보지 않고 다른 집으로 떠난다.<<if $awareness gte 200>> 당신은 <<he_ ga>> 몸을 팔라는 제안을 받고, 거절했다고 짐작한다.<</if>> 당신은 <<his_ yi>> 완고함에 고무되었다. <<stress -6>><<lstress>>
+			<<else>>
+				집주인으로 보이는, <<person2>><<person_ i>> <<person1>><<him_ ul>> 잠깐 살피더니, 두툼한 돈뭉치를 꺼낸다. <<personsimple_ un>> 깜짝 놀란 것 같다. <<person2>><<person_ un>> <<person1>><<himPost "에게">> 집으로 들어오라는 듯한 동작을 취한다. <<He_ nun>> 망설이지만, 시선은 돈다발을 내려다보고 있다. 여기서 보기에도 확실히 많아 보인다. 얼굴이 새빨개진 채, <<he_ nun>> 집으로 들어간다. <<gtrauma>><<trauma 3>><<lhope>><<hope -1>><<greb>><<reb 1>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "streetmodelshow">>
+	<<generate1>><<person1>>
+	<<if $fame.model gte 400>>
+		<<personPost>> 하나가 당신 앞에 걸어나오며, <<his_ yi>> 얼굴에 미소를 띄운다.
+		<br><br>
+
+		"너를 알아," <<person_ i>> 외친다. "네가 그 모델하는 <<girl_ iji>>, 그렇지?" <<He_ nun>> 당신의 손을 잡으며 <<his_ yi>> 미소를 더 크게 짓는다. "나는 네 진짜 팬이야."
+		<br><br>
+		"네 개인적인 사진을 찍고 싶어," <<he_ ga>> 당신이 대답하기도 전에 덧붙인다. <<He_ nun>> <<his_ yi>> 휴대폰을 꺼낸다. "몇 분만, 내 모델이 되어줄 수 있겠어?"
+		<br><br>
+
+		<<link [[동의한다 (0:05)|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[돈을 요구한다 (0:05)|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 1>><</link>>
+		<br>
+		<<if $earSlime.growth gte 200>>
+			<span class="red">You know the ear slimes wouldn't let you do anything but expose yourself.</span>
+		<<else>>
+			<<link [[거절한다|Street Private Photoshoot Refuse]]>><</link>>
+		<</if>>
+		<br>
+	<<else>>
+		당신은 <<personPost>> 하나가 당신에게 다가오는 것을 알아차린다. <<he_ ga>> 다가오자, <<he_ nun>> 갑자기 싱긋 웃기 시작하며 당신 앞에 걸어와, 당신의 팔을 잡는다.
+		<br><br>
+
+		"너는 모델처럼 보이는데, <<lassPost>>," <<he_ nun>> 히죽 웃는다. "사진 몇 장 찍게 포즈좀 취해주겠어? 내 카메라는 바로 여기 있어." <<His_ yi>> 손이 <<his_ yi>> 사타구니를 받치며, <<his_ yi>> 의도를 파악하는 데 일말의 의심도 남기지 않는다.
+		<br><br>
+
+		당신의 얼굴은 붉어진다. <<his_ yi>> 손을 밀쳐 풀어내며, <<person_ gwa>> <<his_ yi>> 노골적인 말들을 뒤로 하면서 당신은 서둘러 그 자리를 떠난다.<<stress 3>><<trauma 3>><<gstress>><<gtrauma>>
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetnpcflash">>
+	<<generate1>><<person1>>
+	당신이
+	<<if $location is "alley">>
+		골목길을 걷고 있을 때,
+	<<else>>
+		거리를 걷고 있을 때,
+	<</if>>
+	트렌치 코트를 입은 <<person_ i>> 당신에게 걸어온다. "실례합니다만," <<he_ ga>> 묻는다, "<<print either("제 코트에 무언가 묻었나요","제 코트가 어떤가요","혹시 제 코트에 얼룩이 졌나요")>>?"
+	<br><br>
+
+	당신은 멈춰서 잠시 <<his_ yi>> 코트를 쳐다본다. 당신이 쳐다보자, <<person_ un>> 싱긋 웃으며 당신이 눈길을 돌리기 전에 <<his_ yi>> 트렌치 코트를 열어젖히고, 환희에 가득차, <<npcRevealText $NPCList[0] "both">>.
+	<<if hasSexStat("exhibitionism", 5) and $worn.under_lower.type.includes("naked")>>
+		<br><br>
+		<<link [[$NPCList[0].pronouns.him + " 보며 마주 옷 속를 보여준다"|Street Flash]]>><<set $phase to 5>><</link>><<exhibitionist5>>
+		<br>
+		<<if $earSlime.growth gte 200 and $earSlime.exhibitionism gte 5>>
+			<span class="red">You know the ear slimes wouldn't let you leave without exposing yourself.</span>
+		<<else>>
+			<<link [[무시한다|Street Flash]]>><<set $phase to 0>><<stress 3>><</link>><<gstress>>
+		<</if>>
+	<<elseif hasSexStat("exhibitionism", 4) and $player.gender_appearance is "f" and $worn.under_upper.type.includes("naked") and !$worn.under_lower.type.includes("naked")>>
+		<br><br>
+		<<link [[$NPCList[0].pronouns.him + " 보며 마주 옷 속를 보여준다"|Street Flash]]>><<set $phase to 4>><</link>><<exhibitionist4>>
+		<br>
+		<<if $earSlime.growth gte 200 and $earSlime.exhibitionism gte 4>>
+			<span class="red">You know the ear slimes wouldn't let you leave without exposing yourself.</span>
+		<<else>>
+			<<link [[무시한다|Street Flash]]>><<set $phase to 0>><<stress 3>><</link>><<gstress>>
+		<</if>>
+	<<elseif hasSexStat("exhibitionism", 2) and !$worn.under_lower.type.includes("naked") and ($player.gender_appearance is "m" or !$worn.under_upper.type.includes("naked"))>>
+		<br><br>
+		<<link [[$NPCList[0].pronouns.him + " 보며 마주 옷 속를 보여준다"|Street Flash]]>><<set $phase to 2>><</link>><<exhibitionist2>>
+		<br>
+		<<if $earSlime.growth gte 200 and $earSlime.exhibitionism gte 2>>
+			<span class="red">You know the ear slimes wouldn't let you leave without exposing yourself.</span>
+		<<else>>
+			<<link [[무시한다|Street Flash]]>><<set $phase to 0>><<stress 3>><</link>><<gstress>>
+		<</if>>
+	<<else>>
+		<<stress 6>><<trauma 3>><<arousal 600>><<gstress>><<gtrauma>><<garousal>>
+		<br><br>
+
+		<<He_ nun>> 망연자실한 당신을 두고, <<his_ yi>> 트렌치 코트를 닫은 후 빠르게 멀어져 간다.
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "streetabstinence">>
+	<<switch $bus>>
+		<<case "wolf" "nightingale">>
+			<<generatey1>><<person1>>
+			As you're walking down the street, you see a group of teens handing out pamphlets to bystanders.
+			They're initiates from the nearby temple. One of them, a <<person>>, approaches you.
+			<br><br>
+
+			<<if ($temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest") and !$worn.face.type.includes("mask")>>
+				<<if $temple_rank is "priest">>
+					"You honor us with your presence, revered one. We're promoting the benefits of abstinence. Would you please help us?"
+				<<else>>
+					"I thought I recognised you from the temple! We're promoting the benefits of abstinence. Wanna help out?"
+				<</if>>
+				<<if playerBellyVisible()>>
+					<<He>> looks down at your baby bump. "You'll make a good example!"
+				<</if>>
+			<<elseif playerBellyVisible()>>
+				<<He>> pauses upon seeing your visibly pregnant belly. <<He>> seems unsure of what to do for a moment, until another initiate meets <<his>> gaze and nods.
+				<br><br>
+
+				"H-hello there. May I offer you a pamphlet? You don't need to be a believer, we just want to enlighten people about the dangers of..."
+				You can already see that <<hes>> sweating. "Of... uh... the virtues of abstinence."
+			<<elseif $demon gte 2 and $transformationParts.demon.horns isnot "hidden">>
+				<<He>> seems to hesitate for a moment as <<he>> gets closer. <<He>> looks at your horns, but shakes <<his>> head, as if making up <<his>> mind.
+				"Hello there. May I offer you a pamphlet? You don't need to be a believer, we just want to enlighten people about the dangers of... improper sexual behaviours."
+			<<else>>
+				"Hello there. May I offer you a pamphlet? You don't need to be a believer, we just want to enlighten people about the virtues of abstinence."
+			<</if>>
+			<br><br>
+
+			<<if ($temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest") and $worn.face.type.includes("mask")>>
+				<span class="blue"><<He>> doesn't seem to recognise you as <<if $temple_rank is "initiate">>an initiate<<else>>a <<temple_title>><</if>> because of your mask.</span>
+				<br><br>
+			<</if>>
+
+			<<if ($temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest") and !$worn.face.type.includes("mask")>>
+				<<link [[Help out (0:30)|Street Abstinence Help]]>><<grace 5>><<pass 30>><</link>><<gggrace>>
+				<br>
+				<<link [[Accept the pamphlet, but be on your way|Street Abstinence Accept]]>><<grace -1>><</link>><<lawareness>><<lgrace>>
+				<br>
+				<<set $skulduggerydifficulty to 400>>
+				<<link [["Pretend " + $NPCList[0].pronouns.he + "'s mistaken"|Street Abstinence Mistaken]]>><</link>><<skulduggerydifficulty>>
+				<br>
+			<<else>>
+				<<link [[Accept the pamphlet|Street Abstinence Accept]]>><</link>><<lawareness>>
+				<br>
+				<<link [[거절한다|Street Abstinence Refuse]]>><</link>>
+				<br>
+			<</if>>
+		<<case "cliff" "starfish">>
+			<<generatey1>><<person1>>
+			As you're walking down the street, you see a group of teens handing out pamphlets to bystanders.
+			According to the logos on their shirts, they seem to belong to some out-of-town association. A <<person>> approaches you.
+			<br><br>
+
+			"How are you today? Good? We're handing out informative pamphlets about sexual healthcare and contraceptive options. Would you care for one?"
+			<<if playerBellyVisible()>>
+				<<He>> looks down at your baby bump. "It's never too late to prepare for next time."
+			<</if>>
+			<br><br>
+
+			<<link [[Accept the pamphlet|Street Volunteers Accept]]>><</link>>
+			<br>
+			<<link [[거절한다|Street Volunteers Refuse]]>><</link>>
+			<br>
+		<<default>>
+			/* Should only be reachable on High street */
+			<<generatey1>><<generatey2>><<person1>>
+			As you're walking down the street, you see two groups of teens handing out pamphlets to bystanders. One group is composed of initiates from the temple, while the others appear to be a group of out-of-town volunteers.
+			<<if $rng lte 33>>
+				<<set $phase to 1>>
+				The two groups mostly ignore one another as they distribute their papers. They seem to be focused on doing their job right. One person of each group, a <<person1>><<person>> from the temple and a <<person2>><<person>> from the volunteers, unintentionally approach you at the same time.
+				<br><br>
+
+				<<if ($temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest") and !$worn.face.type.includes("mask")>>
+					<<person1>>Upon recognising you, the initiate picks up the pace and gets to you first.
+					"Hey there, nice to see you. You probably don't need it, but I can offer you a pamphlet if you'd like? It would greatly help our cause."
+					<br><br>
+
+					The <<person2>><<person>> politely waits for <<his>> turn, but you can see <<him>> glancing at you. <<He>> speaks up.
+					"We're also giving out pamphlets, although... they're a little different."
+				<<else>>
+					The volunteer gets to you first. The initiate slows down, waiting <<person1>><<his>> turn.
+					"Hey there friend, could I bother you for a moment? Teens like us are in the primes of our lives, and we would like for you to be as healthy and happy as possible. Can I interest you in our informative paper?"
+					<br><br>
+
+					You see the <<person1>><<person>> frown, although you don't know why. <<He>> takes a step forward and speaks, clutching a small holy pendant.
+					"We're... also giving out information. It's about the benefits of abstinence and faith. I'd like to give you one, if that's okay."
+					<br><br>
+
+					You feel a little overwhelmed, even though none of them seem too pushy about it.
+				<</if>>
+			<<elseif $rng gte 66>>
+				<<set $phase to 2>>
+				The two groups give each other wary stares. Tension seems to be running high. Some of them even sport fresh bruises. One person of each group, a <<person1>><<person>> from the initiates and a <<person2>><<person>> from the volunteers, rush towards you while shoving each other.
+				<br><br>
+
+				<<if ($temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest") and !$worn.face.type.includes("mask")>>
+					<<person1>>Upon recognising you, the initiate aggressively shoves <<his>> opponent and gets to you first.
+					"Don't listen to this sinner. He'll try to throw you off the righteous path. Abstinence is the only way." <<He>> holds out a pamphlet for you.
+					<br><br>
+
+					The <<person2>><<person>> approaches, quite angered by the initiate's words. However, <<he>> doesn't lose <<his>> calm nor <<his>> professionalism.
+					"You can't know until you try, but you can be hurt while trying. We want to protect you against the dangers of sex, all while assuring you the freedom to explore your body and others', with their consent."
+				<<else>>
+					The volunteer reaches you first. The initiate seems irritated, but upon noticing your gaze, <<person1>><<he>> manages <<his>> anger and impatiently waits for <<his>> turn.
+					<br><br>
+
+					"You're a resident of this town, right? We're giving out essential information about sexual health and safety. Heaven knows this town needs it."
+					<br><br>
+
+					The initiate seems absolutely furious upon hearing such blasphemy. <<He>> imposes <<himself>> in between you and the volunteer.
+					"This sinner has no right to invoke the name of heaven! Trust is not something to be so easily given. The temple has been watching over our town for generations. Don't you want to reward the work of those that defend purity?"
+					<br><br>
+
+					You can't help but feel defensive as the two figures back you into a corner.<<stress 5>><<gstress>>
+				<</if>>
+			<<else>>
+				<<set $phase to 3>>
+				The two groups seem to be mingling. You hear them laughing and joking with one another. One person of each group, a <<person1>><<person>> from the initiates and a <<person2>><<person>> from the volunteers, make a game of reaching you first.
+				<br><br>
+
+				<<if ($temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest") and !$worn.face.type.includes("mask")>>
+					Upon recognising you, the initiate switches instead to a leisurely stroll, sure of <<person1>><<his>> victory. <<He>> shouts to <<his>> rival.
+					"Don't even bother. This one is a fellow worshipper!"
+					<br><br>
+
+					The <<person2>><<person>> greets you with an ample, competitive smile. <<He>> winks at you, then speaks up.<br>
+					"There are only winners if you take my pamphlet. You, me, this town, everyone. A good sexual education brings wonders. I 'pray' that I can convince you!"
+					<br><br>
+
+					The initiate does not seem bothered in the slightest, although the volunteer's cheesy sales pitch earns <<person2>><<him>> a few strange looks.
+				<<else>>
+					The volunteer has more luck and gets to you first. The initiate arrives a few seconds later, laughing and nagging at <<person1>><<his>> opponent for fun. You almost feel like they've forgotten about you, until the volunteer accosts you.
+					"Hey, hope you're doing well today. I - well, we're - giving out pamphlets. It's up to you whether you want to learn more about sex, abstinence, or both."
+					<br><br>
+
+					The <<person1>><<person>> nods in confirmation.
+					"Our pamphlets are better though."
+					<br><br>
+
+					Their friendliness towards one another puts you at ease. <<stress -5>><<lstress>>
+				<</if>>
+			<</if>>
+			<br><br>
+			<<link [[Accept both pamphlets|Street Duo Accept Both]]>><</link>>
+			<br>
+			<<link [["Accept the initiate's pamphlet"|Street Duo Accept Abstinence]]>><</link>>
+			<br>
+			<<link [["Accept the volunteer's pamphlet"|Street Duo Accept Volunteers]]>><</link>>
+			<br>
+			<<link [[Refuse both|Street Duo Refuse Both]]>><</link>>
+			<br>
+	<</switch>>
+<</widget>>
+
+<<widget "rainyDayHarass">>
+	<<generate1>><<person1>>
+
+	A <<person>> calls out to you from the doorway of a nearby <<if $bus is "domus">>house<<else>>mansion<</if>>.
+	<br><br>
+
+	<<switch random(1,5)>>
+		<<case 1>>
+			"What're you doing out alone in this awful weather, <<girl>>? C'mon inside, I'll let you dry off," <<he>> says, gesturing towards the door.
+		<<case 2>>
+			"Good lord, <<girl>>, you're drenched!" <<he>> laughs. "C'mon in, I'll let you hide from the rain for a bit," <<he>> says, gesturing towards the door.
+		<<case 3>>
+			"You're going to get yourself sick walking around like that," <<he>> tuts. "C'mere and get dried off," <<he>> says, gesturing towards the door.
+		<<case 4>>
+			"You seem like you're lost, <<girl>>. How about you come inside and dry off while you get your bearings?" <<he>> asks, gesturing towards the door.
+		<<case 5>>
+			"Cats and dogs today, 'eh <<girl>>? Need somewhere to take shelter for a bit?" <<he>> asks, gesturing towards the door.
+	<</switch>>
+	<br><br>
+
+	<<link [["Follow " + $NPCList[0].pronouns.him|Street Rainy Follow]]>><</link>>
+	<br>
+	<<if $bus is "domus">>
+		<<link [[Keep walking|Street Rainy Walk]]>><</link>>
+	<<else>>
+		<<link [[Keep walking|Street Rainy Walk]]>><</link>>
+	<</if>>
+<</widget>>
+
+:: Widget Passout Street [widget]
+<<widget "passoutstreet">>
+	<<if isPregnancyEnding()>>
+		<<pregnancyPassout "street">>
+	<<else>>
+		<<link [[모든 게 깜깜해진다...->Passout street]]>><</link>>
+	<</if>>
+<</widget>>
+
+:: Widgets Nightingale [widget]
+<<widget "nightingale">>
+	<<if $nextPassageCheck is "Nightingale Street">>
+		<<add_link "<span class='nextLink'><<nightingaleicon>><<link [[나이팅게일 가 (0:05) (병원)|Nightingale Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<nightingaleicon>><<link [[나이팅게일 가 (0:05) (병원)|Nightingale Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "nightingalequick">>
+	<<nightingaleicon>><<link [[나이팅게일 가|Nightingale Street]]>><</link>>
+<</widget>>
+
+<<widget "nightingaleeventend">>
+	<<link [[다음|Nightingale Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Lake Destination [widget]
+<<widget "lake">>
+<<if $nextPassageCheck is "Nightingale Street">>
+	<<add_link "<span class='nextLink'><<lakeicon>><<link [[호수 (0:05)|Lake Bus]]>><<pass 5>><</link>></span><br>">>
+<<else>>
+	<<add_link "<<lakeicon>><<link [[호수 (0:05)|Lake Bus]]>><<pass 5>><</link>><br>">>
+<</if>>
+<</widget>>
+
+<<widget "lakequick">>
+	<<lakeicon>><<link [[호수|Lake Bus]]>><</link>>
+<</widget>>
+
+<<widget "lakeeventend">>
+	<<link [[호수|Lake Bus]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Domus [widget]
+<<widget "domus">>
+	<<if $nextPassageCheck is "Domus Street">>
+		<<add_link "<span class='nextLink'><<domusicon>><<link [[도무스 가 (0:05) (집)|Domus Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<domusicon>><<link [[도무스 가 (0:05) (집)|Domus Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "domusquick">>
+	<<domusicon>><<link [[도무스 가|Domus Street]]>><</link>>
+<</widget>>
+
+<<widget "domuseventend">>
+	<<link [[다음|Domus Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Danube [widget]
+<<widget "danube">>
+	<<if $nextPassageCheck is "Danube Street">>
+		<<add_link "<span class='nextLink'><<danubeicon>><<link [[다뉴브 가 (0:05) (고급 주택)|Danube Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<danubeicon>><<link [[다뉴브 가 (0:05) (고급 주택)|Danube Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "danubequick">>
+	<<danubeicon>><<link [[다뉴브 가|Danube Street]]>><</link>>
+<</widget>>
+
+<<widget "danubeeventend">>
+	<<link [[다음|Danube Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Wolf [widget]
+<<widget "wolf">>
+	<<if $nextPassageCheck is "Wolf Street">>
+		<<add_link "<span class='nextLink'><<wolficon>><<link [[울프 가 (0:05) (사원)|Wolf Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<wolficon>><<link [[울프 가 (0:05) (사원)|Wolf Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "wolfquick">>
+	<<wolficon>><<link [[울프 가|Wolf Street]]>><</link>>
+<</widget>>
+
+<<widget "wolfeventend">>
+	<<link [[다음|Wolf Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Elk [widget]
+<<widget "elk">>
+	<<if $nextPassageCheck is "Elk Street">>
+		<<add_link "<span class='nextLink'><<elkicon>><<link [[엘크 가 (0:05)|Elk Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<elkicon>><<link [[엘크 가 (0:05)|Elk Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "elkquick">>
+	<<elkicon>><<link [[엘크 가|Elk Street]]>><</link>>
+<</widget>>
+
+<<widget "elkeventend">>
+	<<link [[다음|Elk Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+<<widget "compoundoptions">>
+	<<if $compoundhonest + $compoundlie + $compoundmock + $compoundbeg + $compoundflirt gte 9>>
+		<span class="teal"><<He_ nun>> 동요하는 기색이 역력하며 가만히 앉아 있기도 어려워 한다.</span>
+		<br><br>
+	<<elseif $compoundhonest + $compoundlie + $compoundmock + $compoundbeg + $compoundflirt gte 6>>
+		<span class="blue"><<He_ nun>> 얼굴을 찌푸린 채 <<his_ yi>> 펜을 돌리고 있다.</span>
+		<br><br>
+	<<elseif $compoundhonest + $compoundlie + $compoundmock + $compoundbeg + $compoundflirt gte 2>>
+		<span class="purple"><<He_ nun>> 조급해하며 <<his_ yi>> 펜을 돌리고 있다.</span>
+		<br><br>
+	<</if>>
+
+	<<if $compoundhonest gte 5>>
+		"협조해 줘서 고맙군," <<he_ ga>> 말한다. "넌 전혀 위험인물이 아냐, 그렇지?"
+		<<if isPubfameTaskAccepted("compound", "done")>>
+			<<set $pubfame.status to "hiding">><<set $pubfame.timer to 14>>
+			<<world_corruption "soft" 10>>
+			<<He>> jots down a few notes. "I'll let security know about the cameras. We'll also need to keep an eye out for this 'Mickey' character."
+			<br>
+			<<if $pubfame.compound.cameras.length gte 1>>
+				<span class="red">There's no chance the cameras will still be there. You'll need to start over.</span>
+			<</if>>
+			<<set $pubfame.compound.cameras to []>>
+			<br><br>
+		<</if>>
+		<<He_ ga>> 레버를 당기자 당신 발밑의 해치가 열린다. 당신은 그리로 굴러 떨어져, 관을 미끄러져 내려가 차가운 물에 첨벙 빠진다.<<trauma 6>><<gtrauma>>
+		<br><br>
+		<<endevent>>
+		<<link [[다음|Drain Water]]>><<set $bus to "industrialdrain">><</link>>
+
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		너무 고통이 심해 더이상 참을 수가 없다. 당신은 <<he_ ga>> 묻는 거라면 뭐든지, 고통을 멈추기 위해 모든 걸 답해준다.
+		<br><br>
+
+		"넌 전혀 위험인물이 아냐." <<he_ nun>> 실망스럽다는 듯 말한다.
+		<<if isPubfameTaskAccepted("compound", "done")>>
+			<<set $pubfame.status to "hiding">><<set $pubfame.timer to 14>>
+			<<world_corruption "soft" 10>>
+			<<He>> jots down a few notes. "I'll let security know about the cameras. We'll also need to keep an eye out for this 'Mickey' character."
+			<br>
+			<<if $pubfame.compound.cameras.length gte 1>>
+				<span class="red">There's no chance the cameras will still be there. You'll need to start over.</span>
+			<</if>>
+			<<set $pubfame.compound.cameras to []>>
+			<br><br>
+		<</if>>
+		<<He_ ga>> 레버를 당기자 당신 발밑의 해치가 열린다. 당신은 그리로 굴러 떨어져, 관을 미끄러져 내려가 차가운 물에 첨벙 빠진다.
+		<<trauma 6>><<gtrauma>>
+		<br><br>
+		<<endevent>>
+		<<link [[다음|Drain Water]]>><<set $bus to "industrialdrain">><</link>>
+
+	<<elseif $arousal gte $arousalmax>>
+		당신은 사정하기 직전인 것 같은 느낌을 받지만, 사정하지는 않는다. 쾌감은 견딜 수 없이 되어간다. "아, 깜빡했는데." <<he_ ga>> 말한다. "이 기계는 널 오르가즘의 끄트머리에 데려다 놓지만 사정은 시켜주지 않아. 내가 알아야 하는 걸 말해주기까진 절대로."
+		<br><br>
+
+		당신은 견딜 수 없다. 그냥 말 그대로 불가능하다. 당신은 구속을 풀 수 있는 무언가를 찾으려 발버둥치며 <<himPost "에게">> 모든 것을 털어놓는다. "넌 전혀 위험인물이 아냐." <<he_ ga>> 말하며, 스위치를 끈다.
+		<br><br>
+
+		<<orgasm>>
+
+		<<if isPubfameTaskAccepted("compound", "done")>>
+			<<set $pubfame.status to "hiding">><<set $pubfame.timer to 14>>
+			<<world_corruption "soft" 10>>
+			<<He>> jots down a few notes. "I'll let security know about the cameras. We'll also need to keep an eye out for this 'Mickey' character."
+			<br>
+			<<if $pubfame.compound.cameras.length gte 1>>
+				<span class="red">There's no chance the cameras will still be there. You'll need to start over.</span>
+			<</if>>
+			<<set $pubfame.compound.cameras to []>>
+			<br><br>
+		<</if>>
+		<<He_ ga>> 레버를 당기자 당신 발밑의 해치가 열린다. 당신은 그리로 굴러 떨어져, 관을 미끄러져 내려가 차가운 물에 첨벙 빠진다.<<trauma 6>><<gtrauma>>
+		<br><br>
+
+		<<endevent>>
+		<<link [[다음|Drain Water]]>><<set $bus to "industrialdrain">><</link>>
+
+	<<elseif $compoundhonest + $compoundlie + $compoundmock + $compoundbeg + $compoundflirt gte 10>>
+
+		<<his_ yi>> 인내심이 한계에 다다르자, <<He_ ga>> 일어선다. "이게 안 통할 줄 알았어." <<he_ ga>> 말한다. "옛날 식으로 한 번 해 보자고."
+		<br><br>
+
+		<<He_ nun>> 당신의 구속을 풀고는 당신을 콘크리트 바닥으로 끌어당긴다. <<He_ nun>> <<his_ yi>> 코트에서 칼을 꺼내더니, 당신을 음흉한 눈길로 쳐다본다. 그러나 <<he_ ga>> 움직이려는 그 때, <<he_ nun>> 무언가가 잡아끄는 것을 느낀다. "무슨-" <<he_ ga>> <<his_ yi>> 반대쪽 손을 보자 그 손이 당신을 구속하던 구속구에 붙들려 있는 것을 발견한다. "이 새끼가... 어떻게?"
+		<<ltrauma>><<lstress>><<set $stress -= 2000>><<trauma -6>>
+		<br><br>
+
+		<<if $skulduggery lte 400>>
+			<<skulduggeryskilluse>>
+		<<else>>
+			<span class="blue">방금 건 너무 쉬웠다. 당신은 아무것도 새로 익히지 못했다.</span>
+			<br><br>
+		<</if>>
+
+		당신은 <<he_ ga>> 당신을 고문하는 데 쓰던 기계를 집어든다. 가치가 있을지도 모른다. "그거 내려놔." <<he_ ga>> 말한다. "비싼 거라고."
+		<<set $blackmoney += 200>>
+		뭐, 그러던가 말던가.
+		<br><br>
+
+		당신은 문을 열 방법을 찾지 못했고, <<personPost "도">> 순순히 정보를 말해줄 것 같지 않다. 하지만 당신은 구석에서 금속 해치를 발견한다. 당신은 해치를 열고 어둠 속으로 기어 내려간다.
+		<<earnFeat "Mouth Sealed Shut">>
+		<br><br>
+		<<endevent>>
+		<<set $torturesurvivor to 1>>
+		<<link [[다음|Industrial Drain]]>><<set $eventskip to 1>><</link>>
+		<br>
+
+	<<else>>
+
+		<<if $compoundhonest lte 4>>
+			<<link [[정직하게 답한다|Elk Compound Honest]]>><<set $compoundhonest += 1>><<arousal 3000>><<pain -3>><<stress 6>><</link>><<garousal>><<gstress>><<lpain>>
+			<br>
+		<</if>>
+		<<if $compoundlie lte 4>>
+			<<link [[거짓으로 답한다|Elk Compound Lie]]>><<set $compoundlie += 1>><<arousal -1000>><<pain 7>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<larousal>><<gpain>>
+			<br>
+		<<else>>
+			당신은 너무 압박을 받아 더이상 다른 거짓말을 생각해 낼 수 없다.
+			<br>
+		<</if>>
+
+		<<if $submissive lte 500 and $compoundmock lte 4>>
+			<<link [[조롱한다|Elk Compound Mock]]>><<def 1>><<set $compoundmock += 1>><<arousal -2000>><<pain 7>><<stress 6>><</link>><<gstress>><<larousal>><<gpain>>
+			<br>
+		<</if>>
+		<<if $submissive gte 1500 and $compoundbeg lte 4>>
+			<<link [[애원한다|Elk Compound Beg]]>><<sub 1>><<set $compoundbeg += 1>><<arousal 3000>><<pain -5>><<stress 6>><</link>><<gstress>><<garousal>><<lpain>>
+			<br>
+		<</if>>
+
+		<<if $compoundflirt is 0>>
+			<<link [[추파를 던진다|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous1>><<lpain>>
+			<br>
+		<<elseif $compoundflirt is 1 and hasSexStat("promiscuity", 2)>>
+			<<link [[추파를 던진다|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous2>><<lpain>>
+			<br>
+		<<elseif $compoundflirt is 2 and hasSexStat("promiscuity", 3)>>
+			<<link [[추파를 던진다|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous3>><<lpain>>
+			<br>
+		<<elseif $compoundflirt is 3 and hasSexStat("promiscuity", 4)>>
+			<<link [[추파를 던진다|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous4>><<lpain>>
+			<br>
+		<<elseif $compoundflirt is 4 and hasSexStat("promiscuity", 5)>>
+			<<link [[추파를 던진다|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous5>><<lpain>>
+			<br>
+		<</if>>
+
+<</if>>
+<</widget>>
+
+<<widget "passoutcompound">>
+	<<if isPregnancyEnding()>>
+		<<pregnancyPassout "compound">>
+	<<else>>
+		당신은 몸을 너무 혹사시켰다. 의식이 멀어진다.
+		<br><br>
+
+		<<link [[다음|Elk Compound Experiment]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+:: Widgets Harvest [widget]
+<<widget "harvest">>
+	<<if $nextPassageCheck is "Harvest Street">>
+		<<add_link "<span class='nextLink'><<harvesticon>><<link [[하베스트 가 (0:05) (술집)|Harvest Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<harvesticon>><<link [[하베스트 가 (0:05) (술집)|Harvest Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "harvestquick">>
+	<<harvesticon>><<link [[하베스트 가|Harvest Street]]>><</link>>
+<</widget>>
+
+<<widget "harvesteventend">>
+	<<link [[다음|Harvest Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Mer [widget]
+<<widget "mer">>
+	<<if $nextPassageCheck is "Mer Street">>
+		<<add_link "<span class='nextLink'><<mericon>><<link [[메르 가 (0:05) (부두)|Mer Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<mericon>><<link [[메르 가 (0:05) (부두)|Mer Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "merquick">>
+	<<mericon>><<link [[메르 가|Mer Street]]>><</link>>
+<</widget>>
+
+<<widget "mereventend">>
+	<<link [[다음|Mer Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Starfish [widget]
+<<widget "starfish">>
+	<<if $nextPassageCheck is "Starfish Street">>
+		<<add_link "<span class='nextLink'><<starfishicon>><<link [[스타피쉬 가 (0:05) (해변)|Starfish Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<starfishicon>><<link [[스타피쉬 가 (0:05) (해변)|Starfish Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "starfishquick">>
+	<<starfishicon>><<link [[스타피쉬 가|Starfish Street]]>><</link>>
+<</widget>>
+
+<<widget "starfisheventend">>
+	<<link [[다음|Starfish Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Cliff [widget]
+<<widget "cliff">>
+	<<if $nextPassageCheck is "Cliff Street">>
+		<<add_link "<span class='nextLink'><<clifficon>><<link [[클리프 가 (0:05) (카페)|Cliff Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<clifficon>><<link [[클리프 가 (0:05) (카페)|Cliff Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "cliffquick">>
+	<<clifficon>><<link [[클리프 가|Cliff Street]]>><</link>>
+<</widget>>
+
+<<widget "cliffeventend">>
+	<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Barb [widget]
+<<widget "barb">>
+	<<if $nextPassageCheck is "Barb Street">>
+		<<add_link "<span class='nextLink'><<barbicon>><<link [[바브 가 (0:05) (무용 학원)|Barb Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<barbicon>><<link [[바브 가 (0:05) (무용 학원)|Barb Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "barbquick">>
+	<<barbicon>><<link [[바브 가|Barb Street]]>><</link>>
+<</widget>>
+
+<<widget "barbeventend">>
+	<<link [[다음|Barb Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Connudatus [widget]
+<<widget "connudatus">>
+	<<if $nextPassageCheck is "Connudatus Street">>
+		<<add_link "<span class='nextLink'><<connudatusicon>><<link [[콘누다투스 가 (0:05) (스트립 클럽)|Connudatus Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<connudatusicon>><<link [[콘누다투스 가 (0:05) (스트립 클럽)|Connudatus Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "connudatusquick">>
+	<<connudatusicon>><<link [[콘누다투스 가|Connudatus Street]]>><</link>>
+<</widget>>
+
+<<widget "connudatuseventend">>
+	<<link [[다음|Connudatus Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+<<widget "connudatuswallet">>
+	당신은 조용한 장소를 찾아 <<wallet_ ul>> 열어 본다.
+
+	<<rng>>
+	<<if $rng gte 91>>
+
+		당신은 찾은 게 많지 않다. <<moneyGainDisplay 2 true true>> 어치의 잔돈뿐이다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 81>>
+
+		당신은 찾은 게 많지 않다. <<moneyGainDisplay 3 true true>> 어치의 잔돈뿐이다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 71>>
+
+		당신은 비밀 주머니에 숨겨져 있던 <<moneyGainDisplay 8 true true>> 를 발견한다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 61>>
+
+		당신은 검은 신용카드를 발견한다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<set $blackmoney += 8>><<crimeUp 8 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 51>>
+
+		당신은 감춰져 있던 <<moneyGainDisplay 15 true true>> 를 발견한다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 41>>
+
+		당신은 은색 신용카드를 발견한다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<set $blackmoney += 15>><<crimeUp 15 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 31>>
+
+		당신은 감춰져 있던 <<moneyGainDisplay 25 true true>> 를 발견한다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 21>>
+
+		당신은 금색 신용카드를 발견한다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<set $blackmoney += 25>><<crimeUp 25 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 11>>
+
+		당신은 백금 신용카드를 발견한다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<set $blackmoney += 50>><<crimeUp 50 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<<else>>
+
+		당신은 감춰져 있던 <<moneyGainDisplay 50 true true>> 를 발견한다.
+		<br><br>
+
+		<<link [[가져간다|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><</link>>
+		<br>
+
+	<</if>>
+<</widget>>
+
+<<widget "connudatusMarketsStatusEvents">>
+	<<switch random(1,9)>>
+		<<case 1>>
+			As you walk among the stalls, you stop in front of one selling a nice variety of flowers. Their sweet smell calms and soothes you.<<lstress>><<stress -6>>
+
+		<<case 2>>
+			As you walk among the stalls, you pass by one selling a variety of fresh fish.
+			<<if $cat gte 6 or $wolfgirl gte 6 or $fox gte 6>>
+
+				<<if $cat gte 6>>
+					<<set _transformation to "cat">>
+				<<elseif $wolfgirl gte 6>>
+					<<set _transformation to "wolf">>
+				<<else>>
+					<<set _transformation to "fox">>
+				<</if>>
+
+				Your inner _transformation reacts to their smell, and you begin to salivate a little.<<lstress>><<stress -6>>
+
+			<<else>>
+				You walk faster, trying to get away from their unpleasant smell.<<gstress>><<stress 6>>
+			<</if>>
+
+		<<case 3>>
+			You pass by a stall where the seller and a client seem to be in a heated discussion. After some back and forth, the seller relents and gives the client their purchase. Looks like someone got a discount.<<lstress>><<stress -6>>
+
+		<<case 4>>
+			You pass by a stall where a beggar seems to be asking for alms. The seller, however, is not having it, finally screaming for the beggar to get lost.<<gstress>><<stress 6>>
+
+		<<case 5>>
+			You stop by a stall to get a look at the products. There is a plate nearby with some apple slices as free samples. You take one. It's sweet and savoury.<<lstress>><<stress -6>>
+
+		<<case 6>>
+			You stop by a stall to get a look at the products. Suddenly, you feel someone grabbing your ass. You turn to say something, but the person has already gone.<<gstress>><<stress 6>>
+
+		<<case 7>>
+			As you walk around the market, you notice a bank note on the ground. You bend over and pick it up. It's a <<printmoney 500>> bill.<<lstress>><<stress -6>>
+
+		<<case 8>>
+			As you walk around the market, you notice of a bank note on the ground. You bend over to pick it up, only to realise that it is fake. Someone slaps your ass, and you turn to spot the culprit running away.<<gstress>><<stress 6>>
+
+		<<case 9>>
+			<<generate1>><<person1>>
+
+			You walk through the market, distracted by the variety of products on display. Someone bumps into you, and you fall to the ground. The other person doesn't bother to stop or apologise and keeps running. As you get up, a <<person1>><<person>> passes by, screaming something about a thief on the run.<<gstress>><<stress 6>>
+
+	<</switch>>
+	<br><br>
+
+	<<link [[다음|Connudatus Street]]>><<pass 15>><<endevent>><</link>>
+<</widget>>
+
+<<widget "connudatusMarketsProductsEvents">>
+	<<if $loft_river is 1 and $rng gte 80>>
+		You stop by a stall selling various vegetables. Now that you think about it, the orphans could use more vitamins in their diet.
+		<br><br>
+
+		<<if $money gte 15000>>
+			<<ind>><<link [[Buy some vegetables and send them to the loft (£150)|Connudatus Street]]>><<set $money -= 15000>><<hope 1>><<famegood 1>><<pass 15>><<endevent>><</link>><<ghope>>
+
+		<<else>>
+			<<ind>><span class="blue">You can't afford to buy it.</span>
+
+		<</if>>
+
+	<<else>>
+		<<switch random(1,5)>>
+			<<case 1>>
+				You stop by a stall selling various gardening equipment. Nothing catches your eyes at first, but you then notice a single bag of fertiliser hidden under some other products. It's priced at <<printmoney 100000>>.
+				<br><br>
+
+				<<if $money gte 100000>>
+					<<gardenicon "fertiliser">><<link [[Buy it (£1000)|Connudatus Street]]>><<set $fertiliser.current += 1>><<set $money -= 100000>><<pass 15>><<endevent>><</link>>
+
+				<<else>>
+					<<ind>><span class="blue">You can't afford to buy it.</span>
+
+				<</if>>
+
+			<<case 2>>
+				You stop by a stall selling various farm products. To the side, you notice a couple bottles of milk. Seems you can buy 3 bottles for <<printmoney 10000>>.
+				<br><br>
+
+				<<if $money gte 10000>>
+					<<tendingicon "milk">><<link [[Buy it (£100)|Connudatus Street]]>><<tending_give bottle_of_milk 3>><<set $money -= 10000>><<pass 15>><<endevent>><</link>>
+
+				<<else>>
+					<<ind>><span class="blue">You can't afford to buy it.</span>
+
+				<</if>>
+
+			<<case 3>>
+				<<set _change to random(100,500)>>
+
+				You notice a stall where the owner is organising the items on the back. There is some change on the counter. You could probably grab it if you wanted.
+				<br><br>
+
+				<<crimeicon "mark">><<link [[Steal the change|Connudatus Street]]>><<crimeUp 1 "petty">><<set $money += _change>><<pass 15>><<endevent>><</link>><<crime "petty">>
+
+			<<case 4>>
+				You notice a stall with some eggs on display and a "be back soon" sign on the table. You could probably steal some eggs if you wanted.
+				<br><br>
+
+				<<tendingicon "eggs">><<link [[Steal the eggs|Connudatus Street]]>><<crimeUp 1 "petty">><<tending_give chicken_egg 3>><<transform fox 1>><<pass 15>><<endevent>><</link>><<crime "petty">>
+
+			<<case 5>>
+				You stop by a stall selling various hand made clothes. They are not quite to your taste, but some still catch your attention.
+				<br><br>
+
+				<<if $money gte 500>>
+					<<icon "clothes/straw_hat_acc.png" "infront">><<icon "clothes/straw_hat.png">><<link [[Buy the Straw Hat (£5)|Connudatus Street]]>><<headwear 17>><<set $money -= 500>><<pass 15>><<endevent>><</link>>
+					<br>
+
+
+					<<if $daily.corruptionSlimeClothes and setup.clothes.upper[38].reveal lt Math.clamp($daily.corruptionSlimeClothes, 0, 500)>>
+						<<ind>><span class="red">The slime in your ear won't allow you to buy the Gingham Dress.</span>
+						<br>
+					<<elseif $earSlime.forcedDressing and $earSlime.forcedDressing.days gt 0 and setup.clothes.upper[38].gender isnot $earSlime.forcedDressing.type and setup.clothes.upper[38].gender isnot 'n'>>
+						<<ind>><span class="red">The slime in your ear refuses to allow you to try on or buy the Gingham Dress as it is only permitting more <<print $earSlime.forcedDressing.type is "f" ? "feminine" : "masculine">> clothing.</span>
+						<br>
+					<<elseif $money gte 1500>>
+							<<icon "clothes/gingham_dress_acc.png" "infront">><<icon "clothes/gingham_dress.png">><<link [[Buy the Gingham Dress (£15)|Connudatus Street]]>><<upperwear 38>><<set $money -= 1500>><<pass 15>><<endevent>><</link>>
+						<br>
+					<<else>>
+						<<ind>><span class="blue">You can't afford to buy the Gingham Dress.</span>
+						<br>
+					<</if>>
+
+					<<if $daily.corruptionSlimeClothes and setup.clothes.upper[33].reveal lt Math.clamp($daily.corruptionSlimeClothes, 0, 500)>>
+						<<ind>><span class="red">The slime in your ear won't allow you to buy the Checkered Shirt.</span>
+						<br>
+					<<elseif $earSlime.forcedDressing and $earSlime.forcedDressing.days gt 0 and setup.clothes.upper[33].gender isnot $earSlime.forcedDressing.type and setup.clothes.upper[38].gender isnot 'n'>>
+						<<ind>><span class="red">The slime in your ear refuses to allow you to try on or buy the Checkered Shirt as it is only permitting more <<print $earSlime.forcedDressing.type is "f" ? "feminine" : "masculine">> clothing.</span>
+						<br>
+					<<elseif $money gte 3000>>
+							<<icon "clothes/checkered_shirt.png">><<link [[Buy the Checkered Shirt (£30)|Connudatus Street]]>><<upperwear 33>><<set $money -= 3000>><<pass 15>><<endevent>><</link>>
+						<br>
+					<<else>>
+						<<ind>><span class="blue">You can't afford to buy the Checkered Shirt.</span>
+						<br>
+					<</if>>
+
+				<<else>>
+					<<ind>><span class="blue">You can't afford to buy any of it.</span>
+
+				<</if>>
+
+		<</switch>>
+
+	<</if>>
+	<br>
+	<<getouticon>><<link [[떠난다|Connudatus Street]]>><<pass 15>><<endevent>><</link>>
+
+<</widget>>
+
+<<widget "connudatusMarketsLewdEvents">>
+	<<generate1>><<person1>>
+
+	You stop to take a look at some products. Suddenly, you feel a hand rest on your ass. You look back and notice a <<person>> right behind you. <<He>> smiles.
+	<br><br>
+
+	<<if hasSexStat("promiscuity", 2)>>
+		<<link [[Reciprocate|Connudatus Markets Hook Up]]>><<set $phase to 2>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+
+	<<link [[Move away|Connudatus Markets Hook Up]]>><<set $phase to 1>><</link>>
+
+<</widget>>
+
+:: Widgets High [widget]
+<<widget "high">>
+	<<if $nextPassageCheck is "High Street">>
+		<<add_link "<span class='nextLink'><<highicon>><<link [[하이 가 (0:05) (쇼핑 센터)|High Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<highicon>><<link [[하이 가 (0:05) (쇼핑 센터)|High Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "highquick">>
+	<<highicon>><<link [[하이 가|High Street]]>><</link>>
+<</widget>>
+
+<<widget "higheventend">>
+	<<link [[다음|High Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Oxford [widget]
+<<widget "oxford">>
+	<<if $nextPassageCheck is "Oxford Street">>
+		<<add_link "<span class='nextLink'><<oxfordicon>><<link [[옥스포드 가 (0:05) (학교)|Oxford Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<oxfordicon>><<link [[옥스포드 가 (0:05) (학교)|Oxford Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "oxfordquick">>
+	<<oxfordicon>><<link [[옥스포드 가|Oxford Street]]>><</link>>
+<</widget>>
+
+<<widget "oxfordeventend">>
+	<<link [[다음|Oxford Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+:: Widgets Events Street [widget]
+<<widget "eventsstreet">>
+	<<set $dangerevent to random(1, 100)>>
+	<<rng>>
+	<<if $wraith.state and $eventforced and Time.isBloodMoon() and !_wraithEventSkipped>>
+		<<wraithEventStreet>>
+	<<elseif $kylarwatched is 1>>
+		<<kylarwatched>>
+	<<elseif $kylar_manor_secret is 2>>
+		<<monstrance_accost>>
+	<<elseif Time.dayState is "night">>
+		<<if $exposed gte 1>>
+			<<if $bus is "residential">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<residentialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<residentialex2>>
+				<<else>>
+					<<residentialex3>>
+				<</if>>
+			<<elseif $bus is "commercial">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<commercialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<commercialex2>>
+				<<else>>
+					<<commercialex3>>
+				<</if>>
+			<<elseif $bus is "industrial">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<industrialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<industrialex2>>
+				<<else>>
+					<<industrialex3>>
+				<</if>>
+			<<elseif $bus is "park">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<parkex1>>
+				<<elseif $dangerevent lte 20>>
+					<<parkex2>>
+				<<else>>
+					<<parkex3>>
+				<</if>>
+			<<else>>
+				<<set $dangerevent to random(1, 60)>>
+				<<if $dangerevent lte 20>>
+					<<streetex1>>
+				<<elseif $dangerevent lte 30>>
+					<<streetex2>>
+				<<elseif $dangerevent lte 40>>
+					<<streetex3>>
+				<<elseif $dangerevent lte 50>>
+					<<streetex4>>
+				<<elseif $dangerevent lte 60>>
+					<<streetex5>>
+				<</if>>
+			<</if>>
+		<<elseif $rng gte 51>>
+			<<set $dangerevent to random(1, 150)>>
+			<<if $dangerevent lte 9>>
+				<<if ($exhibitionismrun is undefined or $exhibitionismrun is "danubedone") and ($exhibitionismrunon is 1 or $exhibitionismrunon is 0) and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer2>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon is 2 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer3>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon is 3 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer4>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon isnot 1 and Time.days gte 8 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 18>>
+				<<if C.npc.Whitney.state is "dungeon" and $whitneyposter isnot 1>>
+					<<whitneyposter>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 27>>
+				<<if $hallucinations gte 2 and $tentacledisable is "f">>
+					<<streettentacle>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 36>>
+				<<if $fame.sex gte random(1, 1000)>>
+					<<streetsexfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 45>>
+				<<if $fame.rape gte random(1, 1000)>>
+					<<streetrapefame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 54>>
+				<<if $fame.bestiality gte random(1, 1000)>>
+					<<streetbestialityfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 63>>
+				<<if $fame.prostitution gte random(1, 1000)>>
+					<<streetprostitutionfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 72>>
+				<<if $fame.pregnancy gte random(1, 1000)>>
+					<<streetpregnancyfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 81>>
+				<<if $fame.exhibitionism gte random(1, 1000)>>
+					<<streetexhibitionismfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 90>>
+				<<if $syndromeeden is 1 and (($edenfreedom isnot 2 or $edenCagedEscape) and $edendays gte 7) or ($edenfreedom gte 2 and $edendays gte 21)>>
+					<<streetedenrage>>
+				<<elseif !$edenCagedEscape and ($edenfreedom is 1 and $edendays gte 2) or ($edenfreedom gte 2 and $edendays gte 8)>>
+					<<if $edenfreedom gte 2 and C.npc.Eden.love gte 60>>
+						<<streetedenworried>>
+					<<else>>
+						<<streetedenangry>>
+					<</if>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 100>>
+				<<if !$weekly.streetPolice and crimeSumCurrent() gte 1000 and !$worn.lower.type.includes("naked")>>
+					<<streetpolice>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 110>>
+				<<if $worn.neck.collared is 1>>
+					<<streetcollared>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 120>>
+				<<if $leftarm is "bound" or $rightarm is "bound">>
+					<<streetbound>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 130>>
+				<<if $worn.lower.name is "towel" or $worn.lower.name is "large towel bottom">>
+					<<streetlowertowel>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 140>>
+				<<if $worn.upper.name is "towel" or $worn.upper.name is "large towel">>
+					<<streetuppertowel>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 150>>
+				<<if crimeSumCurrent() gte 5000>>
+					<<streetwanted>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<eventsstreetnight>>
+		<</if>>
+	<<else>>
+		<<if $exposed gte 1>>
+			<<if $bus is "residential">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<residentialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<residentialex2>>
+				<<else>>
+					<<residentialex3>>
+				<</if>>
+			<<elseif $bus is "commercial">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<commercialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<commercialex2>>
+				<<else>>
+					<<commercialex3>>
+				<</if>>
+			<<elseif $bus is "industrial">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<industrialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<industrialex2>>
+				<<else>>
+					<<industrialex3>>
+				<</if>>
+			<<elseif $bus is "park">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<parkex1>>
+				<<elseif $dangerevent lte 20>>
+					<<parkex2>>
+				<<else>>
+					<<parkex3>>
+				<</if>>
+			<<else>>
+				<<set $dangerevent to random(1, 20)>>
+				<<if $dangerevent lte 10>>
+					<<streetexday1>>
+				<<elseif $dangerevent lte 20>>
+					<<streetexday2>>
+				<</if>>
+			<</if>>
+
+		<<elseif C.npc.Avery.state isnot "dismissed" and $averyseen isnot 1 and Time.weekDay is 7 and Time.dayState is "day" and ($scienceproject is "won" or $scienceproject is "done" or C.npc.Avery.init is 1)>>
+			<<set $averyseen to 1>>
+			<<streetavery>>
+		<<elseif fameTotal() gte 3000 and $photo_known is undefined>>
+			<<set $photo_known to 1>>
+			<<street_niki>>
+			<<set $niki_seen to "street">>
+		<<elseif $rng gte 52>>
+			<<set $dangerevent to random(1, 210)>>
+			<<if $dangerevent lte 10>>
+				<<if $exhibitionismrun is undefined and $exhibitionismrunon is 1 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer2>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon is 2 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer3>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon is 3 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer4>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon isnot 1 and Time.days gte 8 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 18>>
+				<<if C.npc.Whitney.state is "dungeon" and $whitneyposter isnot 1>>
+					<<whitneyposter>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 27>>
+				<<if $hallucinations gte 2 and $tentacledisable is "f">>
+					<<streettentacle>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 36>>
+				<<if $fame.sex gte random(1, 1000)>>
+					<<streetsexfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 45>>
+				<<if $fame.rape gte random(1, 1000)>>
+					<<streetrapefame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 54>>
+				<<if $fame.bestiality gte random(1, 1000)>>
+					<<streetbestialityfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 63>>
+				<<if $fame.prostitution gte random(1, 1000)>>
+					<<streetprostitutionfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 72>>
+				<<if $fame.pregnancy gte random(1, 1000)>>
+					<<streetpregnancyfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 81>>
+				<<if $fame.exhibitionism gte random(1, 1000)>>
+					<<streetexhibitionismfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 90>>
+				<<if $syndromeeden is 1 and (($edenfreedom isnot 2 or $edenCagedEscape) and $edendays gte 7) or ($edenfreedom gte 2 and $edendays gte 21)>>
+					<<streetedenrage>>
+				<<elseif ($edenfreedom is 1 and $edendays gte 2) or ($edenfreedom gte 2 and $edendays gte 8)>>
+					<<if $edenfreedom gte 2 and C.npc.Eden.love gte 60>>
+						<<streetedenworried>>
+					<<else>>
+						<<streetedenangry>>
+					<</if>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 100>>
+				<<if !$weekly.streetPolice and crimeSumCurrent() gte 1000 and !$worn.lower.type.includes("naked")>>
+					<<streetpolice>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 110>>
+				<<if $worn.neck.collared is 1>>
+					<<streetcollared>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 120>>
+				<<if $leftarm is "bound" or $rightarm is "bound">>
+					<<streetbound>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 130>>
+				<<if $worn.lower.name is "towel" or $worn.lower.name is "large towel bottom">>
+					<<streetlowertowel>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 140>>
+				<<if $worn.upper.name is "towel" or $worn.upper.name is "large towel">>
+					<<streetuppertowel>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 150>>
+				<<bodywritingExposureCheck true>>
+				<<if _bodywriting_exposed is 1>>
+					<<streetbodywriting>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 160>>
+				<<bodywritingExposureCheck true>>
+				<<if _bodywriting_exposed is 1 and $skin[_bodypart].special is "prostitution">>
+					<<streetwhorebodywriting>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 170>>
+				<<if crimeSumCurrent() gte 5000>>
+					<<streetwanted>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 180>>
+				<<bodywritingExposureCheck true>>
+				<<if _bodywriting_exposed is 1 and $skin[_bodypart].special is "criminal">>
+					<<streetcriminalbodywriting>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 190>>
+				<<if $bus is "domus" or $bus is "danube">>
+					<<streetorphancookie>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 200>>
+				<<streetstray>>
+			<<elseif $dangerevent lte 210>>
+				<<if $condomLvl gte 1 and ["wolf", "nightingale", "cliff", "starfish", "high"].includes($bus) and Time.days gte 4>>
+					<<streetabstinence>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<eventsstreetday>>
+		<</if>>
+	<</if>>
+	<<if $eventforced>>
+		<<unset $eventforced>>
+	<</if>>
+<</widget>>
+
+<<widget "pantsdownscene">>
+	<<npc Whitney>><<person1>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		"Is that you, slut?" You turn around to see Whitney strolling down the sidewalk at you.
+		<br><br>
+		"I thought it was you! Why are you tied up like that?"
+		<br><br>
+		<<He>> turns you around to see your wrists tied together. <<He>>'s silent for a few seconds before <<he>> speaks.
+		<br><br>
+		"This gives me an idea. Stay still."
+		<br><br>
+		Before you can wonder what <<he>> means, you feel <<his>> fingers in your waistband. You gasp as Whitney pulls your <<bottoms>> down.
+		<br><br>
+	<<else>>
+		Suddenly you hear Whitney's voice. "Hey slut! Stay right there!"
+		<br><br>
+		You turn around to see Whitney walking up to you, a mischievous look in <<his>> eyes. You brace yourself for whatever <<he>> has planned. "Don't move, I wanna try something."
+		<br><br>
+		<<He>> reaches <<his>> hands towards the waistband of your bottoms.
+		<br><br>
+	<</if>>
+<<link [[Remain still|High Public Pants Down Still]]>><<trauma 6>><<stress 6>><<sub 1>><<npcincr Whitney dom 1>><</link>><<gstress>><<gtrauma>><<gdom>>
+<br>
+<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+	<<link [[Push Whitney's hands away|High Public Pants Down Push]]>><<set $fightstart to 1>><<def 1>><<npcincr Whitney dom -1>><</link>><<ldom>>
+<<else>>
+	<span class="blue">With your arms bound, you can't stop <<him>>.</span>
+<</if>>
+<</widget>>
+
+<<widget "whitneyShoppingCentre">>
+	<<npc Whitney>><<person1>>
+	Suddenly you hear Whitney's voice. "Hey slut! Stay right there!"
+	<br><br>
+	You turn around to see Whitney walking up to you, a mischievous look in <<his>> eyes. You brace yourself for whatever <<he>> has planned. "Come with me."
+	<br><br>
+	<<He>> reaches <<his>> hands towards your own.
+	<br><br>
+	<<link [[Remain still|Whitney Shopping Centre]]>><<trauma 6>><<stress 6>><<sub 1>><<npcincr Whitney dom 1>><<set $phase to 0>><</link>><<gstress>><<gtrauma>><<gdom>><<handholdingvirginitywarning>>
+	<br>
+	<<link [[Back away|Whitney Shopping Centre Refuse]]>><<def 1>><<npcincr Whitney dom -1>><<set $phase to 0>><</link>><<ldom>>
+<</widget>>
+
+<<widget "whitneyShoppingData">>
+	<<set _chosenCommentSchool to "Hope you enjoy wearing it to school.">>
+	<<set _rejectedCommentSchool to "Something wrong with it? Would be perfect for school.">>
+	<<set _chosenCommentSwimClass to "Hope you enjoy wearing it to swim class.">>
+	<<set _rejectedCommentSwimClass to "Something wrong with it? Would be perfect for swim class.">>
+
+	<<set _chosenCommentOutside to "Hope to see you wearing it out of school.">>
+
+	<<set _chosenCommentBeach to "Hope you enjoy wearing it on the beach.">>
+	<<set _rejectedCommentBeach to "Something wrong with it? Would be perfect for the beach.">>
+	<<set _extraCommentBeach to " Perfect for a slut like you on the beach.">>
+
+	<<set _rejectedCommentBed to "Hope you enjoy wearing it to bed.">>
+	<<set _extraCommentBed to " Would be perfect to sleep in.">>
+
+	<<set _rejectedCommentLewd to "Didn't like it? Was it too lewd for you?">>
+	<<set _extraCommentLewd to " Perfect for a slut like you.">>
+
+	<<set _rejectedCommentGeneric to "Something wrong with it?">>
+
+	<<if $whitneyClothesGender is "f">>
+		<<set $_set1 to ["pink", "purple", "tangerine", "yellow"]>>
+		<<set $_colour1 to $_set1.random()>>
+		<<set $_colour2 to ["light pink", "lilac", "brown", "tan"][$_set1.indexOf($_colour1)]>>
+		<<set $_denim to ["denim", "light blue", "black", "blue steel", "grey"].random()>>
+		<<set _whitneyClothingChoices to [
+			{index: 0, items:{
+				upper: [113, "white"], lower: [106, $_colour1, $_colour1], legs: [3], feet: [[33, 34].random(), $_colour2, "silver"]
+			}, chosenComment: _chosenCommentSchool, rejectedComment: _rejectedCommentSchool, schoolItems: true},
+			{index: 1, items:{
+				upper: [112, $_colour1, "white"], lower: [27, "black"], legs: [3], feet: [[33, 34].random(), $_colour2, "silver"]
+			}, chosenComment: _chosenCommentSchool, rejectedComment: _rejectedCommentSchool, schoolItems: true},
+			{index: 2,items:{
+				upper: [5, "white", $_colour1], lower: [56, $_colour1], legs: [3], feet: [[33, 34].random(), $_colour2, "silver"]
+			}, chosenComment: _chosenCommentSchool, rejectedComment: _rejectedCommentSchool, schoolItems: true},
+			{index: 3, items:{under_upper: [[2, 6].random(), $_colour1]},
+				chosenComment: _chosenCommentSwimClass, rejectedComment: _rejectedCommentSwimClass, swimItems: true},
+			{index: 4, items:{under_upper: [24, $_colour1], under_lower: [31, $_colour1]},
+				chosenComment: _chosenCommentSwimClass, rejectedComment: _rejectedCommentSwimClass, swimItems: true},
+			{index: 5, items:{upper: [109]}, exposed: true,
+				chosenComment: _rejectedCommentBed, rejectedComment: _rejectedCommentLewd, extraComment: _extraCommentBed, sleepItems: true},
+			{index: 6, items:{upper: [[17, 18].random(), $_colour1]}, exposed: true,
+				chosenComment: _rejectedCommentBed, rejectedComment: _rejectedCommentLewd, extraComment: _extraCommentBed, sleepItems: true},
+			{index: 7, items:{upper: [21, $_colour1], lower: [76, $_denim], legs: [[1, 4].random()], feet: [[10, 12].random(), $_colour1]}, normalItems: true,
+				chosenComment: _chosenCommentOutside, rejectedComment: _rejectedCommentLewd, extraComment: _extraCommentLewd},
+			{index: 8, items:{upper: [21, $_colour1], lower: [25, $_colour1], legs: [12, $_colour1, "white"], feet: [[10, 12].random(), $_colour1]}, normalItems: true,
+				chosenComment: _chosenCommentOutside, rejectedComment: _rejectedCommentLewd, extraComment: _extraCommentLewd},
+			{index: 9, items:{upper: [19, $_colour1], lower: [114, $_denim], legs: [[1, 4].random()], feet: [[10, 12].random(), $_colour1]}, normalItems: true,
+				chosenComment: _chosenCommentOutside, rejectedComment: _rejectedCommentLewd, extraComment: _extraCommentLewd},
+			{index: 10, items:{upper: [29], legs: [27, "white"], feet: [[10, 12].random(), "purple"]}, normalItems: true,
+				chosenComment: _chosenCommentOutside, rejectedComment: _rejectedCommentLewd, extraComment: _extraCommentLewd},
+			{index: 11, items:{under_upper: [[1, 35].random(), $_colour1], under_lower: [[18, 41].random(), $_colour1]},
+				chosenComment: _chosenCommentBeach, rejectedComment: _rejectedCommentBeach, extraComment: _extraCommentBeach},
+		]>>
+	<<else>>
+		/* Picking out males clothes is a pain */
+		<<set $_set1 to ["blue", "red", "green", "teal"]>>
+		<<set $_colour1 to $_set1.random()>>
+		<<set $_blackOrWhite to ["black", "white"].random()>>
+		<<set $_leather to ["black", "brown", "blue steel", "tan", "olive", "wine"].random()>>
+		<<set $_metal to ["grey", "steel", "blue steel", "bronze", "gold", "silver"].random()>>
+		<<set _whitneyClothingChoices to [
+			{index: 0, items:{head: [2, $_colour1], upper: [62, $_colour1], lower: [[28, 104].random(), $_colour1], legs: [2], feet: [1]},
+			chosenComment: _chosenCommentSchool, rejectedComment: _rejectedCommentSchool},
+			{index: 1, items:{face: [15, $_metal], upper: [149, ["white", "brown", "navy blue", "tan"].random()], lower: [[6, 60, 105].random(), "black"], legs: [2], feet: [1]},
+			chosenComment: _chosenCommentSchool, rejectedComment: _rejectedCommentSchool},
+			{index: 2, items:{under_upper: [21, $_colour1], under_lower: [7, $_colour1]},
+				chosenComment: _chosenCommentSwimClass, rejectedComment: _rejectedCommentSwimClass},
+			{index: 3, items:{under_lower: [7, $_colour1]}, breastExposed: true,
+				chosenComment: _chosenCommentSwimClass, rejectedComment: _rejectedCommentSwimClass},
+			{index: 4, items:{upper: [119, "black", $_colour1], lower: [137, ["black", "navy", "olive", "brown"].random()], feet: [30, $_colour1]},
+				chosenComment: _chosenCommentOutside, rejectedComment: _rejectedCommentGeneric},
+			{index: 5, items:{upper: [8, $_blackOrWhite, $_colour1], lower: [[127, 132].random(), $_colour1], legs: [[20, 27].random(), $_blackOrWhite, $_colour1], feet: [6, $_blackOrWhite , $_colour1]},
+				chosenComment: _chosenCommentOutside, rejectedComment: _rejectedCommentGeneric},
+			{index: 6, items:{upper: [[40, 41].random(), $_leather], lower: [23, $_blackOrWhite], feet: [21]}, breastExposed: true,
+				chosenComment: _chosenCommentOutside, rejectedComment: _rejectedCommentGeneric},
+			{index: 7, items:{under_lower: [19, $_colour1]}, breastExposed: true,
+				chosenComment: _chosenCommentBeach, rejectedComment: _rejectedCommentBeach, extraComment: _extraCommentBeach},
+		]>>
+	<</if>>
+<</widget>>
+
+<<widget "whitneyShoppingPicker">>
+	/* When still picking out items */
+	<<if $whitneyClothingChoice is undefined>><<set $whitneyClothingChoice to []>><</if>>
+	<<set _whitneyChoice to _whitneyClothingChoices.filter(choice => !$whitneyClothingChoice.includes(choice.index) and !($player.breastsize gte 3 and choice.breastExposed)).random()>>
+	<<run $whitneyClothingChoice.push(_whitneyChoice.index)>>
+	<<headruined true>>
+	<<faceruined true>>
+	<<upperruined true>>
+	<<lowerruined true>>
+	<<underupperruined true>>
+	<<underlowerruined true>>
+	<<legsruined true>>
+	<<feetruined true>>
+	<<run Object.entries(_whitneyClothingChoices[$whitneyClothingChoice.last()].items).forEach(([slot, item]) => {
+		wikifier("generalWear", slot, item[0], item[1] ? `"${item[1]}"` : undefined, item[2] ? `"${item[2]}"` : undefined);
+	})>>
+<</widget>>
+
+<<widget "whitneyShoppingPickerChoice">>
+	<<if !$whitneyClothingChoice>>
+		<<exit>>
+	<</if>>
+	<<set $changeBack to $worn.upper.type.includes("naked") or $worn.lower.type.includes("naked") or _whitneyClothingChoices[$whitneyClothingChoice.last()].exposed>>
+	<<if $changeBack>>
+		<<undress "wardrobe">>
+		<<storeon "whitneyShopping">>
+	<<else>>
+		/* Remember the colours used */
+		<<set _itemColours to {}>>
+		<<run Object.entries($worn).forEach(([slot, item]) => {
+			if (item.index) {
+				T.itemColours[slot] = {};
+				if (item.colour) T.itemColours[slot].colour = item.colour;
+				if (item.accessory_colour) T.itemColours[slot].accessory_colour = item.accessory_colour;
+			}
+		})>>
+		<<headruined true>>
+		<<faceruined true>>
+		<<upperruined true>>
+		<<lowerruined true>>
+		<<underupperruined true>>
+		<<underlowerruined true>>
+		<<legsruined true>>
+		<<legsruined true>>
+		<<feetruined true>>
+		<<storeon "whitneyShopping">>
+		<<run Object.entries(_whitneyClothingChoices[$whitneyClothingChoice.last()].items).forEach(([slot, item]) => {
+			let colour = T.itemColours[slot]?.colour || item[1];
+			let accessory_colour = T.itemColours[slot]?.accessory_colour || item[2];
+			wikifier("generalWear", slot, item[0], `"${colour}"`, `"${accessory_colour}"`);
+		})>>
+	<</if>>
+<</widget>>
+
+<<widget "street_alley_detour">>
+	You walk along the street when you see the familiar blue flashing lights of the police up ahead.
+	<br><br>
+
+	As you approach, you find the intersection blocked by a car wreck still in the process of being cleaned up. The crosswalk has been closed in the meantime. You could wait for the authorities to finish here, or you could take a detour through <<if $bus isnot "park" or $bus isnot "nightingale">>a nearby alley.<<else>> the park.<</if>>
+	<br><br>
+
+	<<if $bus is "domus" or $bus is "danube" or $bus is "barb" or $bus is "connudatus">>
+		<<link[[Take the detour|Residential alleyways]]>><</link>>
+	<<elseif $bus is "cliff" or $bus is "high" or $bus is "wolf">>
+		<<link[[Take the detour|Commercial alleyways]]>><</link>>
+	<<elseif $bus is "oxford" or $bus is "mer" or $bus is "elk" or $bus is "harvest">>
+		<<link[[Take the detour|Industrial alleyways]]>><</link>>
+	<<elseif $bus is "starfish" or $bus is "nightingale">>
+		<<link[[Take the detour|Park]]>><</link>>
+	<</if>>
+	<br>
+
+	<<switch $bus>>
+		<<case "nightingale">>
+			<<link[[기다린다 (0:20)|Nightingale Street]]>><<pass 20>><</link>>
+		<<case "domus">>
+			<<link[[기다린다 (0:20)|Domus Street]]>><<pass 20>><</link>>
+		<<case "elk">>
+			<<link[[기다린다 (0:20)|Elk Street]]>><<pass 20>><</link>>
+		<<case "high">>
+			<<link[[기다린다 (0:20)|High Street]]>><<pass 20>><</link>>
+		<<case "starfish">>
+			<<link[[기다린다 (0:20)|Starfish Street]]>><<pass 20>><</link>>
+		<<case "barb">>
+			<<link[[기다린다 (0:20)|Barb Street]]>><<pass 20>><</link>>
+		<<case "connudatus">>
+			<<link[[기다린다 (0:20)|Connudatus Street]]>><<pass 20>><</link>>
+		<<case "wolf">>
+			<<link[[기다린다 (0:20)|Wolf Street]]>><<pass 20>><</link>>
+		<<case "harvest">>
+			<<link[[기다린다 (0:20)|Harvest Street]]>><<pass 20>><</link>>
+		<<case "oxford">>
+			<<link[[기다린다 (0:20)|Oxford Street]]>><<pass 20>><</link>>
+		<<case "danube">>
+			<<link[[기다린다 (0:20)|Danube Street]]>><<pass 20>><</link>>
+		<<case "mer">>
+			<<link[[기다린다 (0:20)|Mer Street]]>><<pass 20>><</link>>
+		<<case "cliff">>
+			<<link[[기다린다 (0:20)|Cliff Street]]>><<pass 20>><</link>>
+		<<case "park">>
+			<<link[[기다린다 (0:20)|Park]]>><<pass 20>><</link>>
+	<</switch>>
+
+<</widget>>
+
+<<widget "eventsstreetday">>
+	<<set $dangerevent to random(1, 190)>>
+	<<rng>>
+	<<if $location is "alley" and !Time.schoolDay and $bullytimer gte $rng and C.npc.Whitney.init is 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state) and $daily.whitney.park is undefined>>
+		<<set $bullytimer to 0>>
+		<<eventsWhitneyStreet>>
+	<<elseif !Time.schoolDay and $bullytimer gte $rng and C.npc.Whitney.init is 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state) and $bus is "high" and $dangerevent lte 30 and C.npc.Whitney.dom gte 10>>
+		<<set $bullytimer to 0>>
+		<<if random(0, 100) gte 50 and Time.dayState is "day" and ($whitneyromance is 1 or ($whitneyskirtcheck gte 1 and $forcedcrossdressingdisable is "f" and C.npc.Whitney.dom gte 18)) and !$daily.whitney.shoppingCentre and !($weekly.whitneyShoppingCentre gte 2)>>
+			<<whitneyShoppingCentre>>
+		<<else>>
+			<<pantsdownscene>>
+		<</if>>
+	<<elseif $rng lte 10 and $worn.feet.type.includes("heels") and currentSkillValue("feetskill") lt $worn.feet.reveal>>
+		<<streetheeltrip>>
+	<<elseif $rng gte 91>>
+		<<street1>>
+	<<elseif $dangerevent lte 10>>
+		<<streetfamerape>>
+	<<elseif $dangerevent lte 15 and $location isnot "alley" and $bus isnot "park">>
+		<<street_alley_detour>>
+	<<elseif $dangerevent lte 20>>
+		<<streetbox>>
+	<<elseif $dangerevent lte 30>>
+		<<street8>>
+	<<elseif $dangerevent lte 40>>
+		<<street9>>
+	<<elseif $dangerevent lte 50>>
+		<<street7>>
+	<<elseif $dangerevent lte 55>>
+		<<street10>>
+	<<elseif $dangerevent lte 60>>
+		<<streetrocks>>
+	<<elseif $dangerevent lte 65>>
+		<<street6>>
+	<<elseif $dangerevent lte 75>>
+		<<street5>>
+	<<elseif $dangerevent lte 85>>
+		<<street4>>
+	<<elseif $dangerevent lte 95>>
+		<<street2>>
+	<<elseif $dangerevent lte 96>>
+		<<street3>>
+	<<elseif $dangerevent lte 106>>
+		<<streetbullies>>
+	<<elseif $dangerevent lte 116>>
+		<<streetfootbridge>>
+	<<elseif $dangerevent lte 126>>
+		<<streetbottomgrope>>
+	<<elseif $dangerevent lte 132>>
+		<<shadyFan>>
+	<<elseif $dangerevent lte 142>>
+		<<streetvan>>
+	<<elseif $dangerevent lte 152>>
+		<<streetfriendly1>>
+	<<elseif $dangerevent lte 162>>
+		<<eventAmbient>>
+		<<destinationeventend>>
+	<<elseif $dangerevent lte 172>>
+		<<streetdog>>
+	<<elseif $dangerevent lte 176>>
+		<<streetexshow>>
+	<<elseif $dangerevent lte 180>>
+		<<streetmodelshow>>
+	<<elseif $dangerevent lte 184>>
+		<<streetnpcflash>>
+	<<elseif $dangerevent lte 190>>
+		<<if ($bus is "domus" or $bus is "danube") and Weather.precipitation is "rain" and ($upperwetstage is 1 or $lowerwetstage is 1)>>
+			<<rainyDayHarass>>
+		<<else>>
+			<<eventAmbient>>
+			<<destinationeventend>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "eventsstreetnight">>
+	<<set $dangerevent to random(1, 158)>>
+	<<rng>>
+	<<if $location is "alley" and !Time.schoolDay and $bullytimer gte $rng and C.npc.Whitney.init is 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state) and $daily.whitney.park is undefined>>
+		<<set $bullytimer to 0>>
+		<<eventsWhitneyStreet>>
+	<<elseif $rng lte 10 and $worn.feet.type.includes("heels") and currentSkillValue("feetskill") lt $worn.feet.reveal>>
+		<<streetheeltrip>>
+	<<elseif $rng gte 91>>
+		<<street1>>
+	<<elseif $dangerevent lte 10>>
+		<<streetbox>>
+	<<elseif $dangerevent lte 20>>
+		<<street8>>
+	<<elseif $dangerevent lte 30>>
+		<<street9>>
+	<<elseif $dangerevent lte 40>>
+		<<street7>>
+	<<elseif $dangerevent lte 45>>
+		<<streetrocks>>
+	<<elseif $dangerevent lte 50>>
+		<<street6>>
+	<<elseif $dangerevent lte 55>>
+		<<street10>>
+	<<elseif $dangerevent lte 65>>
+		<<street5>>
+	<<elseif $dangerevent lte 75>>
+		<<street4>>
+	<<elseif $dangerevent lte 85>>
+		<<streetfamerape>>
+	<<elseif $dangerevent lte 95>>
+		<<street2>>
+	<<elseif $dangerevent lte 105>>
+		<<street3>>
+	<<elseif $dangerevent lte 107>>
+		<<streetnight1>>
+	<<elseif $dangerevent lte 109>>
+		<<streetnight2>>
+	<<elseif $dangerevent lte 119>>
+		<<streetbottomgrope>>
+	<<elseif $dangerevent lte 121>>
+		<<streetlurker>>
+	<<elseif $dangerevent lte 131>>
+		<<streetvan>>
+	<<elseif $dangerevent lte 136>>
+		<<streetexshow>>
+	<<elseif $dangerevent lte 139>>
+		<<streetkidnap>>
+	<<elseif $dangerevent lte 149>>
+		<<eventAmbient>>
+		<<destinationeventend>>
+	<<elseif $dangerevent lte 154>>
+		<<streetmodelshow>>
+	<<elseif $dangerevent lte 158>>
+		<<streetnpcflash>>
+	<</if>>
+<</widget>>
+
+<<widget "streeteffects">>
+	<<if !$possessed>>
+		<<if wraithCanHunt() and $wraith.state and $wraith.hunt is 0 and $wraith.timer gte (random(0, 60))>>
+			<<wHunt "town">>
+		<<elseif $wraith.hunt>>
+			<<wHunt "town">>
+		<<elseif $kylar and $kylar.timer.street gte ($rng + 65) and C.npc.Kylar.state is "active" and $kylarwatched isnot 1 and $exposed lte 0>>
+			<<set $kylar.timer.street to 0>><<set $kylarwatchedtimer to 2>>
+			원초적 본능이 경고를 보낸다. 당신은 몸을 부르르 떤다. <span class="blue">누군가 당신을 지켜보고 있다.</span>
+			<<set $kylarwatched to 1>><<set $eventskip to 1>>
+		<<elseif $kylarwatched is 1>>
+			<<if $exposed gte 1 or C.npc.Kylar.state isnot "active" or $kylarwatchedtimer lte 0>>
+				<<set $kylarwatched to 0>>
+			<<else>>
+				<span class="blue">누군가 당신을 지켜보고 있다.</span>
+			<</if>>
+		<</if>>
+		<<wTimerProgress>>
+	<</if>>
+<</widget>>
+
+<<widget "loiter">>
+	<<add_link "<<loitericon>><<link [[어슬렁거린다 (0:15)|$passage]]>><<pass 15>><</link>><br>">>
+	<<hideDisplay>>
+<</widget>>
+
+<<widget "street_rescue">>
+	<<generate1>><<person1>>
+	<<person_ i>> 당신에게로 온다.
+	<<if $exposed gte 1>>
+		<<covered>> <<He_ ga>> <<his_ yi>> 시선을 다른 곳으로 돌린다.
+	<</if>>
+	"비명 소리를 들었는데." <<he_ ga>> 말한다. "괜찮니? 이 근처에 아는 사람 있니? 아니면 어디로 데려다 줄 데가 있을까?" <<he_ ga>> 묻는다.
+	<br><br>
+
+	<<link [[괜찮다고 한다|Street Rescue Fine]]>><</link>>
+	<br>
+	<<link [[고아원까지 태워 달라고 한다 (0:05)|Street Rescue Orphanage]]>><<pass 5>><</link>>
+	<br>
+	<<if $farm_stage gte 7>>
+		<<link [[농장까지 태워 달라고 한다 (0:15)|Street Rescue Farm]]>><<pass 15>><</link>>
+		<br>
+	<</if>>
+	<<if $trauma gte $traumamax * 0.8>>
+		<<link [[정신을 잃는다 (1:00)|Street Rescue Break]]>><<pass 60>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "monstrance_accost">>
+	<<if $per_npc.bishop>>
+		<<loadNPC 0 "bishop">>
+	<<else>>
+		<<generateConfessor 1>>
+		<<saveNPC 0 "bishop">>
+	<</if>>
+	<<person1>>
+	<<if $temple_rank is undefined or $temple_rank is "prospective">>
+		"아이야,"
+	<<else>>
+		"<<temple_Title_ yo "dark">>,"
+	<</if>>
+	느릿한 목소리가 그림자가 진 골목길에서 들려온다. <<He_ ga>> 환한 곳으로 걸어나오자, 검은 로브로 몸을 감싼 형상이 보인다. <<His_ yi>> 눈은 <<his_ yi>> 두건으로 숨겨져 있다.
+	<<if $temple_confessor_intro>>
+		주교다. <<His_ yi>> 두 일행이 그늘에서 걸어나온다.
+	<<else>>
+		"무서워하지 말거라. 나는 사원에서 왔단다." 사원의 표식이 새겨진 펜던트가 정말로 <<his_ yi>> 목에 걸려 있다. 검은 로브로 몸을 감싼 두 형체가 그늘에서 더 걸어나와, <<himPost>> 옆에 선다.
+	<</if>>
+	<br><br>
+
+	"나는 네가 한 저택에서 본, 어떤 <span class="pink">성광?</span> 같은 것에 대해 문의했다고 들었단다. 말해 보거라, 그곳의 주민들에 대해 어떻게 생각하느냐? 그들이 너를 겁주지는 않았고?"<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[거기에는 별로 이상한 것은 없다고 말한다|Street Monstrance Nothing]]>><</link>>
+	<br>
+	<<link [[거기에는 괴물들이 있지만, 신경쓰지 않는다고 말한다|Street Monstrance Brave]]>><</link>>
+	<br>
+	<<link [[거기에는 괴물들이 있고, 그들은 무서웠다고 말한다|Street Monstrance Scary]]>><</link>>
+	<br>
+	<<link [[아무것도 말하지 않는다|Street Monstrance Silent]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "text_pillory_release_fail_strip">>
+	And I think it's drugs."
+	<br><br>
+	"Yeah," the <<person4>><<person>> grins, looks over your body. "Definitely drugs."
+	<br><br>
+	The <<person2>><<person>> in charge nods, turns to the crowd.<br>
+	"Listen everyone," <<he>> says. "This <<girl>> is acting very strangely. I suspect <<pshe>> is dangerously high.
+	Now, if someone had actually seen <<phim>> hiding drugs on <<pher>> person... That be probable cause to strip-search <<phim>> right away, I'd say.
+	In fact, under duty of care, I'd think we'd be obliged to. For <<pher>> medical safety. So, I don't suppose anyone has anything to tell me."
+	<br><br>
+	<<set _exhib_bar to random(15,35)>>
+	<<if $player.gender_appearance is "m">>
+		One person in the crowd thinks they remembers seeing you stuffing a suspicious bag of powder into your underpants. Another is certain of it.
+		<<if $worn.under_lower.type.includes("naked")>><br>
+			<<if $speech_attitude is "meek">>
+				You're shocked to see someone so blatantly lie to police. You're not even wearing underpants!
+			<<elseif $speech_attitude is "bratty">>
+				"Well that's <<print either("obviously","blatantly")>> a lie,"
+				<<if $exhibitionism gte _exhib_bar>>
+					you snap, pulling down the back of your $worn.lower.name to briefly flash your butt. "No underpants. See?!"
+				<<else>>
+					you snap. "I'm not even wearing underpants!"
+				<</if>>
+				<br>
+				From the look on everyone's face, you realise setting the record straight probably didn't help your case.
+			<<else>>
+				"But that's obviously a lie, officer!"
+				<br><br>
+				The <<person2>><<person>> shrugs. "That's not obvious to me."
+				<br><br>
+				"I'm not," you drop your voice. "I'm not even wearing underpants."
+				<br>
+				From the look on <<his>> face, you can see that setting the record straight here did not help your case.
+			<</if>>
+		<</if>>
+	<<else>>
+		One person in the crowd remembers seeing you stuffing a suspicious bag of powder into your bra. Another confirms, but is certain you hid it in your panties.
+		<<if $worn.under_lower.type.includes("naked")>><br>
+			<<if $speech_attitude is "meek">>
+				You're shocked to see someone so blatantly lie to police. You're not even wearing panties!
+			<<elseif $speech_attitude is "bratty">>
+				"Well that's <<print either("obviously","blatantly")>> a lie,"
+				<<if $exhibitionism gte _exhib_bar>>
+					you snap, pulling down the back of your $worn.lower.name to briefly flash your butt. "See?! No panties!"
+				<<else>>
+					you snap. "I'm not even wearing panties!"
+				<</if>>
+				<br>
+				From the look on everyone's face, you suddenly doubt your own wisdom in 'setting the record straight'.
+			<<else>>
+				"But that's obviously a lie, officer!"
+				<br><br>
+				The <<person2>><<person>> shrugs. "That's not obvious to me."
+				<br><br>
+				"I'm not," you drop your voice. "I'm not even wearing panties."
+				<br>
+				From the look on <<his>> face, you sense that setting the record straight did not help your case.
+			<</if>>
+		<<elseif $worn.under_upper.type.includes("naked")>><br>
+			<<if $speech_attitude is "meek">>
+				You're shocked to see someone so blatantly lie to police. You're not wearing a bra!
+			<<elseif $speech_attitude is "bratty">>
+				"Well that's <<print either("obviously","blatantly")>> a lie,"
+				<<if $exhibitionism gte _exhib_bar>>
+					you snap, you <<if $breastsize lte 3>>try to<</if>> jiggle your <<breasts>> through your $worn.upper.name. "No bra! See?"
+				<<else>>
+					you snap. "I'm not even wearing a bra!"
+				<</if>>
+				<br>
+				From the look on everyone's face, you suddenly doubt your own wisdom in 'setting the record straight'.
+			<<else>>
+				"But that's obviously a lie, officer!"
+				<br><br>
+				The <<person2>><<person>> shrugs. "It's not obvious to me."
+				<br><br>
+				"I'm not," you drop your voice. "I'm not even wearing a bra."
+				<br>
+				From the look on <<his>> face, you sense that setting the record straight did not help your case.
+			<</if>>
+		<</if>>
+	<</if>>
+	<br><br>
+	"I've heard enough." The <<person2>><<person>> nods gravely. Winks at you.
+	<br><br>
+	The <<person4>><<person>> grabs you.
+	<br><br>
+<</widget>>

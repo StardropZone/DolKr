@@ -1,0 +1,33 @@
+:: Widgets custom system [widget nobr]
+<<widget "customlocation">>
+    <<if _args[0] isnot undefined>>
+        <<set $custom.location to _args[0]>>
+    <<else>>
+        <<delete $custom.location>>
+    <</if>>
+<</widget>>
+
+<<widget "custompassout">>
+<<if $custom.location isnot undefined>>
+    <<switch $custom.location>>
+        <<case "cliff">>
+            <<set _customlocation to "custom home cliff">>
+    <</switch>>
+<<link [[모든 것이 암흑 속으로 사라져간다...|_customlocation]]>><</link>>
+<</if>>
+<br>
+<<passout>>
+<<if _args[0] is undefined>>
+    <<pass 1 hour>>
+<<else>>
+    <<pass _args[0] _args[0]>>
+<</if>>
+<</widget>>
+
+<<widget "customsleephour">><<silently>>
+	<<if $location eq "cliff_home">>
+		<<if wraithSleepEventCheck()>>
+			<<wraithEvent>>
+		<</if>>
+	<</if>>
+<</silently>><</widget>>

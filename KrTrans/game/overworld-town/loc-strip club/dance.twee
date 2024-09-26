@@ -1,0 +1,315 @@
+:: Strip Club Dancing
+<<set $outside to 0>><<set $location to "strip_club">><<effects>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+당신은 이렇게 노출된 상태로는 춤을 출 수 없다! 얼굴이 빨갛게 달아오르며, 당신은 현장에서 도망친다.
+<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+당신은 이렇게 노출된 상태로는 춤을 출 수 없다! 얼굴이 빨갛게 달아오르며, 당신은 현장에서 도망친다.
+<br><br>
+<</if>>
+
+<<if $danceevent is "finish">>
+<<link [[다음|Strip Club]]>><<endevent>><<clotheson>><</link>>
+<<elseif $danceevent is "private">>
+	<<if hasSexStat("promiscuity", 3)>>
+		<<link [[개인실|Strip Club Private Dance]]>><<dance_private_init>><</link>><<promiscuous3>>
+		<br>
+	<<elseif $promiscuity lte 34 and $uncomfortable.prostituting is false>>
+		<<link [[개인실|Strip Club Private Dance]]>><<set $desperateaction to 1>><<dance_private_init>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+<<elseif $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74>>
+	<<link [[도망친다|Strip Club Dressing Room]]>><<clotheson>><<endevent>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+	<<link [[도망친다|Strip Club Dressing Room]]>><<clotheson>><<endevent>><</link>>
+	<<else>>
+	<<link [[그만둔다|Strip Club]]>><<clotheson>><<endevent>><</link>>
+	<</if>>
+<</if>>
+
+:: Strip Club Private Dance
+<<set $outside to 0>><<set $location to "strip_club">><<effects>>
+
+<<if $phase is 0>>
+
+<<set $tipmod to 2>><<tipset>>
+
+<<promiscuity3>>당신은 <<person_ ul>> 뒤쪽 방들중 하나로 데려간다. 공연장보다 조명이 밝아서, 당신의 눈이 적응하는데 시간이 좀 걸린다. 한쪽에 봉이 있는 작은 무대가 있고, 그 앞에는 넓은 공간을 차지하고 있는 커다란 소파도 있다.
+<br><br>
+
+	<<if $rng gte 71>>
+당신이 뒤돌기도 전에, <<person_ i>> 손을 당신의 허리에 감고 당신의 목에 입을 비벼댄다.
+<br><br>
+
+	<<link [[밀친다|Strip Club Private Dance]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[애무를 받으며 협상한다|Strip Club Private Dance]]>><<arousal 300 "breasts">><<arousal 300 "genitals">><<set $phase to 2>><<submission 5>><<garousal>><</link>>
+	<br>
+
+	<<else>>
+<<person_ un>> 문가에 멋쩍게 서서, 당신이 무언가를 시작해주길 기다리고 있다.
+<br><br>
+<<rng>>
+
+		<<if $tipreaction is "low">>
+당신은 <<him_ ul>> 잡아당겨 소파에 앉게 한다. 당신은 당신이 생각했던 가격보다 조금 낮은 <<printmoney $tip>> 정도로 협상한다.
+<br><br>
+
+"그게 별로 많지 않다는 것은 알지만..." <<he_ ga>> 말한다, "하지만 내가 내일 밥이라도 먹으려면 그 정도가 전부야." <<he_ ga>> <<his_ yi>> 발끝을 내려다본다.
+<br><br>
+
+			<<if $rng gte 51>>
+			"그리고, 너만 괜찮다면 만지고 싶진 않네. 뭐, 조금은 할지도 모르지만, 나는 그냥 이야기나 하고 싶어."
+			<br><br>
+
+			<<link [[받아들인다|Strip Club Private Dance]]>><<set $phase to 3>><<pass 30>><</link>>
+			<br>
+			<<link [[거절한다|Strip Club Private Dance]]>><<set $phase to 4>><</link>>
+			<br>
+			<<else>>
+			<<link [[받아들인다|Strip Club Private Dance Sex]]>><<set $consensual to 1>><<set $sexstart to 1>><</link>>
+			<br>
+			<<link [[거절한다|Strip Club Private Dance]]>><<set $phase to 4>><</link>>
+			<br>
+			<</if>>
+
+		<<elseif $tipreaction is "mid">>
+당신은 <<him_ ul>> 잡아당겨 소파에 앉게 한다. 당신은 당신에겐 합리적으로 보이는 <<printmoney $tip>> 정도로 협상한다.
+<br><br>
+
+			<<if $rng gte 51>>
+			<<he_ ga>> 부드럽게 말한다. "너만 괜찮다면 만지고 싶진 않네. 뭐, 조금은 할지도 모르지만, 나는 그냥 이야기나 하고 싶어."
+			<br><br>
+
+			<<link [[받아들인다|Strip Club Private Dance]]>><<set $phase to 3>><<pass 30>><</link>>
+			<br>
+			<<link [[거절한다|Strip Club Private Dance]]>><<set $phase to 4>><</link>>
+			<br>
+			<<else>>
+			<<link [[받아들인다|Strip Club Private Dance Sex]]>><<set $consensual to 1>><<set $sexstart to 1>><</link>>
+			<br>
+			<<link [[거절한다|Strip Club Private Dance]]>><<set $phase to 4>><</link>>
+			<br>
+			<</if>>
+		<</if>>
+
+	<</if>>
+
+<<elseif $phase is 1>>
+	<<if $rng gte 21>>
+	당신은 <<person_ ul>> 밀어낸다. <<He_ nun>> 실망스러운 것 같아 보이지만, 어쩔 수 없다.
+	<<set $enemyanger += 20>>
+
+		<<if $tipreaction is "low">>
+	당신은 당신이 생각했던 가격보다 조금 낮은 <<printmoney $tip>> 정도로 협상한다.
+	<br><br>
+
+	"네가 그만큼 가치있다고 생각해?" <<he_ ga>> 비웃는다. "난 너 같은 년들이랑 공짜로도 할 수 있어, 이건 자선 같은거지."
+	<br><br>
+
+			<<link [[받아들인다|Strip Club Private Dance Sex]]>><<set $consensual to 1>><<set $sexstart to 1>><</link>>
+			<br>
+			<<link [[거절한다|Strip Club Private Dance]]>><<set $phase to 5>><</link>>
+			<br>
+
+		<<elseif $tipreaction is "mid">>
+	당신은 당신에겐 합리적으로 보이는 <<printmoney $tip>> 정도로 협상한다.
+	<br><br>
+
+			<<link [[받아들인다|Strip Club Private Dance Sex]]>><<set $consensual to 1>><<set $sexstart to 1>><</link>>
+			<br>
+			<<link [[거절한다|Strip Club Private Dance]]>><<set $phase to 5>><</link>>
+			<br>
+
+		<</if>>
+
+	<<else>>
+	당신은 당신의 은밀한 곳들을 더듬는 <<his_ yi>> 손을 떼내려고 하지만, <<he_ ga>> 한 손으로 당신의 팔을 붙잡고 다른 손으로 입을 꽉 조인다.
+	<br><br>
+	<<set $enemyanger += 20>>
+
+	<<link [[다음|Strip Club Private Dance Sex]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+	<</if>>
+
+<<elseif $phase is 2>>
+	<<if $tipreaction is "low">>
+<<his_ yi>> 가차없는 손놀림에도 불구하고, 당신은 어떻게든 당신이 생각했던 가격보다 조금 낮은 <<printmoney $tip>> 정도로 협상해낸다.
+<br><br>
+	<<elseif $tipreaction is "mid">>
+<<his_ yi>> 가차없는 손놀림에도 불구하고, 당신은 어떻게든 당신에겐 합리적으로 보이는 <<printmoney $tip>> 정도로 협상해낸다.
+<br><br>
+	<</if>>
+
+	<<link [[받아들인다|Strip Club Private Dance Sex]]>><<set $consensual to 1>><<set $sexstart to 1>><</link>>
+	<br>
+	<<link [[거절한다|Strip Club Private Dance]]>><<set $phase to 5>><</link>>
+	<br>
+
+<<elseif $phase is 3>>
+<<he_ ga>> <<his_ yi>> 머리를 당신의 무릎에 얹자, 당신은 <<his_ yi>> 머리칼을 부드럽게 쓰다듬는다. <<He_ nun>> 일상적인 주제에 대해 말하고 당신은 그것을 공감하며 들어준다. 진부한 대화임에도 불구하고, <<He_ nun>> 어느 순간 눈물을 글썽이며 <<he_ ga>> <<his_ yi>> 배우자에게 속을 터놓기가 힘들다며 호소한다.
+<br><br>
+
+<<hePost "에게">> 주어진 30분이 끝나자, <<He_ nun>> 제 비용을 내고 시간을 내준 것에 대해 당신에게 감사 인사를 한다. <<He_ nun>> 진심으로 고마워하는 것 같다.
+<br><br>
+<<fameprostitution 1>>
+
+<<clotheson>>
+
+<<link [[다음|Strip Club]]>><<set $money += $tip>><<endevent>><</link>>
+
+<<elseif $phase is 4>>
+<<He_ nun>> 풀이 죽은 눈으로 고개를 끄덕인다. <<He_ nun>> 금방 방을 떠났다.
+<br><br>
+
+<<clotheson>>
+
+<<link [[다음|Strip Club]]>><<endevent>><</link>>
+
+<<elseif $phase is 5>>
+<<rng>>
+	<<if $rng gte 21>>
+	<<He_ nun>> 뭘 해야할지 잘 모르겠다는 듯 당신은 쳐다본다. 결국, <<He_ nun>> "넌 아마도 무슨 전염병에라도 걸렸을 테니까."라고 말하곤 방을 떠난다.
+	<br><br>
+
+<<clotheson>>
+
+<<link [[다음|Strip Club]]>><<endevent>><</link>>
+
+	<<else>>
+<<He_ nun>> 당신을 잠시 멍하니 보더니, 웃어버린다. "재미있는 농담이야, 이제 내가 널 때려눕히기 전에 무릎을 꿇는게 좋을 거야!" <<he_ ga>> 당신에게 달려든다!
+<br><br>
+
+<<link [[다음|Strip Club Private Dance Sex]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+	<</if>>
+<</if>>
+
+:: Strip Club Private Dance Sex
+<<if $molestationstart is 1>>
+<<set $molestationstart to 0>>
+<<controlloss>>
+<<violence 1>>
+<<neutral 1>>
+<<molested>>
+
+<<maninit>>
+<<enable_rescue>>
+	<<if $phase is 1>>
+<<set $NPCList[0].lefthand to "arms">>
+<<set $leftarm to "grappled">>
+<<set $rightarm to "grappled">>
+<<hand_gag 0 right>>
+	<<elseif $phase is 5>>
+<<set $enemyanger += 40>>
+	<</if>>
+
+<<elseif $sexstart is 1>>
+<<set $sexstart to 0>>
+<<set $consensual to 1>>
+<<neutral 1>>
+
+<<maninit>>
+<<enable_rescue>>
+<<set $enemytrust += 40>>
+	<<if $phase is 2>>
+"이럴 만한 가치가 있어야 할 거야." <<he_ ga>> 말한다.
+	<<else>>
+<<set $enemytrust += 40>>
+	<</if>>
+	<<if $phase is 1>>
+"이럴 만한 가치가 있어야 할 거야." <<he_ ga>> 말한다.
+	<<else>>
+<<set $enemytrust += 40>>
+	<</if>>
+
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyarousal lte $enemyarousalmax and $enemyhealth gte 0 and $alarm lte 0 and $finish is 0>>
+	<span id="next"><<link [[다음|Strip Club Private Dance Sex]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Strip Club Private Dance Sex Finish]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Strip Club Private Dance Sex Finish
+<<set $outside to 0>><<set $location to "strip_club">><<effects>>
+
+<<if $consensual is 1>>
+
+	<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $prostitutionstat += 1>><<fameprostitution 1>>
+		<<if $phase is 2>>
+	"자, 네 몸 값이다. <<whore_ ya>>." <<person_ i>> <<he_ ga>> 끝나자 헉헉거리며 말한다. <<He_ nun>> 당신을 돌아보지도 않고 방을 떠난다.
+	<br><br>
+	<<tipreceive>>
+		<<elseif $phase is 1>>
+	"자, 네 몸 값이다. <<whore_ ya>>." <<person_ i>> <<he_ ga>> 끝나자 헉헉거리며 말한다.
+
+			<<if $brothelknown is 0 and $rng gte 91>>
+	"너한테 줄 게 있어." <<He_ ga>> 방을 떠나기 전에 당신에게 종이 한 장을 건넨다. 당신은 종이를 읽는다. 하베스트 가의 한 건물 주소가 적혀있다. <span class="gold">당신은 이제 하베스트 가의 수상한 건물에 들어갈 수 있다.</span>
+	<br><br>
+			<<else>>
+	<<He_ nun>> 당신을 돌아보지도 않고 방을 떠난다.
+	<br><br>
+			<</if>>
+	<<tipreceive>>
+		<<else>>
+		<<he_ ga>> 만족감에 미소 짓는다. "시간 내줘서 고마워. 자, 받아." <<He_ nun>> 나가기 전까지도 당신에게 활짝 웃어주곤 떠난다.
+		<br><br>
+	<<tipreceive>>
+		<</if>>
+
+	<<else>>
+		<<if $phase is 2>>
+		"좋아, 돈을 바라진 않겠지?" <<He_ nun>> 넌더리가 난다는 듯 당신을 쳐다보곤 떠난다.
+		<br><br>
+		<<elseif $phase is 1>>
+		"좋아, 돈을 바라진 않겠지?" <<He_ nun>> 넌더리가 난다는 듯 당신을 쳐다보곤 떠난다.
+		<br><br>
+		<<else>>
+		"내가 뭔가 잘못했니? 미안해!" <<he_ ga>> 방에서 달아난다.
+		<br><br>
+		<</if>>
+
+	<</if>>
+
+<<else>>
+
+	<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<fameprostitution 1>>
+	"자, 네 몸 값이다. <<whore_ ya>>." <<person_ i>> <<he_ ga>> 끝나자 헉헉거리며 말한다. <<He_ nun>> 당신을 돌아보지도 않고 방을 떠난다.
+	<br><br>
+	<<tipreceive>>
+	<<elseif $enemyhealth lte 0>>
+	당신은 간신히 <<person_ ul>> 쓰러뜨리고, 도망칠 찰나의 순간을 얻는다. 당신은 보안 요원에게 알리고, 요원들이 신속하게 <<person_ ul>> 제압한다.
+	<br><br>
+
+	<<else>>
+	문이 벌컥 열리면서 건장한 보안 요원이 들어온다. <<person_ un>> 건장한 요원에게 질질 끌려나간다. 당신은 안도의 한숨을 내쉰다.
+	<br><br>
+	<<set $rescued += 1>>
+
+	<</if>>
+
+<</if>>
+<br><br>
+
+<<clotheson>>
+
+<<endcombat>>
+<<link [[다음|Strip Club]]>><</link>>

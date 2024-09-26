@@ -1,0 +1,121 @@
+:: Churchyard
+<<location "churchyard">><<set $outside to 1>><<effects>><<handheldon>>
+
+당신은 옛 교회 유적에 있다. 돌 유적으로 둘러싸인 언덕에서 오래된 저택이 우뚝 솟아 있다.
+
+<<if Time.dayState is "night">>
+	<<if Weather.bloodMoon>>
+		무덤은 붉은 달빛에 불안한 그림자를 드리운다.
+	<<else>>
+		<<if Weather.precipitation is "none">>
+			달빛이 드리운 그림자가 움직이는 것 같다
+		<<elseif Weather.precipitation is "rain">>
+			돌에 쏟아지는 빗방울이 다른 모든 것을 젖게 한다.
+		<<elseif Weather.precipitation is "snow">>
+			눈이 비석에 쌓인다.
+		<<else>>
+			당신은 어둠 속에서 발을 헛디디지 않도록 조심한다.
+		<</if>>
+	<</if>>
+<<elseif Time.dayState is "day">>
+	새들은 석상 위에 둥지를 틀고, 무덤의 아치형 입구 위에 늘어서 있다.
+<<elseif Time.dayState is "dawn">>
+	아침 햇살이 나무들 위로 비친다.
+<<else>>
+	해가 저물자 그림자가 길어진다.
+<</if>>
+<br><br>
+
+<<foresticon "churchyard">><<link [[무덤|Churchyard Catacombs Lock]]>><</link>>
+<br>
+<<foresticon>><<link [[숲으로 들어간다|Forest]]>><<endevent>><<set $forest to 10>><</link>>
+<br>
+
+:: Churchyard Catacombs Lock
+<<location "sepulchre">><<set $outside to 0>><<effects>>
+
+당신은 무덤에 다가간다. 가고일이 양쪽에 앉은 채 지켜본다. 무덤의 문은 오래된 석재와는 맞지 않게 현대적인 장치로 잠겨 있다.
+<br><br>
+
+<<set $lock to 500>>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		당신은 <span class="blue">당신의 팔이 묶여 있지 않았다면</span> 자물쇠를 딸 수 있었으리라고 생각한다.
+		<br><br>
+	<<else>>
+		<span class="green">이 자물쇠는 따기 쉬워 보인다.</span>
+		<br><br>
+		<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|Churchyard Catacombs Sneak]]>><<pass 10>><<crimeUp 1 "trespassing">><</link>><<crime "trespassing">>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">이 자물쇠는 당신의 자물쇠따기 능력 바깥에 있는 것으로 보인다.</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<getouticon>><<link [[떠난다|Churchyard]]>><</link>>
+<br>
+
+:: Churchyard Catacombs Sneak
+<<effects>>
+<<if $crypt_intro is 1>>
+	당신은 무덤에 들어선다. 또 다른 횃불이 돌출된 횃불걸이에서 타오른다. 당신은 그걸 집어들고 지하묘지 아래로 내려간다.
+	<br><br>
+
+	<<link [[다음|Catacombs]]>><<catacombs_init>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	자물쇠가 없어졌음에도, 석재 문 하나가 단단히 끼어 있다. 그러나 당신은 사이로 들어가기에 충분할 만큼 밀어낼 수 있었다.
+	<br><br>
+
+	내부는 횃불 하나로 밝혀져 있다. 불빛은 방의 먼 구석까진 도달하지 못한다.
+	<br><br>
+
+	당신은 횃불걸이에서 횃불을 꺼내 당신의 길을 밝히는 데 쓴다. 방은 열린 석관을 제외하고는 비어 있다.
+	<br><br>
+
+	<<ind>><<link [[천천히 안을 훑어본다|Churchyard Catacombs Peer Slow]]>><<set $crypt_intro to 1>><</link>>
+	<br>
+	<<ind>><<link [[재빨리 안을 훑어본다|Churchyard Catacombs Peer Quick]]>><<set $crypt_intro to 1>><</link>>
+	<br>
+	<<getouticon>><<link [[떠난다|Churchyard Catacombs Leave]]>><<stress 6>><</link>><<gstress>>
+	<br>
+<</if>>
+
+:: Churchyard Catacombs Peer Slow
+<<effects>>
+
+당신은 당신이 보고 싶지 않은 무언가를 찾았을 때 재빨리 횃불을 거둘 준비를 한 채, 횃불을 앞으로 내밀며 석관의 내부를 조금씩 비춰나간다. 당신은 아래로 내려가는 계단을 발견한다.
+<br><br>
+
+<<link [[내려간다|Churchyard Catacombs Intro]]>><</link>>
+<br>
+
+:: Churchyard Catacombs Peer Quick
+<<effects>>
+
+당신은 횃불을 앞으로 쑥 내밀며, 석관의 내부를 단번에 비춘다. 당신은 아래로 내려가는 계단을 발견한다.
+<br><br>
+
+<<link [[내려간다|Churchyard Catacombs Intro]]>><</link>>
+<br>
+
+:: Churchyard Catacombs Intro
+<<effects>>
+
+계단을 따라 내려가니 좁은 통로가 이어져 있고, 당신의 횃불이 팔이 여섯 개 달린 천사의 상을 비춘다. 석상은 돌로 된 해골들로 둘러싸인 벽에 설치되어 있다.
+<br><br>
+
+길은 쭉 안쪽으로 이어져 있다. 당신의 횃불에서 나오는 빛은 여기보다 조금 먼 곳까지 닿아, 두 갈래로 갈라지는 길을 드러낸다.
+<br><br>
+
+<<link [[다음|Catacombs]]>><<catacombs_init>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Churchyard Catacombs Leave
+<<effects>>
+
+당신은 횃불을 횃불걸이에 돌려놓을 때 잠시 멈춘 걸 빼고는 지체없이 몸을 돌려 입구 쪽으로 걸어나간다. 문에 도달하기 전 당신은 발걸음을 서두른다.
+<br><br>
+
+<<link [[다음|Churchyard]]>><</link>>
+<br>

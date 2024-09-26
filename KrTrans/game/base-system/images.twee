@@ -1,0 +1,1986 @@
+:: Widgets Breasts Img [widget]
+<<widget "breastsidle">>
+	<<set _filters to $skinColor.current>>
+	<<set _img to setup.tanImg.doggy[($options.tanImgEnabled ? "t" : "f")]>>
+	<<if $worn.upper.exposed gte 2 or setup.clothes.upper[clothesIndex("upper",$worn.upper)].breast_combat>>
+		<<if $player.perceived_breastsize is 0>>
+		<<elseif $player.perceived_breastsize is 1 or $player.perceived_breastsize is 2>>
+			<img class="layer-sexmouth" @src="_img.breastsTiny" @style="'filter: ' + _filters.body">
+		<<elseif $player.perceived_breastsize is 3 or $player.perceived_breastsize is 4>>
+			<img class="layer-sexmouth" @src="_img.breastsSmall" @style="'filter: ' + _filters.body">
+		<<elseif $player.perceived_breastsize gte 5 and $player.perceived_breastsize lte 7 >>
+			<img class="layer-sexmouth" @src="_img.breastsLarge" @style="'filter: ' + _filters.body">
+		<<elseif $player.perceived_breastsize gte 8 and $player.perceived_breastsize lte 12>>
+			<img class="layer-sexmouth" @src="_img.breastsHuge" @style="'filter: ' + _filters.body">
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "breastsactive">>
+	<<set _filters to $skinColor.current>>
+	<<set _img to setup.tanImg.doggy[($options.tanImgEnabled ? "t" : "f")]>>
+	<<if $worn.upper.exposed gte 2 or setup.clothes.upper[clothesIndex("upper",$worn.upper)].breast_combat>>
+		<<if $player.perceived_breastsize is 0>>
+		<<elseif $player.perceived_breastsize is 1 or $player.perceived_breastsize is 2>>
+			<img @class="'layer-sexmouth anim-doggy-4f-'+_animspeed" @src="_img.breastsTiny" @style="'filter: ' + _filters.body">
+		<<elseif $player.perceived_breastsize is 3 or $player.perceived_breastsize is 4>>
+			<img @class="'layer-sexmouth anim-doggy-4f-'+_animspeed" @src="_img.breastsSmall" @style="'filter: ' + _filters.body">
+		<<elseif $player.perceived_breastsize gte 5 and $player.perceived_breastsize lte 7 >>
+			<img @class="'layer-sexmouth anim-doggy-4f-'+_animspeed" @src="_img.breastsLarge" @style="'filter: ' + _filters.body">
+		<<elseif $player.perceived_breastsize gte 8 and $player.perceived_breastsize lte 12>>
+			<img @class="'layer-sexmouth anim-doggy-4f-'+_animspeed" @src="_img.breastsHuge" @style="'filter: ' + _filters.body">
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "breastsidlemissionary">>
+	<<set _filters to $skinColor.current>>
+	<<set _img to setup.tanImg.missionary[($options.tanImgEnabled ? "t" : "f")]>>
+	<<if $player.perceived_breastsize is 0>>
+	<<elseif $player.perceived_breastsize is 1 or $player.perceived_breastsize is 2>>
+		<img class="layer-sexmouth" @src="_img.breastsTiny" @style="'filter: ' + _filters.body">
+	<<elseif $player.perceived_breastsize is 3 or $player.perceived_breastsize is 4>>
+		<img class="layer-sexmouth" @src="_img.breastsSmall" @style="'filter: ' + _filters.body">
+	<<elseif $player.perceived_breastsize gte 5 and $player.perceived_breastsize lte 7>>
+		<img class="layer-sexmouth" @src="_img.breastsLarge" @style="'filter: ' + _filters.body">
+	<<elseif $player.perceived_breastsize gte 8 and $player.perceived_breastsize lte 12>>
+		<img class="layer-sexmouth" @src="_img.breastsHuge" @style="'filter: ' + _filters.body">
+	<</if>>
+<</widget>>
+
+<<widget "breastsactivemissionary">>
+	<<set _filters to $skinColor.current>>
+	<<set _img to setup.tanImg.missionary[($options.tanImgEnabled ? "t" : "f")]>>
+	<<if $player.perceived_breastsize is 0>>
+	<<elseif $player.perceived_breastsize is 1 or $player.perceived_breastsize is 2>>
+		<img @class="'layer-sexmouth anim-doggy-4f-'+_animspeed" @src="_img.breastsTiny" @style="'filter: ' + _filters.body">
+	<<elseif $player.perceived_breastsize is 3 or $player.perceived_breastsize is 4>>
+		<img @class="'layer-sexmouth anim-doggy-4f-'+_animspeed" @src="_img.breastsSmall" @style="'filter: ' + _filters.body">
+	<<elseif $player.perceived_breastsize gte 5 and $player.perceived_breastsize lte 7>>
+		<img @class="'layer-sexmouth anim-doggy-4f-'+_animspeed" @src="_img.breastsLarge" @style="'filter: ' + _filters.body">
+	<<elseif $player.perceived_breastsize gte 8 and $player.perceived_breastsize lte 12>>
+		<img @class="'layer-sexmouth anim-doggy-4f-'+_animspeed" @src="_img.breastsHuge" @style="'filter: ' + _filters.body">
+	<</if>>
+<</widget>>
+
+:: Widgets Transformation Img [widget]
+
+<<widget "img_tf_doggy_idle">>
+	<<if $physicalTransform is 1>>
+		<<img_tf_wolf_doggy_idle>>
+		<<img_tf_cat_doggy_idle>>
+		<<img_tf_cow_doggy_idle>>
+		<<img_tf_bird_doggy_idle>>
+		<<img_tf_fox_doggy_idle>>
+	<</if>>
+	<<if $specialTransform is 1>>
+		<<img_tf_angel_doggy_idle>>
+		<<img_tf_fallenangel_doggy_idle>>
+		<<img_tf_demon_doggy_idle>>
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_doggy_active">>
+	<<if $physicalTransform is 1>>
+		<<img_tf_wolf_doggy_active>>
+		<<img_tf_cat_doggy_active>>
+		<<img_tf_cow_doggy_active>>
+		<<img_tf_bird_doggy_active>>
+		<<img_tf_fox_doggy_active>>
+	<</if>>
+	<<if $specialTransform is 1>>
+		<<img_tf_angel_doggy_active>>
+		<<img_tf_fallenangel_doggy_active>>
+		<<img_tf_demon_doggy_active>>
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_miss_idle">>
+	<<if $physicalTransform is 1>>
+		<<img_tf_wolf_miss_idle>>
+		<<img_tf_cat_miss_idle>>
+		<<img_tf_cow_miss_idle>>
+		<<img_tf_bird_miss_idle>>
+		<<img_tf_fox_miss_idle>>
+	<</if>>
+	<<if $specialTransform is 1>>
+		<<img_tf_angel_miss_idle>>
+		<<img_tf_fallenangel_miss_idle>>
+		<<img_tf_demon_miss_idle>>
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_miss_active">>
+	<<if $physicalTransform is 1>>
+		<<img_tf_wolf_miss_active>>
+		<<img_tf_cat_miss_active>>
+		<<img_tf_cow_miss_active>>
+		<<img_tf_bird_miss_active>>
+		<<img_tf_fox_miss_active>>
+	<</if>>
+	<<if $specialTransform is 1>>
+		<<img_tf_angel_miss_active>>
+		<<img_tf_fallenangel_miss_active>>
+		<<img_tf_demon_miss_active>>
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_wolf_doggy_idle">>
+	<<if !_disabled.includes($transformationParts.wolf.ears)>>
+		<img class="layer-horns colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/wolf/ears/'+$transformationParts.wolf.ears+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.pits)>>
+		<img class="layer-doggyhirsute colour-hair" @src="'img/sex/doggy/active/transformations/hirsute/pits/'+$transformationParts.wolf.pits+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.pubes) and !playerBellyVisible()>>
+		<img class="layer-doggyhirsute colour-hair" @src="'img/sex/doggy/active/transformations/hirsute/pubes/'+$transformationParts.wolf.pubes+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.tail)>>
+		<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/wolf/tail/'+$transformationParts.wolf.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.cheeks)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/wolf/cheeks/'+$transformationParts.wolf.cheeks+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_wolf_doggy_active">>
+	<<if !_disabled.includes($transformationParts.wolf.ears)>>
+		<img @class="'layer-horns colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/wolf/ears/'+$transformationParts.wolf.ears+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.pits)>>
+		<img @class="'layer-doggyhirsute colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/hirsute/pits/'+$transformationParts.wolf.pits+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.pubes) and !playerBellyVisible()>>
+		<img @class="'layer-doggyhirsute colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/hirsute/pubes/'+$transformationParts.wolf.pubes+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.tail)>>
+		<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/wolf/tail/'+$transformationParts.wolf.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.cheeks)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/wolf/cheeks/'+$transformationParts.wolf.cheeks+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_wolf_miss_idle">>
+	<<if !_disabled.includes($transformationParts.wolf.ears)>>
+		<img class="layer-horns colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/wolf/ears/'+$transformationParts.wolf.ears+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.pits)>>
+		<img class="layer-doggyhirsute colour-hair" @src="'img/sex/missionary/active/transformations/hirsute/pits/'+$transformationParts.wolf.pits+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.pubes) and !playerBellyVisible()>>
+		<img class="layer-doggyhirsute colour-hair" @src="'img/sex/missionary/active/transformations/hirsute/pubes/'+$transformationParts.wolf.pubes+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.tail)>>
+		<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/wolf/tail/'+$transformationParts.wolf.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.cheeks)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/wolf/cheeks/'+$transformationParts.wolf.cheeks+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_wolf_miss_active">>
+	<<if !_disabled.includes($transformationParts.wolf.ears)>>
+		<img @class="'layer-horns colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/wolf/ears/'+$transformationParts.wolf.ears+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.pits)>>
+		<img @class="'layer-doggyhirsute colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/hirsute/pits/'+$transformationParts.wolf.pits+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.pubes) and !playerBellyVisible()>>
+		<img @class="'layer-doggyhirsute colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/hirsute/pubes/'+$transformationParts.wolf.pubes+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.tail)>>
+		<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/wolf/tail/'+$transformationParts.wolf.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.wolf.cheeks)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/wolf/cheeks/'+$transformationParts.wolf.cheeks+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_cat_doggy_idle">>
+	<<if !_disabled.includes($transformationParts.cat.ears)>>
+		<img class="layer-horns colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/cat/ears/'+$transformationParts.cat.ears+'.png'">
+		<img class="layer-backhair colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/cat/ears/'+$transformationParts.cat.ears+'_back.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.cat.tail)>>
+		<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/cat/tail/'+$transformationParts.cat.tail+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_cat_doggy_active">>
+	<<if !_disabled.includes($transformationParts.cat.ears)>>
+		<img @class="'layer-horns colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/cat/ears/'+$transformationParts.cat.ears+'.png'">
+		<img @class="'layer-backhair colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/cat/ears/'+$transformationParts.cat.ears+'_back.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.cat.tail)>>
+		<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/cat/tail/'+$transformationParts.cat.tail+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_cat_miss_idle">>
+	<<if !_disabled.includes($transformationParts.cat.ears)>>
+		<img class="layer-horns colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/cat/ears/'+$transformationParts.cat.ears+'.png'">
+		<img class="layer-backhair colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/cat/ears/'+$transformationParts.cat.ears+'_back.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.cat.tail)>>
+		<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/cat/tail/'+$transformationParts.cat.tail+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_cat_miss_active">>
+	<<if !_disabled.includes($transformationParts.cat.ears)>>
+		<img @class="'layer-horns colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/cat/ears/'+$transformationParts.cat.ears+'.png'">
+		<img @class="'layer-backhair colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/cat/ears/'+$transformationParts.cat.ears+'_back.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.cat.tail)>>
+		<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/cat/tail/'+$transformationParts.cat.tail+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_cow_doggy_idle">>
+	<<set $_cow to $transformationParts.cow>>
+	<<set $_demon to $transformationParts.demon>>
+	<<if isPartEnabled($_cow.horns)>>
+		<<set $_hornType to $_cow.horns>>
+		<<set $_layer to "layer-horns">>
+		<<if isPartEnabled($_demon.horns) and isChimeraEnabled("demoncow", "horns")>>
+			<<set $_hornType to 'default-demon'>>
+			<<set $_layer to "layer-horns-chimera">>
+		<</if>>
+		<img @class="$_layer + ' anim-idle-2f'" @src="'img/sex/doggy/active/transformations/cow/horns/'+$_hornType+'.png'">
+	<</if>>
+	<<if isPartEnabled($_cow.ears)>>
+		<img class="layer-horns anim-idle-2f" @src="'img/sex/doggy/active/transformations/cow/ears/'+$_cow.ears+'.png'">
+	<</if>>
+	<<if isPartEnabled($_cow.tail)>>
+		<img class="layer-sexwings anim-idle-2f" @src="'img/sex/doggy/active/transformations/cow/tail/'+$_cow.tail+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_cow_doggy_active">>
+	<<set $_cow to $transformationParts.cow>>
+	<<set $_demon to $transformationParts.demon>>
+	<<if isPartEnabled($_cow.horns)>>
+		<<set $_hornType to $_cow.horns>>
+		<<set $_layer to "layer-horns">>
+		<<if isPartEnabled($_demon.horns) and isChimeraEnabled("demoncow", "horns")>>
+			<<set $_hornType to 'default-demon'>>
+			<<set $_layer to "layer-horns-chimera">>
+		<</if>>
+		<img @class="$_layer + ' anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/cow/horns/'+$_hornType+'.png'">
+	<</if>>
+	<<if isPartEnabled($_cow.ears)>>
+		<img @class="'layer-foreground anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/cow/ears/'+$_cow.ears+'.png'">
+	<</if>>
+	<<if isPartEnabled($_cow.tail)>>
+		<img @class="'layer-sexwings anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/cow/tail/'+$_cow.tail+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_cow_miss_idle">>
+	<<set $_cow to $transformationParts.cow>>
+	<<set $_demon to $transformationParts.demon>>
+	<<if isPartEnabled($_cow.horns)>>
+		<<set $_hornType to $_cow.horns>>
+		<<set $_layer to "layer-horns">>
+		<<if isPartEnabled($_demon.horns) and isChimeraEnabled("demoncow", "horns")>>
+			<<set $_hornType to 'default-demon'>>
+			<<set $_layer to "layer-horns-chimera">>
+		<</if>>
+		<img @class="$_layer + ' anim-idle-2f'" @src="'img/sex/missionary/active/transformations/cow/horns/'+$_hornType+'.png'">
+	<</if>>
+	<<if isPartEnabled($_cow.ears)>>
+		<img class="layer-horns anim-idle-2f" @src="'img/sex/missionary/active/transformations/cow/ears/'+$_cow.ears+'.png'">
+		<img class="layer-face anim-idle-2f" src="img/sex/missionary/active/transformations/cow/tag.png">
+	<</if>>
+	<<if isPartEnabled($_cow.tail)>>
+		<img class="layer-sexwings anim-idle-2f" @src="'img/sex/missionary/active/transformations/cow/tail/'+$_cow.tail+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_cow_miss_active">>
+	<<set $_cow to $transformationParts.cow>>
+	<<set $_demon to $transformationParts.demon>>
+	<<if isPartEnabled($_cow.horns)>>
+		<<set $_hornType to $_cow.horns>>
+		<<set $_layer to "layer-horns">>
+		<<if isPartEnabled($_demon.horns) and isChimeraEnabled("demoncow", "horns")>>
+			<<set $_hornType to 'default-demon'>>
+			<<set $_layer to "layer-horns-chimera">>
+		<</if>>
+		<img @class="$_layer + ' anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/cow/horns/'+$_hornType+'.png'">
+	<</if>>
+	<<if isPartEnabled($_cow.ears)>>
+		<img @class="'layer-horns anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/cow/ears/'+$_cow.ears+'.png'">
+		<img @class="'layer-face anim-doggy-4f-'+_animspeed" src="img/sex/missionary/active/transformations/cow/tag.png">
+	<</if>>
+	<<if isPartEnabled($_cow.tail)>>
+		<img @class="'layer-sexwings anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/cow/tail/'+$_cow.tail+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_bird_doggy_idle">>
+	<<set $_bird to $transformationParts.bird>>
+	<<if !_disabled.includes($_bird.tail)>>
+		<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/bird/tail/'+$transformationParts.bird.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.eyes)>>
+		<img class="layer-sexlashes anim-idle-2f" @src="'img/sex/doggy/active/transformations/bird/eyes/'+$transformationParts.bird.eyes+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.malar)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/bird/malar/'+$transformationParts.bird.malar+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.plumage)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/bird/plumage/'+$transformationParts.bird.plumage+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.wings)>>
+		<<set $_demon to $transformationParts.demon>>
+		<<if isPartEnabled($_demon.wings) and isChimeraEnabled('demonharpy', 'wings')>>
+			<img class="layer-sexaboveclothes colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/bird/wings/default-demon.png'">
+		<<else>>
+			<img class="layer-sexaboveclothes colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/bird/wings/'+$transformationParts.bird.wings+'.png'">
+		<</if>>
+	<</if>>
+	<<if !_disabled.includes($_bird.pubes) and !playerBellyVisible()>>
+		<img class="layer-doggyhirsute colour-hair" anim-idle-2f @src="'img/sex/doggy/active/transformations/bird/pubes/'+$transformationParts.bird.pubes+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_bird_doggy_active">>
+	<<set $_bird to $transformationParts.bird>>
+	<<if !_disabled.includes($_bird.tail)>>
+		<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/bird/tail/'+$transformationParts.bird.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.eyes)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/bird/eyes/'+$transformationParts.bird.eyes+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.malar)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/bird/malar/'+$transformationParts.bird.malar+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.plumage)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/bird/plumage/'+$transformationParts.bird.plumage+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.wings)>>
+		<<set $_demon to $transformationParts.demon>>
+		<<if isPartEnabled($_demon.wings) and isChimeraEnabled('demonharpy', 'wings')>>
+			<img @class="'layer-sexaboveclothes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/bird/wings/default-demon.png'">
+		<<else>>
+			<img @class="'layer-sexaboveclothes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/bird/wings/'+$transformationParts.bird.wings+'.png'">
+		<</if>>
+	<</if>>
+	<<if !_disabled.includes($_bird.pubes) and !playerBellyVisible()>>
+		<img @class="'layer-doggyhirsute colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/bird/pubes/'+$transformationParts.bird.pubes+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_bird_miss_idle">>
+	<<set $_bird to $transformationParts.bird>>
+	<<if !_disabled.includes($_bird.tail)>>
+		<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/bird/tail/'+$transformationParts.bird.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.eyes)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/bird/eyes/'+$transformationParts.bird.eyes+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.malar)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/bird/malar/'+$transformationParts.bird.malar+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.plumage)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/bird/plumage/'+$transformationParts.bird.plumage+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.wings)>>
+		<<set $_demon to $transformationParts.demon>>
+		<<if isPartEnabled($_demon.wings) and isChimeraEnabled('demonharpy', 'wings')>>
+			<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/bird/wings/default-demon.png'">
+		<<else>>
+			<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/bird/wings/'+$transformationParts.bird.wings+'.png'">
+		<</if>>
+	<</if>>
+	<<if !_disabled.includes($_bird.pubes) and !playerBellyVisible()>>
+		<img class="layer-doggyhirsute colour-hair" @src="'img/sex/missionary/active/transformations/bird/pubes/'+$transformationParts.bird.pubes+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_bird_miss_active">>
+	<<set $_bird to $transformationParts.bird>>
+	<<if !_disabled.includes($_bird.tail)>>
+		<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/bird/tail/'+$transformationParts.bird.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.eyes)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/bird/eyes/'+$transformationParts.bird.eyes+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.malar)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/bird/malar/'+$transformationParts.bird.malar+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.plumage)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/bird/plumage/'+$transformationParts.bird.plumage+'.png'">
+	<</if>>
+	<<if !_disabled.includes($_bird.wings)>>
+		<<set $_demon to $transformationParts.demon>>
+		<<if isPartEnabled($_demon.wings) and isChimeraEnabled('demonharpy', 'wings')>>
+			<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/bird/wings/default-demon.png'">
+		<<else>>
+			<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/bird/wings/'+$transformationParts.bird.wings+'.png'">
+		<</if>>
+	<</if>>
+	<<if !_disabled.includes($_bird.pubes) and !playerBellyVisible()>>
+		<img @class="'layer-doggyhirsute colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/bird/pubes/'+$transformationParts.bird.pubes+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_fox_doggy_idle">>
+	<<if !_disabled.includes($transformationParts.fox.ears)>>
+		<img class="layer-horns colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/fox/ears/'+$transformationParts.fox.ears+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fox.tail)>>
+		<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/fox/tail/'+$transformationParts.fox.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fox.cheeks)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/doggy/active/transformations/fox/cheeks/'+$transformationParts.fox.cheeks+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_fox_doggy_active">>
+	<<if !_disabled.includes($transformationParts.fox.ears)>>
+		<img @class="'layer-horns colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/fox/ears/'+$transformationParts.fox.ears+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fox.tail)>>
+		<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/fox/tail/'+$transformationParts.fox.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fox.cheeks)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/fox/cheeks/'+$transformationParts.fox.cheeks+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_fox_miss_idle">>
+	<<if !_disabled.includes($transformationParts.fox.ears)>>
+		<img class="layer-horns colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/fox/ears/'+$transformationParts.fox.ears+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fox.tail)>>
+		<img class="layer-sexwings colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/fox/tail/'+$transformationParts.fox.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fox.cheeks)>>
+		<img class="layer-sexlashes colour-hair anim-idle-2f" @src="'img/sex/missionary/active/transformations/fox/cheeks/'+$transformationParts.fox.cheeks+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_fox_miss_active">>
+	<<if !_disabled.includes($transformationParts.fox.ears)>>
+		<img @class="'layer-horns colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/fox/ears/'+$transformationParts.fox.ears+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fox.tail)>>
+		<img @class="'layer-sexwings colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/fox/tail/'+$transformationParts.fox.tail+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fox.cheeks)>>
+		<img @class="'layer-sexlashes colour-hair anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/fox/cheeks/'+$transformationParts.fox.cheeks+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_angel_doggy_idle">>
+	<<if !_disabled.includes($transformationParts.angel.halo)>>
+		<img class="layer-over_head-back anim-idle-2f" @src="'img/sex/doggy/active/transformations/angel/backhalo/'+$transformationParts.angel.halo+'.png'">
+		<img class="layer-halo-front anim-idle-2f" @src="'img/sex/doggy/active/transformations/angel/fronthalo/'+$transformationParts.angel.halo+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.angel.wings)>>
+		<img class="layer-backhair anim-idle-2f" @src="'img/sex/doggy/active/transformations/angel/backwings/'+$transformationParts.angel.wings+'.png'">
+		<img class="layer-sexwings anim-idle-2f" @src="'img/sex/doggy/active/transformations/angel/frontwings/'+$transformationParts.angel.wings+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_angel_doggy_active">>
+	<<if !_disabled.includes($transformationParts.angel.halo)>>
+		<img @class="'layer-over_head-back anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/angel/backhalo/'+$transformationParts.angel.halo+'.png'">
+		<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/angel/fronthalo/'+$transformationParts.angel.halo+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.angel.wings)>>
+		<img @class="'layer-backhair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/angel/backwings/'+$transformationParts.angel.wings+'.png'">
+		<img @class="'layer-sexwings anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/angel/frontwings/'+$transformationParts.angel.wings+'.png'">
+	<</if>>
+<</widget>>
+
+
+<<widget "img_tf_angel_miss_idle">>
+	<<if !_disabled.includes($transformationParts.angel.halo)>>
+		<img class="layer-over_head-back anim-idle-2f" @src="'img/sex/missionary/active/transformations/angel/backhalo/'+$transformationParts.angel.halo+'.png'">
+		<img class="layer-halo-front anim-idle-2f" @src="'img/sex/missionary/active/transformations/angel/fronthalo/'+$transformationParts.angel.halo+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.angel.wings)>>
+		<img class="layer-sexwings anim-idle-2f" @src="'img/sex/missionary/active/transformations/angel/wings/'+$transformationParts.angel.wings+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_angel_miss_active">>
+	<<if !_disabled.includes($transformationParts.angel.halo)>>
+		<img @class="'layer-over_head-back anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/angel/backhalo/'+$transformationParts.angel.halo+'.png'">
+		<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/angel/fronthalo/'+$transformationParts.angel.halo+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.angel.wings)>>
+		<img @class="'layer-sexwings anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/angel/wings/'+$transformationParts.angel.wings+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_fallenangel_doggy_idle">>
+	<<if !_disabled.includes($transformationParts.fallenAngel.halo)>>
+		<img class="layer-over_head-back anim-idle-2f" @src="'img/sex/doggy/active/transformations/fallenangel/backhalo/'+$transformationParts.fallenAngel.halo+'.png'">
+		<img class="layer-halo-front anim-idle-2f" @src="'img/sex/doggy/active/transformations/fallenangel/fronthalo/'+$transformationParts.fallenAngel.halo+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fallenAngel.wings)>>
+		<img class="layer-sexwings anim-idle-2f" @src="'img/sex/doggy/active/transformations/fallenangel/wings/'+$transformationParts.fallenAngel.wings+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_fallenangel_doggy_active">>
+	<<if !_disabled.includes($transformationParts.fallenAngel.halo)>>
+		<img @class="'layer-over_head-back anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/fallenangel/backhalo/'+$transformationParts.fallenAngel.halo+'.png'">
+		<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/fallenangel/fronthalo/'+$transformationParts.fallenAngel.halo+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fallenAngel.wings)>>
+		<img @class="'layer-sexwings anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/fallenangel/wings/'+$transformationParts.fallenAngel.wings+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_fallenangel_miss_idle">>
+	<<if !_disabled.includes($transformationParts.fallenAngel.halo)>>
+		<img class="layer-over_head-back anim-idle-2f" @src="'img/sex/missionary/active/transformations/fallenangel/backhalo/'+$transformationParts.fallenAngel.halo+'.png'">
+		<img class="layer-halo-front anim-idle-2f" @src="'img/sex/missionary/active/transformations/fallenangel/fronthalo/'+$transformationParts.fallenAngel.halo+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fallenAngel.wings)>>
+		<img class="layer-sexwings anim-idle-2f" @src="'img/sex/missionary/active/transformations/fallenangel/wings/'+$transformationParts.fallenAngel.wings+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_fallenangel_miss_active">>
+	<<if !_disabled.includes($transformationParts.fallenAngel.halo)>>
+		<img @class="'layer-over_head-back anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/fallenangel/backhalo/'+$transformationParts.fallenAngel.halo+'.png'">
+		<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/fallenangel/fronthalo/'+$transformationParts.fallenAngel.halo+'.png'">
+	<</if>>
+	<<if !_disabled.includes($transformationParts.fallenAngel.wings)>>
+		<img @class="'layer-sexwings anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/fallenangel/wings/'+$transformationParts.fallenAngel.wings+'.png'">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_demon_doggy_idle">>
+	<<set $_demon to $transformationParts.demon>>
+	<<if isPartEnabled($_demon.horns)>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.horns_colour, Transformations.defaults.demon.colour)>>
+		<img class="layer-halo-front anim-idle-2f" @src="'img/sex/doggy/active/transformations/demon/horns/'+$_demon.horns+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+	<<if isPartEnabled($_demon.tail)>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.tail_colour, Transformations.defaults.demon.colour)>>
+		<<set $_tailType to isPartEnabled($transformationParts.cat.tail) and isChimeraEnabled('demoncat', 'tail') ? 'default-cat' : $_demon.tail>>
+		<img class="layer-sexwings anim-idle-2f" @src="'img/sex/doggy/active/transformations/demon/tail/'+$_tailType+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+	<<if isPartEnabled($_demon.wings) and not isChimeraEnabled('demonharpy', 'wings')>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.wings_colour, Transformations.defaults.demon.colour)>>
+		<img class="layer-halo-front anim-idle-2f" @src="'img/sex/doggy/active/transformations/demon/wings/'+$_demon.wings+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_demon_doggy_active">>
+	<<set $_demon to $transformationParts.demon>>
+	<<if isPartEnabled($_demon.horns)>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.horns_colour, Transformations.defaults.demon.colour)>>
+		<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/demon/horns/'+$_demon.horns+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+	<<if isPartEnabled($_demon.tail)>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.tail_colour, Transformations.defaults.demon.colour)>>
+		<<set $_tailType to isPartEnabled($transformationParts.cat.tail) and isChimeraEnabled('demoncat', 'tail') ? 'default-cat' : $_demon.tail>>
+		<<if $enemytype is "man" and ($anusstate is "penetrated" or $vaginastate is "penetrated") and $_tailType isnot 'default-cat'>>
+			<img @class="'layer-sexback anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/demon/tailsexback/'+$_tailType+'.png'" @style="'filter: ' + $_filter">
+			<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/demon/tailsexfront/'+$_tailType+'.png'" @style="'filter: ' + $_filter">
+		<<else>>
+			<img @class="'layer-sexlashes anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/demon/tail/'+$_tailType+'.png'" @style="'filter: ' + $_filter">
+		<</if>>
+	<</if>>
+	<<if isPartEnabled($_demon.wings) and not isChimeraEnabled('demonharpy', 'wings')>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.wings_colour, Transformations.defaults.demon.colour)>>
+		<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/demon/wings/'+$_demon.wings+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_demon_miss_idle">>
+	<<set $_demon to $transformationParts.demon>>
+	<<if isPartEnabled($_demon.horns)>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.horns_colour, Transformations.defaults.demon.colour)>>
+		<img class="layer-halo-front anim-idle-2f" @src="'img/sex/missionary/active/transformations/demon/horns/'+$_demon.horns+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+	<<if isPartEnabled($_demon.tail)>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.tail_colour, Transformations.defaults.demon.colour)>>
+		<<set $_tailType to isPartEnabled($transformationParts.cat.tail) and isChimeraEnabled('demoncat', 'tail') ? 'default-cat' : $_demon.tail>>
+		<img class="layer-sexwings anim-idle-2f" @src="'img/sex/missionary/active/transformations/demon/tail/'+$_tailType+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+	<<if isPartEnabled($_demon.wings) and not isChimeraEnabled('demonharpy', 'wings')>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.wings_colour, Transformations.defaults.demon.colour)>>
+		<img class="layer-halo-front anim-idle-2f" @src="'img/sex/missionary/active/transformations/demon/wings/'+$_demon.wings+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+<</widget>>
+
+<<widget "img_tf_demon_miss_active">>
+	<<set $_demon to $transformationParts.demon>>
+	<<if isPartEnabled($_demon.horns)>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.horns_colour, Transformations.defaults.demon.colour)>>
+		<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/demon/horns/'+$_demon.horns+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+	<<if isPartEnabled($_demon.tail)>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.tail_colour, Transformations.defaults.demon.colour)>>
+		<<set $_tailType to isPartEnabled($transformationParts.cat.tail) and isChimeraEnabled('demoncat', 'tail') ? 'default-cat' : $_demon.tail>>
+		<img @class="'layer-sexwings anim-doggy-4f-' + _animspeed" @src="'img/sex/missionary/active/transformations/demon/tail/' + $_tailType + '.png'" @style="'filter: ' + $_filter">
+	<</if>>
+	<<if isPartEnabled($_demon.wings) and not isChimeraEnabled('demonharpy', 'wings')>>
+		<<set $_filter to ColourUtils.partToFilter($_demon.wings_colour, Transformations.defaults.demon.colour)>>
+		<img @class="'layer-halo-front anim-doggy-4f-'+_animspeed" @src="'img/sex/missionary/active/transformations/demon/wings/'+$_demon.wings+'.png'" @style="'filter: ' + $_filter">
+	<</if>>
+<</widget>>
+
+:: Widgets Icon Img [widget]
+
+<<widget "barbicon">>
+	<<icon "barb.png">>
+<</widget>>
+
+<<widget "wolfcaveicon">>
+	<<switch _args[0]>>
+		<<case "pup">><<icon "wolfpup.png">>
+		<<case "sleep">><<icon "wolfsleep.png">>
+		<<case "stream">><<icon "stream.png">>
+		<<case "black dog">><<icon "blackdog.png">>
+		<<case "bw">><<icon "blackwolf.png">>
+		<<case "ferocity">><img class="icon" src="img/ui/wolfferocity.png">
+		<<case "harmony">><img class="icon" src="img/ui/wolfharmony.png">
+		<<default>><<icon "wolves.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "clifficon">>
+	<<icon "cliff.png">>
+<</widget>>
+
+<<widget "starfishicon">>
+	<<icon "starfish.png">>
+<</widget>>
+
+<<widget "fishtankicon">>
+	<<switch $container.home.name>>
+		<<case "Small Fish Tank">>
+			<<icon "tank_small.gif">>
+		<<case "Fish Tank">>
+			<<icon "tank_medium.gif">>
+		<<case "Large Fish Tank">>
+			<<switch $container.home.decorations>>
+				<<case "Standard Decorations">><<icon "tank_large_decor.gif">>
+				<<case "Exotic Decorations">><<icon "tank_large_exotic.gif">>
+				<<default>><<icon "tank_large.gif">>
+			<</switch>>
+		<<case "Huge Fish Tank">>
+			<<switch $container.home.decorations>>
+				<<case "Standard Decorations">><<icon "tank_huge_decor.gif">>
+				<<case "Exotic Decorations">><<icon "tank_huge_exotic.gif">>
+				<<default>><<icon "tank_huge.gif">>
+			<</switch>>
+		<<default>>
+			<<icon "tank_medium.gif">>
+	<</switch>>
+<</widget>>
+
+<<widget "mericon">>
+	<<icon "mer.png">>
+<</widget>>
+
+<<widget "domusicon">>
+	<<icon "domus.png">>
+<</widget>>
+
+<<widget "connudatusicon">>
+	<<icon "connudatus.png">>
+<</widget>>
+
+<<widget "highicon">>
+	<<icon "high.png">>
+<</widget>>
+
+<<widget "oxfordicon">>
+	<<icon "oxford.png">>
+<</widget>>
+
+<<widget "harvesticon">>
+	<<icon "harvest.png">>
+<</widget>>
+
+<<widget "danubeicon">>
+	<<icon "danube.png">>
+<</widget>>
+
+<<widget "wolficon">>
+	<<icon "wolf.png">>
+<</widget>>
+
+<<widget "nightingaleicon">>
+	<<icon "nightingale.png">>
+<</widget>>
+
+<<widget "elkicon">>
+	<<icon "elk.png">>
+<</widget>>
+
+<<widget "busicon">>
+	<<icon "bus.png">>
+<</widget>>
+
+<<widget "brothelicon">>
+	<<switch _args[0]>>
+		<<case "gloryhole">><<icon "gloryhole.png">>
+		<<case "stage">><<icon "stage.png">>
+		<<default>><<icon "brothel.gif">>
+	<</switch>>
+<</widget>>
+
+<<widget "swimmingicon">>
+	<<icon "swimming.png">>
+<</widget>>
+
+<<widget "scienceicon">>
+	<<switch _args[0]>>
+		<<case "pink lichen">><<icon "lichen_pink.png">>
+		<<case "white lichen">><<icon "lichen_white.png">>
+		<<case "violet lichen">><<icon "lichen_violet.png">>
+		<<case "purple lichen">><<icon "lichen_purple.png">>
+		<<default>><<icon "science.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "historyicon">>
+	<<icon "history.png">>
+<</widget>>
+
+<<widget "mathicon">>
+	<<icon "math.png">>
+<</widget>>
+
+<<widget "englishicon">>
+	<<icon "english.png">>
+<</widget>>
+
+<<widget "parkicon">>
+	<<switch _args[0]>>
+		<<case "fountain">><<icon "fountain.png">>
+		<<default>><<icon "park.gif">>
+	<</switch>>
+<</widget>>
+
+<<widget "policeicon">>
+	<<icon "police.png">>
+<</widget>>
+
+<<widget "peppersprayicon">>
+	<<icon "spray.png">>
+<</widget>>
+
+<<widget "sewericon">>
+	<<switch _args[0]>>
+		<<case "algae">><<icon "algae.png">>
+		<<case "drain">><<icon "drain_ocean.png">>
+		<<case "litter">><<icon "litter.png">>
+		<<case "main">><<icon "sewermain.png">>
+		<<case "mud">><<icon "mud.png">>
+		<<case "wood">><<icon "log.png">>
+		<<case "webs">><<icon "webs.png">>
+		<<case "rubble">><<icon "rubble.png">>
+		<<case "rubbish">><<icon "rubbish.png">>
+		<<case "ruins">><<icon "ruins.png">>
+		<<case "scrap">><<icon "scrap.png">>
+		<<case "waterfall">><<icon "waterfall.png">>
+		<<default>><<icon "sewer.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "foresticon">>
+	<<switch _args[0]>>
+		<<case "bush">><<icon "bush.png">>
+		<<case "churchyard">><<icon "churchyard.png">>
+		<<case "river">><<icon "river.png">>
+		<<case "bog">><<icon "bog.png">>
+		<<default>><<icon "forest.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "islandicon">>
+	<<switch _args[0]>>
+		<<case "explore">><<icon "explore.png">>
+		<<case "mask">><<icon "clothes/islander_mask.png">>
+		<<case "nuts">><<icon "nuts.png">>
+		<<default>><<icon "island.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "pubicon">>
+	<<icon "pub.png">>
+<</widget>>
+
+<<widget "lockericon">>
+	<<switch _args[0]>>
+		<<case "put in">><<icon "putinlocker.png">>
+		<<default>><<icon "locker.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "loitericon">>
+	<<icon "loiter.gif">>
+<</widget>>
+
+<<widget "compoundicon">>
+	<<icon "compound.gif">>
+<</widget>>
+
+<<widget "oakicon">>
+	<<icon "danube_oak.png">>
+<</widget>>
+
+<<widget "heelsicon">>
+	<<switch _args[0]>>
+		<<case "hobble">><<icon "hobbleheels.png">>
+		<<default>><<icon "exerciseheels.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "exerciseicon">>
+	<<icon "physique.png">>
+<</widget>>
+
+<<widget "getinicon">>
+	<<icon "get_in.png">>
+<</widget>>
+
+<<widget "refuseicon">>
+	<<icon "refuse.png">>
+<</widget>>
+
+<<widget "getouticon">>
+	<<switch _args[0]>>
+		<<case "dig">><<icon "dig.png">>
+		<<case "hole">><<icon "get_out_hole.png">>
+		<<default>><<icon "get_out.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "loveicon">>
+	<img class="icon" src="img/ui/love_interest.png">
+<</widget>>
+
+<<widget "templeicon">>
+	<<switch _args[0]>>
+		<<case "altar">><<icon "altar.gif">>
+		<<case "chastity">><<icon "padlock.png">>
+		<<case "chastity release">><<icon "padlock_unlocked.png">>
+		<<case "confession">><<icon "confessional.png">>
+		<<case "garden">><<switch Weather.dayState>><<case "night">><<icon "temple_garden_night.png">><<default>><<icon "temple_garden.png">><</switch>>
+		<<case "pew">><<icon "pew.png">>
+		<<case "pray">><<skinicon "pray">>
+		<<case "prayer room">><<icon "prayer_room.png">>
+		<<case "quarters">><<icon "quarters.png">>
+		<<case "trial">><<icon "trial_of_purity.gif">>
+		<<case "trialcontinue">><<icon "trial_continue.gif">>
+		<<case "trialbail">><<icon "trial_jump.gif">>
+		<<case "virginity">><<icon "virginity_test.png">>
+		<<default>><<wolficon>>
+	<</switch>>
+<</widget>>
+
+<<widget "edenicon">>
+	<<switch _args[0]>>
+		<<case "broom">><<icon "broom_dustpan.png">>
+		<<case "coat stand">><<icon "coatstand.png">>
+		<<case "collar">><img class="icon" src="img/ui/collar.png">
+		<<case "curtains">><<icon "curtains.png">>
+		<<case "fix">><<icon "hammer_nails.png">>
+		<<case "radio">><<icon "radio.png">>
+		<<case "rug">><<icon "rug.png">>
+		<<case "scarf">><<icon "clothes/scarf.png">>
+		<<case "salve">><<icon "salve.png">>
+		<<case "soap">><<icon "soap.png">>
+		<<case "supplies">><<icon "supplies.png">>
+		<<case "target">><<icon "target.png">>
+		<<default>><<icon "cabin.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "wraithicon">>
+	<<icon "wraith.png">>
+<</widget>>
+
+<<widget "assignmenticon">>
+	<<icon "assignment.png">>
+<</widget>>
+
+<<widget "couchicon">>
+	<<icon "couch_relax.png">>
+<</widget>>
+
+<<widget "askicon">>
+	<<icon "ask.png">>
+<</widget>>
+
+<<widget "stallicon">>
+	<<switch _args[0]>>
+		<<case "open">><<icon "stall_open.png">>
+		<<case "balloon">><<icon "stall_balloon.png">>
+		<<default>><<icon "stall.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "entertownicon">>
+	<<switch Weather.dayState>>
+		<<case "night">>
+			<<icon "town_night.png">>
+		<<default>>
+			<<icon "town.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "relaxicon">>
+	<<icon "relax.png">>
+<</widget>>
+
+<<widget "farmicon">>
+	<<switch _args[0]>>
+		<<case "barn">><<icon "barn.png">>
+		<<case "clear yard">><<icon "clearyard.gif">>
+		<<case "cottage">><<icon "cottage.png">>
+		<<case "grass">><<icon "grass.png">>
+		<<case "horse">><<icon "horse_ride.png">>
+		<<case "kennel">><<icon "kennel.png">>
+		<<case "meadow">><<icon "meadow.png">>
+		<<case "tv">><<icon "TV.gif">>
+		<<default>><<icon "farmlands.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "tendingicon">>
+	<<switch _args[0]>>
+		<<case "aphrodisiac shrooms">><<icon "tending/mushroom_aphrodisiac.png">>
+		<<case "carrots">><<icon "tending/carrot.png">>
+		<<case "eggs">><<icon "tending/egg.png">>
+		<<case "ghostshrooms">><<icon "tending/ghostshroom.png">>
+		<<case "milk">><<icon "tending/milk.png">>
+		<<case "mushrooms">><<icon "tending/mushroom.png">>
+		<<case "truffles">><<icon "tending/truffle.png">>
+		<<case "wolfshrooms">><<icon "tending/wolfshroom.png">>
+		<<default>><<icon "basket.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "crimeicon">>
+	<<switch _args[0]>>
+		<<case "black box">><<icon "blackbox.gif">>
+		<<case "mark">><<icon "mark.gif">>
+		<<case "safe">><<icon "safe.gif">>
+		<<case "shackles">><<icon "shackles.png">>
+		<<case "plunder">><<icon "plunder.png">>
+		<<default>><<icon "crime.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "antiqueicon">>
+	<<icon `"antiques/antique_" + _args[0] + ".png"`>>
+<</widget>>
+
+<<widget "gifticon">>
+	<<switch _args[0]>>
+		<<case "balloons">><<icon "balloons.png">>
+		<<case "christmas">><<icon "gift_christmas.png">>
+		<<case "christmas hat">><<icon "clothes/christmas_hat.png">>
+		<<case "gothic">><<icon "clothes/gothic_gown.png">>
+		<<case "hunting">><span class="clothes-brown"><<icon "clothes/hunting_coat.png">></span>
+		<<case "kimono">><<icon "clothes/kimono.png">>
+		<<case "love">><<icon "gift_li.png">>
+		<<case "wrapping">><<icon "wrapping.png">>
+		<<case "shirt">><span class="clothes-light-blue"><<icon "clothes/t-shirt.png">></span>
+		<<case "sundress">><span class="clothes-light-pink"><<icon "clothes/sundress.png">></span>
+		<<case "tuxedo">><<icon "clothes/tuxedo_jacket.png">>
+		<<case "valentine">><<icon "gift_vday.png">>
+		<<default>><<icon "gift_christmas.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "mooricon">>
+	<<switch _args[0]>>
+		<<case "remy">><<icon "estate.png">>
+		<<case "remy cottage">><<icon "remy_cottage.png">>
+		<<default>><<icon "moor.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "birdicon">>
+	<<switch _args[0]>>
+		<<case "nest">>
+			<<set $_nestImg to "birdTower/nest">>
+			<<switch $bird.upgrades.nest>>
+				<<case 0>><<set $_nestImg += "_wood">>
+				<<case 1>><<set $_nestImg += "_padded">>
+				<<case 2>><<set $_nestImg += "_cushioned">>
+				<<case 3>>
+					<<set $_nestImg += "_luxurious">>
+					<<if $bird.upgrades.decor gte 4>>
+						<<set $_nestImg += "_decor">>
+					<</if>>
+			<</switch>>
+			<<if Object.values($children).find(child => (child.type is "hawk" and child.location is "tower" and child.eggTimer))>>
+				<<set $_nestImg += "_eggs">>
+			<</if>>
+			<<set $_nestImg += ".png">>
+			<<icon $_nestImg>>
+		<<case "perch">>
+			<<set $_perchImg to "birdTower/perch">>
+			<<switch Weather.dayState>>
+				<<case "night">>
+					<<if Weather.bloodMoon>>
+						<<set $_perchImg += "_blood">>
+					<<else>>
+						<<set $_perchImg += "_night">>
+					<</if>>
+				<<default>>
+					<<switch Weather.name>>
+						<<case "lightPrecipitation" "heavyPrecipitation" "thunderStorm">><<set $_perchImg += "_rain">>
+						<<case "snow">><<set $_perchImg += "_snow">>
+						<<default>><<set $_perchImg += ("_" + Weather.dayState)>>
+					<</switch>>
+			<</switch>>
+			<<if $bird.upgrades?.decor gte 3>>
+				<<set $_perchImg += "_decor">>
+			<</if>>
+			<<set $_perchImg += ".png">>
+			<<icon $_perchImg>>
+		<<case "perch_up">><<icon "birdTower/perch_get_up.png">>
+		<<case "preen">>
+			<<set $_frontIcon = 'birdTower/preen_wing_debris.png'>>
+			<<if $daily.birdGroom is undefined>>
+				<<icon $_frontIcon infront>>
+			<</if>>
+			<<icon "birdTower/preen_wing.png">>
+		<<case "preen_self">>
+			<<set $_hairIcon =  'birdTower/preen_wing_hair.png'>>
+			<<set $_frontIcon = 'birdTower/preen_wing_debris.png'>>
+			<<if $daily.birdSelfPreen is undefined>>
+				<<icon $_frontIcon infront>>
+			<</if>>
+			<span @class="'hair-'+$haircolour">
+				<span class="colour-hair"><<icon $_hairIcon>></span>
+			</span>
+		<<case "hunt">>
+			<<set $_huntImg to "birdTower/prepare_hunt_" + Weather.dayState + ".gif">>
+			<<icon $_huntImg>>
+		<<case "firepit">>
+			<<if $bird.upgrades>>
+				<<set $_firePitImg to "birdTower/firepit_">>
+				<<switch $bird.upgrades.firepit>>
+					<<case 0 1>><<set $_firePitImg += "makeshift_">>
+					<<case 2>><<set $_firePitImg += "robust_">>
+					<<case 3>><<set $_firePitImg += "bonfire_">>
+				<</switch>>
+				<<set $_firePitTime to getBirdBurnTime()>>
+				<<if $_firePitTime lte 0>>
+					<<set $_firePitImg += "0.gif">>
+				<<elseif $_firePitTime lte 120>>
+					<<set $_firePitImg += "1.gif">>
+				<<elseif $_firePitTime lte 480>>
+					<<set $_firePitImg += "2.gif">>
+				<<elseif $_firePitTime lte 960>>
+					<<set $_firePitImg += "3.gif">>
+				<<else>>
+					<<set $_firePitImg += "4.gif">>
+				<</if>>
+				<<icon $_firePitImg>>
+			<<else>>
+				<<icon "campfire.gif">>
+			<</if>>
+		<<case "rainwater">>
+			<<if $bird.upgrades?.pot is 3 and getBirdBurnTime() gt 0>>
+				<<icon "birdTower/rain_pool_heated.gif">>
+			<<else>>
+				<<icon "birdTower/rain_pool.gif">>
+			<</if>>
+		<<case "rack">>
+			<<switch $bird.upgrades.rack>>
+				<<case 0 1>><<icon "birdTower/drying_rack_makeshift.png">>
+				<<case 2>><<icon "birdTower/drying_rack_expanded.png">>
+				<<case 3>><<icon "birdTower/drying_rack_enclosed.png">>
+			<</switch>>
+		<<case "snare">><<icon "birdTower/snare_no_bait.png">>
+		<<case "snare_bait">><<icon "birdTower/snare_bait.png">>
+		<<case "snare_lurker">><<icon "birdTower/snare_lurker.gif">>
+		<<case "sing">><<icon "sing.png">>
+		<<case "tower">><<icon "birdTower/tower.png">>
+		<<case "tools">><<icon "birdTower/toolbox.png">>
+		<<case "pot">><<icon "birdTower/cooking_pot.png">>
+		<<case "pot_cook">>
+			<<if getBirdBurnTime() gt 0>>
+				<<icon "birdTower/cooking_pot_boil.gif">>
+			<<else>>
+				<<icon "birdTower/cooking_pot.png">>
+			<</if>>
+		<<case "telescope">><<icon "birdTower/ornate_telescope.png">>
+		<<case "wood">><<icon "birdTower/wood.png">>
+		<<case "fabric">><<icon "birdTower/fabric.png">>
+		<<case "sticks">><<icon "birdTower/stick.png">>
+		<<case "leaves">><<icon "birdTower/leaf.png">>
+		<<case "junk">><<icon "birdTower/junk.png">>
+		<<case "lurkers">><<icon "birdTower/lurker_dead.png">>
+		<<case "lurkers_netted">><<icon "birdTower/lurker_netted.png">>
+		<<case "leather">><<icon "birdTower/lurker_leather.png">>
+		<<case "feathers">><<icon "birdTower/feather.png">>
+		<<case "tarp" "shelter">><<icon "birdTower/tarp.png">>
+		<<case "mirror">>
+			<<if $bird.upgrades?.decor gte 3>>
+				<<icon "birdTower/mirror_tower_decor.png">>
+			<<else>>
+				<<icon "birdTower/mirror_tower.png">>
+			<</if>>
+		<<case "wardrobe">><<if $bird.upgrades?.decor gte 4>><<icon "birdTower/wardrobe_tower_decor.png">><<else>><<icon "birdTower/wardrobe_tower.png">><</if>>
+		<<case "eggs">>
+			<<switch _eggIcon>>
+				<<case 1>><<icon "birdTower/hawk_egg_one.png">>
+				<<case 2>><<icon "birdTower/hawk_egg_two.png">>
+				<<default>><<icon "birdTower/hawk_egg_three.png">>
+			<</switch>>
+		<<case "kiss">><<if $monster is 1>><<icon "birdTower/kiss_greathawk_monster.png">><<else>><<icon "birdTower/kiss_greathawk_beast.png">><</if>>
+		<<case "ask">><<icon "birdTower/socialise_question.png">>
+		<<case "fly_down">><<icon "birdTower/flight_land.png">>
+		<<case "bracelet">><<icon "birdTower/bracelet.png">>
+		<<case "wallet">><<icon "birdTower/wallet.png">>
+		<<case "ring">><<icon "birdTower/ring.png">>
+		<<case "watch">><<icon "birdTower/watch.png">>
+		<<case "necklace">><<icon "birdTower/necklace.png">>
+		<<case "antique bullet">><<icon "antique_bullet.png">>
+		<<case "silver">><<icon "birdTower/silver_bar.gif">>
+		<<case "trapdoor">><<if $bird.lock is 1>><<icon "birdTower/trap_door_locked.png">><<else>><<icon "birdTower/trap_door.png">><</if>>
+		<<case "children">>
+			<<run Object.values($children).forEach(child => {
+				if (child.type is "hawk" and child.location is "tower" and child.eggTimer is undefined) {
+					if (!T.childrenIconSelect) T.childrenIconSelect = [];
+					T.childrenIconSelect.push(child.childId);
+				}
+			})>>
+			<<if _childrenIconSelect.length gte 2>>
+				<<set $_child1 to _childrenIconSelect.pluck()>>
+				<<set $_child2 to _childrenIconSelect.pluck()>>
+				<<if $children[$_child1].features.monster is $children[$_child2].features.monster>>
+					<<if $children[$_child1].features.monster is "monster">>
+						<<set _childIconFilter1 = "filter: " + setup.colours.getSkinCSSFilter($children[$_child1].features.skinColour)>>
+						<<set _childIconFilter2 = "filter: " + setup.colours.getSkinCSSFilter($children[$_child2].features.skinColour)>>
+						<<set $_baseIcon to "birdTower/child_harpies.png">>
+						<<set $_skinIcon1 to "birdTower/child_harpies_skin1.png">>
+						<<set $_skinIcon2 to "birdTower/child_harpies_skin2.png">>
+						<span class="icon-container">
+							<<icon $_baseIcon>>
+							<span @style="_childIconFilter1">
+								<<icon $_skinIcon2>>
+							</span>
+							<span @style="_childIconFilter2">
+								<<icon $_skinIcon1>>
+							</span>
+						</span>
+					<<else>>
+						<<icon "birdTower/child_hawks.png">>
+					<</if>>
+				<<else>>
+					<<set _childIconFilter = "filter: " + ($children[$_child1].features.monster is "monster" ? setup.colours.getSkinCSSFilter($children[$_child1].features.skinColour) : setup.colours.getSkinCSSFilter($children[$_child2].features.skinColour))>>
+					<<set $_baseIcon to "birdTower/child_birds.png">>
+					<<set $_skinIcon to "birdTower/child_birds_skin.png">>
+					<span class="icon-container">
+						<<icon $_baseIcon>>
+						<span @style="_childIconFilter">
+							<<icon $_skinIcon>>
+						</span>
+					</span>
+				<</if>>
+			<<else>>
+				<<if $children[_childrenIconSelect[0]].features.monster is "monster">>
+					<<set _childIconFilter = "filter: " + setup.colours.getSkinCSSFilter($children[_childrenIconSelect[0]].features.skinColour)>>
+					<<set $_baseIcon to "birdTower/child_harpy.png">>
+					<<set $_skinIcon to "birdTower/child_harpy_skin.png">>
+					<span class="icon-container">
+						<<icon $_baseIcon>>
+						<span @style="_childIconFilter">
+							<<icon $_skinIcon>>
+						</span>
+					</span>
+				<<else>>
+					<<icon "birdTower/child_hawk.png">>
+				<</if>>
+			<</if>>
+		<<default>><<icon "birdTower/tower.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "tficon">>
+	<<switch _args[0]>>
+		<<case "angel">>
+			<<set $_baseIcon to "tf_angel.png">>
+		<<case "fallen">>
+			<<set $_baseIcon to "tf_fallen.png">>
+		<<case "demon">>
+			<<set $_baseIcon to "tf_demon.png">>
+		<<case "wolf">>
+			<<set $_hairIcon =  'tf_wolf.png'>>
+			<<set $_frontIcon = 'tf_wolf_acc.png'>>
+		<<case "cat">>
+			<<set $_hairIcon =  'tf_cat.png'>>
+			<<set $_frontIcon = 'tf_cat_acc.png'>>
+		<<case "cow">>
+			<<set $_baseIcon = 'tf_cow.png'>>
+		<<case "fox">>
+			<<set $_hairIcon =  'tf_fox.png'>>
+			<<set $_frontIcon = 'tf_fox_acc.png'>>
+		<<case "harpy">>
+			<<set $_hairIcon =  'tf_harpy.png'>>
+	<</switch>>
+	<<if $_baseIcon>>
+		<<icon $_baseIcon>>
+	<<elseif $_hairIcon>>
+		<<if $_frontIcon>>
+			<<icon $_frontIcon infront>>
+		<</if>>
+		<span @class="'hair-'+$haircolour">
+			<span class="colour-hair"><<icon $_hairIcon>></span>
+		</span>
+	<</if>>
+<</widget>>
+
+<<widget "alleyicon">>
+	<<switch Weather.dayState>>
+		<<case "day">>
+			<<icon "alley.png">>
+		<<case "night">>
+			<<icon "alley_night.png">>
+		<<case "dawn">>
+			<<icon "alley_dawn.png">>
+		<<case "dusk">>
+			<<icon "alley_dusk.png">>
+		<<default>>
+			<<icon "alley.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "arcadeicon">>
+	<<icon "arcade.gif">>
+<</widget>>
+
+<<widget "poundicon">>
+	<<if Weather.precipitation is "rain">>
+		<<icon "pound_rust.png">>
+	<<else>>
+		<<icon "pound.png">>
+	<</if>>
+<</widget>>
+
+<<widget "dancestudioicon">>
+	<<icon "dancestudio.png">>
+<</widget>>
+
+<<widget "dorenflaticon">>
+	<<icon "dorenflat.png">>
+<</widget>>
+
+<<widget "maleicon">>
+	<<icon "male.png">>
+<</widget>>
+
+<<widget "femaleicon">>
+	<<icon "female.png">>
+<</widget>>
+
+<<widget "museumicon">>
+	<<icon "museum.png">>
+<</widget>>
+
+<<widget "homeicon">>
+	<<icon "orphanage.png">>
+<</widget>>
+
+<<widget "roadicon">>
+	<<if (Weather.bloodMoon or $forcedBloodmoon)>>
+		<<icon "roadnight_blood.png">>
+	<<else>>
+		<<switch Weather.dayState>>
+			<<case "day">>
+				<<icon "roadday.png">>
+			<<case "night">>
+				<<icon "roadnight.png">>
+			<<case "dawn">>
+				<<icon "roaddawn.png">>
+			<<case "dusk">>
+				<<icon "roaddusk.png">>
+			<<default>>
+				<<icon "roadday.png">>
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "forestroadicon">>
+	<<icon `"forest_road_" + _args[0] + ".png"`>>
+<</widget>>
+
+<<widget "schoolicon">>
+	<<switch _args[0]>>
+		<<case "building">><span style="position:relative;bottom:5px"><<icon "schoolnew.png">></span>
+		<<case "computer">><<icon "computer.png">>
+		<<case "courtyard">><<icon "school_courtyard.png">>
+		<<case "headdesk">><<icon "headdesk.png">>
+		<<case "infirmary">><<icon "infirmary.png">>
+		<<case "library">>	<<icon "library.png">>
+		<<case "library desk">><<icon "library_desk.png">>
+		<<case "stump">><<icon "stump.png">>
+		<<default>><<icon "school.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "soupkitchenicon">>
+	<<icon "soupkitchen.png">>
+<</widget>>
+
+<<widget "spaicon">>
+	<<icon "spa.png">>
+<</widget>>
+
+<<widget "stripclubicon">>
+	<<icon "stripclub.gif">>
+<</widget>>
+
+<<widget "stairsicon">>
+    <<set _stairs = `stairs${_args[0] || "downup"}${_args[1] || ""}.png`>>
+	<<print "<<icon _stairs>>">>
+<</widget>>
+
+<<widget "walkicon">>
+	<<switch _args[0]>>
+		<<case "west">><img class="icon flip" src="img/misc/icon/walk.png">
+		<<default>><<icon "walk.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "runicon">>
+	<<switch _args[0]>>
+		<<case "west">><img class="icon flip" src="img/misc/icon/run.png">
+		<<default>><<icon "run.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "glideicon">>
+	<<switch _args[0]>>
+		<<case "west">><img class="icon flip" src="img/misc/icon/wing.png">
+		<<default>><<icon "wing.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "swimicon">>
+	<<switch _args[0]>>
+		<<case "back">><img class="icon flip" src="img/misc/icon/swim.png">
+		<<case "break">><<icon "breakice.png">>
+		<<case "dive">><<icon "dive.png">>
+		<<case "down">><<icon "swimdown.png">>
+		<<case "leave">><<icon "leavewater.png">>
+		<<case "up">><<icon "swimup.png">>
+		<<default>><<icon "swim.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "sneakicon">>
+	<<icon "sneak.png">>
+<</widget>>
+
+<<widget "caveicon">>
+	<<switch _args[0]>>
+		<<case "left">><<icon "caveleft.png">>
+		<<case "right">><<icon "caveright.png">>
+		<<case "north">><<icon "cavenorth.png">>
+		<<case "south">><<icon "cavesouth.png">>
+		<<case "west">><<icon "cavedeeper.png">>
+		<<case "east">><img class="icon flip" src="img/misc/icon/cavedeeper.png">
+		<<case "sea">><<icon "cavesea.png">>
+		<<case "torch">><<icon "torch.gif">>
+		<<case "treasure">><<icon "treasure_chest.png">>
+		<<default>><<icon "cavedeeper.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "tentacleicon">>
+	<<switch _args[0]>>
+		<<case "north">><<icon "tentanorth.png">>
+		<<case "south">><<icon "tentasouth.png">>
+		<<case "west">><<icon "tentadeeper.png">>
+		<<case "east">><img class="icon flip" src="img/misc/icon/tentadeeper.png">
+		<<default>><<icon "tentadeeper.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "entranceicon">>
+	<<icon "entrance.png">>
+<</widget>>
+
+<<widget "exiticon">>
+	<<icon "exit.png">>
+<</widget>>
+
+<<widget "lakeicon">>
+	<<switch _args[0]>>
+		<<case "campfire">><<icon "birdTower/firepit_robust_3.gif">>
+		<<case "dock">><<icon "lake_dock.png">>
+		<<case "field office">><<icon "field_office.png">>
+		<<case "fishing">><<icon "fishing.png">>
+		<<case "key">><<icon "bronze_key.png">>
+		<<case "meditate">><<icon "meditate.png">>
+		<<case "pond">><<icon "pond.png">>
+		<<case "pots">><<icon "pots.png">>
+		<<case "skate">><span class="clothes-tan"><<icon "clothes/ice_skates.png">></span>
+		<<case "waterfall">><<icon "waterfall_lake.png">>
+		<<default>><<icon "lake.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "bedicon">>
+	<<switch _args[0]>>
+		<<case "zzz">><<icon "zzz.png">>
+		<<case "single">><<furnitureicon "bed.png">>
+		<<case "double">><<furnitureicon "doublebed.png">>
+		<<case "deluxe">><<furnitureicon "doublebeddeluxe.png">>
+		<<case "eden">><<icon "bededen.png">>
+		<<case "exotic">><<furnitureicon "doublebedexotic.png">>
+		<<case "wicker">><<furnitureicon "doublebedwicker.png">>
+		<<case "yellow">><<furnitureicon "doublebedyellow.png">>
+		<<default>><<icon "bed.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "furnitureicon">>
+	<<icon `"furniture/" + _args[0]`>>
+<</widget>>
+
+<<widget "deskchairicon">>
+	<<if $options.images is 1>>
+		<<set $_desk to Furniture.get('desk')>>
+		<<set $_chair to Furniture.get('chair')>>
+		<span>
+			<<if $_chair>><img class="icon infront" @src="'img/misc/icon/furniture/' + $_chair.iconFile2"><</if>>
+			<<if $_desk>><img class="icon" @src="'img/misc/icon/furniture/' + $_desk.iconFile"><</if>>
+		</span>
+	<</if>>
+<</widget>>
+
+<<widget "bedroomtablechairicon">>
+	<<if $options.images is 1>>
+		<<set $_table to Furniture.get('table')>>
+		<<set $_chair to Furniture.get('chair')>>
+		<span>
+			<<if $_table>><img class="icon infront" @src="'img/misc/icon/furniture/' + $_table.iconFile"><</if>>
+			<<if $_chair>><img class="icon" @src="'img/misc/icon/furniture/' + $_chair.iconFile"><</if>>
+		</span>
+	<</if>>
+<</widget>>
+
+<<widget "wardrobeicon">>
+	<<icon "wardrobe.png">>
+<</widget>>
+
+<<widget "gardenicon">>
+	<<switch _args[0]>>
+		<<case "fertiliser">><<icon "fertiliser.png">>
+		<<case "flower">><<icon "flower.png">>
+		<<case "plot">><<icon "gardenplot.png">>
+		<<case "strangled">><<icon "gardenstrangled.png">>
+		<<case "tangled">><<icon "gardentangled.png">>
+		<<case "till">><<icon "till.png">>
+		<<case "water">><<icon "watering_can.gif">>
+		<<case "weeds">><<icon "gardenweeds.png">>
+		<<default>><<icon "garden.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "laddericon">>
+	<<icon "ladder.png">>
+<</widget>>
+
+<<widget "lofticon">>
+	<<icon "loft.png">>
+<</widget>>
+
+<<widget "fenceicon">>
+	<<icon "fence.gif">>
+<</widget>>
+
+<<widget "undobindingsicon">>
+	<<icon "bindings.png">>
+<</widget>>
+
+<<widget "bathroomicon">>
+	<<switch _args[0]>>
+		<<case "shower">><<icon "shower.gif">>
+		<<case "sink">><<icon "sink.png">>
+		<<case "bath">><<icon "bath.png">>
+		<<case "robe">><<icon "clothes/bathrobe.png">>
+		<<case "shave">><<icon "shave.png">>
+		<<case "toilet">><<icon "toilet.png">>
+		<<default>><<icon "bathroom.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "shavestyleicon">>
+	<<if $options.images is 1>>
+		<<set _shaveIconFilter = "filter: " + setup.colours.getSkinCSSFilter($skinColor.natural, $skinColor.range)>>
+		<<set $_fileName = 'shave_' + _args[0] + '_' + ($player.penisExist ? 'm' : 'f') + '.png'>>
+		<span @style="_shaveIconFilter">
+			<<icon $_fileName>>
+		</span>
+	<</if>>
+<</widget>>
+
+<<widget "skinicon">>
+	<<if $options.images is 1>>
+		<<set _iconFilter = "filter: " + setup.colours.getSkinCSSFilter($skinColor.natural, $skinColor.range)>>
+		<<switch _args[0]>>
+			<<case "chef">>
+				<<set $_skinIcon = 'chef_hands.png'>>
+				<<set $_frontIcon = 'chef_bowl.png'>>
+			<<case "waiter">>
+				<<set $_skinIcon = 'waiter_arm.png'>>
+				<<set $_frontIcon = 'waiter_platter.png'>>
+			<<case "hitchhike">>
+				<<set $_skinIcon = 'hitchhike_thumb.png'>>
+				<<set $_frontIcon = 'hitchhike_car.png'>>
+			<<case "strip">>
+				<<set $_skinIcon = 'strip_skin.png'>>
+				<<set $_frontIcon = 'strip_undies.png'>>
+			<<case "pray">>
+				<<set $_skinIcon = 'pray_hands.png'>>
+				<<set $_frontIcon = 'pray.png'>>
+			<<case "breastEnlarge">>
+				<<set $_skinIcon = 'breast_enlarge_skin.png'>>
+				<<set $_frontIcon = 'breast_enlarge_arrows.png'>>
+			<<case "breastReduce">>
+				<<set $_skinIcon = 'breast_reduce_skin.png'>>
+				<<set $_frontIcon = 'breast_reduce_arrows.png'>>
+			<<case "penisEnlarge">>
+				<<set $_skinIcon = 'penis_enlarge_skin.png'>>
+				<<set $_frontIcon = 'penis_enlarge_arrows.png'>>
+			<<case "penisReduce">>
+				<<set $_skinIcon = 'penis_reduce_skin.png'>>
+				<<set $_frontIcon = 'penis_reduce_arrows.png'>>
+			<<case "wash">>
+				<<set $_skinIcon = 'wash_skin.png'>>
+				<<set $_frontIcon = 'wash_bubbles.png'>>
+		<</switch>>
+		<span class="icon-container">
+			<span @style="_iconFilter">
+				<<icon $_skinIcon>>
+			</span>
+			<<icon $_frontIcon>>
+		</span>
+	<</if>>
+<</widget>>
+
+<<widget "pregnancyicon">>
+	<<if $options.images is 1>>
+		<<if _args[0] is "player">>
+			<<set _pregnancyIconFilter = "filter: " + setup.colours.getSkinCSSFilter($skinColor.natural, $skinColor.range)>>
+			<<set $_skinIcon to "belly_human_breasts">>
+			<<switch $player.breastsize>>
+				<<case 0>><<set $_skinIcon += "0.png">>
+				<<case 1 2>><<set $_skinIcon += "1.png">>
+				<<case 3 4>><<set $_skinIcon += "2.png">>
+				<<case 5 6>><<set $_skinIcon += "3.png">>
+				<<case 7 8>><<set $_skinIcon += "4.png">>
+				<<case 9 10>><<set $_skinIcon += "5.png">>
+				<<case 11 12>><<set $_skinIcon += "6.png">>
+			<</switch>>
+			<span @style="_pregnancyIconFilter">
+				<<icon $_skinIcon>>
+			</span>
+		<<elseif C.npc[_args[0]]>>
+			<<if _args[0] is "Great Hawk">>
+				<<if $monster is 1 or ($monsterchance gte $rng and $hallucinations gte 1) or ($monsterchance gte $rng and $monsterhallucinations is "f") or ($greathawkmonster is 2) or ($bestialitydisable is "t")>>
+					<<set _pregnancyIconFilter = "filter: " + setup.colours.getSkinCSSFilter(C.npc["Great Hawk"].skincolour)>>
+					<<set $_frontIcon to "birdTower/belly_harpy.png">>
+					<<set $_skinIcon to "birdTower/belly_harpy_breasts">>
+					<<switch C.npc["Great Hawk"].breastsize>>
+						<<case 0>><<set $_skinIcon += "0.png">>
+						<<case 1 2>><<set $_skinIcon += "1.png">>
+						<<case 3 4>><<set $_skinIcon += "2.png">>
+						<<case 5 6>><<set $_skinIcon += "3.png">>
+						<<case 7 8>><<set $_skinIcon += "4.png">>
+						<<case 9 10>><<set $_skinIcon += "5.png">>
+						<<case 11 12>><<set $_skinIcon += "6.png">>
+					<</switch>>
+					<span class="icon-container">
+						<span @style="_pregnancyIconFilter">
+							<<icon $_skinIcon>>
+						</span>
+						<<icon $_frontIcon>>
+					</span>
+				<<else>>
+					<<icon "birdTower/belly_hawk.png">>
+				<</if>>
+			<<else>>
+				<<set _pregnancyIconFilter = "filter: " +  setup.colours.getSkinCSSFilter(C.npc[_args[0]].skincolour)>>
+				<<set $_skinIcon to "belly_human_breasts">>
+				<<switch C.npc[_args[0]].breastsize>>
+					<<case 0>><<set $_skinIcon += "0.png">>
+					<<case 1 2>><<set $_skinIcon += "1.png">>
+					<<case 3 4>><<set $_skinIcon += "2.png">>
+					<<case 5 6>><<set $_skinIcon += "3.png">>
+					<<case 7 8>><<set $_skinIcon += "4.png">>
+					<<case 9 10>><<set $_skinIcon += "5.png">>
+					<<case 11 12>><<set $_skinIcon += "6.png">>
+				<</switch>>
+				<span @style="_pregnancyIconFilter">
+					<<icon $_skinIcon>>
+				</span>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "dressasyouwereicon">>
+	<span class="clothes-light-blue"><<icon "clothes/serafuku.png">></span>
+<</widget>>
+
+<<widget "towelicon">>
+	<span class="clothes-off-white"><<icon "clothes/towel.png">></span>
+<</widget>>
+
+<<widget "bedroomicon">>
+	<<icon "bedroom.png">>
+<</widget>>
+
+<<widget "mirroricon">>
+	<<switch _args[0]>>
+		<<case "blood">><<icon "mirrorblood.gif">>
+		<<case "home">><<icon "mirrorhome.png">>
+		<<default>><<icon "mirror.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "animalicon">>
+	<<icon `_args[0] + ".png"`>>
+<</widget>>
+
+<<widget "investigateicon">>
+	<<icon "investigate.png">>
+<</widget>>
+
+<<widget "robinicon">>
+	<<icon `"robin_" + _args[0] + ".png"`>>
+<</widget>>
+
+<<widget "shopicon">>
+	<<switch _args[0]>>
+		<<case "adult">><<icon "adultshop.gif">>
+		<<case "closed">><<icon "closedstore.png">>
+		<<case "clothing">><<icon "clothingshop.png">>
+		<<case "dilapidated">><<icon "dilapidatedshop.png">>
+		<<case "forest">><<icon "forestshop.png">>
+		<<case "tailor">><<icon "tailorThread.png">>
+		<<case "tattoo">><<icon "tattoo.png">>
+		<<case "toy">><<icon "toyshop2.png">>
+		<<case "register">><<icon "cash_register.png">>
+		<<default>><<icon "shopping_centre.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "petshopicon">>
+	<<switch _args[0]>>
+		<<case "cage">><<icon "cage.png">>
+		<<case "chew">><<icon "chewtoy.png">>
+		<<case "feeder">><<icon "automatic_feeder.gif">>
+		<<case "decor">><<icon "tank_decor.png">>
+		<<case "decor exotic">><<icon "tank_decor_exotic.png">>
+		<<case "tank small">><<icon "tank_small.gif">>
+		<<case "tank medium">><<icon "tank_medium.gif">>
+		<<case "tank large">><<icon "tank_large.gif">>
+		<<case "tank huge">><<icon "tank_huge.gif">>
+		<<case "treat">><<icon "dogtreat.png">>
+		<<default>><<icon "petshop.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "hairdressericon">>
+	<<switch _args[0]>>
+		<<case "chair">><<icon "hairdresser_chair.png">>
+		<<case "gel">><<icon "hairgel.png">>
+		<<case "hairspray">><<icon "hairspray.png">>
+		<<default>><<icon "hairdresser.gif">>
+	<</switch>>
+<</widget>>
+
+<<widget "cosmeticsicon">>
+	<<switch _args[0]>>
+		<<case "contacts">><<icon "contacts.png">>
+		<<case "dyes">>	<<icon "dye.png">>
+		<<case "mascara">><<icon "mascara.png">>
+		<<case "eyeshadow">><<icon "eyeshadow.png">>
+		<<default>><<icon "cosmetics.gif">>
+	<</switch>>
+<</widget>>
+
+<<widget "rebuyicon">>
+	<<switch _args[0]>>
+		<<case "disable">><<icon "rebuy_disabled.png">>
+		<<default>><<icon "rebuy.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "pregnancytesticon">>
+	<<icon "pregnancy_test.gif">>
+<</widget>>
+
+<<widget "beachicon">>
+	<<switch _args[0]>>
+		<<case "seaweed">><<icon "seaweed.png">>
+		<<case "rocks">><<icon "sea_rocks.png">>
+		<<default>><<icon "beach.gif">>
+	<</switch>>
+<</widget>>
+
+<<widget "chaleticon">>
+	<<icon "chalet.png">>
+<</widget>>
+
+<<widget "prisonicon">>
+	<<icon `"prison_" + _args[0] + ".png"`>>
+<</widget>>
+
+<<widget "hospitalicon">>
+	<<icon "hospital.png">>
+<</widget>>
+
+<<widget "procedureicon">>
+	<<switch _args[0]>>
+		<<case "breast enlarge">><<skinicon "breastEnlarge">>
+		<<case "breast reduce">><<skinicon "breastReduce">>
+		<<case "penis enlarge">><<skinicon "penisEnlarge">>
+		<<case "penis reduce">><<skinicon "penisReduce">>
+		<<case "parasite">><<icon "antiParasiteCream.png">>
+		<<case "paternity">><<icon "paternityTest.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "condomicon">>
+	<<switch _args[0]>>
+		<<case "machine">><<icon "condom_machine.png">>
+		<<default>><<icon "condom.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "pillicon">>
+	<<switch _args[0]>>
+		<<case "breastEnlarge">><<icon "smalluparrow.png" "infront">><<icon "pillbreast.png">>
+		<<case "breastReduce">><<icon "smalldownarrow.png" "infront">><<icon "pillbreast.png">>
+		<<case "breastBlock">><<icon "smallcross.png" "infront">><<icon "pillbreast.png">>
+		<<case "penisEnlarge">><<icon "smalluparrow.png" "infront">><<icon "pillpenis.png">>
+		<<case "penisReduce">><<icon "smalldownarrow.png" "infront">><<icon "pillpenis.png">>
+		<<case "penisBlock">><<icon "smallcross.png" "infront">><<icon "pillpenis.png">>
+		<<case "bottomEnlarge">><<icon "smalluparrow.png" "infront">><<icon "pillbottom.png">>
+		<<case "bottomReduce">><<icon "smalldownarrow.png" "infront">><<icon "pillbottom.png">>
+		<<case "bottomBlock">><<icon "smallcross.png" "infront">><<icon "pillbottom.png">>
+		<<case "fertility">><<icon "fertility_booster.png">>
+		<<case "contraceptive">><<icon "contraceptive_pills.png">>
+		<<case "morningAfter">><<icon "morningAfter.png">>
+		<<case "blue">><<icon "pillblue.png">> /*unused*/
+		<<case "stimulant">><<icon "stimulant.png">>
+		<<default>><<icon "pill_collection.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "asylumicon">>
+	<<switch _args[0]>>
+		<<case "door">><<icon "asylum_door.png">>
+		<<case "wardrobe">><<icon "asylum_wardrobe.png">>
+		<<case "cell">><<icon "asylum_cell.png">>
+		<<case "bed">><<icon "hospital_bed.png">>
+		<<default>><<icon "hospital_bed.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "socialiseicon">>
+	<<switch _args[0]>>
+		<<case "angry">><<icon "socialise_angry.png">>
+		<<case "party">><<icon "solocup.png">>
+		<<case "volleyball">><<icon "volleyball.png">>
+		<<case "cinema">><<icon "ticket.png">>
+		<<default>><<icon "socialise.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "smokeicon">>
+	<<icon "cig.png">>
+<</widget>>
+
+<<widget "daydreamicon">>
+	<<icon "daydream.png">>
+<</widget>>
+
+<<widget "photographystudioicon">>
+	<<icon "camera.png">>
+<</widget>>
+
+<<widget "officeicon">>
+	<<icon "office.png">>
+<</widget>>
+
+<<widget "pilloryicon">>
+	<<icon "watch_pillory.png">>
+<</widget>>
+
+<<widget "cafeicon">>
+	<<icon "cafe.png">>
+<</widget>>
+
+<<widget "docksicon">>
+	<<icon "docks.png">>
+<</widget>>
+
+<<widget "landfillicon">>
+	<<icon "rubbish.png">>
+<</widget>>
+
+<<widget "coastalpathicon">>
+	<<switch Weather.dayState>>
+		<<case "day">>
+			<<icon "coastalpath_day.png">>
+		<<case "night">>
+			<<icon "coastalpath_night.png">>
+		<<case "dawn">>
+			<<icon "coastalpath_dawn.png">>
+		<<case "dusk">>
+			<<icon "coastalpath_dusk.png">>
+		<<default>>
+			<<icon "coastalpath_day.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "baskicon">>
+	<<icon "bask.png">>
+<</widget>>
+
+<<widget "changingroomicon">>
+	<<icon "changingroom.png">>
+<</widget>>
+
+<<widget "scarleticon">>
+	<<icon "scarletNew.png">>
+<</widget>>
+
+<<widget "oliveicon">>
+	<<icon "oliveNew.png">>
+<</widget>>
+
+<<widget "lockpickicon">>
+	<<icon "lockpick.png">>
+<</widget>>
+
+<<widget "sextoysicon">>
+	<<switch _args[0]>>
+		<<case "anal beads">><span class="clothes-silver"><<icon "sexToys/analbeads.png">></span>
+		<<case "dildo">><span class="clothes-fleshy"><<icon "sexToys/dildo.png">></span>
+		<<case "horse strap-on">><<icon "sexToys/strap-on_horse_cock.png">>
+		<<case "knotted strap-on">><<icon "sexToys/strap-on_knotted_cock.png">>
+		<<case "lube">><span class="clothes-light-blue"><<icon "sexToys/lube.png">></span>
+		<<case "pump">><span class="clothes-pink"><<icon "sexToys/handheld_pump.png">></span>
+		<<case "smalldildo">><span class="clothes-fleshy"><<icon "sexToys/dildo_small.png">></span>
+		<<case "strap-on">><<icon "sexToys/strap-on.png">>
+		<<case "stroker">><<icon "sexToys/onahole.png">>
+		<<default>><<icon "sexToys/bulletvibe.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "busstationicon">>
+	<<icon "busstation.png">>
+<</widget>>
+
+<<widget "factoryicon">>
+	<<icon "factory.gif">>
+<</widget>>
+
+<<widget "foodicon">>
+	<<icon `"food_" + _args[0] + ".png"`>>
+<</widget>>
+
+
+<<widget "hypnosisicon">>
+	<<icon "hypnosis.png">>
+<</widget>>
+
+<<widget "dooricon">>
+	<<switch _args[0]>>
+		<<case "domus">><<icon "domus_house.png">>
+		<<case "danube">><<icon "danube_house.png">>
+		<<case "open">><<icon "flat_door_open.png">>
+		<<case "orphanage">><<icon "orphanage_doors.png">>
+		<<default>><<icon "flat_door.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "childicon">>
+	<<icon `"childToys/" + _args[0] + ".png"`>>
+<</widget>>
+
+<<widget "officebuildingicon">>
+	<<icon "office_building.png">>
+<</widget>>
+
+<<widget "kylarmanoricon">>
+	<<icon "kylars_manor.png">>
+<</widget>>
+
+<<widget "main_hall_icon">>
+	<<if $christmas is 1>>
+		<<icon "mainhall_christmas.png">>
+	<<elseif $halloween is 1>>
+		<<icon "mainhall_halloween.png">>
+	<<else>>
+		<<icon "mainhall.png">>
+	<</if>>
+<</widget>>
+
+<<widget "townhallicon">>
+	<<icon "town_hall.png">>
+<</widget>>
+
+<<widget "venticon">>
+	<<switch _args[0]>>
+		<<case "eyes">><<icon "vent_eyes.png">>
+		<<default>><<icon "vent.png">>
+	<</switch>>
+<</widget>>
+
+<<widget "ind">>
+	<<icon "indent.png">>
+<</widget>>
+
+<<widget "clothingicon">>
+	<<if $options.images is 1>>
+		<<set $_item to setup.clothes[_args[1]][clothesIndex(_args[1],_args[0])]>>
+		<<if $_item.iconFile>>
+			<<if typeof($_item.iconFile) === 'string'>>
+				<<set $clothesiconFile = "img/misc/icon/clothes/" + $_item.iconFile>>
+			<<else>>
+				<<set $clothesiconFile = "img/misc/icon/clothes/" + $_item.name_cap + ".png">>
+			<</if>>
+			<<if _args[0].colour is 0 or $_item.colour_options.length lt 2>>
+				<img class="icon" alt="" @src="$clothesiconFile">
+			<<else>>
+				<img alt="" @class="'icon-'+ _args[0].colour.replace(/ /g, '-') + ' icon'" @src="$clothesiconFile" @style="(_args[0].colour is 'custom'? _args[0].colourCustom : '')">
+			<</if>>
+		<</if>>
+		<<if $_item.accIcon isnot 0 and $_item.accessory isnot 0>>
+			<<if typeof($_item.accIcon) === 'string'>>
+				<<set $clothesiconFile = "img/misc/icon/clothes/" + $_item.accIcon>>
+			<<else>>
+				<<set $clothesiconFile = "img/misc/icon/clothes/" + $_item.name_cap + "_acc.png">>
+			<</if>>
+			<span class="spanIcon">
+			<<if !_args[0].accessory_colour or $_item.accessory_colour_options.length lt 2>>
+				<img class="accIcon" alt="" @src="$clothesiconFile">
+			<<else>>
+				<img @class="'icon-'+ _args[0].accessory_colour.replace(/ /g, '-') + ' accIcon'" alt="" @src="$clothesiconFile" @style="(_args[0].accessory_colour is 'custom'? _args[0].accessory_colourCustom : '')">
+			<</if>>
+			</span>
+		<</if>>
+	<</if>>
+<</widget>>

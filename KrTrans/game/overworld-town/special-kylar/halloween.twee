@@ -1,0 +1,1795 @@
+:: Kylar Halloween Start [widget]
+<<widget "halloweenkylar">>
+	<<npc Kylar>><<person1>>
+	<span class="blue">누군가가 당신을 지켜보고 있는 것 같다.</span> 주위를 둘러보자, 그림자 속에서
+	<<if $pronoun is "m">>
+		고딕 정장을 입고 두껍게 화장을 한 형체가 기어나온다.
+	<<else>>
+		고딕 드레스를 입고 두껍게 화장을 한 형체가 기어나온다. <<if $NPCList[0].breastsize gte 1>>꽉 조인 코르셋이 <<his_ yi>> <<breastsdesc_ rul $NPCList[0].breastsdesc>> 보정해 주고 있다.<</if>>
+	<</if>>
+	<<him_ ul>> 알아보기까지는 시간이 조금 걸린다. 카일라다.
+	<br><br>
+	<<set $halloween_kylar_proposed to 1>>
+
+	<<if $exposed gte 1>>
+		<<covered>> "해피 할로윈-" <<He_ nun>> 말을 꺼내다가, 어둠에 가려져 처음엔 보이지 않았던 당신의 드러난 몸을 알아채고는 말을 끊는다. <<His _nun>> 어디에 시선을 둬야 될 지 망설이는 듯 눈을 깜빡이며 당신을 훑어본다.
+		<br><br>
+
+		근처 길거리에서 취객들이 소리치는 소리가 들린다. 카일라는 무아지경에서 벗어나, 소리가 들려오는 쪽으로 불안한 눈빛을 보낸다. "너-너 뭘 좀 덮어야겠다," <<he_ ga>> 말한다. "변태놈들이 돌아다니잖아." <<He_ nun>> 어둠 속으로 달려간다.
+		<br><br>
+
+		1분도 채 되지 않아, <<he_ ga>> 두루말이 휴지를 품에 안고 돌아온다. "다른 날 같았으면 이런 건 안 통했을 거야. 그치만 미라 분장을 한다면 눈에 띄지 않을 수 있어."
+		<br><br>
+
+		<<link [[보지 말라고 한다|Kylar Halloween Look]]>><<npcincr Kylar dom -1>><</link>>
+		<br>
+		<<if hasSexStat("exhibitionism", 3)>>
+			<<link [[카일라가 지켜보게 한다|Kylar Halloween Watch]]>><<npcincr Kylar lust 5>><<npcincr Kylar love 1>><</link>><<exhibitionist2>><<gglust>><<glove>>
+			<br>
+		<</if>>
+
+	<<else>>
+		"해피 할로윈," <<he_ ga>> 말한다. <<He_ nun>> 흥분한 기색이다. "너한테 보여주고 싶은 게 있어. 이쪽이야."
+		<br><br>
+		<<link [[카일라와 함께 간다 (1:00)|Kylar Halloween]]>><<npcincr Kylar love 1>><<pass 10>><</link>><<glove>>
+		<br>
+		<<link [[거절한다|Kylar Halloween Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
+		<br>
+	<</if>>
+<</widget>>
+
+:: Kylar Halloween
+<<set $location to "town">><<effects>>
+<<set $dateCount.Total++>><<set $dateCount.Kylar++>>
+
+카일라는 공원을 거쳐 나이팅게일 가로 당신을 이끈다. 가는 길에 일진 몇 명을 지나쳤지만, 그들은 너무 취해서 <<him_ ul>> 알아보지 못한다.
+<br><br>
+
+당신과 카일라는 병원을 지나쳐 마을 밖으로 이어지는 작은 오솔길을 따라 걷는다. 나무가 점차 빽빽해지지만, 카일라는 속도를 늦추지 않는다.
+<br><br>
+
+<<link [[계속 걷는다|Kylar Halloween Walk]]>><</link>>
+<br>
+<<link [[망설인다|Kylar Halloween Hesitate]]>><</link>>
+<br>
+
+:: Kylar Halloween Hesitate
+<<effects>>
+
+당신은 길 가장자리에서 멈춰선다. 카일라가 돌아본다. <<He_ nun>> 머뭇거리다가 입을 연다. "그-그렇게 안 멀어," <<he_ ga>> 손을 내밀면서 말한다.
+<br><br>
+
+<<link [[카일라와 함께 간다|Kylar Halloween Walk]]>><<npcincr Kylar love 1>><</link>><<glove>>
+<br>
+<<link [[거절한다|Kylar Halloween Forest Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Forest Refuse
+<<effects>>
+
+당신은 뒤돌아서 걸어간다. 카일라는 숲 가장자리에 홀로 서서 멀어지는 당신을 쳐다본다.
+<br><br>
+
+<<link [[다음|Nightingale Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+:: Kylar Halloween Refuse
+<<effects>>
+
+당신은 뒤돌아서 걸어간다. 카일라는 공원에 홀로 서서 멀어지는 당신을 쳐다본다.
+<br><br>
+
+<<link [[다음|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+:: Kylar Halloween Watch
+<<effects>>
+
+당신은 휴지로 몸을 감는다. 찢지 않고 두르려니 몇 번의 시행착오가 필요하다. 카일라는 그 모든 광경을 지켜본다. <<his_ yi>> 붉어진 얼굴은 어두운 조명에도 선명히 보인다.
+<<exhibitionism2>>
+
+당신은 카일라에게 괜찮아 보이냐고 묻는다. <<He_ nun>> 고개를 끄덕이지만, <<his_ yi>> 음침한 시선으로 보아 여전히 야한 복장인 것은 마찬가지다. 그럴 수 밖에 없다.
+<br><br>
+
+"너-너한테 보여주고 싶은 게 있어," <<he_ ga>> 말한다. "이쪽이야."
+<br><br>
+
+<<if $worn.upper.exposed gte 1>>
+	<<upperwear 65>>
+<</if>>
+<<if $worn.lower.exposed gte 1>>
+	<<lowerwear 57>>
+<</if>>
+
+<<link [[카일라와 함께 간다 (1:00)|Kylar Halloween]]>><<npcincr Kylar love 1>><<pass 10>><</link>><<glove>>
+<br>
+<<link [[거절한다|Kylar Halloween Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Look
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"소-<<girl_ i>> 옷 입는 걸 쳐다보는 건 실례야," 당신이 말한다.
+<<elseif $speech_attitude is "bratty">>
+	"뒤 돌아," 당신이 말한다. "무례하기는."
+<<else>>
+	"네가 보고 있으면 못 입어," 당신이 말한다.
+<</if>>
+<br><br>
+
+<<if $worn.upper.exposed gte 1>>
+	<<upperwear 65>>
+<</if>>
+<<if $worn.lower.exposed gte 1>>
+	<<lowerwear 57>>
+<</if>>
+
+카일라는 당신이 휴지를 몸에 두르는 동안 시선을 다른 곳으로 돌린다. 찢지 않고 두르려니 몇 번의 시행착오가 필요하지만, 꽤 그럴싸한 결과물이 나온 것 같다.
+<br><br>
+당신은 카일라에게 괜찮아 보이냐고 묻는다. <<He_ nun>> 고개를 끄덕이지만, <<his_ yi>> 음침한 시선으로 보아 여전히 야한 복장인 것은 마찬가지다. 그럴 수 밖에 없다.
+<br><br>
+
+"너-너한테 보여주고 싶은 게 있어," <<he_ ga>> 말한다. "이쪽이야."
+<br><br>
+
+<<link [[카일라와 함께 간다 (1:00)|Kylar Halloween]]>><<npcincr Kylar love 1>><<pass 10>><</link>><<glove>>
+<br>
+<<link [[거절한다|Kylar Halloween Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Walk
+<<location "forest">><<effects>>
+<<pass 15>>
+당신은 카일라와 함께 숲에 들어선다. 어두워서 길이 하나도 보이지 않지만, <<hes_ nun>> 어디로 가야 할 지 알고 있는 듯 하다.
+<br><br>
+
+나무는 점차 빽빽해지다가, 어느 순간 공동묘지로 통하는 길을 연다. 카일라는 미소짓는다. "할로윈엔 뭔가 특별한 걸 해보고 싶었어," <<he_ nun>> 언덕 위에 서있는 저택을 가리키며 말한다. "다들 겁이 나서 들어가 본 사람이 없대. 분명 저 안에 보물이 있을 거야." <<He_ nun>> 당신의 팔을 붙잡고 걸음을 내딛는다.
+<br><br>
+
+<<link [[계속한다|Kylar Halloween Continue]]>><</link>>
+<br>
+<<link [[화를 낸다|Kylar Halloween Angry]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Angry
+<<effects>>
+
+당신은 카일라의 손을 뿌리친다.
+<<if $speech_attitude is "meek">>
+	"왜 내가 이런 걸 좋아할 거라고 생각한 거야?" 당신이 묻는다. "할로윈에 저런 무서운 곳에는 가고 싶지 않아."
+<<elseif $speech_attitude is "bratty">>
+	"저리 꺼져," 당신이 말한다. "할로윈이라고 해도 저런 위험한 폐가 같은 데는 안 가."
+<<else>>
+	"어디 갈 건지 미리 말을 해줬어야지," 당신이 말한다. "난 이런 거 싫어."
+<</if>>
+<br><br>
+
+카일라는 자신의 발을 내려다본다. "미-미안," <<he_ ga>> 말한다. "나-난 단 둘이서 재-재밌게 놀 수 있을 줄 알았어."
+<br><br>
+
+<<link [[저택으로 걸어간다|Kylar Halloween Continue Walk]]>><<npcincr Kylar love 1>><</link>><<glove>>
+<br>
+<<link [[돌아가자고 고집한다|Kylar Halloween Leave]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Leave
+<<effects>>
+
+당신은 돌아서서 숲을 향해 걸어간다. 카일라는 서둘러 뒤따라오며 더듬더듬 사과한다. "미-미안해. 제-제발 화내지 말아줘."
+<br><br>
+
+<<link [[계속 걸어간다|Kylar Halloween March]]>><</link>>
+<br>
+<<link [[키스한다|Kylar Halloween Kiss]]>><</link>><<promiscuous1>>
+<br>
+
+:: Kylar Halloween March
+<<effects>>
+<<pass 15>>
+
+당신은 계속해서 숲을 가로질러 걸어간다. 카일라는 뒤를 따른다. 저 너머에서 마을의 불빛이 보인다. 카일라가 당신을 가로막고 선다. <<He_ nun>> 눈을 피한다. "날 용서해 줄 수 있어?"
+<br><br>
+
+<<link [[네|Kylar Halloween Yes]]>><<npcincr Kylar love 1>><<npcincr Kylar rage -5>><</link>><<glove>><<llksuspicion>>
+<br>
+<<link [[아니요|Kylar Halloween No]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 5>><</link>><<llove>><<ggksuspicion>>
+<br>
+
+:: Kylar Halloween Yes
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"다-당연하지," 당신이 말한다. "다음에 또 겁주지만 말아줘."
+<<elseif $speech_attitude is "bratty">>
+	"그러지 뭐," 당신이 말한다. "나중에 또 이상한 짓 하지만 마."
+<<else>>
+	"그래," 당신이 말한다. "그냥 겁을 좀 먹었던 거 뿐이야."
+<</if>>
+<br><br>
+
+카일라는 안도의 한숨을 내쉰다. 당신은 울프 가에 다다른다. 뒤를 돌아보았을 때, 카일라는 더 이상 보이지 않는다.
+<br><br>
+
+<<link [[다음|Nightingale Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Halloween No
+<<effects>>
+
+당신은 카일라를 무시하고, <<him_ yi>> 옆을 지나쳐 울프 가로 걸어간다. 뒤를 돌아보았을 때, 카일라는 더 이상 보이지 않는다.
+<br><br>
+
+<<link [[다음|Nightingale Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Halloween Kiss
+<<effects>>
+
+당신은 뒤돌아서 카일라를 팔로 감싸안고, <<him_ ul>> 끌어당겨 입을 맞춘다. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>> <<He_ nun>> 마치 <<hisPost>> 자신의 몸무게를 지탱하지 못하는 듯이, 당신에게 잠시동안 기대고 있는다.
+<br><br>
+
+당신은 입을 거둔다. <<him_ un>> 화장이 번진 얼굴로 더없이 행복한 미소를 짓는다.
+<<if _npcKissVirginTemp>>
+	"바-방금 게 내 첫키스였어," <<he_ ga>> 눈을 반짝이며 속삭인다. "꿈꿔왔던 것보다 훨씬 좋아."
+<</if>>
+<br><br>
+
+<<link [[마을로 돌아간다|Kylar Halloween Town]]>><</link>>
+<br>
+<<if hasSexStat("promiscuity", 2)>>
+	<<link [[카일라를 바닥으로 밀친다|Kylar Halloween Sex]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Town
+<<effects>>
+
+당신은 카일라의 손을 잡고 마을로 돌아간다. <<takeHandholdingVirginity "Kylar" "romantic">>
+
+<<if $speech_attitude is "meek">>
+	"나-난 그냥 숲에서 단 둘이 만나고 싶은 건 줄 알았어," 당신이 말한다. "기분 나빴으면 사과할게."
+<<elseif $speech_attitude is "bratty">>
+	"난 네가 이런 걸 생각한 줄 알았지," 당신이 말한다. "뭔 으스스한 모험 같은 게 아니라."
+<<else>>
+	"난 그냥 숲에서 단 둘이 있고 싶은 줄 알았는데," 당신이 말한다.
+<</if>>
+<br><br>
+
+<<He_ nun>> 대답하는 대신, 당신의 손을 더 강하게 쥔다.
+<br><br>
+
+"난 가봐야 돼," <<he_ ga>> 울프가에 도착하자 말한다. "고마워." <<He_ nun>> 당신을 미련이 남는 듯 포옹하고는 허둥지둥 사라진다.
+<br><br>
+
+<<link [[다음|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Halloween Sex
+<<run statusCheck("Kylar")>>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	카일라는 당신에게 숲 바닥으로 밀쳐지자 숨 넘어가는 소리를 낸다.
+	<<set $enemytrust += 100>><<promiscuity2>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Kylar Halloween Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Kylar Halloween Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Kylar Halloween Sex Finish
+<<set $outside to 0>><<effects>>
+<<run statusCheck("Kylar")>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He_ nun>> 풀어헤쳐진 복장으로 당신의 옆에 눕는다. <<tearful>> 당신은 자리에서 일어선다.
+	<<if $orgasmcurrent is 0 and !playerChastity()>>
+		<<if _kylarStatus.includes("Rage")>>
+			카일라는 무릎을 꿇고 앉아 당신의 <<genitals_ rul>> 바라본다. "넌 한번도 안 갔어," <<he_ ga>> 중얼거린다. "내가... 부족했던 거야?" <<He_ nun>> 격렬하게 고개를 흔든다. "만회하고 말겠어. 보여줄거야."
+		<<else>>
+			카일라는 무릎을 꿇고 앉아 당신의 <<genitals_ rul>> 바라본다. "너는 못 갔잖아," <<he_ ga>> 중얼거린다. "넌 나를 보내 줬는데 그런 건 불공평해. 자, 내가 만회해 볼게."
+		<</if>>
+		<br><br>
+
+		<<kylarFinish>>
+		<<He_ nun>> 일어서서, 자신의 <<if $pronoun is "m">>정장<<else>>드레스<</if>>에 묻은 잔디 자국을 닦아낸다.
+	<<else>>
+		카일라도 같이 일어서서, 자신의 <<if $pronoun is "m">>정장<<else>>드레스<</if>>에 묻은 잔디 자국을 닦아낸다.
+	<</if>>
+	<br><br>
+	<<clothesonplant>>
+	<<endcombat>>
+	<<npc Kylar>><<person1>>
+	<<if $exposed gte 1>>
+		"오-옷은 미안," <<he_ ga>> 말한다. "뭔가 덮을 만한 걸 찾아볼게." <<He_ nun>> 주변을 더듬거리더니, 식물로 간이 옷가지를 만들어 당신의 몸에 두른다.
+		<br><br>
+	<</if>>
+
+	당신은 카일라의 손을 잡고 마을로 돌아간다. <<takeHandholdingVirginity "Kylar" "romantic">> "난 가봐야 돼," <<he_ ga>> 울프가에 도착하자 말한다. "고마워." <<He_ nun>> 당신을 미련이 남는 듯 포옹하고는 허둥지둥 사라진다.
+	<br><br>
+
+	<<link [[다음|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	당신은 카일라를 밀치고, 마을로 도망친다. "자-잠시만!" <<he_ ga>> 당신의 등 뒤에서 소리친다, "미안해!"
+	<br><br>
+	<<tearful>> 당신은 울프 가에 도착한다. 뒤를 돌아보았을 때, 카일라는 더 이상 보이지 않는다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Kylar>><<person1>>
+	<<link [[다음|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<He_ nun>> 풀어헤쳐진 복장으로 당신의 옆에 눕는다. <<tearful>> 당신은 자리에서 일어선다. 카일라도 같이 일어난다.
+	<br><br>
+	<<clothesonplant>>
+	<<endcombat>>
+	<<npc Kylar>><<person1>>
+	<<if $exposed gte 1>>
+		"오-옷은 미안," <<he_ ga>> 말한다. "뭔가 덮을 만한 걸 찾아볼게." <<He_ nun>> 주변을 더듬거리더니, 식물로 간이 옷가지를 만들어 당신의 몸에 두른다.
+		<br><br>
+	<</if>>
+
+	당신은 카일라의 손을 잡고 마을로 돌아간다. <<takeHandholdingVirginity "Kylar" "romantic">> "난 가봐야 돼," <<he_ ga>> 울프가에 도착하자 말한다. "고마워." <<He_ nun>> 당신을 미련이 남는 듯 포옹하고는 허둥지둥 사라진다.
+	<br><br>
+
+	<<link [[다음|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Continue Walk
+<<effects>>
+
+불안감이 들긴 하지만, 당신은 카일라를 지나쳐 묘지를 향해 걸어간다. <<He_ nun>> 황급히 뒤따라온다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Continue]]>><</link>>
+<br>
+
+:: Kylar Halloween Continue
+<<effects>>
+<<pass 10>>
+
+당신은 묘지를 가로질러, 언덕 위의 저택으로 향한다. 카일라는 기운이 넘치는 듯, 계속해서 당신을 앞서간다.
+<br><br>
+
+당신은 거대한 정문 앞에 도달한다. 가까이서 보니 저택은 하늘을 배경으로 어렴풋하게 보여 더 큰 것 같다. 바람<<if Weather.precipitation is "rain">>과 비<</if>> 소리 외에는 아무것도 들리지 않는 가운데, 당신은 카일라의 곁에 잠시 서있는다.
+<br><br>
+
+카일라는 열쇠를 넣고 돌린다. 문이 찰칵 하는 소리를 내며 열린다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Mansion]]>><</link>>
+<br>
+
+:: Kylar Halloween Mansion
+<<set $outside to 0>><<effects>>
+
+카일라는 자신의 휴대전화를 조명으로 들고 저택 안쪽을 밝힌다. 발을 한번 딛을 때마다 먼지 구름이 인다. 왼쪽과 오른쪽에는 안쪽 방으로 통하는 문이 있고, 위층으로 향하는 계단도 보인다.
+<br><br>
+
+"이쪽이야," 카일라가 왼쪽으로 확신에 찬 걸음을 내딛으며 말한다. 당신은 그 뒤를 따라 다음 방의 회색 시트로 덮인 가구를 지나쳐, 또 다른 방으로 향한다. 주방으로 쓰이던 곳으로 보인다.
+<br><br>
+
+카일라는 쭈그려 앉아 먼지로 덮인 바닥을 더듬거린다. "여깄다!" <<He_ nun>> 바닥에 난 문을 열어제끼고, 그 안으로 조명을 비춘다. "저기 사다리가 있어," <<he_ ga>> 발로 안쪽을 건드려 보며 말한다. <<He_ nun>> 어두운 주방을 뒤로 하고 사다리를 타고 내려간다.
+<br><br>
+
+당신은 지나쳐 온 방에서 바닥재가 삐걱이는 소리에 귀를 기울이고는, 카일라를 따라 내려간다.<<gstress>><<stress 6>>
+<br><br>
+
+<<link [[다음|Kylar Halloween Mansion 2]]>><</link>>
+<br>
+
+:: Kylar Halloween Mansion 2
+<<effects>>
+
+당신은 카일라를 따라 어두컴컴한 지하실에서 와인 선반 몇개를 지나친다. 대부분은 비어 있지만 몇몇 선반엔 빈 병이 놓여 있다.
+<br><br>
+
+"하나 남은 게 있다!" 카일라가 외친다. "뭔가 있을 줄 알았어." <<He_ nun>> 맨 아래 선반을 향해 조명을 비춘다. 거기엔 꽉 찬 병이 하나 있다.
+<br><br>
+
+카일라는 병을 집어들고 주머니에서 코르크 뽑는 기구를 꺼낸다. <<He_ nun>> 망설임 없이 마개를 열고 당신에게 병을 내민다. "네-네가 먼저 마셔봐."
+<br><br>
+
+병의 라벨에는 기이하게 생긴 보랏빛 과일이 그려져 있다.
+
+<<if currentSkillValue('history') gte 500>>
+	<span class="green">당신은 역사 시간에 윈터가 했던 이야기를 떠올린다.</span> 마을에서는 사람들이 소위 <span class="lewd">사랑의 묘약</span>이라고 부르는 와인을 만들었다고 했다. 제조법은 역사 속으로 사라졌다. 남아있는 병은 분명 값어치가 있을 것이다.
+	<br><br>
+
+	당신은 카일라도 이를 알고 있을 거라고 확신한다.
+	<br><br>
+
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">당신의 배 속에 아기가 있다는 걸 알면서도 술을 마실 수는 없다.</span>
+	<<else>>
+		<<link [[어쨌든 마신다|Kylar Halloween Known Drink]]>><<wearProp "beerbottle">><<alcohol 60>><<drugs 60>><<hallucinogen 60>><</link>>
+	<</if>>
+	<br>
+	<<link [[거절한다|Kylar Halloween Unknown Refuse]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[화를 낸다|Kylar Halloween Known Angry]]>><</link>>
+	<br>
+<<else>>
+	그것을 어디서 본 것 같지만, <span class="red">어디였는지 기억이 나지 않는다.</span> 달콤한 향이 난다.
+	<br><br>
+
+	<<link [[마신다|Kylar Halloween Unknown Drink]]>><<alcohol 60>><<drugs 60>><<hallucinogen 60>><</link>>
+	<br>
+	<<link [[거절한다|Kylar Halloween Unknown Refuse]]>><<set $phase to 0>><<npcincr Kylar love -1>><</link>><<llove>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Known Drink
+<<effects>>
+
+당신은 병에 든 것을 한 모금 마신다. 달콤하다. 몸에 따스한 기운이 퍼지고, 약간 어지럽긴 하지만 그 외에 특별한 건 없다. 이건 사랑의 묘약이 아니다.
+<br><br>
+
+카일라는 기대에 찬 표정으로 바라본다.
+<br><br>
+
+<<link [[약효가 도는 척 한다|Kylar Halloween Known Pretend]]>><<handheldon>><<npcincr Kylar rage -10>><</link>><<lllksuspicion>>
+<br>
+<<link [[그냥 카일라에게 병을 넘겨준다|Kylar Halloween Known Hand]]>><<handheldon>><</link>>
+<br>
+
+:: Kylar Halloween Known Pretend
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"신기한 기분이 들어," 당신은 휘청이며 말한다. 당신은 카일라를 쳐다본다. "너 진짜 <<if $pronoun is "m">>잘생겼다<<else>>예쁘다<</if>>!"
+<<elseif $speech_attitude is "bratty">>
+	"이거 쎈데," 당신은 휘청이며 말한다. 당신은 카일라를 쳐다본다. "와 씨, 너 언제부터 이렇게 섹시했냐?"
+<<else>>
+	"느낌이 이상해," 당신은 휘청이며 말한다. 당신은 카일라를 쳐다본다. "너 오늘따라 되게 <<if $pronoun is "m">>잘생겨 보인다<<else>>예뻐 보인다<</if>>."
+<</if>>
+<br><br>
+
+카일라의 호흡이 가빠진다. "토-통했어," <<he_ ga>> 말한다. "그-그러니까... 우-우리 키스할까?"
+<br><br>
+
+<<link [[따라간다|Kylar Halloween Known Go]]>><<npcincr Kylar love 3>><<npcincr Kylar rage -2>><</link>><<promiscuous1>><<gglove>><<lksuspicion>>
+<br>
+<<link [[겁준다|Kylar Halloween Known Scare]]>><<npcincr Kylar rage -10>><<trauma -6>><</link>><<lllksuspicion>><<ltrauma>>
+<br>
+
+:: Kylar Halloween Known Go
+<<effects>>
+
+당신은 카일라를 얼싸안고, <<himPost>>에게 키스를 퍼붓는다. <<HePost>>도 당신을 팔로 감싸안는다. 당신과 카일라는 함께 바닥을 구른다.
+<<promiscuity1>>
+
+<<link [[다음|Kylar Halloween Mansion Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Kylar Halloween Mansion Sex
+<<run statusCheck("Kylar")>>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Kylar Halloween Mansion Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Kylar Halloween Mansion Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Kylar Halloween Mansion Sex Finish
+<<run statusCheck("Kylar")>>
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He_ nun>> 숨을 헐떡인다. 당신은 여기가 어디인지 모르겠다는 양 눈을 껌뻑이며 주변을 돌아본다.
+	<<if $speech_attitude is "meek">>
+		"미안해," 당신이 말한다. "나한테 뭐가 씌인 건지 모르겠어."
+	<<elseif $speech_attitude is "bratty">>
+		"내가 너무 스스럼없었다," 당신이 말한다. "갑자기 이상한 기분이 들었거든. 네가 있어서 다행이네."
+	<<else>>
+		"내가 갑자기 왜 그랬는지 모르겠어," 당신이 말한다.
+	<</if>>
+<br><br>
+
+	"난 괜찮아," 카일라가 행복에 겨운 미소를 지으며 말한다.
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<<if $orgasmcurrent is 0 and !playerChastity()>>
+		<<if _kylarStatus.includes("Rage")>>
+			카일라는 무릎을 꿇고 앉아 당신의 <<genitals_ rul>> 바라본다. "넌 한번도 안 갔어," <<he_ ga>> 중얼거린다. "나를 사랑하지 않는 거야?" <<He_ nun>> 격렬하게 고개를 흔든다. "만회하고 말겠어. 보여줄거야."
+		<<else>>
+			카일라는 무릎을 꿇고 앉아 당신의 <<genitals_ rul>> 바라본다. "너는 못 갔잖아," <<he_ ga>> 중얼거린다. "넌 나를 보내 줬는데 그런 건 불공평해. 자, 내가 만회해 볼게."
+		<</if>>
+		<br><br>
+
+		<<kylarFinish>>
+		<<He_ nun>> 자리에서 일어서서, 자신의 <<if $pronoun is "m">>정장<<else>>드레스<</if>>에 묻은 먼지를 털어낸다.
+
+	<<else>>
+		카일라도 함께 일어서서, 자신의 <<if $pronoun is "m">>정장<<else>>드레스<</if>>에 묻은 먼지를 털어낸다.
+	<</if>>
+
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+
+<<elseif $enemyhealth lte 0>>
+	당신이 카일라를 와인 선반으로 밀치자, 그 위의 모든 것들이 떨어져 부서진다.
+
+	<br><br>
+	<<tearful>> 당신은 자세를 고친다. 카일라가 일어서는 동안 당신은 여기가 어디인지 모르겠다는 양 눈을 껌뻑이며 주변을 돌아본다.
+	<<if $speech_attitude is "meek">>
+		"미안해," 당신이 말한다. "나한테 뭐가 씌인 건지 모르겠어."
+	<<elseif $speech_attitude is "bratty">>
+		"내가 너무 스스럼없었다," 당신이 말한다. "갑자기 이상한 기분이 들었거든. 네가 있어서 다행이네."
+	<<else>>
+		"내가 갑자기 왜 그랬는지 모르겠어," 당신이 말한다.
+	<</if>>
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+<<else>>
+	당신은 여기가 어디인지 모르겠다는 양 눈을 껌뻑이며 주변을 돌아본다.
+	<<if $speech_attitude is "meek">>
+		"미안해," 당신이 말한다. "나한테 뭐가 씌인 건지 모르겠어."
+	<<elseif $speech_attitude is "bratty">>
+		"내가 너무 스스럼없었다," 당신이 말한다. "갑자기 이상한 기분이 들었거든. 네가 있어서 다행이네."
+	<<else>>
+		"내가 갑자기 왜 그랬는지 모르겠어," 당신이 말한다.
+	<</if>>
+	<br><br>
+	<<tearful>> 당신은 자리에서 일어선다.
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+<</if>>
+
+당신은 지하실에서 올라와 정문으로 돌아간다.
+<br><br>
+
+<<npc Kylar>><<person1>>
+
+<<link [[다음|Kylar Halloween Exit]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Scare
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"키-키스하자고?" 당신은 웃으며 병을 집는다. 당신은 휘두르기라도 할 것 처럼 병을 머리 위로 치켜든다. "그 정도론 부족해. 우리 영원히 함께하자!"
+<<elseif $speech_attitude is "bratty">>
+	"그딴 건 좆까라 그래," 당신은 웃으며 병을 집는다. 당신은 휘두르기라도 할 것 처럼 병을 머리 위로 치켜든다. "우린 영원히 함께할 거니까."
+<<else>>
+	"난 그런 걸로는 모자라," 당신은 웃으며 병을 집는다. 당신은 휘두르기라도 할 것 처럼 병을 머리 위로 치켜든다. "우린 영원히 함께할 거야."
+<</if>>
+<br><br>
+
+당신이 앞으로 다가가자, 카일라는 공포와 갈망이 뒤섞인 얼굴로 뒷걸음친다. "어딜 가려고, 내 사랑?" 당신은 멈추지 않는다. "겁먹지 마!"
+<br>
+
+카일라는 침을 꿀꺽 삼킨다. "우-우린 함께 하게 될 거야," <<he_ ga>> 말한다. "이-일단은 병 내려놔."
+<br>
+"그 정도론 안되지." 당신은 앞으로 달려든다. 카일라는 뒷걸음치다 발을 헛디디더니, 황급히 일어나 사다리 쪽으로 뛰어간다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Known Chase]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Chase
+<<effects>>
+
+당신은 카일라를 쫓아 사다리를 오른다. 당신이 끝까지 올라왔을 때 <<He_ nun>> 이미 부엌에서 도망친 뒤다. 당신은 정문에서 소리가 들리나 귀를 기울이지만 아무것도 들리지 않는다. <<He_ nun>> 아직 저택 안에 있을 것이다.
+<br><br>
+"어디 갔어 내 사랑?" 당신은 다음 방으로 발걸음을 옮기며 달콤하게 속삭인다. 방 구석에서 무슨 소리가 들린다. 뒤쪽의 창문 근처에 시트로 덮인 탁자 같은 것이 보인다.
+<br><br>
+마신 게 사랑의 묘약은 아니었을지 몰라도, 와인 때문에 짓궃은 마음이 드는 게 느껴진다. 당신은 그저 연기하는 중이었음을 스스로에게 상기시킨다.
+<br><br>
+
+<<link [[커튼 뒤를 살펴본다|Kylar Halloween Known Curtain]]>><</link>>
+<br>
+<<link [[시트 아래를 살펴본다|Kylar Halloween Known Sheet]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Curtain
+<<effects>>
+
+당신은 커튼 뒤로 살금살금 걸어가, 커튼을 잡고 확 젖힌다. 그곳에 카일라는 없다.
+<br><br>
+
+삐걱이는 소리와 팔다리가 휘적이는 소리가 들린다. 카일라가 탁자 밑에서 나타나 뛰어간다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Known Front]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Sheet
+<<effects>>
+
+당신은 시트를 향해 살금살금 걸어가, 시트의 가장자리를 잡고 확 젖힌다. 카일라의 얼굴이 당신을 맞이한다. <<He_ nun>> 비틀대며 도망치더니 탁자의 반대편에서 나타난다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Known Front]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Front
+<<effects>>
+
+당신은 깔깔대며 현관 홀까지 <<him_ ul>> 뒤쫓는다. <<He_ nun>> 문을 향해 달려가지만 문은 잠겨 있다. <<His_ nun>> 떨리는 손으로 열쇠를 찾아 더듬거린다. 당신은 <<him_ yi>> 손이 열쇠에 닿는 순간, <<him_ ul>> 덮쳐 바닥에 눕힌다.
+<br><br>
+
+당신은 <<him_ ul>> 다리로 붙들고 올라타, 병을 머리 위로 치켜올린다. <<He_ nun>> 비명을 지르며 자신의 얼굴을 팔로 막는다.
+<br><br>
+
+<<link [[아무것도 모르는 척 한다|Kylar Halloween Known Dumb]]>><</link>>
+<br>
+<<link [[실토한다|Kylar Halloween Known Clean]]>><<npcincr Kylar love -3>><</link>><<lllove>>
+<br>
+
+:: Kylar Halloween Known Dumb
+<<effects>>
+
+"여긴 어디야?" 당신은 주위를 돌아보며 말한다. 당신이 병을 내려놓자 카일라가 손가락 사이로 빼꼼 바라본다. "뭔-" 당신은 두리번거린다. "우리 아래층에 있지 않았어? 왜 그렇게 겁 먹은 얼굴이야?"
+<br><br>
+
+카일라는 눈을 감고 안도의 한숨을 내쉰다.
+<br><br>
+
+<<link [[키스한다|Kylar Halloween Known Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar rage -3>><</link>><<promiscuous1>><<gglove>><<lksuspicion>>
+<br>
+<<link [[일어선다|Kylar Halloween Known Stand]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Stand
+<<effects>>
+
+당신은 자리에서 일어나 카일라를 풀어준다. <<He_ nun>> 먼지 틈에서 열쇠를 찾아다닌다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Exit]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Kiss
+<<effects>>
+
+당신은 카일라의 어깨에 손을 얹고, <<his_ yi>> 입술에 입을 맞춘다. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+<<if _npcKissVirginTemp>>
+	<<His_ nun>> 잠시 숨을 멈췄다가, 당신의 허리에 팔을 감고 당신을 끌어당긴다.
+<<else>>
+	<<He_ nun>> 당신의 허리에 팔을 감고 당신을 끌어당긴다.
+<</if>>
+<<His_ yi>> 맥박이 정신없이 뛴다.
+<<promiscuity1>>
+
+<<link [[다음|Kylar Halloween Known Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Kylar Halloween Known Clean
+<<effects>>
+
+병이 바닥으로 떨어지고, 당신은 보다 자연스럽게 웃음을 터뜨린다. 카일라는 혼란해 하는 표정을 지은 채 손가락 틈새로 바라본다.
+
+<<if $speech_attitude is "meek">>
+	"미안," 당신이 말한다. "그래도 동의도 없이 남한테 사랑의 묘약을 먹이면 안되는 거야."
+<<elseif $speech_attitude is "bratty">>
+	"쫄았냐?" 당신이 말한다. "그래도 싸지. 나한테 그런 식으로 약을 먹이려고 하다니."
+<<else>>
+	"나한테 약을 먹이려 한 대가야," 당신이 말한다.
+<</if>>
+<br><br>
+
+카일라는 눈을 감고 안도의 한숨을 내쉰다.
+<br><br>
+
+<<link [[키스한다|Kylar Halloween Known Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar rage -3>><</link>><<promiscuous1>><<gglove>><<lksuspicion>>
+<br>
+<<link [[일어선다|Kylar Halloween Known Stand]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Sex
+<<run statusCheck("Kylar")>>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Kylar Halloween Known Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Kylar Halloween Known Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Kylar Halloween Known Sex Finish
+<<run statusCheck("Kylar")>>
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	카일라는 뒤로 쓰러져, 아까보다도 더 격하게 숨을 헐떡인다. <<tearful>> 당신은 자리에서 일어선다.
+	<<if $orgasmcurrent is 0 and !playerChastity()>>
+		<<if _kylarStatus.includes("Rage")>>
+			카일라는 무릎을 꿇고 앉아 당신의 <<genitals_ rul>> 바라본다. "넌 한번도 안 갔어," <<he_ ga>> 중얼거린다. "나를 사랑하지 않는 거야?" <<He_ nun>> 격렬하게 고개를 흔든다. "만회하고 말겠어. 보여줄거야."
+		<<else>>
+			카일라는 무릎을 꿇고 앉아 당신의 <<genitals_ rul>> 바라본다. "너는 못 갔잖아," <<he_ ga>> 중얼거린다. "넌 나를 보내 줬는데 그런 건 불공평해. 자, 내가 만회해 볼게."
+		<</if>>
+		<br><br>
+
+		<<kylarFinish>>
+		<<He_ nun>> 자리에서 일어서서, 자신의 <<if $pronoun is "m">>정장<<else>>드레스<</if>>에 묻은 먼지를 털어낸다.
+
+	<<else>>
+		카일라도 함께 일어서서, 자신의 <<if $pronoun is "m">>정장<<else>>드레스<</if>>에 묻은 먼지를 털어낸다.
+	<</if>>
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+<<elseif $enemyhealth lte 0>>
+	당신이 물러서자, 카일라는 움츠러들어 다친 곳을 살핀다. <<tearful>> 당신은 자리에서 일어선다.
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+<<else>>
+	카일라는 뒤로 쓰러져, 아까보다도 더 격하게 숨을 헐떡인다. <<tearful>> 당신은 자리에서 일어선다.
+
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+<</if>>
+
+<<npc Kylar>><<person1>>
+<<link [[다음|Kylar Halloween Exit]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Hand
+<<effects>>
+
+당신은 카일라에게 병을 건넨다. <<He_ nun>> 실망한 기색이지만 한 모금을 마신다.
+<br><br>
+
+당신은 지하실에서 올라와 정문으로 돌아간다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Exit]]>><</link>>
+<br>
+
+:: Kylar Halloween Known Angry
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"나-난 그거 뭔지 알아," 당신이 말한다. "너 완전 소름 끼쳐."
+<<elseif $speech_attitude is "bratty">>
+	"감히 이딴 짓거리를 하다니," 당신이 말한다. "난 널 믿었어. 그래서 웬 요상한 집까지 따라와 줬는데, 나한테 약이나 먹이려고 해?"
+<<else>>
+	"난 그게 뭔지 알아," 당신이 말한다. "널 신뢰했다니 믿기지가 않네."
+<</if>>
+<br>
+카일라는 고개를 흔든다. "아-아냐," <<he_ ga>> 말한다. "그런 게 아니-"
+<br>
+<<if $speech_attitude is "meek">>
+	"비싸게 팔 수도 있었을 건데," 당신이 덧붙인다. "네가 뚜껑까지 열어 버렸어."
+<<elseif $speech_attitude is "bratty">>
+	"거기다 뚜껑도 열어 버렸지," 당신이 덧붙인다. "존나 비싼 거였는데. 난 돈이 필요했다고."
+<<else>>
+	"그리고 뚜껑도 열어 버렸잖아," 당신이 덧붙인다. "비싸게 팔릴 거였는데. 그 돈을 쓸 수도 있었을 거란 말이야."
+<</if>>
+<br><br>
+
+"나-나-난-" 카일라는 겨우 숨을 내뱉는다. <<He_ nun>> 뒤돌아서 달려간다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Rough Exit]]>><</link>>
+<br>
+
+:: Kylar Halloween Unknown Drink
+<<effects>>
+
+당신은 한 모금을 마신다. 달콤하고 조금의 신맛도 느껴지지 않는다. 몸에 따스한 기운이 퍼지고, 약간 어지러운 느낌이 든다.
+<br><br>
+
+카일라는 당신을 뚫어져라 쳐다본다. 당신은 <<himPost>>에게 병을 건넨다. <<He_ nun>> 실망한 눈치로 한 모금을 마신다.
+<br><br>
+
+당신과 카일라는 지하실을 떠난다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Exit]]>><</link>>
+<br>
+
+:: Kylar Halloween Unknown Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"나-난 마시기 싫어," 당신이 말한다. "독이 든 거면 어떡해."
+<<elseif $speech_attitude is "bratty">>
+	"썩어빠진 정체불명의 와인 같은 건 안 마셔," 당신이 말한다.
+<<else>>
+	"사양할게," 당신이 말한다. "어디 있던 건지도 모르잖아."
+<</if>>
+<br>
+"마셔도 안전해," 카일라가 답한다. <<He_ nun>> 직접 한 모금 마시더니, 살짝 움찔거린다. "그냥 좀 셀 뿐이야."
+<br><br>
+
+<<if $phase is 1>>
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">당신의 배 속에 아기가 있다는 걸 알면서도 술을 마실 수는 없다.</span>
+	<<else>>
+		<<link [[마신다|Kylar Halloween Known Drink]]>><</link>>
+	<</if>>
+	<br>
+<<else>>
+	<<link [[마신다|Kylar Halloween Unknown Drink]]>><</link>>
+	<br>
+<</if>>
+<<link [[다시 거절한다|Kylar Halloween Unknown Refuse 2]]>><</link>>
+<br>
+
+:: Kylar Halloween Unknown Refuse 2
+<<effects>>
+
+카일라는 한 모금을 더 마신다. 이번에는 아까보다 잘 넘긴다. <<He_ nun>> 실망한 듯 하지만, 더 밀어붙이지는 않는다.
+<br><br>
+
+당신과 카일라는 지하실을 떠난다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Exit]]>><</link>>
+<br>
+
+:: Kylar Halloween Exit
+<<effects>>
+<<pass 5>>
+
+<<if C.npc.Whitney.init is 1 and C.npc.Whitney.state isnot "dungeon">>
+	카일라는 문을 열려 하지만 문은 잠겨 있다. 열쇠는 제대로 들어가지도 않는다. "이상하네," 카일라가 말한다. "들어올 때는 잘 됐는데."
+	<br><br>
+
+	<<He_ ga>> 다른 방향을 시도해 보려는 순간, 위층에서 크게 삐걱이는 소리가 들린다. 카일라는 잠시 얼어붙더니 당신을 바라본다. "다-다른 방법을 시도해 보자." <<He_ nun>> 자물쇠 앞에 쭈그려 앉아 열쇠 구멍 안으로 불빛을 비춘다.
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Exit 2]]>><</link>>
+	<br>
+<<else>>
+	당신과 카일라는 붉은 달빛으로 물든 저택을 빠져나온다. 무언가가 카일라의 발목을 붙잡아 <<He_ nun>> 하마터면 넘어질 뻔 한다. 그러더니 <<he_ ga>> 비명을 지른다.
+	<br><br>
+
+	<span class="red">창백한 손이 땅에서 튀어나와,</span> 카일라의 발목을 움켜쥔다. <<He_ nun>> 손을 뿌리치지만, 또 다른 손이 튀어나와 <<him_ ul>> 더듬는다.<<ggawareness>><<awareness 12>>
+	<br><br>
+
+	둘의 주위로 더 많은 손이 나타난다. 카일라는 당신의 손을 잡고 함께 숲을 향해 달린다. <<takeHandholdingVirginity "Kylar" "romantic">>
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Skulduggery 2]]>><</link>>
+	<br>
+
+<</if>>
+
+:: Kylar Halloween Rough Exit
+<<effects>>
+<<pass 5>>
+
+<<if C.npc.Whitney.init is 1 and C.npc.Whitney.state isnot "dungeon">>
+	카일라가 정문을 열려고 하고 있다. 문은 잠겨 있다.
+
+	<<He_ nun>> 위층에서 들리는 크게 삐걱이는 소리에 잠시 멈춘다. "우-우리 나가자," <<he_ ga>> 한 손에 열쇠를 쥐고 문을 향해 다시 돌아서며 말한다. 열쇠는 제대로 들어가지도 않는다.
+	<br><br>
+
+	"이상하네," <<he_ ga>> 말한다. "들어올 때는 잘 됐는데. 다-다른 방법을 시도해 보자." <<He_ nun>> 자물쇠 앞에 쭈그려 앉아 열쇠 구멍 안으로 불빛을 비춘다.
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Exit 2]]>><</link>>
+	<br>
+<<else>>
+	당신은 정문을 지나쳐, 붉은 달빛 아래로 뛰어나간다. 카일라가 앞서 뛰어가는 것이 보인다. 무언가가 카일라의 발목을 붙잡아 <<He_ nun>> 하마터면 넘어질 뻔 한다. 그러더니 <<he_ ga>> 비명을 지른다.
+	<br><br>
+
+	<span class="red">창백한 손이 땅에서 튀어나와,</span> 카일라의 발목을 움켜쥔다. <<He_ nun>> 손을 뿌리치지만, 또 다른 손이 튀어나와 <<him_ ul>> 더듬는다.<<ggawareness>><<awareness 12>>
+	<br><br>
+
+	더 많은 손이 나타나는 사이 당신은 카일라를 따라잡는다. 카일라는 당신의 손을 잡고 함께 숲을 향해 달린다.
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Skulduggery 2]]>><</link>>
+	<br>
+
+<</if>>
+
+:: Kylar Halloween Exit 2
+<<effects>>
+
+<<He_ nun>> 몇 분 동안 자물쇠를 건드려 본다. "못하겠어," <<he_ ga>> 좌절하며 말한다. "이런 자물쇠는 처음 봐." <<He_ nun>> 창문을 찾아 복도 가장자리에 불빛을 비춘다. 창문은 전부 잠겨 있다.
+<br><br>
+
+"위층에 있을 지도 몰라," <<he_ ga>> 제안한다. 삐걱이는 소리가 다시금 화답한다.
+<br><br>
+
+<<set $lock to 1000>>
+
+<<link [[정문 자물쇠를 딴다 (0:05)|Kylar Halloween Pick]]>><<pass 5>><</link>>
+<br>
+<<link [[위층을 수색한다|Kylar Halloween Upstairs]]>><</link>>
+<br>
+
+:: Kylar Halloween Pick
+<<effects>>
+
+<<set $lock to 1000>>
+당신은 열쇠구멍 안을 들여다본다.
+<<if currentSkillValue('skulduggery') gte $lock>>
+	한 번도 본 적 없는 식의 자물쇠지만, <span class="green">당신은 도전을 받아들인다.</span> 당신은 자물쇠를 만지작거리며, 문에 귀를 대고 내부 구조를 가늠해 본다.
+	<br><br>
+
+	카일라는 불안에 떨며 당신을 바라보지만, 방해하지는 않는다. 당신이 적절하게 압력을 가하자, 자물쇠가 찰칵 하며 열린다. <<he_ nun>> 놀라움에 입을 딱 벌린다.
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Skulduggery]]>><</link>>
+	<br>
+<<else>>
+	한 번도 본 적 없는 식의 자물쇠여서, <span class="red">당신은 어떤 식으로 작동하는지 도저히 알 수가 없다.</span>
+	<br><br>
+
+	카일라는 불안에 떨며 당신을 바라보지만, 방해하지는 않는다.
+	<br><br>
+
+	당신은 문에서 물러난다.
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Upstairs]]>><</link>>
+	<br>
+
+<</if>>
+
+:: Kylar Halloween Skulduggery
+<<effects>>
+
+당신과 카일라는 붉은 달빛으로 물든 저택을 빠져나온다. <<He_ ga>> 키득대기 시작한다. "재밌었다," <<he_ ga>> 말한다. "언젠가 한번 더-" 무언가가 카일라의 발목을 붙잡아 <<He_ nun>> 하마터면 넘어질 뻔 한다. 그러더니 <<he_ ga>> 비명을 지른다.
+<br><br>
+
+<span class="red">창백한 손이 땅에서 튀어나와,</span> 카일라의 발목을 움켜쥔다. <<He_ nun>> 손을 뿌리치지만, 또 다른 손이 튀어나와 <<him_ ul>> 더듬는다.<<ggawareness>><<awareness 12>>
+<br><br>
+
+둘의 주위로 더 많은 손이 나타난다. 카일라는 당신의 손을 잡고 함께 숲을 향해 달린다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Skulduggery 2]]>><</link>>
+<br>
+
+:: Kylar Halloween Skulduggery 2
+<<effects>>
+
+당신은 지친 것도 느끼지 못하고 마을의 불빛이 보일 때까지 계속해서 달린다. 카일라는 멈춰서서 헐떡이며 당신에게 기댄다. <<His_ yi>> 옷과 머리는 풀어헤쳐져 있고, 도망치는 동안 장식 몇 개도 없어져 버렸다.
+<br><br>
+
+<<He_ nun>> 당신을 바라보더니, 당신의 허리에 양팔을 두르고 당신을 끌어당긴다.
+<br><br>
+
+<<link [[키스한다|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
+<br>
+<<link [[밀친다|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Skulduggery Kiss
+<<effects>>
+
+당신은 앞으로 기대어 카일라의 입술에 입을 맞춘다. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+<<if _npcKissVirginTemp>>
+	<<His_ nun>> 잠시 숨을 멈췄다가, 
+<<else>>
+	<<He_ nun>>
+<</if>>
+당신을 땅바닥으로 밀어내린다.
+<<promiscuity1>>
+
+<<link [[다음|Kylar Halloween Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Kylar Halloween Skulduggery Pull
+<<effects>>
+
+당신은 카일라를 밀어낸다.
+<<if $speech_attitude is "meek">>
+	"지-지금은 안돼," 당신은 말한다. "나 아직 너무 무서워."
+<<elseif $speech_attitude is "bratty">>
+	"진심이냐?" 당신이 따진다. "지금? 방금 그런 일이 있었는데도?"
+<<else>>
+	"지금은 안돼," 당신이 말한다. "아직 생각이 정리가 안됐어."
+<</if>>
+<br><br>
+
+카일라는 시선을 돌린다. 당신은 마을을 향해 계속 걸어간다. 울프 가에 도착해 뒤를 돌아보니, 카일라는 보이지 않는다.
+<br><br>
+
+<<link [[다음|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Halloween Upstairs
+<<effects>>
+
+당신은 계단 위의 어둠을 슬쩍 바라본다. 카일라가 위로 불빛을 비추자 벽을 따라 회색 시트가 더 걸려 있는 게 보인다. 벽에 걸린 그림을 덮고 있는 것 같다.
+<br><br>
+
+"내-내가 먼저 가 볼게," 카일라가 말한다. 불안하다기 보단 거의 흥분한 듯한 목소리다.
+<br><br>
+
+당신은 <<him_ ul>> 따라 삐걱대는 계단을 올라, 근처의 방으로 들어간다. 벽을 따라 커다란 가구 몇 개가 서 있다. 창문 근처에는 거대한 사주식 침대가 놓여있다. 다른 가구들과 달리 침대는 회색 시트로 덮여 있지 않지만, 대신 근처 바닥에 시트 한 장이 떨어져 있다.
+<br><br>
+<<if currentSkillValue('skulduggery') gte 400>>
+	<span class="blue">당신의 머리카락이 곤두선다.</span> 침대에는 먼지가 쌓여 있지 않다. 시트는 치워진 지 얼마 되지 않았다. 그 생각이 뇌리를 겨우 스치려 할 쯤 무언가 움직이는 소리가 들린다. 당신은 한 시트 아래에서 끔찍하게 날카로운 소리와 함께 손이 덤벼드는 것을 겨우 옆으로 피한다.
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Upstairs Dodge]]>><</link>>
+	<br>
+<<else>>
+	당신은 무언가 움직이는 소리를 들었지만, <span class="red">너무 늦어 버렸다.</span> 한 시트 아래에서 끔찍하게 날카로운 소리와 함께 손이 덤벼들어, 당신의 팔을 붙잡는다.
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Caught]]>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Upstairs Dodge
+<<effects>>
+
+시트에 덮인 나머지 가구들도 움직이기 시작해, 구석으로 물러서는 당신과 카일라를 향해 소리를 질러댄다. 움직이기 시작하니, 시트 아래로 사람의 형상이 드러난다. 그 중 하나가 달려오다가, 카일라가 후추 스프레이를 꺼내들자 멈춘다.
+<br><br>
+
+<<endevent>><<npc Whitney>><<person1>>
+
+형상 중 하나가 이미 여러 번 봤던 으스대는 걸음거리로 나머지 앞에 선다. "공원에서 네가 이 찐따새끼랑 얘기하는 걸 봤지," 휘트니가 시트를 머리에서 걷어 자신의 악마 코스튬을 드러내며 말한다. <<His_ yi>> 친구들도 뒤따라 시트를 걷는다.
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+카일라는 말할 것도 없이 겁에 질린 듯 하다. <<His_ yi>> 눈은 나갈 길을 찾아 방 안을 정신없이 훑어본다.
+<br><br>
+
+<<link [[휘트니에게 갈채를 보낸다|Kylar Halloween Upstairs Applaud]]>><</link>>
+<br>
+<<link [[화를 낸다|Kylar Halloween Upstairs Angry]]>><</link>>
+<br>
+
+:: Kylar Halloween Upstairs Applaud
+<<effects>>
+
+당신은 웃는다.
+<<if $speech_attitude is "meek">>
+	"정말 무섭더라," 당신이 말한다. "잘 했어."
+<<elseif $speech_attitude is "bratty">>
+	"아주 잘 했다 휘트니," 당신이 말한다. "하마터면 쫄 뻔 했네."
+<<else>>
+	"좋았어 휘트니," 당신이 말한다. "우릴 겁 주는 데 성공했네."
+<</if>>
+<br><br>
+<<endevent>><<npc Whitney>><<person1>>
+"마음에 드냐?" 휘트니가 히죽댄다. "그럼 이것도 좋아하겠지. 무릎 꿇어. 이 찐따한테 네 주인이 누군지 보여줘야겠다."
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+카일라가 주먹이 허얘질 정도로 후추 스프레이를 꽉 쥔다.
+<br><br>
+
+<<link [[마지못해 휘트니의 요구를 받아준다|Kylar Halloween Kneel]]>><<set $phase to 0>><<trauma 12>><<stress 6>><</link>><<ggtrauma>><<gstress>>
+<br>
+<<if isLoveInterest("Whitney")>>
+	<<link [[열정적으로 휘트니의 요구를 받아준다|Kylar Halloween Kneel]]>><<set $phase to 1>><</link>><<promiscuous1>>
+	<br>
+<<elseif hasSexStat("promiscuity", 4)>>
+	<<link [[열정적으로 휘트니의 요구를 받아준다|Kylar Halloween Kneel]]>><<set $phase to 1>><</link>><<promiscuous4>>
+	<br>
+<</if>>
+<<link [[거절한다|Kylar Halloween Kneel Refuse]]>><</link>>
+<br>
+
+
+:: Kylar Halloween Upstairs Angry
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"너-너 때문에 겁 먹었잖아," 당신이 말한다. "사과해."
+<<elseif $speech_attitude is "bratty">>
+	"좆까," 당신이 말한다. "하마터면 쫄 뻔 했다고."
+<<else>>
+	"이런 게 재밌어?" 당신이 묻는다. "난 완전 무서웠는데."
+<</if>>
+<br><br>
+<<endevent>><<npc Whitney>><<person1>>
+"그게 목적인 거지," 휘트니가 말한다. "그게 아니면 뭣하러 저 찐따랑 여기까지 왔겠어? 뭔가 나쁜 짓을 꾸미고 있던 건 아니겠지." <<He_ ga>> 잠시 멈춘다. "혹시 모르니까, 이 등신한테 네 주인이 누군지 보여줘야겠다. 무릎 꿇어."
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+카일라가 주먹이 허얘질 정도로 후추 스프레이를 꽉 쥔다.
+<br><br>
+
+<<link [[마지못해 휘트니의 요구를 받아준다|Kylar Halloween Kneel]]>><<set $phase to 0>><<trauma 12>><<stress 6>><</link>><<ggtrauma>><<gstress>>
+<br>
+<<if isLoveInterest("Whitney")>>
+	<<link [[열정적으로 휘트니의 요구를 받아준다|Kylar Halloween Kneel]]>><<set $phase to 1>><</link>><<promiscuous1>>
+	<br>
+<<elseif hasSexStat("promiscuity", 4)>>
+	<<link [[열정적으로 휘트니의 요구를 받아준다|Kylar Halloween Kneel]]>><<set $phase to 1>><</link>><<promiscuous4>>
+	<br>
+<</if>>
+<<link [[거절한다|Kylar Halloween Kneel Refuse]]>><</link>>
+<br>
+
+:: Kylar Halloween Kneel Refuse
+<<effects>>
+
+<<endevent>><<npc Whitney>><<person1>><<generatey2>>
+당신은 고개를 가로젓는다. 휘트니가 친구들 중 <<person2>><<personPost>>에게 손짓하자, 그자가 소리를 지르며 달려든다. <<He_ nun>> 얼굴에 후추 스프레이를 정통으로 맞고 울부짖으며 뒤로 나가떨어진다. 두 명이 더 달려든다.<<ldom>><<npcincr Whitney dom -1>>
+<br><br>
+
+<<endevent>><<npc Kylar>><<person1>>
+카일라는 한 쪽이 자신을 붙잡으려는 것을 숙여 피하고 다른 한 쪽에게 스프레이를 뿌린다. <<He_ nun>> 몸을 비틀어, 상대의 코앞에서 스프레이를 발사한다.<<glove>><<npcincr Kylar love 1>>
+<br><br>
+
+<<endevent>><<npc Whitney>><<person1>>
+세 명은 방 구석으로 물러난다. 휘트니는 다시 한 번 손짓을 하지만, 나머지 패거리들은 머뭇거린다. "저딴 새끼한테 겁먹은 거냐?" 휘트니가 말한다. "저거 이제 다 썼다고."
+<br><br>
+
+<<link [[다음|Kylar Halloween Kneel Refuse 2]]>><</link>>
+<br>
+
+:: Kylar Halloween Kneel Refuse 2
+<<effects>>
+
+<<endevent>><<npc Kylar>><<person1>><<generatey2>>
+카일라는 당신을 자신의 뒤로 끌어당기고, 출구로 걸어 나갈 때까지 당신의 팔을 놓지 않는다. <<person2>><<person_ i>> 길을 막지만, 카일라가 스프레이를 들이밀자 뒤로 물러선다.
+<br><br>
+
+"씨발 쫄보새끼들," 휘트니가 가까이 다가오며 말한다. 카일라는 스프레이를 꺼내지만, <span class="red">아무것도 나오지 않는다.</span> 휘트니는 팔로 카일라의 목을 걸고, <<person1>><<him_ ul>> 공중으로 들어올린다.
+<br><br>
+
+"도-도망가-" 카일라가 겨우 말한다.
+<br><br>
+
+<<link [[도망간다|Kylar Halloween Kneel Run]]>><<sub 1>><</link>>
+<br>
+<<link [[카일라를 돕는다|Kylar Halloween Kneel Help]]>><<def 1>><</link>><<physiquedifficulty 1 $physiquemax>>
+<br>
+<<if $spray gte 1>>
+	<<link [[자신의 후추 스프레이를 쓴다|Kylar Halloween Kneel Spray]]>><<spray -1>><<def 1>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Kneel Run
+<<effects>>
+<<pass 15>>
+<<endevent>><<npc Whitney>><<person1>>
+당신은 돌아서서 도망친다. 휘트니는 카일라를 버리고 당신을 뒤쫓으려 하지만, 카일라가 <<him_ yi>> 발을 건다.
+<br><br>
+
+당신은 계단을 내려가 이제는 열려 있는 정문을 거쳐, 붉은 달빛 아래로 탈출한다. 낡은 계단을 쿵쾅대며 내려오는 소리가 들리지만, 당신은 숲에 도달해서도 계속해서 달린다.
+<br><br>
+
+당신은 몇 분 동안 달리다가, 나무 뒤에 숨어 귀를 기울인다. 뒤쫓아오는 소리는 나지 않는다. 당신은 놈들이 당신을 쫓는 동안 카일라는 빠져 나왔을지 궁금해한다.
+<br><br>
+
+<<link [[다음|Forest]]>><<endevent>><<set $eventskip to 1>><<set $forest to 0>><</link>>
+<br>
+
+:: Kylar Halloween Kneel Help
+<<effects>>
+<<pass 15>>
+<<endevent>><<npc Whitney>><<person1>>
+<<if $physiqueSuccess>>
+	당신은 휘트니의 팔을 붙잡고, <span class="green"><<him_ ul>> 카일라에게서 떼어낸다.</span> 당신과 카일라는 함께 계단을 내려가 이제는 열려 있는 정문을 거쳐, 붉은 달빛 아래로 탈출해 숲으로 달려간다.<<ldom>><<npcincr Whitney dom -1>>
+	<br><br>
+	<<endevent>><<npc Kylar>><<person1>>
+	카일라는 나무에 기대 서서 잠시 숨을 고르다가, 달려들어 당신을 껴안는다. "그렇게 위험한 짓은 하면 안 됐어," <<he_ ga>> 말한다.<<glove>><<llksuspicion>><<npcincr Kylar love 1>><<npcincr Kylar rage -5>>
+	<br><br>
+
+	<<link [[키스한다|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
+	<br>
+	<<link [[밀친다|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
+	<br>
+<<else>>
+	당신은 휘트니의 팔을 붙잡았지만, <span class="red"><<he_ nun>> 당신을 바닥으로 밀쳐버린다.</span> 당신이 일어서기도 전에, <<his_ yi>> 친구들이 당신의 위에 서서 팔과 다리를 누른다.
+	<br><br>
+
+	휘트니는 카일라를 옆으로 밀어 친구 중 한 명의 손에 맡긴다. <<He_ nun>> 당신의 머리채를 잡고 당신을 무릎 꿇린다.
+	<br><br>
+
+	<<link [[다음|Kylar Halloween Forced Kneel]]>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Kneel Spray
+<<effects>>
+
+<<endevent>><<npc Whitney>><<person1>>
+당신은 카일라의 머리 너머로 후추 스프레이를 겨누고, 휘트니의 눈을 향해 발사한다. <<He_ nun>> 자신의 얼굴을 움켜쥐고 뒤로 휘청거린다.
+
+카일라는 당신의 손을 잡고, 함께 계단을 내려가 이제는 열려 있는 정문을 거쳐 붉은 달빛 아래로 탈출한다. <<takeHandholdingVirginity "Kylar" "romantic">> You run into the forest.<<ldom>><<npcincr Whitney dom -1>>
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+카일라는 나무에 기대 서서 잠시 숨을 고르다가, 달려들어 당신을 껴안는다. "그렇게 위험한 짓은 하면 안 됐어," <<he_ ga>> 말한다.<<glove>><<llksuspicion>><<npcincr Kylar love 1>><<npcincr Kylar rage -5>>
+<br><br>
+
+<<link [[키스한다|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
+<br>
+<<link [[밀친다|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Kneel
+<<effects>>
+
+<<if $phase is 0>>
+	<<endevent>><<npc Whitney>><<person1>>
+	당신은 잠시 망설이다가, 휘트니 앞으로 걸어가 무릎 꿇는다. <<He_ nun>> 걸치고 있던 누더기를 옆으로 치워
+	<<if $NPCList[0].penis isnot "none">>
+		<span class="lewd"><<his_ yi>> <<penisdesc_ rul $NPCList[0].penisdesc>> 드러내고,</span>
+	<<else>>
+		<span class="lewd"><<his_ yi>> 보지를 드러내고,</span>
+	<</if>>
+	당신의 뒤통수를 움켜잡는다.<<gdom>><<npcincr Whitney dom 1>>
+	<br><br>
+
+	<<endevent>><<npc Kylar>><<person1>>
+	카일라는 끼어들려 하지만, 휘트니의 친구들에게 제지당한다. 그들은 <<his_ yi>> 머리를 붙들고, <<him_ i>> 모든 것을 지켜 보게 한다.<<ggksuspicion>><<npcincr Kylar rage 10>>
+	<br><br>
+
+	<<endevent>><<npc Whitney>><<person1>>
+
+	<<link [[다음|Kylar Halloween Oral]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<endevent>><<npc Whitney>><<person1>>
+	당신은 휘트니 앞으로 걸어가 무릎 꿇는다. 당신이 <<his_ ga>> 걸치고 있던 누더기를 옆으로 치워 
+	<<if $NPCList[0].penis isnot "none">>
+		<span class="lewd"><<his_ yi>> <<penisdesc_ rul $NPCList[0].penisdesc>> 드러내자,</span>
+	<<else>>
+		<span class="lewd"><<his_ yi>> 보지를 드러내자,</span>
+	<</if>>
+	<<he_ ga>> 당신의 뒤통수를 움켜잡는다.<<gdom>><<npcincr Whitney dom 1>>
+
+	<<if isLoveInterest("Whitney")>>
+		<<glove>><<npcincr Whitney love 1>><br>
+		<<promiscuity1>>
+	<<else>>
+		<<glust>><<npcincr Whitney lust 5>><br>
+		<<promiscuity4>>
+	<</if>>
+
+	<<endevent>><<npc Kylar>><<person1>>
+	카일라는 끼어들려 하지만, 휘트니의 친구들에게 제지당한다. 그들은 <<his_ yi>> 머리를 붙들고, <<him_ i>> 모든 것을 지켜 보게 한다.
+	<<if !$syndromekylar>>
+		<span class="blue"><<He_ nun>> 당신의 열의를 극심한 공포와 함께 바라본다. 끔찍한 오한이 당신을 스쳐간다.</span><<set $kylar_mad to 1>>
+	<</if>>
+	<<gggksuspicion>><<npcincr Kylar rage 20>>
+	<br><br>
+
+	<<endevent>><<npc Whitney>><<person1>>
+
+	<<link [[다음|Kylar Halloween Oral]]>><<set $sexstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Caught
+<<effects>>
+
+시트에 덮인 나머지 가구들도 움직이기 시작해, 카일라를 향해 소리지르며 달려든다. 움직이기 시작하니, 시트 아래로 사람의 형상이 드러난다. 그들은 <<his_ yi>> 팔을 붙잡고, <<him_ ul>> 강제로 무릎 꿇린다.
+<br><br>
+
+<<endevent>><<npc Whitney>><<person1>>
+당신을 잡고 있던 형상이 웃음을 터뜨린다. 익숙한 목소리다. "공원에서 네가 이 찐따새끼랑 얘기하는 걸 봤지," 휘트니가 시트를 머리에서 걷어 자신의 악마 코스튬을 드러내며 말한다. <<His_ yi>> 친구들도 뒤따라 시트를 걷는다. "네 주인이 누군지 모두에게 보여줘야겠어."
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+카일라는 당신에게 손을 뻗으려 절박하게 몸부림치지만, 휘트니의 친구 중 하나가 앞으로 나서 <<him_ ul>> 저지한다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Forced Kneel]]>><</link>>
+<br>
+
+:: Kylar Halloween Forced Kneel
+<<effects>>
+
+<<endevent>><<npc Whitney>><<person1>>
+<<if $NPCList[0].penis isnot "none">>
+	휘트니는 걸치고 있던 누더기를 옆으로 치워, <span class="lewd"><<his_ yi>> <<penisdesc_ rul $NPCList[0].penisdesc>> 드러낸다.</span>
+<<else>>
+	휘트니는 걸치고 있던 누더기를 옆으로 치워, <span class="lewd"><<his_ yi>> 보지를 드러낸다.</span>
+<</if>>
+<<He_ nun>> 카일라를 가리킨다. "저 변태새끼가 똑바로 볼 수 있게 해," <<he_ ga>> 말하고는 당신을 내려다본다. "뭘 기다리고 있냐, <<slut_ a>>? 시작해."
+<br><br>
+
+<<link [[마지못해 휘트니의 요구를 받아준다|Kylar Halloween Lick]]>><<set $phase to 0>><<trauma 12>><<stress 6>><</link>><<ggtrauma>><<gstress>>
+<br>
+<<if isLoveInterest("Whitney")>>
+	<<link [[열정적으로 휘트니의 요구를 받아준다|Kylar Halloween Lick]]>><<set $phase to 1>><</link>><<promiscuous1>>
+	<br>
+<<elseif hasSexStat("promiscuity", 4)>>
+	<<link [[열정적으로 휘트니의 요구를 받아준다|Kylar Halloween Lick]]>><<set $phase to 1>><</link>><<promiscuous4>>
+	<br>
+<</if>>
+<<link [[거절한다|Kylar Halloween Lick Refuse]]>><</link>>
+<br>
+
+:: Kylar Halloween Lick Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"나-난 하기 싫어," 당신이 말한다. "시켜도 안 할 거야."
+<<elseif $speech_attitude is "bratty">>
+	"꺼져, 이 변태야," 당신이 말한다. "강요해도 절대 안 해."
+<<else>>
+	"강요해도 안 할 거야," 당신이 말한다.
+<</if>>
+<br><br>
+
+휘트니는 웃음을 터뜨리더니, 카일라 옆에 서 있던 <<generatey2>><<person2>><<personPost>>에게 고개를 까딱인다. <<person1>><<His_ yi>> 친구는 카일라의 가방을 뒤적이다가, 칼 한 자루를 꺼내든다. <span class="red"><<person2>><<He_ nun>> 칼을 카일라의 목에 들이댄다.</span><<gggtrauma>><<gggstress>><<trauma 24>><<stress 24>>
+<br><br>
+
+"한 번 더 얘기한다," 휘트니가 말한다. "빨라고."
+<br><br>
+
+카일라의 얼굴은 공허하다. "하-하지 마."
+<br><br>
+
+<<link [[휘트니가 시키는 대로 한다|Kylar Halloween Lick]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[거절한다|Kylar Halloween Lick Refuse 2]]>><<stress 24>><</link>><<gggstress>>
+<br>
+
+:: Kylar Halloween Lick Refuse 2
+<<effects>>
+<<person1>>
+당신은 고개를 가로젓는다. "씨발 지금 장난까냐?" 휘트니가 말한다. "그래 좋아." <<He_ nun>> 당신을 바닥으로 밀치고, 카일라를 향해 뚜벅뚜벅 걸어간다. "그거 이리 내놔," <<he_ ga>> <<person2>><<personPost>>에게 말한다. <<person1>><<He_ nun>> 칼을 바라보다가, <span class="green">내던져버린다.</span><<llstress>><<stress -12>>
+<br><br>
+
+그 대신, <<he_ nun>> 손을 뒤로 젖혀 카일라의 코에 주먹을 날린다. 카일라는 뒤로 나가떨어져 움직이지 않는다. "볼 장 다 봤네," 휘트니가 말한다. <<He_ nun>> 당당하게 방을 나서고, 그 뒤를 친구들이 따른다.<<lldom>><<npcincr Whitney dom -3>>
+<br><br>
+
+<<link [[다음|Kylar Halloween End]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Halloween End
+<<effects>>
+
+<<endevent>><<npc Kylar>><<person1>>
+당신은 카일라의 곁에 쭈그려 앉는다. 코에서 피가 흐르긴 하지만 의식은 남아 있다.<<lllksuspicion>><<npcincr Kylar rage -20>>
+<br><br>
+
+당신은 <<him_ i>> 일어설 수 있게 부축해 주고, 함께 계단을 내려가 이제 열려 있는 정문을 거쳐 붉은 달빛 아래로 탈출한다.
+<br><br>
+
+그 고생을 했음에도 불구하고, 카일라는 기운이 솟아난 듯 보인다. 다만 아래에 다다르기 전에 멈춰달라 부탁하긴 한다. <<He_ nun>> 복장과 머리가 다 엉망으로 헝클어진 채 나무에 기대어 숨을 고른다.
+<br><br>
+
+느닷없이, <<he_ nun>> 달려들어 당신을 꽉 끌어안는다.
+<br><br>
+
+<<link [[키스한다|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
+<br>
+<<link [[밀친다|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Lick
+<<effects>>
+
+<<if $phase is 0>>
+	<<endevent>><<npc Whitney>><<person1>>
+	당신은 잠시 망설이다가, 휘트니의 고간으로 몸을 기울인다. <<He_ nun>> 당신의 머리에 손을 얹고 머리채를 붙잡는다.<<gdom>><<npcincr Whitney dom 1>>
+	<br><br>
+	<<endevent>><<npc Kylar>><<person1>>
+	휘트니의 친구 중 하나가 카일라의 머리를 붙들고, <<him_ i>> 모든 것을 지켜 보게 한다.<<ggksuspicion>><<npcincr Kylar rage 10>>
+	<br><br>
+
+	<<endevent>><<npc Whitney>><<person1>>
+
+	<<link [[다음|Kylar Halloween Oral]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<endevent>><<npc Whitney>><<person1>>
+	당신은 휘트니의 허벅지 뒤를 잡고 <<his_ yi>> 고간으로 몸을 기울인다. <<He_ nun>> 당신의 머리에 손을 얹고 머리채를 붙잡는다.<<gdom>><<npcincr Whitney dom 1>>
+	<<if isLoveInterest("Whitney")>>
+		<<glove>><<npcincr Whitney love 1>><br>
+		<<promiscuity1>>
+	<<else>>
+		<<gglust>><<npcincr Whitney lust 5>><<promiscuity4>>
+	<</if>>
+
+	<<endevent>><<npc Kylar>><<person1>>
+	휘트니의 친구 중 하나가 카일라의 머리를 붙들고, <<him_ i>> 모든 것을 지켜 보게 한다.<<gggksuspicion>><<npcincr Kylar rage 20>>
+	<br><br>
+
+	<<endevent>><<npc Whitney>><<person1>>
+
+	<<link [[다음|Kylar Halloween Oral]]>><<set $sexstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Oral
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 50>><<npcoral>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $enemytrust -= 50>><<maninit>>
+<</if>>
+<<effects>>
+카일라가 공허한 표정으로 지켜본다.
+<br><br>
+
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Kylar Halloween Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Kylar Halloween Oral]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Kylar Halloween Oral Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<His_ yi>> 친구들은 환호성을 지르며 카일라를 마룻바닥으로 밀친다. 휘트니는 사주식 침대에 기댄다. "참 특별한 밤이야," <<he_ ga>> 말한다. "내 친구들도 한 번씩 빨아주지 그래?" 고함 소리가 더 커진다.
+	<br><br>
+	<<tearful>> 당신은 일어선다. 다른 뭔가를 해 볼 틈도 없이, 수 개의 손이 당신의 어깨를 잡고 침대로 밀친다.
+	<br><br>
+
+	<<endcombat>>
+	<<link [[다음|Kylar Halloween Bed]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	휘트니는 휘청거리며, 바닥으로 넘어진다.
+	<br><br>
+	<<tearful>> 당신은 일어선다. 소지품을 챙기기도 전에, 휘트니의 친구들이 올라타 당신의 어깨를 붙잡는다. 당신은 몸부림치지만, 상대가 너무 많다.
+	<br><br>
+	휘트니는 사주식 침대에 기댄다. "전희부터 먼저 해 줬으면 좋겠어?" <<he_ ga>> 묻는다. "그거 좋지. 내 친구들 한 번씩 빨아주는 건 어때?" <<His_ yi>> 친구들이 당신을 침대로 밀치며 고함친다.
+	<br><br>
+	<<endcombat>>
+	<<link [[다음|Kylar Halloween Bed]]>><</link>>
+	<br>
+<<else>>
+	"좋아," 휘트니가 사주식 침대에 기대어 말한다. "하지만 오늘은 특별한 밤이거든. 내 친구들 한 번씩 빨아주는 건 어때?"
+	<br><br>
+	<<His_ yi>> 친구들이 환호성을 지른다. 수 개의 손이 당신의 어깨를 잡고, 당신을 쓰러트려 침대로 밀친다.
+	<br><br>
+	<<endcombat>>
+	<<link [[다음|Kylar Halloween Bed]]>><</link>>
+<</if>>
+
+:: Kylar Halloween Bed
+<<effects>>
+
+<<npc Whitney>><<person1>>
+휘트니의 친구들이 당신을 둘러싸 더듬고 찔러대다가, 휘트니가 끼어들자 멈춘다. "그 찐따새낀 어디 갔어?" <<His_ yi>> 친구들이 두리번거린다.
+<<endevent>><<npc Kylar>><<person1>>
+"이 빡대가리들, 그 새끼 튀었잖아. 전부 보게 하려고 했는데."
+<<endevent>><<npc Whitney>><<person1>>
+<br><br>
+<<He_ nun>> 방을 나가 계단 아래로 휴대전화 불빛을 비춰 본다.
+<<endevent>><<npc Kylar>><<person1>>
+"문은 닫혀 있는 걸 보니 아직 안에 있어. 찾는 놈은 내 <<slut_ irang>> 한판 뜨게 해 준다."
+<br><br>
+
+<<link [[다음|Kylar Halloween Bed 2]]>><</link>>
+<br>
+
+:: Kylar Halloween Bed 2
+<<effects>>
+
+<<endevent>><<npc Whitney>><<person1>>
+친구들이 카일라를 찾아 저택 곳곳으로 흩어지는 동안, 휘트니는 침대로 올라와 당신 곁에 앉는다. "기다리게 해서 미안," 휘트니가 말한다. "그래도 갱뱅 한번 뜨고 나면 훨씬-"
+<br><br>
+
+<span class="red">비명소리가 그의 <<him_ yi>> 말을 끊는다.</span> 휘트니는 당신의 팔을 붙잡고, 당신을 가까이 끌어당긴다. "널 혼자 두고 갈 순 없지," <<he_ ga>> 당신을 방 밖으로 끌고 가며 말한다.
+<br><br>
+
+<<generatey2>><<person2>>
+당신은 비명소리가 난 방향을 향해 휘트니를 따라간다. 그곳엔 미동도 없이 바닥에 쓰러진 <<person_ ul>> 휘트니의 나머지 친구들이 둘러싸고 있다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Bed 3]]>><</link>>
+<br>
+
+:: Kylar Halloween Bed 3
+<<effects>>
+
+<<generatey3>><<person3>>
+"나-난 갈래," <<person_ i>> 떨리는 목소리로 말한다. "여긴 귀신 들렸다고-"
+<br>
+휘트니가 얼굴을 후려쳐 <<him_ yi>> 말을 끊는다. "겁쟁이 새끼처럼 굴지 좀 마,"<<person1>>
+<<he_ ga>> 쓰러진 사람 옆에 쭈그려 앉아 말한다. "그냥 그 또라이가 어두컴컴한 데 숨어서 훔친 마취제 갖고 놀던 거겠지." <<He_ nun>> <<person2>><<persons_ yi>> 목을 만져본다. "얜 멀쩡해. 누가 <<him_ ul>> 일으켜 세워 줘."
+<br><br>
+
+<span class="red">문이 쾅 하고 닫힌다.</span>
+<br><br>
+
+<<link [[다음|Kylar Halloween Bed 4]]>><</link>>
+<br>
+
+:: Kylar Halloween Bed 4
+<<effects>>
+
+"안에 있는 거 다 알아, 음침한 새끼야," 휘트니가 말한다. "지금 나오면 너도 기차놀이에 끼워 줄게." 대답은 돌아오지 않는다. <<His_ yi>> 친구들은 움직이는 것조차 두려워 하는 듯 보인다.
+<br><br>
+
+<span class="red">발 아래에서 진동이 느껴지고,</span> 이윽고 방 전체가 흔들리기 시작한다. 가구는 바닥 위에서 덜걱이고, 액자는 벽에서 떨어진다.
+<br><br>
+
+무언가가 창문 아래에서 으르렁대자, 마침내 <<person3>><<person_ i>> 정신을 놓아 버린다. <<He_ nun>> 문을 향해 달려간다. 문은 잠겨 있다. <<he_ nun>> 알아들을 수 없는 소리로 횡설수설하며 주먹으로 문을 두드린다. 휘트니를 제외한 나머지도 모두 같은 짓을 하기 시작한다. 심지어 <<person1>><<hePost>>조차도 불길함을 느끼는 것 같다. <<His_ nun>> 소리의 근원지를 찾아 창문 주위를 잽싸게 훑어본다.
+<br><br>
+
+문이 열리고, <<his_ yi>> 친구들이 밖으로 굴러 떨어져 계단을 황급히 내려간다. <<person2>><<person_ ul>> 끌고 가던 두 명은 뒤쳐져 공포에 질린 채 어깨 뒤를 흘깃거린다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Bed 5]]>><</link>>
+<br>
+
+:: Kylar Halloween Bed 5
+<<effects>>
+
+<<endevent>><<npc Whitney>><<person1>>
+휘트니는 당신의 팔을 붙든다. <<He_ nun>> 스스로가 인정할 수준보다도 더 겁을 먹었지만, 도망치지는 않는다. "여기 있는 거 다 알아," <<he_ ga>> 방 이곳저곳을 돌아보며 다시 한 번 말한다. <<He_ nun>> 문 앞으로 걸어가 당신을 자기 앞으로 밀친다.
+<br><br>
+
+<<clotheson>>
+<<endevent>><<npc Kylar>><<person1>>
+당신은 문틀 옆 그림자에 숨은 카일라를 발견한다. <<his_ yi>> 눈빛이 이글거린다. 휘트니는 위험을 눈치채지 못한 채, 뒤로 걸음을 내딛으며 가까이 다가간다.
+<br><br>
+
+<<link [[본다|Kylar Halloween Wait]]>><</link>>
+<br>
+<<link [[휘트니에게 경고한다|Kylar Halloween Warn]]>><</link>>
+<br>
+
+:: Kylar Halloween Wait
+<<effects>>
+
+휘트니가 복도로 들어서자, <span class="blue">카일라가 덮쳐온다.</span> <<He_ nun>> 앞으로 다가서서, 휘트니의 목에 무언가를 찌른다.
+<br><br>
+
+휘트니는 몸을 비틀어 카일라를 바닥에 엎어뜨린다.
+<<endevent>><<npc Whitney>><<person1>>
+<<He_ nun>> 앞으로 걸어가며 자신의 목에서 다트를 뽑아낸다. 카일라는 허둥지둥 도망치지만 역부족이다. 휘트니는
+<<endevent>><<npc Kylar>><<person1>>
+<<his_ yi>> 멱살을 잡지만, 카일라를 들어올리기엔 힘이 부치는 듯 하다. 휘트니는 휘청이더니, 그 자리에 쓰러진다.
+<br><br>
+
+<<link [[다음|Kylar Halloween Escape]]>><</link>>
+<br>
+
+:: Kylar Halloween Escape
+<<effects>>
+<<pass 15>>
+카일라는 자리에서 뛰어올라, 당신의 팔을 붙잡는다. 당신은 휘트니의 힘없는 손을 피해, 함께 계단을 내려가 붉은 달빛 아래로 빠져나온다.
+<br><br>
+
+당신과 카일라는 끊임없이 달린다. 숲에 다다르자, 카일라는 멈춰서서 나무에 기대어 휴식을 취한다. <<His_ yi>> 옷과 머리는 헝클어졌지만, 얼굴엔 미소가 떠오른다. "내-내가 이겼어," <<he_ ga>> 당신을 끌어안으며 말한다. "넌 오직 나만의 것이야."<<lllksuspicion>><<npcincr Kylar rage -20>>
+<br><br>
+
+<<link [[카일라의 비결에 대해 묻는다|Kylar Halloween Tricks]]>><</link>>
+<br>
+<<link [[키스한다|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
+<br>
+<<link [[밀친다|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Tricks
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"네-네가 바닥을 흔든 것 때문에 다들 엄청 겁에 질렸어," 당신이 말한다. "그리고 그 소리도. 어떻게 한 거야?"
+<<elseif $speech_attitude is "bratty">>
+	"네가 땅을 막 흔든 거 말이야," 당신이 말한다. "거기다 소리까지. 완전 무섭더라. 잘 했어."
+<<else>>
+	"그런 소리는 대체 어떻게 낸 거야?" 당신이 묻는다. "거기다 땅도 흔들리고. 꼭 지진 같았어."
+<</if>>
+<br><br>
+
+카일라의 표정엔 변함이 없다. "내가 한 거 아니야," <<he_ ga>> 말한다. "난 마취제밖에 안 썼어."<<gstress>><<stress 6>>
+<br><br>
+
+<<He_ nun>> 그런 건 중요하지 않다는 듯 당신을 가까이 끌어당긴다.
+<br><br>
+
+
+<<link [[키스한다|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
+<br>
+<<link [[밀친다|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Kylar Halloween Warn
+<<effects>>
+
+<<endevent>><<npc Kylar>><<person1>>
+"뒤에!" 당신이 소리친다. 카일라가 덤벼드는 때에 맞춰, 휘트니는 돌아서서 카일라의 팔을 붙잡는다. 휘트니가 팔을 뒤로 꺾자 카일라가 비명을 지른다. 다트가 바닥에 툭 떨어진다.
+<br><br>
+
+카일라는 나머지 손으로 펀치를 날리려 하지만, 휘트니는 그 주먹을 붙잡고 <<him_ ul>> 공중에 들어올려 난간 너머로 던져버린다.<<gglove>><<npcincr Whitney love 5>>
+<br><br>
+
+카일라는 아래층 바닥으로 곤두박질쳤지만 겨우 비틀대며 일어난다. <<He_ nun>> 자신의 팔을 쥐고 정문을 나가며 당신에게 배신감에 찬 시선을 던진다.
+<<if !$syndromekylar>>
+	<span class="blue">무서운 전율이 당신을 스치고 지나간다.</span><<set $kylar_mad to 1>>
+<</if>>
+<<gggksuspicion>><<npcincr Kylar rage 20>>
+<br><br>
+
+<<link [[다음|Kylar Halloween Whitney]]>><</link>>
+<br>
+
+:: Kylar Halloween Whitney
+<<effects>>
+
+<<endevent>><<npc Whitney>><<person1>>
+휘트니는 가구들이 움직이던 방으로 도로 뒷걸음질 친다. 가구들은 이제 조용하다. 창문 너머로 마지막 남은 <<his_ yi>> 친구들이 숲으로 사라지는 광경이 보인다. 카일라는 어디에도 보이지 않는다.
+<br><br>
+
+"쫄보새끼들," <<he_ ga>> 여전히 친구들에게 열이 받은 채 투덜거린다. "좋았던 거 다 초 쳤네." <<He_ nun>> 당신 쪽을 바라보다가 이내 고개를 돌린다. "난 갈란다." <<He_ nun>> 계단을 향해 걸어간다.
+<br><br>
+
+<<link [[휘트니와 함께 마을로 돌아간다|Kylar Halloween Accompany]]>><</link>>
+<br>
+<<link [[혼자 돌아간다|Kylar Halloween Alone]]>><</link>>
+<br>
+
+:: Kylar Halloween Accompany
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"나-나랑 같이 집까지 가 줄래?" 당신이 묻는다. "오늘 너무 무서웠어."
+<<elseif $speech_attitude is "bratty">>
+	"같이 가자," 당신이 말한다.
+<<else>>
+	"같이 가지 않을래?" 당신이 묻는다.
+<</if>>
+<br><br>
+<<if C.npc.Whitney.love gte 21 or $whitneyromance is 1>>
+	<span class="green">"그러든가,"</span> 휘트니가 말한다. "근데 이번만큼은 <<slutPost>>같은 짓은 접어 둬라. 지금은 그럴 기분 아니야."
+	<br><br>
+
+	당신은 휘트니와 함께 붉은 달빛 아래로 나와 숲을 지난다. <<He_ nun>> 저 너머로 마을의 불빛이 보일 때까지 한 마디도 하지 않는다.
+	<br><br>
+
+	<<link [[휘트니에게 감사를 표한다|Kylar Halloween Thank]]>><<npcincr Whitney love 1>><<npcincr Whitney dom 1>><</link>><<gdom>><<glove>>
+	<br>
+	<<link [[무엇이 문제인지 물어본다|Kylar Halloween Ask]]>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<ldom>><<llove>>
+	<br>
+<<else>>
+	<span class="red">"꺼져,"</span> 휘트니가 자신을 따라 계단을 내려오는 당신에게 말한다. "지금은 그럴 기분 아니야."
+	<br><br>
+
+	당신은 붉은 달빛 아래로 걸어나온다. 휘트니는 당신이 따라오지 않는지 눈길을 돌려 확인하며 성큼성큼 걸어간다.
+	<br><br>
+
+	<<link [[다음|Churchyard]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Halloween Thank
+<<effects>>
+<<pass 15>>
+<<if $speech_attitude is "meek">>
+	"챙겨 줘서 고마워," 당신이 말한다. "숲은 무섭거든."
+<<elseif $speech_attitude is "bratty">>
+	"동행 고맙다," 당신이 말한다.
+<<else>>
+	"같이 와 줘서 고마워," 당신이 말한다. "밤에 숲길은 위험하거든."
+<</if>>
+<br><br>
+
+"상관 없어," 휘트니가 말한다. "난 갈 데가 좀 있거든. 저 쫄보들한테 한마디 해 줘야겠어." <<He_ nun>> 잠시 머뭇거리다가, 몸을 숙여 당신에게 키스한다. <<takeKissVirginity "Whitney" `($whitneyromance is 1?"loveInterest":"romantic")`>>
+<br><br>
+당신은 <<him_ ul>> 가까이 잡아두려 하지만, <<he_ nun>> 뒤로 물러나 딴 곳을 쳐다본다. <<He_ nun>> 뭔가 말하려는 듯 입을 열었다가, 그냥 돌아서서 마을로 성큼성큼 걸어간다.
+<br><br>
+
+<<link [[다음|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Halloween Ask
+<<effects>>
+<<pass 15>>
+<<if $speech_attitude is "meek">>
+	"왜-왜 그래?" 당신이 묻는다. "나한텐 말해도 돼."
+<<elseif $speech_attitude is "bratty">>
+	"뭔 일 있나 보네," 당신이 말한다. "난 다 알아."
+<<else>>
+	"무슨 일이라도 있어?" 당신이 묻는다.
+<</if>>
+<br><br>
+
+휘트니는 당신의 가슴께에 손을 올리고 당신을 나무로 밀친다. "그게 대체 뭔 개소리야?" <<he_ ga>> 성난 듯 내뱉는다. "네가 보기엔 나한테 문제가 있는 것 같다고?"
+<br><br>
+
+<<link [[키스한다|Kylar Halloween Whitney Kiss]]>><<npcincr Whitney dom -1>><</link>><<promiscuous1>><<ldom>>
+<br>
+<<link [[사과한다|Kylar Halloween Whitney Apologise]]>><<npcincr Whitney dom 1>><<npcincr Whitney love 1>><</link>><<gdom>><<glove>>
+<br>
+<<link [[침묵한다|Kylar Halloween Whitney Silent]]>><</link>>
+<br>
+
+:: Kylar Halloween Whitney Kiss
+<<effects>>
+
+휘트니는 가까이, 당신이 몸을 기울여 <<his_ yi>> 입술에 입을 맞출 수 있을 정도로 가까이 당신 쪽으로 몸을 숙인다. <<takeKissVirginity "Whitney" `($whitneyromance is 1?"loveInterest":"romantic")`>>
+<<promiscuity1>>
+
+<<He_ nun>> 한 대 맞기라도 한 것 처럼 뒷걸음질친다. <<He_ nun>> 뭔가 말하려는 듯 입을 열었다가, 그냥 돌아서서 마을로 성큼성큼 걸어간다.
+<br><br>
+
+<<link [[다음|Wolf Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Halloween Whitney Apologise
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"미-미안," 당신은 더듬거리며 말한다. "화나게 하려던 건 아니었어."
+<<elseif $speech_attitude is "bratty">>
+	"과민반응 하지 마," 당신이 말한다. "미안하다고, 됐지?"
+<<else>>
+	"미안," 당신이 말한다. "화나게 하려던 건 아니야."
+<</if>>
+<br><br>
+
+휘트니는 당신을 쥔 손을 놓는다. "화난 거 아니야," <<he_ ga>> 말한다. "그래도 괜히 흥분한 것 같긴 하네. 나도... 미안하다."
+<br><br>
+
+<<He_ nun>> 돌아서서 마을로 성큼성큼 걸어간다.
+<br><br>
+
+<<link [[다음|Wolf Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Halloween Whitney Silent
+<<effects>>
+
+휘트니는 잠시 당신을 째려보더니, 이내 손을 떨어트린다. <<He_ nun>> 마을로 성큼성큼 걸어간다.
+<br><br>
+
+<<link [[다음|Wolf Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Halloween Alone
+<<effects>>
+
+당신은 붉은 달빛 아래로 걸어나온다. 휘트니는 당신이 따라오지 않는지 눈길을 돌려 확인하며 성큼성큼 걸어간다.
+<br><br>
+
+<<link [[다음|Churchyard]]>><<endevent>><</link>>
+<br>

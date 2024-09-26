@@ -1,0 +1,31 @@
+:: Widgets trClothesType [widget nobr]
+<<widget "trClothesType">><<silently>>
+	<<if _clothesType is undefined>>
+		<<set _clothesType to {
+			"over_head":"외투 머리",
+			"over_upper":"외투 상의",
+			"over_lower":"외투 하의",
+			"head":"머리",
+			"face":"얼굴",
+			"neck":"목",
+			"upper":"상의",
+			"lower":"하의",
+			"under_upper":"속옷 상의",
+			"under_lower":"속옷 하의",
+			"hands":"손",
+			"handheld":"들고다니는 물건",
+			"legs":"다리",
+			"feet":"발",
+			"genitals":"생식기",
+		}>>
+	<</if>>
+	<<set _trResult to _clothesType[_args[0]]>>
+	<<if _trResult isnot undefined>>
+		<<if _args[1] isnot undefined>>
+			<<getPostNum _trResult>>
+			<<trPost _postNum _args[1] _args[2]>>
+		<</if>>
+	<<else>>
+		<<set _trResult to "<span class='red'> 에러: trClothesType: clothesType에 없음(" + _args[0] + ")</span>">>
+	<</if>>
+<</silently>><</widget>>

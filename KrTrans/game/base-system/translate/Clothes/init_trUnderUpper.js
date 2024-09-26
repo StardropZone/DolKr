@@ -1,0 +1,338 @@
+function init_trUnderUpper()
+{
+    setup.trClothes.under_upper = [
+        {
+            index: 0,
+            name: "naked",
+            name_ko: "벗음",
+            variable: "naked",
+            description: "naked",
+            post: 0
+        },
+
+        {
+            index: 1,
+            name: "bikini top",
+            name_ko: "비키니 상의",
+            variable: "bikini",
+            description: "몸을 드러내는 수영복.",
+            post: 1
+        },
+
+        {
+            index: 2,
+            name: "school swimsuit",
+            name_ko: "학교 수영복",
+            variable: "schoolswimsuit",
+            description: "적절한 학교 수영복.",
+            post: 0
+        },
+
+        {
+            index: 3,
+            name: "leotard",
+            name_ko: "레오타드",
+            variable: "leotard",
+            description: "몸에 딱 달라붙는다. 당신의 상체를 가려주지만, 공공장소에서는 반바지를 입는 것이 좋을 것이다.",
+            post: 1
+        },
+
+        {/* 0.3.x 까지 */
+            index: 4,
+            name: "full body leotard",
+            name_ko: "전신 레오타드",
+            variable: "leotardfull",
+            description: "몸에 딱 달라붙는다. 다리를 가려준다.",
+            post: 1
+        },
+
+        {
+            index: 4,
+            name: "unitard",
+            name_ko: "전신 레오타드",
+            variable: "unitard",
+            description: "몸에 딱 달라붙는다. 다리를 가려준다.",
+            post: 1
+        },
+
+        {
+            index: 5,
+            name: "skimpy leotard",
+            name_ko: "노출 많은 레오타드",
+            variable: "leotardskimpy",
+            description: "몸에 딱 달라붙는다. 당신의 상체를 가려주지만, 허벅지와, 그 외에도 이것저것을 과시한다.",
+            post: 1
+        },
+
+        {
+            index: 6,
+            name: "foreign school swimsuit",
+            name_ko: "외국 학교 수영복",
+            variable: "schoolswimsuitj",
+            description: "학교의 공식 교복 수영복으로, 외국에서 인기 있는 스타일이다.",
+            post: 0
+        },
+
+        {
+            index: 7,
+            name: "swimsuit",
+            name_ko: "수영복",
+            variable: "swimsuit",
+            description: "섹시하다.",
+            post: 0
+        },
+
+        {
+            index: 8,
+            name: "bunny leotard",
+            name_ko: "바니걸 레오타드",
+            variable: "leotardbunny",
+            description: "웨이트리스 복장. 보기보다는 튼튼하다. 바니걸 의상의 일부로, 그에 맞게 엉덩이 쪽에 폭신폭신한 흰색 꼬리가 달려있다.",
+            post: 1
+        },
+
+        {
+            index: 9,
+            name: "catgirl bra",
+            name_ko: "캣걸 브라",
+            variable: "catgirlbra",
+            description: "보통의 브라로는 충분히 귀엽지 않을 때.",
+            post: 1
+        },
+
+        {
+            index: 10,
+            name: "lace bra",
+            name_ko: "레이스 브라",
+            variable: "lacebra",
+            description: "그 아래에 있는 걸 넌지시 보여준다.",
+            post: 1
+        },
+
+        {
+            index: 11,
+            name: "microkini top",
+            name_ko: "마이크로비키니 상의",
+            variable: "microkini",
+            description: "예의의 경계선에 걸쳐있다.",
+            post: 1
+        },
+
+        {
+            index: 12,
+            name: "plain bra",
+            name_ko: "평범한 브라",
+            variable: "plainbra",
+            description: "건전하다.",
+            post: 1
+        },
+
+        {
+            index: 13,
+            name: "sports bra",
+            name_ko: "스포츠 브라",
+            variable: "sportsbra",
+            description: "가슴을 잘 받쳐준다.",
+            post: 1
+        },
+
+        {
+            index: 14,
+            name: "mesh shirt",
+            name_ko: "망사 셔츠",
+            variable: "mesh",
+            description: "가리는게 하나도 없다.",
+            post: 1
+        },
+
+        {
+            index: 15,
+            name: "corset",
+            name_ko: "코르셋",
+            variable: "corset",
+            description: "복부를 조이고 가슴을 강조해준다.",
+            post: 0
+        },
+
+        {
+            index: 16,
+            name: "striped bra",
+            name_ko: "줄무늬 브라",
+            variable: "stripedbra",
+            description: "개성이 넘쳐흐른다.",
+            post: 1
+        },
+
+        {
+            index: 17,
+            name: "chest wrap",
+            name_ko: "가슴붕대",
+            variable: "chestwrap",
+            description: "평평하게 만드는 동시에 보호해준다.",
+            post: 1
+        },
+
+        {
+            index: 18,
+            name: "arm sleeves",
+            name_ko: "암 슬리브",
+            variable: "armsleeves",
+            description: "당신의 팔을 지켜준다.",
+            post: 1
+        },
+
+        {
+            index: 19,
+            name: "classic bikini top",
+            name_ko: "클래식 비키니 상의",
+            variable: "classicbikini",
+            description: "노출이 심한 수영복. 그 부분이 부유한 사람에게는 친절하지 않다.",
+            post: 1
+        },
+
+        {
+            index: 20,
+            name: "classic school swimsuit",
+            name_ko: "클래식 학교 수영복",
+            variable: "classicschoolswimsuit",
+            description: "진짜 학교 수영복. 빈티지.",
+            post: 0
+        },
+
+        {
+            index: 21,
+            name: "swim shirt",
+            name_ko: "수영복 셔츠",
+            variable: "swimshirt",
+            description: "수영하는 동안 태양으로부터 보호한다.",
+            post: 1
+        },
+
+        {
+            index: 22,
+            name: "vest",
+            name_ko: "런닝셔츠",
+            variable: "vest",
+            description: "건전하다.",
+            post: 1
+        },
+
+        {
+            index: 23,
+            name: "strapless bra",
+            name_ko: "끈없는 브라",
+            variable: "straplessbra",
+            description: "어깨가 자유롭다.",
+            post: 1
+        },
+
+        {
+            index: 24,
+            name: "school swim top",
+            name_ko: "학교 수영복 상의",
+            variable: "schoolswimtop",
+            description: "외국의 학교 수영복을 모방했다.",
+            post: 1
+        },
+
+        {
+            index: 25,
+            name: "tape",
+            name_ko: "테이프",
+            variable: "tape",
+            description: "간신히 거기에 붙어있다.",
+            post: 1
+        },
+
+        {
+            index: 26,
+            name: "cow bra",
+            name_ko: "소 브라",
+            variable: "cow",
+            description: "가슴을 잘 받쳐준다.",
+            post: 1
+        },
+
+        {
+            index: 27,
+            name: "chest binder",
+            name_ko: "가슴 압박대",
+            variable: "chestbinder",
+            description: "평평하게 만드는 동시에 보호해준다.",
+            post: 1
+        },
+
+        {
+            index: 28,
+            name: "undershirt",
+            name_ko: "속셔츠",
+            variable: "undershirt",
+            description: "따뜻하고 몸에 꼭 맞는다.",
+            post: 1
+        },
+
+        {
+            index: 29,
+            name: "see-through swimsuit",
+            name_ko: "속이 비치는 수영복",
+            variable: "seethroughswimsuit",
+            description: "당신의 몸통 모양을 잡는다.",
+            post: 0
+        },
+
+        {
+            index: 30,
+            name: "push up bra",
+            name_ko: "보정 브라",
+            variable: "pushupbra",
+            description: "가슴을 크게 보이게 한다.",
+            post: 1
+        },
+
+        {
+            index: 31,
+            name: "shibari ropes",
+            name_ko: "묶는 밧줄",
+            variable: "shibari",
+            description: "긴박 플레이에 꽂힌 사람들을 위해서.",
+            post: 2
+        },
+
+        {
+            index: 32,
+            name: "turtleneck leotard",
+            name_ko: "터틀넥 레오타드",
+            variable: "leotardturtleneck",
+            description: "몸에 딱 달라붙는다. 당신의 상체를 가려주지만, 허벅지를 과시한다.",
+            post: 1
+        },
+
+        {
+            index: 33,
+            name: "camisole",
+            name_ko: "캐미솔",
+            variable: "camisole",
+            description: "다목적이고 가슴을 잘 받쳐준다.",
+            post: 2
+        },
+
+        {
+            index: 34,
+            name: "latex leotard",
+            name_ko: "라텍스 레오타드",
+            variable: "latexleotard",
+            description: "몸에 딱 달라붙는다.",
+            post: 1
+        },
+
+        {
+            index: 35,
+            name: "bunny-tie bikini top",
+            name_ko: "버니 넥타이 비키니 상의",
+            variable: "buntiebikinitop",
+            description: "몸을 드러내는 수영복.",
+            post: 1
+        },
+	];
+}
+window.init_trUnderUpper = init_trUnderUpper;

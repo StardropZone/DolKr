@@ -1,0 +1,171 @@
+:: Beach Cave
+<<set $location to "underground">><<set $outside to 0>>
+<<if $cave gte 50>>
+<<elseif $cave gte 20>>
+	<<water waist>>
+<<else>>
+	<<water>>
+<</if>>
+<<effects>>
+<<set $cave = Math.clamp($cave, 0, 100)>>
+당신은 해안가 동굴에 있다. 발광하는 이끼가 벽에 붙어 있다.
+<br><br>
+<<if $cave gte 100>>
+	<span class="lblue">당신은 동굴 뒤쪽에 있다.</span> 썩어가는 나무 왕좌가 당신 앞에 놓여 있다.
+	<<if !$weekly.beachCaveCompass>>
+		상자 하나가 거기에 놓여 있다.
+	<</if>>
+<<elseif $cave gte 50>>
+	당신의 발은 흐르는 물에 잠겨 있다.
+<<elseif $cave gte 20>>
+	물이 허리까지 차오른다.
+<<elseif $cave gte 1>>
+	목까지 물이 차오른다.
+<<else>>
+	목까지 물이 차오른다. 동굴의 천장은 근처 해안가 수면 아래에 잠겨있다. 그 길은 바깥으로 통하지만, 당신은 수영을 해야 한다.
+<</if>>
+<br><br>
+
+<<if $cave gte 50 and $cave lt 54 and $smuggler_pub_known is 1>>
+	You hear an echo of voices, and see the passage to the smuggler's den hidden behind a rock.
+	<br><br>
+<<elseif $cave gte 50 and $cave lt 54 and ($historytrait gte 4 or ($temple_spear_mission gte 1 and $temple_spear_mission_winter is 1))>>
+	You hear an echo of voices. You think of the smuggler's den you read about in history class. It was in a cave like this.
+	<br><br>
+<</if>>
+
+<<beach_cave_pursuit>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax>>
+	<<passoutcave>>
+<<elseif $eventskip isnot 1 and $cave lt 100>>
+	<<if random(1, 4) is 4>>
+		<<eventscavetreasure>>
+	<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventscave>>
+	<<else>>
+		<<eventscavesafe>>
+	<</if>>
+<<else>>
+	<<if $cave gte 50 and $cave lt 54 and $smuggler_pub_known is 1>>
+		<<ind>><<link [[Follow the tunnel to the smuggler's pub (0:05)|Smuggler Pub]]>><<pass 5>><<beach_cave_end>><</link>>
+		<br>
+	<<elseif $cave gte 50 and $cave lt 54 and ($historytrait gte 4 or ($temple_spear_mission gte 1 and $temple_spear_mission_winter is 1))>>
+		<<ind>><<link [[Follow the tunnel to the smuggler's pub (0:05)|Smuggler Pub Beach Cave Intro]]>><<pass 5>><<beach_cave_end>><</link>>
+		<br>
+	<</if>>
+	<<if $cave lt 100>>
+		<<caveicon "west">><<link [[더 깊은 곳으로 들어간다 (0:10)|Beach Cave]]>><<set $cave += 5>><<pass 10>><</link>>
+		<br>
+	<<elseif !$weekly.beachCaveCompass>>
+		<<caveicon "treasure">><<link [[상자를 연다|Beach Cave Open]]>><<set $weekly.beachCaveCompass to true>><</link>>
+		<br>
+	<</if>>
+	<<if $cave gt 0>>
+		<<caveicon "sea">><<link [[바다를 향해 나간다 (0:10)|Beach Cave]]>><<set $cave -= 5>><<pass 10>><</link>>
+		<br>
+	<<else>>
+		<<swimicon "up">><<link [[밖으로 헤엄친다 (0:05)|Beach Cave Up]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>
+
+
+:: Beach Cave Open
+<<effects>>
+
+당신은 상자를 연다. 안에서 은빛이 반짝인다. 나침반이다. 그것은 가치있는 것처럼 보인다. 수집가라면 더 많이 알고 있을 것이다.
+<<set $antiquemoney += 2200>><<museumAntiqueStatus "antiquesilvercompass" "found">>
+<br><br>
+<<set $pursuit += 1>>
+<<if $museumAntiques.antiques.antiqueleathermap isnot "found" and $museumAntiques.antiques.antiqueleathermap isnot "talk" and $museumAntiques.antiques.antiqueleathermap isnot "museum">>
+	<<set $skulduggerydifficulty to 700>>
+	<<caveicon "treasure">><<link [[상자를 더 자세히 조사한다|Beach Cave Examine]]>><</link>><<skulduggerydifficulty>>
+	<br>
+<</if>>
+
+<<getouticon>><<link [[떠난다|Beach Cave]]>><<set $eventskip to 1>><</link>>
+<br>
+
+
+:: Beach Cave Examine
+<<effects>>
+
+
+당신은 상자를 들여다보며, 상자 벽을 더듬는다.
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<earnFeat "X Marks the Spot">>
+	당신은 나무 벽 사이에서, 간신히 알아챌 수 있는 단추를 찾아낸다. 당신은 그것을 누르지 않는다. 대신, 손가락 끝으로 감촉을 확인한다. 그곳엔 먼저 누르게 되어있는, 보다 작은 버튼이 있다. 당신이 그것을 손톱으로 누르자, 상자 바닥에서<span class="green">숨겨진 공간이 드러난다.</span>
+	<br><br>
+	<<set $antiquemoney += 4000>><<museumAntiqueStatus "antiqueleathermap" "found">>
+	가죽으로 된 두루마리가, 왁스 처리된 끈으로 묶여 안에 놓여 있다. 당신은 그것을 펼친다. 그것은 지도이고, 상태가 좋다. 숲 옆에 눌린 듯한, 해안 정착촌이 그려져 있다. 선들이 바다를 가로질러 그려져 있고, 그 중 일부는 점선으로 찍혀 있다. 왼쪽 상단 모서리에는 크라켄이 그려져 있으며, 오른쪽 하단에는 용이 그려져 있다. 수집가라면 더 많이 알고 있을 것이다.
+	<br><br>
+	<<skulduggeryuse>>
+
+	<<link [[다음|Beach Cave]]>><</link>>
+	<br>
+
+<<else>>
+
+	당신은 나무 벽 사이에서, 간신히 알아챌 수 있는 단추를 찾아낸다. 당신은 그것을 누른다. 상자의 밑부분이 탁 열리면서, <span class="red">다트가 튀어나온다.</span> 그것은 빗나간 방향으로 날아가지만, 당신을 놀라게 한다. 당신은 상자를 떨어뜨린다. 물이 그것을 잡아채서, 얇은 틈으로 빨아들인다.<<gstress>><<stress 6>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[다음|Beach Cave]]>><</link>>
+	<br>
+
+<</if>>
+
+
+:: Beach Cave Up
+<<effects>>
+
+당신은 물 속으로 다이빙하고, 헤엄친다. 동굴은 위쪽으로 굽어 있다.
+
+<<if Time.dayState is "night">>
+	<<if !Weather.isOvercast>>
+		당신은 위쪽의 달빛을 향해 헤엄쳐, 차가운 밤바람 속으로 나온다.
+	<<elseif Weather.precipitation is "rain">>
+		너무 어두워서 어느 쪽이 위인지 분간하기 어렵다. 당신은 공황상태에 빠지기 전에 바다에 쏟아지는 빗속으로 나온다.<<gstress>><<stress 6>>
+	<<else>>
+		너무 어두워서 어느 쪽이 위인지 분간하기 어렵다. 당신은 공황상태에 빠지기 전에 차가운 밤바람 속으로 나온다.<<gstress>><<stress 6>>
+	<</if>>
+<<else>>
+	<<if !Weather.isOvercast>>
+		당신은 위쪽의 태양을 향해 헤엄쳐, 시원한 바닷바람 속으로 나온다.
+	<<elseif Weather.precipitation is "rain">>
+		당신은 위쪽의 불빛을 향해 헤엄쳐, 바다에 쏟아지는 빗속으로 나온다.
+	<<else>>
+		당신은 위쪽의 불빛을 향해 헤엄쳐, 시원한 바닷바람 속으로 나온다.
+	<</if>>
+<</if>>
+<br><br>
+<<beach_cave_end>>
+<<link [[다음|Rocks Pool]]>><</link>>
+<br>
+
+:: Beach Cave Entrance
+<<set $location to "underground">><<set $outside to 0>><<effects>>
+
+
+당신은 부드러운 빛을 향해, 동굴 안으로 헤엄쳐 들어간다. 당신은 바위를 움켜쥐고, 공기 주머니로 몸을 당긴다. 발광하는 이끼가 벽에 붙어 있다.
+<br><br>
+
+<<link [[다음|Beach Cave]]>><<set $cave to 0>><<beach_cave_init>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Beach Cave Pub Entrance
+<<set $location to "underground">><<set $outside to 0>><<effects>>
+
+You walk through the cave, leaving the mirth of the pub behind you. You find a rush of ankle-high water. Bioluminescent lichen clings to the walls.
+<br><br>
+
+<<link [[다음|Beach Cave]]>><<pass 5>><<beach_cave_init>><<set $cave to 50>><<set $eventskip to 1>><</link>>
+<br>

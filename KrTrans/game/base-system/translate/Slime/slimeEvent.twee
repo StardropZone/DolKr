@@ -1,0 +1,50 @@
+:: Widgets slimeEvent [widget nobr]
+/* widget "slimeNoSleep" in base-system/sleep.twee */
+<<widget "trinit_SlimeEvent">>
+    <<if _koslimeEvents is undefined>>    
+        <<set _koslimeEvents to {
+            "go commando" : "속옷을 입지 말라고",
+            "have sex with someone or something" : "다른 사람이나 짐승과 섹스를 하라고",
+            "only sleep naked from now on" : "이제부턴 알몸으로 잠을 자라고",
+            "have sex with someone" : "다른 사람과 섹스를 하라고",
+            "go running or swimming for an hour" : "한 시간 동안 뛰거나 수영을 하러 가라고",
+            "steal something" : "무언가를 훔치라고",
+            "go running or swimming naked for an hour" : "한 시간 동안 알몸으로 뛰거나 수영을 하러 가라고",
+            "go running or swimming naked for two hours" : "두 시간 동안 알몸으로 뛰거나 수영을 하러 가라고",
+            "study at the school library while naked for an hour" : "한 시간 동안 학교 도서관에서 공부하라고",
+            "study at the school library while naked for two hours" : "두 시간 동안 학교 도서관에서 공부하라고",
+            "only wear feminine clothes for a while" : "당분간 여성스러운 옷만 입으라고",
+            "only wear masculine clothes for a while" : "당분간 남성스러운 옷만 입으라고",
+            "get sperm into your vagina" : "당신의 질 안에 정액을 넣으라고",
+            "get sperm into your anus" : "당신의 항문 안에 정액을 넣으라고",
+            "get your own sperm into your vagina" : "당신의 질 안에 당신 자신의 정액을 넣으라고",
+            "get your own sperm into your anus" : "당신의 항문 안에 당신 자신의 정액을 넣으라고",
+            "ejaculate into someones vagina" : "다른 사람의 질 안에 사정하라고",
+            "ejaculate into someone's vagina" : "다른 사람의 질 안에 사정하라고",
+            "masturbate and orgasm at least ten times" : "자위해서 최소한 열 번 절정하라고",
+            "masturbate and orgasm at least five times" : "자위해서 최소한 다섯 번 절정하라고",
+            "go running or swimming" : "뛰거나 수영을 하러 가라고",
+            "study at the school" : "학교에서 공부하라고",
+            "masturbate" : "자위하라고",
+			"masturbate to orgasm" : "절정에 이를 때 까지 자위하라고",
+			"fully expose yourself while working as a model in town" : "모델로 일하는 동안 당신의 몸을 완전히 노출하라고",
+			"use the farm equipment to empty your breasts of milk" : "농장 기기를 사용하여 당신의 모유를 전부 짜내라고",
+			"use the farm equipment to empty your penis of semen" : "농장 기기를 사용하여 당신의 정액을 전부 짜내라고",
+        }>>
+    <</if>>
+<</widget>>
+
+<<widget "trSlimeEvent">><<silently>>
+	<<if _koslimeEvents is undefined>>
+		<<trinit_SlimeEvent>>
+	<</if>>
+	<<if _args[0]>>
+		<<set $_event to _args[0]>>
+	<<else>>
+		<<set $_event to $earSlime.event>>
+	<</if>>
+	<<set _trResult to  _koslimeEvents[$_event]>>
+	<<if ndef _trResult>>
+		<<set _trResult to "<span class='red'>trSlimeEvent: 이벤트를 찾을 수 없음: " + $_event + "</span>">>
+	<</if>>
+<</silently>><<print _trResult>><</widget>>

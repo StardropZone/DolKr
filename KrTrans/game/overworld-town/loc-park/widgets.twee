@@ -1,0 +1,382 @@
+:: Widgets Park [widget]
+<<widget "passoutpark">>
+	<<if isPregnancyEnding()>>
+		<<pregnancyPassout "park">>
+	<<else>>
+		<<link [[모든 것이 어두워진다...->Passout park]]>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "park">>
+	<<if $nextPassageCheck is "Park">>
+		<<add_link "<span class='nextLink'><<parkicon>><<link [[공원 (0:05)|Park]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<parkicon>><<link [[공원 (0:05)|Park]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "parkquick">>
+	<<parkicon>><<link [[공원|Park]]>><</link>>
+<</widget>>
+
+<<widget "parkeventend">>
+	<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+<<widget "parkrun">>
+	<<if $rng gte $park_fame>>
+		<<rng>>
+		<<if $rng gte 91>>
+			<<generate1>><<person1>>
+			뒤에서 발자국 소리가 들리고 ,당신은 어깨너머 시선으로 뒤를 본다. 한 <<person_ i>> 당신을 <span class="pink">쫓아온다.</span>
+			<br><br>
+
+			<<link [[다음|Park Run Stalk]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<elseif $rng gte 86>>
+			While running, you have to pass through some bushes.
+			<<if $worn.lower.type.includes("naked")>>
+				당신이 밀고 지나갈 때, 나뭇가지가 당신의 <<undies_ ro>> 되튀어, 당신을 찌른다.
+			<<else>>
+				당신이 밀고 지나갈 때, 가시덩어리가 노출된 당신의 <<if $player.breastsize is 0>>가슴<<else>>유방<</if>>에 걸린다.
+				<<gpain>>
+			<</if>>
+			<<pain 5>>
+			<br><br>
+			<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+		<<elseif $rng gte 81>>
+			<<generate1>><<person1>>당신은 <<person_ ul>> 지나친다.
+
+			<<if $worn.upper.type.includes("naked")>>
+				<<He_ nun>> 어깨 높이의 울타리를 두고 당신을 향해 미소 짓는다. <<He_ nun>> 당신이 그렇게 노출되어 있다는 사실을 깨닫지 못한다.
+			<<else>>
+				<<He_ nun>> 허리 높이의 울타리를 두고 당신의 <<undies_ ul>> 숨긴 채 당신을 향해 미소 짓는다. <<He_ nun>> 당신이 그렇게 노출되어 있다는 사실을 깨닫지 못한다.
+			<</if>>
+			<br><br>
+
+			<<if $earSlime.growth gte 200 - ($earSlime.promiscuity * 10)>>
+				<span class="lewd">머릿속의 슬라임이 당신에게 자신의 모습을 드러내고 <<himPost "에게">> 강간을 요청하라고 명령하는 것을 느낀다.</span> <span class="red">슬라임은 당신의 복종을 기대한다.</span>
+				<br><br>
+
+				<<link [[복종한다|Park Run Exposed Slime Obey]]>><<set $phase to 3>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+				<br>
+				<<link [[반항한다|Park Run Exposed Slime Defy]]>><<set $phase to 3>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+				<br>
+			<<else>>
+				<<link [[마주 미소짓는다|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+				<br>
+				<<if hasSexStat("exhibitionism", 2)>>
+					<<link [[당신의 비밀을 인정한다|Park Run Secret]]>><</link>><<exhibitionist2>>
+					<br>
+				<</if>>
+			<</if>>
+
+		<<elseif $rng gte 71>>
+			<<generate1>><<generatep2>>
+			<<print either("나무 아래서,","덤불 가운데서,","입구가 잘 보이는 곳에서,","공원 정자에서,","가로등 바로 아래서,","텅 빈 어린이 놀이터의 그네 위에서,")>>
+			한 <<person1>><<person_ i>>  <<if $NPCList[1].pronoun is "m">><<his_ yi>> 남자친구를 빨고 있다.<<else>><<his_ yi>> 여자친구를 빨고 있다.<</if>>
+			<<if $NPCList[0].description == $NPCList[1].description && $NPCList[0].pronoun == $NPCList[1].pronoun>>또 다른<<else>>한<</if>> <<person2>><<person_ i>> 당신이 지나갈때 당신을 쳐다본다. <<He_ nun>> 
+			<<if $NPCList[0].pronoun is "m">>남자친구의 <<else>>여자친구의<</if>> <<if $pronoun is "m">>머리가 다리 사이로 흔들리고<<else>>다리 사이에 머리를 낀 채로<</if>> <<his_ yi>> 얼굴에 행복한 만족감이 가득 찬 표정을 짓고 있다.
+			<br><br>
+
+			<<endevent>>
+			<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+		<<elseif $rng gte 61>>
+			당신은 떠돌이 개를 만난다. 당신의 발자국 소리에 개가 도망간다.
+			<br><br>
+
+			<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+		<<elseif $rng gte 51>>
+			<<if Weather.precipitation is "rain">>
+				<<generatef1>><<person1>>폭우가 쏟아지는 가운데, <<person_ i>> 미끄러져 웅덩이에 빠진다. 물은 순식간에 <<his_ yi>>
+				<<print either("티셔츠","캐주얼 블라우스","선드레스","상의","탱크탑")>>에 스며들어 <<his_ yi>> <<breastsdesc_ ga $NPCList[0].breastsdesc>> 모든 사람에게 노출된다.
+				<br>
+				<<if $rng % 2>>
+					굴욕감을 느끼며, <<he_ nun>> <<his_ yi>> 팔로 몸을 가리고 공원에서 도망친다.
+				<<else>>
+					<<He_ nun>> 눈치채지 못하거나 신경 쓰지 않는다. <<person_ un>> 달리기를 계속하며, 주변의 모든 사람들을 줄겁게 한다.
+				<</if>>
+			<<else>>
+				<<generate1>><<person1>><<person_ gwa>> <<generate2>><<person2>><<person_ i>> 지나쳐 달려가자 당신은 나무 뒤에 숨는다.
+				<<set _earSlimeEvent to true>>
+			<</if>>
+
+			<br><br>
+			<<if _earSlimeEvent and $earSlime.growth gte 200 - ($earSlime.promiscuity * 10)>>
+				<span class="lewd">머릿속의 슬라임이 당신에게 자신의 모습을 드러내고 그들에게 강간을 요청하라고 명령하는 것을 느낀다.</span> <span class="red">슬라임은 당신의 복종을 기대한다.</span>
+				<br><br>
+
+				<<link [[복종한다|Park Run Exposed Slime Obey]]>><<set $phase to 1>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+				<br>
+				<<link [[반항한다|Park Run Exposed Slime Defy]]>><<set $phase to 1>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+				<br>
+			<<else>>
+				<<link [[다음|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<</if>>
+		<<elseif $rng gte 41>>
+			<<if Weather.precipitation isnot "none">> /*10% chance if running naked in the park at night during rain or snow.*/
+				<<print either("폭풍우가 몰아치는 곳을","호수위의 다리를","호수를","호수 옆의 나무들을","폭풍우가 몰아치는 덤불 옆을")>> 지나갈 때 
+				무언가가 다리를 잡아당겨 당신을 아래로 끌어내린다.
+				<!-- Modified for Monster People -->
+				<<beastNEWinit 1 lizard>>
+				<br>
+				<<if $monster is 1 or $bestialitydisable is "f">>
+					당신이 반응하기도 전에, 거대한 하수구 <<beasttype_ ga>> 달려든다.
+					<br><br>
+					<<link [[다음|Park Lizard Rape]]>><<set $molestationstart to 1>><</link>>
+					<br>
+				<<else>>
+					그것은 거대한 도마뱀이다.
+					<br>
+					당신은 거대 도마뱀의 발톱에서 간신히 빠져나와 도망친다. 뒤돌아보니 하수구를 향해 허겁지겁 돌아가는 모습이 보인다.<<beastescape>>
+					<br><br>
+					<<link [[다음|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+				<</if>>
+			<<else>>
+				당신은 아무도 마주치지 않았다.
+				<br><br>
+				<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+			<</if>>
+		<<elseif $rng gte 31>>
+			뒤에서 발소리가 들린다. <<generate1>><<person1>><<person_ i>> 길을 건너간다. <<He_ ga>> 고개를 돌리거나 당신을 알아채지 못한다. 당신은 거의 눈에 띌 뻔 했다.
+			<<ltrauma>><<trauma -1>><<garousal>><<arousal 100>>
+			<br><br>
+
+			<<if $earSlime.growth gte 200 - ($earSlime.promiscuity * 10)>>
+				<span class="lewd">머릿속의 슬라임이 당신에게 자신의 모습을 드러내고 <<himPost "에게">> 강간을 요청하라고 명령하는 것을 느낀다.</span> <span class="red">슬라임은 당신의 복종을 기대한다.</span>
+				<br><br>
+
+				<<link [[복종한다|Park Run Exposed Slime Obey]]>><<set $phase to 2>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+				<br>
+				<<link [[반항한다|Park Run Exposed Slime Defy]]>><<set $phase to 2>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+				<br>
+			<<else>>
+				<<link [[다음|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<</if>>
+		<<elseif $rng gte 21>>
+			당신은 낡은 은신처 아래에서 담배를 피우는 학생무리와 거의 마주칠 뻔 한다. 당신은 그들을 피해간다.
+			<br><br>
+
+			<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+		<<elseif $rng gte 15>>
+			<<rng>>
+			<<if ndef $park_run_seen_by>><<set $park_run_seen_by to []>><</if>>
+			<<if $rng gte 81 and C.npc.Whitney.init is 1 and C.npc.Whitney.state isnot "dungeon" and $pillory.tenant.special.name isnot "Whitney">>
+				당신은 낡은 은신처 아래에서 담배를 피우는 학생무리와 거의 마주칠 뻔 한다. 가운데 형체가 불을 붙이자, 당신은 그들을 알아볼 수가 있다. 휘트니다.
+				<br>
+				<<npc Whitney>><<person1>>눈을 감고, <<he_ ga>> 연기 구름을 내뿜는다.
+				<<set $phase to 1>>
+			<<elseif $rng gte 61 and C.npc.Leighton.init is 1 and $pillory.tenant.special.name isnot "Leighton">>
+				어떤 정자 근처 그림자 속에 한 사람이 도사리고 있다. 그자가 불빛 근처로 움직이자 당신은 그들이 누군지 알아본다. 레이턴이다.
+				<br>
+				<<npc Leighton>><<person1>><<He_ nun>> 무언가를 찾고 있는 것 같다. 혹은 누군가거나.
+				<<set $phase to 2>>
+			<<elseif $rng gte 41 and C.npc.Doren.init is 1>>
+				또 다른 사람이 가로등 아래를 지나 뛰어간다. 도렌이다.
+				<br>
+				<<npc Doren>><<person1>><<set $phase to 3>>
+			<<elseif $rng gte 21 and C.npc.Harper.init is 1>>
+				병원 근처를 지나갈 때, 당신은 앞쪽 벤치에 앉아 있는 의사 하퍼를 발견한다.
+				<br>
+				<<npc Harper>><<person1>><<he_ nun>> 깊은 생각에 잠긴 채, 몇가지 서류를 읽고 있다.
+				<<set $phase to 4>>
+			<<elseif C.npc.Bailey.init is 1>>
+				당신은 근처에서 익숙한 목소리를 듣고 멈춰 선다.
+				<br>
+				"... 온전하게 데려와. 알겠어?"
+				<br>
+				<span class="purple">베일리다.</span>
+				<br><br>
+				"물론이죠," 다른 목소리가 대답한다. "고마워요, <<print either("이 녀석 귀엽네요. 하지만 괜찮을 겁니다,","이 녀석 꽤나 괜찮네요. 하지만 걱정마세요,","이 녀석은 좀 거칠긴 하지만,")>> 부드럽게 대할게요."
+				<br>
+				"돈."
+				<br>
+				"아 네. 네, 여깄습니다. 여기 다 넣었어요."
+				<br>
+				"좋아."
+				<br>
+				<<npc Bailey>><<person1>>베일리가 근처 덤불에서 나와 돈을 세고 있다.
+				<<set $phase to 5>>
+			<<else>>/*Here in case Bailey is ever dropped out of the intro scene.*/
+				익숙한 얼굴을 본다고 생각한 순간 당신은 심장이 멎을 것만 같았다. 알고보니 낯선 사람으로 밝혀졌다.
+				<br>
+				<<set $phase to 6>>
+			<</if>>
+			<<if $phase isnot 6>>
+				<<He_ ga>> 당신을 보지 못했다. 아직은.
+				<br><br>
+				<<link [[계속 숨어있는다|Park Run NPC Hide]]>><</link>>
+				<br>
+				<<if hasSexStat("exhibitionism", 2)>>
+					<<link [[당신을 드러낸다|Park Run NPC Show]]>><<endevent phaseless>><</link>><<exhibitionist2>>
+					<br>
+				<</if>>
+			<<else>>
+				<<endevent>>
+				<<link [[계속 간다|Park]]>><<set $eventskip to 1>><</link>>
+			<</if>>
+		<<elseif $rng gte 7>>
+			앞쪽의 노부부가 손을 잡고, 공원을 천천히 걷고 있다. 당신은 그들의 뒤를 조용히 지나친다. 당신이 거기 있는 것을 알면 그들이 어떻게 반응할지 궁금하다.
+			<br><br>
+			<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+		<<else>>
+			당신은 벤치에 앉아있는 <<generate1>><<generate2>><<fullGroup_ yi>> 뒤로 몰래 숨어든다. 너무 가까워서 손을 뻗어 잡을 수 있을 정도다.
+			<<garousal>><<arousal 600>>
+			<br><br>
+			<<endevent>>
+			<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+		<</if>>
+	<<else>>
+		<<rng>>
+		<<if $rng gte 81>>
+			<<generate1>><<person1>>불빛이 깜빡인다. 한 <<person_ i>> 덤불 아래에 누워, 당신을 향해 카메라를 들고 있다. 카메라 플래시가 터지며, 당신의 <<nudity_ rul>> 촬영한다. <<covered>>
+			<br><br>
+
+			<<if hasSexStat("exhibitionism", 5)>>
+				<<link [[포즈를 취한다|Park Run Pose]]>><<fameexhibitionism 20 "pic">><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+			<<link [[도망간다|Park Run Away]]>><<fameexhibitionism 10 "pic">><</link>>
+			<br>
+			<<set $skulduggerydifficulty to 300>>
+			<<link [[카메라를 훔친다|Park Run Steal]]>><<crimeUp 10 "thievery">><</link>><<crime "thievery">><<skulduggerydifficulty>>
+			<br>
+		<<elseif $rng gte 61>>
+			<<generate1>><<generate2>>전방의 풀숲에서 <<fullGroup_ i>> 나온다. 그들은 당신을 향해 걸어온다. <<covered>> "<<phim_ iya>>." <<person1>><<person_ i>> 말한다. "그 변태."
+			<br><br>
+
+			"이런 <<girlPost "에게">>는 우리가 원하는 건 뭐든지 할 수 있어." <<person2>><<person_ ga>> 말한다. "아무도 <<phim_ ul>> 믿지 않을거야." 그들은 속도를 높인다.
+			<br><br>
+
+			<<link [[싸운다|Park Run Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
+			<br>
+			<<link [[도망간다|Park Run Escape]]>><</link>><<athleticsdifficulty 1 1000>>
+			<br>
+
+		<<elseif $rng gte 41>>
+			떠돌이 개가 당신을 한동안 쫓아다닌다.
+			<<gstress>><<stress 3>>
+			<br><br>
+
+			<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<<elseif $rng gte 21>>
+			당신은 경찰 복장을 한 <<generatePolice 1>><<person1>><<person_ i>> 덤불 반대편에서 행인과 대화하는 것을 우연히 듣는다. "맞아요," <<he_ ga>> 말한다. "이 정도 키의 <<girlPost>>입니다. 공원에서 음란 행위를 했어요. 정말 아무것도 못 보셨나요?"
+			<<if $earSlime.growth gte 200 - ($earSlime.promiscuity * 10)>>
+				<<generate2>>
+				<br><br>
+				<span class="lewd">머릿속의 슬라임이 당신이 모습을 드러내 그들에게 강간을 요청하라고 명령하는 것을 느낀다.</span> <span class="red">슬라임은 당신의 복종을 기대한다.</span>
+				<br><br>
+
+				<<link [[복종한다|Park Run Exposed Slime Obey]]>><<set $phase to 4>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+				<br>
+				<<link [[반항한다|Park Run Exposed Slime Defy]]>><<set $phase to 4>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+				<br>
+			<<else>>
+				당신은 반대 방향으로 달린다.<<gstress>><<stress 3>>
+				<br><br>
+				<<endevent>>
+				<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			공원은 한가한 시간임에도 불구하고 붐빈다. 당신은 덤불에 몸을 숨기려고 몸을 낮게 웅크린다.
+			<<garousal>><<arousal 600>>
+			<br><br>
+
+			<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "eventParkStreak1">>
+	<<generate1>><<generate2>>
+	"멈춰!"
+	<br><br>
+	뒤돌아보니 경찰관 두 명이 당신을 쫓아오고 있다. 심장이 두근거린다.
+	<br><br>
+	<<link [[도망간다|Park Streak Police Run]]>><</link>><<athleticsdifficulty 1 1000>><<crimes "resisting" "exposure">>
+	<br>
+	<<link [[멈춘다|Park Streak Police Catch]]>><<set $phase to 1>><<pass 2>><</link>>
+	<br>
+	<<link [[싸운다|Park Streak Police Fight]]>><<set $fightstart to 1>><</link>>
+<</widget>>
+
+<<widget "eventParkStreak2">>
+	<<generate1>><<generate2>>
+	길을 달리고 있는데 <<person1>><<person_ gwa>> <<person2>><<person_ i>> 앞에 있는 길로 걸어나오는 것을 보았다. 그들은 악의적인 표정을 짓고 있다.
+	<br><br>
+	"뭐, 이런 애는 과시하는 걸 좋아하지," <<person1>><<person_ i>> 말한다.
+	<br>
+	"우리 재밌게 놀 수 있을 것 같은데." <<person2>><<person_ i>> 중얼거린다.
+	<br><br>
+	<<link [[다음|Park Streak Rape]]>><<set $molestationstart to 1>><</link>>
+<</widget>>
+
+<<widget "eventParkStreak3">>
+	<<npc Whitney>><<person1>>
+	분수대 옆을 지나가다가 나무 아래에서 담배를 피우고 있는 휘트니를 발견한다. <<He_ nun>> 아직 당신을 보지 못했다.
+	<br><br>
+	<<run wikifier("nnpc_himPost", "Whitney", "을", "sep")>>
+	<<link [[_trResult + _trPost +" 피한다"|Park Streak Whitney]]>><<pass 2>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[_trResult + "에게 달려간다"|Park Streak Whitney]]>><<pass 2>><<set $phase to 1>><</link>>
+<</widget>>
+
+<<widget "eventParkStreak4">>
+	<<npc Robin>><<person1>>
+	굽이를 돌자 가판대에서 핫초코를 팔고 있는 로빈이 보인다. <<he_ nun>> 손님 몇 명을 상대하느라 아직 당신을 알아채지 못했다. 당신이 지금 이 상태로 지나가면 <<he_ ga>> 반가워할지 궁금하다.
+	<br><br>
+	<<run wikifier("nnpc_himPost", "Robin", "을", "sep")>>
+	<<link [[_trResult + _trPost +" 피한다"|Park Streak Robin]]>><<pass 2>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[_trResult + "에게 달려간다"|Park Streak Robin]]>><<pass 2>><<set $phase to 1>><</link>>
+<</widget>>
+
+<<widget "eventParkStreak5">>
+	<<npc Kylar>><<person1>>
+	길을 달려 내려가던 중, 나무 아래에서 무언가에 몸을 구부린 채 앉아 있는 누군가를 발견했다. 당신은 스케치북에 무언가 그리고 있는 카일라를 발견한다. <<He_ nun>> 아직 당신을 보지 못하고, 그리는 것에 집중하고 있다. 원한다면 <<him_ rul>> 피할 수 있다.
+	<br><br>
+	<<run wikifier("nnpc_himPost", "Kylar", "을", "sep")>>
+	<<link [[_trResult + _trPost +" 피한다"|Park Streak Kylar]]>><<pass 2>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[_trResult + "에게 달려간다"|Park Streak Kylar]]>><<pass 2>><<set $phase to 1>><</link>>
+<</widget>>
+
+<<widget "eventParkStreakEnd">>
+	<<if $bus is "parkmens">>
+		<<link [[다음|Men's Toilets]]>><<endevent>><<set $eventskip to 1>><<pass 5>><</link>>
+	<<else>>
+		<<link [[다음|Women's Toilets]]>><<endevent>><<set $eventskip to 1>><<pass 5>><</link>>
+	<</if>>
+<</widget>>
+
+:: Widgets Events Toilets [widget]
+<<widget "eventstoilets">>
+	<<generate1>><<person1>>당신이 화장실에 들어가자, 뒤에서 외치는 목소리가 들린다. "거기 들어가는 거 다 봤어, 변태야!" 한 <<person_ i>> 눈을 부릅뜨고 달려든다. "대가를 톡톡히 치르게 해주겠어!"
+	<br><br>
+
+	<<link [[다음|Toilets Molestation]]>><<set $molestationstart to 1>><</link>>
+
+	<<if $player.gender_appearance isnot $player.gender>><<set $toiletsmistake to 1>><</if>>
+<</widget>>
+
+<<widget "eventstoiletssafe">>
+	<<if Weather.precipitation is "rain">>
+		비가 작은 창문을 두드리는 소리가 들린다.
+		<br><br>
+	<<else>>
+		바람이 작은 창문을 덜컹거리게 한다.
+		<br><br>
+	<</if>>
+
+	<<if $bus is "parkmens">>
+		<<link [[다음|Men's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Women's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>

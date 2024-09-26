@@ -1,0 +1,735 @@
+:: Chalets Work End
+<<effects>>
+<<endevent>>
+당신은 모래투성이인 산책로를 지나 섬으로 해안으로 이어지는 모래밭으로 간다. 
+<<if Time.dayState isnot "night" and (Time.weekDay is 1 or Time.weekDay is 7)>>
+    <<if $exposed gte 1>>
+        <<covered>>
+        <<if random(1, 2) is 2>>
+            먼 거리에서 사람을 태운 말들이 질주하고 있고, 그 뒤를 차가 쫒아간다. 영화를 찍고 있는게 분명하다.
+            <br><br>
+            당신이 반쯤 지나가고 있을 때, <span class="pink">말들이 당신 쪽으로 방향을 튼다.</span> 말들은 점점 속도를 높이며 가까워진다. 여긴 숨을 곳도 없다.
+            <br><br>
+
+            <<link [[도망친다|Chalets Work End Run]]>><</link>>
+            <br>
+            <<link [[모래 속에 파고든다|Chalets Work End Bury]]>><</link>>
+            <br>
+        <<else>>
+            먼 거리에서 사람을 태운 말들이 질주하고 있고, 그 뒤를 차가 쫒아간다. <<covered>> 다행히도, 그들은 충분한 거리를 유지한다.
+            <br><br>
+
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+                당신은 반대편 해안에 도착한다.
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <</if>>
+    <<else>>
+        <<if random(1, 2) is 2>>
+            먼 거리에서 사람을 태운 말들이 질주하고 있고, 그 뒤를 차가 쫒아간다. 영화를 찍고 있는게 분명하다.
+            <br><br>
+
+            당신이 반쯤 지나가고 있을 때, <span class="purple">말들이 당신 쪽으로 방향을 튼다.</span> 말들은 점점 속도를 높이며 가까워진다. 여긴 숨을 곳도 없다.
+            <br><br>
+
+            <<link [[도망친다|Chalets Work End Clothed Run]]>><</link>>
+            <br>
+            <<link [[바닥에 엎드린다|Chalets Work End Drop]]>><<stress 6>><</link>><<gstress>>
+            <br>
+        <<else>>
+            먼 거리에서 사람을 태운 말들이 질주하고 있고, 그 뒤를 차가 쫒아간다. <<covered>> 다행히도, 그들은 당신이 맞은편 해안에 도착할때까지 충분한 거리를 유지한다.
+            <br><br>
+
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+                당신은 반대편 해안에 도착한다.
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <</if>>
+    <</if>>
+<<else>>
+    <<if $exposed gte 1>>
+        <<covered>>
+        <<if random(1, 2) is 2>>
+            당신은 텅 빈 모래밭을 건너간다. 비록 혼자있고, 근처에 엿보는 시선이 아무도 없지만, 텅 빈 공간에 무방비로 노출된 듯한 기분이 든다.
+            <br><br>
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+                당신은 반대편 해안에 도착한다.
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <<else>>
+            <<generatey1>><<generatey2>><<generatey3>><<person1>>
+            당신은 텅 빈 모래밭을 건너간다. 비록 혼자있고, 근처에 엿보는 시선이 아무도 없지만, 텅 빈 공간에 무방비로 노출된 듯한 기분이 든다.
+            <br><br>
+            멀리있는 해안선에서 사람 세명의 모습이 보인다. <span class="purple">그들은 이쪽으로 걸어오고 있다.</span>
+            <br><br>
+            <<link [[계속 걸어간다|Chalets Work End Group Keep]]>><<stress 12>><</link>><<ggstress>>
+            <br>
+            <<link [[반대 방향으로 걷는다 (0:05)|Chalets Work End Group Walk]]>><<pass 5>><</link>>
+            <br>
+        <</if>>
+    <<else>>
+        <<if random(1, 2) is 2>>
+            당신은 텅 빈 모래밭을 지나간다. 차가운 바람이 얼굴을 스친다.
+            <br><br>
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+                당신은 반대편 해안에 도착한다.
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <<else>>
+            <<if $hallucinations gte 2>>
+                당신은 텅 빈 모래밭을 지나간다. 갈매기들이 머리 위를 둥글게 맴돈다. 당신을 따라오는 것 같다.<<gstress>><<stress 6>>
+                <br><br>
+            <<else>>
+                당신은 텅 빈 모래밭을 지나간다. 갈매기들이 끼륵끼륵 운다.
+                <br><br>
+            <</if>>
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+                당신은 반대편 해안에 도착한다.
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <</if>>
+    <</if>>
+<</if>>
+
+:: Chalets Work End Group Keep
+<<effects>>
+
+가까이 다가가면서 사람 모습이 더 선명하게 보인다. <<personPost>>, <<person2>><<person_ gwa>>, <<person3>><<person_ ida>>. 당신은 그들을 학교에서 봤다는 것을 알아차린다. 그들도 당신을 알아본다.
+<br><br>
+
+<<if random(1, 2) is 2>>
+    그들은 당신을 방해하지 않게 시선을 피하지만, 한명은 지나치면서 킥킥거린다.
+    <br><br>
+    <<chalets_end_link>>
+<<else>>
+    그들은 욕정에 찬 눈빛으로 <span class="pink">당신에게 다가온다.</span>
+    <br><br>
+
+    <<link [[다음|Chalets Work End Group Caught]]>><</link>>
+    <br>
+<</if>>
+
+:: Chalets Work End Group Walk
+<<effects>>
+
+<<if random(1, 5) is 5>>
+    중심을 벗어나 다른 방향으로 걸어간다. 몇 분쯤 뒤를 살짝 돌아본다. <span class="pink">삼인조는 당신을 따라와 거의 따라잡았다.</span> 이제 그들의 모습이 선명하게 보인다. <<personPost>>, <<person2>><<person_ gwa>>, <<person3>><<person_ ida>>. 당신은 그들을 학교에서 봤다는 것을 알아차린다. 그들도 당신을 알아본다.
+    <br><br>
+
+    <<link [[다음|Chalets Work End Group Caught]]>><</link>>
+    <br>
+<<else>>
+    중심을 벗어나 다른 방향으로 걸어간다. 몇 분쯤 뒤를 살짝 돌아본다. 삼인조는 당신을 지나쳐갔다.
+    <br><br>
+    당신은 해안 방향으로 돌아간다.
+    <br><br>
+
+    <<chalets_end_link>>
+<</if>>
+
+:: Chalets Work End Group Caught
+<<effects>>
+
+"<<pshe_ 이>> <<slut_ irago>> 내가 말했지." <<person1>><<person_ 이>> 말한다. 나마지 둘이 당신의 팔을 한쪽씩 붙잡는다. "모두가 알 수 있게 증거를 남겨야해."
+<br><br>
+
+<<He_ 는>> 주머니에서 핸드폰을 꺼내 당신에게 향한다.
+<br><br>
+
+<<link [[저항한다|Chalets Work End Group Struggle]]>><</link>><<physiquedifficulty 1 16000>>
+<br>
+<<link [[대신 몸을 대주겠다고 한다|Chalets Work End Group Offer]]>><</link>>
+<br>
+<<link [[애원한다|Chalets Work End Group Struggle]]>><<sub 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+<br>
+<<if $submissive gte 1500>>
+    <<link [[간절히 빈다|Chalets Work End Group Beg]]>><<sub 1>><</link>><<submissivetext>>
+    <br>
+<</if>>
+
+:: Chalets Work End Group Struggle
+<<effects>>
+
+<<if $physiqueSuccess>>
+    <span class="green">당신은 <<person2>><<person_ 이>> 잡고있던 팔을 빼내서 </span> <<person3>><<person_ 의>> 얼굴을 때린다. 그들은 당신에게서 조금 물러나서, 겁먹은 것을 감추기 위해 웃는다.
+    <br><br>
+    당신은 <<person1>><<persons_ 의>> 손에서 핸드폰을 쳐낸다. 폰은 포물선을 그리며 멀리 날아가, 축축한 모래 사이로 파묻힌다.
+    <br><br>
+    <<person_ un>> 욕을 내뱉으며 황급히 달려간다. 당신은 <<he_ 가>> 옷을 적시지 않고 핸드폰을 찾으려 노력하는 틈을 타 도망친다.
+    <br><br>
+
+    <<chalets_end_link>>
+<<else>>
+    당신은 벗어나려고 애쓰지만, <span class="red">그들은 당신의 팔을 등뒤로 단단히 고정시키고,</span> <<if !playerBellySize(true) gte 8>>
+당신의 배를 가격한다<<else>>당신의 정강이를 걷어찬다<</if>>.<<gpain>><<gstress>><<stress 6>><<pain 4>>
+    <br><br>
+
+    "그 <<slut_ ul>> 똑바로 잡고있어." <<person1>><<person_ 이>> 말한다. <<He_ 는>> 당신의 <<lewdnessPost>> 사진을 찍고 또 찍는다. 한장 찍을 때 마다 한 걸음씩 움직이며 당신을 다양한 각도에서 찍는다.<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+    <br><br>
+
+    그들은 볼일을 마치고는, 얼굴부터 닿도록 모래에 당신을 내팽겨친다. 그들은 핸드폰 주위에 모여 사진을 구경하며 사라진다.
+    <br><br>
+
+    당신은 발을 딛고 일어나, 다시 해안으로 향한다.
+    <br><br>
+    <<fameexhibitionism 20>>
+    <<chalets_end_link>>
+<</if>>
+
+:: Chalets Work End Group Offer
+<<effects>>
+
+<<person1>><<person_ 은>> 당신의 제안을 검토하는 것 같았지만. <<person2>><<person_ 와>> <<person3>><<person_ 은>> 고민하지 않고 당신을 모래밭에 짓누른다.
+<br><br>
+
+<<link [[다음|Chalets Work End Group Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Chalets Work End Group Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Chalets Work End Group Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Chalets Work End Group Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Chalets Work End Group Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+    그들은 당신을 젖은 모래에 남겨두고 떠난다.
+	<br><br>
+	<<tearful>> 당신은 다시 해안으로 향한다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+<<elseif $enemyhealth lte 0>>
+    당신은 <<person1>><<person_ 을>> 젖은 모래 위로 내팽겨친다. <<He_ 는>> <<person2>><<person_ gwa>> 함께 쓰러진다. <<person3>><<person_ 은>> 겁에 질려 뒤로 물러선다.
+	<br><br>
+	그들은 젖은 옷에 대해 불평하며, 성욕은 잊어버린다. <<tearful>> 당신은 다시 해안으로 향한다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+<</if>>
+
+<<chalets_end_link>>
+
+:: Chalets Work End Group Plead
+<<effects>>
+
+그들은 당신의 애원을 무시한다. <<He_ 는>> 당신의 <<lewdnessPost>> 사진을 찍고 또 찍는다. 한장 찍을 때 마다 한 걸음씩 움직이며 당신을 다양한 각도에서 찍는다.<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+<br><br>
+
+그들은 볼일을 마치고는, 얼굴부터 닿도록 모래에 당신을 내팽겨친다. 그들은 핸드폰 주위에 모여 사진을 구경하며 사라진다.
+<br><br>
+
+당신은 발을 딛고 일어나, 다시 해안으로 향한다.
+<br><br>
+<<fameexhibitionism 20>>
+<<chalets_end_link>>
+
+:: Chalets Work End Group Beg
+<<effects>>
+
+"제발요." 당신은 단어 하나하나에 비통함이 담기도록 흐느끼며 애원한다. "남들에게 보이지 말아주세요!"
+<br><br>
+
+<<person1>><<person_ 은>> 망설인다. <<person2>><<person_ 이>> 팔을 풀어주자, 이어서 <<person3>><<person_ 도>> 팔을 풀어준다. <<covered>> 당신은 뒤돌아 사라진다. 그들은 쫒아오지 않는다.
+<br><br>
+
+당신은 해안으로 돌아간다.
+<br><br>
+
+<<chalets_end_link>>
+
+
+:: Chalets Work End Run
+<<effects>>
+
+당신은 도망치기 시작한다. 당신이 어떤 모습을 하고 있는지 보일만큼 가까이 오기 전에 해안에 도착할 가능성은 전혀 없지만, 촬영에 집중하면 눈치채지 못할지도 모른다.
+<br><br>
+<<generate1>><<person1>><<generate2>>
+우레와 같은 말발굽 소리가 빠르게 다가온다. 말들은 모래와 물을 튀기며 당신의 발자국을 지나쳐온다. 뒤로 자동차가 따라오고, <<person_ 이>> 카메라를 어깨에 걸치고 창밖으로 몸을 기울이고 있다.
+<<if random(1, 2) is 2>>
+    <span class="green">그들은 당신을 눈치채지 못한 것 같다.</span>
+    <br><br>
+    당신은 계속 나아가, 곧 마을에 도착한다.
+    <br><br>
+
+    <<chalets_end_link>>
+<<else>>
+    <span class="red"><<He_ 가>> 당신과 마주친다.</span>
+    <br><br>
+    "컷!" <<person2>><<personsimple_ 의>> 우렁찬 목소리가 들린다. 자동차가 방향을 바꿔 당신 쪽을 향한다. 카메라는 계속해서 당신을 비추고 있다. <<person_ 이>> 반대쪽 창에서 확성기를 손에 든채로 나온다.
+    <br><br>
+    말에 탄 사람들도 방향을 틀더니, 금방 차를 추월해 당신 주변을 둘러싼다. 차는 천천히 뒤따라온다.
+    <br><br>
+    "여기서 해변 <<slut_ ul>> 만날줄은 몰랐는데" <<person_ 이>> 말한다. "이리 돌아서서 카메라에 뭐 좀 보여주는게 어때? 해안까지 태워다 줄게."
+    <br><br>
+
+    <<if hasSexStat("exhibitionism", 5)>>
+        <<link [[과시한다|Chalets Work End Run Show]]>><<fameexhibitionism 30>><</link>>
+        <br>
+    <</if>>
+    <<link [[몸을 가린채 계속 도망친다|Chalets Work End Run Cover]]>><<fameexhibitionism 30>><</link>>
+    <br>
+<</if>>
+
+:: Chalets Work End Run Show
+<<effects>>
+
+당신은 팔을 벌리고 카메라를 향해 돌아서 당신의 모든 것을 보여준다. 말을 탄 사람들은 당신 주변을 둥글게 맴돈다. 당신이 자동차를 향해 뽐내며 걷는 모습을 카메라가 빠짐없이 잡는다.
+<<exhibitionism5>>
+
+당신은 자동차 문을 열고, 마치 택시라도 되는 것처럼 자연스럽게 올라탄다.
+<br><br>
+
+도착까지는 그리 오래 걸리지 않았지만, 이동하는 내내 <<person1>><<person_ 와>> <<person2>><<person_ 은>> 당신을 음흉한 시선으로 바라본다. 당신이 떠나가는 동안 당신의 <<bottom_ 에>> 그들의 시선이 향하는 것을 느낄 수 있다.
+<br><br>
+
+<<chalets_end_link>>
+
+:: Chalets Work End Run Cover
+<<effects>>
+
+<<covered>> 말에 탄 사람들은 당신 주변을 둥글게 맴돌며, 모든 각도에서 음흉하게 바라본다. 차가 뒤따라오는 소리가 들리고, 카메라가 당신의 <<bottom_ 을>> 향하고 있는 게 느껴진다. 적어도 그들이 일종의 보호막이 되어주긴 한다.
+<br><br>
+
+그들은 당신이 해안에 도착하자 떠나간다. 주변에는 아무도 없다. 당신은 모래밭을 서둘러 벗어난다.
+<br><br>
+
+<<chalets_end_link>>
+
+:: Chalets Work End Bury
+<<effects>>
+
+당신은 손으로 모래를 파내 작은 구덩이를 만든다. 몸을 안으로 숨기고 파낸 모래를 도로 몸위에 덮는다. 깊지는 않지만, 적어도 목에서 발끝까지 모래로 덮여있고 더 이상 시간이 없다.
+<br><br>
+
+<<generate1>><<generate2>><<person2>>
+우레와 같은 말발굽 소리가 빠르게 다가오고, 그 뒤로 자동차가 따라온다. 거의 당신을 밟을 것 같은 순간 선두마가 앞발을 들어올리며 멈춘다. 나머지 말은 속도를 늦추고 차가 앞질러 지나간다.
+<br><br>
+"컷!" <<person_ 이>> 소리치며, 확성기를 들고 창밖으로 몸을 기울인다. "대체 무슨-" <<he_ 는>> 당신을 본 순간 침묵한다. "여기서 뭐하는거니 <<girl_ a>>? 촬영에 방해되니까 어서 일어나."
+<br><br>
+
+<<person2>><<person_ 이>> 창밖으로 몸을 기울이고, 어깨에 매고있는 카메라를 당신에게 향한다. 그들은 당신이 모래 밑에 벗은 몸을 숨기고 있다는 것을 모르고 있다.
+<br><br>
+
+<<link [[일어난다|Chalets Work End Stand]]>><</link>>
+<br>
+<<link [[거절한다|Chalets Work End Refuse]]>><</link>>
+<br>
+
+:: Chalets Work End Stand
+<<effects>>
+
+당신은 발을 딛고 일어난다. 모래가 당신의 몸에서 떨어지며 숨겨진 <<lewdness_ 가>> 드러난다. <<person_ 은>> 상황을 깨닫기까지 시간이 좀 걸렸다.
+<br><br>
+
+"카메라 아직 켜져있지?" <<he_ 가>> 묻는다. <<covered>> 말에 타있던 사람들도 눈치챈다. 몇몇은 늑대 울음소리를 낸다. "부끄러워 할거 없단다 <<girl_ a>>."
+<br><br>
+
+<<if hasSexStat("exhibitionism", 5)>>
+    <<link [[과시한다|Chalets Work End Run Show]]>><<fameexhibitionism 30>><</link>>
+    <br>
+<</if>>
+<<link [[몸을 가리고 도망친다|Chalets Work End Run Cover]]>><<fameexhibitionism 30>><</link>>
+<br>
+
+:: Chalets Work End Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+    "하지만 저는 조금 시간이 필요할거 같은데요." 당신이 말한다.
+<<elseif $speech_attitude is "bratty">>
+    "난 여기가 좋은데요." 당신이 말한다. "그쪽이 전세낸거도 아니잖아요."
+<<else>>
+    "옆으로 좀 돌아서 가주세요." 당신은 말한다.
+<</if>>
+<br><br>
+
+<<if random(1, 2) is 2>>
+    <<person2>><<person_ 이>> 막 논쟁하려고 하지만, 말에 탄 사람이 방향을 튼다. "그럼 위에서 하지." <<he_ 가>> 한숨쉰다.
+    <br><br>
+
+    당신은 그들이 충분히 멀어지기를 기다렸다가 모래에서 빠져나온다. 당신은 다시 해안으로 향한다.
+    <br><br>
+
+    <<chalets_end_link>>
+<<else>>
+    "마주치는 멍청이 하나하나마다 촬영을 멈출 순 없어." <<person2>><<person_ 이>> 차에서 내리면서 말한다. "닥치고 일어나."
+    <br><br>
+
+    <<He_ 는>> 당신의 발목을 잡고 끄집어낸다. 몸에서 모래가 떨어져나가며 <span class="pink">숨겨진 <<lewdness_ 가>> 드러난다.</span> 말 기수들이 환호하는 소리를 낸다.
+    <br><br>
+
+    <<persons_ 이>> 갑자기 악마같은 미소를 짓는다.
+
+    <<if $horsedisable is "f">>
+        <<He_ 가>> 카메라를 들고 있는 <<person1>><<person_ gwa>>, 기수 한 사람에게 손짓한다. 첫번째 사람이 렌즈를 가까이 당겨오고, 두번째 사람은 말에서 내린다.
+        <<endevent>>
+        <<beastNEWinit 1 horse>>
+        <br><br>
+
+        당신은 <<beasttype_ 로부터>> 황급히 도망치려 한다.
+
+        <<link [[다음|Chalets Work End Horse]]>><<set $molestationstart to 1>><</link>>
+        <br>
+    <<else>>
+        "즉흥 강간씬이 나올 차례군," <<he_ 은>> 말하며, 카메라를 들고 있는 <<person1>><<personPost>>에게 손짓한다. 그들은 곧바로 덮쳐온다.
+        <br><br>
+
+        <<link [[다음|Chalets Work End Pair]]>><<set $molestationstart to 1>><</link>>
+        <br>
+    <</if>>
+<</if>>
+
+:: Chalets Work End Horse
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+    <<beastCombatInit>><<set _n to $active_enemy>>
+    <<if $pronoun is "m">>
+        <<set $NPCList[_n].stance to "top">><<set $position to "doggy">><<set $position_lock to 1>>
+    <<else>>
+        <<set $NPCList[_n].stance to "top">><<set $position to "missionary">><<set $position_lock to 1>>
+    <</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Chalets Work End Horse Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Chalets Work End Horse]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Chalets Work End Horse Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+    <<famebestiality 25>>
+	<<beasttype_ 이>> 빠르게 물러나자, 기수들이 환호한다. "잘 찍혔나?" 감독이 화상을 확인하러 카메라로 성급히 달려오며 묻는다.
+	<br><br>
+
+	<<tearful>> 당신은 비틀거리며 그곳을 빠져나간다. 그들은 촬영결과에 만족하는 것 같다.
+	<br><br>
+
+    당신은 해안으로 돌아간다.
+    <br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<chalets_end_link>>
+<<else>>
+
+	<<beasttype_ 이>> 앞발을 들어올리더니, 방향을 틀어 달아나며 다른 말들을 놀래킨다. 감독은 질서를 되찾으려 노력하지만, 겁에 질린 말들은 우르르 도망친다.
+	<br><br>
+
+	<<tearful>> 당신은 비틀거리며 그곳을 빠져나간다. 그들은 당신을 붙잡을 겨를이 없다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<chalets_end_link>>
+<</if>>
+
+:: Chalets Work End Pair
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Chalets Work End Pair Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Chalets Work End Pair]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Chalets Work End Pair Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+    <<famerape 25>>
+	<<ejaculation>>
+    그들은 발을 이용해 당신을 모래로 대충 덮어두고 떠난다.
+	<br><br>
+    <<tearful>> 당신은 발을 딛고 일어나, 다시 해안으로 향한다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+	당신은 발로 <<person1>><<persons_ 의>> 눈에 모래를 튀긴다. <<He_ 이>> 비틀거리며 물러서다, 카메라를 모래에 떨어뜨린다.
+	<br><br>
+    "조심해!" <<person2>><<person_ 이>> 소리친다. "그 장비가 너보다 비싼거야."
+    <br><br>
+	<<tearful>> 당신은 둘이 다투는 사이에 도망친다. 기수들은 어리둥절해서 당신을 가로막지 않는다.
+	<br><br>
+    당신은 해안으로 되돌아온다.
+    <br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<chalets_end_link>>
+
+:: Chalets Work End Clothed Run
+<<effects>>
+
+당신은 도망치기 시작하지만, 그리 멀리가지 못하고 무리와 마주친다.
+<<generate1>><<generate2>><<generate3>><<person1>>
+말 기수 중 <<person_ 이>> 안장에서 몸을 기울여
+<<if $physiquesize gte 13000>>
+    당신을 한 팔로 들어올리려 한다. <span class="green">하지만 당신의 체격이 충분해서,</span> 반대로 <<him_ 이>> 모래로 내동댕이쳐진다.<<large_text>>
+    <br><br>
+
+    "컷!" <<person2>><<person_ 이>> 차창 밖으로 몸을 내민채 소리친다. "시간은 금이야. 빨리 일어나!"
+    <br><br>
+
+    <<He_ 은>> 당신을 스쳐보면서 <<person3>><<person_ 을>> 타박한다. 당신은 황급히 해안으로 향한다.
+    <br><br>
+
+    <<chalets_end_link>>
+<<else>>
+    <span class="red">당신을 한 팔로 들어 올린다.</span> 당신은 <<he_ 의>> 어깨에 기대어진 채로 위아래로 흔들거린다.<<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+    <br><br>
+    자동차가 당신 옆으로 다가와 속도를 맞춘다. <<person3>><<person_ 이>> 창밖으로 몸을 기울여 당신에게 카메라를 향한다.
+    <br><br>
+    "멋진 장면이야." <<person2>><<person_ 이>> 말한다. <<He_ 는>> 당신을 훑어본다. "그 자세를 유지해. <span class="red">엉덩이를 조금만 더 흔들면 좋겠는데.</span>"
+    <br><br>
+
+    <<link [[화를 낸다|Chalets Work End Angry]]>><</link>>
+    <br>
+    <<link [[엉덩이를 흔든다|Chalets Work End Wiggle]]>><</link>>
+    <br>
+<</if>>
+
+:: Chalets Work End Angry
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+    "무-무서워요," 당신은 말한다. "제-제발 저 좀 내려주세요."
+<<elseif $speech_attitude is "bratty">>
+    "당장 내려놓지 못해!" 당신은 말한다.
+<<else>>
+    "좀 내려주세요." 당신은 말한다.
+<</if>>
+<br><br>
+
+"노력해봐 그럼." <<person2>><<person_ 이>> 말한다. "그렇게 해 줄게!"
+<br><br>
+
+당신이 <<person1>><<persons_ 의>> 손아귀에서 조금 빠져나오자, <<he_ 는>> 말의 속도를 줄여 당신을 모래밭에 내려놓는다. 그들은 당신을 남겨두고 떠나고, 당신은 걸어서 해안으로 간다.
+<br><br>
+
+<<chalets_end_link>>
+
+:: Chalets Work End Wiggle
+<<effects>>
+
+당신은 <<bottom_ 을>> 과장되게 흔든다. <<person1>><<person_ 이>> 당신의 엉덩이를 때린다.
+<br><br>
+
+"방금 거 찍었어?" <<person2>><<person_ 이>> 자리를 옮겨 카메라 화면을 살펴보며 묻는다. <<person1>><<person_ 은>> 말의 속도를 줄여 당신을 모래밭에 내려놓는다.
+<br><br>
+
+그들은 당신을 남겨두고 떠난다. 당신은 걸어서 해안으로 간다.
+<br><br>
+
+<<chalets_end_link>>
+
+:: Chalets Work End Drop
+<<effects>>
+
+당신은 모래밭에 엎드린다. 말들이 굉음을 내며 지나가고, 당신은 튀기는 모래 때문에 얼굴을 가린다. 말들이 지나가자 당신은 모래속에 반쯤 파묻혀 있다. 그들은 당신을 눈치채지 못한 것 같다.
+<br><br>
+
+당신은 일어서서, 몸에서 모래를 털어내고, 해안으로 다시 걸어간다.
+<br><br>
+
+<<chalets_end_link>>
+
+:: Chalets Work End 2
+<<location "town">><<effects>>
+
+<<if $chalets_bags gte 1>>
+    <<if $exposed gte 1>>
+        당신은 사무소에 돌아온다. <<covered>> 당신은 <<if $chalets_bags is 1>>가득 찬 쓰레기 봉지 하나를<<else>>가득 찬 쓰레기 봉지들을<</if>> 갖고 있지만, 보수를 받으려면 지금 모습으로 매니저를 만나야 한다. 어쩌면 안에서 뭔가 가릴만한 물건을 찾을지도 모른다.
+        <br><br>
+
+       <<getinicon>> <<link [[들어간다|Chalets Work End Succeed Ask]]>><<stress 12>><</link>><<ggstress>>
+        <br>
+        <<starfishicon>><<link [[쓰레기를 방치하고 떠난다|Starfish Street]]>><<chalets_end>><</link>>
+        <br>
+    <<else>>
+        <<loadNPC 0 "chalets_manager">><<person1>>
+        당신은 사무소로 들어간다. <<person_ 은>> 책상에서 당신을 올려다본다. "잘 끝냈나? 훌륭해. 여기 보수 받아가."
+        <br><br>
+
+        <<if Time.weekDay is 1 or Time.weekDay is 7>>
+            당신은 <<moneyGain `$chalets_bags * 15`>>를 벌었다.
+        <<else>>
+            당신은 <<moneyGain `$chalets_bags * 10`>>를 벌었다.
+        <</if>>
+        <br><br>
+        <<starfishicon>><<link [[떠난다|Starfish Street]]>><<chalets_end>><<endevent>><<set $eventskip to 1>><</link>>
+        <br>
+    <</if>>
+<<else>>
+    <<if $exposed gte 1>>
+        당신은 사무소에 돌아온다. <<covered>> 별장청소를 끝내지 못했기에 보수를 받을 수 없다. 하지만 매니저에게 뭔가 가릴만한 물건을 받을 수 있을지도 모른다.
+        <br><br>
+
+        <<ind>><<link [[가릴 물건을 부탁한다|Chalets Work End Failed Ask]]>><<stress 12>><</link>><<ggstress>>
+        <br>
+       <<starfishicon>> <<link [[떠난다|Starfish Street]]>><<chalets_end>><</link>>
+        <br>
+    <<else>>
+        당신은 사무소에 돌아왔지만, 별장청소를 끝내지 못했기에 받을 보수를 받을 수 없다.
+        <br><br>
+
+        <<link [[다음|Starfish Street]]>><<chalets_end>><</link>>
+        <br>
+    <</if>>
+<</if>>
+
+:: Chalets Work End Succeed Ask
+<<effects>><<loadNPC 0 "chalets_manager">><<person1>>
+
+당신은 사무소로 들어간다. <<person1>><<person_ 이>> 책상에서 올려다본다. "일은 잘-" <<he_ 이>> 당신의 상태를 알아차리고는 고개를 돌린다. "뒤쪽으로 가면 타월이 좀 있어. 맘대로 써. 고쳐입고 오면 보수를 줄게."
+<br><br>
+
+<<towelup>>
+당신은 뒤로 가서 제공받은 타월을 몸에 두르고, 보수를 받으러 돌아온다.
+<br><br>
+
+<<if Time.weekDay is 1 or Time.weekDay is 7>>
+    당신은 <<moneyGain 15>>를 벌었다.
+<<else>>
+    당신은 <<moneyGain 10>>를 벌었다.
+<</if>>
+<br><br>
+
+<<link [[다음|Starfish Street]]>><<chalets_end>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Chalets Work End Failed Ask
+<<effects>>
+
+<<loadNPC 0 "chalets_manager">><<person1>>
+당신은 사무소로 들어간다. <<person_ 은>> 당신을 힐끗 보더니 당신의 상태를 알아차린다. "금방 돌아왔네." <<he_ 가>> 말한다. "왠지는 알거같군." <<He_ 는>> 고개를 피한다. "뒤쪽으로 가면 타월이 좀 있어."
+<br><br>
+
+<<towelup>>
+당신은 뒤로 가서 제공받은 타월을 몸에 두른다.
+<br><br>
+
+<<link [[다음|Starfish Street]]>><<chalets_end>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Chalets Work End Slow
+<<effects>>
+
+당신은 한발 한발 내딛기 전에 땅을 조심스럽게 확인하며 나아간다. 해안에 가까워지자 모래가 점점 단단해지고 깨진 도로조각들이 보이기 시작한다.<<housekeeping 1 100>>
+<br><br>
+
+<<chalets_end_link>>
+
+:: Chalets Work End Fast
+<<effects>>
+
+당신은 속도를 유지한채, 최대한 균형을 잡으며 모래밭을 빠져나간다.
+<br><br>
+<<if $housekeepingSuccess>>
+    <span class="green">당신은 굳건하고 확실하게 발을 내딛는다.</span> 해안에 가까워지자 모래가 점점 단단해지고 깨진 도로조각들이 보이기 시작한다.<<housekeeping 1 200>>
+    <br><br>
+<<else>>
+    <span class="red">당신은 고르지 못한 땅을 밟고 휘청거리며,</span> 적어도 바닥에 얼굴을 처박지 않으려고 노력한다. 그 노력은 성공했지만, 대신 <<bottom_ 으로>> 넘어진다.<<gstress>><<housekeeping 1 200>>
+    <br><br>
+    당신은 일어서서 다시 걸어간다. 해안에 가까워지자 모래가 점점 단단해지고 깨진 도로조각들이 보이기 시작한다.
+    <br><br>
+<</if>>
+
+<<chalets_end_link>>
+
+:: Chalets Work End Fast Wet
+<<effects>>
+
+당신은 속도를 유지한채, 최대한 균형을 잡으며 젖은 모래밭을 빠져나간다.
+<br><br>
+
+<<if $housekeepingSuccess>>
+    <span class="green">당신은 굳건하고 확실하게 발을 내딛는다.</span> 해안에 가까워지자 모래가 점점 단단해지고 깨진 도로조각들이 보이기 시작한다.<<housekeeping 1 300>>
+    <br><br>
+<<else>>
+    지나가는 도중 내딛은 발이 갑자기 더 깊이 빠져드는 바람에, 발을 미처 들어올리지 못하고 그만 <span class="red">균형을 잃고 넘어진다.</span>.
+    <br><br>
+    <<wet_all>>
+    당신은 얼굴부터 모래바닥에 처박힌다. 다시 일어서자, 당신이 바닥에 찍은 모래구덩이에 물이 고이며 작은 웅덩이를 만든다.
+    <br><br>
+    당신은 해안으로 다시 걸어간다. 해안에 가까워지자 모래가 점점 단단해지고 깨진 도로조각들이 보이기 시작한다.
+    <br><br>
+<</if>>
+
+<<chalets_end_link>>

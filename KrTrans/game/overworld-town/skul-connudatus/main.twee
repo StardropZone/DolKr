@@ -1,0 +1,539 @@
+:: Connudatus Street Thievery
+
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "high">>
+당신은 군중을 훑어본다.
+<<if Time.dayState is "night">>
+	이 시간엔 많은 사람들이 술에 취해 있다. 어렵지 않을 것이다.
+<</if>>
+<<if $rng gte 80>>
+	<<if Time.dayState is "night">>
+		<<generate1>><<person1>> <<person_ i>> 비틀대다가 당신 앞에서 땅에 쓰러진다. "나눈 너어어무 서툴러," <<he_ nun>> 일어서려고 애쓰다가, 실패하며 중얼거린다.
+		<<if $pronoun is "m">>
+			<<he_ nun>> 어딘가에서 <<his_ yi>> 셔츠를 잃어버린 것 같지만, <<he_ nun>> 신경도 쓰지 않고 심지어 깨닫지도 못하는 것 같다.
+		<<else>>
+			<<he_ ga>> 몸을 앞으로 기울이자, <<his_ yi>> 깊게 파인 드레스가 헐렁하게 늘어져, <<his_ yi>> 천박한 젖가슴을 당신에게 드러낸다. <<He_ nun>> 신경도 쓰지 않고 심지어 깨닫지도 못하는 것 같다.
+		<</if>>
+		<br><br>
+		<<link [[훔친다|Connudatus Drunkard Rob]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+		<br>
+		<<link [[그냥 도와준다|Connudatus Drunkard]]>><</link>>
+		<br>
+	<<else>>
+		<<generate1>><<person1>> <<person_ i>> 진열대 앞에 기대어, 진열대를 살펴보고 있다. <<His_ yi>> <<wallet_ un>> <<him_ yi>> 뒤에 있는 얇은 끈에 걸려 있다.
+		<br><br>
+		<<link [[낚아챈다|Connudatus Snatch]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+		<br>
+		<<link [[내버려둔다|Connudatus Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 60>>
+	<<generate1>><<generate2>><<fullGroup_ i>> 식당 밖에 앉아 있다. <<person1>><<persons_ yi>> <<wallet_ un>> <<his_ yi>> 다리 옆에 있는 가방 위에 놓여 있다.
+	<br><br>
+	<<link [[가져간다|Connudatus Thievery Restaurant]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[내버려둔다|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<<elseif $rng gte 45>>
+	<<generate1>><<person1>>당신은 사진을 찍는 관광객을 발견한다. <<He_ nun>> 낭비할만한 돈이 있을 것이다.
+	<br><br>
+	<<link [[카메라를 훔친다|Connudatus Camera]]>><</link>>
+	<br>
+	<<link [[떠난다|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<<elseif $rng gte 20>>
+	차 한 대가 가게 앞에 멈춰 선다. <<generate1>><<person1>><<person_ i>> <<his_ yi>> 차 문을 열어둔 채 밖으로 나와, 건물 안으로 들어간다. 그리고 <<his_ yi>> <<wallet_ un>> 좌석 위에 있다.
+	<br><br>
+	<<link [[가져간다|Connudatus Car]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[내버려둔다|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<generate1>><<person1>><<person_ i>> 벤치에 앉아 있고, <<wallet_ un>> 그 옆에 놓여있다.
+	<br><br>
+	<<link [[가져간다|Connudatus Street Bench]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[내버려둔다|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Connudatus Drunkard
+
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "high">>
+<<famegood 1>>
+당신은 <<personPost>>에게 손을 내밀고 <<him_ i>> 일어설 수 있도록 도와준다. <<He_ ga>> 안정되기 까지 약간 시간이 걸린다. 멀리서 한 무리의 사람들이 <<himPost>>에게 손을 흔들었고, <<he_ nun>> 똑같이 손을 흔들었다. <<he_ nun>> 비틀거리며 <<his_ yi>> 친구들에게 가기 전에 "친절한 천사에게 감사해야겠네," 라고 말한다.
+<br><br>
+<<endevent>>
+<<link [[다음|Connudatus Street]]>><</link>>
+<br>
+
+:: Connudatus Drunkard Rob
+
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "high">>
+당신은 몸을 숙이고, 한 손으로 <<his_ yi>> 팔을 잡고, 다른 한 손으로 <<his_ yi>> <<wallet_ ul>> 가져간다. 당신이 <<him_ ul>> <<his_ yi>> 발로 일어서도록 세우자 <<he_ nun>> 당신에게 기댄다.
+<br><br>
+<<if $skulduggery lte 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">이렇게 쉬운 목표물로부터 더 이상 배울 수 있는 것은 없다.</span>
+<</if>>
+"네가 날 만진 걸 느꼈어," <<he_ ga>> 말한다. "네가 뭘 원하는지 알아." <<He_ nun>> 손을 뻗어 당신의 <<groin_ ul>> 더듬는다.
+<br><br>
+<<if hasSexStat("promiscuity", 4)>>
+	<<link [[이점을 활용한다|Connudatus Drunkard Sex]]>><<set $sexstart to 1>><</link>><<promiscuous4>>
+	<br>
+<</if>>
+<<link [[밀쳐낸다|Connudatus Drunkard Push]]>><</link>>
+<br>
+
+:: Connudatus Drunkard Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<promiscuity4>>
+	<<enable_rescue>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Connudatus Drunkard Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Connudatus Drunkard Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Connudatus Drunkard Push
+
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "high">>
+당신은 <<person_ ul>> 당신에게서 밀쳐낸다.
+<<if $rng gte 71>>
+	"머엉청이," <<he_ ga>> 비웃는다. "가만히 있는 착한 <<girl_ i>> 되어야지."
+	<br><br>
+	<<link [[다음|Connudatus Drunkard Sex]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<He_ nun>> 또 넘어질 뻔 한다. "어이," 한 목소리가 외친다, "그 불쌍한 <<girl_ un>> 내버려두고 이리 와." <<person_ un>> 웃으면서 고개를 돌리고, 손을 흔든다. <<He_ nun>> <<his_ yi>> 친구들에게 돌아간다.
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<</if>>
+
+:: Connudatus Drunkard Sex Finish
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"어이," 한 목소리가 외친다. "그 불쌍한 <<girl_ un>> 내버려 둬." <<person_ un>> 목소리가 들리는 쪽을 바라본다.  당신에 대해서는 잊어버린 듯, <<he_ nun>> 몸을 돌려 <<his_ yi>> 친구들에게로 걸어간다.
+	<br><br>
+	<<clotheson>>
+<<elseif $enemyhealth lte 0>>
+	당신은 <<him_ ul>> 땅바닥에 밀어버린다. <<He_ nun>> 다시 일어나려고 안간힘을 쓴다. <<tearful>> 당신은 안전을 위해 도망친다.
+	<br><br>
+	<<clotheson>>
+<<elseif $alarm is 1>>
+	"어이," 한 목소리가 외친다. "그 불쌍한 <<girl_ un>> 내버려 둬." <<person_ un>> 목소리가 들리는 쪽을 바라본다.  당신에 대해서는 잊어버린 듯, <<he_ nun>> 몸을 돌려 <<his_ yi>> 친구들에게로 걸어간다.
+	<br><br>
+	<<clotheson>>
+<<elseif $finish is 1>>
+	<<He_ nun>> 비틀거리며 당신에게서 멀어진다.
+	<br><br>
+	<<clotheson>>
+<</if>>
+<br><br>
+<<connudatuswallet>>
+<<endcombat>>
+
+:: Connudatus Snatch
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $skulduggery lte 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">이렇게 쉬운 목표물로부터 더 이상 배울 수 있는 것은 없다.</span>
+<</if>>
+당신은 지나가면서 <<wallet_ ul>> 잡는다.
+<<if $rng gte 61>>
+	줄이 고정된 곳에서 팽팽하게 당겨진다. <<person_ i>> 돌아서서 당신을 현장에서 잡는다. "작은 쥐새끼가," <<he_ ga>> 당신의 어깨를 움켜 잡으면서 말한다. "너한테 존경심이란 걸 가르쳐주지."
+	<br><br>
+	<<link [[다음|Connudatus Snatch Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	그것은 끈에서 떨어져 나간다. 당신은 속도를 바꾸지 않고, 걸어간다.
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<</if>>
+
+:: Connudatus Snatch Molestation
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<set $enemyanger += 200>><<npcidlegenitals>>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $enemyanger lte 50>>
+	<span id="next"><<link [[다음|Connudatus Snatch Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Connudatus Snatch Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Connudatus Snatch Molestation Finish
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"이 작은 <<whorePost>> 같으니," <<he_ nun>> 진열대에 기대면서 헉헉거린다. <<tearful>> 당신은 기회를 노려 빠져나온다. <<He_ nun>> 당신을 돌아보지만, 당신은 이미 떠난 뒤다. <<his_ yi>> <<walletPost>>도 마찬가지다.
+	<br><br>
+	<<clotheson>>
+<<elseif $enemyhealth lte 0>>
+	당신은 <<him_ ul>> 진열대로 밀쳐낸다. <<He_ nun>> 거기에 부딪힌다. <<tearful>> 당신은 <<his_ yi>> 지갑을 손에 들고, 안전한 곳으로 달아난다.
+	<br><br>
+	<<clotheson>>
+<<elseif $enemyanger lte 50>>
+	<<person_ un>> 진열대에 기대어 있다. "본... 본때를 <<phimPost>>에게 보여줘야 겠군, 그럼 되겠지," <<he_ ga>> 헉헉거린다. <<tearful>> 당신은 기회를 노려 빠져나온다. <<He_ nun>> 당신을 돌아보지만, 당신은 이미 떠난 뒤다. <<his_ yi>> <<walletPost>>도 마찬가지다.
+	<<clotheson>>
+<<else>>
+	<<generate2>><<person2>>"무슨 일이야?" <<person_ i>> 소리친다. <<He_ nun>> <<person1>><<person_ ul>> 붙잡고 <<him_ ul>> 제지한다.
+	<br><br>
+	"이 <<girl_ i>> 내 <<wallet_ ul>> 가져가려고 했어 이 멍청아," <<person_ un>> 끼어든 이를 밀어내면서 소리를 지른다. <<He_ nun>> 화가 나서 눈을 부릅뜨고, 주위를 둘러본다. 하지만 <<he_ nun>> 당신을 찾을 수 없었다. <<his_ yi>> <<walletPost>>도 마찬가지다.
+	<<clotheson>>
+<</if>>
+<br><br>
+<<connudatuswallet>>
+<<endcombat>>
+
+:: Connudatus Thievery Restaurant
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $skulduggery lte 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">이렇게 쉬운 목표물로부터 더 이상 배울 수 있는 것은 없다.</span>
+<</if>>
+<<person1>>당신은 무릎을 꿇고 신발 끈을 묶는 척 한다. 당신은 일어서면서 <<wallet_ ul>> 집어 든다.
+<<if $rng gte 61>>
+	<<person2>><<person_ un>> 당신을 알아챈다. "<<pShe_ ga>> 네 걸 훔치고 있어! 봐!" <<he_ ga>> 소리친다.
+	<<gstress>><<stress 6>>
+	<br><br>
+	<<set $skulduggerydifficulty to 400>>
+	<<link [[도망친다|Connudatus Thievery Restaurant Run]]>><<crimeUp 30 "thievery">><<tiredness 12>><</link>><<crime "thievery">><<ggtiredness>>
+	<br>
+	<<link [[허세를 부린다|Connudatus Thievery Restaurant Bluff]]>><</link>><<skulduggerydifficulty>>
+	<br>
+<<else>>
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<</if>>
+
+:: Connudatus Thievery Restaurant Run
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+당신은 그들이 일어서기도 전에, 군중 속으로 달려가 모습을 감춘다. 하지만 그들은 당신을 잘 볼 수 있었다.
+<br><br>
+<<connudatuswallet>>
+<<endevent>>
+
+:: Connudatus Thievery Restaurant Bluff
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $speech_attitude is "meek">>
+	"죄송합니다!" 당신은 그렇게 말하며, <<person1>><<wallet_ ul>> 테이블 위에 놓고 그들 사이를 바라본다. "제가 시력이 좋지 않아서 제 물건인 줄 알았어요."
+<<elseif $speech_attitude is "bratty">>
+	"실은," 당신은 그렇게 말하며, <<person1>><<wallet_ ul>> 테이블 위에 놓는다. "나는 그냥 이걸 당신에게 돌려주려던 참이에요. 다른 누군가가 이걸 가져가서 제가 되찾아왔거든요. 그런 식으로 비난하지 마세요."
+<<else>>
+	"저는 여기서 일하고 있는데," 당신은 그렇게 말하며, <<person1>><<wallet_ ul>> 테이블 위에 놓는다. "고객들이 쉽게 가져갈 수 있는 곳에 귀중품을 맡기는 것은 회사 정책에 위배되는 일이에요. 앞으로는 더 조심해주세요."
+<</if>>
+<br><br>
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<person_ un>> <<person2>><<person_ ul>> 돌아본다. "넌 항상 호들갑이라니까."
+	<br><br>
+	"호들갑이라고? 그럼 네가 진짜 물건을 강탈당할 때도 내가 조용히 있어야 한다고 생각해?"
+	<br><br>
+	<span class="green">당신은 그들의 논쟁을 뒤로 하고, <<person1>><<wallet_ ul>> 가져간다.</span>
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<<else>>
+	<span class="red"><<person_ un>> <<wallet_ ul>> 들어올려 품 속에 챙긴다.</span> "알겠어," <<he_ ga>> 의심스러운 눈초리로 당신을 바라보며, 말한다. 이번에는 빈손으로 떠나야 한다.
+	<br><br>
+	<<endevent>>
+	<<link [[다음|Connudatus Street]]>><</link>>
+	<br>
+<</if>>
+
+:: Connudatus Camera
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $speech_attitude is "meek">>
+	"실례합니다 <<sirPost>>," 당신은 <<his_ yi>> 소매를 잡아당기며 말한다. "제가 도와드리고 싶은데. 사진 한 장 찍어 드릴까요?"
+<<elseif $speech_attitude is "bratty">>
+	"마을에 처음 오시나요?" 당신은 말한다. "도움이 필요해보이시네요. 제가 사진 찍어드릴까요?"
+<<else>>
+	"안녕하세요," 당신은 말한다. "원하신다면 사진을 찍어 드릴 수 있는데요."
+<</if>>
+<br><br>
+<<He_ nun>> 미소 짓는다. "정말 친절한 제안이구나. 여기 있단다," <<he_ nun>> 당신에게 카메라를 건네주고 당신에게서 몇 피트 떨어진 곳으로 걸어간다.
+<<if $skulduggery lte 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">이렇게 쉬운 목표물로부터 더 이상 배울 수 있는 것은 없다.</span>
+<</if>>
+<br><br>
+<<if $rng gte 61>>
+	<<He_ nun>> 당신이 기대했던 것보다 빨리 돌아선다. "이봐!" <<he_ ga>> 소리친다. "그걸 돌려줘!" 당신은 달리기 시작한다. <<He_ nun>> 당신을 따라 달린다.
+	<<gstress>><<stress 6>><<tiredness 12>><<ggtiredness>>
+	<br><br>
+	<<athleticsdifficulty 1 1000 true>>
+	<<if $athleticsSuccess>>
+		당신은 노점상을 돌아다니며 <<him_ ul>> 뿌리치려 하고, 그것은 <span class="green">성공한다</span>. 당신은 조용한 장소를 찾아서 카메라를 살펴본다.
+		<<if $rng gte 81>>
+			꽤 비싸 보인다. 당신은 이것으로 어느정도 벌 수 있을 것이다.
+			<<set $blackmoney += 30>><<crimeUp 30 "thievery">>
+		<<elseif $rng gte 61>>
+			그것은 꽤 흔한 물건이지만, 가치가 있어 보인다.
+			<<set $blackmoney += 15>><<crimeUp 25 "thievery">>
+		<<elseif $rng gte 41>>
+			그것은 확실히 저렴한 물건이지만, 가치가 없는 것은 아니다.
+			<<set $blackmoney += 10>><<crimeUp 10 "thievery">>
+		<<elseif $rng gte 21>>
+			그것은 꽤 조잡한 물건으로 보이고, 그렇게 가치 있는 것도 아니다.
+			<<set $blackmoney += 5>><<crimeUp 5 "petty">>
+		<<else>>
+			그것은 정말 싸구려라, 그 재료인 플라스틱보다도 가치가 없다.
+		<</if>>
+		<br><br>
+		<<endevent>>
+		<<link [[다음|Connudatus Street]]>><</link>>
+		<br>
+	<<else>>
+		당신은 노점상을 돌아다니며 <<him_ ul>> 뿌리치려 하지만, 그것은 <span class="red">실패한다</span>. <<He_ nun>> 당신을 뒤쫓아 골목으로 들어간다. 당신이 모퉁이를 돌자 울타리가 당신의 길을 막고 있다. <<person_ un>> 당신 뒤에서 멈춘다.
+		<br><br>
+		"사람들이 말하길 이 마을의 <<girls_ ga>> 약하고 순종적이라고 말했지," <<he_ nun>> <<his_ yi>> 소매를 걷어 올렸다. "내가 네게 네 입장을 알게 해줄 필요가 있어 보이는군."
+		<br><br>
+		<<link [[카메라를 던진다|Connudatus Camera Throw]]>><</link>>
+		<br>
+		<<link [[그대로 서 있는다|Connudatus Camera Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<He_ nun>> 때마침 몸을 돌려 당신이 군중 속으로 사라지는 것을 본다.
+	<br><br>
+	당신은 조용한 장소를 찾아서 카메라를 살펴본다.
+	<<if $rng gte 81>>
+		꽤 비싸 보인다. 당신은 이것으로 어느정도 벌 수 있을 것이다.
+		<<set $blackmoney += 30>><<crimeUp 30 "thievery">>
+	<<elseif $rng gte 61>>
+		그것은 꽤 흔한 물건이지만, 가치가 있어 보인다.
+		<<set $blackmoney += 15>><<crimeUp 25 "thievery">>
+	<<elseif $rng gte 41>>
+		그것은 확실히 저렴한 물건이지만, 가치가 없는 것은 아니다.
+		<<set $blackmoney += 10>><<crimeUp 10 "thievery">>
+	<<elseif $rng gte 21>>
+		그것은 꽤 조잡한 물건으로 보이고, 그렇게 가치 있는 것도 아니다.
+		<<set $blackmoney += 5>><<crimeUp 5 "petty">>
+	<<else>>
+		그것은 정말 싸구려라, 그 재료인 플라스틱보다도 가치가 없다.
+	<</if>>
+	<<endevent>>
+	<br><br>
+	<<link [[다음|Connudatus Street]]>><</link>>
+	<br>
+<</if>>
+
+:: Connudatus Camera Throw
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+당신은 <<him_ yi>> 뒤로 카메라를 던진다. <<He_ nun>> 그것을 쫓아 달린다. "만약 네가 그것을 망가트렸다면, 내가 너를 부숴버릴 거야," <<he_ ga>> 땅을 박차오르면서 말한다. 당신은 <<he_ ga>> 정신이 팔려 있는 동안 울타리를 기어올라 다른 쪽으로 몸을 끌어당긴다. <<he_ ga>> 돌아설 때쯤엔 당신은 이미 떠나있다.
+<br><br>
+<<link [[다음|Connudatus Street]]>><<endevent>><</link>>
+<br>
+
+:: Connudatus Camera Molestation
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<set $enemyanger += 150>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Connudatus Camera Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Connudatus Camera Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Connudatus Camera Molestation Finish
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"바로 이거야," <<he_ ga>> 말한다. "이거 때문에 내가 여기까지 왔지. 넌 카메라 훔치는 <<whorePost>> 짓이나 계속 해라, 난 그냥 다른 걸 살거야." <<He_ nun>> <<he_ ga>> 왔던 길을 되돌아간다.
+	<br><br>
+	<<clotheson>>
+<<elseif $enemyhealth lte 0>>
+	당신은 <<him_ ul>> 땅바닥에 밀친 뒤 울타리를 오르기 시작한다. <<he_ ga>> <<his_ yi>> 발로 일어섰을 때엔 당신은 이미 탈출한 뒤다. 당신은 한동안 계속 움직이다가 방해받지 않을 조용한 장소를 찾아본다.
+	<br><br>
+	<<clotheson>>
+<<else>>
+<</if>>
+<br><br>
+당신은 카메라를 살펴본다.
+<<if $rng gte 81>>
+	꽤 비싸 보인다. 당신은 이것으로 어느정도 벌 수 있을 것이다.
+	<<set $blackmoney += 30>><<crimeUp 30 "thievery">>
+<<elseif $rng gte 61>>
+	그것은 꽤 흔한 물건이지만, 가치가 있어 보인다.
+	<<set $blackmoney += 15>><<crimeUp 25 "thievery">>
+<<elseif $rng gte 41>>
+	그것은 확실히 저렴한 물건이지만, 가치가 없는 것은 아니다.
+	<<set $blackmoney += 10>><<crimeUp 10 "thievery">>
+<<elseif $rng gte 21>>
+	그것은 꽤 조잡한 물건으로 보이고, 그렇게 가치 있는 것도 아니다.
+	<<set $blackmoney += 5>><<crimeUp 5 "petty">>
+<<else>>
+	그것은 정말 싸구려라, 그 재료인 플라스틱보다도 가치가 없다.
+<</if>>
+<br><br>
+<<endcombat>>
+<<link [[다음|Connudatus Street]]>><</link>>
+
+:: Connudatus Car
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $skulduggery lte 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">이렇게 쉬운 목표물로부터 더 이상 배울 수 있는 것은 없다.</span>
+<</if>>
+<<if $rng gte 51>>
+	당신이 열려있는 차로 걸어 가서 당신에게 그럴 권리가 있다는 것처럼 <<wallet_ ul>> 집어든 순간, 때마침 <<person_ i>> 건물을 빠져나온다. <<He_ nun>> 아직 당신을 보지 못했지만 곧 보게 될 것이다.
+	<<gstress>><<stress 6>>
+	<br><br>
+	<<link [[도망친다|Connudatus Car Run]]>><<crimeUp 30 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[차 안에 숨는다|Connudatus Car Hide]]>><</link>>
+	<br>
+	<<link [[내버려둔다|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	당신은 열려있는 차로 걸어 가서 당신에게 그럴 권리가 있다는 것처럼 <<wallet_ ul>> 집어든다. 곧 돌아온 <<person_ un>> 아무것도 눈치채지 못한 채로 차를 몰고 떠난다.
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<</if>>
+
+:: Connudatus Car Run
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+당신은 <<wallet_ ul>> 손에 들고, 도망친다. <<person_ i>> 반응하기까지 약간의 시간이 필요했고, 그것은 혼잡한 거리에서 당신이 사라지기엔 충분했다.
+<br><br>
+<<connudatuswallet>>
+<<endevent>>
+
+:: Connudatus Car Hide
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<wallet_ ul>> 손에 들고 당신은 차 안으로 뛰어들어 뒷좌석 밑으로 기어간다.
+<<if $rng gte 51>>
+	<<person_ un>> <<his_ yi>> <<wallet_ i>> 사라진 것이나 승객이 있다는 것도 눈치채지 못하고, 앉아서 엔진에 시동을 건다.
+	<br><br>
+	차가 도로를 따라 덜컹거릴 때 당신은 좌석 밑에 숨는다. <<he_ ga>> 차를 세우기까지는 오래 걸리지 않는다. 문이 열리는 소리가 들리고 차가 조금 더 달리다가, 다시 한 번 멈춘다. 운전사는 차에서 내리고, 이번에는 문을 닫는다.
+	<br><br>
+	당신은 창문 밖을 들여다 본다. 당신은 엘크 가에 있는 건물들 중 하나에 있다. 외곽에 있는 철책선이, 여러 개의 붉은 벽돌로 된 건물을 보호하듯 세워져 있다. 당신은 차에서 내린다.
+	<br><br>
+	<<pass 5>>
+	당신은 <<wallet_ ul>> 열어본다. 비어있다.
+	<br><br>
+	<<endevent>>
+	<<link [[주변을 둘러본다|Elk Compound]]>><</link>>
+	<br>
+<<else>>
+	<<person_ un>> 앉아서, 주위를 둘러본 다음, 다시 밖으로 나간다. <<He_ nun>> 분명히 <<he_ ga>> <<his_ yi>> <<wallet_ ul>> 건물에 두고 왔다고 생각할 것이다.
+	<br><br>
+	<<he_ ga>> 돌아오기 전에 당신은 당신의 은신처에서 일어나 차에서 탈출한다.
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<</if>>
+
+:: Connudatus Street Bench
+
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $rng gte 61>>
+	당신은 벤치 뒤로 걸어가서, 손을 뻗어 그 좌석에서 <<wallet_ ul>> 꺼낸다.
+	<<stress 6>><<gstress>>
+	<<outfitChecks>>
+	<<if _shirtless>>
+		<<person_ un>> 당신을 잡으려 하지만, 당신은 <<him_ ul>> 떨쳐내고 안전한 곳으로 도망친다.
+		<br><br>
+	<<else>>
+		<<person_ i>> 당신의 <<top_name_ ul>> 잡고 있다.
+		<<set _top.integrity -= 10>>
+		<<if _top.integrity lte 0>>
+			당신은 <<him_ ul>> 밀쳐내지만, 당신의 옷은 <<his_ yi>> 손아귀에 잡혀 찢어진다. <<integritycheck>><<exposure>><<if $exposed gte 1>><<covered>><</if>> 당신은 안전한 곳으로 달아난다.
+		<<else>>
+			당신은 <<him_ ul>> 떨쳐내지만, 당신의 <<top_name_ i>> 찢어지는 소리가 살짝 들린다. 당신은 안전한 곳으로 달아난다.
+		<</if>>
+		<br><br>
+	<</if>>
+	<<if $skulduggery lte 300>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">이렇게 쉬운 목표물로부터 더 이상 배울 수 있는 것은 없다.</span>
+	<</if>>
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<<else>>
+	당신은 벤치 뒤로 걸어가서, 손을 뻗어 <<person_ i>> 눈치채지 못하게 <<wallet_ ul>> 가져간다.
+	<br><br>
+	<<if $skulduggery lte 300>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">이렇게 쉬운 목표물로부터 더 이상 배울 수 있는 것은 없다.</span>
+	<</if>>
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<</if>>

@@ -1,0 +1,22 @@
+#tipimg {
+	height: 215px;
+	width: 215px;
+	overflow: hidden;
+	position: static;
+}
+
+.white {
+	color: #FFFFFF;
+}
+
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
+
+.redblink {
+	color: red;
+	font-weight: bolder;
+	animation: blink-effect 1s step-end infinite;
+}

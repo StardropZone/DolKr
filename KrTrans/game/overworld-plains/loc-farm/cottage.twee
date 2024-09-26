@@ -1,0 +1,5069 @@
+:: Farm Cottage
+<<set $location to "alex_cottage">><<set $outside to 0>><<effects>>
+<<farm_work_update>>
+<<if $slimeFarmNakedStored is true>>
+	당신은 옷을 몸에 걸친다.
+	<<storeon "farmHidingSpot">>
+	<<exposure>>
+	<<unset $slimeFarmNakedStored>>
+<</if>>
+<<if $farm_stage gte 7>><<unset $farm_naked>><</if>>
+
+<<if $alexSomnoAngry is 0>>
+	당신이 아래층으로 내려오자 알렉스가 당신을 노려본다.
+	<br><br>
+	<<set $alexSomnoAngry to 1>>
+<</if>>
+
+당신은 알렉스의 집 아래층에 있다. 이곳은 아담하고, 아늑하다. 현대식 가전 제품이 있는 주방과, 작은 테이블, 그리고 소파와 안락 의자가 있는 거실이 있다.
+<br><br>
+
+<!-- Flavor text of Alex coming down, going up, or being upstairs -->
+<<if Time.hour is 21 and ($alex_to_bed is undefined or $farm_end isnot 1)>>
+	<<npc Alex>><<person1>>
+	<<if $farm_end isnot 1>>
+		<<set $farm_end to 1>>
+		/* If it's 21:00 and you go to the cottage, the farm work needs to be stopped. */
+		알렉스가 집으로 들어온다. "또 하루의 일과가 끝났군," <<he_ ga>> 말하며,
+		<<if $exposed gt 0>>
+			얼굴을 붉힌다. "점점 추워지고 있으니, 너는 무언가 좀 더 입어야 할 것 같은데." <<glust>><<npcincr Alex lust 1>>
+		<<else>>
+			미소짓는다.
+		<</if>>
+		<<if $farm_count gte 1 and $farm_stage lte 6>>
+			"여기 추가 수당이야." <<He_ ga>> 당신에게 <<moneyGain $farm.wage>>를 건넨다.
+		<</if>>
+		<br><br>
+	<</if>>
+	<<set $alex_to_bed to 1>>
+	알렉스가 <<his_ yi>> 방으로 올라가자 계단이 삐걱거린다.
+	<<endevent>>
+	<br><br>
+<<elseif Time.hour gte 21 or Time.hour lte 4>>
+	위층에서 알렉스의 코 고는 소리가 들린다.
+	<br><br>
+<<elseif Time.hour is 5 and ($alex_bed is "player" or $alex_bed is undefined) and $alexSomnoAngry is undefined>>
+	<<set $alex_bed to "none">><<npc Alex>><<person1>>
+	알렉스가 내려오자 계단이 삐걱거린다. <<covered>> "아침을 만들게." <<he_ ga>> 주방으로 향하며 말한다.
+	<<if $exposed gte 1>>
+		<<He_ ga>> 곁눈질하지 않는 척하며 지나간다.<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<<endevent>>
+	<br><br>
+<<elseif $farm_work.alex is "admin" or ($farm_work.alex is "clearing" and $farm_stage is 12)>>
+	당신은 위층에서 알렉스가 통화하는 소리를 듣는다.
+	<br><br>
+<</if>>
+
+<!-- Main options of available actions -->
+
+<<if $farm.build_finished.includes("nursery")>>
+	<<run $farm.build_finished.delete("nursery")>>
+	<<set C.npc.Alex.pregnancy.nursery to true>>
+	<<unset $cottage_nursery_prep>>
+
+	새로운 아이 방이 추가되었다. <span class="gold">당신과 알렉스의 아이들은 이제 농장에서 살 수 있을 것이다.</span>
+	<br><br>
+	<<link [[다음|Farm Cottage]]>><</link>>
+
+<<elseif isPregnancyEnding()>>
+	<<pcFarmBirth>>
+
+<<elseif npcPregnancyEnding("Alex")>>
+	<<npc "Alex">>
+	"제-젠장..." 당신은 알렉스가 소리지르는 것을 듣는다. 당신은 <<himPost>>에게로 달려간다.
+	<br>
+
+	"뭐가 잘못됐어?" 당신이 묻는다. <<himPost>>에게 다가가자, 당신은 <<his_ yi>> 허벅지 아래로 액체가 흘러내리는 것을 본다.
+	<br>
+
+	"시작된 것 같아," <<he_ ga>> 말한다.
+	<br><br>
+
+	당신은 심장이 평소보다 빠르게 뛰는 것을 느낀다. "너를 병원으로 데려가는 것이 좋겠어?" 당신이 묻는다.<<gstress>><<stress 6>>
+	<br><br>
+
+	"아니, 괜찮아. 나는 그런 곳을 별로 좋아하지 않거든. 지역 의사에게 전화 좀 해 줄래?" <<he_ ga>> 말한다. <<He_ ga>> <<his_ yi>> 전화기를 주머니에서 꺼내 당신에게 건네준다.
+	<br><br>
+
+	<<link [[다음|Farm Alex Birth]]>><</link>>
+
+<<elseif playerIsPregnant() and playerBellyVisible() and !talkedAboutPregnancy("pc","Alex")>>
+	<<npc "Alex">>
+	<<setTalkedAboutPregnancy "pc" "Alex">>
+	<<if $farm_stage gte 7>>
+		당신은 알렉스가 공포에 차서 당신의 배를 쳐다보고 있다는 것을 알아차린다. "너...너 임신했어?! 내게는 아무 말도 하지 않았잖아..."
+
+		<<if getPregnancyObject().potentialFathers.length gte 2 or !getPregnancyObject().potentialFathers.find(s => s.source === "Alex")>>
+			<<He_ nun>> 낙담한 듯 하다.
+			<br><br>
+
+			"뭐-뭐어, 네가 몸이 안 좋다고 느낄 때는 농장에서 쉬도록 해," <<he_ ga>> 말한다.
+			<br><br>
+
+			<<link [[다음|Farm Work]]>><<endevent>><</link>>
+
+		<<else>>
+			<br><br>
+			<<He_ ga>> 마치 답변을 기다리는 듯이, 당신을 쳐다본다.
+
+			"내 말은, 앉아 봐, 응?" 알렉스가 말한다.
+			<br><br>
+
+			<<link [[다음|Farm PC Pregnancy Reveal]]>><<set $phase to 3>><</link>>
+
+		<</if>>
+
+	<<else>>
+		당신은 알렉스가 당신의 배를 쳐다보고 있다는 것을 알아차린다. "아, 임신했어? 너무 힘들다고 느끼면 농장에서 쉬도록 해. 나는 괜찮아," <<he_ ga>> 말한다.
+		<br><br>
+
+		<<link [[다음|Farm Work]]>><<endevent>><</link>>
+
+	<</if>>
+
+<<elseif npcIsPregnant("Alex") and !talkedAboutPregnancy("Alex","pc") and npcBellySize("Alex") gte 1>>
+	<<alex_cottage_pregnancy_reveal>>
+
+<<elseif ($farm_countdown lte 0 or $farm_countdown is undefined) and ($renttime lte -2 or ($renttime lte 0 and Time.hour gte 4 and Time.hour lte 21))>>
+	<<unset $farm_countdown>><<unset $baileyReunionScene>>
+	<span class="red">당신은 문을 두드리는 소리를 듣는다.</span>
+	<br><br>
+
+	<<if Time.hour gte 21 or Time.hour lte 4>>
+		알렉스가 위층에서 움직인다.
+		<br><br>
+
+		<<link [[노크에 대답한다|Farm Cottage Bailey]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[알렉스에게 맡긴다|Farm Cottage Bailey]]>><<set $phase to 1>><</link>>
+		<br>
+
+	<<elseif Time.hour is 5>>
+		알렉스는 당신을 걱정스러운 눈길로 본다.
+		<br><br>
+
+		<<link [[노크에 대답한다|Farm Cottage Bailey]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[알렉스에게 맡긴다|Farm Cottage Bailey]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[노크에 대답한다|Farm Cottage Bailey]]>><<set $phase to 2>><</link>>
+		<br>
+		<<link [[알렉스에게 맡긴다|Farm Cottage Bailey]]>><<set $phase to 3>><</link>>
+		<br>
+	<</if>>
+<<elseif $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $farm_attack_timer is 0 and Time.hour gte 21>>
+	<<npc Alex>><<person1>>
+	알렉스가 쿵쾅거리며 계단을 내려온다. <span class="red">"<<nnpc_He_ ga Remy>> 왔어,"</span> <<he_ ga>> 말한다. "레미 말이야. 우리는 할 수 있어. 가서 준비해, 나는
+	<<if $farm.tower_guard>>
+		<<NPCname_ ul $farm.tower_guard>> 확인할게."
+	<<else>>
+		그들을 찾을 수 있을지 알아볼게."
+	<</if>>
+	<br><br>
+
+	<<farm_assault_intro>>
+	<br><br>
+
+	<<link [[준비한다|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 3>><</link>>
+	<br>
+<<elseif Time.hour is 5 and $alex_breakfast is undefined>>
+	<<if $alexSomnoAngry lte 1>>
+		<<foodicon "pancakes">><<link [[알렉스를 도와 아침식사를 준비한다|Farm Breakfast Reject]]>><<set $alex_breakfast to 1>><<set $phase to 0>><</link>>
+		<br>
+		<<foodicon "eat">><<link [[아침식사를 한다|Farm Breakfast Reject]]>><<set $alex_breakfast to 1>><<set $phase to 1>><</link>>
+	<<else>>
+		<<foodicon "pancakes">><<link [[알렉스를 도와 아침식사를 준비한다 (0:20)|Farm Breakfast Make]]>><<set $alex_breakfast to 1>><<pass 20>><<npcincr Alex love 1>><<stress -6>><<tiredness -6>><</link>><<glove>><<lstress>><<ltiredness>>
+		<br>
+		<<foodicon "eat">><<link [[아침식사를 한다 (0:20)|Farm Breakfast Eat]]>><<set $alex_breakfast to 1>><<pass 20>><<stress -12>><<tiredness -6>><</link>><<llstress>><<ltiredness>>
+	<</if>>
+	<br>
+	<<farm_cottage_options>>
+<<elseif Time.hour is 5 and $alexSomnoAngry is undefined>>
+	알렉스는 거실에 앉아 TV를 본다.
+	<br><br>
+
+	<<npc Alex>><<person1>>
+	<<if $alex_tea is undefined>>
+		<<set $alex_tea to 1>>
+		<<if Time.days % 2 is 0>>
+			<<if C.npc.Alex.dom gte 1>>
+				"차 한 잔 마실까 하는데," <<he_ ga>> 말한다. "주전자 물 좀 끓일래?"
+				<br><br>
+
+				<<link [[차 한 잔을 만든다 (0:05)|Farm Breakfast Tea]]>><<npcincr Alex love 1>><<pass 5>><</link>><<glove>>
+				<br>
+				<<link [[차 두 잔을 만든다 (0:05)|Farm Breakfast Tea 2]]>><<npcincr Alex love 1>><<pass 5>><<stress -6>><</link>><<glove>><<lstress>>
+				<br>
+				<<link [[거절한다|Farm Breakfast Tea Refuse]]>><<npcincr Alex dom -1>><<npcincr Alex love -1>><</link>><<llove>><<ldom>>
+				<br>
+			<<else>>
+				"차 한 잔 마실까 하는데," <<he_ ga>> <<his_ yi>> 발로 일어서며 말한다. "너도 마실래?"
+				<br><br>
+
+				<<link [[수락한다 (0:05)|Farm Breakfast Tea Receive]]>><<pass 5>><<stress -6>><</link>><<lstress>>
+				<br>
+				<<link [[거절한다|Farm Cottage]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<farm_cottage_tv_options>>
+			<<farm_cottage_options>>
+		<</if>>
+	<<else>>
+		<<farm_cottage_tv_options>>
+		<<farm_cottage_options>>
+	<</if>>
+<<else>>
+	<<farm_cottage_options>>
+<</if>>
+
+
+
+:: Farm Bedroom
+<<set $outside to 0>><<effects>><<getTarget true>>
+<<farm_work_update>>
+당신은 알렉스의 집에 있는 당신의 방에 있다. 이곳은 비좁지만, 고아원에 있는 당신의 방보다 넓다. 당신의 침대 맞은 편에 옷장이 있다. 농장이 내려다보이는 창문 옆에 책상이 놓여 있다.
+<br><br>
+
+<<if $unbind is 1>>
+	<<unset $unbind>>
+	당신은 구속구를 푼다.
+	<br><br>
+<</if>>
+
+<<if $alex_bed is "player">>
+	알렉스는 당신의 방에서 코를 골며 자고 있다.
+	<<if Time.hour is 5>>
+		<<set $alex_bed to "none">><<npc Alex>><<person1>>
+		<<He_ nun>> 하품하며 이불을 옆으로 걷어낸다. <<covered>> "아침 먹을 시간이야," <<he_ ga>> 말한다.
+		<<if $daily.alex.bedOrgasm>>
+			<<if $exposed gte 2>>
+				알렉스는 황급히 수건으로 <<his_ yi>> 옷을 닦은 다음, 시선을 피하면서 당신에게 새 수건을 건네준다.
+				<br><br>
+				<<switch random(1, 3)>>
+					<<case 1>>
+						"벼-변태같으니. 나 이거 방금 빨았는데," <<he_ ga>> 말한다. <<his_ yi>> 얼굴이 붉어진다.
+					<<case 2>>
+						"누-누가 좀 앞서나간 것 같은데, 변태녀석." <<He_ 는>> 얼굴을 붉힌다.
+					<<case 3>>
+						"자-자연적인 알람 고마워," <<he_ 가>> 뺨을 붉힌다. "언제든 수탉보다 먼저 알려준다니까."
+				<</switch>>
+			<<else>>
+				알렉스는 당신의 젖은 부분을 가리키며 닦을 수건을 건네주고, 시선을 피한다.
+				<br><br>
+				<<switch random(1, 3)>>
+					<<case 1>>
+						<<He_ ga>> 기지개를 켠다. "내가 금방 빨래할게. 하지만 그 전에, 나 배고파."
+					<<case 2>>
+						"굉장한 꿈을 꿨나 봐, 파트너," <<he_ ga>> 피식 웃으며 <<his_ yi>> 팔꿈치로 당신을 쿡쿡 찌른다. "나도 그 꿈에 나왔어?"
+					<<case 3>>
+						"자연적인 알람 고마워," <<he_ ga>> 킥킥댄다. "언제든 수탉보다 먼저 알려준다니까."
+				<</switch>>
+			<</if>>
+		<</if>>
+		<<if $exposed gte 1>>
+			<<He_ ga>> 곁눈질하지 않는 척 하며 지나간다.<<glust>><<npcincr Alex lust 1>>
+		<<else>>
+			<<He_ ga>> 방을 나서고, 계단이 삐걱거리는 소리가 들린다.
+		<</if>>
+		<<endevent>>
+	<</if>>
+	<br><br>
+<</if>>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutfarmroad>>
+<<elseif $farm_attack_timer is 0 and Time.hour gte 21 and !$possessed>>
+	<<npc Alex>><<person1>>
+	알렉스가 쿵쾅거리며 계단을 내려온다. <span class="red">"<<nnpc_He_ ga Remy>> 왔어,"</span> <<he_ ga>> 말한다. "레미 말이야. 우리는 할 수 있어. 가서 준비해, 나는
+	<<if $farm.tower_guard>>
+		<<NPCname_ ul $farm.tower_guard>> 확인할게."
+	<<else>>
+		그들을 찾을 수 있을지 알아볼게."
+	<</if>>
+	<br><br>
+
+	<<farm_assault_intro>>
+	<br><br>
+
+	<<link [[준비한다|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 3>><</link>>
+	<br>
+<<else>>
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound" or $worn.feet.name is "ankle cuffs">>
+		<<if $possessed>>
+			당신은 구속구를 내려다본다. 힘을 줘서 당기자, 그것들은 견디지 못하고 부서진다.
+			<br><br>
+			<<unbind>>
+		<<else>>
+			<<undobindingsicon>><<link [[구속구를 푼다 (0:10)|Farm Bedroom]]>><<set $unbind to 1>><<pass 10>><<unbind>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<if !($earSlime.event and $earSlime.noSleep)>>
+		<<bedicon>><<link [[다 벗고 침대에 들어간다|Farm Bed]]>><<undressSleep "Farm Bed">><</link>>
+		<br>
+		<<listsleepoutfits "Farm Bed">>
+		<<roomoptions>>
+
+		<<wardrobeicon>><<link [[옷장|Farm Wardrobe]]>><</link>>
+		<br>
+	<<else>>
+		<br>
+		<<if $possessed>>
+			<span class="red">머릿속의 슬라임은 조용하다.</span>
+		<<else>>
+			<<ind>><span class="red">슬라임이 당신이 자러 가기 전에 <<trSlimeEvent $earSlime.event>> 한다.</span>
+		<</if>>
+		<br>
+	<</if>>
+	<<if playerHasSexToys()>>
+		<<sextoysicon>><<link [[섹스 장난감들|Sextoys Inventory]]>><<set $sextoyInvReturnLink to $passage>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Farm Mirror">>
+		<span class="nextLink"><<mirroricon>><<link [[거울|Farm Mirror]]>><<preMirror>><</link>></span>
+	<<else>>
+		<<mirroricon>><<link [[거울|Farm Mirror]]>><<preMirror>><</link>>
+	<</if>>
+	<br>
+	<br>
+	<<bedicon "yellow">><<link [[알렉스의 방 (0:01)|Farm Alex Bedroom]]>><<pass 1>><</link>>
+	<br>
+	<<main_hall_icon>><<link [[아래층으로 간다 (0:01)|Farm Cottage]]>><<pass 1>><</link>>
+	<br>
+	<br>
+	<<link [[게임 설정|Farm Settings]]>><</link>>
+	<br>
+
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+	<<else>>
+		<<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br>
+<</if>>
+
+:: Farm Mirror
+<<effects>>
+
+<<link [[물러난다|Farm Bedroom]]>><<unset $mirrorMenu>><<postMirror>><</link>>
+<br>
+
+<<mirror>>
+<br><br>
+
+:: Farm Bed
+<<effects>>
+<<wearoutfit>>
+
+<<set $bus to "farm_bedroom">><<effects>>
+당신은 이불 아래 몸을 파묻고 있다.
+<<if $alex_bed is "player">>
+	알렉스는 당신 옆에서 코를 골며 자고 있다.
+<</if>>
+<<if $wraith.state and $wraithPrison and ($moonstate is "evening" or $moonstate is _nightstate)>>
+	당신은 불안을 느끼고, 당신의 눈이 거울로 향한다.
+<</if>>
+<br><br>
+
+<<if numberOfEarSlime() and $alex_bed isnot "player" and random(0,100) lt 3 + Math.floor($earSlime.growth / 100) - $earSlime.eventTimer and !$earSlime.event>>
+	<<set $slimeBedExit to "Farm Bed">>
+	<<set $slimeBedroomExit to "Farm Bedroom">>
+	<<setSlimeSleepEvents>>
+	<<if $earSlimeEvent>>
+		<<slimeSleepEvents>>
+	<</if>>
+<</if>>
+<<farm_sleep_options>>
+
+:: Farm Sleep
+<<set _autosavehere to true>>
+<<sleep>>
+<<effects>>
+<<if $bus is "farm_alex_room">>
+	<<if $exposed gte 2>>
+		<<npcincr Alex lust 3>>
+	<<else>>
+		<<npcincr Alex lust 1>>
+	<</if>>
+<</if>>
+<<if $bus is "farm_alex_room" or $alex_bed is "player">>
+	<<set $bedGuest to "Alex">>
+<</if>>
+<<if $wraith.nightmare is 2 and Time.isBloodMoon()>>
+	<<sleepeffects>>
+	당신은 아름다운 형체가, 하얀 망토를 입고, 붉은 달 아래 서 있는 꿈을 꾼다. 그것은 어서 오라는 몸짓으로 팔을 당신에게 벌리고 있다. 당신이 가까이 가자 당신은 그것의 눈빛이 당신의 정신에 구멍을 뚫는 것을 느낄 수 있다.
+	<br><br>
+
+	그것은 전부 안쪽으로 구부러진 나무들로 둘러싸여, 호수 위에 떠 있다. 모든 것이 당신 주위로 움직이며, 당신은 당신이 커다란 유적 위에 떠 있는 것을 알아챈다. 당신은 숨을 쉴 수가 없다.
+	<br><br>
+
+	당신은 천천히 눈을 뜨고, 침대에서 느릿느릿 일어난다.<<if $bus is "farm_alex_room" or $bus is "farm_bedroom" and $alex_bed is "player">> 당신은 알렉스를 깨우지 않게 조심한다.<</if>> 당신의 귀가 울린다.
+	<br><br>
+
+	<<wraithPossess "alex_cottage">>
+	<<if $bus is "farm_alex_room">>
+		<<storeon "farm alex bed" "wardrobe">>
+		<span class="nextLink"><<link [[걸어라.|Farm Alex Bedroom]]>><<rainWraith>><</link>></span>
+	<<else>>
+		<<storeon "Farm Bed" "wardrobe">>
+		<span class="nextLink"><<link [[걸어라.|Farm Bedroom]]>><<rainWraith>><</link>></span>
+	<</if>>
+	<br>
+<<else>>
+	<<wakingEffects $sleepHoursTotal>>
+	<<if $nightmares gte 1 and $controlled is 0>>
+		당신은 뭔가 <<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>창백하고<<else>>어둡고<</if>> 끔찍한 것에 뒤를 쫓기는 꿈을 꾼다.
+	<<else>>
+		<<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+			당신은 추잡한 꿈 때문에 괴로워한다.
+			<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+			<<arousal `100 * $sleepHoursTotal`>>
+			<<if $arousal gte $arousalmax>>
+				그 꿈들은 당신을 절정으로 몰아넣는다.
+				<<orgasm>><<set $daily.alex.bedOrgasm to true>>
+			<</if>>
+		<<elseif !_wakingEffect>>
+			당신은 편안히 잠을 잔다.
+			<br><br>
+		<</if>>
+		<<if !_sleepinterrupt and (Time.hour gt 21 or Time.hour lt 6) and $bus is "farm_alex_room" or $alex_bed is "player" and !_alexWake>>
+			<<switch random(1, 6)>>
+				<<case 1>>
+					<<if Time.hour is 5>>
+						당신은 알렉스를 깨우려고 한다. <<nnpc_He_ 가 "Alex">> 신음하며 몸을 뒤척인다.
+					<<else>>
+						당신은 알렉스가 깨어났다고 생각했지만, <<nnpc_hes_ 는 "Alex">> 꿈을 꾸고 있을 뿐이었다.
+					<</if>>
+				<<case 2>>
+					알렉스가 몸을 대자로 뻗는다. 당신은 <<nnpc_his_ 의 "Alex">> 팔을 당신의 얼굴에서 부드럽게 치운다.
+				<<case 3>>
+					알렉스는 당신이 <<nnpc_him_ ul "Alex">> 바라보니, 밝게 웃으며 아직 자고 있다.
+				<<case 4>>
+					알렉스는 <<print either("이불을 독차지하고 있다", "당신의 귓가에 코를 골고 있다", "침을 흘리고 있다. 당신은 침을 닦아준다")>>.
+				<<case 5>>
+					알렉스는 침대 끝에 아슬아슬하게 누워있다. 당신은 <<nnpc_him_ 의 "Alex">> 자세를 고쳐준다.
+				<<case 6>>
+					"<<print either("못된... 오늘 저녁밥은 없다",
+									"보-보지 마",
+									"숙취가 왔나",
+									"바보같은 새 같으니",
+									"사유지에서... 꺼져",
+									"모두에게 보여주겠어")>>..."
+					알렉스가 웅얼거린다.
+			<</switch>>
+		<</if>>
+	<</if>>
+	<<sleepeffects>>
+	<<if $remywake is 1>>
+		<<npc Alex>><<person1>>
+		"일어나!" 누군가 당신을 흔들어 깨운다. 알렉스다. <span class="red">"<<nnpc_He_ ga Remy>> 왔어,"</span> <<he_ ga>> 말한다. "레미 말이야. 우리는 할 수 있어. 준비해, 나는
+		<<if $farm.tower_guard>>
+			<<NPCname_ ul $farm.tower_guard>> 확인할게."
+		<<else>>
+			그들을 찾을 수 있을지 알아볼게."
+		<</if>>
+		<br><br>
+
+		<<farm_assault_intro>>
+		<br><br>
+
+		<<set _bedroom to ($bus is "farm_alex_room" ? "farm alex bed" : "Farm Bed")>>
+		<<set $wardrobe_location to "alexFarm">>
+		<<wardrobeSelection true>>
+		<<storeon _bedroom "check">>
+		<<if _store_check is 1>>
+			<<storeon _bedroom>>
+		<</if>>
+		<<link [[준비한다|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 1>><<unset $remywake>><</link>>
+		<br>
+	<<elseif _sleepinterrupt>>
+		<<npc Alex>><<person1>>
+		<<if _alexWake is 1>>
+			You awake to the sound of the staircase to the loft creaking.
+
+			<<if $bus is "farm_alex_room">>
+				The sheets have been tossed aside and Alex is missing.
+			<</if>>
+			<br><br>
+
+			<<link [[조사한다 (0:01)|Farm Cottage Nighttime Nursery]]>><<set $phase to 1>><<pass 1>><</link>>
+			<br>
+			<<link [[무시한다|Farm Cottage Nighttime Nursery]]>><<set $phase to 2>><</link>>
+
+		<<elseif $bus is "farm_alex_room">>
+			<<if (Time.hour gte 22 or Time.hour lt 6) and $rng gte 61 and C.npc.Alex.lust gte 60>>
+				You awake to feel <<if $NPCList[0].penis isnot "none">>a firm shaft<<else>>something wet<</if>> pressed against your rear end. You wait for Alex to say <<his>> familiar line, but you are greeted by silence. The loud snore you hear indicates that Alex is still asleep. <<His>> arms are wrapped around you, and <<he>> is dry humping you. <<arousal 600 "bottom">><<garousal>>
+				<br><br>
+				<<if hasSexStat("promiscuity", 4)>>
+					<span class="lewd">A lewd idea strikes you.</span>
+					<br>
+					<<link [[Pleasure Alex|Farm Alex Somno]]>><</link>><<promiscuous4>>
+					<br>
+				<</if>>
+				<<link [[Wake Alex|Farm Alex Somno Wake Wholesome]]>><</link>>
+				<br>
+				<<link [[Try and go back to sleep|Farm Alex Somno Let Sleep]]>><<stress 6>><<trauma 6>><</link>><<gstress>><<gtrauma>>
+				<br>
+			<<else>>
+				당신은 <<genitals_ rul>> 더듬는 손길을 느끼고 깨어났고,
+				<<if $NPCList[0].penis isnot "none">>
+					단단하고 긴 것이 당신의 <<bottomPost>>에 눌리는 것을 느낀다.
+				<<else>>
+					누군가의
+					<<if $NPCList[0].breastsize is 0>>
+						가슴이
+					<<else>>
+						<<breastsdesc_ ga $NPCList[0].breastsdesc>>
+					<</if>>
+					당신의 등을 누르는 것을 느낀다.
+				<</if>>
+				다른 한 손은 당신의 허벅지에 올라와 있다.
+				<br><br>
+
+				<<if $daily.alex.tvTease>>
+					"오늘 아침 일 만회하려고?" 알렉스가 말한다. <<his_ yi>> 숨결이 목덜미에 닿는다. "용서해 줄 수도 있는데."
+				<<else>>
+					"너 되게 뻔뻔하네." 알렉스가 말한다. <<his_ yi>> 숨결이 목덜미에 닿는다. "<<nnpc_genderPost "Alex">>애 침대에서 자다니."
+				<</if>>
+				<br><br>
+
+				<<link [[밀어낸다|Farm Alex Climb]]>><<def 1>><<npcincr Alex dom -1>><</link>><<ldom>>
+				<br>
+				<<link [[장단을 맞춘다|Farm Alex Allow]]>><<sub 1>><<npcincr Alex dom 1>><</link>><<promiscuous1>><<gdom>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $exposed gte 2 and random(1, 2) is 2>>
+				약간 쌀쌀함이 느껴진다. 이불이 사라져 있다. 당신의 방에서 멀어지는 발소리가 들린다. <<covered>>
+				<br><br>
+
+				당신의 이불은 침대 아래 발치에 떨어져 있었다. 알렉스의 소행인 것 같다. 당신이 자는 사이 <<He_ ga>> 당신의 <<lewdness_ rul>> 엿보고 있었던 것이다.
+				<br><br>
+
+				<<link [[다시 잔다|Farm Bed]]>><<endevent>><</link>>
+				<br>
+				<<link [[일어난다|Farm Bedroom]]>><<endevent>><</link>>
+				<br>
+				<<link [[화를 낸다 (0:05)|Farm Bedroom Confront]]>><<pass 5>><<npcincr Alex love -1>><<npcincr Alex dom -1>><</link>><<llove>><<ldom>>
+				<br>
+				<<if hasSexStat("promiscuity", 3)>>
+					<<link [[되갚아준다 (0:20)|Farm Bedroom Revenge]]>><<pass 20>><<npcincr Alex dom -1>><<npcincr Alex lust 5>><</link>><<promiscuous3>><<ldom>><<gglust>>
+					<br>
+				<</if>>
+			<<else>>
+				당신은 <<genitals_ rul>> 더듬는 손길을 느끼고 깨어난다.
+				<<if $NPCList[0].penis isnot "none">>
+					단단하고 긴 것이 당신의 <<bottomPost>>에 눌린다.
+				<<else>>
+					누군가의
+					<<if $NPCList[0].breastsize is 0>>
+						가슴이
+					<<else>>
+						<<breastsdesc_ ga $NPCList[0].breastsdesc>>
+					<</if>>
+					당신의 등을 누른다.
+				<</if>>
+				<br><br>
+
+				"네가 외로울까 해서." 알렉스가 말한다, <<his_ yi>> 숨결이 목에 닿는다.
+				<br><br>
+
+				<<link [[밀어낸다|Farm Alex Push]]>><<def 1>><<npcincr Alex dom -1>><</link>><<ldom>>
+				<br>
+				<<link [[장단을 맞춘다|Farm Alex Go]]>><<sub 1>><<npcincr Alex dom 1>><</link>><<promiscuous1>><<gdom>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		<br><br>
+
+		<<if $bus is "farm_alex_room">>
+			<<link [[일어난다|Farm Alex Bedroom]]>>
+				<<set $wardrobe_location to "alexFarm">>
+				<<wardrobeSelection true>>
+				<<storeon "farm alex bed" "check">>
+				<<if _store_check is 1>>
+					<<storeon "farm alex bed">>
+				<</if>>
+			<</link>>
+			<br>
+		<<else>>
+			<<radiooutfits>>
+			<br><br>
+
+			<<link [[일어난다|Farm Bedroom]]>><<bedclotheson "Farm Bed">><</link>>
+		<</if>>
+		<br>
+	<</if>>
+<</if>>
+<<set $phase to 0>>
+
+:: Farm Alex Somno
+<<effects>>
+
+You gently start to grind your rear into Alex's crotch. <<His>> body twitches as <<he>> moans into your ear. You move carefully so as to not wake <<him>>. <<promiscuity4>><<arousal 1000 "bottom">>
+
+Alex holds your body tighter and begins humping your rear faster.
+<br><br>
+
+<<link [[Keep going|Farm Alex Somno 2]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[Give Alex oral|Farm Alex Somno 2]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[Give Alex a hand job|Farm Alex Somno 2]]>><<set $phase to 2>><</link>>
+
+:: Farm Alex Somno 2
+<<effects>>
+
+<<if $phase is 0>> /* Keep going */
+	You continue to grind against <<his>> clothed <<if $NPCList[0].penis isnot "none">>dick<<else>>pussy<</if>>. Alex mumbles out words that you can't understand, but you can make out the word 'partner'. The idea of Alex having a wet dream about you sends a shiver through your body. <<arousal 2500 "bottom">><<ggarousal>>
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		You soon find yourself begging for Alex's <<if $NPCList[0].penis isnot "none">>cock<<else>>pussy<</if>>, having to cover your mouth to stop yourself.
+	<<elseif $speech_attitude is "bratty">>
+		You grit your teeth. "Stupid cow<<nnpc_gendery "Alex">>..." you whisper as a moan escapes your lips.
+	<<else>>
+		You cover your mouth with your hand as you moan. "Alex..." you whisper.
+	<</if>>
+<<elseif $phase is 1>> /* Give Alex oral */
+	You take a deep breath as you carefully move Alex's arms to give you room to move. Slowly, you roll over to face Alex. <<He>> doesn't stop humping you, but <<his>> pace slows. You slip further down under the covers until your face is within inches of <<his>> crotch. You hook your fingers around <<his>> <<if $NPCList[0].penis isnot "none">>boxers<<else>>underwear<</if>> band and slide them down. You bring your lips to <<his>> <<if $NPCList[0].penis isnot "none">>dick<<else>>clit<</if>> and start gently licking it.
+	<br><br>
+	Alex twitches, bucking <<his>> <<if $NPCList[0].penis isnot "none">>dick<<else>>pussy<</if>> against your lips. You open your mouth <<if $NPCList[0].penis isnot "none">>to allow <<his>> dick to enter<<else>>and start sucking on <<his>> clit<</if>>.
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		<<His>> <<if $NPCList[0].penis isnot "none">>precum<<else>>fluids<</if>> start to fill your mouth, causing you to moan. You push your legs together, attempting to stimulate your own growing arousal.
+	<<elseif $speech_attitude is "bratty">>
+		You brush your teeth against <<his>> <<if $NPCList[0].penis isnot "none">>shaft<<else>>clit<</if>>, causing <<him>> to thrust <<his>> hips forward. You nearly gag at the sudden movement, but huff before <<if $NPCList[0].penis isnot "none">>the tip of <<his>> dick<<else>>kissing <<his>> clit<</if>>.
+	<<else>>
+		You lick up and down <<his>> <<if $NPCList[0].penis isnot "none">>dick<<else>>clit<</if>>, tasting <<his>> <<if $NPCList[0].penis isnot "none">>precum<<else>>fluids<</if>>. You feel a warmth grow in between your legs, encouraging you to keep going. Your licks become faster, occasionally interrupted by you sucking the <<if $NPCList[0].penis isnot "none">>tip<<else>>bud<</if>>.
+	<</if>>
+	<<arousal 1500 "mouth">><<garousal>>
+<<else>> /* Give Alex a hand job */
+	You loosen Alex's hold on you before carefully rolling yourself over. <<Hes>> still humping, but <<his>> pace slows. You reach down into <<his>> <<if $NPCList[0].penis isnot "none">>boxers<<else>>underwear<</if>>, slipping your hand under the waistband. <<His>> <<if $NPCList[0].penis isnot "none">>dick<<else>>pussy<</if>> is already drenched with <<if $NPCList[0].penis isnot "none">>precum<<else>>fluids<</if>>.
+	<br><br>
+	<<if $NPCList[0].penis isnot "none">>
+		You take <<print $NPCList[0].penisdesc>> into your hand. You pump <<his>> cock at a steady pace at first. Alex's body twitches as <<his>> arms lock around you, pressing you against <<his>> body. <<His>> hips buck to match your pace.
+		<br><br>
+		<<if $speech_attitude is "meek">>
+			You tenderly take the tip into your hand, rubbing your finger over the slit. A soft moan falls from Alex's mouth along with a little drool. "Y-you are too cute..." you whisper as you slip your free hand down to rub against your crotch.
+		<<elseif $speech_attitude is "bratty">>
+			You caress <<his>> dick, pausing to squeeze the base of <<his>> shaft firmly. <<He>> groans before burying <<his>> head into your shoulder. You stifle a chuckle and resume stroking <<him>>.
+		<<else>>
+			You stroke <<his>> shaft, brushing your fingers over <<his>> balls. Alex twitches in your touch, panting softly. <<He>> humps your hand as you continue to work <<him>>. "Even asleep you get so worked up," you whisper as you quicken your movements.
+		<</if>>
+		<<arousal 1500>><<garousal>>
+	<<else>>
+		You slip two fingers into Alex's quim, and <<he>> tightens around you. <<His>> arms lock around your shoulders, pressing you against <<his>> body. <<His>> hips begin to buck against your hand.
+		<br><br>
+		<<if $speech_attitude is "meek">>
+			You brush your thumb against <<his>> clit, focusing on thrusting your fingers in and out. Alex's pants and moans encourage your own arousal. Your free hand slips between your legs, rubbing against your crotch.  "Y-you are too cute..." you whisper.
+		<<elseif $speech_attitude is "bratty">>
+			You thrust your fingers, pausing only to pinch <<his>> clit. <<He>> whimpers in <<his>> sleep but continues to needily hump your fingers. You smirk as an idea comes to mind. You slip two more fingers inside, keeping your pace steady. Alex's pants and moans quicken as <<he>> buries <<his>> face into your shoulder.
+		<<else>>
+			You tease Alex's clit with your thumb. <<He>> twitches at your touch and continues humping your fingers. You add another finger, and <<his>> moans become more frequent. "Even asleep you get so worked up," you whisper.
+		<</if>>
+		<<arousal 1500>><<garousal>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $arousal gte $arousalmax>>
+	<<link [[Next |Farm Alex Somno Orgasm]]>><</link>>
+<<elseif $rng gte 60>> /* Alex wake up */
+	<<link [[Next |Farm Alex Somno Wake]]>><</link>>
+<<else>>
+	<<link [[Next |Farm Alex Somno 3]]>><</link>>
+<</if>>
+
+:: Farm Alex Somno 3
+<<effects>>
+
+<<if $phase is 0>> /* Keep going */
+	Suddenly, Alex's hands grip onto your arms. <<His>> hips give one final strong jerk against your ass. <<arousal 1500 "bottom">><<garousal>>
+<<elseif $phase is 1>> /* Give Alex oral */
+	<<if $NPCList[0].penis isnot "none">>
+		Without warning, Alex thrusts forward and ejaculates into your mouth. You manage to swallow most of it. <<bodyliquid "mouth" "semen">>
+	<<else>>
+		Without warning, Alex bucks <<his>> hips against your mouth. <<His>> orgasm covers your face in lewd fluids. You lick your lips. It tastes oddly nice. <<bodyliquid "face" "goo">>
+	<</if>>
+	<<arousal 1500>><<garousal>>
+<<else>> /* Give Alex a hand job */
+	<<if $NPCList[0].penis isnot "none">>
+		<<His>> body convulses in orgasmic bliss, covering your hands in cum. <<arousal 1500 "mouth">><<garousal>><<if random(0,1) is 1>><<bodyliquid "rightarm" "semen">><<else>><<bodyliquid "leftarm" "semen">><</if>>
+		<br><br>
+		<<His>> grip softens, then releases.
+	<<else>>
+		You feel Alex's fluids gushing out of <<his>> quim as <<he>> convulses in orgasmic bliss, leaving a wet spot on the sheets. <<arousal 1500>><<garousal>><<if random(0,1) is 1>><<bodyliquid "rightarm" "goo">><<else>><<bodyliquid "leftarm" "goo">><</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $arousal gte $arousalmax>>
+	<<link [[Next |Farm Alex Somno Orgasm]]>><</link>>
+<<else>>
+	<<if $phase is 0>>
+		The tension leaves <<his>> body, and <<he>> sighs, apparently having climaxed. <<He>> clings to you, and you smile. <<stress -6>><<lstress>>
+	<<else>>
+		<<if $NPCList[0].penis isnot "none">>
+			You tuck <<his>> dick back into <<his>> boxers.
+		<<else>>
+			You fix <<his>> boyshorts and return to your place in Alex's hold.
+		<</if>>
+	<</if>>
+	<br><br>
+	You fall asleep soon after.
+	<br><br>
+
+	<<link [[다음|Farm Alex Bed]]>><<set $alexSomno to 0>><<endevent>><</link>>
+<</if>>
+
+:: Farm Alex Somno Orgasm
+<<effects>>
+
+Your own growing pleasure becomes too much.
+<<orgasm>>
+<<if $phase is 0>> /* Keep going */
+	Alex's hips continue grinding against you. You ride out your orgasm as <<he>> finishes pleasuring <<himself>> with your body.
+<<elseif $phase is 1>> /* Give Alex oral */
+	Alex continues to grind against your mouth as you come down from your orgasm.
+<<else>> /* Give Alex a hand job */
+	As you ride out your orgasm,
+	<<if $NPCList[0].penis isnot "none">>
+		you grip tighter onto <<his>> cock.
+	<<else>>
+		you plunge your fingers deeper into Alex's pussy.
+	<</if>>
+<</if>>
+<br><br>
+You settle back into <<his>> arms and drift off to sleep.
+<br><br>
+
+<<link [[다음|Farm Alex Bed]]>><<endevent>><</link>>
+
+:: Farm Alex Somno Wake
+<<effects>>
+
+Your body freezes as you hear a voice not your own. "...Partner?" <<stress 6>><<gstress>>
+<br><br>
+Alex still sounds sleepy, but also somewhat embarrassed. "What are you doing...?"
+<br><br>
+<<if $phase is 0>> /* Keep going */
+	<<if $speech_attitude is "meek">>
+		"I...You were grinding into me while you slept..." you mumble.
+	<<elseif $speech_attitude is "bratty">>
+		"You started humping my ass like a dog in heat. Figured I should help you out a bit," you snicker, pressing your butt further into <<his>> crotch.
+	<<else>>
+		"You woke me up by humping me. I thought I should help out a bit," you respond flatly.
+	<</if>>
+<<elseif $phase is 1>> /* Give Alex oral */
+	<<if $NPCList[0].penis isnot "none">>
+		<<if $speech_attitude is "meek">>
+			You stare up at Alex, eyes wide open. You hesitate for a moment before quickly pulling your mouth off Alex's cock. "I... you looked like you were really pent up, so I wanted to help you..." you mumble, precum still dripping from your mouth.
+		<<elseif $speech_attitude is "bratty">>
+			You smirk as you slip Alex's dick out of your mouth. "This buddy of yours was poking me while you slept. Figured I would help out," you say as you lick <<his>> precum off your lips.
+		<<else>>
+			You slip Alex's cock out of your mouth. "You were really pitching a tent in your sleep. I just wanted to help," you say.
+		<</if>>
+	<<else>>
+		<<if $speech_attitude is "meek">>
+			You stare up at Alex, eyes wide open. You hesitate as you pull your mouth away from Alex's quim. "I...you were getting really wet, so I wanted to help you..." you mumble, wiping the lewd fluid off your chin.
+		<<elseif $speech_attitude is "bratty">>
+			You smirk as you pull your mouth away from Alex's quim. "Your little friend was getting slick everywhere, so I wanted to help and clean it up," you say as you lick the lewd fluid off your lip.
+		<<else>>
+			You move your mouth away from Alex's quim. "I felt you getting wet. I just wanted to help you out," you say.
+		<</if>>
+	<</if>>
+<<else>> /* Give Alex a hand job */
+	<<if $NPCList[0].penis isnot "none">>
+		<<if $speech_attitude is "meek">>
+			You yelp, freezing in place. You let go of <<his>> cock and move your hand away. "I...you felt really pent up, so I just wanted to help you out..." you mumble as you hide your face partly in the pillow.
+		<<elseif $speech_attitude is "bratty">>
+			You chuckle, removing your hand from Alex's cock to pinch <<his>> cheek. "Your buddy needed a hand, that's all," you say with a smirk.
+		<<else>>
+			You jump at Alex's voice, removing your hand from <<his>> cock. "You were humping my ass while you slept. I wanted to help you out," you say with a small smile.
+		<</if>>
+	<<else>>
+		<<if $speech_attitude is "meek">>
+			You yelp, freezing in place. You slip your fingers out of Alex's quim, moving your hand away. "I...you were rubbing against me, so I just wanted to help you out..." you mumble as you hide your face partly in the pillow.
+		<<elseif $speech_attitude is "bratty">>
+			You chuckle, removing your finger from Alex's quim to pinch <<his>> cheek. "Your little friend was being real needy. You clearly needed a hand," you say with a smirk.
+		<<else>>
+			You jump and quickly remove your fingers from Alex's quim. You were rubbing up against me while you slept. I wanted to help you out," you say with a small smile.
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+<<if C.npc.Alex.love lte 20>>
+	Alex shoves you off the bed onto the floor. <<pain 8>><<ggpain>>
+	<br><br>
+	<<He>> sits up and looks down at you.
+	<<if C.npc.Alex.dom gte 30>>
+		"The hell were you thinking? Go sleep in your own damn bed!" Alex shouts at you.
+	<<else>>
+		"W-what the hell were you thinking? I... Just go sleep in your own damn bed," Alex shouts.
+	<</if>>
+	<<npcincr Alex love -1>><<llove>>
+	<br><br>
+	Alex watches you intently. <<He>> won't let you back into the bed for the night.
+	<br><br>
+
+	<<set $alex_bed_spurned to 1>>
+
+	<<link [[다음|Farm Alex Bedroom]]>><<set $alexSomnoAngry to 0>><<endevent>><</link>>
+<<else>>
+	Alex's face goes red. <<He>> struggles to find <<his>> words.
+	<<if C.npc.Alex.dom gte 30>>
+		"How kind of you to help me out like this. Well, you should finish what you started then," Alex whispers before nipping your ear.
+	<<else>>
+		"I... You didn't need to help me out like this... Would you mind finishing up?" Alex whispers before nuzzling into your cheek.
+	<</if>>
+	<br><br>
+
+	<<link [[Oblige|Farm Alex Somno Wake 2]]>><</link>>
+	<br>
+	<<link [[Reject|Farm Alex Somno Wake Reject]]>><</link>>
+<</if>>
+
+:: Farm Alex Somno Wake 2
+<<effects>>
+
+<<if $phase is 0>> /* Keep going */
+	You waste no time continuing to grind your ass against Alex's crotch.
+	<<if $player.penisExist>>
+		<<He>> slips <<his>> hand around to your dick, pumping it. <<He>> occasionally squeezes too hard while <<he>> moans.
+	<<else>>
+		Alex gropes at your <<breasts>>. <<He>> occasionally pinches your nipples while <<he>> moans.
+	<</if>>
+	<<arousal 5000 "breasts">><<gggarousal>>
+<<elseif $phase is 1>> /* Give Alex oral */
+	You waste no time returning to your position in front of Alex's groin.
+	<<if C.npc.Alex.penis isnot "none">>
+		You plant a kiss onto the tip <<his>> cock, then take <<his>> length into your mouth, causing <<him>> to groan.
+	<<else>>
+		You plant a kiss onto <<his>> clit before dragging your tongue up <<his>> slit. You dip your tongue inside <<his>> quim, causing <<him>> to groan.
+	<</if>>
+	<<if C.npc.Alex.dom gte 30>>
+		You feel <<his>> hands on the back of your head encouraging you to keep going.
+	<<else>>
+		You feel <<his>> hands on top of your head. <<He>> strokes it gently.
+	<</if>>
+	<<arousal 5000 "mouth">><<gggarousal>>
+<<else>> /* Give Alex a hand job */
+	<<if C.npc.Alex.penis isnot "none">>
+		You wrap your hand around Alex's shaft and begin quickly pumping <<his>> cock.
+	<<else>>
+		You slip your fingers inside of Alex's quim, finger fucking <<him>> roughly.
+	<</if>>
+	<br><br>
+	Alex <<if $player.penisExist>>wraps <<his>> hand around your cock and begins to pump<<else>>shoves <<his>> fingers into your own quim<</if>>. <<arousal 5000 "genitals">><<gggarousal>>
+<</if>>
+<br><br>
+
+<<link [[Continue|Farm Alex Somno Wake 3]]>><</link>>
+
+:: Farm Alex Somno Wake 3
+<<effects>>
+
+<<if $phase is 0>> /* Keep going */
+	Alex keeps fondling you, until you eventually push <<him>> over the edge. <<He>> pushes <<his>> crotch against you wildly as <<he>> cums.
+<<elseif $phase is 1>> /* Give Alex oral */
+	Alex grips the back of your head tightly as <<he>> cums in your mouth.
+	<<if C.npc.Alex.penis isnot "none">>
+		<<bodyliquid "mouth" "semen">>
+	<<else>>
+		<<bodyliquid "mouth" "goo">>
+	<</if>>
+<<else>> /* Give Alex a hand job */
+	Alex groans, <<if $NPCList[0].penis isnot "none">>gripping on to your cock tightly<<else>>thrusting deeply into your quim<</if>> as <<he>> cums over your hand.
+	<<if C.npc.Alex.penis isnot "none">>
+		<<if random(0,1) is 1>><<bodyliquid "rightarm" "semen">><<else>><<bodyliquid "leftarm" "semen">><</if>>
+	<<else>>
+		<<if random(0,1) is 1>><<bodyliquid "rightarm" "goo">><<else>><<bodyliquid "leftarm" "goo">><</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $arousal gte $arousalmax>>
+	<<orgasm>>
+	You pant as you calm down from your orgasm. Alex smiles with a devious look.
+	<br><br>
+<</if>>
+
+Alex takes you back into <<his>> arms. "Had your fun, partner?" <<he>> says, bumping <<his>> head against yours. You lazily nod as you relax against the pillow. Alex kisses your forehead. "Night, partner."
+<br><br>
+
+<<link [[다음|Farm Alex Bed]]>><<set $alexSomno to 1>><<endevent>><</link>>
+
+:: Farm Alex Somno Wake Reject
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"In...in the morning, Alex," you meekly respond.
+<<elseif $speech_attitude is "bratty">>
+	"I was trying to sleep. We can fuck in the morning," you huff.
+<<else>>
+	"Not right now. Maybe in the morning," you say.
+<</if>>
+<br><br>
+<<if C.npc.Alex.dom gte 30>>
+	Alex sighs, staying silent for a moment. "Come on, now. Don't you want to know what I was dreaming about?" <<His>> hand travels down to grope your ass.
+	<br><br>
+
+	<<link [[Shove|Farm Alex Somno Wake Pushy]]>><<npcincr Alex dom -1>><</link>><<ldom>>
+	<br>
+	<<link [[Give in|Farm Alex Somno Wake Sex]]>><<npcincr Alex dom 1>><<set $sexstart to 1>><</link>><<gdom>>
+<<else>>
+	Alex pouts but doesn't push it further. "Alright then. Night, partner." Alex kisses your cheek before rolling over.
+	<br><br>
+
+	<<link [[다음|Farm Alex Bed]]>><<set $alexSomno to 2>><<endevent>><</link>>
+<</if>>
+
+:: Farm Alex Somno Wake Wholesome
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	You move away from Alex. "A-Alex...please wake up," you say as you tap <<his>> legs with your feet.
+<<elseif $speech_attitude is "bratty">>
+	"Alex, wake up, you horny bastard," you say, sounding annoyed. You elbow <<him>>.
+<<else>>
+	You sigh. "Alex, wake up." You nudge <<his>> shoulder.
+<</if>>
+<br><br>
+Alex groans and then yawns. <<He>> hugs onto you tighter, resting <<his>> head on your shoulder. "Something the matter?" <<He>> shifts, then freezes when <<he>> realises what <<he>> was doing. "Fuck..." You roll over to look at Alex.
+<br><br>
+<<if C.npc.Alex.lust gte 20>>
+	<<He>> glances between you and <<his>> groin. "How about a night ride?" <<he>> asks, smirking.
+	<br><br>
+
+	<<link [[받아들인다|Farm Alex Somno Wake Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+	<<link [[Reject|Farm Alex Somno Wake Reject]]>><</link>>
+<<else>>
+	<<He>> looks away before turning <<his>> back to you. <<He>> mumbles an apology, then pulls the blanket over <<him>> entirely.
+	<br><br>
+
+	<<link [[다음|Farm Alex Bed]]>><<endevent>><</link>>
+<</if>>
+
+:: Farm Alex Somno Wake Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+
+	You wrap your arms around Alex. <<He>> returns the gesture before ravaging your neck with kisses and love bites. <<arousal 600>><<garousal>>
+	<<set $enemytrust += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Alex Somno Wake Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Alex Somno Wake Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Alex Somno Wake Sex Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	Alex buries <<his>> head in your neck, holding onto you. <<He>> mumbles a 'Good night' before falling asleep. <<lllust>><<npcincr Alex lust -10>>
+	<br><br>
+	<<tearful>> 당신은 <<his_ ga>> 코 고는 소리를 듣는다.
+	<<set $alexSomno to 1>>
+<<elseif $enemyhealth lte 0>>
+	Alex gives a small yelp. "You could've just said no, you know," <<he>> says, sounding wounded. <<He>> lays back down and faces away from you. <<llove>><<npcincr Alex love -1>>
+	<br><br>
+	<<tearful>> 당신은 돌아눕는다.
+	<<set $alexSomno to 2>>
+<<else>>
+	Alex pouts. "Gonna be hard to go back to sleep like this," <<he>> sheepishly chuckles.
+	<br><br>
+	<<He>> lays back down and faces away from you.
+	<br><br>
+	<<tearful>> 당신은 돌아눕는다.
+	<<set $alexSomno to 2>>
+<</if>>
+<br><br>
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Farm Alex Bed]]>><<endevent>><</link>>
+
+:: Farm Alex Somno Wake Pushy
+<<effects>>
+
+You shove Alex away, almost knocking <<him>> out of the bed. <<He>> gives you an annoyed look before rolling over. "Good night," you hear <<him>> say, sounding bitter. You return to your original position.
+<br><br>
+<<link [[다음|Farm Alex Bed]]>><<set $alexSomno to 2>><<endevent>><</link>>
+
+:: Farm Alex Somno Let Sleep
+<<effects>>
+
+You decide to try and go back to sleep. Alex continues to hump your rear. <<stress 6>><<trauma 6>><<gstress>><<gtrauma>>
+<br><br>
+
+<<link [[다음|Farm Alex Bed]]>><<endevent>><</link>>
+
+:: Farm Alex Climb
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+당신은 알렉스에게서 황급히 떨어진다.
+<<if _alex.dom gte random(1, 50)>>
+	<<He_ nun>> 팔을 당신의 허리에 감아, 당신을 그 자리에 붙들고, <<his_ yi>> 몸을 당신에게 밀착시킨다. "내가 좀 거칠어지는 게 좋아?" <<he_ ga>> 속삭인다. "그래줄 수 있는데."<<gstress>><<glust>><<stress 6>><<npcincr Alex lust 1>>
+	<br><br>
+
+	<<link [[몸부림쳐 푼다|Farm Alex Climb 2]]>><<def 1>><<npcincr Alex dom -1>><</link>><<ldom>>
+	<br>
+	<<link [[굴복한다|Farm Alex Allow]]>><<sub 1>><<npcincr Alex dom 3>><</link>><<promiscuous1>><<ggdom>>
+	<br>
+<<else>>
+	<<He_ nun>> 침대에서 일어나는 당신을 제지하지 않는다. "마음대로 하셔," <<he_ ga>> 말한다. <<He_ 는>> 몸을 굴린다.
+	<br><br>
+
+	<<link [[다음|Farm Alex Bedroom]]>><<endevent>><<storeon "farm alex bed" "check">><<if _store_check is 1>><<storeon "farm alex bed">><<set $wardrobe_location to "alexFarm">><<wardrobeSelection>><</if>><</link>>
+	<br>
+<</if>>
+
+:: Farm Alex Climb 2
+<<effects>>
+
+당신은 알렉스의 손을 쳐내고, 침대 위에서 몸부림친다. "마음대로 하셔," <<he_ ga>> 말한다. <<He_ 는>> 몸을 굴린다.
+<br><br>
+
+<<set $alex_bed_spurned to 1>>
+
+<<link [[다음|Farm Alex Bedroom]]>><<endevent>><<storeon "farm alex bed" "check">><<if _store_check is 1>><<storeon "farm alex bed">><<set $wardrobe_location to "alexFarm">><<wardrobeSelection>><</if>><</link>>
+<br>
+
+
+:: Farm Alex Allow
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+당신은 엉덩이를 돌려대며, <<bottomtext>> 당신의 <<bottom_ 을>> 알렉스의 옷 아래 <<print (_alex.penis isnot "none" ? "육봉" : "보지")>>에 문질러, 그것을
+<<if currentSkillValue("bottomskill") lt 400>>
+	서서히 젖게 만든다.
+<<elseif currentSkillValue("bottomskill") lt 800>>
+	빠르게 젖게 만든다.
+<<else>>
+	순식간에 흠뻑 젖게 만든다.
+<</if>>
+<<promiscuity1>>
+
+<<he_ nun>> 더욱 대담해지며, 입맞춤으로 당신의 목덜미를 유린한다.
+<br><br>
+
+<<link [[다음|Farm Alex Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Farm Alex Push
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+당신은 알렉스를 곁에서 밀어내고, 반대쪽으로 돌아눕는다.
+<<if _alex.dom gte random(1, 50)>>
+	<<He_ nun>> 당신의 허리와 어깨에 <<his_ yi>> 팔을 둘러, 당신의 몸을 <<hePost>>에게로 끌어당긴다. "내가 좀 거칠어지는 게 좋아?" <<he_ ga>> 물어보며, 당신의 <<bottom_ ul>> 움켜쥔다. "난 상관없는데."<<gstress>><<stress 6>><<glust>><<npcincr Alex lust 1>>
+	<br><br>
+
+	<<link [[다시 밀어낸다|Farm Alex Push 2]]>><<def 1>><<npcincr Alex dom -1>><</link>><<ldom>>
+	<br>
+	<<link [[굴복한다|Farm Alex Go]]>><<sub 1>><<npcincr Alex dom 3>><</link>><<promiscuous1>><<ggdom>>
+	<br>
+<<else>>
+	<<He_ nun>> 침대에서 일어난다. "마음이 바뀔 걸." <<he_ ga>> 말한다. 어두워서 <<his_ yi>> 표정은 보이지 않는다. <<He_ nun>> <<his_ yi>> 방으로 돌아간다.
+	<br><br>
+
+	<<link [[다음|Farm Bed]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Farm Alex Push 2
+<<effects>>
+
+이번에는 좀 더 강하게, 당신은 알렉스를 밀어낸다. <<He_ nun>> 침대에서 굴러떨어진다. "마음대로 하셔," <<he_ ga>> 말한다. "마음 바뀌면 어디로 와야 하는지는 너도 알 거야." <<He_ nun>> <<his_ yi>> 방으로 돌아간다.
+<br><br>
+
+<<link [[다음|Farm Bed]]>><<endevent>><</link>>
+<br>
+
+:: Farm Alex Go
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	당신은 알렉스의 팔을 당신의 몸 위아래로 움직이며, <<him_ ga>> 당신의 몸을 탐하도록 한다.
+<<elseif $speech_attitude is "bratty">>
+	당신은 알렉스의 둔부를 마주 움켜잡고, <<his_ yi>> 사타구니를 당신의 사타구니에 가까이 밀착시킨다.
+<<else>>
+	당신은 다리를 벌리고 양팔로 알렉스를 끌어안는다.
+<</if>>
+<<promiscuity1>>
+
+ 용기를 얻어, <<he_ nun>> 더욱 대담해지며, 입맞춤으로 당신의 목덜미를 유린한다.
+ <br><br>
+
+<<link [[다음|Farm Alex Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+
+:: Farm Alex Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Alex Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Alex Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Alex Sex Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	알렉스는 등을 대고 돌아눕는다.<<lllust>><<npcincr Alex lust -5>><<npcincr Alex love 1>><<glove>>
+	<<if $bus is "farm_alex_room">>
+		<<unset $alex_bed>>
+	<<else>>
+		<<set $alex_bed to "player">>
+	<</if>>
+	<br><br>
+
+	<<tearful>> 당신은 <<his_ ga>> 코 고는 소리를 듣는다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<if $bus is "farm_alex_room">>
+		<<link [[다음|Farm Alex Bed]]>><</link>>
+	<<else>>
+		<<link [[다음|Farm Bed]]>><</link>>
+	<</if>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	<<if $bus is "farm_alex_room">>
+		당신은 알렉스를 침대 아래로 밀치고, 반대편으로 내려온다. "이 정도로 거친 걸 원했을 줄은 몰랐는데," <<he_ ga>> 말한다. <<He_ nun>> 이불 아래로 황급히 들어간다.<<llove>><<npcincr Alex love -1>>
+		<br><br>
+
+		<<tearful>> 당신은 당신의 방으로 돌아간다.
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<link [[다음|Farm Bedroom]]>><<storeon "farm alex bed" "check">><<if _store_check is 1>><<storeon "farm alex bed">><<set $wardrobe_location to "alexFarm">><<wardrobeSelection>><</if>><</link>>
+		<br>
+	<<else>>
+		당신은 알렉스를 침대 아래로 밀친다. "이 정도로 거친 걸 원했을 줄은 몰랐는데," <<he_ ga>> 말한다. 어두워서 <<his_ yi>> 표정은 보이지 않는다. <<He_ nun>> <<his_ yi>> 방으로 돌아간다.<<llove>><<npcincr Alex love -1>>
+		<br><br>
+
+		<<tearful>> 당신은 돌아눕는다.
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<link [[다음|Farm Bed]]>><</link>>
+	<</if>>
+<<else>>
+	<<if $bus is "farm_alex_room">>
+		당신은 침대에서 일어난다. "마음대로 하셔," <<he_ ga>> 말한다. <<tearful>> 당신은 당신의 방으로 돌아간다.
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<link [[다음|Farm Bedroom]]>><<storeon "farm alex bed" "check">><<if _store_check is 1>><<storeon "farm alex bed">><<set $wardrobe_location to "alexFarm">><<wardrobeSelection>><</if>><</link>>
+	<<else>>
+		알렉스는 침대에서 일어난다. "마음대로 하셔," <<he_ ga>> 말한다. "나랑 끝까지 해보려면 어디로 와야 하는지는 너도 알 거야."
+		<br><br>
+
+		<<tearful>> 당신은 돌아눕는다.
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<link [[다음|Farm Bed]]>><</link>>
+	<</if>>
+<</if>>
+
+
+
+:: Farm Bedroom Confront
+<<effects>>
+
+당신은 이불을 몸에 감싸고, 알렉스의 방으로 쳐들어간다. 당신은 불을 켜고, <<him_ i>> 자는 체하고 있는 것을 발견한다.
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"나-나한테 그런 짓을 하면 안 돼," 당신이 말한다. "무례한 거야."
+<<elseif $speech_attitude is "bratty">>
+	"망할 변태같으니," 당신이 말한다. "내가 너한테 똑같이 굴면 좋겠어?"
+<<else>>
+	"변태같이 굴지 마," 당신이 말한다.
+<</if>>
+<br><br>
+
+"네가 무슨 말 하는지 모르겠는데," 알렉스가 거짓말한다.
+<br><br>
+
+당신은 <<him_ ul>> 좀 더 추궁하나, <<he_ nun>> 계속해서 시치미뗀다. 하지만 결국에는 <<He_ ga>> 유죄를 시인한다.
+<br><br>
+
+당신은 침실로 돌아온다.
+<br><br>
+
+<<link [[다음|Farm Bed]]>><<endevent>><</link>>
+
+:: Farm Bedroom Revenge
+<<effects>>
+<<set _alex to C.npc.Alex>>
+<<trBreastsdesc _alex.breastsdesc>><<set _chest to (_alex.pronoun is "f" ? _trResult : "근육질 가슴")>>
+<<trPenisdesc _alex.penisdesc>><<set _genitals to (_alex.penis isnot "none" ? _trResult : "보지")>>
+
+당신은 알렉스가 다시 잠들 만큼의 시간을 기다렸다가, <<his_ yi>> 방에 숨어들어간다. 당신은 등을 펴고 누워있는 <<him_ ul>> 발견했고, <<his_ ga>> 숨을 쉴 때 마다 <<his_ yi>> 이불이 오르락내리락한다.
+<br><br>
+
+	당신은 이불을 걷는다. <<Hes_ 는>> 검정색 티셔츠와 <<print (_alex.pronoun is "f" ? "보이쇼츠" : "사각팬티")>>를 입고 있다.
+	<br><br>
+
+	소리나지 않게 조심하면서, 당신은 <<print (_alex.pronoun is "f" ? "보이쇼츠" : "사각팬티")>>를 <<his_ 의>> 허벅지로 끌어내려, <span class="lewd"><<his_ 의>> _genitals를 드러낸다.</span>
+
+당신은 멈추지 않고, 천을 <<his_ 의>> 무릎까지 끌어내린다. 발목까지 도달했을 때 <<He_ 가>> 몸을 뒤척이자, 당신은 속옷을 마저 휙 잡아끌어서, <<his_ 의>> 몸에서 완전히 벗긴다.
+<<promiscuity3>>
+
+알렉스는 당신이 한 짓을 깨닫자 마자 <<his_ 의>> 다리 사이로 손을 뻗는다. "미-미친," <<he_ 가>> 얼굴을 확 붉히며 말한다. "보지 마." <<He_ 가>> 자신의 속옷을 향해 손을 뻗으나, 당신은 침대에서 물러난다.
+<br><br>
+
+<<He_ 는>> <<his_ 의>> _genitals 위로 셔츠를 잡아내리며, 당신을 쫓아온다.
+그것은 몸을 가리기에는 충분히 길지도 헐렁하지도 않으며, 원단이 <<his_ 의>> _chest 위로 팽팽하게 당겨져 밑의 피부를 뽐내고 있다.
+<br><br>
+
+<<link [[돌려준다|Farm Alex Give]]>><<npcincr Alex love 1>><</link>><<glove>>
+<br>
+<<link [[계속 놀린다|Farm Alex Tease]]>><<npcincr Alex lust 5>><</link>><<athleticsdifficulty 1 1000>><<gglust>>
+<br>
+
+
+:: Farm Alex Give
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+당신은 <<his_ 의>> <<print (_alex.pronoun is "f" ? "보이쇼츠" : "사각팬티")>>를 내민다.
+<<He_ 는>> 속임수라고 생각한 듯 주저하다가, 그것을 낚아챈다.
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"나-난 그냥 이게 어떤 기분인지 알려주고 싶었어," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "잘 때 훔쳐보고 있었던 거 알아."
+<<elseif $speech_attitude is "bratty">>
+	"나는 네가 이런 변태짓 좋아하는 줄 알았지," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "나한테 이럴 만큼 즐기는 것 같던데."
+<<else>>
+	"네가 먼저 시작했잖아," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "잘 때 훔쳐보고 있었던 거 알아."
+<</if>>
+<br><br>
+
+"무-무슨 말인지 모르겠는데." 알렉스가 거짓말한다. 어쨌거나 <<he_ nun>> 당신의 말뜻을 알아차린 것 같다.
+<br><br>
+
+당신은 침대로 돌아간다.
+<br><br>
+
+<<link [[다음|Farm Bed]]>><<endevent>><</link>>
+
+:: Farm Alex Tease
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+당신은 알렉스와 옷장 사이에 있는 <<him_ 의>> 침대 시트 위에 서 있다. <<He_ 는>> <<his_의>>
+<<print (_alex.pronoun is "f" ? "보이쇼츠" : "사각팬티")>>를 향해 돌진한다.
+<<if $athleticsSuccess>>
+
+	<span class="green">그러나 당신은 그것을 멀리 들어올린다.</span> <<He_ 는>> 한 손으로 셔츠를 허벅지 사이로 잡아내려야 하는 탓에, 불리한 상황에 처해 있다.<<ldom>><<npcincr Alex dom -1>>
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"이것 때문에 내게 벌을 줄 생각이니?" 당신은 놀려댄다.
+	<<elseif $speech_attitude is "bratty">>
+		"별로 재밌진 않다," 당신이 말한다. "그치?"
+	<<else>>
+		"돌려받고 싶어?" 당신이 묻는다. "그 대신 나한테 뭘 해줄래?"
+	<</if>>
+	<br><br>
+
+	알렉스는 흥분을 가라앉힌다. "네 말뜻은 알겠어." <<he_ 가>> 선명하게 달아오른 얼굴로 말한다. "그냥 이리 돌려주라."
+	<br><br>
+
+	<<link [[돌려준다|Farm Alex Tease Give]]>><<npcincr Alex love 1>><</link>><<glove>>
+	<br>
+	<<link [[보여달라고 요구한다|Farm Alex Tease Demand]]>><<npcincr Alex love -1>><<npcincr Alex dom -3>><<npcincr Alex lust 5>><</link>><<llove>><<lldom>><<gglust>>
+	<br>
+<<else>>
+	<span class="red">그리고 그것을 당신의 손아귀에서 낚아챈다.</span> <<gdom>><<npcincr Alex dom 1>>
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"나-난 그냥 이게 어떤 기분인지 알려주고 싶었어," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "잘 때 훔쳐보고 있었던 거 알아."
+	<<elseif $speech_attitude is "bratty">>
+		"나는 네가 이런 변태짓 좋아하는 줄 알았지," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "나한테 이럴 만큼 즐기는 것 같던데."
+	<<else>>
+		"네가 먼저 시작했잖아," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "잘 때 훔쳐보고 있었던 거 알아."
+	<</if>>
+	<br><br>
+
+	"무-무슨 말인지 모르겠는데." 알렉스가 거짓말한다. 어쨌거나 <<he_ nun>> 당신의 말뜻을 알아차린 것 같다.
+	<br><br>
+
+	당신은 침대로 돌아간다.
+	<br><br>
+
+	<<link [[다음|Farm Bed]]>><<endevent>><</link>>
+<</if>>
+
+:: Farm Alex Tease Give
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+당신은 알렉스에게 <<print (_alex.pronoun is "f" ? "보이쇼츠" : "사각팬티")>>를 던져준다.
+
+<<if $speech_attitude is "meek">>
+	"나-난 그냥 이게 어떤 기분인지 알려주고 싶었어," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "잘 때 훔쳐보고 있었던 거 알아."
+<<elseif $speech_attitude is "bratty">>
+	"나는 네가 이런 변태짓 좋아하는 줄 알았지," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "나한테 이럴 만큼 즐기는 것 같던데."
+<<else>>
+	"네가 먼저 시작했잖아," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "잘 때 훔쳐보고 있었던 거 알아."
+<</if>>
+<br><br>
+
+"무-무슨 말인지 모르겠는데." 알렉스가 거짓말한다. 어쨌거나 <<he_ nun>> 당신의 말뜻을 알아차린 것 같다.
+<br><br>
+
+당신은 침대로 돌아간다.
+<br><br>
+
+<<link [[다음|Farm Bed]]>><<endevent>><</link>>
+
+
+:: Farm Alex Tease Demand
+<<effects>>
+<<set _alex to C.npc.Alex>>
+<<trBreastsdesc _alex.breastsdesc>><<set _chest to (_alex.pronoun is "f" ? _trResult : "탄탄한 가슴")>>
+<<trPenisdesc _alex.penisdesc>><<set _genitals to (_alex.penis isnot "none" ? _trResult : "보지")>>
+
+<<if $speech_attitude is "meek">>
+	"응, 그럴게," 당신은 말한다. "하지만 네가 먼저 셔츠를 벗었으면 좋겠어."
+<<elseif $speech_attitude is "bratty">>
+	"돌려줄게," 당신은 말한다. "네가 셔츠를 벗는다면 말이야."
+<<else>>
+	"그럴게," 당신은 말한다. "네가 셔츠를 벗는다면 말이야."
+<</if>>
+<br><br>
+
+알렉스의 홍조가 짙어진다. <<He_ 는>> <<his_ 의>> 셔츠를 자신의 몸에 더 꼭 붙이고 고개를 돌린다. <<He_ 는>> 잠시 멈칫했다가, 신속한 움직임으로 <<his_ 의>> 셔츠를 몸과 머리 위로 끌어올린다. <<His_ 의>> 양팔은 다시 아래로 내려지지만, 이미 당신이 <<his_ 의>> _genitals를 한 번 더 본 후였다.
+
+당신은 또한 <<his_ 의>> _chest도 훔쳐볼 수 있었다.
+<br><br>
+
+"행복하냐?" <<he_ 가>> 묻는다.
+<br><br>
+
+당신은 <<himPost>>에게 <<print (_alex.pronoun is "f" ? "보이쇼츠" : "사각팬티")>>를 던져준다.
+
+<<if $speech_attitude is "meek">>
+	"나-난 그냥 이게 어떤 기분인지 알려주고 싶었어," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "잘 때 훔쳐보고 있었던 거 알아."
+<<elseif $speech_attitude is "bratty">>
+	"나는 네가 이런 변태짓 좋아하는 줄 알았지," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "나한테 이럴 만큼 즐기는 것 같던데."
+<<else>>
+	"네가 먼저 시작했잖아," <<him_ i>> 옷을 입도록 돌아서며, 당신이 말한다. "잘 때 훔쳐보고 있었던 거 알아."
+<</if>>
+<br><br>
+
+"무-무슨 말인지 모르겠는데." 알렉스가 거짓말한다. 어쨌거나 <<he_ nun>> 당신의 말뜻을 알아차린 것 같다.
+<br><br>
+
+당신은 침대로 돌아간다.
+<br><br>
+
+<<link [[다음|Farm Bed]]>><<endevent>><</link>>
+
+
+
+:: Farm Settings [exitCheckBypass]
+<<set $settingsExitPassage to "Farm Bedroom">>
+<<settings>>
+
+
+:: Farm Alex Bedroom
+<<set $wardrobe_location to "alexFarm">>
+<<effects>><<getTarget true>>
+<<wearoutfit>>
+<<farm_work_update>>
+당신은 알렉스의 침실에 있다. 당신의 방과 비슷하다. 옷장에서 옷들이 쏟아져 나와있고, 책상은 어수선하다. 창문을 통해 도로와, 그 너머 황무지가 내려다보인다. <<if C.npc.Alex.pregnancy.ultraSoundWallPic is true>>당신의 가장 최근 초음파 검사를 한 사진이 벽에 걸려 있다.<</if>>
+<br><br>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutfarmroad>>
+
+<<elseif npcIsPregnant("Alex") and !talkedAboutPregnancy("Alex","pc") and npcBellySize("Alex") gte 1>>
+	<<alex_cottage_pregnancy_reveal>>
+
+<<else>>
+	<<if $farm_attack_timer is 0 and Time.hour gte 21 and !$possessed>>
+		<<npc Alex>><<person1>>
+		고함치는 소리가 들려온다. 알렉스는 벌떡 일어선다. <span class="red">"<<nnpc_He_ ga Remy>> 왔어,"</span> <<he_ ga>> 말한다. "레미 말이야. 우리는 할 수 있어. 가서 준비해, 나는
+		<<if $farm.tower_guard>>
+			<<NPCname_ ul $farm.tower_guard>> 확인할게."
+		<<else>>
+			그들을 찾을 수 있을지 알아볼게."
+		<</if>>
+		<br><br>
+
+		<<farm_assault_intro>>
+		<br><br>
+
+		<<link [[준비한다|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 3>><</link>>
+		<br>
+	<<elseif Time.hour is 21 and $alex_to_bed is undefined and !$possessed>>
+		<<set $alex_to_bed to 1>>
+		하루 일과에 지쳐, 알렉스는 하품하며 침대로 들어간다.
+		<br><br>
+
+	<<elseif Time.dayState is "night" and $alex_bed is undefined>>
+		<<npc Alex>><<person1>>
+		알렉스는 <<his_ 의>> 침대에서 코를 골고 있다.
+		<<if Time.hour is 5>>
+			<br><br>
+			<<set $alex_bed to "none">>
+			<<He_ 는>> 이불을 마룻바닥으로 내던진다. <<covered>> "아침밥," <<he_ 가>> 하품한다.
+			<<if $daily.alex.bedOrgasm>>
+				잠시 뒤, <<he_ 가>> 얼굴을 붉힌 채 당신을 돌아본다. "밤중에 분명 뭔가가 들리던데. 내-내가 했던 말은 잊어버려."
+			<<else>>
+				<<switch $alexSomno>>
+					<<case 0>> /* Alex didn't wake up */
+						Alex smiles, "I feel extra refreshed this morning. Feels like it's gonna be a good day."
+					<<case 1>> /* Alex did wake up and PC finished them off/they had sex */
+						Alex blushes, "Last night was nice, partner. I feel extra refreshed this morning."
+					<<case 2>> /* Alex did wake up but no sex */
+						Alex looks over at you and blushes, though <<he>> seems to avoid eye contact with you.
+				<</switch>>
+			<</if>>
+			<<if $exposed gte 1>>
+				<<He_ ga>> 곁눈질하지 않는 척하며 방을 나선다.<<glust>><<npcincr Alex lust 1>>
+			<<else>>
+				<<He_ ga>> 방을 나서고, 계단이 삐걱거리는 소리가 들린다.
+			<</if>>
+		<</if>>
+		<<endevent>>
+		<br><br>
+
+	<<elseif $alex_bed isnot "player" and $farm_work.alex is "admin" or ($farm_work.alex is "clearing" and $farm_stage is 12) and !$possessed>>
+		<<npc Alex>><<person1>>
+		알렉스는 책상에 앉아서, 펼쳐진 노트북과 흩뿌려진 종이들 앞에서 전화통화를 하고 있다.
+		<<if $exposed gte 1>>
+			<<He_ 는>> 당신의 외설적인 모습에 정신이 팔리지 않으려고 노력하지만, 계속 몰래 힐끔거리고 있다.<<npcincr Alex lust 1>><<glust>>
+		<</if>>
+		<br><br>
+
+		<<if $arousal gte $arousalmax>>
+			<<orgasmLocation "alexFarmAdmin">>
+		<</if>>
+		<<endevent>>
+
+		<<if playerIsPregnant() and playerAwareTheyArePregnant() and getPregnancyObject().potentialFathers.find(s => s.source === "Alex") and (C.npc.Alex.pregnancy.pcKnowledge isnot true or C.npc.Alex.pregnancy.test is true or C.npc.Alex.pregnancy.test is true) and C.npc.Alex.pregnancy.ultraSound isnot "requested">>
+			<<pcPregnancyRevealToAlex>>
+		<</if>>
+
+		<<if C.npc.Alex.pregnancy.pcKnowledge is true and C.npc.Alex.pregnancy.ultraSoundPics is true and C.npc.Alex.pregnancy.sample isnot true and getPregnancyObject().potentialFathers.length is 1>>
+			<<link [[Show Alex your ultrasound pictures (0:05)|Farm PC Ultrasound Pics Show]]>><</link>>
+			<br><br>
+		<</if>>
+
+		<<officeicon>><<link [[도와준다 (1:00)|Farm Alex Admin]]>><<pass 60>><<npc Alex>><<person1>><<npcincr Alex love 1>><<stress 6>><</link>><<skill_difficulty `currentSkillValue("maths")` "수학" 1 1000>><<glove>><<gstress>>
+		<br>
+		<<if $alex_countdown is undefined and C.npc.Alex.love gte 80>>
+			<<officeicon>><<link [[알렉스를 껴안는다 (0:30)|Farm Phone Cuddle]]>><<pass 30>><<npc Alex>><<person1>><<npcincr Alex love 1>><</link>><<glove>>
+			<br>
+		<</if>>
+		<<if hasSexStat("promiscuity", 4) and !$daily.alex.adminOral>>
+			<<officeicon>><<link [[책상 밑으로 기어 들어간다|Farm Alex Admin Crawl]]>><<npc Alex>><<person1>><<set $daily.alex.adminOral to true>><</link>><<promiscuous4>>
+			<br>
+		<</if>>
+		<<if checkSextoysGift("Alex") and isLoveInterest("Alex") and checkIfNPCHasCategorySextoy("Alex","strap-on").length <= 5>>
+			<<sextoysicon "strap-on">><<link [[알렉스에게 페니스 밴드를 선물한다|Alex Gift Strap-on]]>><<npc Alex>><<person1>><</link>>
+			<br>
+		<</if>>
+		<br>
+	<</if>>
+	<<if $farm_stage gte 7>>
+		여기에는 책상이 있다. 당신은 여기서 농장 프로젝트 작업을 할 수 있다.
+		<br>
+		<<officeicon>><<link [[책상에 앉는다|Farm Upgrades]]>><</link>>
+		<br><br>
+	<</if>>
+	<<if $earSlime.event and $earSlime.noSleep>>
+		<<if $possessed>>
+			<<ind>><span class="purple">머릿속의 슬라임은 조용하다.</span>
+		<<else>>
+			<<ind>><span class="red">슬라임이 당신이 자러 가기 전에 <<trSlimeEvent $earSlime.event>> 한다.</span>
+		<</if>>
+		<br>
+	<<elseif $alex_bed_spurned isnot 1>>
+		<<bedicon "yellow">><<link [[다 벗고 알렉스의 침대에 들어간다|Farm Alex Bed]]>><<undressSleep "farm alex bed">><</link>>
+		<br>
+		<<if $earSlime.alwaysSleepNaked is false>>
+			<<bedicon "yellow">><<link [[알렉스의 침대에 눕는다|Farm Alex Bed]]>><</link>>
+		<<else>>
+			<<icon "cross.png" "infront">>
+			<<bedicon "yellow">>
+			<<if $possessed>>
+				<span class="purple">슬라임은 조용하다.</span>
+			<<else>>
+				<span class="purple">슬라임은 당신이 옷을 하나라도 걸치고 자는 것을 허락하지 않을 것이다.</span>
+			<</if>>
+		<</if>>
+		<br>
+	<</if>>
+	<br>
+	<<if $nextPassageCheck is "Farm Bedroom">>
+		<span class="nextLink"><<link [[당신의 방 (0:01)|Farm Bedroom]]>><<pass 1>><</link>></span>
+	<<else>>
+		<<bedicon>><<link [[당신의 방 (0:01)|Farm Bedroom]]>><<pass 1>><</link>>
+	<</if>>
+	<br>
+	<<main_hall_icon>><<link [[아래층으로 간다 (0:01)|Farm Cottage]]>><<pass 1>><</link>>
+	<br>
+<</if>>
+
+:: Farm Alex Bed
+<<set $bus to "farm_alex_room">><<effects>>
+
+<<if Time.dayState is "night" and $alex_bed is undefined>>
+	당신은 알렉스의 곁으로 파고든다.
+<<else>>
+	당신은 이불 속으로 파고든다.
+	<<if numberOfEarSlime() and $alex_bed isnot "player" and random(0,100) lt 3 + Math.floor($earSlime.growth / 100) - $earSlime.eventTimer and !$earSlime.event>>
+		<<set $slimeBedExit to "Farm Alex Bed">>
+		<<set $slimeBedroomExit to "Farm Alex Bedroom">>
+		<<setSlimeSleepEvents>>
+		<<if $earSlimeEvent>>
+			<<slimeSleepEvents>>
+		<</if>>
+	<</if>>
+<</if>>
+<<if $wraith.state and $wraithPrison and ($moonstate is "evening" or $moonstate is _nightstate)>>
+	당신은 불안을 느끼고, 당신의 눈이 거울로 향한다.
+<</if>>
+<br><br>
+<<farm_sleep_options>>
+
+:: Farm Breakfast Reject
+<<effects>>
+
+<<npc Alex>><<person1>>
+
+<<if $phase is 0>> /* Help Alex make breakfast */
+	You attempt to help Alex with breakfast but <<he>> shoves you away. "I don't need your damn help. And you aren't welcome at the table this morning," Alex says with a harsh tone.
+<<else>> /* Eat breakfast */
+	You sit down at the table before Alex whips around. "You aren't getting anything. Make it yourself," Alex says with a harsh tone. <<He>> doesn't want you in the kitchen.
+<</if>>
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+:: Farm Breakfast Make
+<<effects>>
+
+<<npc Alex>><<person1>>
+<<alexRemyTattoosCheck "breakfast">>
+
+당신은 주방에 있는 알렉스와 합류해, 그를 도와주겠다고 한다. <<He_ nun>> 당신의 도움에 고마워한다.
+
+<<if $rng gte 81>>
+	<<He_ nun>> 당신에게 <<he_ ga>> 스크램블 에그를 만드는 동안 감자를 씻어 껍질을 벗겨달라고 부탁한다.
+	<br><br>
+
+	곧 식사가 차려진다. 농장의 수확물로 만든, 스크램블 에그와 해쉬브라운이다.
+<<elseif $rng gte 61>>
+	<<He_ nun>> 당신에게 <<he_ ga>> 베이컨을 구울 동안 녹색채소를 손질해달라고 부탁한다.
+	<br><br>
+
+	곧 식사가 차려진다. 채소 한 쪽을 곁들인 베이컨이다.
+<<elseif $rng gte 41>>
+	<<He_ nun>> 당신에게 <<he_ ga>> 크림을 준비할 동안 반죽을 개어달라고 부탁한다.
+	<br><br>
+
+	곧 식사가 차려진다. 과일로 채운 신선한 페이스트리에, 크림을 얹어 냈다.
+<<elseif $rng gte 21>>
+	<<He_ nun>> 당신에게 <<he_ ga>> 비법 소스를 배합할 동안 채소를 씻어달라고 부탁한다.
+	<br><br>
+
+	곧 식사가 차려진다.	고소한 크레이프와 볶은 채소, 그리고 크림 소스다.
+<<else>>
+	<<He_ nun>> 당신에게 과일을 씻어달라고 부탁한다.
+	<br><br>
+
+	곧 식사가 차려진다. 요거트와 과일 모듬이다.
+<</if>>
+좋은 냄새가 난다.
+<br><br>
+
+
+<<link [[알렉스에게 감사인사를 한다|Farm Breakfast]]>><<npcincr Alex love 1>><<set $phase to 1>><</link>><<glove>>
+<br>
+<<link [[대화한다|Farm Breakfast]]>><<trauma -6>><<set $phase to 2>><</link>><<ltrauma>>
+<br>
+<<link [[조용히 식사한다|Farm Breakfast]]>><<set $phase to 3>><<stress -6>><</link>><<lstress>>
+<br>
+
+
+
+:: Farm Breakfast Eat
+<<effects>>
+
+<<npc Alex>><<person1>>
+
+알렉스가 주방을 분주히 돌아다니는 동안 당신은 테이블에 앉아있다. <<He_ nun>> 접시 두 개를 들고 카운터에서 돌아와, 당신 앞에 하나를 내려놓는다.
+
+<<if $rng gte 81>>
+	농장의 수확물로 만든, 스크램블 에그와 해쉬브라운이다.
+<<elseif $rng gte 61>>
+	채소 한 쪽을 곁들인 베이컨이다.
+<<elseif $rng gte 41>>
+	과일로 채운 신선한 페이스트리에, 크림을 얹어 냈다.
+<<elseif $rng gte 21>>
+	고소한 크레이프와 볶은 채소, 그리고 크림 소스다.
+<<else>>
+	요거트와 과일 모듬이다.
+<</if>>
+<br><br>
+
+알렉스는 앉자마자 바로 먹기 시작한다.
+<br><br>
+
+<<link [[알렉스에게 감사인사를 한다|Farm Breakfast]]>><<npcincr Alex love 1>><<set $phase to 1>><</link>><<glove>>
+<br>
+<<link [[대화한다|Farm Breakfast]]>><<trauma -6>><<set $phase to 2>><</link>><<ltrauma>>
+<br>
+<<link [[조용히 식사한다|Farm Breakfast]]>><<set $phase to 3>><<stress -6>><</link>><<lstress>>
+<br>
+
+
+:: Farm Breakfast
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+<<if $phase is 1>>
+	당신은 음식을 칭찬한다.
+	<<if $speech_attitude is "meek">>
+		"저-정말 맛있어!" 당신이 말한다. "도시에서 파는 으-음식과는 비교가 안 될 정도야."
+	<<elseif $speech_attitude is "bratty">>
+		"놀라운데," 당신이 말한다. "도시에서 파는 쓰레기들보다는 낫네."
+	<<else>>
+		"정말 맛있다," 당신이 말한다. "도시의 레스토랑보다 나아."
+	<</if>>
+	<br><br>
+
+	알렉스가 활짝 웃는다. "고마워," <<he_ ga>> 또 한 입을 가득 물며 말한다.
+	<<switch random(1, 5)>>
+		<<case 1>>
+			<<if _alex.lust gte 20>>
+				"여기 음식만 먹음직스러운 건 아닌데." <<He_ ga>> 윙크한다.
+			<<elseif isLoveInterest("Alex")>>
+				"네가 동기부여가 되어 줬어."
+			<<else>>
+				"연습을 많이 했거든."
+			<</if>>
+		<<case 2>>
+			<<if $farm.build_finished.includes("coop 2")>>
+				"네 덕분에 달걀이 많아져서, 혼자 다 감당할 수가 없어."
+			<<elseif $farm.build_finished.includes("coop 1")>>
+				"달걀은 공급 과잉이지. 닭들이 무슨 토끼처럼 번식했다고. 마침 얘기가 나와서 말인데...
+				<<if C.npc.Alex.lust gte 20>>
+					우리끼리 가질 시간이 매우 기대되는걸." <<He_ ga>> 윙크한다.
+				<<else>>
+					아무 것도 아니야. 음식 식겠다." <<He_ nun>> <<his_ yi>> 접시에 남은 음식을 해치운다.
+				<</if>>
+			<<else>>
+				"우리 달걀 말야, 내가 뭐랬어?"
+			<</if>>
+		<<case 3>>
+			"나 기분이 좋아.
+			<<if $farm_attack_timer is 0>>
+				오늘 밤에 무슨 일이 생기든, 난 각오 됐어."
+			<<elseif isLoveInterest("Alex")>>
+				난 내
+				<<if _alex.dom gte 30>>
+					<<girl_ 을>> 가졌고,
+				<<else>>
+					<<if $player.gender_appearance is "f">>여<<else>>남<</if>>자를 지켜야 하고,
+				<</if>>
+				번성하는 사업에다, 우리만의 장소를 가졌지. <<nnpc_genderyPost "Alex">>에게 더할 나위 없지 않겠어?"
+			<<else>>
+				언제까지나 지금만 같길."
+			<</if>>
+		<<case 4>>
+			<<if $farm.milking.dayMilking is true>>
+				<<if _alex.dom gte 30>>
+					"네가 너 자신의 젖을 짜기로 해 줘서 기쁘다. 너무 맛있어."
+				<<elseif _alex.dom lte -30>>
+					"우-우유는 너한테 감사하지 않으면 안 되겠는걸." 당신은 <<his_ 의>> 뺨이 불그스름하게 물든 것을 발견한다.
+				<<else>>
+					"이 요리에 네 모유를 썼어. 네가 개의치 않길 바라. 그럴 가치가 있었다고 하네, 내 배는."
+				<</if>>
+			<<elseif $farm_work.cattle.gender is "m">>
+				"우리 숫소들은 좋은 우유를 만드니까."
+			<<else>>
+				"우리 암소들은 좋은 우유를 만드니까."
+			<</if>>
+		<<case 5>>
+			"도시 놈들은 따라올 수가 없지." <<He_ ga>> 주먹으로 테이블을 내려치자 위에 놓인 모든 물건들이 덜컹거린다. 당신은 접시를 잘 잡는다.
+			<br><br>
+
+			<<if _alex.dom gte 30>>
+				"그래, 말했다. 그래서 네가 어쩔 건데?" <<He_ ga>> <<his_ yi>> 혀를 쏙 내민다.
+			<<elseif _alex.dom lte -30>>
+				"젠장, 너를 놀래킬 생각은 아니었는데." <<He_ nun>> 당신이 괜찮은지 다시 확인하고서 <<his_ yi>> 접시를 비운다.
+			<<else>>
+				"미안," <<he_ ga>> 웃으며 손을 들어 <<his_ yi>> 뒷머리를 긁는다. "그냥 해 본 말이야."
+			<</if>>
+	<</switch>>
+
+<<elseif $phase is 2>>
+	당신은 알렉스와 식사하는 동안 농장과 <<his_ 의>> 오늘 계획에 관해 떠든다.
+	<<switch random(1, 5)>>
+		<<case 1>>
+			"농장 이야기는 됐고," 어느 순간 <<he_ 가>> 말한다. "네 이야기 해 주라."
+			<br><br>
+
+			<<farm_tell_alex>>
+		<<case 2>>
+			<<silently>><<farm_upgrades_status>><</silently>>
+			<<if $farm_attack_timer is 0>>
+				"레미가 오늘 밤에 찾아올 텐데," <<he_ ga>> 음식을 적당히 삼키고 말한다.
+				<<if _alex.dom gte 30>>
+					"덤벼 보라지." <<He_ ga>> <<his_ yi>> 손바닥에 주먹을 부딪친다. "내 사유지에 발을 들이는 새끼들은 모조리 후회하게 해줄 테니까."
+				<<elseif _alex.dom lte -30>>
+					"거짓말은 안 할게. 떨려." <<He_ nun>> 기대하는 눈으로 당신을 바라본다. "네가 꼭 와줄 필요는 없지만, 함께 있을 때 승산이 더 있을 거라 생각해."
+				<<else>>
+					"걔네들이 걔네 엄마들에게로 도망가게 만들어 주자고." <<He_ nun>> 웃는다.
+				<</if>>
+			<<elseif _upgrade_count gte 8>>
+				"농장이 이보다 발전할 수는 없을 거야," <<he_ 는>> 음식을 꿀꺽 삼키고 나서, 싱긋 웃는다. "달리 더 할 일은 많지 않아, 계속 최고의 상태를 유지하는 것밖에는. 지금으로선 말이지.
+				솔직히 말해서, 여기까지 올 줄은 상상도 못 했어. 다 네 덕분이야."
+			<<else>>
+				<<if $farm.aggro gte 60>>
+					"일이 계속 쌓여만 가는걸, 걱정이야. 깡패 자식들이 자꾸 목을 죄어오니 더 힘들지만,"
+				<<else>>
+					"일이 계속 쌓여만 가는걸, 걱정이야,"
+				<</if>>
+					<<he_ 가>> 한숨을 크게 내뱉더니, 밝은 미소를 보인다. "그래도, 우리가 감당 못할 일따윈 없지."
+			<</if>>
+		<<case 3>>
+			<<if $speech_attitude is "meek">>
+				"우리가 처음 만났을 때 기억나니? 꽤-꽤나 시간이 흘렀지." 당신은 곰곰이 생각한다.
+			<<elseif $speech_attitude is "bratty">>
+				"이곳에 온지 정말 오래된 느낌이야," 당신이 크게 말한다.
+			<<else>>
+				"우리 먼 길을 걸어왔구나, 그치? 우리가 처음 만났던 날 기억나니?" 당신은 궁금해한다.
+			<</if>>
+			<<He_ nun>> 당신의 말에 고개를 끄덕인다.
+			<br><br>
+
+			<<if isLoveInterest("Alex")>>
+				"그 날을 절대로 못 잊지." <<He_ ga>> 활짝 웃는다. "널 만난 건 내 생애 최고의 일이야, 파트너." 당신은 <<his_ yi>> 미소가 이보다 더 환해질 수는 없을 거라 생각한다.
+			<<else>>
+				"고생길을 걸어왔지," <<he_ 가>> 애틋한 미소로 말한다. "다시 돌아간대도 그렇게 할 거야, 파트너."
+			<</if>>
+		<<case 4>>
+			<<He_ nun>> 입에 음식을 가득 채운 채로 말한다. 결국, <<he_ ga>> 음식을 꿀꺽 삼킨다.
+			<<if $tiredness gte (C.tiredness.max / 5) * 2>>
+				"잠을 잘 못 잔 거야?" <<he_ ga>> 묻는다. "네 눈 보면 알아."
+			<<elseif $tiredness gte (C.tiredness.max / 5) * 3>>
+				"너 정말 제대로 눈 좀 붙여야 해," 걱정스러운 표정으로 <<he_ ga>> 말한다. "당장이라도 쓰러질 것 같다고."
+			<<elseif $arousal gte ($arousalmax / 5) * 3 and _alex.lust gte 20>>
+				<<He_ ga>> 당신 얼굴의 짙은 홍조를 알아차린다.
+				<br><br>
+
+				<<if _alex.dom gte 10>>
+					"꼼짝 말고 앉아있어 봐. 그리로 갈게," <<he_ 는>> 테이블 아래에서 당신의 사타구니에 발을 대고 누르며, 씨익 웃는다.<<arousal 200 "genitals">><<garousal>>
+				<<elseif _alex.dom lte -10>>
+					"너-너도 나랑 같은 생각 중이야?" <<He_ nun>> 덩달아 얼굴을 붉힌다.
+				<<else>>
+					"무슨 일로 아침 댓바람부터 그렇게 달아있는 거야? 내가 한번 봐야겠는데." <<he_ 가>> 놀려댄다.
+				<</if>>
+			<<else>>
+				"가족들한테 다시 연락해 봐야겠어. <<if $pronoun is "m">>아빠<<else>>엄마<</if>>가 들른 뒤로 참 많은 일이 있었지."
+			<</if>>
+		<<case 5>>
+			<<He_ 는>> 음식이 목에 걸려 거의 질식할 뻔 하다가, 목을 가다듬는다.
+			<br><br>
+			/* Modify to account for tfs*/
+			<<if $worn.neck.collared is 1>>
+				<<if _alex.dom gte 30>>
+					느닷없이, 당신의 목줄이 강한 힘으로 잡아당겨져서 당신은 거의 음식에 얼굴을 박을 뻔 한다. "미안, 분위기 잡으려던 거였는데." <<he_ ga>> 싱긋 웃는다.
+					"내 힘을 과소평가했던 것 같아."<<arousal 100>><<npcincr Alex lust 1>><<garousal>><<glust>>
+				<<elseif _alex.dom lte -30>>
+					<<He_ 가>> 멋쩍게 당신의 목걸이를 응시한다. "그건 경찰이 도와줄 수 있을 거야. 근데 내가 더 잘할지도. 한 번 믿어 봐." <<He_ 는>> 당신의 목줄을 잡아당긴다.
+					<<arousal 100>><<npcincr Alex lust 1>><<garousal>><<glust>>
+				<<else>>
+					"좋은 시간 보내 볼래?" <<he_ 가>> 당신의 목줄로 손을 뻗으며 말한다. 순식간에, 빠른 속도로 한 번 잡아당겨지더니 당신과 테이블 사이의 간격이 좁혀진다.
+					<<He_ 는>> 당신의 얼굴 표정을 보고 웃는다.<<arousal 100>><<npcincr Alex lust 1>><<garousal>><<glust>>
+				<</if>>
+			<<elseif $worn.upper.type.includes("formal", "costume") or $worn.lower.type.includes("formal", "costume")>>
+				"너 쫙 빼입었구나," <<he_ 가>> 당신의 복장을 살피며 말한다. "이렇게 일찍 어디로 가는지 궁금하네. 내 알 바 아닐 것 같긴 한데."
+			<<elseif $worn.upper.type.includes("holy") or $worn.lower.type.includes("holy")>>
+				"풍년이 들길 기도해 줘," <<he_ 는>> 웃으며, <<his_ 의>> 허리에 손을 얹는다.
+			<<elseif $worn.head.name is "football helmet" or $worn.upper.name is "padded football shirt" or $worn.lower.name is "football shorts">>
+				<<He_ nun>> 당신의 미식축구 장비를 알아차리고, 깜짝 놀란 듯 보인다. "네가 그런 걸 좋아할 타입이라고는 생각 못 했는데," <<he_ ga>> 말한다. "내가 그걸 한 지도 꽤 되었지."
+			<<elseif $worn.upper.type.includes("school") or $worn.lower.type.includes("school")>>
+				<<if Time.schoolDay>>
+					"학교 잘 다녀 와," <<he_ 가>> 말한다. "난 집에서 배웠어서 진짜 다행이다."
+				<<else>>
+					"알지, 오늘 휴일인 거," <<he_ 가>> 웃어댄다. <<Hes_ nun>> 당신의 교복에 대해 얘기하고 있다.
+				<</if>>
+			<<elseif $worn.upper.name is "cow onesie" or $worn.lower.name is "cow print chaps" or $worn.lower.name is "cow onesie bottoms" or $worn.hands.name is "cow sleeves" or $worn.legs.name is "cow socks">>
+				<<He_ 는>> 당신의 젖소 무늬 의상에 주목한다. "네 모습 마음에 든다, <<if $player.gender_appearance is "m">>숫소<<else>>암소<</if>>씨. 다른 소들 틈에 정말 잘 녹아들 거야." <<He_ 가>> 재빨리 덧붙인다. "진짜로 시도하진 말고."
+			<<elseif $worn.head.name is "cowboy hat" or $worn.lower.name is "cowboy chaps">>
+				<<He_ 는>> 당신의 카우보이 의상에 주목한다. "그 때 파트너 제안했던 거, 옛날 서부극에서의 파트너를 말한 건 아니었거든." <<he_ 가>> 웃는다.
+			<<elseif $worn.upper.type.includes("sleep") or $worn.lower.type.includes("sleep")>>
+				"너 어서 옷 갈아입어야겠다," <<he_ 가>> 말한다. "네 잠옷이 망가지는 걸 보는 건 싫을 거야."
+			<<elseif $worn.head.name is "straw hat">>
+				<<He_ 는>> 당신의 밀짚모자에 주목한다. "우리 같은 모자네." <<he_ 가>> 밝게 웃는다. "선크림도 잊지 마."
+			<<elseif $worn.head.name is "racing helmet" or $worn.head.name is "riding helmet" or $worn.feet.name is "paddock boots" or $worn.feet.name is "field boots">>
+				<<He_ 는>> 당신의 승마 장비에 주목한다. "우리 언제 한 번 승마를 해도 되겠어," <<he_ 가>> 제안한다. "내가 너무 바쁘지만 않았다면."
+			<<else>>
+				"돼지들이 내 옷 좀 그만 벗겨댔으면 좋겠다." <<he_ 는>> 한숨을 쉰다. "다음에 꼭 저녁 먹을 배 비워 놔."
+			<</if>>
+	<</switch>>
+<<else>>
+당신은 아침을 먹는다. 당신은 떠들 기분이 아니고, 알렉스는 먹는 데에 집중한 듯 보인다.
+<</if>>
+<br><br>
+
+<<He_ nun>> 빈 접시들을 싱크대에 가져다 놓는다.
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Breakfast Tea
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+당신은 알렉스에게 차를 끓여준다. <<he_ yi>> 취향대로, 우유를 조금 넣고, 설탕은 넣지 않는다.
+<br><br>
+"건배," 당신이 <<himPost>>에게 컵을 건네자 <<he_ ga>> 말한다.
+
+<<if _alex.lust gte 20>>
+	<<He_ ga>> 당신이 돌아설 때 당신의 <<bottom_ ul>> 찰싹 후려친다.
+	<br><br>
+
+	<<link [[화를 낸다|Farm Breakfast Tea Angry]]>><<npcincr Alex love -1>><<npcincr Alex dom -1>><<stress -6>><</link>><<llove>><<ldom>><<lstress>>
+	<br>
+	<<link [[무시한다|Farm Cottage]]>><<npcincr Alex dom 1>><<endevent>><</link>><<gdom>>
+	<br>
+	<<if hasSexStat("promiscuity", 2)>>
+		<<link [[자극한다|Farm Breakfast Tea Goad]]>><<sub 1>><<npcincr Alex dom 3>><</link>><<promiscuous2>><<ggdom>>
+		<br>
+	<</if>>
+<<else>>
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Farm Breakfast Tea Angry
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"그-그건 내게 고마움을 표시하는 좋은 방법이 아니야," 당신이 말한다.
+<<elseif $speech_attitude is "bratty">>
+	"다음부터 이 망할 차는 네가 알아서 끓여 마셔." 당신이 말한다.
+<<else>>
+	"무례하게 굴지 마." 당신이 말한다.
+<</if>>
+<br><br>
+
+당신이 말하는 동안 알렉스는 당신의 <<bottom_ ul>> 탐나는 눈길로 쳐다본다. "미안." <<he_ ga>> 싱긋 웃으며 말한다. "참을 수가 없었어."
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+
+:: Farm Breakfast Tea Goad
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"만약 내가 끓인 차가 불만족스럽다면," 당신이 말한다. "나를 제대로 혼내줘야지."
+<<elseif $speech_attitude is "bratty">>
+	"그걸 때린 거라고 한 거야?" 당신이 다른 쪽 엉덩이를 내밀며 말한다. "겁쟁이, 다시 해봐."
+<<else>>
+	"난 거의 느끼지 못했는데." 당신이 말한다. "다시 해 줘."
+<</if>>
+<<promiscuity2>>
+
+알렉스는 <<his_ yi>> 찻잔을 테이블 위에 두고는, 당신의 허리를 향해 손을 뻗는다. "부족했어?" <<he_ ga>> 그렇게 물으며 당신을 <<his_ yi>> 무릎에 엎드리게 한다. "그럼 이건 어때?"
+<br><br>
+
+<<He_ nun>> 당신의 <<bottom_ ul>> <<his_ yi>> 손으로 후려치지만, 그렇게 강하지는 않다.
+<br><br>
+
+<<link [[더 세게|Farm Breakfast Spank]]>><<sub 1>><<pain 4>><<trauma -6>><</link>><<gpain>><<ltrauma>>
+<br>
+<<link [[이제 됐어|Farm Breakfast Spank End]]>><</link>>
+<br>
+
+
+
+:: Farm Breakfast Tea 2
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+당신은 차를 두 잔 끓인다. <<he_ yi>> 취향대로 우유를 조금 넣고, 설탕은 넣지 않는다.
+<br><br>
+"건배," 당신이 <<himPost>>에게 컵을 건네자 <<he_ ga>> 말한다.
+
+<<if _alex.lust gte 30>>
+	당신이 돌아설 때 <<He_ 가>> 당신의 <<bottom_ ul>> 찰싹 후려친다.
+	<br><br>
+
+	<<link [[화를 낸다|Farm Breakfast Tea Angry]]>><<npcincr Alex love -1>><<npcincr Alex dom -1>><<stress -6>><</link>><<llove>><<ldom>><<lstress>>
+	<br>
+	<<link [[무시한다|Farm Cottage]]>><<npcincr Alex dom 1>><<endevent>><</link>><<gdom>>
+	<br>
+	<<if hasSexStat("promiscuity", 2)>>
+		<<link [[자극한다|Farm Breakfast Tea 2 Goad]]>><<sub 1>><<npcincr Alex dom 3>><</link>><<promiscuous2>><<ggdom>>
+		<br>
+	<</if>>
+<<else>>
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Farm Breakfast Tea 2 Goad
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"아-아앗," 당신은 <<his_ yi>> 허벅지에 당신의 차를 살짝 기울이며 말한다. "난 너무 덜렁댄다니까. 나한테 벌을 주지 말았으면 좋겠다."
+<<elseif $speech_attitude is "bratty">>
+	"그걸 때린 거라고 한 거야?" 당신이 다른 쪽 엉덩이를 내밀며 말한다. "겁쟁이, 다시 해봐."
+<<else>>
+	"난 거의 느끼지 못했는데." 당신이 말한다. "다시 해 줘."
+<</if>>
+<<promiscuity2>>
+
+알렉스는 <<his_ yi>> 찻잔을 테이블 위에 두고는, 당신의 허리를 향해 손을 뻗는다. "부족했어?" <<he_ ga>> 그렇게 물으며 당신을 <<his_ yi>> 무릎에 엎드리게 한다. "그럼 이건 어때?"
+<br><br>
+
+<<He_ nun>> 당신의 <<bottom_ ul>> <<his_ yi>> 손으로 후려치지만, 그렇게 강하지는 않다.
+<br><br>
+
+<<link [[더 세게|Farm Breakfast Spank]]>><<sub 1>><<npcincr Alex lust 5>><<set $daily.alex.spank to true>><</link>><<gpain>><<glust>><<ltrauma>>
+<br>
+<<link [[이제 그만|Farm Breakfast Spank End]]>><</link>>
+<br>
+
+:: Farm Breakfast Spank
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+"더 세게," 당신이 말한다.
+
+<<if (_alex.dom + _alex.lust) gte 40>>
+	<<pain 4>><<trauma -6>>
+	알렉스는 <<his_ yi>> 손을 들어올리고, 당신의 <<bottom_ ul>> 한번 더 강타한다. 이번에는 따끔거린다.
+	<br><br>
+
+	"너같이 못된 <<girls_ nun>> 이런 걸 당하는 거야," <<he_ ga>> 말한다.
+	<br><br>
+
+	<<link [[더 세게|Farm Breakfast Spank 2]]>><<sub 1>><<npcincr Alex lust 5>><</link>><<ggpain>><<glust>><<lltrauma>>
+	<br>
+	<<link [[이제 됐어|Farm Breakfast Spank End]]>><</link>>
+	<br>
+<<else>>
+	알렉스는 <<his_ yi>> 손을 들어올려 내리칠 준비를 하지만, 머뭇거린다.
+	<br><br>
+
+	"그만하면 됐어," <<he_ ga>> 말한다. "이만하면 교훈을 얻었겠지." <i>지배도와 욕정이 더 높다면 <<him_ 은>> 더 나아갈 수 있을 것이다.</i>
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Farm Breakfast Spank 2
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+"더-더 세게," 당신이 말한다.
+
+<<if (_alex.dom + _alex.lust) gte 50>>
+	<<pain 8>><<trauma -12>>
+	알렉스는 당신의 <<bottomPost>>에 얼얼한 강타를 몇 차례 날리며 괴롭힌다.
+
+	"이제부터 착한 <<girl_ i>> 될 거지," <<he_ ga>> 말한다. "그렇지?" <<He_ nun>> 당신을 얼얼한 채로 놔둔다.
+	<br><br>
+
+	<<link [[더 세게|Farm Breakfast Spank 3]]>><<npcincr Alex lust 5>><</link>><<gggpain>><<glust>><<llltrauma>>
+	<br>
+	<<link [[이제 됐어|Farm Breakfast Spank End]]>><</link>>
+	<br>
+<<else>>
+	알렉스는 <<his_ yi>> 손을 들어올려 내리칠 준비를 하지만, 머뭇거린다.
+	<br><br>
+
+	"그만하면 됐어," <<he_ ga>> 말한다. "이만하면 교훈을 얻었겠지." <i>지배도와 욕정이 더 높다면 <<him_ 은>> 더 나아갈 수 있을 것이다.</i>
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Farm Breakfast Spank 3
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+"더 세게!" 당신이 외친다.
+
+<<if (_alex.dom + _alex.lust) gte 60>>
+	<<pain 12>><<trauma -18>>
+	알렉스는 <<his_ yi>> 손을 들어올리고는, 당신의 여린 <<bottom_ ul>> 엄청난 힘으로 후려친다. 당신의 얼굴에서 눈물이 흘러 떨어지며 앞으로 미는 힘에 의해 당신은 휘청거린다.
+	<br><br>
+
+	<<if (_alex.dom + _alex.lust) gte 70>>
+		"자, 이제 내게 보상을 해줘야지." <<he_ ga>> 말한다. <<He_ 는>> 당신의 다리를 <<his_ yi>> 무릎에서 치우고, 당신의 머리카락을 움켜쥔다. "네 입을 제대로 사용하는 게 좋을 거야."
+		<<He_ nun>> <<npcUndressText _alex "lower" "self" "and">>, <<npcRevealText _alex "lower">>.
+		<br><br>
+
+		<<if hasSexStat("promiscuity", 4)>>
+			<<link [[핥는다|Farm Breakfast Oral]]>><<set $sexstart to 1>><<set $daily.alex.breakfastSex to true>><</link>><<promiscuous4>>
+			<br>
+		<</if>>
+		<<link [[밀쳐낸다|Farm Breakfast Oral Refuse]]>><<npcincr Alex dom -1>><</link>>
+		<br>
+	<<else>>
+		"이만하면 교훈을 얻었겠지." <<he_ 가>> 당신을 무릎에서 밀어내며 말한다. 당신의 눈물을 보자 <<He_ 는>> 우물쭈물한다. "너무 세게 때리진 않았어야 할텐데." <i>지배도와 욕정이 더 높다면 <<him_ 은>> 더 나아갈 수 있을 것이다.</i>
+		<br><br>
+
+		<<link [[안심시킨다|Farm Breakfast Spank Reassure]]>><<npcincr Alex dom 1>><</link>><<gdom>>
+		<br>
+		<<link [[불평한다|Farm Breakfast Spank Complain]]>><<npcincr Alex dom -1>><</link>><<ldom>>
+		<br>
+	<</if>>
+<<else>>
+	알렉스는 <<his_ yi>> 손을 들어올려 내리칠 준비를 하지만, 머뭇거린다.
+	<br><br>
+
+	"그만하면 됐어," <<he_ ga>> 말한다. "이만하면 교훈을 얻었겠지." <i>지배도와 욕정이 더 높다면 <<him_ 은>> 더 나아갈 수 있을 것이다.</i>
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Farm Breakfast Oral
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<npcoral>>
+	<<set $enemytrust += 100>><<promiscuity4>>
+<</if>>
+
+<<effects>>
+알렉스는 차를 홀짝이고 있다.
+<br><br>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Breakfast Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Breakfast Oral]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Breakfast Oral Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	알렉스는 <<his_ yi>> 의자에 등을 기대어 앉아 <<his_ yi>> 차를 끝까지 마신다.<<glove>><<lllust>><<npcincr Alex love 1>><<npcincr Alex lust -10>>
+	<br><br>
+	<<tearful>> 당신은 빈 잔을 들고 주방에 도로 가져간다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Farm Cottage]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	알렉스는 <<his_ yi>> 성기를 가린다. "말로 해도 됐을 텐데," <<he_ 가>> 말한다. "아야야."<<llove>><<ldom>><<npcincr Alex dom -1>><<npcincr Alex love -1>>
+	<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Farm Cottage]]>><</link>>
+	<br>
+<<else>>
+	"좋아," 알렉스가 말한다. "나중에 보상해주면 돼."
+	<br><br>
+	<<tearful>> 당신은 주방으로 돌아간다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Farm Cottage]]>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Farm Breakfast Oral Refuse
+<<effects>>
+
+당신은 알렉스의 손아귀에서 벗어난다. "좋아," <<he_ ga>> 말한다. "나중에 보상해주면 돼."
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Breakfast Spank Reassure
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"시-신경쓰지 마," 당신이 말한다. "내가 원했던 거였잖아."
+<<elseif $speech_attitude is "bratty">>
+	"얕보지 마," 당신이 말한다. "네가 너무 거칠었다면 내가 뭐라도 말했을 거야."
+<<else>>
+	"괜찮았어," 당신이 말한다. "네가 너무 거칠었다면 내가 뭐라도 말했을 거야."
+<</if>>
+<br><br>
+
+알렉스는 끄덕인다. "자극적이네," <<he_ ga>> 말한다. "그냥 그렇다고."
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+:: Farm Breakfast Spank Complain
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"조-조금 거칠었어," 당신이 말한다. "앉지를 못 하겠어."
+<<elseif $speech_attitude is "bratty">>
+	"무자비하네," 당신이 말한다. "앉지를 못 하겠어."
+<<else>>
+	"너무 거칠었어," 당신이 말한다. "앉지를 못 하겠어."
+<</if>>
+<br><br>
+
+알렉스는 끄덕인다. "미안해." <<he_ ga>> 말한다. <<He_ nun>> 눈길을 피한다.
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Breakfast Spank End
+<<effects>>
+
+당신은 알렉스의 손아귀에서 벗어나려 몸부림친다. "이만하면 교훈을 얻었겠지." <<he_ ga>> 말한다. <<He_ nun>> <<his_ yi>> 차를 홀짝인다.
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Breakfast Tea Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"나-난 다른 할 일이 있어서," 당신이 말한다. "그리고 너만큼 잘 만들지 못할 거야."
+<<elseif $speech_attitude is "bratty">>
+	"난 네 부하가 아니야," 당신이 말한다. "네가 알아서 만들어 마셔."
+<<else>>
+	"나 바빠," 당신이 말한다. "미안."
+<</if>>
+<br><br>
+
+"좋아," 알렉스는 기지개를 켜며 말한다. "난 바싹 마른 채 남아있을게."
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+:: Farm Breakfast Tea Receive
+<<effects>>
+
+알렉스가 주방으로 간 동안 당신은 TV 앞에 앉아있다. 물이 끓는 소리가 들린다. 잠시 후, 알렉스가 김이 피어오르는 머그잔 두 개를 들고 돌아온다.
+<br><br>
+
+<<if C.npc.Alex.lust gte 20>>
+	"그 밖에 더 필요한 거 있어?" <<he_ 가>> 몸을 숙여 당신 옆에 있는 협탁 위에 머그잔을 올려놓으며 말한다.
+	<br><br>
+
+	<<link [[키스한다|Farm Breakfast Kiss]]>><<npcincr Alex love 1>><<npcincr Alex lust 5>><</link>><<kissvirginitywarning>><<glove>><<glust>>
+	<br>
+	<<if hasSexStat("promiscuity", 4) and !playerChastity("hidden") and (!playerChastity("cage") or $player.vaginaExist)>>
+		<<link [[알렉스의 머리를 당신의 가랑이에 누른다|Farm Breakfast Receive Oral]]>><<set $sexstart to 1>><<set $daily.alex.breakfastSex to true>><</link>>
+		<br>
+	<</if>>
+	<<link [[그냥 차를 마신다|Farm Breakfast Just]]>><</link>>
+	<br>
+<<else>>
+	차가 마음을 편안하게 해 준다.
+	<br><br>
+
+	<<if Time.hour gte 6>>
+		<<He_ 가>> 벽시계를 흘끗 본다. "일하러 갈 시간이네. 이따 보자." <<he_ 가>> 말하고, 일어나서 현관으로 발걸음을 옮긴다.
+		<br><br>
+
+		<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+	<<farm_cottage_tv_options>>
+	<<link [[일어난다|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+<</if>>
+
+
+:: Farm Breakfast Kiss
+<<effects>>
+
+당신은 알렉스의 머리 뒤쪽을 잡고, <<him_ 을>> 끌어당겨 키스한다.<<set $consensual to 1>>
+<<if $farm_stage gte 7 and $alex_countdown is undefined>>
+	<<takeKissVirginity "Alex" "loveInterest">>
+<<else>>
+	<<takeKissVirginity "Alex" "romantic">>
+<</if>>
+<<promiscuity1>>
+
+<<He_ 가>> 당신 위에 올라앉아, 당신을 의자에 붙들어두며 <<his_ 의>> 입술은 당신의 턱을 따라 내려가더니, 당신의 목을 덮친다. <<He_ 는>> 당신을 장난스럽게 한 번 깨물어주고 나서 당신 옆의 소파로 돌아앉는다.
+<br><br>
+
+<<farm_cottage_tv_options>>
+<<link [[일어난다|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Breakfast Receive Oral
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	알렉스는 당신과 눈을 맞추며 당신 앞에 무릎을 꿇는다. <<He_ 는>> <<his_ 의>> 양손을 <<his_ 의>> 허벅지 위에 둔다.
+	<<maninit>>
+	<<if $player.penisExist and $player.vaginaExist>>
+		<<if random(1, 2) is 2 and !playerChastity("cage")>>
+			<<set $NPCList[0].mouth to "penisentrance">><<set $penisuse to "othermouth">><<set $penisstate to "othermouthentrance">><<set $penistarget to 0>>
+		<<else>>
+			<<set $NPCList[0].mouth to "vaginaentrance">><<set $vaginause to "othermouth">><<set $vaginastate to "othermouthentrance">><<set $vaginatarget to 0>>
+		<</if>>
+	<<elseif $player.penisExist and !playerChastity("cage")>>
+		<<set $NPCList[0].mouth to "penisentrance">><<set $penisuse to "othermouth">><<set $penisstate to "othermouthentrance">><<set $penistarget to 0>>
+	<<else>>
+		<<set $NPCList[0].mouth to "vaginaentrance">><<set $vaginause to "othermouth">><<set $vaginastate to "othermouthentrance">><<set $vaginatarget to 0>>
+	<</if>>
+	<<set $enemytrust += 100>><<promiscuity4>>
+	<<set $NPCList[0].location.head to "genitals">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $orgasmdown gte 1>>
+	<span id="next"><<link [[다음|Farm Breakfast Receive Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Breakfast Receive Oral]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Breakfast Receive Oral Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	알렉스는 의자에 기댄 채, 숨을 헐떡인다. "제기랄," <<he_ ga>> 말한다. "널 보내버리고 싶었는데."
+	<br><br>
+	<<tearful>> 당신은 소파에 <<him_ ul>> 위한 자리를 만들어준다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $enemyhealth lte 0>>
+	<<He_ nun>> 뒤로 쓰러져, 앉은 자세를 취한다. "내가 그렇게나 서툴렀어?" <<he_ ga>> 말한다.
+	<br><br>
+	<<tearful>> 당신은 소파에 <<him_ ul>> 위한 자리를 만들어준다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $orgasmdown gte 1>>
+	오르가즘이 당신의 몸을 휘감자 당신은 두 눈을 꾹 감는다. 눈을 뜨자, 알렉스는 당신을 향해 씩 웃고 있다. "좋아할 줄 알았어," <<he_ 가>> 말한다. "난 내 <<if $player.gender_appearance is "f">>여자<<else>>남자<</if>>를 제대로 대하고 있다니까."
+	<br><br>
+	<<tearful>> 당신은 소파에 <<him_ ul>> 위한 자리를 만들어준다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+	<<tearful>> 당신은 옆에 있는 소파에 앉을 자리를 만들어준다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<npc Alex>><<person1>>
+<<farm_cottage_tv_options>>
+<<link [[일어난다|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+:: Farm Breakfast Just
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"나-난 괜찮아," 당신이 말한다. "차 잘 마실게."
+<<elseif $speech_attitude is "bratty">>
+	"그게 다야," 당신이 말한다. 당신은 차를 한 모금 마신다.
+<<else>>
+	"괜찮아," 당신이 말한다. "차 잘 마실게."
+<</if>>
+<br><br>
+
+알렉스는 당신 옆 의자에 털썩 앉는다.
+<br><br>
+
+<<farm_cottage_tv_options>>
+<<link [[일어난다|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Breakfast TV
+<<effects>>
+
+<<if $daily.alex.spank and $pain gte 20>>
+	<<He_ nun>> 당신의 눈물을 보자 죄책감을 느끼는 듯, 한 손으로 눈물을 닦아주며, 다른 손으로는 부드럽게 당신의 등을 토닥인다.
+	<<He_ yi>> 위로는 어색하지만, <<hes_ ga>> <<hisPost>> 나름대로 최선을 다하고 있음을 당신은 안다. 아픔이 조금씩 가신다.<<pain -10>><<lpain>>
+	<br><br>
+<</if>>
+<<if $rng gte 91>>
+	당신은 알렉스와 자연 다큐멘터리를 본다. 자연 생태계 속의 ?animals 관찰 다큐멘터리다. 알렉스는 흥미로워 보인다. <<He_ 는>>
+	<<print either("특히 적나라한 장면에서는 당신의 두 눈을 가린다", "더 가까이서 보려고 몸을 기울인다", "몇몇 동물 상식을 당신과 공유한다")>>.
+<<elseif $rng gte 81>>
+	당신은 알렉스와 광고를 본다. <<print either("요상한", "터무니없이 비싼", "당신 연령대에는 안 맞는", "분명 성인 시청자를 겨냥한")>> 상품이다.
+	<<switch random(1, 3)>>
+		<<case 1>>
+			"돌았구만," <<he_ 가>> 말한다. "요즘 파는 물건들이란."
+		<<case 2>>
+			"아니, 저런 걸 누가 산다는 건데?" <<He_ nun>> 화면을 보고 어리둥절한 몸짓을 한다.
+		<<case 3>>
+			"한 번은 내 <<sister_npc_ ga>> 저걸 샀었지," <<he_ ga>> 낄낄거린다. "부서져서 왔더라고."
+	<</switch>>
+<<elseif $rng gte 71>>
+	당신은 알렉스와 뉴스를 본다. <<print either("어떤 유명인의 생일", "날씨", "지역 소개", "현지 인터뷰")>> 소식이다. 알렉스는 딱히 불평할 거리가 없다.
+<<elseif $rng gte 61>>
+	당신은 알렉스와 오래된 스포츠 경기를 본다. 알렉스는 <<if random(1,2) is 1>> <<his_ yi>> 팀이 골을 넣자 대환호한다.<<else>>이미 경기 결과를 알고 있음에도 불구하고, 실점에 괴로워한다.<</if>>
+<<elseif $rng gte 51>>
+	당신은 알렉스와 외국 시트콤을 본다. 알렉스는 재방송에 관해 불평한다. "<<print either("어떻게 딱 저기서 끊냐,", "이거 다른 편인 줄 알았는데,", "또 이거 틀어주네,")>>" <<he_ ga>> 한숨쉰다.
+<<elseif $rng gte 41>>
+	당신은 알렉스와 드라마를 본다. 알렉스가 창 밖을 내다본다.
+	<<if Weather.precipitation is "rain">>
+		"날씨 더럽네." <<he_ ga>> 신음한다.
+	<<elseif Weather.precipitation is "snow">>
+		<<if $christmas is 1 and Time.monthDay is 25>>
+			"크리스마스에 때마침." <<he_ ga>> 말한다.
+		<<else>>
+			<<if random(1,2) is 1>>"옷 제대로 껴입어," <<he_ 는>> 말한다.<<else>> "삽질할 준비 되었길 바랄게." <<he_ 가>> 웃더니, 한숨짓는다. "내 등은 별로 반갑지 않다고 하네."<</if>>
+		<</if>>
+	<<elseif Weather.fog>>
+		"안개 꼈네, 언제나처럼." <<he_ ga>> 말한다.
+	<<else>>
+		"아까 분명히..." <<he_ nun>> 말을 삼킨다.
+	<</if>>
+<<elseif $rng gte 31>>
+	당신은 알렉스와 뭔가를 보려고 하지만, 음량이 너무 작다. 알렉스는 음량을 높였다가, 액션 장면 도중에 도로 낮춘다. "나 저런 상황 싫더라." <<he_ ga>> 말한다.
+<<elseif $rng gte 21>>
+	당신은 알렉스와 애니메이션 방송을 본다. 알렉스는 <<print either("추억으로 눈이 커진다", "거의 집중하지 않는다", "몸개그 장면에서 웃음을 터트린다")>>. 당신은 <<his_ yi>> 감정을 함께 느낀다.
+<<elseif $rng gte 11>>
+	알렉스는 당신에게 꼭 팔짱을 낀 채, TV를 가리키며, 환하게 웃는다. "이걸 수 없이 많이 봤었는데도, 이 장면은 언제나 내 마음을 사로잡더라." 당신은 조금 훈훈해진다.
+<<else>>
+	알렉스는 채널을 휙휙 넘기지만, 두 사람의 마음에 드는 걸 찾을 수 없었다. "이 시간에는 뭐 볼 만한 게 없다니까," <<he_ nun>> 어깨를 으쓱인다.
+<</if>>
+<br><br>
+
+
+<<if Time.hour gte 6>>
+	<<He_ 가>> 벽시계를 흘끗 본다. "일하러 갈 시간이네. 이따 보자." <<he_ 가>> 말하고, 일어나서 현관으로 발걸음을 옮긴다.
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<<elseif $alex_countdown is undefined>>
+	<<link [[계속 본다 (0:20)|Farm Breakfast TV]]>><<pass 20>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[알렉스를 껴안는다 (0:40)|Farm Breakfast Cuddle]]>><<npcincr Alex love 1>><<pass 40>><</link>><<glove>>
+	<br>
+	<<link [[그만둔다|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[계속 본다 (0:20)|Farm Breakfast TV]]>><<pass 20>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[그만둔다|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Farm Breakfast Cuddle
+<<effects>>
+<<set _alex to C.npc.Alex>>
+<<alexRemyTattoosCheck "cuddle">>
+
+당신은 알렉스의 곁에서 편하게 쉰다.
+<<if $daily.alex.spank and $pain gte 20>>
+	<<He_ nun>> 당신의 눈물을 보자 죄책감을 느끼는 듯, 한 손으로 눈물을 닦아주며, 다른 손으로는 부드럽게 당신의 등을 토닥인다.
+	<<He_ yi>> 위로는 어색하지만, <<hes_ ga>> <<hisPost>> 나름대로 최선을 다하고 있음을 당신은 안다. 아픔이 조금씩 가신다.<<pain -10>><<lpain>>
+	<br><br>
+<</if>>
+<<switch random(1, 10)>>
+	<<case 1>>
+		<<if _alex.dom gte 30>>
+			<<He_ ga>> 리모컨을 떨어트린다. "제길," <<he_ ga>> 말한다. "좀 주워줄래?" 당신은 팔을 뻗어, <<himPost>>에게 그것을 건넨다. "고마워." <<He_ nun>> 아무것도 아닌 척 휘파람을 불며, 당신에게서 시선을 돌린다.
+			<br><br>
+
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and hasSexStat("exhibitionism", 5)>>
+				당신은 <<he_ ga>> 당신의 치마를 올려다보려고 리모컨을 일부러 떨어트렸다는 사실을 눈치채고, <<he_ ga>> 당신을 다시 바라볼 때 치마를 다시 뒤집어 젖혀버린다.
+				<<He_ nun>> 당신의 시선을 피하고는, 완전히 빨개진 얼굴로 히죽거린다.<<npcincr Alex lust 3>><<glust>>
+			<<elseif setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+				당신은 어리둥절했다가, <<he_ ga>> 당신의 치마를 올려다보려고 리모컨을 일부러 떨어트렸다는 사실을 깨닫는다. 당신은 <<he_ 가>> 그것을 자백할 때까지 <<his_ 의>> 머리를 헝클어트린다.<<stress 6>><<gstress>><<npcincr Alex lust 1>><<glust>>
+			<<else>>
+				<<He_ 는>> 만면에 큰 미소를 띄우고 있고, 당신은 의아해한다. "좋은 구경했지 뭐야. 오늘 하루가 더 밝아졌어."<<npcincr Alex lust 1>><<glust>>
+			<</if>>
+		<<elseif _alex.dom lte -30>>
+			리모컨이 바닥에 떨어진다. "내가 주울게," <<he_ ga>> 말한다.
+			<br><br>
+
+			당신의 시선은 <<he_ 가>> 그것을 잡으려고 손을 뻗을 때 <<his_ 의>> 탄탄한 둔부에서 팽팽하게 당겨지는 <<print (_alex.pronoun is "f" ? "보이쇼츠" : "사각팬티")>>에 머무른다.
+			"너-너 딱 걸렸어," 알렉스는 뺨을 붉히고, 뒤로 물러서며 당신을 가리킨다.<<npcincr Alex lust 1>><<glust>><<arousal 100>><<garousal>>
+		<<else>>
+			리모컨이 바닥에 떨어진다. 서로가 동시에 손을 뻗자, 서로의 손이 닿는다. <<He_ nun>> 웃음을 참지 못하고, 당신도 덩달아 웃음이 터진다.
+		<</if>>
+	<<case 2>>
+		함께 일출을 바라보는 동안, <<He_ 는>> 당신의 머리를 쓰다듬는다. "정말로 아름답네. 딱 그런 사람을 알아. 무척 가까이에 있지."
+		<<he_ 가>> 몸을 기울여 당신의 볼에 입맞추고, 씩 웃는다. "멀리 갈 필요가 없다니까."
+	<<case 3>>
+		<<He_ ga>> 채널을 넘긴다. 영화에서 음란한 장면이 한창이다. <<He_ ga>> 당신을 힐끗 보더니, 빠르게 채널을 돌린다.<<npcincr Alex lust 1>><<glust>>
+		<<if Time.hour isnot 6>>
+		<br><br>
+			<<if hasSexStat("promiscuity", 2)>>
+				<<link [[그것을 가지고 놀린다|Farm TV Tease]]>><<npcincr Alex lust 5>><<arousal 200>><</link>><<promiscuous1>><<glust>><<garousal>>
+				<br>
+			<</if>>
+			<<link [[알렉스가 뭘 봤는지 묻는다|Farm TV Ask]]>><<npcincr Alex lust 3>><<arousal 100>><</link>><<glust>><<garousal>>
+		<</if>>
+	<<case 4>>
+		광고가 나오는 동안, 당신과 알렉스는 이마를 맞대고 서로 코를 비빈다.
+	<<case 5>>
+		당신은 <<his_ 의>> <<npcClothesText_ rul _alex "upper">> 벗기고, <<his_ 의>> 탄탄한 복부를 드러낸다. 당신은 거기 뜨거운 입김을 불어넣고 얼굴을 부빈다. 그걸 보고 <<He_ ga>> 마구 웃기 시작한다.<<npcincr Alex lust 1>><<glust>>
+	<<case 6>>
+		"조용하고 좋다." <<he_ ga>> <<he_ yi>> 베개를 털며 말한다. "하루종일 이러고 있을 수 있었으면 좋겠어." <<He_ nun>> 당신을 뒤에서 끌어안고,
+		<<if ($harpy gte 6 and $transformationParts.bird.wings isnot "hidden") or ($angel gte 6 and $transformationParts.angel.wings isnot "hidden") or ($demon gte 6 and $transformationParts.demon.wings isnot "hidden") or ($fallenangel gte 2 and $transformationParts.fallenAngel.wings isnot "hidden")>>
+			당신의 날개를 쓰다듬어준다.
+		<<elseif ($wolfgirl gte 3 and $transformationParts.wolf.ears isnot "hidden") or ($cat gte 4 and $transformationParts.cat.ears isnot "hidden") or ($cow gte 4 and $transformationParts.cow.ears isnot "hidden") or ($fox gte 4 and $transformationParts.fox.ears isnot "hidden")>>
+			당신의 귀 뒤쪽을 긁어준다.
+		<<elseif $wolfgirl gte 6 or $fox gte 6>>
+			당신의 배를 문질러준다.
+		<<elseif $cat gte 6>>
+			당신의 머리를 어루만져준다.
+		<<elseif $cow gte 6>>
+			당신의 콧등을 긁어준다.
+		<<else>>
+			당신의 얼굴을 쓰다듬는다.
+		<</if>>
+		평화를 만끽하며, 당신은 서로의 눈을 바라본다.
+	<<case 7>>
+
+		<<if C.npc.Alex.pregnancy.noBirthControl isnot true and ($playerPregnancyHumanDisable is "f" or $npcPregnancyDisable is "f") and (!npcIsPregnant("Alex") or !playerIsPregnant()) and C.npc.Alex.gender isnot $player.gender>>
+			<<set C.npc.Alex.pregnancy.noBirthControl to true>>
+		<</if>>
+
+		<<if (npcIsPregnant("Alex") or playerIsPregnant()) and (C.npc.Alex.pregnancy.selfKnowledge or C.npc.Alex.pregnancy.pcKnowledge)>>
+			"곧 <<if childrenCountBetweenParents("Alex","pc") gte 1 or childrenCountBetweenParents("pc","Alex") gte 1>>우리 가족이 늘어난다는<<else>>우리가 가정을 가진다는<</if>> 것에 대해 어떻게 생각해?" 당신은 질문하며, 당신의 머리를 <<his_ yi>> 어깨에 기댄다.
+			<br><br>
+
+			<<He_ nun>> 당신에게 팔을 두르고, 잠시 말이 없다.
+			"솔직히 말해서, 불안해. 아직 비현실적인 느낌이야."
+			<br><br>
+
+			"그 사실이 기뻐?" 당신이 묻는다.
+			<br><br>
+
+			"물론이지." <<He_ nun>> <<his_ yi>> 머리를 당신의 머리에 가볍게 콩 부딪친다. "이보다 더 기쁠 수가 없어."
+
+		<<elseif C.npc.Alex.pregnancy.pills is "fertility" and C.npc.Alex.pregnancyAvoidance is 0>>
+			"Do you think this is gonna work? You know, this baby thing," you ask Alex.
+            <br><br>
+
+            <<He_ nun>> 당신에게 팔을 두르고, 잠시 말이 없다.
+            "I'm not sure. Even taking the right measures, it still is a difficult task to get pregnant."
+            <br><br>
+
+            "Maybe we should work a little harder?"
+            <br><br>
+
+            "Sure, cow<<if $player.gender_appearance is "f">>girl<<else>>boy<</if>>." <<He>> softly bumps <<his>> head against yours. "Won't catch me complaining about that."
+
+		<<elseif childrenCountBetweenParents("pc","Alex") gte 1 or childrenCountBetweenParents("Alex","pc") gte 1>>
+			"이제 우리가 가정을 가진다는 것에 대해 어떻게 생각해?" 당신은 질문하며, 당신의 머리를 <<his_ yi>> 어깨에 기댄다.
+			<br><br>
+
+			<<He_ nun>> 당신에게 팔을 두르고, 잠시 말이 없다.
+			"솔직히, 예상하지 못했어. 최소한, 이렇게 빨리는 말야."
+			<br><br>
+
+			"그 사실이 기뻐?" 당신이 묻는다.
+			<br><br>
+
+			"물론이지." <<He_ nun>> <<his_ yi>> 머리를 당신의 머리에 가볍게 콩 부딪친다. <<if C.npc.Alex.pregnancy.nursery is true>>"이보다 더 기쁠 수가 없어."<<else>>"하지만 나는 내 작은 친구들이 그리워."<</if>>
+
+		<<else>>
+			"가족을 만드는 것에 대해 어떻게 생각해?" 당신은 <<his_ yi>> 어깨에 머리를 기댄 채 묻는다.
+			<br><br>
+
+			<<He_ nun>> 당신에게 팔을 두르고, 잠시 말이 없다.
+			<<if (knowsAboutAnyPregnancy("pc", "Alex") and C.npc.Alex.gender is "m") or ($genderknown.includes("Alex") and $player.penisExist and C.npc.Alex.gender is "f") or ($genderknown.includes("Alex") and $player.gender isnot _alex.gender) or (!$genderknown.includes("Alex") and $player.gender_appearance isnot _alex.gender)>>
+				"솔직히 말하면, 생각해본 적 없어. 내가 술 없이 지낼 수 있을지도 잘 모르겠고. 근데 상관 없어. 네가 그걸로 행복해한다면, 나 열 배로도 할 수 있어." <<he_ ga>> 환하게 웃으며 말한다.
+			<<else>>
+				"아마 입양할 수 있겠지. 근데 비용이 꽤 나간다더라. 지금도 우린 할 일이 산더미인데다가. 내가 술 없이 지낼 수 있을지도 잘 모르겠고." <<He_ nun>> 갑자기 씩 웃는다. "그래도 네가 그걸로 행복해한다면, 나 열 배로도 할 수 있어."
+			<</if>>
+			<br><br>
+
+			"그럼 내가 만약 아이를 갖기 싫다고 하면?"
+			<br><br>
+
+			"그럼 왜 물어본 거야?" <<He_ nun>> <<his_ yi>> 머리를 당신의 머리에 가볍게 콩 부딪친다. "말했다시피, 네가 행복한 거라면 뭔들."
+
+		<</if>>
+	<<case 8>>
+		당신은 <<his_ yi>> 어깨너머로 손을 뻗어, 리모컨을 빼앗으려 한다.
+		<<if $bodysize is 3>>
+			<<He_ nun>> 리모컨을 높이 치켜들지만, 어차피 당신은 그걸 잡을 수 있을 만큼 크다. "제길, 방심했네." <<he_ ga>> 웃음을 터뜨린다.
+			<br><br>
+
+			<<him_ ga>> 웃는 도중 당신은 입을 맞춰버리고, <<he_ yi>> 얼굴이 새빨개진다.<<takeKissVirginity "Alex" "loveInterest">>
+		<<elseif currentSkillValue('athletics') gte 800>>
+			<span class="green"><<His_ yi>> 반사신경은 빠르지만 당신이 더 빠른 모양이다.</span> "네가 이겼어, 정정당당하게 말야. 이제 돌려줘." <<He_ nun>> <<his_ yi>> 양팔로 팔짱을 낀다.
+			<br><br>
+
+			<<if $speech_attitude is "meek">>
+				"호-혹시 화난 거니?" 당신은 키득거리며, <<hers_ 의>> 팔에 달라붙는다. "이-이제 내 쪽을 봐야겠네."
+			<<elseif $speech_attitude is "bratty">>
+				"내가 신경을 건드렸나 봐?" 당신은 <<his_ 의>> 코 끝을 손가락으로 튕기며 놀려댄다. "네 즐길 거리는 나한테서 먼저 찾아야지."
+			<<else>>
+				"정색하지 마," 당신은 <<his_ 의>> 양팔과 가슴 사이로 들어오며 말한다. "봐야 할 건, 네 코 앞에 있잖아."
+			<</if>>
+			<br><br>
+
+			<<His_ 의>> 태도는 <<he_ 가>> 웃음을 터트리며 무너진다. "전적으로 네 말이 맞아." 얼마 지나지 않아, 당신은 장난스러운 키스를 주고받는다.<<takeKissVirginity "Alex" "loveInterest">>
+		<<else>>
+			<span class="red"><<He_ 는>> 그것을 손쉽게 치워버린다.</span> 당신은 미끄러져, 소파에서 떨어질 뻔 한다. "잡았다," <<he_ 가>> 외치고,
+			<<if _alex.dom gte 30>>
+				당신의 <<bottom_ 을>> 잡아 당신을 <<his_ 의>> 무릎에 올려놓는다. "미안해. 내 <<if $player.gender_appearance is "f">>여자<<else>>남자<</if>>를 실망시켜서는 안 되지." <<He_ 는>> 한 손을 당신의 등허리로 쓸어내린다.
+			<<elseif _alex.dom lte -30>>
+				당신을 다시 끌어올려준다. "사람 놀래키기는. 괜찮아?" 당신이 끄덕이자, <<he_ 는>> 안도의 한숨을 내쉬며, 당신의 등을 쓰다듬는다. "다음에는 그냥 얘기해."
+			<<else>>
+				당신을 다시 끌어올려준다. "방금 아슬아슬했다. 미안해." <<He_ 는>> 당신에게 한 팔을 두르고, 잠시 후 웃기 시작한다. "하지만 네가 이기게 놔둘 순 없었지."
+			<</if>>
+			<br><br>
+
+			당신은 키스를 기대하며, 몸을 앞으로 기울인다. <<He_ 는>> 당신을 탐닉하며, 몇 차례 장난스레 입술을 붙였다 뗐다 한 후에, 물러나며, 얼굴을 붉힌다.<<takeKissVirginity "Alex" "loveInterest">>
+		<</if>>
+	<<case 9>>
+		당신은 <<him_ yi>> 몸에 팔과 다리를 둘러 감고, <<hes_ ga>> 움직이는 것을 막는다.
+		<br><br>
+
+		<<if _alex.dom gte 30>>
+			<<He_ 는>> 당신을 <<his_ 의>> 탄탄한 양팔로 꽉 껴안는다. "우리 같은 생각 한 것 같네." <<he_ 가>> 싱긋 웃는다.
+		<<elseif _alex.dom lte -30>>
+			"그냥 자세 고치려던 거야," <<he_ 는>> 하품하며, 당신의 가슴에 기대고 당신의 양팔을 <<himselfPost>>에게 두른다.
+		<<else>>
+			"걱정 마, 아무 데도 안 가." <<He_ 는>> 당신에게 따뜻한 웃음을 지어보이고, 당신을 품으로 꼭 끌어당긴다.
+		<</if>>
+	<<case 10>>
+		당신은 <<his_ 의>> 양 다리에 양손을 올리고 <<his_ 의>> 탄탄한 허벅지를 쥔다.<<npcincr Alex lust 1>><<glust>>
+		<br><br>
+
+		<<if $daily.alex.breakfastSex>>
+			"2-2차전 시동거는 거야?" <<he_ ga>> 말하며, <<his_ yi>> 얼굴은 확 달아오른다. "너도 참 대단한 애라니까. 나 몸 풀 시간 좀 주라, 우선."
+		<<elseif _alex.dom gte 30>>
+			"조심하는 게 좋을 텐데, 자꾸 그렇게 자극하면," <<he_ nun>> 속삭이더니, 당신의 귀에 입김을 불어넣는다. "좋은 일이 일어나게 될 걸."
+		<<elseif _alex.dom lte -30>>
+			"네 그 머릿속에서는 무슨 일이 계획되고 있는 거야?" <<He_ nun>> 순간적으로 얼굴을 붉히고, 수줍은 웃음을 내비친다.
+		<<else>>
+			"진정해, <<girlPost>>," <<he_ 가>> 당신의 손을 잡으며, 낮은 목소리로 말한다. "나중에도 올라탈 시간은 넘쳐나니까."
+		<</if>>
+<</switch>>
+<br><br>
+
+<<if Time.hour gte 6>>
+	<<He_ 는>> 벽시계를 흘끗 보더니 몸을 일으킨다. "일하러 갈 시간이네. 이따 볼 수 있길," <<he_ 는>> 웃으며, 작별의 의미로 손을 흔든다.
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if (playerPregnancyPossibleWith("Alex") or NPCPregnancyPossibleWithPlayer("Alex")) and C.npc.Alex.pregnancy.noBirthControl is true and C.npc.Alex.pregnancy.pills isnot "fertility">>
+		<<link [[아기를 갖자고 한다|Farm Cottage Baby Request]]>><</link>>
+		<<if C.npc.Alex.vagina isnot "none">>
+			<i><span class="blue">이것은 <<nnpc_his_ yi "Alex">> 다음 임신 때 까지 알렉스를 더 임신하기 쉽게 할 것이다.</span></i>
+		<<else>>
+			<i><span class="blue">이것은 당신의 다음 임신 때 까지 알렉스를 더 정력이 넘치게 할 것이다.</span></i>
+		<</if>>
+		<br><br>
+	<</if>>
+
+	<<link [[계속 껴안고 있는다 (0:20)|Farm Breakfast Cuddle]]>><<npcincr Alex love 1>><<pass 20>><</link>><<glove>>
+	<br>
+	<<link [[TV를 본다 (0:20)|Farm Breakfast TV]]>><<pass 20>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[일어난다|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Farm TV Tease
+<<effects>>
+<<set _alex to C.npc.Alex>>
+<<set $daily.alex.tvTease to true>>
+
+<<if $speech_attitude is "meek">>
+	"우-우리로 대신 상상한 거야?" 당신은 수줍은 미소를 지으며, <<his_ yi>> 목덜미를 쓰다듬는다.
+<<elseif $speech_attitude is "bratty">>
+	당신은 알렉스의 멱살을 쥐고 <<him_ yi>> 눈을 마주본다. "인정하지 그래. 너 나랑 그런 걸 하고 싶었지."
+<<else>>
+	당신은 <<his_ yi>> 뺨을 감싸고 부드럽게 묻는다, "해보고 싶은 거라도 있었나 봐?"
+<</if>>
+<br><br>
+
+"아-아니, 나는-" 알렉스가 침을 꿀꺽 삼킨다. "딱히 그런 생각을 하진 않았어." 딱 봐도 거짓말이다.
+<br><br>
+
+<<if $speech_attitude is "meek">>초조하게<<elseif $speech_attitude is "bratty">>단호하게<<else>>결연하게<</if>>, 당신은 <<him_ ul>> 밀어 소파의 머리받침대에 기대게 하고 <<himPost>>에게 올라탄다.
+<<if $player.breastsize gte 5>>
+	당신의 <<breasts_ 가>> <<his_ 의>> 얼굴에 가까워지는 탓에 <<him_ 는>> 소리내어 침을 삼킨다.
+<<else>>
+	당신의 <<bottom_ 이>> <<his_ 의>> 무릎 위를 누르는 자극이 곧 <<him_ 이>> 견디기에는 너무 심해진다.
+<</if>>
+<<promiscuity1>>
+
+<<His_ 의>> 내숭이 무너지고, <<he_ 는>> 당신의 뒤통수와, 당신의 허벅지를 붙든다. <<He_ 가>> 입술이 벌리며 몸을 기울인다.
+당신은 마지막 순간에 방향을 틀어버린다. <<He_ 가>> 황당함에 
+<<if _alex.dom gte 30>>
+	한숨짓는다. "자꾸 그렇게 놀려 봐, 나 그냥 자제 안 할지도 몰라."
+<<elseif _alex.dom lte -30>>
+	말을 더듬는다. "나-나 뭐 잘못한 거 있냐?"
+<<else>>
+	눈을 크게 뜬다. "대-대체 방금 그거 다 뭐였냐?"
+<</if>>
+<br><br>
+
+당신은 아무런 말도 하지 않고, 마치 그런 일 따위 없었다는 듯이 다시 껴안기를 재개한다.
+<br><br>
+
+<<farm_cottage_tv_options>>
+<<link [[일어난다|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+:: Farm TV Ask
+<<effects>>
+
+<<set $daily.alex.tvTease to true>>
+<<if $speech_attitude is "meek">>
+	"있지..." 당신은 <<him_ ul>> 가볍게 꼭 쥐고 애원한다. "나 보고 싶은데, 제-제발 채널 다시 돌려줄 수 있을까?"
+<<elseif $speech_attitude is "bratty">>
+	"야, 나 못 봤단 말이야," 당신은 <<his_ yi>> 팔을 살짝 치며 항의한다. "날 위해 채널을 다시 돌려주면 고맙겠는데."
+<<else>>
+	"야, 나 못 봤는데," 당신은 <<him_ yi>> 팔짱을 끼며 말한다. "채널 다시 돌려줄 수 있어?"
+<</if>>
+<br><br>
+
+알렉스는 얼굴을 붉히면서, <<his_ yi>> 옷깃을 거머쥐고 부채질한다. "그-그것들은 아무 볼 가치도 없는 거였어," <<he_ ga>> 주저한다. "널 배려해 준 거야."
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"그-그런 것 같지는 않은데." 당신은 <<his_ yi>> 양 손목을 살짝 잡고 <<him_ ul>> <<if $bodysize isnot 3>>올려다<</if>>본다. "제발 말해줘."
+<<elseif $speech_attitude is "bratty">>
+	"네 얼굴은 안 그래보이는데, 거짓말쟁이." 당신은 팔짱을 끼고 몸을 앞으로 기울인다. "솔직히 말해. 당장."
+<<else>>
+	"실내가 그렇게 덥지는 않은데 말이야." 당신은 점점 <<his_ 의>> 얼굴로 다가간다. "말해 봐, 뭘 봤던 거야?"
+<</if>>
+<br><br>
+
+<<He_ nun>> 입을 꾹 다물고, 고개를 가로젓는다. 당신은 <<him_ ul>> 더 압박한다.
+<br>
+<<He_ ga>> 머뭇거린다. 당신은 사람 두 명이 나오는 장면이었다는 말을 듣는다. 더욱 압박한다.
+<br>
+<<His_ yi>> 망설임에 금이 가기 시작한다. 이건 <<himPost>>에게는 부끄러운 일이다. 좀 더.
+<br>
+<<He_ nun>> 설명할 수 없다며 말을 더듬는다. 당신은 왜인지 묻는다.
+<br>
+그러자, <<he_ yi>> 목소리가 커진다. "그거를 하고 있었어, 알겠지? 버-벗고-"
+<br>
+당신은 간절하게 기다린다. "너-너랑 나로 상상했어." <<he_ ga>> 실토하며, <<his_ yi>> 얼굴과 목이 미친듯이 붉어진다.
+<br>
+"나 사실 알고 있었어," 마침내 당신이 인정한다. "그냥 너한테 장난친 거야."
+<br>
+"너-너... 그럼 일부러 나한테 그런-" <<he_ nun>> 믿어지지 않는 듯, 더 말을 잇지 못한다.
+<br><br>
+
+잠시 후, 당신은 아무 일도 없었다는 듯이 다시 껴안기를 재개한다.
+<br><br>
+
+<<farm_cottage_tv_options>>
+<<link [[일어난다|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+:: Farm Alex Admin
+<<effects>>
+
+당신은 의자를 끌어와, 알렉스의 사업 운영을 돕는다.
+<<if $rng gte 3>>
+	<<He_ nun>> 마을에 있는 고객들 중 한 명과 통화한다. 그들은 농장의
+	<<print either("우유", "달걀", "송로버섯", "생산품", "수확량", "곡물", "과일", "채소", "수확물")>>에 만족하고 있는 모양이다.
+<<elseif $rng gte 2>>
+	<<He_ nun>> 공급 업체 중 하나와 통화하며, 더 나은 거래를 위해 협상을 시도하고 있다.
+<<else>>
+	<<He_ 는>> 당신에게 농장의 지출을 요약해서 알려준다.
+<</if>>
+<br><br>
+
+<<if currentSkillValue('maths') gte random(1, 1000)>>
+	<<if $rng gte 3>>
+		<span class="green">당신은 알렉스에게 <<print either("파인트", "갤런", "킬로", "그램", "무게", "카톤", "부셸", "톤")>>당 더 많은 요금을 청구하도록 설득한다.</span><<farm_yield 3>><<ggfarm>>
+		<br><br>
+
+		"너 일처리 빠르구나," <<he_ 가>> 말한다. "도와줘서 고마워."
+	<<elseif $rng gte 2>>
+		당신은 알렉스의 스팸함에 묻혀있는, 더 나은 거래를 제안하고 있는 다른 업체의 이메일을 찾아낸다. 당신은 그것을 알렉스에게 보여주고, <span class="green"> <<he_ 가>> 그것을 활용한다.</span><<farm_yield 3>><<ggfarm>>
+		<br><br>
+
+		"이메일을 더 자주 확인해야겠는걸," <<he_ 는>> 낄낄거린다.
+	<<else>>
+		<span class="green">당신은 돈을 좀 절약할 수 있는 부분을 발견한다.</span><<farm_yield 3>><<ggfarm>>
+		<br><br>
+
+		"한 푼 한 푼이 중요하지," <<he_ 가>> 당신의 등을 두드리며 말한다. "잘 해 줬어."
+	<</if>>
+<<else>>
+	책상은 아수라장이고, <<his_ yi>> 노트북 컴퓨터도 하등 나을 것이 없다. 당신은 물건들을 정리한다. <<mathsskill 2>><<ggmaths>>
+	<br><br>
+
+	"어쨌든 고마워," 알렉스는 전화기를 <<his_ yi>> 얼굴에 더 가까이 가져다 댄다. "죄송합니다, 말씀하셨어요?"
+<</if>>
+<br><br>
+
+<<link [[다음|Farm Alex Bedroom]]>><<endevent>><</link>>
+<br>
+
+:: Farm Phone Cuddle
+<<effects>>
+
+<<alexRemyTattoosCheck "cuddleDesk">>
+
+당신은 알렉스의 옆에 앉아서, 편히 쉰다.
+<<switch random(1, 8)>>
+	<<case 1>>
+		<<Hes_ nun>> 공급 업체와 격하게 통화중이지만, 불편한 기색은 보이지 않는다. <<He_ nun>> <<his_ yi>> 남은 팔로 당신을 감싸안는다.
+	<<case 2>>
+		<<Hes_ nun>> 고객과 통화중이지만, 별로 개의치 않는 듯하다. 당신은 <<him_ ga>> 때때로 당신을 보며 미소짓는 것을 알아챈다.
+	<<case 3>>
+		<<Hes_ 는>> 상대를 기다리는 중이다. <<He_ 가>> 당신을 끌어당겨 뺨에 가볍게 입맞추고, 밝게 미소짓는다.
+	<<case 4>>
+		<<Hes_ 는>> 전화를 거는 중이다. "마침 잘 왔어," <<he_ 가>> 당신의 머리카락을 헝클어뜨리며, 희롱한다. "이건 폭풍전야의 고요함이야. 각오해 둬."
+	<<case 5>>
+		<<He_ 는>> 통화 내용에 대해 걱정하지 않으려고 애쓴다. <<His_ 의>> 시선이 당신과 마주친다. "네가 여유 내 줘서 기뻐." <<he_ 가>> 옅게 미소짓는다.
+	<<case 6>>
+		당신은 뺨을 <<his_ 의>> 뺨에 비비면서, <<his_ 의>> 목소리를 느끼며 만족스러워한다.
+	<<case 7>>
+		당신은 심심해서, 당신의 머리를 <<her_ 의>> 머리에 부딪친다.
+		<<if ($demon gte 2 and $transformationParts.demon.horns isnot "hidden") or ($cow gte 2 and $transformationParts.cow.horns isnot "hidden")>>
+			<<He_ nun>> 고통에 움츠러들고, 당신은 그제서야 머리의 뿔을 떠올린다. 사과를 하기도 전에, <<he_ ga>> 머리를 부딪혀 온다. 둘 다 이마에 손을 얹고는 웃는다.
+		<<else>>
+			<<He_ ga>> 당신에게 같은 짓을 한다. 이렇게 주고받는 일이 제법 오랫동안 계속된다.
+		<</if>>
+	<<case 8>>
+		<<if $exposed gte 1>>
+			<<Hes_ nun>> 당신의 <<lewdnessPost>>에서 눈을 떼지 못한다. "네-넵, 듣고 있습니다," <<he_ nun>> 눈에 띄게 얼굴을 붉힌 채, 통화를 버벅거린다.
+		<<else>>
+			당신은 <<his_ 의>> 책상 위에 펼쳐진 아수라장을 응시한다. <<him_ 의>> 한숨소리가 들려온다. "어떻게 보일지 나도 알지만, 먼저 해결해야 할 일들이 있어서." <<He_ 는>> 윙크하며 당신의 어깨를 쿡쿡 찌른다.
+		<</if>>
+<</switch>>
+<br><br>
+
+<<if Time.hour gte 21>>
+	<<He_ 가>> <<his_ 의>> 침대 옆 시계를 흘끗 보더니, 일어난다. "자리 펼 시간이야," <<he_ 는>> 그렇게 말하고, 당신에게 굿나잇 키스를 해 준다.<<takeKissVirginity "Alex" "loveInterest">>
+<br><br>
+
+<<link [[일어난다|Farm Alex Bedroom]]>><<endevent>><</link>>
+<br>
+<<else>>
+<<link [[계속 껴안고 있는다 (0:30)|Farm Phone Cuddle 2]]>><<npcincr Alex love 1>><<pass 30>><</link>><<glove>>
+<br>
+<<link [[일어난다|Farm Alex Bedroom]]>><<endevent>><</link>>
+<br>
+<</if>>
+
+:: Farm Phone Cuddle 2
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+<<switch random(1, 10)>>
+	<<case 1>>
+		"넌 참 힘이 세지," 당신은 속삭이며, <<his_ 의>> 탄탄한 팔뚝을 느껴본다. 알렉스는 가슴을 펴더니, 전화를 마친 후 당신의 팔을 만져본다.<<npcincr Alex lust 1>><<glust>>
+		<br><br>
+
+		<<if $physique gte ($physiquesize / 7) * 6>>
+			"네가 더 세지," <<he_ ga>> 마주 속삭이며, 당신의 근육 형태에 감탄한다. "감명받았어." <<He_ nun>> 당신의 볼에 꾹 눌러 입맞춘다.<<npcincr Alex dom -1>><<ldom>>
+		<<elseif $physique gte ($physiquesize / 7) * 5>>
+			"너도야. 우리 비슷하겠네." <<he_ nun>> 관찰해보더니, 당신의 볼에 꾹 눌러 입맞춘다.
+		<<elseif $physique gte ($physiquesize / 7) * 4>>
+			"너도 나쁘지 않아. 건초 몇 더미는 더 들어올릴 수 있겠네," <<he _nun>> 놀려대고, 당신의 볼에 꾹 눌러 입맞춘다.
+		<<else>>
+			"살짝 말랑하네," <<he_ ga>> 평한다. "아무려면 어때. 내가 우리 둘 책임질 만큼 강하니까 괜찮아." <<He_ nun>> 당신의 볼에 꾹 눌러 입맞춘다.<<npcincr Alex dom 1>><<gdom>>
+		<</if>>
+	<<case 2>>
+		당신은 알렉스의 귀에 밀어를 속삭인다. 통화가 진행됨에 따라, 당신의 말도 더욱 음란해져 간다. 결국, <<his_ yi>> 새빨간 얼굴에 열이 오르고, 
+		<<he_ nun>> 말을 더듬는 것을 멈출 수가 없어진다.<<npcincr Alex lust 1>><<glust>>
+		<br><br>
+
+		"죄송한데, 다시 말씀해 주시겠어요?" 전화 너머 목소리가 말한다.
+	<<case 3>>
+		통화연결음에 알렉스가 짜증을 낸다. <<He_ 가>> 투덜거리며
+		<<if _alex.dom gte 30>>
+			당신을 무릎에 앉혀놓는다. <<He_ 는>> 당신의 머리를 마구 헝클어뜨린다.
+		<<elseif _alex.dom lte -30>>
+			당신의 무릎에 내려앉는다. 당신이 <<his_ 의>> 앞머리를 손으로 쓸어주고, <<he_ 는>> 당신의 머리카락을 만지작댄다.
+		<<else>>
+			당신의 몸에 기댄다. 당신과 알렉스는 서로의 머리카락을 가지고 논다.
+		<</if>>
+		<br><br>
+
+		"힘내, 파트너." 당신은 만족스러운 한숨을 내뱉는다. <<He_ 는>> 당신에게 환하게 웃어보인다.
+	<<case 4>>
+		당신은 알렉스가 반응하는지 보려고 바보같은 표정을 지어보인다. <<He_ 가>> 웃음을 참더니,
+		<<if (_alex.dom + _alex.lust) gte 40>>
+			당신의 턱을 잡고 기울인다. <<He_ 는>> 당신에게 길게 입맞춘 후에, 우쭐한 미소와 함께 입술을 뗀다. "왜 그래? 설마 그 얼굴로 굳어버렸다고 할 셈은 아니겠지."
+			<<takeKissVirginity "Alex" "loveInterest">><<arousal 100 "mouth">><<garousal>>
+		<<elseif _alex.dom lte -30>>
+			당신의 턱 밑을 간지럽힌다. "장난치지 좀 마, 뺀질아. 네가 내 대신 하려는 게 아니라면 말야." <<He_ 는>> 전화기를 거의 넘겨줘버릴 뻔하나, 그러지는 않기로 하며 킥킥 웃는다.
+		<<else>>
+			엄한 표정을 한 번 짓고 뺨을 잡아당긴다. "뺀질아, 나 지금 일하려고 하고 있잖아."
+		<</if>>
+	<<case 5>>
+		통화를 마친 알렉스는, <<his_ yi>> 책상 아래서 병 하나를 꺼내 병나발을 불고는, 당신의 무릎 위에 풀썩 쓰러진다. "스아-" <<He_ ga>> 한 번 더 꿀꺽 들이켜고.
+		"사랑-" 또 한 번 꿀꺽. "한드아아아아아..." 마지막으로 꿀꺽. "그으런 눈으로 바라보지 마라져어..." 당신은 <<himPost>>에게서 병을 압수한다.
+	<<case 6>>
+		당신은 알렉스의 가슴에 머리를 기대고, <<he_ 는>> 머리를 감싸안아준다. "너무 킁킁거리지는 말아줘," <<he_ 가>> 킥킥거린다. "샤워 한 번 더 해야 한다는 거 알아."
+		<br><br>
+
+		당신은 깜박 졸았고, 깨어나니 여전히 <<his_ yi>> 팔에 안겨있다.<<tiredness -6>><<ltiredness>>
+	<<case 7>>
+		알렉스가 통화에 열중하는 동안,
+		<<if $speech_attitude is "meek">>
+			당신은 의자에 앉아서 빙글빙글 돌다가, 최고 속도에 달했을 때 <<himPost>>에게로 몸을 던져버린다. <<He_ nun>> 못내 당신을 붙잡는다.
+		<<elseif $speech_attitude is "bratty">>
+			당신은 다리를 <<his_ yi>> 의자 위에 올리고, 당신의 발로 <<his_ yi>> 머리를 살살 찌른다. "어어-" 약오른 채로 <<he_ ga>> 말한다. "말씀드렸다시피-"
+		<<else>>
+			당신은 넘어지지 않도록 책상을 잡고서, 당신이 앉은 의자를 앞뒤로 흔들거린다. <<He_ nun>> 다치기 전에 멈출 것을 촉구한다.
+		<</if>>
+		<br>
+		당신은 몸을 숙이고, <<if $speech_attitude is "meek">>조심스레<<elseif $speech_attitude is "bratty">>탐욕스럽게<<else>>열정적으로<</if>>
+		<<if $player.breastsize gte 5>>
+			 당신의 <<breasts_ ro>> <<his_ yi>> 얼굴을 짓눌러,
+		<<else>>
+			가슴을 <<himPost>>에게 짓눌러,
+		<</if>>
+		<<his_ yi>> 모든 주의를 끌어온다. 얼굴이 붉어진 채, <<he_ 는>> 하마터면 전화기를 떨어트릴 뻔 하다가, 평정심을 되찾는다.<<npcincr Alex lust 1>><<glust>>
+	<<case 8>>
+		"너무 오래 앉아있었네," 알렉스가 전화기를 치우며 말한다. "스트레칭 좀 해야겠다." <<He_ 가>> 의자에서 일어난다.
+		<br><br>
+
+		당신은 <<he_ 가>> 앓는 소리를 내며 자세를 바꿔 스트레칭하는 동안 <<his_ 의>> 가슴과 드러난 피부를 감상한다. <<He_ 는>> 허둥거리며 당신에게 잔소리한다.<<npcincr Alex lust 1>><<glust>><<arousal 50>><<garousal>>
+	<<case 9>>
+	<<if _alex.dom lte -30 or $stress gte ($stressmax / 5) * 3>>
+		"이것 좀 들고 있어 줄래?" 알렉스가 당신에게 전화기를 건네주며 말한다. <<He_ 는>> 당신의 어깨를 힘있게 마사지하기 시작하고, <<his_ yi>> 손길은 곧 등으로 내려간다.
+		<br><br>
+
+		<<if $panicparalysis gte 1 and $controlled is 0>>
+			당신은 완전히 얼어붙어서는, 전화기를 떨어트린다. <<He_ 가>> 그것을 다시 집어들며 말한다, "괜찮아."
+		<<elseif $panicattacks gte 1 and $controlled is 0>>
+			당신은 처음에는 움찔하지만, 긴장을 풀고 심호흡을 하려 한다.
+		<</if>>
+		<<Hes_ 의>> 손기술은, 약간 거칠기는 하지만, 뭉친 근육을 풀기 위해 적당량의 압력을 가하는 것에 능숙하다. 당신은 신음을 억누른다.
+		<<if _alex.lust gte 20 and _alex.dom gte 10>>
+			<<He_ 는>> 한 손을 당신의 <<bottom_ uro>> 미끄러트려, 추가로 한 번 더듬는다.<<arousal 200 "bottom">><<garousal>>
+		<</if>>
+		<br><br>
+
+		당신은 <<himPost>>에게 감사를 표한다. <span class="green">만족감이 느껴진다.</span> "감사하지 않아도 돼," <<he_ 가>> 미소짓는다. "긴장하고 있는 것 같길래."<<stress -12>><<llstress>>
+	<<else>>
+		알렉스는 무리한 듯 피로해 보인다. <<him_ 을>> 진정시켜주길 바라며, 당신은 <<handtext>> <<his_ 의>> 어깨와 등 근육을 주무르기 시작한다.
+			<<if currentSkillValue("handskill") gte 800>>
+				"다-다시 연락드리겠습니다," <<he_ 가>> 전화를 끊으며 말한다. <<He_ 는>> 당신에게 무너지듯 기대어, 마치 황홀경에 취한 듯, 가쁜 숨을 몰아쉰다.
+			<<elseif currentSkillValue("handskill") gte 400>>
+				"잠시만요," <<he_ 가>> 전화기를 내려놓으며 말한다. <<He_ 는>> 뒤로 기대어, <<his_ 의>> 발을 책상 위에 올려놓고 당신의 손길에 편안해한다.
+			<<else>>
+				<<His_ 는>> 통화 도중 안색이 크게 바뀌지는 않으나, 당신의 노력에 고마워 보인다.
+			<</if>>
+			<br><br>
+
+			<<if $speech_attitude is "meek">>
+				"너한테 이게 필요할 것 같았어. 네-네가 걱정돼서."
+			<<elseif $speech_attitude is "bratty">>
+				"너 너무 무리하고 있어. 이게 필요했던 게 분명해."
+			<<else>>
+				"네가 알아서 잘 한다는 건 알지만, 그래도 이게 필요할 거라 생각했어."
+			<</if>>
+				당신이 말한다.
+			<br><br>
+
+		<<He_ 는>> 끄덕이고, 휴식을 함께하기 위해 당신을 더 가까이로 데려온다. "정말 너무 고마워." <<he_ 가>> 씩 웃는다.
+	<</if>>
+	<<case 10>>
+		당신은 알렉스의 무릎에 앉는다. <<He_ nun>> 양팔로 당신을 감싸안는다.
+		<<if _alex.dom gte 30>>
+			"넌 그냥 내 일을 어렵게 만드는 걸 좋아하지, 안 그러냐?" <<he_ ga>> 속삭인다. "내 <<if $player.gender_appearance is "f">>여자<<else>>남자<</if>>의 이런 점이 좋더라. 네 모든 게 귀여워 죽겠어."
+		<<elseif _alex.dom lte -30>>
+			"씨팔, 이렇게는 일 못 하겠다." <<His_ yi>> 목소리가 떨린다. "넌 항상 내가 원하는 걸 손에 넣기 더럽게 힘들게 만들지. 절대 변하지 않아."
+		<<else>>
+			"이래서야 어떻게 일이 손에 잡히겠냐?" <<he_ ga>> 킥킥거린다. "이래야 내 <<if $player.gender_appearance is "f">>여자<<else>>남자<</if>>지, 그래. 언제나 미칠 듯이 특별하고 매력적이야."
+		<</if>>
+<</switch>>
+<br><br>
+
+<<if Time.hour gte 21>>
+	<<He_ 가>> <<his_ 의>> 침대 옆 시계를 흘끗 보더니, 일어난다. "자리 펼 시간이야," <<he_ 는>> 그렇게 말하고, 당신에게 굿나잇 키스를 한다.<<takeKissVirginity "Alex" "loveInterest">>
+<<else>>
+	당신은 기분 좋은 포옹을 나눈 후 일어나기로 한다. 헤어질 때 <<He_ 는>> 미소지으며 손을 흔든다.
+<</if>>
+<br><br>
+
+<<link [[다음|Farm Alex Bedroom]]>><<endevent>><</link>>
+<br>
+
+:: Farm Alex Admin Crawl
+<<effects>>
+<<set _alex to C.npc.Alex>>
+<<trPenisdesc _alex.penisdesc>><<set _genitals to (_alex.penis isnot "none" ? _trResult : "보지")>>
+
+당신은 알렉스의 책상 밑으로 기어들어간다. 당신은 <<his_ yi>> 무릎 사이를 훔쳐본다. <<He_ nun>> 전화로 <<if random(1,2) is 1>>공급 업체와<<else>>고객과<</if>> 통화하고 있다.
+당신은 그것 때문에 하려는 일을 멈출 생각이 없다.
+<br><br>
+
+<<if $pronoun is "f">>
+	당신은 <<his_ yi>> 치마를 걷어 올리고, <<his_ yi>> 보이쇼츠를 드러낸다.
+<<else>>
+	당신은 <<his_ yi>> 바지 지퍼를 내리고, <<his_ yi>> 사각팬티를 드러낸다.
+<</if>>
+당신은 <<himPost>>에게 눈을 맞추며 한 손가락으로 속옷 위에서 <<his_ yi>> _genitals를 쓸어내린다. <<He_ nun>> <<his_ yi>> 통화에 집중하려 하지만, 당신의 손길에 <<his_ yi>> 목소리가 떨린다.
+<<promiscuity4>>
+
+당신의 <<his_ yi>> 속옷을 옆으로 치운다.
+<br><br>
+
+<<link [[다음|Farm Alex Admin Oral]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Farm Alex Admin Oral
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>><<npcoral>><<set $NPCList[0].mouth to "none">>
+	<<set $enemytrust += 100>>
+<</if>>
+<<effects>>
+<<set _alex to C.npc.Alex>>
+알렉스는 통화하면서 <<his_ yi>> 목소리를 안정시키려 애쓴다.
+<<switch random(1, 6)>>
+	<<case 1>>
+		<<if _alex.penis isnot "none" or $player.penisExist>>
+			"시-실망하실 일 없을 겁니다... 저희는 아주 대담하거든요."
+		<<else>>
+			"의-의심의 여지 없이... 잘 봉사하고 있습니다."
+		<</if>>
+	<<case 2>>
+		<<if $player.penisExist>>
+			"여-역시 안에다 채워 줘. 제-젠장, 비료 말한 겁니다!"
+		<<elseif _alex.penis isnot "none">>
+			"저-전 씨를 뿌릴 필요가 있어서... 네, 넵, 씨앗들이요. 새로운 작물들."
+		<<else>>
+			"어-엄청 젖었어. 네-넵, 흙 얘기 한 거예요!"
+		<</if>>
+	<<case 3>>
+		"교-교배라면 하윽... 그게 또 저희 전문인데..."
+	<<case 4>>
+		"이-인증받았고, 모두 자연산이고, 윤리적으로 공급되는..."
+	<<case 5>>
+		"부-분명 우리 품질에 만족하실 겁니다... 장담합니다."
+	<<case 6>>
+		"<<print either( "그-그 부분은 제가 다시 연락을", "다-다른 데 가면 이런 거 못 볼 겁니다", "워-원하면 전부 가져... 가실 수 있을 겁니다")>>..."
+<</switch>>
+
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Alex Admin Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Alex Admin Oral]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Alex Admin Oral Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"설득력 있는 열정이군요," 전화 너머로 목소리가 들려온다. <<He_ nun>> 자신이 통화 중이었다는 걸 자각한 듯, 놀라서 일어나 앉는다. <<He_ nun>> 얼굴을 붉히며 통화를 계속한다.<<glove>><<lllust>><<npcincr Alex love 1>><<npcincr Alex lust -10>><<gfarm>><<farm_yield 1>>
+	<br><br>
+	<<tearful>> 당신은 책상 밑에서 빠져나온다. 여기서 할 일은 끝냈다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+<<elseif $enemyhealth lte 0>>
+	"아야," 알렉스가 팔을 뻗어 당신을 잡은 채 말한다.
+	<br><br>
+	"괜찮으세요?" 전화 너머 목소리가 묻는다.
+	<br><br>
+	"네-네에," <<he_ ga>> 대답한다. "괜찮습니다."<<llove>><<lfarm>><<npcincr Alex love -1>><<farm_yield -1>>
+	<br><br>
+	<<tearful>> 당신은 책상 밑에서 빠져나온다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+<<else>>
+	알렉스는 통화를 계속하고, 상대방은 여전히 눈치채지 못한다.
+	<br><br>
+	<<tearful>> 당신은 책상 밑에서 빠져나온다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+<</if>>
+
+<<link [[다음|Farm Alex Bedroom]]>><</link>>
+<br>
+
+:: Farm Cottage Bailey
+<<effects>>
+
+<<npc Alex>><<person1>>
+<<if $phase is 3>>
+	당신은 주방에 숨는다. 이번에는, 조금 더 강하게 문을 두들긴다.
+	<br><br>
+	"대체 여기서 뭐 하는 행패야?" 알렉스가 말한다. 당신은 창문을 통해 <<him_ ga>> 다가오는 것을 본다. 또 다른 인물이 <<him_ ul>> 만나기 위해 걸어간다. <span class="red">베일리다.</span>
+	<br><br>
+	"내 고아가 여기 있어," 베일리가 말한다. "<<pShe_ nun>> 나에게 빚을 졌어. 난 돈을 받으러 왔고."
+	<br><br>
+
+	<<link [[베일리를 대면한다|Farm Cottage Bailey Confront]]>><</link>>
+	<br>
+	<<link [[알렉스에게 맡긴다|Farm Cottage Bailey Deal]]>><</link>>
+	<br>
+<<elseif $phase is 2>>
+	당신은 문을 연다. <span class="red">베일리다.</span> "돈 낼 시간이야," <<nnpc_he_ ga Bailey>> 말한다.
+	<br><br>
+	발자국 소리가 가까워진다. 알렉스가 집으로 달려와, 당신 옆에 선다. "네가 무슨 결정을 하든, 난 널 지지할게," <<he_ ga>> 속삭인다.
+	<br><br>
+
+	<<cottage_bailey_options>>
+<<elseif $phase is 1>>
+	알렉스가 문을 연다. <span class="red">베일리다.</span> <<nnpc_He_ nun Bailey>> 알렉스를 지나쳐, 당신을 똑바로 쳐다본다.
+	<br><br>
+
+	"돈 낼 시간이야," <<nnpc_he_ ga Bailey>> 말한다.
+	<br><br>
+
+	알렉스는 당신 옆에 서서 베일리를 노려본다. "네가 무슨 결정을 하든, 난 널 지지할게," <<he_ ga>> 속삭인다.
+	<br><br>
+	<<cottage_bailey_options>>
+<<else>>
+
+	당신은 문을 연다. <span class="red">베일리다.</span>
+	<br><br>
+	"돈 낼 시간이야," <<nnpc_he_ ga Bailey>> 말한다.
+	<br><br>
+	알렉스는 당신 옆에 서서 베일리를 노려본다. "네가 무슨 결정을 하든, 난 널 지지할게," <<he_ ga>> 속삭인다.
+	<br><br>
+	<<cottage_bailey_options>>
+<</if>>
+
+
+
+<<set $renttime to 7>><<set $rentday to Time.weekDay>>
+
+
+:: Farm Cottage Bailey Confront
+<<effects>>
+
+당신은 문을 연다. 알렉스는 베일리를 휙 지나쳐 당신 옆에 선다. "네가 무슨 결정을 하든, 난 널 지지할게," <<he_ ga>> 속삭인다.
+<br><br>
+<<cottage_bailey_options>>
+
+:: Farm Cottage Bailey Deal
+<<effects>>
+
+"우린 당신한테는 동전 한 푼도 안 줘," 알렉스가 말한다. "이제 
+<<if C.npc.Alex.dom gte 20>>
+	내
+<<else>>
+	우리
+<</if>>
+사유지에서 꺼져."
+<br><br>
+
+"좋아," 베일리가 말한다. "내 친구들이 아주 기뻐하겠군." <<nnpc_He_ nun Bailey>> 돌아서서 걸어가 버린다.
+<br><br>
+
+<<if $bailey_encroach gte 1>>
+	<span class="pink"><i>베일리는 레미에게 더 많은 지원을 보낼 것이고, 습격은 더 빨라질 것입니다. <<nnpc_He_ nun Bailey>> 또한 레미가 습격하는 동안 지원군을 보낼 것입니다.</i></span>
+<<else>>
+	<span class="pink"><i>베일리는 레미의 농장 습격을 지원해, 습격이 더 빨리 일어나게 할 것입니다. <<nnpc_He_ nun Bailey>> 또한 레미가 습격하는 동안 지원군을 보낼 것입니다.</i></span>
+<</if>>
+<br><br>
+
+<<link [[다음|Farm Cottage Bailey Refuse 2]]>><</link>>
+<br>
+
+
+:: Farm Cottage Bailey Pay
+<<effects>>
+
+<<rentpay>>
+
+알렉스는 베일리를 노려보며, 문을 쾅 닫는다.
+<<if $bailey_encroach is undefined>>
+	"진짜 열받네," 알렉스가 말한다. "하지만 우리는 다른 일만으로도 충분히 바쁘니까."
+<<else>>
+	<<unset $bailey_encroach>>
+	"그 깡패한테 굴복하는 건 싫지만," <<he_ ga>> 말한다. "하지만 숨쉴 틈이 있으면 좋을 거야."
+<</if>>
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+
+
+:: Farm Cottage Bailey Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"나-난 돈 안 낼 거예요," 당신이 말한다. 당신은 베일리의 눈을 제대로 바라볼 수 없다. "저리 가버려요."
+<<elseif $speech_attitude is "bratty">>
+	"한 푼도 못 가져갈 줄 알아," 당신이 말한다. 당신은 베일리를 노려본다. "여기서 당신은 아무 힘도 없어."
+<<else>>
+	"날 더 이상 괴롭히게 두지 않을 거예요," 당신이 베일리를 바라보며 말한다. "이건 당신 돈 아니에요."
+<</if>>
+<br>
+
+알렉스가 당신의 어깨에 손을 얹는다. "우리를 협박하진 못할 거야," <<he_ ga>> 말한다. "
+<<if C.npc.Alex.dom gte 20>>
+	내
+<<else>>
+	우리
+<</if>>
+사유지에서 꺼져."
+<br><br>
+
+"좋아," 베일리가 말한다. "내 친구들이 아주 기뻐하겠군." <<nnpc_He_ nun Bailey>> 돌아서서 걸어가 버린다.
+<br><br>
+
+<<if $bailey_encroach gte 1>>
+	<span class="pink"><i>베일리는 레미에게 더 많은 지원을 보낼 것이고, 습격은 더 빨라질 것입니다. <<nnpc_He_ nun Bailey>> 또한 레미가 습격하는 동안 지원군을 보낼 것입니다.</i></span>
+<<else>>
+	<span class="pink"><i>베일리는 레미의 농장 습격을 지원해, 습격이 더 빨리 일어나게 할 것입니다. <<nnpc_He_ nun Bailey>> 또한 레미가 습격하는 동안 지원군을 보낼 것입니다.</i></span>
+<</if>>
+<br><br>
+
+
+<<link [[다음|Farm Cottage Bailey Refuse 2]]>><</link>>
+<br>
+
+
+:: Farm Cottage Bailey Refuse 2
+<<effects>>
+<<set $baileypaychain to 0>>
+<<set $baileyRefusedToPay += 1>>
+<<set $baileyRefusedToPayTotal += $rentmoney + ($babyRent || 0)>>
+<<set $baileyRefusedToPayTotalStat += $rentmoney + ($babyRent || 0)>>
+
+알렉스가 문을 쾅 닫는다.
+<<if $bailey_encroach is undefined>>
+	<<set $bailey_encroach to 1>>
+	"우린 한 배를 탔고," <<he_ ga>> 말한다. "난 그 깡패 따윈 두렵지 않아."
+<<else>>
+	<<set $bailey_encroach += 1>>
+	"<<nnpc_him_ i Bailey>> 발악하도록 둬." <<he_ ga>> 말한다.
+<</if>>
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Alex Pregnancy Reveal
+<<effects>><<npc "Alex">><<setKnowsAboutPregnancy "Alex" "pc">><<setTalkedAboutPregnancy "Alex" "pc">>
+<<set C.npc.Alex.pregnancy.selfKnowledge to true>>
+
+<<if $farm_stage gte 7>>
+	You sit next to Alex on the sofa. "So, what is it?" you ask.
+
+	<<if npcBellyVisible("Alex")>>
+		With a sigh, <<he>> takes your right hand and places it on <<his>> belly.
+
+		You don't have to think too hard to conclude what that means.
+
+	<<else>>
+		<<He>> pulls something out of <<his>> pocket and hands it to you.
+
+		It's a pregnancy test, and <span class="pink">it's positive.</span>
+
+	<</if>>
+	<<llstress>><<stress -12>>
+	<br><br>
+
+	Many thoughts rush through your head, but you can't help but smile.
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+		"Our own little family. Mum would be proud," <<he>> says, taking your hands and leaning in for a hug.
+
+	<<else>>
+		"Looks like our little family's growing. I wonder what Mum would think about this," <<he>> says, taking your hands and leaning in for a hug.
+
+	<</if>>
+	<<glove>><<npcincr Alex love 1>>
+	<br><br>
+
+	You hold each other in an embrace for a while, occasionally trading kisses.<<glust>><<npcincr Alex lust 1>>
+	<br><br>
+
+<<else>>
+	Inside the cottage, you take a seat on the sofa. Alex goes to the kitchen and makes some tea. <<He>> hands you a mug.
+	<br><br>
+
+	"So, what did you want to talk about?" you say after taking a sip of your tea.
+	<br><br>
+
+	<<if npcBellyVisible("Alex")>>
+		With a sigh, <<he>> takes your right hand and places it on <<his>> belly. You don't have to think too hard to figure out what that means.
+
+	<<else>>
+		<<His>> hands shaking slightly, <<he>> pulls something from <<his>> pocket and gives it to you. It's a pregnancy test, and <span class="pink">it's positive.</span>
+
+	<</if>>
+	<br>
+
+	Many thoughts cross your mind in a whirl of confusion. You don't know how to react to the news. Your eyes turn to Alex.
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex","pc") lte 0 or pregnancyCountBetweenParents("pc","Alex") lte 0>>
+		"Oi! Don't look at me like that, I wasn't expecting this either," <<he>> says.
+
+	<<else>>
+		"We were careless, and it happened again." <<He>> shakes <<his>> head. "We still have time to prepare, at least," <<he>> says.
+
+	<</if>>
+	<br><br>
+
+<</if>>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+<<else>>
+	<<link [[다음|Farm Alex Pregnancy Reveal 2]]>><</link>>
+
+<</if>>
+
+:: Farm Alex Pregnancy Reveal 2
+<<effects>>
+
+<<if $farm_stage gte 7>>
+	<<He>> releases you and looks at <<his>> belly for a moment. "Gonna have to take a break from the booze.
+
+	<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+		That kind of sucks, but I'm sure it'll be worth it."
+
+	<<else>>
+		You're placing me in a difficult position here, you know." <<He>> laughs.
+
+	<</if>>
+	<br><br>
+
+	<<if C.npc.Alex.dom gte 30>>
+		"But don't get too cocky," <<he>> says. "This also means you'll have to work twice as hard. <span class="blue">I won't help you with Remy either.</span> I'm not taking that risk." Alex frowns, looking preoccupied.
+
+	<<else>>
+		<<His>> face softens. "I'm not sure if I'll be able to work the same way I do once I'm further along, <span class="blue">and I don't wanna risk myself against Remy while I'm like this,"</span> <<he>> finishes with a preoccupied expression on <<his>> face.
+
+	<</if>>
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	<<He>> shakes <<his>> head. "We'll deal with that later. Right now, we have something more important to worry about. Gotta start making room for our little fella here." <<He>> breaks into a smile once more.
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex","pc") gte 1 or pregnancyCountBetweenParents("pc","Alex") gte 1>>
+
+	<<else>>
+		"There's actually a third room upstairs. I think we can make good use of it."
+		<br><br>
+
+		<span class="gold">You can now make an extension for the cottage.</span>
+		<br><br>
+
+	<</if>>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+<<else>>
+	<<His>> face softens. "Damn, gonna have to take a break from the booze<<if pregnancyCountBetweenParents("Alex", "pc") gte 1 or pregnancyCountBetweenParents("pc", "Alex") gte 1>> again<</if>>. That sucks."
+	<br><br>
+
+	<<He>> looks down at <<his>> belly and <<his>> face softens.
+
+	<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+		"There's far too much work at the farm right now... If things aren't better by the time the baby comes, we'll have to send it to the orphanage," <<he>> says.
+		<br><br>
+
+		Your thoughts turn to Bailey and how the orphans are treated, but as you open your mouth to speak, <<he>> interrupts you.
+		<br><br>
+
+		"I know! I don't like this either, but it would be temporary, just until things settle down. And this is only in the worst-case scenario."
+		<br><br>
+
+		<<link [[다음|Farm PC Pregnancy Reveal 3]]>><</link>>
+
+	<<else>>
+		"There's still far too much work at the farm right now... If things still aren't better by the time the baby comes, we'll have to send it to the orphanage again," <<he>> says.
+		<br><br>
+
+		Your thoughts turn to your <<if childrenCountBetweenParents("Alex", "pc") is 1 or childrenCountBetweenParents("pc", "Alex") is 1>>child that is<<else>>children that are<</if>> still at the orphanage.
+		<br><br>
+
+		<<if C.npc.Alex.dom gte 30>>
+			<<He>> frowns. "If you want to avoid this, you better help me with the farm. I don't really want my children living as orphans."
+
+		<<else>>
+			<<He>> sighs. "If we want to avoid this, we better work harder at the farm. It hurts to think about our children living as orphans."
+
+		<</if>>
+		<br><br>
+
+		<<He>> finishes <<his>> tea and stands up. "Better get back to work."
+		<br><br>
+
+		<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+	<</if>>
+<</if>>
+
+:: Farm PC Pregnancy Reveal
+<<effects>><<npc "Alex">>
+
+ <<if ![3,4].includes($phase)>>
+    <<if $location is "alex_cottage">>
+        You take a seat next to Alex.
+    <<else>>
+        You reach for Alex and grab <<his>> arm.
+    <</if>>
+
+	<<if C.npc.Alex.pregnancy.ultraSound is "collected">>
+		<<set C.npc.Alex.pregnancy.ultraSound to "done">>
+		You hand the ultrasound pictures to Alex. <<He>> freezes in place and looks to you. "So you really are pregnant?"
+		<br><br>
+		You nod and flash <<him>> a nervous smile. A pregnant pause fills the air as <<he>> processes this information.
+		<br><br>
+		<<if $phase isnot 3>><<set $phase to 4>><</if>>
+	<<elseif C.npc.Alex.pregnancy.ultraSound is "collected2">>
+		<<set C.npc.Alex.pregnancy.ultraSound to "done">>
+		You hand the note from Dr Harper to Alex. <<He>> freezes in place and looks to you. "So you really are pregnant?"
+		<br><br>
+		You nod and flash <<him>> a nervous smile. A pregnant pause fills the air as <<he>> processes this information.
+		<br><br>
+		<<if $phase isnot 3>><<set $phase to 4>><</if>>
+	<<elseif C.npc.Alex.pregnancy.test is true>>
+		You hand the paternity test results to Alex. <<He>> freezes in place<<if $farm_stage gte 7>>, but you can see a smile forming on <<his>> face.<<else>>.<</if>>
+        <br><br>
+
+	<<else>>
+		"Hey, do you have a minute? I have something I need to share with you. It's important."
+		<br><br>
+
+		<<He>> gives you a curious glance but focuses <<his>> attention on you. "Sure," <<he>> says. "What's up?"
+		<br><br>
+
+	<</if>>
+
+<</if>>
+
+<<if C.npc.Alex.pregnancy.test isnot true and $farm_stage gte 7 and $alex_countdown is undefined>>
+	<<setKnowsAboutPregnancy "pc" "Alex">><<setTalkedAboutPregnancy "pc" "Alex">><<set C.npc.Alex.pregnancy.pcKnowledge to true>>
+
+    <<if playerBellySize() gte 7>>
+        <<if $phase is 4>>
+			"It's yours, okay?" you say.
+            <br><br>
+        <<elseif $phase is 3>>
+            You both take a seat on the sofa. With a sigh, <<if !$worn.upper.type.includes("naked")>>you lift up the hem of your shirt and<<else>>you<</if>> frame your belly with your hands, drawing <<his>> eyes to your stomach.
+            <br><br>
+
+            "It's yours, okay?" you say.
+            <br><br>
+
+        <<else>>
+            You hesitate. "Well, maybe it'd be easier if I just showed you..." <<if !$worn.upper.type.includes("naked")>>You lift up the hem of your shirt and<<else>>You<</if>> frame your belly with your hands, drawing <<his>> eyes to your stomach.
+            <br><br>
+
+        <</if>>
+
+        As <<he>> pulls away from you, <<he>> looks at your belly. "You sure took your time telling me, didn't you?" <<he>> taunts you.
+        <br><br>
+
+        "Never really found a good moment to," you respond.
+        <br><br>
+
+        "It's fine, I'm not bothered by it. Just glad you said something eventually!"
+        <br><br>
+
+    <<else>>
+		<<if $phase isnot 4>>
+			<<switch getPregnancyObject().awareOf>>
+				<<case "temple">>
+					You tell <<him>> what Jordan from the temple told you. <<He>> freezes in place, but you can see a smile forming on <<his>> face.
+				<<case "pharmacy">>
+					You tell <<him>> what the nurse from the pharmacy told you. <<He>> briefly frowns, but then you see a smile forming on <<his>> face.
+				<<default>>
+					You hand <<him>> your pregnancy test. <<He>> freezes in place, but you can see a smile forming on <<his>> face.
+			<</switch>>
+    		<br>
+		<</if>>
+
+        "Wow," <<he>> says, breaking the silence. "I sure wasn't expecting that."
+		<br>
+
+		<<He>> pulls you into a hug.
+
+        <<if pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+            "Our own little family. Mum would be proud."
+
+        <<else>>
+            "Looks like our little family's growing. I wonder what Mum would think about this."
+
+        <</if>>
+        <br><br>
+		<<if $phase is 4>>
+			As <<he>> pulls away from you, <<he>> looks to you. "Sorry for not believing you."
+			<br>
+			"Yeah, I was quite surprised," you say with a sheepish laugh.
+			<br>
+			<<He>> laughs with you. "It's fine, I'm looking forward to the unexpected family."
+		<<else>>
+			<<switch getPregnancyObject().awareOf>>
+				<<case "temple">>
+					As <<he>> pulls away from you, <<he>> looks to you. "No idea who this Jordan is, but I wonder how <<nnpc_he "Jordan">> figured out you were pregnant?"
+					<br>
+					"Yeah, I was quite surprised," you say with a sheepish laugh.
+					<br>
+					<<He>> laughs with you. "It's fine, I'm not bothered by it."
+				<<case "pharmacy">>
+					As <<he>> pulls away from you, <<he>> looks to you. "There are better ways to keep yourself from becoming pregnant."
+					<br><br>
+					"Yeah, sorry," you say with a sheepish laugh.
+					<br>
+					<<He>> laughs with you. "It's fine, I'm not bothered by it."
+				<<default>>
+					As <<he>> pulls away from you, <<he>> holds up the used pregnancy test. "But did you really break the news by handing me the thing you peed on?" <<he>> teases.
+					<br><br>
+					"Yeah, sorry," you say with a sheepish laugh.
+					<br>
+					<<He>> laughs with you. "It's fine, I'm not bothered by it. Can't be squeamish when you're a farmer!"
+			<</switch>>
+		<</if>>
+		<br><br>
+
+    <</if>>
+
+<<else>>
+
+    <<if C.npc.Alex.pregnancy.pcKnowledge isnot true>>
+		<<setKnowsAboutPregnancy "pc" "Alex">><<setTalkedAboutPregnancy "pc" "Alex">><<set C.npc.Alex.pregnancy.pcKnowledge to true>>
+
+        <<if playerBellySize() gte 7>>
+            <<if $phase is 4>>
+                "It's yours, okay?" you say.
+            <<elseif $phase is 3>>
+                With a sigh, <<if !$worn.upper.type.includes("naked")>>you lift up the hem of your shirt and<<else>>you<</if>> frame your belly with your hands, drawing <<his>> eyes to your stomach.
+
+                "It's yours, okay?" you say.
+
+            <<else>>
+                You hesitate. "Well, maybe it'd be easier if I just showed you..." <<if !$worn.upper.type.includes("naked")>>You lift up the hem of your shirt and<<else>>You<</if>> frame your belly with your hands, drawing <<his>> eyes to your stomach.
+                <br><br>
+
+            <</if>>
+
+        <<elseif $phase is 4>>
+        <<else>>
+			<<switch getPregnancyObject().awareOf>>
+				<<case "temple">>
+					You tremble as you tell <<him>> what Jordan from the temple told you.
+				<<case "pharmacy">>
+					You tremble as you tell <<him>> what the nurse from the pharmacy told you.
+				<<default>>
+					With trembling fingers, you hand <<him>> your pregnancy test.
+			<</switch>>
+        <</if>>
+        <br><br>
+
+    <</if>>
+
+    <<if C.npc.Alex.pregnancy.test is true>>
+		<<if $farm_stage gte 7>>
+			"Wow," <<he>> says, breaking the silence. "I sure wasn't expecting that."
+			<br>
+
+			<<He>> pulls you into a hug.
+
+			<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+				"Our own little family. Mum would be proud."
+
+			<<else>>
+				"Looks like our little family's growing. I wonder what Mum would think about this."
+
+			<</if>>
+			<br><br>
+
+			As <<he>> pulls away from you, <<he>> holds up the paternity test results. "Sorry I've doubted you," <<he>> says.
+			<br><br>
+
+			"It's okay, I'm not bothered by it," you say with a sheepish laugh.
+			<br><br>
+
+		<<else>>
+			"Wow," <<he>> says, breaking the silence.
+
+			<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+				"I sure wasn't expecting that." <<He>> pauses for a moment.
+
+			<<else>>
+				"I guess we were careless...again." <<He>> pauses for a moment.
+			<</if>>
+			<br>
+
+			"Let's go to the cottage, shall we?" Alex leads you inside.
+			<br><br>
+
+		<</if>>
+
+    <<else>>
+		<<set C.npc.Alex.pregnancy.sample to true>>
+
+        <<He>> <<if $farm_work.alex is "relax">>stands up but <</if>>freezes in place. "H-Hold on, partner. How sure are you about this?" <<he>> asks.
+        <br><br>
+
+        You open your mouth to speak, but <<he>> interrupts you. "Actually...here..." <<He>> pulls out a strand of <<his>> hair. "Please take a paternity test, then we can talk. I just don't know if I can trust you yet."
+        <br><br>
+
+        <span class="blue">You'll need a paternity test to convince Alex that <<hes>> the father. Maybe the town hospital can provide one.</span>
+        <br><br>
+
+        <<if $farm_work.alex is "relax">>
+            <<link [[다음|Farm Work]]>><<endevent>><<unset $farm_relax_drink>><<set $farm_work.alex to "still">><</link>>
+
+        <<else>>
+            <<link [[다음|Farm Work]]>><<endevent>><</link>>
+
+        <</if>>
+
+    <</if>>
+
+<</if>>
+
+<<if ($farm_stage gte 7 and $alex_countdown is undefined) or C.npc.Alex.pregnancy.test is true>>
+	<<link [[다음|Farm PC Pregnancy Reveal 2]]>><<run delete C.npc.Alex.pregnancy.test>><</link>>
+
+<</if>>
+
+:: Farm PC Pregnancy Reveal Mpreg Alt
+<<effects>><<npc "Alex">>
+
+<<if $location is "alex_cottage">>
+    You take a seat next to Alex.
+<<else>>
+    You reach for Alex and grab <<his>> arm.
+<</if>>
+
+<<switch getPregnancyObject().awareOf>>
+    <<case "wakingUp">>
+        You tremble as you tell <<him>> what you thought when you looked at yourself after waking up. You show <<him>> your belly.
+    <<case "mirror">>
+        You tremble as you tell <<him>> what you thought when you looked at yourself in the mirror. You show <<him>> your belly.
+    <<case "temple">>
+        You tremble as you tell <<him>> what Jordan told you.
+    <<case "pharmacy">>
+        You tremble as you tell <<him>> what the nurse from the pharmacy told you.
+    <<default>>
+        With trembling fingers, you hand <<him>> your pregnancy test.
+<</switch>>
+
+<br><br>
+<<He>> looks at you with a baffled expression. "But... how?" <<he>> asks. "You don't have a vagina. Your condition could easily be something else; you should get checked at the hospital."
+
+<<if getPregnancyObject().ultrasoundDone>>
+	<br><br>
+    "I already have." You hand Alex a printout of your ultrasound.
+    <br><br>
+    It takes <<him>> a moment to put two and two together, then <<he>> laughs. "Is this your way of explaining that beer belly you have?" <<he>> teases. "Nice sense of humour." <<He>> ruffles your hair playfully.
+    <br><br>
+	"I'm not joking," you insist. "I'm pregnant."
+    <br><br>
+	<<if playerBellySize() gte 7>>
+		<<He>> doesn't seem convinced, so you grab <<his>> hand and put it on your belly. <span class="green">Your baby shifts around inside you</span>. "What- but- how?" Alex's eyes widen and <<he>> stares at your belly bump. "How... how is this possible?"
+	<<else>>
+		<<He>> doesn't seem convinced, but there is nothing more you can do. "But how can you be pregnant?"
+	<</if>>
+
+	<br><br>
+	<<if $submissive gte 1150>>
+		You shake your head. "I don't know. I can't explain it either..."
+	<<elseif $submissive lte 850>>
+		You shrug. "Fuck if I know. Life finds a way."
+	<<else>>
+		You shrug. "Don't ask questions."
+	<</if>>
+	<br><br>
+	It takes <<him>> a moment to pull <<him>>self together. "Well," <<he>> finally says, "I've seen some pretty strange things here on the farm before, but this takes the cake. I guess nature can be pretty wild, huh?"
+	<br><br>
+
+    <<link [[다음|Farm PC Pregnancy Reveal]]>><<set $phase to 4>><</link>>
+<<else>>
+    <<set C.npc.Alex.pregnancy.ultraSound to "requested">>
+    <br><br>
+    <span class="blue">You'll need a ultrasound to convince Alex that you're pregnant.</span>
+    <br><br>
+    <<link [[다음|Farm Work]]>><<endevent>><</link>>
+<</if>>
+
+:: Farm PC Pregnancy Reveal 2
+<<effects>>
+
+<<if $farm_stage gte 7>>
+	<<if C.npc.Alex.dom gte 30>>
+		<<He>> leans in again, pressing you tight against <<his>> body. "This also means that you're mine." <<He>> scowls darkly as <<he>> adds, "And I'm not letting Remy take what's mine."
+		<br><br>
+
+		"You don't have to worry, I can protect you and the farm by myself when things get worse," <<he>> says, taking a look at your belly again.
+		<br><br>
+
+	<<else>>
+		<<He>> leans in again, hugging you and placing <<his>> chin on your shoulder. "I'll protect you," <<he>> says.
+		<br><br>
+
+		You can see <<his>> face soften. "Remy can try all <<nnpc_he "Remy">> wants. I'm not letting <<nnpc_him "Remy">> ruin this."
+		<br>
+		"The farm, you, I'll protect it all if I have to..." Tears spring to <<his>> eyes.
+		<br><br>
+
+	<</if>>
+
+	<<He>> shakes <<his>> head. "We'll deal with that later. Right now, we have something more important to worry about. Gotta start making room for our little fella here." <<He>> breaks into a smile once more.
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex","pc") gte 1 or pregnancyCountBetweenParents("pc","Alex") gte 1>>
+
+	<<else>>
+		"There's actually a third room upstairs. I think we can make good use of it."
+		<br><br>
+
+		<span class="gold">You can now make an extension for the cottage.</span>
+		<br><br>
+
+	<</if>>
+
+	<<if $farm_work isnot undefined and $farm_work.alex isnot undefined and $farm_work.alex.includes("admin","clearing")>>
+		<<link [[다음|Farm Alex Bedroom]]>><<endevent>><</link>>
+
+	<<else>>
+		<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<</if>>
+
+<<else>>
+	You take a seat on the sofa while Alex goes to the kitchen to make some tea.
+	<br><br>
+
+	<<He>> hands you a mug, only speaking once you take a sip. "Sorry, it's just that I'm not sure how to deal with this. I'm not saying I'm not happy, just surprised." <<He>> takes a sip of <<his>> tea.
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+		"Do you think it could stay here?" you ask <<him>>.
+
+	<<else>>
+		"Maybe this time, we will get things done in time," you say.
+	<</if>>
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+		<<His>> face softens. "There's far too much work at the farm right now... If things aren't better by the time the baby comes, we'll have to send it to the orphanage," <<he>> says.
+		<br><br>
+
+		Your thoughts turn to Bailey and how the orphans are treated, but as you open your mouth to speak, <<he>> interrupts you.
+		<br><br>
+
+		"I know! I don't like this either, but it would be temporary, just until things settle down. And this is only in the worst-case scenario."
+		<br><br>
+
+		<<link [[다음|Farm PC Pregnancy Reveal 3]]>><</link>>
+
+	<<else>>
+		<<His>> face softens. "There's still far too much work at the farm right now... If things still aren't better by the time the baby comes, we'll have to send it to the orphanage again," <<he>> says.
+		<br><br>
+
+		Your thoughts turn to your <<if childrenCountBetweenParents("Alex", "pc") is 1 or childrenCountBetweenParents("pc", "Alex") is 1>>child that is<<else>>children that are<</if>> still at the orphanage.
+		<br><br>
+
+		<<if C.npc.Alex.dom gte 30>>
+			<<He>> frowns. "If you want to avoid this, you better help me with the farm. I don't really want my children living as orphans."
+
+		<<else>>
+			<<He>> sighs. "If we want to avoid this, we better work harder at the farm. It hurts to think about our children living as orphans."
+
+		<</if>>
+		<br><br>
+
+		<<He>> finishes <<his>> tea and stands up. "Better get back to work."
+		<br><br>
+
+		<<link [[떠난다|Farm Work]]>><<endevent>><</link>>
+
+	<</if>>
+
+<</if>>
+
+:: Farm PC Pregnancy Reveal 3
+/*Only for the first non-LI pregnancy reveal*/
+<<effects>>
+
+<<if C.npc.Alex.dom gte 30>>
+    <<He>> frowns. "If you want to avoid this, you better help me with the farm. I don't really want my children living as orphans."
+
+<<else>>
+    <<He>> sighs. "If we want to avoid this, we better work harder at the farm. It hurts to think about our child living as an orphan."
+
+<</if>>
+<br><br>
+
+"There's room at the cottage for our little fella here, but I need to focus on restoring the three main fields first. After that, I can turn my attentions elsewhere."
+<br><br>
+
+<<He>> finishes <<his>> tea and stands up. "Better get back to work."
+<br><br>
+
+Alex is willing to build a Nursery at the cottage, but first <span class="gold">you need to help <<him>> clear the three main fields.</span>
+<br><br>
+
+<<link [[떠난다|Farm Work]]>><<endevent>><</link>>
+
+:: Farm PC Pregnancy Reveal Unknown
+<<effects>><<npc "Alex">>
+<<set C.npc.Alex.pregnancy.pcKnowledge to true>><<set C.npc.Alex.pregnancy.sample to true>>
+
+<<if $phase is 1>>
+
+	<<if playerBellySize() gte 7>>
+		You approach Alex and grab <<his>> hand, placing it over your belly.
+
+	<<else>>
+		You approach Alex and grab <<his>> hand, placing your pregnancy test on it.
+	<</if>>
+
+	<<if talkedAboutPregnancy("pc","Alex")>>
+		<<if $speech_attitude is "meek">>
+			"I...I think that this baby is yours," you say.
+		<<elseif $speech_attitude is "bratty">>
+			"Chances are that this baby is yours," you say.
+		<<else>>
+			"This baby is probably yours," you say.
+		<</if>>
+
+	<<else>>
+		<<setTalkedAboutPregnancy "pc" "Alex">>
+		<<if $speech_attitude is "meek">>
+			"I'm...I'm pregnant, and I think that the baby is yours," you say.
+		<<elseif $speech_attitude is "bratty">>
+			"You knocked me up. Pretty sure that this baby is yours," you say.
+		<<else>>
+			"I'm pregnant, and the baby is probably yours," you say.
+		<</if>>
+
+	<</if>>
+	<br><br>
+
+<</if>>
+
+<<if $farm_stage gte 7>>
+	Alex looks at you in horror. "You...you think?!"
+	<br><br>
+
+    You open your mouth to speak, but <<he>> interrupts you. "Look...just..." <<He>> pulls out a strand of <<his>> hair. "Please take a paternity test, then we can talk. I just don't know if I can trust you yet."
+
+    <<He>> sighs. "I'm sorry, but I'd rather be sure that it's mine."
+	<br><br>
+
+    <span class="blue">You'll need a paternity test to convince Alex that <<hes>> the father. Maybe the town hospital can provide one.</span>
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+<<else>>
+
+	<<He>> <<if $farm_work.alex is "relax">>stands up but <</if>>freezes in place. "H-Hold on, partner. How sure are you about this?" <<he>> asks.
+	<br><br>
+
+	You open your mouth to speak, but <<he>> interrupts you. "Actually...here..." <<He>> pulls out a strand of <<his>> hair. "Please take a paternity test, then we can talk. I just don't know if I can trust you yet."
+	<br><br>
+
+	<span class="blue">You'll need a paternity test to convince Alex that <<hes>> the father. Maybe the town hospital can provide one.</span>
+	<br><br>
+
+	<<if $farm_work.alex is "relax">>
+		<<link [[다음|Farm Work]]>><<endevent>><<unset $farm_relax_drink>><<set $farm_work.alex to "still">><</link>>
+
+	<<else>>
+		<<link [[다음|Farm Work]]>><<endevent>><</link>>
+
+	<</if>>
+
+<</if>>
+
+:: Farm Alex Birth
+<<effects>><<set $alexBabiesCount to getPregnancyObject("Alex").fetus.length>>
+
+You make the call, explaining the situation to the dispatcher. As you talk, Alex winces, breathing through contractions.
+<br><br>
+
+"Do you need something?" you ask as you give the phone back to <<him>>.
+<br>
+
+Alex smiles. "Could you make me some tea? It's better if I rest until the doc arrives." <<He>> takes a seat on the sofa, keeping <<his>> hands on <<his>> belly and controlling <<his>> breathing.
+<br><br>
+
+You make Alex a cup of tea. No sugar, a little milk, just the way <<he>> likes it.
+<br>
+
+"Thanks," <<he>> says as you hand <<him>> the cup.
+<br><br>
+
+You take a seat next to Alex but soon stand up, unable to sit still as you both wait for the doctor's arrival.<<gstress>><<stress 6>>
+<br><br>
+
+<<link [[다음|Farm Alex Birth 2]]>><</link>>
+
+:: Farm Alex Birth 2
+<<effects>>
+
+It doesn't take long before you hear a knock on the door.
+<br>
+
+You rush to the door, where a figure with a big bag awaits.
+<br><br>
+
+<<if pregnancyCountBetweenParents("pc","Alex") isnot 1 or pregnancyCountBetweenParents("Alex","pc") isnot 1>>
+    <<if $harperintro isnot 1 and $hospitalintro isnot 1>>
+    "Hello, I'm Doctor Harper. I don't believe we've had the pleasure of meeting." <<nnpc_He "Harper">> looks young for a doctor, can't be older than 25.
+
+    <<else>>
+        It's <span class="pink">Doctor Harper</span>. "Well, this certainly is a chance meeting," <<nnpc_he "Harper">> comments.
+
+    <</if>>
+
+<<else>>
+    "And here we are again," Harper laughs. "Nothing interesting on TV, I take it?"
+
+<</if>>
+<br>
+
+<<nnpc_His "Harper">> gaze turns to Alex, who seems relieved at the Doctor's arrival. "If you'll excuse me," <<nnpc_he "Harper">> says.
+<br><br>
+
+Harper steps inside the cottage, approaches Alex, and examines <<him>> for a while. "Everything seems normal; you can expect a healthy birth."
+<br>
+
+<<nnpc_He "Harper">> sighs. "Usually, I would recommend doing this in a hospital, but it doesn't look like we have time for this."
+<br><br>
+
+<<link [[다음|Farm Alex Birth 3]]>><</link>>
+
+:: Farm Alex Birth 3
+<<effects>>
+
+Harper turns to you. "I'll take <<him>> to <<his>> bed. Could you fetch some dry towels and a bowl of hot water?"
+<br><br>
+
+After gathering up the supplies, you head to Alex's room. Heavy breathing can be heard as you climb the stairs.
+<br><br>
+
+"Breathe," you hear Harper say as you open the door. Alex reclines in bed with a sheet draped over <<his>> lower half, <<his>> face pale and breathing ragged. Harper sits on the desk chair at the foot of the bed, examining Alex with clinical precision.
+<br><br>
+
+Both look at you as you enter the room. "Ah, I see you got everything I needed. You can put it next to me," Harper says.
+<br><br>
+
+"Y-you don't have to stay here if you don't want to..." Alex manages to say through heavy breaths.
+<br><br>
+
+<<link [[Stay|Farm Alex Birth 4]]>><<set $phase to 1>><<npcincr Alex love 1>><</link>><<glove>>
+<br>
+<<link [[떠난다|Farm Alex Birth 4]]>><<npcincr Alex dom -1>><</link>><<ldom>>
+
+:: Farm Alex Birth 4
+<<effects>>
+
+<<if $phase is 1>>
+	You place the towels and the bowl next to Harper and approach Alex.
+
+	<<if $speech_attitude is "meek">>
+		"I want to stay here with you," you say as you take <<his>> hand in your own.
+	<<elseif $speech_attitude is "bratty">>
+		"Don't think you'll cut me off that easily," you say as you take <<his>> hand in your own.
+	<<else>>
+		"I'll stay here," you say as you take <<his>> hand in your own.
+	<</if>>
+	<<glove>><<npcincr Alex love 1>>
+	<br><br>
+
+	<<He>> smiles at you. "Than-" <<Hes>> interrupted by a strong contraction, and <<his>> grip on your hand tightens.<<gpain>><<violence 6>>
+	<br><br>
+
+	"It's time," Harper says. "I'll need you to push as hard as you can."
+	<br><br>
+
+	Alex nods. <<His>> face is pale, but you can tell that <<hes>> determined.
+	<br>
+
+	<<His>> grip on your hand tightens even more. It almost feels like Alex's going to break it.<<ggpain>><<violence 12>>
+	<br><br>
+
+	You move your other hand to Alex's hair and start brushing it gently while encouraging <<him>> to keep giving <<his>> best.
+	<br><br>
+
+	"Almost there, just a little more," Harper says.
+	<br><br>
+
+<<else>>
+	You place the towels and the bowl next to Harper and leave, giving one final glance at Alex, who nods at you.
+	<br><br>
+
+	You sit by the door, with only the sound of heavy breathing and Harper's voice to accompany you. Time passes, and the wait becomes unbearable. Eventually, the sounds stop, and a silence fills the cottage.
+	<br><br>
+
+	Expecting the worst, you enter the room again to find Harper holding <<print $alexBabiesCount > 1 ? "your newborns, bundled into clean towels." : "your newborn, bundled into a clean towel.">>
+	<br><br>
+
+	Alex looks exhausted as <<he>> tries to catch <<his>> breath.
+	<br><br>
+
+<</if>>
+
+<<link [[다음 (0:45)|Farm Alex Birth 5]]>><<pass 45>><</link>>
+
+:: Farm Alex Birth 5
+<<effects>>
+
+<<if $phase is 1>>After a few intense minutes, you<<else>>You<</if>> hear a cry
+
+<<if $alexBabiesCount is 2>>
+    , followed by another.
+<<elseif $alexBabiesCount is 3>>
+	, followed by another and, surprisingly, one more.
+
+<<else>>
+	.
+
+<</if>>
+<br><br>
+
+Harper gets up and hands the <<print $alexBabiesCount > 1 ? "babies" : "baby">> to Alex.
+
+<<if pregnancyCountBetweenParents("pc", "Alex") lte 1 or pregnancyCountBetweenParents("Alex", "pc") lte 1>>
+    "Congratulations," Harper says. <span class="lewd">"You're both parents now."</span>
+<<else>>
+    "Congratulations," Harper says. "Would you like to see your children now?"
+<</if>>
+<br><br>
+
+<<print $alexBabiesCount > 1 ? "They sit" : "It sits">> in <<his>> arms, eyes shut, chest rising and falling with gentle breaths.
+<br>
+
+Alex hugs <<his>> <<print $alexBabiesCount > 1 ? "babies" : "baby">> close to <<his>> chest.
+<br><br>
+
+"I've run all the tests," Harper says. "There's not a single health problem. Have you two thought of <<print $alexBabiesCount > 1 ? "their names" : "a name">>?"
+<br><br>
+
+"I'm too tired to think about names now and I'm not really good with this, you choose <<if getPregnancyObject("Alex").fetus.length gte 2>>them<<else>>it<</if>>," Alex says.
+<br>
+
+"Come on, give it a try, it's not fair that only I get to choose" you say.
+<br>
+
+Alex thinks for a moment. "Nope, nothing," <<he>> laughs.
+<br><br>
+
+<<birthUi "Alex" "alex_cottage" "alex_cottage" "Farm Alex Birth 6" 10>>
+
+:: Farm Alex Birth 6
+<<effects>>
+
+Having named your <<print $alexBabiesCount > 1 ? "children" : "child">>, you turn your attention to Alex again. <<He>> nods approvingly at your choice of <<print $alexBabiesCount > 1 ? "names" : "name">>.
+<br>
+
+<<He>> sighs. "This knocked me out real good, I can barely keep my eyes open."
+<br><br>
+
+Harper gathers <<nnpc_his "Harper">> equipment and walks to the door. "You should rest for now, avoid walking for a while too, and you'll be fine."
+<br><br>
+
+Alex nods. "Thanks Doc, I appreciate it."
+<br><br>
+
+Harper smiles and leaves, pulling <<nnpc_his "Harper">> phone out of <<nnpc_his "Harper">> pocket as if <<nnpc_he "Harper">> is about to call someone.
+<br><br>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+    "Could you take the little <<print $alexBabiesCount > 1 ? "fellas" : "fella">> here to their new room? I'll try to sleep a little now," Alex asks while giving one final big hug to <<his>> <<if $alexBabiesCount gte 2>>babies<<else>>baby<</if>> and handing <<if $alexBabiesCount gte 2>>them<<else>><<childhim>><</if>> to you.
+	<br><br>
+
+<<else>>
+    "Damn..." Alex says. "The nursery is not ready yet..." <<his>> face softens.
+	<br>
+    <<He>> holds <<his>> <<print $alexBabiesCount > 1 ? "children" : "child">> closer.
+	<br><br>
+
+<</if>>
+
+<<link [[다음|Farm Alex Birth 7]]>><</link>>
+
+:: Farm Alex Birth 7
+<<effects>>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+    You nod and head up to the cottage nursery.
+	<br>
+
+    There, you place your <<if $alexBabiesCount gte 2>>newborns in their cradles, where they quickly fall asleep<<else>>newborn in its cradle, where it quickly falls asleep<</if>>.
+	<br>
+
+    You stay at the nursery for a while, ensuring that your <<if $alexBabiesCount gte 2>>children<<else>>child<</if>> remain comfy and warm.
+	<br><br>
+
+<</if>>
+
+<<if (pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1) or C.npc.Alex.pregnancy.nursery isnot true>>
+	<span class="red">You hear a knock at the door.</span> Maybe Harper forgot something.
+	<br><br>
+
+	You go downstairs and open the door. It's <span class="red">Bailey</span>. You shiver. You wonder if Harper called <<nnpc_him "Bailey">>.
+	<br>
+
+	<<nnpc_He "Bailey">> stares at you. "I suppose we both know why I'm here," <<nnpc_he "Bailey">> says.
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1>>
+		"You don't really think you'll be able to raise a child in a place like this, do you?" <<nnpc_he "Bailey">> says.
+		<br><br>
+
+	<<else>>
+		"You're an irresponsible little fuck, you know that? Making me drive all the way here again just because you don't know how to assume your own responsibilities, instead, making more and more," <<he>> says.
+		<br><br>
+
+	<</if>>
+
+	<<link [[다음|Farm Alex Birth 8]]>><</link>>
+
+<<else>>
+	<<link [[다음|Farm Cottage]]>><<unset $alex_baby_count>><</link>>
+
+<</if>>
+
+:: Farm Alex Birth 8
+<<effects>><<set _alex to statusCheck("Alex")>>
+
+<<if pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1>>
+    You hear footsteps from the staircase.
+	<br><br>
+
+    "We've a place prepared at the orphanage. Now make my job easier and hand me the <<print $alexBabiesCount > 1 ? "brats" : "brat">>," <<nnpc_he "Bailey">> continues.
+	<br>
+
+    "No," you say, looking Bailey directly in the eyes.
+	<br>
+
+    <<nnpc_He "Bailey">> frowns. "Listen, you little-"
+	<br><br>
+
+    "Oi!" Alex interrupts. <<nnpc_He "Alex">> seems to have trouble walking<<if C.npc.Alex.pregnancy.nursery isnot true>>, <<his>> <<print $alexBabiesCount > 1 ? "children" : "child">> on <<his>> arms <</if>>. "What makes you think that we should just give our <<print $alexBabiesCount > 1 ? "children" : "child">> to you?"
+	<br><br>
+
+    Bailey turns <<nnpc_his "Bailey">> gaze to Alex. "Look, 'cow<<if _alex.pronoun is "f">>girl<<else>>boy<</if>>', you could've been fucked by any dumbass and I wouldn't care, but you hitched yourself to MY ward."
+	<br><br>
+
+    Alex clenches <<his>> fists."And who exactly said <<pshe>> is yours? <<pShe>>'s MY <<if $player.gender_appearance is "f">>woman<<else>>man<</if>>."
+	<br>
+
+    Bailey fixes Alex with a piercing gaze."And how exactly do you plan on taking care of a kid in a place like this?"
+	<br><br>
+
+<<else>>
+    You see Alex descending downstairs carrying <<his>> <<print $alexBabiesCount > 1 ? "children" : "child">> along.
+	<br><br>
+
+    <<He>> wordless gives <<his>> <<print $alexBabiesCount > 1 ? "them" : "it">> to Bailey.
+	<br><br>
+
+    "Good," Bailey says. "Stop being such an inconsequential brat and maybe this won't happen anymore," Bailey says as <<nnpc_he "Bailey">> leaves.
+	<br><br>
+
+<</if>>
+
+<<link [[다음|Farm Alex Birth 9]]>><</link>>
+
+:: Farm Alex Birth 9
+<<effects>>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+    "We have our own nursery at the cottage, we don't need or want your help," Alex responds.
+	<br><br>
+
+    A long and deafening silence fills the environment. Bailey keeps staring at you and Alex.
+	<br><br>
+
+    "Tch," Bailey breaks the silence. "Do whatever you want to; it's one less problem for me to deal with anyway." Shooting you one last glare, <<nnpc_He "Bailey">> turns and leaves the farm.
+	<br><br>
+
+    You suddenly feel a hand on your shoulder. "Now, would you be a sweetie and help me go back 	upstairs? Going down was the easy part," Alex laughs.
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><<unset $alex_baby_count>><</link>>
+
+<<else>>
+    "We'll work something out. My <<print $alexBabiesCount > 1 ? "children are not orphans" : "child is not an orphan">>," Alex says, frustrated.
+	<br><br>
+
+    A long and deafening silence fills the room. Bailey continues staring at you and Alex.
+	<br><br>
+
+    "I'll tell you what," Bailey breaks the silence. "I have a proper place for this, and you don't, but I think we can reach an arrangement."
+	<br>
+
+    "What do you mean?" Alex asks.
+	<br><br>
+
+    "I'll let your <<print $alexBabiesCount > 1 ? "brats" : "brat">> stay at my orphanage until you solve your little problem, but it'll cost you. <<printmoney 10000>> each, for every week they remain there."
+	<br><br>
+
+    "When everything is solved, I'll take the little <<print $alexBabiesCount > 1 ? "brats" : "brat">> here again, and, obviously, it will cost you. The price is not up for negotiation," Bailey finishes.
+	<br><br>
+
+    <<link [[다음|Farm Alex Birth 10]]>><</link>>
+<</if>>
+
+:: Farm Alex Birth 10
+<<effects>>
+
+<<set $ward_unlocked to true>>
+<<run Object.values(V.children).filter(child => {
+    if (child.location === "alex_cottage" && (child.father === "Alex" || child.mother === "Alex")) child.location = "home";
+})>>
+
+Alex turns to you. "I hate to say this, but this...offer might be a good thing, for the <<print $alexBabiesCount > 1 ? "kids" : "kid">> at least. I don't like the price, or losing <<print $alexBabiesCount > 1 ? "them" : "it">>, but it will give us more time to prepare a room. It's only temporary, right?" You nod.
+<br><br>
+
+"Okay," Alex says, returning <<his>> attention to Bailey again.
+<br><br>
+
+<<He>> gives one last long hug to <<his>> <<print $alexBabiesCount > 1 ? "children" : "child">> before handing <<print $alexBabiesCount > 1 ? "them" : "it">> to Bailey.
+<br><br>
+
+"I'm glad we could reach an agreement. Now, if you'll excuse me..." Bailey says as <<nnpc_he "Bailey">> leaves.
+<br><br>
+
+Alex stands there, helplessly watching <<his>> <<print $alexBabiesCount > 1 ? "children" : "child">> being taken away, stone-faced and silent.
+<br>
+
+Tears roll down <<his>> face, but <<he>> does <<his>> best to keep up <<his>> stoic façade for your sake.
+<br><br>
+
+<<link [["Comfort " + $NPCList[0].pronouns.him|Farm Alex Birth 11]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[Let it go|Farm Alex Birth 11]]>><<set $phase to 2>><</link>>
+
+:: Farm Alex Birth 11
+<<effects>>
+<<unset $alex_baby_count>>
+
+<<if $phase is 1>>
+    You lean in and hug Alex tight, whispering that everything will be okay.
+	<br>
+
+	<<He>> hugs you back, whimpering and breaking into a sob.
+	<br><br>
+
+    <<He>> releases you after some time and wipes away <<his>> tears with <<his>> sleeve.
+
+<<else>>
+    <<He>> wipes away <<his>> tears with <<his>> sleeve.
+
+<</if>>
+<br>
+
+<<if Time.dayState isnot "night">>
+    "I'll take some rest before getting back to work,"
+
+<<else>>
+    "We should get some rest before getting back to work,"
+
+<</if>>
+
+<<he>> says, trying to sound confident.
+<br><br>
+
+<<if $farm_stage gte 7>>
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+<<else>>
+	<<link [[다음|Farm Work]]>><<endevent>><</link>>
+
+<</if>>
+
+:: Farm PC Birth
+<<effects>>
+
+<<if !$ambulance>>
+	<<set $pcBabyCount to getPregnancyObject("pc").fetus.length>>
+
+	<<He>> grabs <<his>> phone and makes the call, explaining the situation and where the farm is located.
+	<br><br>
+
+	Alex notices your anxiety. "Fancy a fancy cup of tea?" <<he>> asks with a smile on <<his>> face. "I'm sure it will help calm your nerves."
+	<br><br>
+
+	<<He>> goes to the kitchen and makes you a cup of tea.
+	<br>
+
+	"Here," <<he>> says as <<he>> passes you the mug and takes a seat next to you.
+	<br><br>
+
+	You take a sip. The taste is sweet, and it makes you feel warm.<<llstress>>
+	<br>
+
+	The contractions continue to grow stronger and far more frequent, but you're able to breathe through it.<<gpain>><<violence 16>>
+	<br><br>
+
+	Alex holds your hand, and you wait for the Doctor's arrival.
+	<br><br>
+
+	<<link [[다음|Farm PC Birth 2]]>><</link>>
+
+<<else>>
+	You don't have to wait long before you hear a siren and a honk. Alex helps you stand and brings you closer to the paramedics; they quickly put you in the ambulance and drive to the hospital, but the pain becomes too much for you. You pass out.
+	<br><br>
+
+	<<link [[다음|Pregnancy Birth Hospital]]>><<endevent>><<set $phase to 1>><</link>>
+
+<</if>>
+
+:: Farm PC Birth 2
+<<effects>>
+
+It doesn't take long before you hear a knock.
+<br><br>
+
+Alex stands up and opens the door. The only thing you see in the shadow of the doorframe is the silhouette of someone carrying a big bag. "Please, come in," Alex says.
+<br><br>
+
+"If you'll excuse me," the person says, stepping inside the cottage.
+<br>
+
+<<if pregnancyCountBetweenParents("pc","Alex") isnot 1 or pregnancyCountBetweenParents("Alex","pc") isnot 1>>
+    <<if $harperintro isnot 1 and $hospitalintro isnot 1>>
+    "Hello, I'm Doctor Harper. I don't believe we've had the pleasure of meeting." <<nnpc_He "Harper">> looks young for a doctor, can't be older than 25.
+
+    <<else>>
+        It's <span class="pink">Doctor Harper</span>. "Well, this certainly is a chance meeting," <<nnpc_he "Harper">> comments.
+
+    <</if>>
+
+<<else>>
+    "And here we are again," Harper laughs. "Nothing interesting on TV, I take it?"
+
+<</if>>
+<br><br>
+
+<<nnpc_He "Harper">> examines you for a while. "Everything seems normal; you can expect a healthy birth."
+<br>
+
+<<nnpc_He "Harper">> sighs. "Usually, I would recommend doing this in a hospital, but it doesn't look like we have time for this."
+<br><br>
+
+Harper turns to Alex. "I'll take <<phim>> to <<if $player.gender_appearance is "f">>her<<else>>his<</if>> bed, could you get some dry towels?" Alex nods.
+<br><br>
+
+<<link [[다음|Farm PC Birth 3]]>><</link>>
+
+:: Farm PC Birth 3
+<<effects>>
+
+You climb the stairs with Harper's assistance, heading towards <<if $farm_stage gte 7>>your<<else>> Alex's<</if>> room. <<nnpc_He "Harper">> helps you to lay on the bed.
+<br><br>
+
+"Keep working on your breathing; I'll get everything I need ready," <<nnpc_he "Harper">> says. <<nnpc_He "Harper">> reaches for some medical tools from <<nnpc_his "Harper">> bag and places them on the bedroom's desk on a sterile sheet of paper.
+<br><br>
+
+You do your best to control your breathing, but a fresh wave of contractions hits. You groan involuntarily, panting through the pain.
+<br>
+
+Alex arrives and hastily puts down the supplies before hurrying over to your side. <<He>> rubs your back.
+<br><br>
+
+"It's time," Harper says. "I'll need you to push as hard as you can."
+<br><br>
+
+You look back to Alex. "Don't worry, I'll stay here with you," <<he>> says as <<he>> takes hold of your hand.
+<br><br>
+
+<<link [[Let Alex stay|Farm PC Birth 4]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[Tell Alex to leave|Farm PC Birth 4]]>><<set $phase to 2>><</link>>
+
+:: Farm PC Birth 4
+<<effects>>
+
+<<if $phase is 1>>
+    You smile at <<him>>. "Than-" You're interrupted by a strong contraction, and your grip on <<his>> hand tightens.<<gpain>><<violence 6>>
+	<br><br>
+
+<<else>>
+    You shake your head. "Please, leave. I need to do this by myself."
+	<br><br>
+
+    Alex looks disappointed but leaves.
+	<br><br>
+
+<</if>>
+
+You start to push with all the strength you have. The pain overwhelms you. <<ggpain>><<violence 12>>
+<br><br>
+
+"Almost there, just a little more," Harper says.
+<br><br>
+
+The pain becomes too much for you to endure as you continue pushing. Everything fades away.
+<br><br>
+
+<<link [[다음 (2:00)|Farm PC Birth 5]]>><<playerPrebirth>><<pass 120>><</link>>
+
+:: Farm PC Birth 5
+<<effects>>
+
+<<if $phase is 1>>
+    You look around and see Alex, who is still holding your hand. "Next time, tell me if you plan on breaking my hand," <<he>> laughs.
+
+<<else>>
+    Alex enters the room again, <<his>> face pale. <<He>> sighs in relief when <<he>> sees you well. "Didn't know that waiting could be so stressful," <<he>> laughs.
+
+<</if>>
+<br><br>
+
+Harper stands up and brings your <<print $pcBabyCount > 1 ? "babies" : "baby">> over to you and Alex.
+
+<<if pregnancyCountBetweenParents("pc", "Alex") isnot 1 or pregnancyCountBetweenParents("Alex", "pc") isnot 1>>
+    "Congratulations," Harper says. <span class="lewd">"You're both parents now."</span>
+<<else>>
+    "Congratulations," Harper says. <span class="lewd">"Would you like to see your children now?"</span>
+<</if>>
+<br><br>
+
+<<print $pcBabyCount > 1 ? "They sit" : "It sits">> in your arms, eyes shut, chest rising and falling with gentle breaths. You hold your <<print $pcBabyCount > 1 ? "babies" : "baby">> close to your chest.
+<br>
+
+"I've run all the tests," Harper says. "There's not a single health problem. Have you two thought of <<print $pcBabyCount > 1 ? "their names" : "a name">>?"
+<br><br>
+
+"Well," Alex says. "You did all the hard work, you should name <<if $pcBabyCount is 1>><<if getPregnancyObject().fetus[0].gender is "m">>him<<else>>her<</if>><<else>>them<</if>>."
+<br><br>
+
+<<birthUi "pc" "alex_cottage" "alex_cottage" "Farm PC Birth 6" 10>>
+
+:: Farm PC Birth 6
+<<effects>>
+
+Having named your <<print $pcBabyCount > 1 ? "children" : "child">>, you turn your attention to Alex again. <<He>> nods approvingly at your choice of <<if $morethan1baby>>names<<else>>name<</if>>.
+<br><br>
+
+Harper gathers <<nnpc_his "Harper">> equipment and walks to the door. "You should rest for now, avoid walking for a while too, and you'll be fine."
+<br>
+
+"Thanks Doc, I appreciate it," Alex says.
+<br>
+
+Harper smiles and leaves, pulling <<nnpc_his "Harper">> phone out of <<nnpc_his "Harper">> pocket as if <<nnpc_he "Harper">> is about to call someone.
+<br><br>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+   "I'll take the little <<print $pcBabyCount > 1 ? "fellas" : "fella">> here to their new room, okay? You should try to sleep a little now," Alex says.
+   <br>
+
+   <<He>> gives you one final big hug and gathers up your <<print $pcBabyCount > 1 ? "babies" : "baby">>.
+   <br><br>
+
+	Even though you're tired, you can't stop thinking about your <<print $pcBabyCount > 1 ? "children" : "child">>. You keep wondering if they're okay, if they're warm...the thoughts continue until you fall asleep.
+	<br><br>
+
+<<else>>
+    "Damn..." Alex says. "The nursery is not ready yet..." <<his>> face softens.
+	<br><br>
+
+    <<He>> looks unsure what to do.
+	<br><br>
+
+<</if>>
+
+<<if (pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1) or C.npc.Alex.pregnancy.nursery isnot true>>
+	<<link [[다음|Farm PC Birth 7]]>><</link>>
+
+<<else>>
+	<<link [[다음|Farm Cottage]]>><<endevent>><<unset $pcBabyCount>><</link>>
+
+
+<</if>>
+
+:: Farm PC Birth 7
+<<effects>>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+    <span class="red">You're awoken by a knock at the door.</span>
+	<br><br>
+
+    "I got this," you hear Alex say as <<he>> goes down the stairs.
+	<br><br>
+
+<<else>>
+    <span class="red">당신은 문을 두드리는 소리를 듣는다.</span>
+	<br><br>
+
+    "I got this," Alex says as <<he>> goes down the stairs.
+	<br><br>
+
+<</if>>
+
+Some time passes without Alex returning.
+<br><br>
+
+You get up from the bed <<if C.npc.Alex.pregnancy.nursery isnot true>>, pick up your <<if childrenCountBetweenParents("pc", "Alex") gte 2>>children<<else>>child<</if>><</if>> and head downstairs. Walking is a difficult task due to your fatigue.
+<br>
+
+As you descend the stairs, you can hear talking. Alex sounds angry.
+<br><br>
+
+<<if pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1>>
+    "You don't really think you'll be able to raise a child in a place like this, do you?" the other person says.
+	<br><br>
+
+    "We've a place prepared at the orphanage. Now make my job easier and hand me the <<print $pcBabyCount > 1 ? "brats" : "brat">>," <<nnpc_he "Bailey">> continues.
+	<br><br>
+
+<<else>>
+    When you reach the bottom of the stairs, you get a good look at your visitor. <span class="red">It's Bailey.</span> <<nnpc_He "Bailey">> glares at you.
+	<br><br>
+
+    "You're a careless little fuck, you know that? Making me drive all the way here again just because you don't know how to assume your own responsibilities, instead, making more and more," <<he>> says.
+	<br>
+
+    "You both know why I'm here, so stop wasting my time," <<he>> finishes.
+	<br><br>
+
+<</if>>
+
+<<link [[다음|Farm PC Birth 8]]>><</link>>
+
+:: Farm PC Birth 8
+<<effects>><<set _alex to statusCheck("Alex")>>
+
+<<if pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1>>
+    When you reach the bottom of the stairs, you get a good look at your visitor. <span class="red">It's Bailey.</span> <<nnpc_He "Bailey">> glares at you.
+	<br>
+
+    "What makes you think that we should just give our <<print $pcBabyCount > 1 ? "children" : "child">> to you?" Alex protests.
+	<br><br>
+
+    Bailey turns <<nnpc_his "Bailey">> gaze to Alex. "Look, 'cow<<if _alex.pronoun is "f">>girl<<else>>boy<</if>>', you could've fucked any whore and I wouldn't care, but you hitched yourself to MY ward."
+	<br><br>
+
+    Alex clenches <<his>> fists. "And who exactly said <<pshe>> is yours? <<pShe>>'s MY <<if $player.gender_appearance is "f">>woman<<else>>man<</if>>."
+	<br><br>
+
+    Bailey fixes Alex with a piercing gaze. "Oh, yeah? Then tell me how exactly do you plan on taking care of a kid in a place like this?"
+	<br><br>
+
+<<else>>
+    When you reach the bottom of the stairs, you get a good look at your visitor. <span class="red">It's Bailey.</span> <<nnpc_He "Bailey">> glares at you.
+
+    "You're a careless little fuck, you know that? Making me drive all the way here again just because you don't know how to assume your own responsibilities, instead, making more and more," <<he>> says.
+
+    "You both know why I'm here, so stop wasting my time," <<he>> finishes.
+
+    Not having any other option, you wordless give your <<print $pcBabyCount > 1 ? "them" : "it">> to Bailey.
+
+    "Good," Bailey says. "Stop being such an inconsequential brat and maybe this won't happen anymore," Bailey says as <<nnpc_he "Bailey">> leaves.
+
+<</if>>
+
+<<link [[다음|Farm PC Birth 9]]>><</link>>
+
+:: Farm PC Birth 9
+<<effects>>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+    "We have our own nursery at the cottage, we don't need or want your help," Alex responds.
+	<br><br>
+
+    A long and deafening silence fills the environment. Bailey keeps staring at you and Alex.
+	<br><br>
+
+    "Tch," Bailey breaks the silence. "Do whatever you want to; it's one less problem for me to deal with anyway." Shooting you one last glare, <<nnpc_he "Bailey">> turns and leaves the farm.
+	<br><br>
+
+    You suddenly feel a hand on your shoulder. "I'm glad it's over," Alex says. "Don't know how you managed to get down here on your own, but come on, I'll help you upstairs."
+	<br><br>
+
+	<<link [[다음|Farm Bedroom]]>><<unset $pcBabyCount>><</link>>
+
+<<else>>
+    "We'll work something out. My <<print $pcBabyCount > 1 ? "children are not orphans" : "child is not an orphan">>," Alex says, frustrated.
+	<br><br>
+
+    A long and deafening silence fills the room. Bailey continues staring at you and Alex.
+	<br><br>
+
+    "I'll tell you what," Bailey breaks the silence. "I have a proper place for this, and you don't, but I think we can reach an arrangement."
+	<br>
+
+    "What do you mean?" Alex asks.
+	<br><br>
+
+    "I'll let your <<print $pcBabyCount > 1 ? "brats" : "brat">> stay at my orphanage until you solve your little problem, but it'll cost you. <<printmoney 10000>> each, for every week they remain there."
+	<br><br>
+
+    "When everything is solved, I'll take the little <<print $pcBabyCount > 1 ? "brats" : "brat">> here again, and, obviously, it will cost you. The price is not up for negotiation," Bailey finishes.
+	<br><br>
+
+	<<link [[다음|Farm PC Birth 10]]>><</link>>
+
+<</if>>
+
+:: Farm PC Birth 10
+<<effects>>
+
+<<set $ward_unlocked to true>>
+<<run Object.values(V.children).filter(child => {
+    if (child.location === "alex_cottage" && (child.father === "Alex" || child.mother === "Alex")) child.location = "home";
+})>>
+
+Alex turns to you. "I hate to say this, but this...offer might be a good thing, for the <<print $pcBabyCount > 1 ? "kids" : "kid">> at least. I don't like the price, or losing <<print $pcBabyCount > 1 ? "them" : "it">>, but it will give us more time to prepare a room. It's only temporary, right?" You reluctantly nod.
+<br><br>
+
+"Okay," Alex says, returning <<his>> attention to Bailey again.
+<br><br>
+
+You give one last,long hug to your <<print $pcBabyCount > 1 ? "children" : "child">> before handing <<print $pcBabyCount > 1 ? "them" : "it">> to Bailey.
+<br><br>
+
+"I'm glad we could reach an agreement. Now, if you'll excuse me..." Bailey says as <<nnpc_he "Bailey">> leaves.
+<br><br>
+
+You stand there, helplessly watching your <<print $pcBabyCount > 1 ? "children" : "child">> being taken away, stone-faced and silent.
+<br>
+
+Tears involuntarily flow down your face. You unsuccessfully try to wipe them away.
+<br><br>
+
+Alex hugs you. "I'm so sorry. This is all my fault, I should've worked harder, but it's okay, we'll get them back." <<His>> eyes are watery, but <<he>> refuses to shed a tear.
+<br><br>
+
+<<link [[다음|Farm PC Birth 11]]>><</link>>
+
+:: Farm PC Birth 11
+<<effects>>
+<<unset $pcBabyCount>>
+
+<<He>> releases you after some time and wipes away your tears with <<his>> sleeve.
+<br>
+
+<<if Time.dayState isnot "night">>
+    "You should get some rest, I'll get back to work,"
+
+<<else>>
+    "We should get some rest before getting back to work,"
+
+<</if>>
+
+<<he>> says, trying to sound confident.
+<br><br>
+
+<<if $farm_stage gte 7>>
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+<<else>>
+	<<link [[다음|Farm Work]]>><<endcombat>><</link>>
+
+<</if>>
+
+:: Farm Alex Forgotten Birth
+<<effects>>
+
+"Just a minute, I'll get us some tea," <<he>> says as <<he>> head towards the kitchen.
+<br><br>
+
+You sit down on the sofa. It's not long before Alex comes back with two mugs. <<His>> hands are shaking a little, and <<he>> looks nervous.
+<br><br>
+
+<<He>> gives one of the mugs to you. "I know this is all suddenly, but you've probably already found out about it." <<he>> says as <<he>> takes a sip of <<his>> tea.
+<br><br>
+
+After taking a long breath <<he>> fix fixes <<his>> gaze on you. "In short words, you knocked me up and then disappeared...How was I supposed to run a farm on my own while pregnant?!"
+<br><br>
+
+"I kept thinking you would come back at some point, but you never did and the responsibilities grew bigger. It was too much for me, so what choice did I have?" <<he>> sighs.
+<br><br>
+
+<<link [[다음|Farm Alex Forgotten Birth 2]]>><</link>>
+
+:: Farm Alex Forgotten Birth 2
+<<effects>>
+
+You keep listening to Alex, not daring to interrupt <<him>>. <<He>> constantly adjust <<his>> voice, trying to sound firm.
+<br><br>
+
+"That fucking sucked. And then that caretaker of yours showed up and.... well, I did what I it had to be done." <<he>> says, but this time averting your gaze.
+<br><br>
+
+"I don't know how they knew about it, but they were right that, I couln't raise a kid on my own. Not with the farm in this state. I didn't have time to even start thinking about a nursery for them!"
+<br><br>
+
+<<He>> sighs. "I do feel bad for my having my own <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>children living as orphans<<else>>child living as an orphan<</if>>, but I really can't do this just by myself, you're their father, so share this responsibility too!"
+<br><br>
+
+<<link [[Apologise|Farm Alex Forgotten Birth 3]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[Stay silent|Farm Alex Forgotten Birth 3]]>><<set $phase to 2>><</link>>
+
+:: Farm Alex Forgotten Birth 3
+<<effects>>
+
+<<if $phase is 1>>
+    <<if $speech_attitude is "meek">>
+        "I-I'm so sorry, I just...couldn't be here," you say.
+    <<elseif $speech_attitude is "bratty">>
+        "I'm sorry, okay? It's not like I can always be here," you say.
+    <<else>>
+        "I'm sorry, I just couldn't be here" you say.
+    <</if>>
+	<br><br>
+
+    <<His>> face softens. "It's okay, there was no way for you to know."
+	<br>
+
+<<else>>
+	<<He>> shake <<his>> head. "No use to keep thinking of what could or couldn't have happened."
+	<br><br>
+
+<</if>>
+
+"Look," <<he>> says, leaning closer to you. "I don't like that my <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>children are<<else>>child is<</if>> living at an orphanage. There's enough land here on the farm for <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>them<<else>>it<</if>>, but <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>they need<<else>>it needs<</if>> a place to stay."
+<br><br>
+
+<<He>> stands up and take the empty mugs. "I can't take this responsibility all by myself...I should get back to work now," <<he>> says as <<he>> place the mugs in the kitchen and heads to the farm again
+<br><br>
+
+<<if $farm_stage gte 7>>
+	<span class="gold">Alex is willing to keep <<his>> kids at the farm, but first you should help <<him>> out.</span>
+	<br><br>
+
+<<else>>
+	Alex is willing to build a Nursery at the cottage, but first <span class="gold">you need to help <<him>> clear the three main fields.</span>
+	<br><br>
+
+<</if>>
+
+<<link [[다음|Farm Work]]>><<endevent>><</link>>
+
+:: Farm Alex Missed Birth
+<<effects>>
+
+<<if $phase is 1>>
+     <<if $speech_attitude is "meek">>
+        "I-I'm so sorry, I just...couldn't be here," you say.
+     <<elseif $speech_attitude is "bratty">>
+        "I'm sorry, okay? It's not like I can always be here," you say.
+    <<else>>
+        "I'm sorry, I just couldn't be here," you say.
+    <</if>>
+    <br><br>
+
+<</if>>
+
+<<if C.npc.Alex.pregnancy.nursery isnot true>>
+    <<if $phase is 1>>
+        "That's all you have to say? 'Sorry'? Our kids are gone now, no thanks to you!"
+		<br><br>
+
+    <<else>>
+        "At least say something, our kids are gone and you don't have anything to say?!" <<he>> yells at you.
+        <br><br>
+
+    <</if>>
+
+    <<He>> clenches <<his>>. "That 'caretaker' was here. I have no idea how <<nnpc_he "Bailey">> knew about it, but <<nnpc_he "Bailey">> started talking a bunch of nonsense, that my <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>children<<else>>child<</if>> was <<nnpc_his "Bailey">> property cause you were <<nnpc_his "Bailey">> too." fist
+	<br><br>
+
+    Your heart drops into your stomach, how could Bailey know about this?
+	<br><br>
+
+	<<link [[다음|Farm Alex Missed Birth 2]]>><</link>>
+
+<<else>>
+	"You could at least say something, it wasn't easy to do all by myself," <<he>> says.
+	<br><br>
+
+    <<He>> sighs. "It's okay, these things happen I guess."
+	<br><br>
+
+    <<if pregnancyCountBetweenParents("pc","Alex") gte 2 or pregnancyCountBetweenParents("Alex","pc") gte 2>>
+        "Come on," <<he>> says grabbing your arm. "You have to see your <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>children<<else>>child<</if>> too, I gave <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>them names<<else>>it a name<</if>>, but I'm not good at this, so yeah, I'm open for suggestions," <<he>> says as <<he>> leads you to the cottage's nursery.
+		<br><br>
+
+		<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+    <<else>>
+        <<He>> clenches <<his>>. "That 'caretaker' was here. I have no idea how <<nnpc_he "Bailey">> knew about it, but <<nnpc_he "Bailey">> started talking a bunch of nonsense, that my <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>children<<else>>child<</if>> was <<nnpc_his "Bailey">> property cause you were <<nnpc_his "Bailey">> too." fist
+        <br><br>
+
+        Your heart drops into your stomach, how could Bailey know about this?
+        <br><br>
+
+        <<link [[다음|Farm Alex Missed Birth 2]]>><</link>>
+
+    <</if>>
+
+<</if>>
+
+:: Farm Alex Missed Birth 2
+<<effects>>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+    <<if pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1>>
+        "Hey, no need to make that face," <<he>> says, noticing your concern. "I didn't give <<nnpc_him "Bailey">> shit, who does <<nnpc_he "Bailey">> think <<nnpc_he "Bailey">> is?! Coming to MY house and wanting to take MY <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>children<<else>>child<</if>> away, bullshit. But we don't have to worry about it again, I made sure that <<nnpc_he "Bailey">>'s not coming back."
+		<br><br>
+
+    <</if>>
+
+    "Come on," <<he>> says grabbing your arm. "You have to see your <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>children<<else>>child<</if>> too, I gave <<if childrenCountBetweenParents("Alex","pc") gte 2 or childrenCountBetweenParents("pc","Alex") gte 2>>them names<<else>>it a name<</if>>, but I'm not good at this, so yeah, I'm open for suggestions," <<he>> says as <<he>> leads you to the cottage's nursery.
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+
+<<else>>
+	<<if C.npc.Alex.dom gte 20>>
+		"Don't you dare give me that look," <<he>> says, clearly having noticed your expression.
+
+	<<else>>
+		"Quit lookin' at me like that," <<he>> sighs defeatedly, clearly having noticed your expression.
+
+	<</if>>
+	<br><br>
+
+	"What other choice did I have...?" <<he>> asks, starting to tear up. "It's not like there's anywhere for us to raise a kid out here..."
+	<br><br>
+
+	<<He>> wipes <<his>> tears away with a sleeve. "Look, I can't stand the idea of my kids somewhere out there, livin' as orphans, but I've already got a farm to run, and that keeps my hands full enough as it is."
+	<br><br>
+
+	"Even if we asked for 'em back, we'd need somewhere to take care of 'em, like that <span class="blue">nursery</span> I mentioned to you before. You'd also have to go ask <span class="red">that caretaker</span> yourself, since I can't take any time away from the farm..." <<he>> says.
+	<br><br>
+
+	<<if Time.dayState isnot "night">>"I've got to get back to work<<else>>I've got to take some rest<</if>>," <<he>> says, the sadness in <<his>> eyes in no way diminished. <<He>> leans in and gives you a quick hug before walking off.
+	<br><br>
+
+
+	<span class="gold">Alex is willing to keep <<his>> kids at the farm, but first you should help <<him>> out.</span>
+	<br><br>
+
+	<<link [[다음|Farm Work]]>><</link>>
+
+
+<</if>>
+
+:: Farm Alex Orphanage Trip
+<<effects>>
+
+"Pa is kind of busy right now, but he said mother's at the city and that she agreed to help us, it shouldn't take long," <<he>> says looking more excited than before.
+<br><br>
+
+You don't have to wait much until a vehicle approaches and honks.
+<br>
+
+Alex's mother waves at you two.
+<br><br>
+
+Alex opens the door for you and helps you get in, entering from the other side and taking a seat next to you when you're in.
+<br><br>
+
+"My little <<if C.npc.Alex.pronoun is "f">>girl<<else>>boy<</if>> is finally settling down," she laughs.
+<br>
+
+Alex blushes and turns <<his>> faces away.
+<br><br>
+
+"And with such a <<if $player.gender_appearance is "f">>beautiful woman<<else>>handsome man<</if>>" she adds.
+<br><br>
+
+"Mum!" Alex protests.
+<br>
+
+"What? I was telling the truth," she plays. You don't think Alex's face could get more red.
+<br><br>
+
+<<link [[다음|Farm Alex Orphanage Trip 2]]>><</link>>
+
+:: Farm Alex Orphanage Trip 2
+<<effects>>
+
+You soon arrive at the orphanage, where your <<if childrenCountBetweenParents("pc","Alex") gte 2>>children are<<else>>child is<</if>>, Alex looks horrified when <<he>> see the state the orphanage is in.
+<br><br>
+
+"Could you please go and get <<if childrenCountBetweenParents("pc","Alex") gte 2>>them<<else>>it<</if>>?" Alex asks. "I'm not sure if I can go in there."
+<br><br>
+
+You nod and enter the orphanage, going right to the Nursery. The goon, that guards the entrance, doesn't stop you as you enter, take your <<if childrenCountBetweenParents("pc","Alex") gte 2>>children<<else>>child<</if>> and leave.
+<br><br>
+
+Looking to your right, you notice Bailey starting you from <<nnpc_his "Bailey">> office, while some orphans steal glances at you and your <<if childrenCountBetweenParents("pc","Alex") gte 2>>babies<<else>>baby<</if>>, as if surprised that someone actually got out of that place.
+<br><br>
+
+Alex opens the door for you and you get in, still with your <<if childrenCountBetweenParents("pc","Alex") gte 2>>babies<<else>>baby<</if>> in hands.
+<br><br>
+
+<<link [[다음|Farm Alex Orphanage Trip 3]]>><</link>>
+
+:: Farm Alex Orphanage Trip 3
+<<effects>>
+
+<<run Object.values(V.children).filter(child => {
+    if (child.location === "home" && (child.father === "Alex" || child.mother === "Alex")) child.location = "alex_cottage";
+})>>
+
+<<His>> mother drives to the farm, occasionally looking at her <<if childrenCountBetweenParents("pc","Alex") is 1>>grandchild<<else>>grandchildren<</if>> and smiling.
+<br><br>
+
+It's not a long trip, and you soon arrive at the farm.
+<br><br>
+
+Alex helps you leave the vehicle and take your <<if childrenCountBetweenParents("pc","Alex") is 1>>child<<else>>children<</if>> to the cottage's nursery.
+<br><br>
+
+Alex's mother turns to Alex. "I need to get back to work now, but listen, I'm proud of you, you're making this place look like a home," she says as she drives away.
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><</link>>
+
+:: Farm Cottage Baby Request
+<<effects>>
+<<npc "Alex">>
+
+<<set C.npc.Alex.pregnancy.pills to "fertility">>
+<<set C.npc.Alex.pregnancyAvoidance to 0>>
+<<set $NPCList[0].pregnancyAvoidance to 0>>
+
+"Hey," you say, leaning closer to <<him>>. "Let's have <<if childrenCountBetweenParents("pc","Alex") lte 0 or childrenCountBetweenParents("Alex","pc") lte 0>>a<<else>>another<</if>> baby."
+<br><br>
+
+<<He>> freezes in place. "H-Hold on, partner. What's this all about?"
+<br><br>
+
+"You said you wouldn't mind, so I thought it would be good for us."
+<br><br>
+
+<<He>> thinks for a while. "Okay," <<he>> says. "I guess we can try."
+<br><br>
+
+You try to pull <<him>> closer but
+
+<<if C.npc.Alex.gender is "f">>
+	<<he>> shifts <<his>> position, straddling your lap.
+
+<<else>>
+	<<he>> pulls you into <<his>> lap.
+<</if>>
+<br><br>
+
+"Why the long face?" <<he>> says with a grin. "You owe me a good ride now. Didn't you want <<if C.npc.Alex.gender is "f">> to knock me up<<else>> me to breed you<</if>>?" Alex says, leaning closer and closing <<his>> eyes.
+<br><br>
+
+<<link [[다음|Farm Cottage Babay Request Sex]]>><<set $sexstart to 1>><</link>>
+
+:: Farm Cottage Babay Request Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Cottage Babay Request Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Cottage Babay Request Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Cottage Babay Request Sex Finish
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	"I'll stop using contraceptives, so you better be sure of this, mate."
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+<<elseif $finish is 1>>
+	"What?" <<he>> says, confused. "But you...whatever. I'll stop using contraceptives, so you better be sure of this, mate."
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><<pass 20>><</link>>
+
+:: Farm PC Ultrasound Pics Show
+<<effects>><<npc "Alex">><<person1>>
+
+<<if !C.npc.Alex.pregnancy.ultraSoundWallPic>>
+	<<set C.npc.Alex.pregnancy.ultraSoundWallPic to true>>
+<</if>>
+
+<<run delete C.npc.Alex.pregnancy.ultraSoundPics>>
+
+"Hey," you say, leaning closer to Alex. "I have something to show you."
+<br><br>
+
+Alex gives you a curious glance. "Sure, what is it?"
+<br><br>
+
+You grab the ultrasound pictures Harper gave you and hand them to <<him>>. <<He>> seems to be having a hard time understanding what <<hes>> looking at.
+<br><br>
+
+<<if $speech_attitude is "bratty">>
+    "Seriously?" you sigh. "It's our <<if getPregnancyObject().fetus.length is 1>>child<<else>>children<</if>>, dummy,"
+
+<<elseif $speech_attitude is "meek">>
+    "S-Sorry, I should've explained, it's our <<if getPregnancyObject().fetus.length is 1>>child<<else>>children<</if>>,"
+
+<<else>>
+    "You don't get it? It's our <<if getPregnancyObject().fetus.length is 1>>child<<else>>children<</if>>,"
+<</if>>
+
+당신이 말한다.
+<br><br>
+
+"Oh," <<he>> says, taking another look at the pictures. "I thought it was some kind of alien," <<he>> jokes.
+<br><br>
+
+You give <<him>> a light punch on the shoulder. "I'm just joking," <<he>> says, embracing you. "Thanks for showing me this. It's nice to know our <<if getPregnancyObject().fetus.length is 1>>child is<<else>>children are<</if>> growing nice and healthy."
+<br><br>
+
+Alex holds you for a while, and you both enjoy the moment together. <<He>> gives you a kiss before releasing you. "Think we should hang this somewhere?"
+<br><br>
+
+<<if $location is "alex_cottage">>
+	<<if Time.hour gte 5 and Time.hour lte 6>>
+		<<link [[다음|Farm Cottage]]>><<pass 5>><<endevent>><</link>>
+	<<else>>
+		<<link [[다음|Farm Alex Bedroom]]>><<pass 5>><<endevent>><</link>>
+	<</if>>
+
+<<else>>
+	<<link [[다음|Farm Work]]>><<pass 5>><<endevent>><</link>>
+<</if>>

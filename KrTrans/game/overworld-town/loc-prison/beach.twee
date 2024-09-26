@@ -1,0 +1,627 @@
+:: Prison Beach
+<<location "beach">><<set $outside to 1>><<effects>><<effects_prison>>
+
+당신은 감옥 밖 비밀 해변에 있다. 파도가 난폭하다.
+<<if $prison.watchers_friend is 2>>
+
+<<elseif $prison.schedule is "revolt">>
+	당신은 반란의 소리를 듣는다.<<prison_attention 10>>
+<<else>>
+	무언가 위협적인 형상이 머리 위를 맴돈다.
+<</if>>
+<br><br>
+
+
+<<if (Time.hour is 12 or Time.hour is 14) and !$prison_wren_intro and $prison_wren_boat_intro is 1 and Time.weekDay is 6>>
+	<<npc "Wren">><<person1>>
+	해안에 정박한 배가 있다. 렌이 갑판 아래서 나와 물 위로 올라와 근처 바위로 올라간다. <<He_ nun>> 상자를 줍기 위해 웅크리지만, 당신을 보자마자 멈춘다.
+	<br><br>
+	"당신은 정말 똑똑한 <<girl_ i>> 맞네요," <<he_ ga>> 말한다. "놀랄 일도 아니죠. 이 해변은 우리 둘만의 비밀로 하자고요." <<He_ nun>> 상자를 들고, <<his_ yi>> 배로 돌아간다.
+	<br><br>
+
+	<<link [[다음|Prison Beach]]>><<endevent>><<unset $prison_wren_boat_intro>><</link>>
+	<br>
+<<else>>
+	<<if (Time.hour is 12 or Time.hour is 14) and !$prison_wren_intro and Time.weekDay is 6>>
+		<<npc "Wren">><<person1>>
+		렌은 <<his_ yi>> 배 위에서 바쁘게 움직인다.
+		<br><br>
+		<<endevent>>
+	<<elseif Time.hour is 13 and !$prison_wren_intro and Time.weekDay is 6>>
+		렌의 배가 해변 근처에 정박되어있다.
+		<br><br>
+	<<else>>
+
+	<</if>>
+
+	<<if Time.hour is 5>>
+		곧 호명 시간이 있다. <span class="pink">당신이 감옥으로 돌아가지 않는다면, 문제가 생길 것이다.</span>
+		<br><br>
+	<</if>>
+
+	<<if $stress gte $stressmax and isPregnancyEnding()>>
+		<<pregnancyPassout "prisonBeach">>
+	<<elseif $prison.schedule is "hunt">>
+		<<beastNEWinit 1 hawk>><<person1>>
+		<<beasttype_ i>> <span class="red">발톱을 뻗고,</span> 당신에게 날아오른다. 당신은 달려, <<bhis_ robuter>> 도망치려 한다.
+		<br><br>
+		<<bHe_ nun>> 터널을 지나 마당으로 쫓아온다.
+		<br><br>
+
+		<<link [[다음|Prison Yard]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		얕고, 잔잔한 석호에서 작은 물고기들이 뛰어 오른다.
+		<br>
+		<<if (Time.hour is 12 or Time.hour is 14) and !$prison_wren_intro and Time.weekDay is 6>>
+			<br>
+			<<link [[렌과 얘기한다|Prison Beach Wren]]>><</link>>
+			<br>
+		<</if>>
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			<<if $worn.feet.type.includes("shackle")>>
+				<br>
+				<span class="blue">당신은 당신의 팔과 묶이고 다리에 족쇄를 단 채로 수영할 수 없다.</span>
+			<br><br>
+			<<else>>
+				<br>
+				<span class="blue">당신은 당신의 팔이 묶여있는 채로 수영할 수 없다.</span>
+			<br><br>
+			<</if>>
+		<<elseif $worn.feet.type.includes("shackle")>>
+			<br>
+			<span class="blue">당신은 당신의 다리에 족쇄를 단 채로 수영할 수 없다.</span>
+			<br><br>
+		<<else>>
+			<<link [[수영 연습을 한다 (1:00)|Prison Beach Swim]]>><<pass 60>><<stress -6>><<tiredness 6>><</link>><<gtiredness>><<gswimming>><<lstress>>
+			<br><br>
+
+			<<link [[섬 반대로 수영한다 (0:05)|Prison Beach Escape]]>><<pass 5>><</link>>
+			<br><br>
+		<</if>>
+		<<if $prison.yard_door is 1>>
+			<<link [[마당으로 가는 터널로 들어간다 (0:01)|Prison Yard]]>><<pass 1>><<set $location to "prison">><</link>>
+			<br>
+		<<else>>
+			섬으로 가는 경사진 터널이 있지만, <span class="blue">반대쪽에서 잠긴 문이 있다.</span>
+			<br>
+		<</if>>
+
+		<<if $prison.tunnel gte 120>>
+			<<link [[감옥으로 가는 터널로 들어간다 (0:05)|Prison Tunnel Edge]]>><<pass 5>><<set $phase to 1>><<set $location to "prison">><</link>>
+			<br>
+		<</if>>
+		<<prison_map beach>>
+	<</if>>
+<</if>>
+
+:: Prison Beach Wren
+<<effects>>
+<<npc Wren>><<person1>>
+렌이 배 한쪽에 다리를 걸치고 당신에게 말을 건다. "내가 도와줄 수 있는 것이 있나요?" <<he_ ga>> 묻는다.
+<br><br>
+
+<<if $prison.wren_names is 2>>
+	<<askicon>><<link [[승선에 대해 묻는다|Prison Beach Wren Lift]]>><</link>>
+	<br>
+<<elseif $prison.wren_names is 1>>
+	<<if $per_npc.scarred_inmate.name_known is 1 and $prison_wren_scarred isnot 1>>
+		<<ind>><<link [[흉터가 있는 수감자의 이름을 알려준다|Prison Beach Wren Scarred]]>><<set $prison_wren_scarred to 1>><</link>>
+		<br>
+	<<elseif $prison_wren_scarred isnot 1>>
+		<span class="blue">렌은 흉터가 있는 수감자의 이름을 원한다.</span>
+		<br>
+	<</if>>
+	<<if $per_npc.relaxed_guard.name_known is 1 and $prison_wren_relaxed isnot 1>>
+		<<ind>><<link [[너그러운 간수의 이름을 알려준다|Prison Beach Wren Relaxed]]>><<set $prison_wren_relaxed to 1>><</link>>
+		<br>
+	<<elseif $prison_wren_relaxed isnot 1>>
+		<span class="blue">렌은 너그러운 간수의 이름을 원한다.</span>
+		<br>
+	<</if>>
+	<<if $per_npc.veteran_guard.name_known is 1 and $prison_wren_veteran isnot 1>>
+		<<ind>><<link [[노련한 간수의 이름을 알려준다|Prison Beach Wren Veteran]]>><<set $prison_wren_veteran to 1>><</link>>
+		<br>
+	<<elseif $prison_wren_veteran isnot 1>>
+		<span class="blue">렌은 노련한 간수의 이름을 원한다.</span>
+		<br>
+	<</if>>
+	<<if $per_npc.methodical_guard.name_known is 1 and $prison_wren_methodical isnot 1>>
+		<<ind>><<link [[꼼꼼한 간수의 이름을 알려준다|Prison Beach Wren Methodical]]>><<set $prison_wren_methodical to 1>><</link>>
+		<br>
+	<<elseif $prison_wren_methodical isnot 1>>
+		<span class="blue">렌은 꼼꼼한 간수의 이름을 원한다.</span>
+		<br>
+	<</if>>
+	<<if $prison_wren_relaxed is 1 and $prison_wren_scarred is 1 and $prison_wren_veteran is 1 and $prison_wren_methodical is 1>>
+		<<ind>><<link [[모든 이름을 알려줬다|Prison Beach Wren Names]]>><<set $prison.wren_names to 2>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<askicon>><<link [[승선에 대해 묻는다|Prison Beach Wren Ask]]>><<set $prison.wren_names to 1>><</link>>
+	<br>
+<</if>>
+<<getouticon>><<link [[떠난다|Prison Beach]]>><<endevent>><</link>>
+<br>
+
+:: Prison Beach Wren Lift
+<<effects>>
+
+<<if $prison.watchers_friend is 2 or $prison.schedule is "revolt">>
+	렌은 하늘을 본다. "하늘이 맑네요," <<he_ ga>> 말한다. "전 당신을 본토까지 태워줄 수 있어요. 하지만 그건 편도에요. 그들은 내가 들어오는 길에 더 자세히 살피거든요."
+	<br><br>
+
+	<<if $prison.kylar is "solitary">>
+		당신은 카일라를 데리고 갈 수 있지만, 당신은 <<nnpc_he_ ga "Kylar">> 독방에서 풀려날 때까지 기다려야 할 것이다.
+		<br><br>
+	<</if>>
+
+	<<if $prison.kylar is "active">>
+		<<link [[혼자 탈출한다 (0:30)|Prison Wren Escape]]>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>>
+		<br>
+		<<link [[카일라와 함께 탈출한다 (0:40)|Prison Kylar Escape]]>><<prison_end>><<prisoncrimeUp "kylar">><<pass 40>><<prison_guards -40>><<npcincr Kylar rage -60>><<npcincr Kylar love 20>><</link>><<gggcrime "obstruction">><<gggsuspicion>><<ggglove>><<lllksuspicion>>
+		<br>
+	<<else>>
+		<<link [[탈출한다 (0:30)|Prison Wren Escape]]>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>>
+		<br>
+	<</if>>
+
+<<else>>
+	렌이 하늘을 가리킨다. <span class="blue">"저 새들이 보고 있을 땐 당신을 데려갈 수 없어요,"</span> <<he_ ga>> 말한다. "갑판 뒤로 숨는 것은 소용이 없을 거예요. 그들과 친해지거나, 그들을 따돌리면, 우린 갈 수 있어요."
+	<br><br>
+	<<if $prison.kylar is "solitary">>
+		당신은 카일라를 데리고 갈 수 있지만, 당신은 <<nnpc_he_ ga "Kylar">> 독방에서 풀려날 때까지 기다려야 할 것이다.
+		<br><br>
+	<</if>>
+<</if>>
+
+<<getouticon>><<link [[떠난다|Prison Beach]]>><<endevent>><</link>>
+<br>
+
+:: Prison Kylar Escape
+<<effects>>
+<<npc Kylar 2>><<person2>>
+당신은 감옥으로 달려간다.
+<<if $prison.schedule is "revolt">>
+	당신은 반란을 틈타 직원실에 들어가려는 카일라를 발견한다.
+	<br><br>
+	<<if $worn.face.type.includes("gag")>>
+		"으읍!" 당신은 말한다. 카일라는 웃음을 지으며 당신을 돌아본다.
+		<br><br>
+		당신은 <<him_>>에게 제스처를 취하기 전, 잠시 생각한다.
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			당신은 고개를 기울이며, 제자리에서 조깅한다. 카일라는 얼굴을 찌뿌리며, 혼란스러워하다가, 놀란다.
+		<<else>>
+			당신은 문을 열고, 그 곳으로 손가락이 가로질러가는 시늉을 한다. 카일라가 놀란다.
+		<</if>>
+		"너-너 나가는 길을 찾은거야?" <<he_ ga>> 묻는다. "내 물건 좀 챙길게."
+	<<else>>
+		<<if $speech_attitude is "meek">>
+			"내가 나가는 길을 찾았어," 당신이 말한다. "제-제발 나랑 같이 가자."
+		<<elseif $speech_attitude is "bratty">>
+			"난 이 더러운 곳을 나갈거야," 당신이 말한다. "같이 갈래?"
+		<<else>>
+			"내가 나갈 방법을 찾았어," 당신이 말한다. "나랑 같이 갈래?"
+		<</if>>
+		<br><br>
+		"너랑 같이? 다-당연하지," 카일라가 말한다. "내 물건 좀 챙길게."
+	<</if>>
+	<br><br>
+
+	당신은 <<he_ ga>> <<he_ yi>> 침대 밑으로 사라졌다, 배낭을 들고 오기까지 기다린다. "됐어. 이제 가자."
+<<else>>
+	당신은 카일라가 <<his_ yi>> 매트리스에 누워있는 것을 발견한다.
+
+	<<if $worn.face.type.includes("gag")>>
+		"으읍!" 당신은 말한다. 카일라는 웃음을 지으며 당신을 돌아본다.
+		<br><br>
+		당신은 <<himPost>>에게 제스처를 취하기 전, 잠시 생각한다.
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			당신은 고개를 기울이며, 제자리에서 조깅한다. 카일라는 얼굴을 찌뿌리며, 혼란스러워하다가, 놀란다.
+		<<else>>
+			당신은 문을 열고, 그 곳으로 손가락이 가로질러가는 시늉을 한다. 카일라는 놀란다.
+		<</if>>
+		"너-너 나가는 길을 찾은거야?" <<he_ ga>> 묻는다. "내 물건 좀 챙길게."
+	<<else>>
+		<<if $speech_attitude is "meek">>
+			"내가 나가는 길을 찾았어," 당신이 말한다. "제-제발 나랑 같이 가자."
+		<<elseif $speech_attitude is "bratty">>
+			"난 이 더러운 곳을 나갈거야," 당신이 말한다. "같이 갈래?"
+		<<else>>
+			"내가 나갈 방법을 찾았어," 당신이 말한다. "나랑 같이 갈래?"
+		<</if>>
+		<br><br>
+		"너랑 같이? 다-당연하지," 카일라가 말한다. "내 물건 좀 챙길게."
+	<</if>>
+	<br><br>
+
+	당신은 <<he_ ga>> <<he_ yi>> 침대 밑으로 사라졌다, 배낭을 들고 오기까지 기다린다. "됐어. 이제 가자."
+<</if>>
+<br><br>
+
+<<link [[다음|Prison Kylar Escape 2]]>><</link>>
+<br>
+
+
+:: Prison Kylar Escape 2
+<<effects>>
+<<earnFeat "Not Meant to be Caged">>
+<<set $prison.kylar to 0>>
+<<npcset Kylar state "active">>
+렌이 배의 조종실에서 기다린다. <<person1>><<He_ nun>> 호기심에 찬 눈으로 카일라를 바라본다. "당신은 ㄱ-"
+<br>
+"닥쳐." 당신이 배에 오르자 카일라는 침을 뱉는다. "그-그냥 우릴 여기서 멀리 보내줘."
+<br>
+렌은 어깨를 으쓱하며, 배를 섬 주변에서 벗어나 주변에 있던 안개 쪽으로, 방향을 튼다.
+<br><br>
+<<prison_bondage_removal>>
+<<if _punishments_removed is true>>
+	<<He_ nun>> 조종을 잠깐 멈추고 화물칸 아래를 뒤지더니, 도구 상자를 들고 온다. "가만히 있으세요." <<he_ ga>> 말한다. "전 당신이 이걸 벗을 때 까지 운전하지 않겠어요. 당신이 떨어지면 전 제 자신을 절대 용서하지 못할 것 같거든요." <<He_ nun>> 곧 당신의 속박구를 제거한다.
+	<br><br>
+<</if>>
+
+배가 안개에 포위되자 카일라는 당신의 팔 한쪽을 잡는다.
+<br><br>
+
+<<link [[키스한다|Prison Kylar Escape 3]]>><<set $phase to 2>><<npcincr Kylar love 15>><</link>><<kissvirginitywarning>><<ggglove>>
+<br>
+<<link [[껴안는다|Prison Kylar Escape 3]]>><<set $phase to 1>><<npcincr Kylar love 5>><</link>><<gglove>>
+<br>
+<<link [[가만히 있는다|Prison Kylar Escape 3]]>><<set $phase to 0>><</link>>
+<br>
+
+
+:: Prison Kylar Escape 3
+<<effects>>
+
+<<if $phase is 2>>
+	당신은 카일라의 반대쪽 팔을 잡고, <<person2>><<him_ rul>> 키스하도록 끌어당긴다. <<He_ nun>> 거의 당신에게 당겨 넘어질 뻔한다. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+	<br><br>
+<<elseif $phase is 1>>
+	당신은 카일라를 껴안는다. <<person2>><<him_ nun>> 안개 때문에 긴장하고 있다.
+<<else>>
+
+<</if>>
+
+<<if $transformationParts.traits.sharpEyes isnot "disabled">>
+	안개 너머로 바위 첨탑이 보인다. 렌은 아무렇지도 않은 듯이, 주위를 둘러본다.
+<<else>>
+	렌은 마치 전부 기억하는 듯이, 바위 첨탑 주위로 돌아간다. 당신은 양쪽에서, 하늘로 우뚝 솓은 바위를 발견한다.
+<</if>>
+<br><br>
+
+마침내, 배가 반대쪽에 도착한다.
+
+<<if Time.dayState is "night">>
+	<<if !Weather.isOvercast>>
+		당신은 마을의 불빛이 수평선을 비추는 것을 본다.
+	<<else>>
+		그럼에도, 어둠 속에선 멀리 볼 순 없다.
+	<</if>>
+<<else>>
+	당신은 수평선에 있는 마을을 본다.
+<</if>>
+<br><br>
+<<person1>>
+"제가 뭐라 했어요?" <<he_ ga>> 말한다. "이번이 3연속으로 안전하게 항해했다고요."
+<br><br>
+
+<<link [[다음|Prison Kylar Escape 4]]>><</link>>
+<br>
+
+
+:: Prison Kylar Escape 4
+<<location "docks">><<effects>>
+
+배는 좋은 시간에 맞춰, 해얀 쪽으로 접근한다. 렌은 부두 쪽으로 방향을 돌린다.
+<br><br>
+
+"이곳이 내리기 좋은 장소이면 좋겠네요," <<he_ ga>> 부두에 정박하며, 말한다. "전 다른 곳에 가야해요." <<He_ ga>> 미소를 짓는다. 당신은 카일라와 해변으로 발을 디딘다.
+<br><br>
+
+"당신을 곧 다시 보길 바랄게요." <<He_ nun>> 바다 쪽으로 방향을 돌린다.
+<br><br>
+
+<<person2>>"난 봐야할 사람들이 있어," <<he_ ga>> <<his_ yi>> 발을 보며, 말한다. "고-고마워."
+<br><br>
+
+<<link [[$NPCList[1].pronouns.he + " 경찰과 있어도 괜찮은지 물어본다"|Prison Kylar Escape Ask]]>><</link>>
+<br>
+<<link [[끄덕인다|Prison Kylar Escape Nod]]>><</link>>
+<br>
+
+:: Prison Kylar Escape Ask
+<<effects>>
+
+"난 괜찮을거야," 카일라가 말한다. "그-그들은 저번에도 날 놀래키긴 했지만." <<He_ nun>> 당신을 잠깐 바라보다, 돌아서서 부두로 뛰어간다.
+<br><br>
+
+<<link [[다음|Docks]]>><<endevent>><</link>>
+<br>
+
+:: Prison Kylar Escape Nod
+<<effects>>
+
+당신은 끄덕인다. 카일라가 당신을 잠깐 바라보다, 돌아서서 부두로 뛰어간다.
+<br><br>
+
+<<link [[다음|Docks]]>><<endevent>><</link>>
+<br>
+
+:: Prison Wren Escape
+<<effects>>
+
+당신이 배에 타자, 렌이 닻을 올리고 엔진을 킨다. 배는 섬 주변에서 벗어나, 주변에 있던 안개 쪽으로 방향을 튼다.
+<br><br>
+
+<<prison_bondage_removal>>
+<<if _punishments_removed is true>>
+	<<He_ nun>> 조종을 잠깐 멈추고 화물칸 아래를 뒤지더니, 도구 상자를 들고 온다. "가만히 있으세요," <<he_ ga>> 말한다. "전 당신이 이걸 벗을 때 까지 운전하지 않겠어요. 저는 당신이 떨어지면 제 자신을 절대 용서하지 못할거 같거든요." <<He_ nun>> 곧 당신의 속박구를 제거한다.
+	<br><br>
+<</if>>
+
+"저한테 가까이 붙으세요," <<he_ ga>> 말한다. "제가 무언가에 부딪힌진 꽤 되긴 했지만, 저는 당신이 떨어지는 걸 원하지 않거든요." <<He_ nun>> 한 손을 조종기에 올려놓고, 반대쪽 손을 당신의 어깨 위로 올린다.
+<br><br>
+
+<<link [[$NPCList[0].pronouns.him + " 향해 기댄다"|Prison Wren Escape 2]]>><<set $phase to 0>><<npcincr Wren love 1>><</link>><<glove>>
+<br>
+<<link [[멀어진다|Prison Wren Escape 2]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[가만히 있는다|Prison Wren Escape 2]]>><<set $phase to 2>><</link>>
+<br>
+
+:: Prison Wren Escape 2
+<<effects>>
+<<earnFeat "Not Meant to be Caged">>
+<<if $phase is 0>>
+	당신은 렌에게 기댄다. <<He_ nun>> 당신을 꽉 잡고, 웃는다. "너무 쉬워지게 만들지 마세요." <<he_ ga>> 말한다. "전 밀당을 좋아하거든요." 배가 안개에 포위된다.
+<<elseif $phase is 1>>
+	당신은 렌에게서 멀어진다. <<He_ ga>> 웃는다. "꽉 잡기나 하세요." 배가 안개에 포위된다.
+<<elseif $phase is 2>>
+	당신은 배가 안개에 포위되는 동안 가만히 있는다.
+<</if>>
+<br><br>
+<<if $transformationParts.traits.sharpEyes isnot "disabled">>
+	안개 너머로 바위 첨탑이 보인다. 렌은 아무렇지도 않은 듯이, 주위를 둘러본다.
+<<else>>
+	렌은 마치 전부 기억하는 듯이, 바위 첨탑 주위로 돌아간다. 당신은 양쪽에서, 하늘로 우뚝 솓은 바위를 발견한다.
+<</if>>
+<br><br>
+
+마침내, 배가 반대쪽에 도착한다.
+
+<<if Time.dayState is "night">>
+	<<if !Weather.isOvercast>>
+		당신은 마을의 불빛이 수평선을 비추는 것을 본다.
+	<<else>>
+		그럼에도, 어둠 속에선 멀리 볼 순 없다.
+	<</if>>
+<<else>>
+	당신은 수평선에 있는 마을을 본다.
+<</if>>
+<br><br>
+
+"제가 뭐라 했어요?" <<he_ ga>> 말한다. "이번이 3연속으로 안전하게 항해했다고요."
+<br><br>
+
+<<link [[다음|Prison Wren Escape 3]]>><</link>>
+<br>
+
+
+:: Prison Wren Escape 3
+<<location "docks">><<effects>>
+
+배는 좋은 시간에 맞춰, 해얀 쪽으로 접근한다. 렌은 부두 쪽으로 방향을 돌린다.
+<br><br>
+
+"이곳이 내리기 좋은 장소이면 좋겠네요." <<he_ ga>> 부두에 정박하며 말한다. "난 다른 곳에 가야해요." <<He_ ga>> 미소를 짓는다. 당신은 해변으로 발을 디딘다.
+<br><br>
+
+"당신을 곧 다시 보길 바랄게요." <<He_ nun>> 바다 쪽으로 방향을 돌린다.
+<br><br>
+
+<<link [[다음|Docks]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Beach Wren Ask
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	<<gagged_speech "호-혹시 절 데려가 주실 수 있나요?">> 당신은 묻는다. <<gagged_speech "당신의 배를 타고.">>
+<<elseif $speech_attitude is "bratty">>
+	<<gagged_speech "배를 타고 싶은데,">> 당신은 말한다. <<gagged_speech "뭐가 필요하세요??">>
+<<else>>
+	<<gagged_speech "저 좀 같이 데려가 주실 수 있나요?">> 당신은 묻는다. <<gagged_speech "제가 어떤 보수도 드릴 수 있어요.">>
+<</if>>
+<<if $worn.face.type.includes("gag")>>
+	<<He_ nun>> 당신이 말하려는 것을 맞추려 하다, 웃는다.
+<</if>>
+<br><br>
+
+렌은 <<his_ yi>> 턱을 쓰다듬는다. "제가 필요한 게 있어요," <<he_ ga>> 말한다. <span class="gold">"간수들의 이름,</span> 그리고 수감자 중 한명의 이름이요. <span class="gold">흉터가 있는 수감자의 이름 말이죠.</span> 이름은 여기서 가치가 있어요."
+<br><br>
+<<generate_anxious_guard 1>>
+<span class="lblue">"난 이미 불안한 간수의 이름을 알고 있어요."</span> <<he_ ga>> 미소를 짓는다. "그러니 그것에 대해 걱정하진 마세요. 그 이름은 카드 게임에서 얻었어요. <<person2>><<He_ nun>> 걸게 별로 없었거든요."
+<br><br>
+
+<<link [[다음|Prison Beach]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Beach Wren Names
+<<effects>>
+
+
+<<unset $prison_wren_relaxed>>
+<<unset $prison_wren_scarred>>
+<<unset $prison_wren_veteran>>
+<<unset $prison_wren_methodical>>
+
+"좋아요," 렌이 <<his_ yi>> 손벽을 치며, 말한다. "당신은 저에게 매우 도움되네요."
+
+
+<<if $prison.watchers_friend is 2>>
+	<<He_ ga>> 하늘을 본다. <span class="green">"저 새들이 더이상 너가 나가는 것을 방해하지 않네요."</span> <<he_ ga>> 말한다. "당신이 준비되면 말해주세요."
+<<elseif $prison.schedule is "revolt">>
+	<<He_ ga>> 하늘을 본다. <span class="green">"새들이 바빠보이네요."</span> <<he_ ga>> 말한다. "지금이 기회인 것 같네요."
+<<else>>
+	<<He_ ga>> 하늘을 가리킨다. <span class="blue">"문제 하나가 남았어요.</span> 저 새들. 갑판 뒤에 숨는 것은 소용이 없어요. 이미 한번 해봤거든요. 그들과 친해지거나, 그들을 따돌려야하죠."
+<</if>>
+<br><br>
+
+<<link [[다음|Prison Beach]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Beach Wren Scarred
+<<effects>>
+
+<<generate_scarred_inmate 1>>
+렌이 끄덕인다. "그래서 흉터가 있는 수감자의 이름은 <<scarred_inmate_ iut 1>>군요." <<he_ ga>> 말한다. "전 <<person2>><<he_ ga>> 어떻게 그 흉터들을 얻었는지 궁금하지만, 물어보진 않겠어요."
+<br><br>
+
+<<link [[다음|Prison Beach Wren]]>><<endevent>><</link>>
+<br>
+
+:: Prison Beach Wren Relaxed
+<<effects>>
+
+<<generate_relaxed_guard 1>>
+렌이 끄덕인다. "그래서 <<person2>><<his_ yi>> 이름은 <<relaxed_guard_ iut 1>>군요." <<he_ ga>> 말한다. "<<he_ ga>> 내게 직접 알려줄거라 생각했지만, <<he_ nun>> 보기만큼 따뜻하지 않더라고요."
+<br><br>
+
+<<link [[다음|Prison Beach Wren]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Beach Wren Veteran
+<<effects>>
+
+<<generate_veteran_guard 1>>
+렌이 끄덕인다. "그래서 <<veteran_guard_ iut 1>>군요." <<he_ ga>> 말한다. "전 <<person2>><<him_ wa>> 얘기해본적이 없어요. <<He_ nun>> 성질이 있는 것 처럼 보이더군요."
+<br><br>
+
+<<link [[다음|Prison Beach Wren]]>><<endevent>><</link>>
+<br>
+
+:: Prison Beach Wren Methodical
+<<effects>>
+
+
+<<generate_methodical_guard 1>>
+렌이 끄덕인다. "유리 속에 있던 놈은 <<methodical_guard_ ira 1>> 불리는군요." <<he_ ga>> 말한다. <<person2>>"<<He_ nun>> 규칙에 대해 엄격하게 행동하는 것 같지만, 거래를 할 땐 기뻐하더군요." 렌은 상상하며 찌푸린다.
+<br><br>
+
+<<link [[다음|Prison Beach Wren]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Beach Escape
+<<effects>>
+
+당신은 파도가 모래 바닥에서 당신의 발을 들어 올릴 때 까지, 걸어간다. 처음엔 물살이 잔잔하지만,
+<<if currentSkillValue('swimmingskill') gte 1000>>
+	당신은 곧 수면 위에 머물기 위해 고군분투한다. 당신은 <span class="green">물이 얌전해질 때까지,</span> 물과 싸운다.
+	<br><br>
+	<<if $prison.schedule is "revolt">>
+		당신이 수영하는데 그 어떤 것도 방해하지 않는다. <span class="green">감시자들은 다른 수감자들의 의해 주의가 분산되어 있다.</span>
+		<br><br>
+
+		<<link [[다음|Prison Beach Escape 2]]>><</link>>
+		<br>
+	<<elseif $prison.watchers_friend is 2>>
+		당신은 날갯짓 소리를 듣는다. <<beastNEWinit 2 hawk>>두 <<beastsplural_ i>> 머리 위를 맴돌지만, <span class="green"> 곧 첨탑으로 돌아간다.</span> 그들은 당신을 방해하지 않는다.
+		<br><br>
+
+		<<link [[다음|Prison Beach Escape 2]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		당신은 날갯짓 소리를 듣는다. <<beastNEWinit 2 hawk>><span class="red">한 <<beasttype_ i>> 당신을 향해 달려든다.</span> 당신은 수면 아래로 대피하려 하지만, <<bhis_ yi>> 발톱이 당신을 잡는다. <<bHe_ nun>> 당신을 하늘 높이 잡아 올려, 해변에 던진다.<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<br><br>
+
+		<<link [[다음|Prison Beach]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">파도는 순식간에 당신을 잡아, 해변으로 끌어 당긴다.</span> 발로 차고 짓밟아도, 소용이 없다.
+	<br><br>
+
+	당신의 여정은 짧았지만, 끔직했다. 당신은 당신이 시작했던 곳에서 시작하게 되었다.<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+
+	<<link [[다음|Prison Beach]]>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Prison Beach Escape 2
+<<set $location to "sea">><<effects>>
+<br><br>
+
+당신은 섬을 둘러싼 안개까지, 수영한다. 여기가 결정을 내릴 마지막 장소가 될것이다.
+<br><br>
+
+<<link [[탈출한다 (0:30)|Prison Escape]]>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>>
+<br>
+<<link [[감옥으로 다시 돌아간다 (0:05)|Prison Beach]]>><<pass 5>><</link>>
+<br>
+
+:: Prison Escape
+<<effects>>
+
+<<earnFeat "Not Meant to be Caged">>
+당신은 섬과 감옥의 반대 방향으로, 수영한다. 안개 속에서 바위가 보인다. 배들에겐 위험하겠지만, 당신에겐 아니다.
+
+
+<<prison_bondage_removal>>
+<<if _punishments_removed is true>>
+	당신은 울퉁불퉁한 모서리를 이용해서 감옥의 속박구를 절단한다.
+<</if>>
+<br><br>
+
+당신은 부표가 보이지 않는 상황에도, 맞는 방향으로 가고 있다 자신한다. 당신은 마침내 안개가 사라질 때 까지, 수영한다.
+<<if Time.dayState is "night">>
+	<<if !Weather.isOvercast>>
+		수평선 너머로 밤에 불을 키고 있는 마을이 보인다.
+	<<else>>
+		밤의 어둠 때문이 잘 보이진 않는다.
+	<</if>>
+<<else>>
+	수평선 너머로 마을이 보인다.
+<</if>>
+<br><br>
+
+<<link [[다음|Sea]]>><<set $sea to 100>><</link>>
+<br>
+
+
+:: Prison Beach Swim
+<<effects>>
+
+<<if $exposed lt 2>>
+	당신은 옷을 벗고, 석호 주변에서 수영한다.
+<<else>>
+	당신은 석호 주변에서 수영한다.
+<</if>>
+<<strip>>
+<<water>>
+
+<<if $rng gte 81>>
+	작은 물고기들이 거리를 유지한다.
+<<elseif $rng gte 61>>
+	작은 물고기들이 당신을 향해 날아오른다.
+<<elseif $rng gte 41>>
+	해초 속 덩굴 손이 당신의 배를 편안하게 한다.
+<<elseif $rng gte 21>>
+	몇몇 조약돌이 주변 암초에서 퐁당 소리를 내며, 떨어진다.
+<<else>>
+	커다란 파도가 석호를 침범한다.
+<</if>>
+
+<<swimmingskilluse>>
+<br><br>
+
+<<link [[다음|Prison Beach]]>><<clotheson>><</link>>
+<br>

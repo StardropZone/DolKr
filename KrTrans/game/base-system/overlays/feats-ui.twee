@@ -1,0 +1,763 @@
+:: FeatsUI [widget]
+<<widget "feats">>
+	<<updateFeats>>
+	<br>
+	당신이 Degrees of Lewdity를 플레이하면서, 당신은 여러 임무를 수행하는 것으로 <span class="gold">도전과제</span>를 달성하게 됩니다. 도전과제를 더 많이 달성할수록, 당신은 더 많은 <span class="gold">VrelCoins</span>를 얻을 것입니다. 당신이 새 게임을 시작할 때, 당신의 가장 최근에 로드된 세이브의 VrelCoins를 <span class="gold">도전과제 부스터</span>를 구입할 수 있습니다. 이 부스터들은 당신의 다음 게임에 추가 보너스를 줄 것입니다.
+	<br><br>
+	이 탭에서는 다음 게임으로 가져갈 수 있는, 당신의 <span class="gold">가장 최근에 로드한 세이브</span>에서 달성한 모든 도전과제들을 보여줍니다. VrelCoins들은 한 게임을 진행하는 동안, 순서대로 얻어집니다. <span class="red">여러 세이브들을 이리저리 불러가며 플레이하면 이미 얻은 VrelCoins들과 달성한 도전과제들을 잃을 수 있습니다.</span>
+	<br><br>
+	모든 도전과제들을 달성하기 위해서는 여러 번의 플레이가 필요합니다. 만약 당신이 서로 다른 도전과제를 달성한 여러 세이브들을 가지고 있다면, 도전과제 부스트 페이지에 있는 <span class="gold">모든 도전과제 불러오기</span> 버튼을 사용해 그 도전과제들을 합칠 수 있습니다. 만약 당신이 100% 달성을 목표하고 있다면 이것을 반드시 명심하세요!
+	<br><br>
+	몇몇 도전과제들은 당신이 요구조건을 만족하자마자 달성했다고 표시되지만, 다른 것들은 게임 속의 다음 시각이나 자정까지 달성되지 않을 것입니다. 즐거운 사냥을 빕니다!
+	<br><br>
+
+	<<if $feats.locked>>
+		<span class="red">어느 시점에선가 치트를 활성화시켰기에 도전과제를 달성할 수 없습니다.</span>
+	<<elseif $debug is 1>>
+		<span class="red">디버그 모드로 인해 도전과제가 비활성화 되었습니다.</span>
+	<<elseif $replayScene isnot undefined>>
+		<span class="red">리플레이 모드로 인해 도전과제가 비활성화 되었습니다.</span>
+	<<elseif $feats.soft or $feats.pregnancyLocked>>
+		<span class="red">현재 게임에서는 몇 가지 도전과제가 잠겨 있습니다.</span>
+	<<else>>
+		<span class="green">도전과제를 달성할 수 있습니다.</span>
+	<</if>>
+	<br><br>
+	당신은 현재 <<if $feats.allSaves.point is undefined>><span class="gold"><<print $feats.allSaves.points>></span><<else>><span class="red">0</span><</if>>개의 VrelCoin을 갖고 있습니다.
+	<br><br>
+	<<set $feats.filter to "General">>
+	필터:
+	<select id="featTypes" name="featTypes" onchange="V.feats.filter = this.value; Wikifier.wikifyEval('<<replace #featsList>><<featsList>><</replace>>')">
+		<option value="General" selected>일반</option>
+		<option value="Stats">스탯</option>
+		<option value="Social">관계</option>
+		<option value="Transformation">변화</option>
+		<option value="Discoveries">발견</option>
+		<option value="Special">특수</option>
+		<option value="Pregnancy">임신</option>
+		<option value="General" hidden="hidden" selected="selected">일반</option>
+	</select>
+	<br><br>
+	<div id="featsList">
+		<<featsList>>
+	</div>
+<</widget>>
+
+<<widget "featsList">>
+	<<set _skip to []>>
+	<<set _filter to "All">>
+	<<set _keys to Object.keys(setup.feats)>>
+	<<for _i to 0; _i lt _keys.length; _i++>>
+		<<if !setup.feats[_keys[_i]].filter.includes($feats.filter)>>
+			<<continue>>
+		<</if>>
+		<<if Object.keys($feats.currentSave).includes(_keys[_i])>>
+			<<set _owned to 2>>
+		<<elseif Object.keys($feats.allSaves).includes(_keys[_i])>>
+			<<set _owned to 1>>
+		<<else>>
+			<<set _owned to 0>>
+			<<if setup.feats[_keys[_i]].hidden or _skip.includes(setup.feats[_keys[_i]].series)>>
+				<<continue>>
+			<</if>>
+			<<if setup.feats[_keys[_i]].series isnot "">>
+				<<set _skip.push(setup.feats[_keys[_i]].series)>>
+			<</if>>
+		<</if>>
+		<div class="feat">
+			<div class="featImage">
+				<<if _owned gt 0>>
+					<<switch setup.feats[_keys[_i]].difficulty>>
+						<<case 1>><img @src="'img/ui/CopperCoin'+(_owned is 1 ? 'Dull':'')+'.png'" class="featCoin" @style="(_owned is 1 ? 'filter:brightness(65%) contrast(85%);':'')">
+						<<case 2>><img @src="'img/ui/SilverCoin'+(_owned is 1 ? 'Dull':'')+'.png'" class="featCoin" @style="(_owned is 1 ? 'filter:brightness(75%) contrast(85%);':'')">
+						<<case 3>><img @src="'img/ui/GoldCoin'+(_owned is 1 ? 'Dull':'')+'.png'" class="featCoin" @style="(_owned is 1 ? 'filter:brightness(65%) contrast(85%);':'')">
+						<<case 4>><img @src="'img/ui/PlatinumCoin'+(_owned is 1 ? 'Dull':'')+'.png'" class="featCoin" @style="(_owned is 1 ? 'filter:brightness(65%) contrast(85%);':'')">
+						<<case 5>><img @src="'img/ui/JeweledCoin'+(_owned is 1 ? 'Dull':'')+'.png'" class="featCoin" @style="(_owned is 1 ? 'filter:brightness(65%) contrast(85%);':'')">
+					<</switch>>
+				<<else>>
+					<img class="dot">
+				<</if>>
+			</div>
+			<div class="featText">
+				<<if ($feats.pregnancyLocked and setup.feats[_keys[_i]].pregnancyLockable) or ($feats.pregnancySillyLocked and setup.feats[_keys[_i]].pregnancySillyLockable) or ($feats.soft and setup.feats[_keys[_i]].softLockable) or $feats.locked or ($gamemode is "soft" or $alluremod lt 1)>>
+					<<set _titleColor to " red">>
+				<<else>>
+					<<set _titleColor to "">>
+				<</if>>
+				<<if _owned gt 0 or setup.feats[_keys[_i]].hint is undefined>>
+					<span @class="'title' + _titleColor"><<print setup.feats[_keys[_i]].title>></span>
+					<br>
+					<span class="text"><<print setup.feats[_keys[_i]].desc>></span>
+				<<else>>
+					<span @class="'title' + _titleColor">?????</span>
+					<br>
+					<span class="text"><<print setup.feats[_keys[_i]].hint>></span>
+				<</if>>
+				<br>
+				<<if _owned is 2>>
+					<span class="text">달성 일자: <<print new Date($feats.currentSave[_keys[_i]]).toLocaleString(returnTimeFormat())>></span>
+				<<elseif _owned is 1>>
+					<span class="text">기존 달성 일자: <<print new Date($feats.allSaves[_keys[_i]]).toLocaleString(returnTimeFormat())>></span>
+				<</if>>
+			</div>
+		</div>
+	<</for>>
+<</widget>>
+
+/*Feat Popup*/
+<<widget "displayFeat">>
+	<<silently>>
+		<<if _featsCount is undefined>>
+			<<set _featsCount to 0>>
+		<<else>>
+			<<set _featsCount++>>
+		<</if>>
+	<</silently>>
+	<<capture _featsCount>>
+	<div @id="'feat-' + _featsCount" @class="'feat feat' + _featsCount + (_featsCount gte 3 ? ' hiddenFeat' : '') + ' feat-overlay'">
+		<div class="featImage">
+			<<switch setup.feats[_args[0]].difficulty>>
+				<<case 1>><img src="img/ui/CopperCoin.gif" class="featCoin">
+				<<case 2>><img src="img/ui/SilverCoin.gif" class="featCoin">
+				<<case 3>><img src="img/ui/GoldCoin.gif" class="featCoin">
+				<<case 4>><img src="img/ui/PlatinumCoin.gif" class="featCoin">
+				<<case 5>><img src="img/ui/JeweledCoin.gif" class="featCoin">
+			<</switch>>
+		</div>
+		<div class="featText">
+			<span class="title"><<print setup.feats[_args[0]].title>></span>
+			<br>
+			<span class="text"><<print setup.feats[_args[0]].desc>></span>
+		</div>
+		<div @id="'closeFeat-' + _featsCount" class="closeFeat" @onclick="'closeFeats('+ _featsCount +')'"></div>
+	</div>
+	<</capture>>
+<</widget>>
+
+/*Feat Points Menu*/
+<<widget "featsPointsMenu">>
+	<div id="featsStats" class="settingsToggleIndent">
+		<<if $feats.allSaves.points is undefined or $feats.allSaves.points is 0>>
+			당신은 일생동안 <span class="red">0 VrelCoin</span>을 얻었고 도전과제 부스트를 구입할 수 없습니다.
+			<br>
+			<span class="black small-description">만약 이것이 잘못되었다면, 당신의 마지막 세이브를 로드하고 재시작하세요.</span>
+		<<else>>
+			당신은 일생동안 <span class="green"><<print $feats.allSaves.points>> VrelCoin</span>을 얻었습니다.
+		<</if>>
+	</div>
+	/*Have to do this due to the `????` names*/
+	<<set _listbox to '<<listbox "_upgradeNameID" autoselect>>'>>
+	<<for $_i to 0; $_i lt _upgradeNames.length; $_i++>>
+		<<if !$featsBoosts.upgradeDetails[_upgradeNames[$_i]].hidden>>
+			<<set _listbox += '<<option _visibleUpgradeNames[' + $_i + '] _visibleUpgradeIDs[' + $_i + ']>>'>>
+		<</if>>
+	<</for>>
+	<<set _upgradeName to _upgradeNames[_upgradeNameID or 0]>>
+	<<set _listbox += '<</listbox>>'>>
+	<span class="gold settingsToggleIndent">도전과제 부스트 종류:</span>
+	<<print _listbox>>
+
+	<div class="settingsGridFeats">
+		<div class="settingsHeader">
+			<span id="featName"><<featName>></span>
+			<br>
+			<span style="font-size:80%;">
+				<<link "이전">>
+					<<set _upgradeNameID-->>
+					<<if _upgradeNameID lt 0>>
+						<<set _upgradeNameID to _upgradeNames.length - 1>>
+					<</if>>
+					<<if $featsBoosts.upgradeDetails[_upgradeNames[_upgradeNameID]].hidden>>
+						<<for _upgradeNameID; $featsBoosts.upgradeDetails[_upgradeNames[_upgradeNameID]].hidden; _upgradeNameID-->>
+						<</for>>
+					<</if>>
+					<<set _upgradeName to _upgradeNames[_upgradeNameID]>>
+					<<updateFeatsPointsMenu>>
+					<<updateFeatName>>
+				<</link>> |
+				<<link "다음">>
+					<<set _upgradeNameID++>>
+					<<if _upgradeNameID gte _upgradeNames.length>>
+						<<set _upgradeNameID to 0>>
+					<</if>>
+					<<if $featsBoosts.upgradeDetails[_upgradeNames[_upgradeNameID]].hidden>>
+						<<for _upgradeNameID; $featsBoosts.upgradeDetails[_upgradeNames[_upgradeNameID]].hidden; _upgradeNameID++>>
+							<<if (_upgradeNameID + 1) gte _upgradeNames.length>>
+								<<set _upgradeNameID to 0>>
+								<<break>>
+							<</if>>
+						<</for>>
+					<</if>>
+					<<set _upgradeName to _upgradeNames[_upgradeNameID]>>
+					<<updateFeatsPointsMenu>>
+					<<updateFeatName>>
+				<</link>>
+			</span>
+		</div>
+		/*<<set _upgradeName to _upgradeNames[_upgradeNameID]>>*/
+		<div @id="'feats-' + _upgradeName" class="settingsToggleItem">
+			<<featsMenu _upgradeName>>
+			<<if $featsBoosts.pointsUsed isnot 0>>
+				<hr>
+				구입한 도전과제 부스트:
+				<ul>
+					<<for $_i to 0; $_i lt _upgradeNames.length; $_i++>>
+						<<if $featsBoosts.upgrades[_upgradeNames[$_i]] gt 0>>
+							<li>
+							<<switch _upgradeNames[$_i]>>
+								<<case "randomClothing">>
+									<<print ($featsBoosts.clothingGender is "Either" ? "남성용 혹은 여성용" : ($featsBoosts.clothingGender is "Male" ? "남성용" : "여성용"))>> <<print $featsBoosts.name[_upgradeNames[$_i]]>>: <span class="gold"><<print $featsBoosts.upgrades[_upgradeNames[$_i]]>></span> coins
+								<<default>>
+									<<print $featsBoosts.name[_upgradeNames[$_i]]>>: <span class="gold"><<print $featsBoosts.upgrades[_upgradeNames[$_i]]>></span> coins
+							<</switch>>
+							</li>
+						<</if>>
+					<</for>>
+				</ul>
+				당신은<span class="green"> <<print $feats.allSaves.points - $featsBoosts.pointsUsed>>개의 VrelCoin</span>이 남아있다.
+			<</if>>
+		</div>
+	</div>
+<</widget>>
+
+<<widget "updateFeatName">>
+	<<replace #featName>>
+		<<featName>>
+	<</replace>>
+<</widget>>
+
+<<widget "featName">>
+	<<set _details to $featsBoosts.upgradeDetails[_upgradeName]>>
+	<<set _count to _details.count>>
+	<<if _count gte _details.minCount>>
+		<<switch _upgradeName>>
+			<<case "money">>
+				<span class="gold">시작시 소지금</span>
+			<<case "grades">>
+				<span class="gold">시작시 학교 성적</span>
+			<<case "purity" "impurity">>
+				<span class="gold" style="text-transform: capitalize;">일일 <<putpost _upgradeName>> 보너스</span>
+			<<case "newLife">>
+				<span class="gold">새로운 생명</span>
+			<<case "aNewBestFriend">>
+				<span class="gold">새로운 절친</span>
+			<<case "randomClothing">>
+				<span class="gold">무작위 의상 추가</span>
+			<<case "tattoos">>
+				<span class="gold">시작시 문신</span>
+			<<case "defaultMoves">>
+				<span class="gold">기본 행동 세트 추가</span>
+			<<case "specialClothing">>
+				<span class="gold">특수한 의상 추가</span>
+			<<case "sexToys">>
+				<span class="gold">섹스 장난감들</span>
+			<<default>>
+				<span class="gold"  style="text-transform: capitalize;">시작시 <<putpost _upgradeName>> 기술 등급</span>
+		<</switch>>
+	<<else>>
+		<span class="red">?????</span>
+	<</if>>
+<</widget>>
+
+<<widget "featsMenu">>
+	<<set _name to _args[0]>>
+	<<capture _name>>
+		<<set _details to $featsBoosts.upgradeDetails[_name]>>
+		<<set _count to _details.count>>
+		<<if _count gte _details.minCount>>
+			<<if $feats.allSaves.points is undefined or $feats.allSaves.points is 0>>
+				<span class="red">도전과제 부스트를 구입하기 위해 VrelCoin을 얻으세요!</span>
+			<<else>>
+				<<switch _name>>
+					<<case "money">>
+						당신은 <span class="green"> £<<print $money/100 + $featsBoosts.upgrades.money * 50 * _count / _details.cost>>.00를 가지고 게임을 시작합니다</span>.
+					<<case "grades">>
+						당신은 학교 성적 <<if $featsBoosts.upgrades.grades / _details.cost is 2>><span class="lblue">B</span><<elseif $featsBoosts.upgrades.grades / _details.cost is 1>><span class="blue">C</span><<else>><span class="purple">D</span><</if>>를 가지고 게임을 시작합니다.
+					<<case "purity">>
+						<<if ($featsBoosts.upgrades[_name] / _details.cost) is 0>>
+						당신은 매일 순결도 <span class="green">1</span> 포인트를 얻습니다. 순결도 상승 보너스를 구입하면 일일 순결도를 더 많이 얻게 될 것입니다. <i>당신이 취하는 행동이 당신이 얻는 순결도를 무효화거나 증폭시킬 수 있습니다.</i>
+						<<else>>
+						당신은 매일 순결도 <span class="green"><<print 1+$featsBoosts.upgrades[_name] / _details.cost>></span> 포인트를 얻습니다. <i>당신이 취하는 행동이 당신이 얻는 순결도를 무효화거나 증폭시킬 수 있습니다.</i>
+						<</if>>
+					<<case "impurity">>
+						<<if ($featsBoosts.upgrades[_name] / _details.cost) is 0>>
+						당신은 매일 순결도 <span class="green">1</span> 포인트를 얻습니다. 순결도 하락 보너스를 구입하면 이것을 거스를 수 있습니다. <i>당신이 취하는 행동이 당신이 잃는 순결도를 무효화거나 증폭시킬 수 있습니다.</i>
+						<<elseif ($featsBoosts.upgrades[_name] / _details.cost) is 1>>
+						당신은 매일 순결도 <span class="red">1</span> 포인트를 잃습니다. 이것은 당신이 평소 자정에 얻는 순결도 포인트를 무효화합니다. <i>당신이 취하는 행동이 당신이 잃는 순결도를 무효화거나 증폭시킬 수 있습니다.</i>
+						<<elseif ($featsBoosts.upgrades[_name] / _details.cost) is 2>>
+						당신은 매일 순결도 <span class="red">1</span> 포인트를 잃습니다. <i>당신이 취하는 행동이 당신이 잃는 순결도를 무효화거나 증폭시킬 수 있습니다.</i>
+						<<else>>
+						당신은 매일 순결도 <span class="red"><<print $featsBoosts.upgrades[_name] / _details.cost - 1>></span> 포인트를 잃습니다. <i>당신이 취하는 행동이 당신이 잃는 순결도를 무효화거나 증폭시킬 수 있습니다.</i>
+						<</if>>
+					<<case "newLife">>
+						당신은 기생충을 <<print ($featsBoosts.upgrades.newLife is 0 ? "<span class='red'>임신하지 않은</span>" : "<span class='green'>임신한</span>")>> 상태로 게임을 시작합니다.
+					<<case "aNewBestFriend">>
+						당신은 귀 슬라임이
+						<<switch $featsBoosts.upgrades.aNewBestFriend>>
+							<<case 0>><span class='red'>침범하지 않은</span> 상태로 게임을 시작합니다.
+							<<case 10>><span class='green'>하나 침범한</span> 상태로 게임을 시작합니다.
+							<<case 20>><span class='green'>둘 침범한</span> 상태로 게임을 시작합니다.
+						<</switch>>
+					<<case "randomClothing">>
+						당신은 <span class="gold"><<print 3 * $featsBoosts.upgrades.randomClothing / _details.cost>></span>벌의 무작위 의상을 가지고 게임을 시작합니다.
+					<<case "tattoos">>
+						<<if $featsBoosts.upgrades.tattoos / _details.cost is 0>>
+							당신은 몸에 문신이 <span class="red">없이</span> 게임을 시작합니다.
+						<<elseif $featsBoosts.upgrades.tattoos / _details.cost is 1>>
+							당신은 몸에 문신이 <span class="green">1</span>개 있는 상태로 게임을 시작합니다.
+						<<else>>
+							당신은 몸에 문신이 <span class="green"><<print $featsBoosts.upgrades.tattoos / _details.cost>></span>개 있는 상태로 게임을 시작합니다.
+						<</if>>
+					<<case "defaultMoves">>
+							당신은  <span class="green"><<print 2 + $featsBoosts.upgrades.defaultMoves / _details.cost>></span>개의 기본 행동 세트를 가지고 게임을 시작합니다. 이것들은 전투중에 기본적으로 선택되는 행동 세트들로, 수동으로 원하는 행동을 선택하지 않아도 되게 하여 게임 진행을 빠르게 하도록 해 줍니다. 행동 세트들은 <span class="gold">태도</span> 메뉴에서 설정할 수 있습니다.
+					<<case "specialClothing">>
+						당신은 숲 가게의 특수한 의상이 <<print ($featsBoosts.upgrades.specialClothing is 0?"<span class='red'>잠긴</span>":"<span class='green'>해금된</span>")>> 상태로 게임을 시작합니다. 이 도전과제 부스트는 이후에 추가되는 새 의상들을 자동으로 해금해 주지는 않습니다.
+					<<case "sexToys">>
+						당신은
+						<<if $featsBoosts.upgrades[_name] / _details.cost is 0>>
+							섹스 장난감이 <span class="red">하나도 없이</span> 게임을 시작합니다.
+						<<elseif $featsBoosts.upgrades[_name] / _details.cost gte 1>>
+							섹스 장난감 <span class="green"><<print 3 * $featsBoosts.upgrades.sexToys / _details.cost>></span>개를 가지고 게임을 시작합니다.
+						<</if>>
+					<<default>>
+						당신은
+						<<if $featsBoosts.upgrades[_name] / _details.cost is 1>>
+							<<putpost _name>> 기술 <span class="pink">F+</span> 등급을 가지고 게임을 시작합니다.
+						<<elseif $featsBoosts.upgrades[_name] / _details.cost is 2>>
+							<<putpost _name>> 기술 <span class="purple">D</span> 등급을 가지고 게임을 시작합니다.
+						<<elseif $featsBoosts.upgrades[_name] / _details.cost is 3>>
+							<<putpost _name>> 기술 <span class="purple">D+</span> 등급을 가지고 게임을 시작합니다.
+						<<elseif $featsBoosts.upgrades[_name] / _details.cost is 4>>
+							<<putpost _name>> 기술 <span class="blue">C</span> 등급을 가지고 게임을 시작합니다.
+						<<else>>
+							<<putpost _name>> 기술에 <span class="red">숙달되지 않은</span> 상태로 게임을 시작합니다.
+						<</if>>
+				<</switch>>
+				<<if _name is "randomClothing">>
+					<br>
+					<span class="gold bold">옷 종류: </span>
+					<label><<print '<<radiobutton "$featsBoosts.clothingGender" "Either" ' + ($featsBoosts.clothingGender is "Either" ? "checked" : "") + '>>'>> 둘 다</label> |
+					<label><<print '<<radiobutton "$featsBoosts.clothingGender" "Male" ' + ($featsBoosts.clothingGender is "Male" ? "checked" : "") + '>>'>> 남성용</label> |
+					<label><<print '<<radiobutton "$featsBoosts.clothingGender" "Female" ' + ($featsBoosts.clothingGender is "Female" ? "checked" : "") + '>>'>> 여성용</label>
+					<br>
+					<span class="gold bold">커스텀 색상 활성화 (이상한 결과가 나올 수도 있음): </span>
+						<label><<print '<<radiobutton "$featsBoosts.clothingCustomColors" false ' + ($featsBoosts.clothingCustomColors is false ? "checked" : "") + '>>'>> 아니오</label> |
+						<label><<print '<<radiobutton "$featsBoosts.clothingCustomColors" true ' + ($featsBoosts.clothingCustomColors is true ? "checked" : "") + '>>'>> 네</label>
+				<</if>>
+				<<if _details.exclusive is "" or $featsBoosts.upgrades[_details.exclusive] is 0>>
+					<<featsPointsMenuButtons _name _details.cost _details.limit>>
+				<<else>>
+					<span class="red">이 업그레이드를 사용하려면 _details.exclusive 업그레이드를 제거해야 합니다.</span>
+				<</if>>
+
+				<<if _name is "tattoos">>
+					<<set _totalTattoos to $featsBoosts.upgrades.tattoos / _details.cost>>
+					<<if _tattooNumber is undefined or _tattooNumber gt _totalTattoos>>
+						<<set _tattooNumber to Math.clamp(_totalTattoos, 1, $featsBoosts.upgradeDetails.tattoos.limit / _details.cost)>>
+					<</if>>
+
+					<<if _totalTattoos gt 0>>
+						<div class="settingsGrid" style="margin:10px 0px">
+							<div class="settingsHeader">문신 <<print _tattooNumber>>
+							<br>
+								<<if _tattooNumber gte 1 and _totalTattoos gt 1>>
+								<span style="font-size:80%;">
+									<<link "이전 문신">>
+										<<set _tattooNumber-->>
+										<<if _tattooNumber lte 0>>
+											<<set _tattooNumber to _totalTattoos>>
+										<</if>>
+										<<replace #featsPointsMenu>><<featsPointsMenu>><</replace>>
+									<</link>> |
+									<<link "다음 문신">>
+										<<set _tattooNumber++>>
+										<<if _tattooNumber gt _totalTattoos>>
+											<<set _tattooNumber to 1>>
+										<</if>>
+										<<replace #featsPointsMenu>><<featsPointsMenu>><</replace>>
+									<</link>>
+								</span>
+								<</if>>
+							</div>
+							<div class="settingsToggleItem">
+								<span class="listMargin">
+									<span class="gold">문신 종류:</span>
+									<<set _penOptions to ["Tattoo","Brand"]>>
+									<<trListboxItemsFromArray "_penOptions">><<listbox `"$featsBoosts.tattoos["+_tattooNumber+"].pen"` autoselect>>
+										<<optionsfrom _trListboxItems>>
+									<</listbox>>
+								</span>
+							</div>
+							<div class="settingsToggleItem">
+								<span class="gold">문신 위치:</span>
+								<<set _bodyPartOptions to ["Forehead","Left cheek","Right cheek","Left shoulder","Right shoulder","Back","Breasts","Left bottom","Right bottom","Left thigh","Right thigh","Pubic"]>>
+								<<for _l to 1; _l lte _totalTattoos; _l++>>
+									<<if _tattooNumber is _l>>
+										<<continue>>
+									<</if>>
+									<<run _bodyPartOptions.delete($featsBoosts.tattoos[_l].bodypart)>>
+								<</for>>
+								<<trListboxItemsFromArray "_bodyPartOptions">><<listbox `"$featsBoosts.tattoos["+_tattooNumber+"].bodypart"` autoselect>>
+									<<option "무작위" "Random">>
+									<<optionsfrom _trListboxItems>>
+								<</listbox>>
+							</div>
+							<div @id="_tattooNumber + 'tattooFilter'" class="settingsToggleItem">
+								<<tattooFilter>>
+							</div>
+							<div @id="_tattooNumber + 'tattooList'" class="settingsToggleItem">
+								<<tattooList>>
+							</div>
+						</div>
+						<<run $(() => {
+						const currentList = '#' + _tattooNumber + 'tattooList';
+						const currentFilterId = '#' + _tattooNumber + 'tattooFilter';
+							$(currentFilterId + ' select').on('input change', e => {
+							new Wikifier(null, `<<print "${currentList}">> <<replace "${currentList}">><<tattooList>><</replace>>`);
+							}).trigger('change');
+						})>>
+					<</if>>
+				<</if>>
+				<<if _name is "sexToys">>
+					<div id="sexToys"><<sexToysFeatUI>></div>
+				<</if>>
+				<<if _name is "aNewBestFriend" and $featsBoosts.upgradeDetails.aNewBestFriend.count gte 2>>
+					<div id="aNewBestFriend">
+						<label>귓속 슬라임의 시작 상태:
+							<<listbox "$featsBoosts.earSlimeType" autoselect>>
+								<<option "미숙하고 수동적" "immaturePassive">>
+								<<option "미숙하고 적극적" "immatureAggressive">>
+								<<option "어느 정도 자라있고 적극적" "grownAggressive">>
+							<</listbox>>
+						</label>
+					</div>
+				<</if>>
+			<</if>>
+		<<else>>
+			<span class="red"><<print $featsBoosts.missing[_name]>></span>
+		<</if>>
+	<</capture>>
+<</widget>>
+
+<<widget "tattooFilter">>
+	<span class="gold">문신 디자인 종류:</span>
+	<<set _tattooFilters = {
+		"전체" : "all",
+		"그림" : "object",
+		"글자" : "text",
+		"남성적" : "m",
+		"여성적" : "f",
+		"이상성욕" : "bestiality",
+		"소" : "cattle",
+		"전투" : "combat",
+		"범죄" : "criminal",
+		"노출증" : "exhibitionism",
+		"매춘" : "prostitution",
+		"강간" : "rape",
+		"섹스" : "sex",
+		"폭행" : "violence",
+		"임신" : "pregnancy",
+		"수태" : "impreg",
+		}>>
+	<<listbox `"$tattooFilter"+_tattooNumber` autoselect>>
+		<<optionsfrom _tattooFilters>>
+	<</listbox>>
+<</widget>>
+
+<<widget "tattooList">>
+	<span class="gold">문신 디자인:</span>
+	<<featsTattooOptions>><<run console.log(_featsTattooOptions)>>
+	<<trListboxItemsFromArray "_featsTattooOptions">><<listbox `"$featsBoosts.tattoos["+_tattooNumber+"].tattoo"` autoselect>>
+		<<option "무작위" "Random">>
+		<<optionsfrom _trListboxItems>>
+	<</listbox>>
+<</widget>>
+
+<<widget "featsTattooOptions">>
+	<<if _featsTattooAll is undefined>>
+		<<set _featsTattooAll to []>>
+		<<for _value range setup.bodywriting>>
+			<<if _value.featSkip is true>>
+				<<continue>>
+			<</if>>
+			<<run _featsTattooAll.push(_value.writing)>>
+		<</for>>
+	<</if>>
+	<<set _featsTattooOptions to []>>
+	<<switch _tattooNumber>>
+		<<case 1>><<set _tattooFilter to $tattooFilter1>>
+		<<case 2>><<set _tattooFilter to $tattooFilter2>>
+		<<case 3>><<set _tattooFilter to $tattooFilter3>>
+		<<case 4>><<set _tattooFilter to $tattooFilter4>>
+		<<case 5>><<set _tattooFilter to $tattooFilter5>>
+	<</switch>>
+	<<for _value range setup.bodywriting>>
+		<<if (_tattooFilter is "all" and _value.featSkip)
+		or (_tattooFilter is "object" and (_value.featSkip or _value.type isnot _tattooFilter))
+		or (_tattooFilter is "text" and (_value.featSkip or _value.type isnot _tattooFilter))
+		or (_tattooFilter is "m" and (_value.featSkip or _value.gender isnot _tattooFilter))
+		or (_tattooFilter is "f" and (_value.featSkip or _value.gender isnot _tattooFilter))
+		or (_tattooFilter isnot "all" and _tattooFilter isnot "object" and _tattooFilter isnot "text" and _tattooFilter isnot "m" and _tattooFilter isnot "f" and (_value.featSkip or _value.special isnot _tattooFilter))>>
+			<<continue>>
+		<</if>>
+		<<run _featsTattooOptions.push(_value.writing)>>
+	<</for>>
+<</widget>>
+
+<<widget "featsPointsMenuButtons">>
+	<<set _type to _args[0]>>
+	<<set _multi to _args[1]>> /*_details.cost */
+	<<set _max to _args[2]>> /*_details.limit */
+	<<set _maxupgrades to _max/_multi - ($featsBoosts.upgrades[_name] / _details.cost)>>
+	<<set _totalUpgrades to _max/_multi>>
+	<<set _purchasedUpgrades to $featsBoosts.upgrades[_name] / _details.cost>>
+	<br><br>
+	<span class="gold bold">업그레이드:</span>
+	<br>
+	<div style="margin-bottom:10px;">
+	<<switch _name>>
+	<<case "money">>
+		구입한 업그레이드마다 시작시 소지금에 <span class="green">£<<print $featsBoosts.upgradeDetails.money.limit * 5>></span>를 추가합니다.
+	<<case "grades">>
+		구입한 업그레이드마다 시작시 학교 성적을 <span class="green">한 등급</span> 올려줍니다.
+	<<case "purity">>
+		구입한 업그레이드마다 일일 순결도를 1 포인트 올려줍니다.
+	<<case "impurity">>
+		구입한 업그레이드마다 일일 순결도를 1 포인트 내려줍니다.
+	<<case "newLife">>
+		<<if _totalUpgrades is 2>>
+			첫번째 업그레이드를 구입하면 후타나리 촉수 기생충을 임신한 상태로 게임을 시작합니다. 두번째 업그레이드를 구매하면 기생충이 완벽한 움직임 상태가 됩니다; 그렇지 않으면 임의의 움직임 상태가 됩니다.
+		<<else>>
+			첫번째 업그레이드를 구입하면 후타나리 촉수 기생충을 임신한 상태로 게임을 시작합니다. 두번째 번식 도전과제를 달성하면 기생충이 완벽한 움직임 상태가 됩니다.
+		<</if>>
+	<<case "aNewBestFriend">>
+		이 업그레이드를 구입하면 한쪽 귀에 슬라임 기생충이 침범한 상태로 시작합니다.
+	<<case "randomClothing">>
+		구입한 업그레이드마다 특정한 성별의 무작위 옷 세 벌을 가지고 시작합니다.
+	<<case "tattoos">>
+		구입한 업그레이드마다 선택한 하나의 문신이나 낙인을 가지고 시작합니다.
+ 	<<case "defaultMoves">>
+		구입한 업그레이드마다 행동 세트를 추가로 하나 더 가지고 시작합니다.
+	<<case "specialClothing">>
+		이 업그레이드를 구입하면 이전에 해금한 특수 의상들이 해금된 상태로 시작합니다.
+	<<case "sexToys">>
+		구입한 업그레이드마다 선택한 섹스 장난감 세 개를 가지고 시작합니다.
+	<<default>>
+		구입한 업그레이드마다 당신의 <<putpost _name>> 기술을 <span class="green">한 등급</span> 올려줍니다.
+	<</switch>>
+	</div>
+	<<capture _type _multi _max>>
+		<div class="featButtonContainer">
+		<<if _multi is undefined>>
+			<<set _multi to 1>>
+		<</if>>
+		<<if _max is undefined>>
+			<<set _max to 20>>
+		<</if>>
+		<<if $featsBoosts.upgrades[_type] gte 1 * _multi>>
+			<div class="featButton roundl">
+			<<button "<span class='fa-icon fa-left'></span><span class='fa-icon fa-left'></span>">>
+				<<print "<<updateFeatsPointsMenu _type " + (-1 * (_purchasedUpgrades * _multi)) +">>">>
+			<</button>>
+			</div>
+		<<else>>
+			<div class="featButtonGrey roundl">
+			<<button "<span class='fa-icon fa-left'></span><span class='fa-icon fa-left'></span>">>
+			<</button>>
+			</div>
+		<</if>>
+		<<if $featsBoosts.upgrades[_type] gte 1 * _multi>>
+			<div class="featButton">
+			<<button "<span class='fa-icon fa-left'></span>">>
+				<<print "<<updateFeatsPointsMenu _type " + (-1 * _multi) +">>">>
+			<</button>>
+			</div>
+		<<else>>
+			<div class="featButtonGrey">
+			<<button "<span class='fa-icon fa-left'></span>">>
+			<</button>>
+			</div>
+		<</if>>
+		<div class="gold featButton buttonDisable">
+			<<button "_purchasedUpgrades / _totalUpgrades">>
+			<</button>>
+		</div>
+		<<if $featsBoosts.upgrades[_type] / _multi lt  _totalUpgrades
+		and $feats.allSaves.points - $featsBoosts.pointsUsed gte 1 * _multi>>
+			<div class="featButton">
+			<<button "<span class='fa-icon fa-right'></span>">>
+				<<print "<<updateFeatsPointsMenu _type " + (1 * _multi) +">>">>
+			<</button>>
+			</div>
+		<<else>>
+			<div class="featButtonGrey">
+			<<button "<span class='fa-icon fa-right'></span>">>
+			<</button>>
+			</div>
+		<</if>>
+		<<if $featsBoosts.upgrades[_type] / _multi lt _totalUpgrades
+		and $feats.allSaves.points - $featsBoosts.pointsUsed gte _maxupgrades * _multi>>
+			<div class="featButton roundr">
+			<<button "<span class='fa-icon fa-right'></span><span class='fa-icon fa-right'></span>">>
+				<<print "<<updateFeatsPointsMenu _type " + (_maxupgrades * _multi) +">>">>
+			<</button>>
+			</div>
+		<<else>>
+			<div class="featButtonGrey roundr">
+			<<button "<span class='fa-icon fa-right'></span><span class='fa-icon fa-right'></span>">>
+			<</button>>
+			</div>
+		<</if>>
+		</div>
+		<div class=" black small-description" style="margin-top:10px;">(업그레이드 당 <span class="gold">_details.cost <<print (_details.cost is 1 ? "VrelCoin" : "VrelCoins")>></span> 필요)</div>
+
+		<<if _type is "tending">>
+			<div style="margin-top:10px;">
+			<span class="green">원예가</span> - 작물 수확량이 증가하고 비료를 사용하면 썩지 않습니다. 비료를 하나 가지고 시작합니다.
+			<div class="featButton roundl roundr" style="margin-top:5px;">
+			<<if $feats.allSaves.points - $featsBoosts.pointsUsed gte $featsBoosts.upgradeDetails.greenThumb.cost and !$featsBoosts.upgrades.greenThumb>>
+				<<button "이 특성을 가지고 시작">><<print "<<updateFeatsPointsMenu greenThumb $featsBoosts.upgradeDetails.greenThumb.cost>>">><</button>>
+			<<elseif $featsBoosts.upgrades.greenThumb>>
+				<<button "이 특성을 제외한다">><<print "<<updateFeatsPointsMenu greenThumb " + (-1 * $featsBoosts.upgradeDetails.greenThumb.cost) + ">>">><</button>>
+			<</if>>
+			</div>
+			</div>
+			<div class=" black small-description" style="margin-top:10px;">(업그레이드하려면 <span class="gold"><<print "$featsBoosts.upgradeDetails.greenThumb.cost">> VrelCoins</span> 필요)</div>
+		<</if>>
+	<</capture>>
+<</widget>>
+
+<<widget "sexToysFeatUI">>
+	<<set _totalToys to $featsBoosts.upgrades.sexToys / 10>>
+	<<if _toyNumber is undefined or _toyNumber gt _totalToys>>
+		<<set _toyNumber to 0>>
+	<</if>>
+	<<if _toys is undefined>>
+		<<set _toys to {}>>
+		<<run Object.values(setup.sextoys).forEach(toy => T.toys[sextoyPost(toy.namecap,"name")] = toy.index)>>
+	<</if>>
+	<<if _totalToys gt 1>>
+		<div class="settingsGrid" style="margin:10px 0px">
+			<div class="settingsHeader">장난감 <<print _toyNumber+1>>
+			<br>
+				<<if _toyNumber gte 0 and _totalToys gt 1>>
+				<span style="font-size:80%;">
+					<<link "이전 섹스 장난감">>
+						<<set _toyNumber-->>
+						<<if _toyNumber lt 0>>
+							<<set _toyNumber to _totalToys-1>>
+						<</if>>
+						<<replace #featsPointsMenu>><<featsPointsMenu>><</replace>>
+					<</link>> |
+					<<link "다음 섹스 장난감">>
+						<<set _toyNumber++>>
+						<<if _toyNumber+1 gt _totalToys>>
+							<<set _toyNumber to 0>>
+						<</if>>
+						<<replace #featsPointsMenu>><<featsPointsMenu>><</replace>>
+					<</link>>
+				</span>
+				<</if>>
+			</div>
+			<div class="settingsToggleItem">
+				<span class="gold">섹스 장난감:</span>
+				<div id="sexToysFeatUIIndex">
+					<<listbox "$featsBoosts.sexToys[_toyNumber].index" autoselect>>
+						<<option "무작위" -1>>
+						<<optionsfrom _toys>>
+					<</listbox>>
+				</div>
+			</div>
+			<div id="sexToysFeatUIColour">
+				<<sexToysFeatUIColour>>
+			</div>
+		</div>
+		<<run $(() => { $('#sexToysFeatUIIndex select').on('input change', e => {
+			new Wikifier(null, "<<replace '#sexToysFeatUIColour'>><<sexToysFeatUIColour>><</replace>>");
+		}).trigger('change') })>>
+	<</if>>
+<</widget>>
+
+<<widget "sexToysFeatUIColour">>
+	<<if $featsBoosts.sexToys[_toyNumber].index isnot undefined and $featsBoosts.sexToys[_toyNumber].index isnot -1>>
+		<<set _toyColours to {}>>
+		<<set _selectedToy to Object.values(setup.sextoys).find(toy => toy.index === V.featsBoosts.sexToys[T.toyNumber].index)>>
+		<<if _selectedToy and _selectedToy.colour_options and _selectedToy.colour_options.length>>
+			<<run _selectedToy.colour_options.forEach(colour => _toyColours[trColour(colour)] = colour)>>
+		<</if>>
+	<<else>>
+		<<set _toyColours to {}>>
+	<</if>>
+	<<if Object.values(_toyColours).length gt 1>>
+	<div class="settingsToggleItem">
+		<span class="gold">색상:</span><br>
+		<<listbox "$featsBoosts.sexToys[_toyNumber].colour" autoselect>>
+			<<option "무작위" -1>>
+			<<optionsfrom _toyColours>>
+		<</listbox>>
+	</div>
+	<</if>>
+<</widget>>
+
+<<widget "updateFeatsPointsMenu">>
+	<<if $feats.allSaves.points - $featsBoosts.pointsUsed gte _args[1] or _args[1] lt 0>>
+		<<set $featsBoosts.upgrades[_args[0]] += _args[1]>>
+		<<set $featsBoosts.pointsUsed += _args[1]>>
+	<</if>>
+	<<replace #featsPointsMenu>>
+		<<featsPointsMenu>>
+	<</replace>>
+<</widget>>
+
+/* Fake feats, for when you want to gaslight the player. Used for the Wraith, primarily */
+<<widget "displayFeatFake">>
+	<<if _args[0] and $feats.locked is false and $cheatdisable is "t" and $debug is 0 and $gamemode isnot "soft" and $alluremod gte 1>>
+		<<silently>>
+			<<if _featsCount is undefined>>
+				<<set _featsCount to 0>>
+			<<else>>
+				<<set _featsCount++>>
+			<</if>>
+		<</silently>>
+		<div @id="'feat-' + _featsCount" class="feat">
+			<div class="featImage">
+				<<switch setup.feats[_args[0]].difficulty>>
+					<<case 1>><img src="img/ui/CopperCoinFake.gif" class="featCoin">
+					<<case 2>><img src="img/ui/SilverCoinFake.gif" class="featCoin">
+					<<case 3>><img src="img/ui/GoldCoinFake.gif" class="featCoin">
+					<<case 3>><img src="img/ui/PlatinumCoinFake.gif" class="featCoin">
+					<<case 3>><img src="img/ui/JeweledCoinFake.gif" class="featCoin">
+				<</switch>>
+			</div>
+			<div class="featText">
+				<<switch _args[0]>>
+					<<case "It Belongs in a Museum">>
+						<span class="title">이건 박물관으로 가야해?</span>
+					<<default>>
+						<<if setup.feats[_args[0]].title.endsWith("?")>>
+							<span class="text"><<print setup.feats[_args[0]].title>></span>
+						<<else>>
+							<span class="text"><<print setup.feats[_args[0]].title>>?</span>
+						<</if>>
+						<span class="title"><<print setup.feats[_args[0]].title>>?</span>
+				<</switch>>
+				<br>
+				<<switch _args[0]>>
+					<<case "No More Control">>
+						<span class="text">당신은 이보다 더 음란해질 방법을 모른다... 그렇지?</span>
+					<<case "Teachers Nightmare">>
+						<span class="text">당신은 공포 그 자체다... 그렇지?</span>
+					<<case "Anti-Social Moth">>
+						<span class="text">누가 친구가 필요하다는 거지... 그렇지?</span>
+					<<default>>
+						<<if setup.feats[_args[0]].desc.endsWith(".")>>
+							<span class="text"><<print setup.feats[_args[0]].desc>>.. 그렇지?</span>
+						<<else>>
+							<span class="text"><<print setup.feats[_args[0]].desc>>... 그렇지?</span>
+						<</if>>
+				<</switch>>
+			</div>
+			<div @id="'closeFeat-' + _featsCount" class="closeFeat" @onclick="'closeFeats('+ _featsCount +')'"></div>
+		</div>
+	<</if>>
+<</widget>>

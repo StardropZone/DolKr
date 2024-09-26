@@ -1,0 +1,20 @@
+:: Widgets custom rest [widget nobr]
+<<widget "customRest">>
+    <<if $custom.restActive is true>>
+        <<switch _args[0]>>
+            <<case "park">>
+                <<customRestPark>>
+            <<case "beach">>
+                <<customRestBeach>>
+            <<default>>
+                <<link [[휴식한다 (0:10)|custom rest default]]>><<tiredness -5>><<pass 10>><</link>><<ltiredness>>
+        <</switch>>
+    <</if>>
+<</widget>>
+
+:: custom rest default [nobr]
+당신은 휴식을 취했다.
+<br>
+<span class="pink">이 문구를 발견하신다면 실수로 인한 버그이니, 알려주시길 바랍니다. (custom rest default)</span>
+<br>
+<<return "다음">>

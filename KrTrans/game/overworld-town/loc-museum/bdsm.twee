@@ -1,0 +1,1292 @@
+:: Museum Horse Agree
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+당신은 윈터 선생님이 황동 항아리를 받침대 위에 올려놓으려 균형을 잡고 있는 것을 본다. <<npc Winter>><<person1>>
+
+<<if $speech_attitude is "meek">>
+"모- 목마를 시연하는 걸 도와드리고 싶어서 왔어요." 당신이 말한다.
+<<elseif $speech_attitude is "bratty">>
+"거긴 못 올려놓을 걸요." 당신이 말한다. "아무튼, 그 나무 말을 시연하는 걸 돕고 싶어요."
+<<else>>
+"생각을 좀 해 봤는데," 당신이 말한다. "그 목마를 시연하는 걸 도와드리고 싶네요."
+<</if>>
+<br><br>
+
+윈터 선생님이 미소 짓는다. "잘 됐구나." <<he_ ga>> 말한다. <<He_ nun>> 항아리를 안전한 데에 내려놓고 뒤에 있는 방으로 들어간다.
+<<he_ nun>> 팽팽한 천조각들을 한 무더기 들고 다시 나타난다.
+<br><br>
+
+"이건 의상이다." <<He_ nun>> 당신이 볼 수 있도록 옷을 잡아 준다. 여전히 천조각으로만 보인다. 어떻게 입어야 할 지나 이 옷이 과연 얼마나 몸을 가려줄 수 있을지 확신치 못하겠다.
+"생각보단 튼튼하단다. 옷을 갈아입고 있으면 내가 카메라를 가져오도록 하마. 우린 이 행사를 홍보해야 해. 네가 목마를 쳐다보는 사진이면 충분할 게다."
+<br><br>
+
+윈터 선생님이 한 번 더 모습을 감춘다. 당신은 옷을 벗고 천조각 하나를 허리에 둘러 감는다. 거의 스커트처럼 느껴진다. 
+나머지 천들을 당신의 가슴에 둘러 감는다. <<breasts_ rul>> 가리기엔 충분하다.
+<br><br>
+
+<<undress "museum">>
+<<upperwear 79>>
+<<lowerwear 71>>
+
+<<He_ nun>> 카메라를 들고 나타나 미소를 짓는다. "완벽하구나. 겁먹은 표정을 지어 봐라." <<He_ nun>> 사진을 한 장 찍고 멈칫한다.
+"혹시 목마에 앉아 줄 수 있겠니? 구속이나 그런 건 할 필요 없지만, 목마에 앉아 주면 더 나을 것 같구나."
+<br><br>
+
+당신은 목마 위로 기어올라 편하게 자세를 낮춘다. 단단한 나무가 당신의 <<print ($player.ballsExist ? "불알 사이를" : "음순 사이를")>> 누른다.
+당신은 보호하려고 당신의 짧고, 팽팽한 치마를 다리 사이로 밀어 보지만, 전혀 도움이 되지 않는다. 불편하지 않은 상태로는 제대로 앉을 수 없는 것 같다.
+<br><br>
+
+윈터 선생님은 마지막 사진을 찍는다. <<He_ nun>> 만족한 것으로 보인다. "고맙구나. 분명 효과가 있을 거야." <<He_ nun>> 당신이 옷을 갈아입을 수 있게 방에서 나간다.
+<br><br>
+
+<<endevent>>
+
+<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<br>
+
+:: Museum Duck Agree
+<<effects>>
+
+당신은 벽에 황동 항아리를 걸려고 애쓰는 윈터 선생님을 발견한다. <<npc Winter>><<person1>>
+
+<<if $speech_attitude is "meek">>
+	"도- 도와드리고 싶어요." 당신이 말한다. "물고문 의자 말이예요."
+<<elseif $speech_attitude is "bratty">>
+	"거기에 걸어두면 떨어질 걸요." 당신이 말한다. "아무튼, 그 물고문 의자 때문에 왔어요. 하죠."
+<<else>>
+	"생각을 좀 해 봤는데," 당신이 말한다. "그 물고문 의자를 시연하는 걸 도와드리고 싶네요."
+<</if>>
+<br><br>
+
+윈터 선생님이 미소 짓는다. "훌륭하구나." <<He_ nun>> 항아리를 벽에 기대 놓는다. "들어오렴. 어떻게 되어 있는지 보여 주마."
+<br><br>
+
+당신은 윈터 선생님을 따라 정문을 나온다. "5분 정도라면 박물관은 나 없이도 괜찮을 거다. 이쪽으로." <<He_ ga>> 샛길을 통해, 당신을 공원으로 데려간다.
+<br><br>
+
+<<link [[다음|Museum Duck Agree 2]]>><</link>>
+<br>
+
+:: Museum Duck Agree 2
+<<set $outside to 1>><<set $location to "park">><<effects>>
+
+<<generate2>><<generate3>>
+
+당신은 강에 도착한다. 강 옆에는 나무 기중기가 설치되어 있다. 팽팽한 밧줄이 윈터 선생님이 일전에 보여 주었던 의자 꼭대기와 연결되어 있다. 
+<<person2>><<person_ i>> 기중기의 토대 옆에 무릎을 꿇고 있는 동안, <<person3>><<person_ un>> 밧줄의 길이를 조정한다.
+<br><br>
+
+"약간의 조정만 거치면," <<person_ i>> 윈터 선생님에게 말한다. "모든 준비가 완료될 겁니다."
+<br><br>
+<<person1>>
+윈터 선생님이 <<his_ yi>> 두 손을 마주치며 당신에게 돌아선다. 
+"네 역할은 의자에 앉아 강에 빠지는 거란다. 나는 사람들에게 이 장치의 역사를 설명해 주면서 기중기를 작동시키마."
+<br><br>
+
+"꽁꽁 묶이게 될 거야." <<he_ ga>> 계속 말한다. "널 완전히 물에 잠기게 할 필요는 없지만, 젖는 건 각오해 둬라.
+여기에 적합한 복장으로는 생각해 둔 게 있으니, 너무 걱정하지는 말고."
+<br><br>
+
+당신은 윈터 선생님과 함께 박물관으로 돌아간다. <<He_ nun>> 들뜬 것 처럼 보인다.
+<br><br>
+
+<<link [[다음|Museum]]>><<endevent>><</link>>
+<br>
+
+
+:: Museum Duck
+<<set $outside to 1>><<set $location to "park">><<effects>>
+
+<<npc Winter>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+
+윈터 선생님은 당신을 바깥으로 데려가, 좁은 골목길을 지나 공원에 도착한다. 당신이 강에 가까이 가자 목소리가 들려온다.
+윈터 선생님은 당신을 화장실 옆에 멈춰서게 하고, 천조각 한 뭉치를 당신의 손에 넘겨준다. "네 옷이 젖게 할 수는 없잖니. 원래 옷은 이 일이 끝날 때까지 내가 맡아 두마."
+<br><br>
+
+당신은 화장실에 들어가 천조각으로 갈아입는다. 천조각은 꽉 끼고 노출이 심하다. 당신은 당신이 어떻게 보일 지를 상상해 본다. 곧 관중들이 모여들 것이다.
+<<exhibitionism1>>
+<<undress "museum">>
+<<upperwear 79>>
+<<lowerwear 71>>
+당신은 화장실에서 나와 원래 옷을 윈터 선생님에게 건넨다. "아주 좋구나." <<person1>><<he_ ga>> 말한다. "한 가지 더. 네가 받아들여야 한다는 압박을 받게 하고 싶지는 않다만, 제안할 게 있단다."
+<<He_ nun>> <<his_ yi>> 자켓 주머니를 뒤지기 시작한다.
+<br><br>
+
+<<link [[다음|Museum Duck 2]]>><</link>>
+<br>
+
+:: Museum Duck 2
+<<effects>>
+
+<<if playerIsPregnant() and playerBellyVisible()>>
+	"네가 완전히 물 속에 가라앉으면 시연이 더 사실적으로 보일 게다." 윈터 선생님이 당신의 배를 한 번 쳐다본 후 말한다.
+	"하지만 우린 안전하게 진행해야만 해. 관중들에게 겁을 주거나 아기가 다치면 안 되니 말이다."
+	<br><br>
+	<<link [[다음|Museum Duck Light]]>><<bindtemp>><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<<else>>
+	"네가 완전히 물 속에 가라앉으면 시연이 더 사실적으로 보일 게다." 윈터 선생님이 녹색 버튼이 달린 작은 장치를 꺼내며 말한다.
+	"네게 이 방수 버저를 줄 텐데, 이건 네가 시연을 멈추고 싶으면 바로 내가 알 수 있게 해준단다." <<He_ ga>> 버튼을 누르자, <<his_ yi>> 주머니가 진동한다.
+	"너는 수면 아래에 있게 될 테니, 이게 나와 소통할 수 있는 유일한 수단이 될 게다."
+	<br><br>
+
+	"네가 이 제안을 받아들여야 한다고 압박을 느낄 필요가 전혀 없다는 걸 다시 강조해야겠구나. <<he_ ga>> 덧붙인다. "시연이 잘 팔리고 흥미를 더 끌어오르기야 하겠지만, 너무 많은 것을 부탁하고 있다는 건 알고 있단다."
+	<br><br>
+
+	<<link [[받아들인다|Museum Duck Extreme]]>><<bindtemp>><<npcincr Winter love 3>><</link>><<swimmingdifficulty 1 400>><<gglove>><<ltrauma>>
+	<br>
+	<<link [[거절한다|Museum Duck Light]]>><<bindtemp>><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+
+:: Museum Duck Extreme
+<<effects>>
+
+윈터 선생님이 고개를 끄덕이고, 당신에게 녹색 버저를 건네준다. <<He_ nun>> 울타리 위쪽을 건너다 보느라 발뒤꿈치를 들고 선다. "모두 준비되었구나." <<he_ ga>> 말한다. "관중들이 기다리고 있구나, 들어오렴."
+<br><br>
+당신은 윈터 선생님을 따라 울타리를 돌아간다. 거기엔, 한 백 명 정도 되는 많은 인파가 물고문 의자를 둘러싸고 서 있다. 그들은 원터 선생님과 당신을 보고는 열렬한 반응을 보인다.
+<br><br>
+
+"신사 숙녀 여러분." 윈터 선생님이 당신에게 의자에 앉으라 손짓하며 입을 뗀다. "오늘 우리는 이 무뢰한을 처벌하는 광경을 목격하기 위해 여기 있습니다."
+<<He_ nun>> 당신 위의 끈을 당겨 당신을 의자에 단단히 묶는다. "수많은 선량한 시민들을 속여넘긴 사기꾼입니다. 이제 <<pshe_ nun>> 정의와 마주해야 합니다."
+<br><br>
+
+윈터 선생님은 기중기의 반대쪽 끝으로 가서, 당신을 공중으로 들어올린다.
+<<He_ nun>> 당신을 강 위에 띄워놓으며, 물고문 의자에 대해 계속 설명한다. 물이 당신 발 밑으로 맹렬히 들이친다.
+<br><br>
+
+<<link [[다음|Museum Duck Extreme 2]]>><</link>>
+<br>
+
+
+:: Museum Duck Extreme 2
+<<effects>>
+<<wash>>
+윈터 선생님이 레버를 당기자, 당신은 아래쪽의 물로 하강한다. 물이 당신의 발을 감싸고, 그 다음엔 다리를, 이윽고 배과 가슴께까지 차오른다.
+물은 차갑다. 당신은 시연이 얼마나 오래 진행될 지 궁금해한다.
+<br><br>
+
+"보통 이런 처벌은 죽을 정도는 아니었습니다." 윈터 선생님이 레버를 반대 방향으로 당기며 말한다. 당신은 다시 떠오르기 시작한다. "대중들 앞에서 수치심을 주는 것이 1차적인 목적이었지요."
+관중들이 자기들끼리 웅얼거린다. 순간 공포가 번뜩이며, 당신은 천조각이 물에 젖어 투명해진 게 아님을 확인하기 위해 아래쪽을 내려다본다.
+모습을 정돈하기도 전에, 윈터 선생님은 다시 한 번 당신을 강에 빠트린다. 이번에는 물이 목까지 차오른다.
+<br><br>
+
+마지막으로 레버를 당기자, 의자의 남은 부분과 함께 당신 또한 물에 가라앉는다.
+<br><br>
+
+<<link [[다음|Museum Duck Extreme 3]]>><</link>>
+<br>
+
+
+:: Museum Duck Extreme 3
+<<effects>><<rngWraith 1>>
+
+<<if $swimmingSuccess>>
+
+	물이 당신 주변과 위쪽으로 밀려들어오자 당신은 할 수 있는 만큼 숨을 참는다. 당신은 의자가 다시 올라가는 게 느껴질 때까지 <span class="green">침착함을 유지한다.</span>
+	당신의 머리가 수면에서 솟구쳐 오르고, 당신은 숨을 급히 들이쉰다. 당신은 눈을 깜박여 물을 짜내고, 관중들을 흘낏 본다. 관중 일부는 감명을 받은 것 같고, 다른 이들은 당신에게 음흉한 시선을 보내고 있다.
+	<br><br>
+
+	당신은 아래쪽을 보고 천조각들이 투명해지지 않았다는 것에 안도한다. 하지만 천조각은 몸에 달라붙어, 아래에 뭐가 있는지에 대해 불편한 암시를 준다.
+	<br><br>
+
+	"어떤 범죄자들은," 윈터 선생님이 관중들에게 말한다. "한 번 담그는 걸로는 부족했습니다." <<He_ ga>> 레버를 당기자, 의자가 한 번 더 하강한다.
+	"두 번째에는, 더 오래-" 당신이 수면 아래로 사라지자, <<His_ yi>> 목소리가 끊긴다.
+	<br><br>
+
+	<<link [[숨을 참는다|Museum Duck Extreme 4]]>><<set $phase to 0>><</link>><<swimmingdifficulty 300 1000>>
+	<br>
+	<<link [[버저를 누른다|Museum Duck Extreme 4]]>><<set $phase to 1>><</link>>
+	<br>
+
+<<elseif $wraith.state is "haunt" and _wraithEvent>>
+
+	당신은 할 수 있는 만큼 숨을 참아보려 하지만, 곧 공포심이 커지는 게 느껴진다. 뭔가 잘못되기라도 하면 어떻게 되는 거지? 당신은 버저를 누른다.
+	<br><br>
+
+	당신의 손가락이 갑자기 움직이지 않는다. 당신은 손을 꽉 쥐려 하지만, 그럴 수가 없다. <span class="red">미친 듯한 웃음을 지은 투명한 형체가 당신 앞에 나타나면서, 창백한 손이 당신 주변에 생겨난다.</span> <<takeHandholdingVirginity "Ivory Wraith" "rape">>
+	<br><br>
+
+	"<span class="wraith">가라앉아라.</span>"
+	당신은 필사적으로 버저를 누르려 시도하며, 그것에 맞선다. 투명한 형체의 다른 손이 당신의 목을 감싸쥐고, 의자와 함께 아래로 끌어당긴다. 당신 위의 기중기가 하중으로 인해 끼기긱대는 소리가 들린다.
+	<br><br>
+
+	당신이 급하게 위로 끌어올려지는 것이 느껴진다. 당신의 머리가 수면에서 솟구쳐 오르고, 당신은 숨을 급히 들이쉰다. 당신은 수면 아래를 보지만, 그 형체의 흔적은 없다. 당신의 손은 버저를 꽉 붙들고 있다. 누군가가 박수를 치는 소리가 들린다. 다른 이들도 이에 동참한다.
+	<br><br>
+
+	윈터 선생님이 의자의 균형을 잡기 위해 달려와 당신을 풀어준다. "시연은 여기까지입니다." <<he_ ga>> 말한다.
+	"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다. 박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요."
+	<<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신에게 손짓한다. 더 많은 사람들이 박수를 치고, 그들의 눈은 당신의 젖은 몸뚱아리를 훑어본다.
+	<br><br>
+
+	윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. "잘 했단다." <<he_ ga>> 돌아오는 길에 말한다.
+	"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+	<<He_ nun>> 뒤를 살짝 돌아본다. 관중들 다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+	<br><br>
+
+	당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+	<br><br>
+
+	정말 무서웠다. 그 형체의 목소리가 귀에 메아리친다.
+	<br><br>
+	<<endevent>>
+	<<set $museuminterest += 20>>
+	<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+	<br>
+
+<<else>>
+
+	당신은 할 수 있는 만큼 최대로 숨을 들이쉬었지만, 곧 마음속에서 공포가 자라난다. 뭔가 잘못되기라도 하면 어떻게 되는 거지? <span class="red">당신은 버저를 누른다.</span>
+	<br><br>
+
+	당신의 머리가 수면을 뚫고 나오며, 당신은 날카롭게 숨을 들이쉰다. 의자는 계속 위로 떠올라, 다시 내려가기 전에 지면으로 옮겨진다.
+	누군가의 박수 소리가 들리고, 나머지 사람들도 동참한다.
+	<br><br>
+
+	윈터 선생님이 달려와 의자를 움직이지 않게 잡고 묶인 당신을 풀어준다. "시연은 여기까지입니다." <<he_ ga>> 말한다.
+	"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다. 박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요."
+	<<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신에게 손짓한다. 더 많은 사람들이 박수를 치고, 그들의 눈은 당신의 젖은 몸뚱아리를 훑어본다.
+	<br><br>
+
+	윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. "잘 했단다." <<he_ ga>> 돌아오는 길에 말한다.
+	"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+	<<He_ nun>> 뒤를 살짝 돌아본다. 관중들 다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+	<br><br>
+
+	당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+	<br><br>
+
+	굉장히 무서웠지만, <span class="green">당신은 강한 카타르시스를 느낀다.</span><<trauma -6>>
+	<br><br>
+	<<endevent>>
+	<<set $museuminterest += 20>>
+	<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+	<br>
+
+
+<</if>>
+
+:: Museum Duck Extreme 4
+<<effects>>
+
+<<if $swimmingSuccess and $phase isnot 1>>
+
+	당신은 숨을 참는다. 이 깊이에선 물이 더 안전해 보인다. 파릇파릇한 식물이 강변에서 뻗어나와, 태양을 향해 뻗어나가고 있다. <span class="green">당신은 침착함을 유지한다.</span>
+	<br><br>
+
+	의자가 다시 한 번 떠오른다. 당신은 숨을 급히 들이쉬며 눈을 깜박여 물을 짜낸다.
+	관중 일부는 시연에 충격을 받은 것 같다. 마치 기대하던 것보다 훨씬 사실적이었다는 것처럼.
+	<br><br>
+
+	윈터 선생님은 자신이 없어 보인다. <<He_ nun>> 평소의 무미건조한 태도로 관중들에게 말하지만, 당신을 걱정스런 눈길로 쳐다본다.
+	<br><br>
+
+	<<link [[견딘다|Museum Duck Extreme 5]]>><</link>><<swimmingdifficulty 600 1400>>
+	<br>
+	<<link [[고개를 흔든다|Museum Duck Extreme End]]>><</link>>
+	<br>
+
+<<elseif $wraith.state is "haunt" and _wraithEvent>>
+
+	당신은 할 수 있는 만큼 숨을 참아보려 하지만, 곧 공포심이 자라나는 게 느껴진다. 뭔가 잘못되기라도 하면 어떻게 되는 거지? 당신은 버저를 누른다.
+	<br><br>
+
+	당신의 손가락이 갑자기 움직이지 않는다. 당신은 손을 꽉 쥐려 하지만, 그럴 수가 없다. <span class="red">미친 듯한 웃음을 지은 투명한 형체가 당신 앞에 나타나면서, 창백한 손이 당신 주변에 생겨난다.</span> <<takeHandholdingVirginity "Ivory Wraith" "rape">>
+	<br><br>
+
+	"<span class="wraith">가라앉아라.</span>"
+	당신은 필사적으로 버저를 누르려 시도하며, 그것에 맞선다. 투명한 형체의 다른 손이 당신의 목을 감싸쥐고, 의자와 함께 아래로 끌어당긴다. 당신 위의 기중기가 하중으로 인해 끼기긱대는 소리가 들린다.
+	<br><br>
+
+	당신이 급하게 위로 끌어올려지는 것이 느껴진다. 당신의 머리가 수면에서 솟구쳐 오르고, 당신은 숨을 급히 들이쉰다. 당신은 수면 아래를 보지만, 그 형체의 흔적은 없다. 당신의 손은 버저를 꽉 붙들고 있다. 누군가가 박수를 치는 소리가 들린다. 다른 이들도 이에 동참한다.
+	<br><br>
+
+	윈터 선생님이 의자의 균형을 잡기 위해 달려와 당신을 풀어준다. "시연은 여기까지입니다." <<he_ ga>> 말한다.
+	"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다. 박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요."
+	<<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신에게 손짓한다. 더 많은 사람들이 박수를 치고, 그들의 눈은 당신의 젖은 몸뚱아리를 훑어본다.
+	<br><br>
+
+	윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. "잘 했단다." <<he_ ga>> 돌아오는 길에 말한다.
+	"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+	<<He_ nun>> 뒤를 살짝 돌아본다. 관중들 다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+	<br><br>
+
+	당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+	<br><br>
+
+	정말 무서웠다. 그 형체의 목소리가 귀에 메아리친다.
+	<br><br>
+	<<endevent>>
+	<<set $museuminterest += 30>>
+	<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+	<br>
+
+<<else>>
+
+	당신은 할 수 있는 만큼 최대로 숨을 들이쉬었지만, 곧 마음속에서 공포가 자라난다. 뭔가 잘못되기라도 하면 어떻게 되는 거지? <span class="red">당신은 버저를 누른다.</span>
+	<br><br>
+
+	당신의 머리가 잔잔한 수면을 일그러뜨리고, 당신은 날카롭게 숨을 들이쉰다. 의자는 천천히 위로 떠올라, 다시 내려가기 전에 지면으로 옮겨진다.
+	누군가의 박수 소리가 들리고, 나머지 사람들도 동참한다.
+	<br><br>
+
+	윈터 선생님이 의자의 균형을 잡기 위해 달려와 당신을 풀어준다. "시연은 여기까지입니다." <<he_ ga>> 말한다.
+	"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다. 박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요."
+	<<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신에게 손짓한다. 더 많은 사람들이 박수를 치고, 그들의 눈은 당신의 젖은 몸뚱아리를 훑어본다.
+	<br><br>
+
+	윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. "잘 했단다." <<he_ ga>> 돌아오는 길에 말한다.
+	"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+	<<He_ nun>> 뒤를 살짝 돌아본다. 관중들 다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+	<br><br>
+
+	당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+	<br><br>
+
+	굉장히 무서웠지만, <span class="green">당신은 강한 카타르시스를 느낀다.</span><<trauma -12>>
+	<br><br>
+	<<endevent>>
+	<<set $museuminterest += 30>>
+	<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+	<br>
+
+
+<</if>>
+
+
+:: Museum Duck Extreme 5
+<<effects>>
+
+당신은 다시 한번 차가운 물 속으로 가라앉는다.
+<<if $swimmingSuccess>>
+	당신은 숨을 참고, <span class="green"> 침착함을 유지하려 노력한다.</span> 물 바깥에서 웅얼거리는 듯 하지만 흥분한 목소리들이 들린다.
+	<br><br>
+	<<earnFeat "Submerged">>
+	<<if $museumAntiques.antiques.antiquesilvermask isnot "found" and $museumAntiques.antiques.antiquesilvermask isnot "talk" and $museumAntiques.antiques.antiquesilvermask isnot "museum">>
+		강 밑바닥, 당신의 발 옆 토사에 빼꼼 튀어나와 있는 무언가가 <span class="gold">빛난다.</span>
+		당신은 그걸 살살 밀어 빼낸다. 사악한 웃음으로 일그러진 <span class="gold">금속 가면이 당신을 올려다본다.</span>
+		변색이 되긴 했지만, 군데군데가 은빛으로 반짝인다.
+		<br><br>
+
+		의자가 또다시 움직이려 떨리는 것이 느껴진다. 올라갈 때, 당신은 두 발로 가면을 잡는다.
+		<br><br>
+
+		당신이 수면에서 솟구치기도 전에 박수 소리가 들려온다. 당신은 숨을 급히 들이쉬고 눈을 깜박여 물을 짜낸다. 관중들은 감명을 받은 것 같다.
+		<br><br>
+
+		<<link [[다음|Museum Duck Extreme Antique]]>><</link>>
+		<br>
+
+	<<else>>
+		작은 물고기들이 헤엄쳐 지나간다.
+		<br><br>
+		침착한 상태에서도, 숨이 점점 고갈되어가는 것이 느껴진다. 하지만 곧 의자가 움직이려 떨리는 것도 느껴진다.
+		당신이 수면에서 솟구치기도 전에 박수 소리가 들려온다. 당신은 숨을 급히 들이쉬고 눈을 깜박여 물을 짜낸다. 관중들은 감명을 받은 것 같다.
+		<br><br>
+
+		당신의 발이 지면에 닿자 윈터 선생님이 달려온다. <<He_ nun>> 의자를 바로잡고 당신을 묶고 있던 끈을 풀어준다.
+		"시연은 여기까지입니다." <<he_ ga>> 말한다.
+		"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다. 박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요."
+		<<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신에게 손짓한다.
+		박수 소리는 귀가 멀 정도다. 환호 소리에 당황하여, 공원에 있던 사람들의 고개가 이쪽으로 돌아간다.
+		<br><br>
+
+		윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. "아주 잘 했단다." <<he_ ga>> 돌아오는 길에 말한다.
+		"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 순간 내가 너무 멀리 나갔나 하는 생각까지 들었지만, 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+		<<He_ ga>> 뒤를 흘끗 돌아본다. 관중들 대다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+		<br><br>
+
+		당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+		<br><br>
+
+		굉장히 무서웠지만, <span class="green">당신은 강한 카타르시스를 느낀다.</span><<trauma -24>>
+		<br><br>
+
+		<<endevent>>
+		<<set $museuminterest += 50>>
+		<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+		<br>
+	<</if>>
+<<else>>
+	당신은 할 수 있는 만큼 최대로 숨을 들이쉬었지만, 곧 마음속에서 공포가 자라난다. 뭔가 잘못되기라도 하면 어떻게 되는 거지? <span class="red">당신은 버저를 누른다.</span>
+	<br><br>
+
+	당신의 머리가 수면에서 솟구쳐 오르고, 당신은 숨을 급히 들이쉰다. 의자는 계속 끌어올려지다가, 다시 내려가기 전에 땅 위로 옮겨진다.
+	제대로 된 끝을 맞지 못했음에도, 박수 소리는 기운이 넘친다.
+	<br><br>
+
+	윈터 선생님이 의자의 균형을 잡기 위해 달려와 당신을 풀어준다. "시연은 여기까지입니다." <<he_ ga>> 말한다.
+	"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다. 박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요."
+	<<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신에게 손짓한다. 다시 박수 소리가 들리고, 사이사이에 환호 소리가 끼어 있다.
+	환호 소리에 당황하여, 공원에 있던 사람들의 고개가 이쪽으로 돌아간다.
+	<br><br>
+
+	윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. "잘 했단다." <<he_ ga>> 돌아오는 길에 말한다.
+	"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+	<<He_ nun>> 뒤를 살짝 돌아본다. 관중들 다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+	<br><br>
+
+	당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+	<br><br>
+
+	굉장히 무서웠지만, <span class="green">당신은 강한 카타르시스를 느낀다.</span><<trauma -24>>
+	<br><br>
+	<<endevent>>
+	<<set $museuminterest += 50>>
+	<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+	<br>
+<</if>>
+
+:: Museum Duck Extreme Antique
+<<effects>>
+
+당신의 발이 지면에 닿자 윈터 선생님이 달려온다. <<He_ nun>> 의자를 움직이지 않게 잡고 당신을 묶고 있던 끈을 풀어준다. "시연은 여기까지입니다." <<he_ ga>> 말한다.
+"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다. 박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요."
+<<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신에게 손짓한다. 박수 소리는 귀가 멀 정도다.
+환호 소리에 당황하여, 공원에 있던 사람들의 고개가 이쪽으로 돌아간다.
+<br><br>
+
+<<link [[다음|Museum Duck Extreme Antique 2]]>><</link>>
+<br>
+
+
+:: Museum Duck Extreme Antique 2
+<<effects>>
+
+윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. <<he_ ga>> 가면의 존재를 눈치챈 것은 바로 그때다. "그걸 어디서 찾았니?"
+<br><br>
+<<if $speech_attitude is "meek">>
+	"가- 강 밑바닥에 있었어요." 당신이 말한다. 가면은 무표정하다. 당신은 아까 전에는 가면이 웃고 있었다는 생각이 든다.
+	수면 아래에서는 제대로 분간하기가 힘들었다. "이걸 가져가는 게 나쁜 일이 아니었으면 좋겠어요. 아까는 생각치 못했거든요."
+<<elseif $speech_attitude is "bratty">>
+	"강 바닥에 있더라고요." 당신이 말한다. 가면은 무표정하다. 당신은 아까 전에는 가면이 웃고 있었다는 생각이 든다.
+	수면 아래에서는 제대로 분간하기가 힘들었다. "찾은 사람이 임자죠."
+<<else>>
+	"강 바닥에 묻혀 있었어요." 당신이 말한다. 가면은 무표정하다. 당신은 아까 전에는 가면이 웃고 있었다는 생각이 든다.
+	수면 아래에서는 제대로 분간하기가 힘들었다. "발로 잡아당겼죠."
+<</if>>
+<br><br>
+"은으로 된 거니?" 윈터 선생님이 묻는다. "네가 이런 일에 소질이 있다는 건 알았지만, 어딜 가든 귀중한 물건들을 찾아내는 것 같아 보이는구나.
+아주 가치 있어 보여. 네 손에서 가면을 바로 가져가고 싶지만, 일단 몸부터 따뜻하게 해야겠구나."
+<br><br>
+윈터 선생님은 <<his_ yi>> 어깨 너머를 돌아본다. 관중들 대다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+<br><br>
+<<set $antiquemoney += 3000>><<museumAntiqueStatus "antiquesilvermask" "found">>
+당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+<br><br>
+
+굉장히 무서웠지만, <span class="green">당신은 강한 카타르시스를 느낀다.</span><<trauma -24>>
+<br><br>
+<<endevent>>
+<<set $museuminterest += 50>>
+<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<br>
+
+
+:: Museum Duck Extreme End
+<<effects>>
+
+윈터 선생님이 레버를 세게 당겨, 당신을 땅 위로 돌려놓는다. <<He_ nun>> <<him_ ul>> 둘러싸고 박수가 터져나오는 동안 달려와 의자를 움직이지 않게 잡고 당신을 풀어준다.
+<br><br>
+
+"시연은 여기까지입니다." <<he_ ga>> 말한다. "참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다.
+박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요." <<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 다시 한 번 박수 주시기 바랍니다."
+<<He_ ga>> 당신에게 손짓한다. 박수 소리가 다시 들려오지만, 당신은 당신의 젖은 몸을 훑어보는 시선이 느껴진다.
+<br><br>
+
+윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. "잘 했단다." <<he_ ga>> 돌아오는 길에 말한다.
+"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다." <<He_ ga>> 뒤를 흘끗 돌아본다.
+관중들 다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+<br><br>
+
+당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+<br><br>
+
+굉장히 무서웠지만, <span class="green">당신은 강한 카타르시스를 느낀다.</span><<trauma -18>>
+<br><br>
+<<endevent>>
+<<set $museuminterest += 40>>
+<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<br>
+
+
+
+
+:: Museum Duck Light
+<<effects>>
+
+윈터 선생님이 고개를 끄덕이고, 발뒤꿈치를 들고 서서 울타리 위쪽을 건너다 본다. "모두 준비되었구나." <<he_ ga>> 말한다. "관중들이 기다리고 있구나, 들어오렴."
+<br><br>
+당신은 윈터 선생님을 따라 울타리를 돌아간다. 거기엔, 한 백 명 정도 되는 많은 인파가 물고문 의자를 둘러싸고 서 있다. 그들은 원터 선생님과 당신을 보고는 열렬한 반응을 보인다.
+<br><br>
+
+"신사 숙녀 여러분." 윈터 선생님이 당신에게 의자에 앉으라 손짓하며 입을 뗀다. "오늘 우리는 이 무뢰한을 처벌하는 광경을 목격하기 위해 여기 있습니다."
+<<He_ nun>> 당신 위의 끈을 당겨 당신을 의자에 단단히 묶는다. "수많은 선량한 시민들을 속여넘긴 사기꾼입니다. 이제 <<pshe_ nun>> 정의와 마주해야 합니다."
+<br><br>
+
+윈터 선생님은 기중기의 반대쪽 끝으로 가서, 당신을 공중으로 들어올린다. <<He_ nun>> 당신을 강 위에 띄워놓으며, 물고문 의자에 대해 계속 설명한다.
+물이 당신 발 밑으로 맹렬히 들이친다.
+<br><br>
+
+<<link [[다음|Museum Duck Light 2]]>><</link>>
+<br>
+
+:: Museum Duck Light 2
+<<effects>>
+<<wash>>
+윈터 선생님이 레버를 당기자, 당신은 아래쪽의 물로 하강한다. 물이 당신의 발을 감싸고, 그 다음엔 다리를, 이윽고 배과 가슴께까지 차오른다. 물은 차갑다.
+당신은 시연이 얼마나 오래 진행될 지 궁금해한다.
+<br><br>
+
+"보통 이런 처벌은 죽을 정도는 아니었습니다." 윈터 선생님이 레버를 반대 방향으로 당기며 말한다. 당신은 다시 떠오르기 시작한다. "대중들 앞에서 수치심을 주는 것이 1차적인 목적이었지요."
+관중들이 자기들끼리 웅얼거린다. 순간 공포가 번뜩이며, 당신은 천조각이 물에 젖어 투명해진 게 아님을 확인하기 위해 아래쪽을 내려다본다.
+모습을 정돈하기도 전에, 윈터 선생님은 다시 한 번 당신을 강에 빠트린다. 이번에는 물이 목까지 차오른다.
+<br><br>
+
+당신은 물을 피하려고 얼굴을 위로 들지만, 윈터 선생님은 당신을 그런 채로 오래 두지 않는다.
+당신은 아래쪽을 보고 천조각들이 투명해지지 않았다는 것에 안도한다.
+하지만 천조각은 몸에 달라붙어, 아래에 뭐가 있는지 암시한다. 당신을 불쾌하게 만들기엔 충분하다.
+<br><br>
+
+<<link [[다음|Museum Duck Light 3]]>><</link>>
+<br>
+
+:: Museum Duck Light 3
+<<effects>>
+
+윈터 선생님은 당신이 땅 위에 떠오르도록 기중기를 올린다. <<He_ nun>> 당신을 땅 위로 내려주고, 의자가 움직이지 않게 잡고 당신을 풀어주기 위해 달려온다.
+<br><br>
+
+"시연은 여기까지입니다. 참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 박물관에도 한 번 방문해 보시기 바랍니다.
+박물관의 주소는 저희가 나눠드린 소책자에 실려 있습니다. 바로 저기에 있지요." <<He_ ga>> 가리킨다. "마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다."
+<<He_ ga>> 당신에게 손짓한다. 관중들은 정중하게 박수를 치면서도, 그들의 눈은 당신의 젖은 몸뚱아리를 훑어본다.
+<br><br>
+
+윈터 선생님은 따뜻하게 데운 수건을 당신에게 둘러 준다. 그리고 잠시 후, 박물관으로 함께 돌아간다. "잘 했단다." <<he_ ga>> 돌아오는 길에 말한다.
+"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+<<He_ nun>> 뒤를 살짝 돌아본다. 관중들 다수가 뒤를 따라오고 있다. "내 생각엔 우리가 관심을 좀 얻은 것 같다."
+<br><br>
+
+당신은 박물관에 도착한다. <<He_ nun>> 당신을 작은 방으로 데려가, 옷을 갈아입도록 둔다.
+<br><br>
+<<endevent>>
+<<set $museuminterest += 20>>
+<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<br>
+
+:: Museum Horse
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+
+윈터 선생님이 당신에게 작은 방을 보여 준다. "여기에서 옷을 갈아입을 수 있겠구나." <<he_ ga>> 말한다. <<He_ nun>> 미소를 짓고 있다.
+"용서하렴. 목마를 사용하고 있는 걸 보고 싶어 참을 수가 없구나." <<He_ nun>> 기구를 준비하러 떠난다.
+<br><br>
+<<undress "museum">>
+<<upperwear 79>>
+<<lowerwear 71>>
+
+당신은 기억하던 것처럼 팽팽하고 노출이 심한 천조각들을 입는다. 당신은 당신이 어떻게 보일 지를 상상해 본다. 곧 관중들이 모여들 것이다.
+<<exhibitionism1>>
+
+<<if playerIsPregnant() and playerBellyVisible()>>
+	윈터 선생님이 돌아온다. <<He_ nun>> 무언가를 들고 있다. "완벽하구나." <<He_ ga>> 당신의 배를 쳐다보며 잠시 말을 멈춘다.
+	"뭔가 제안하고 싶은 게 있었다만, 아기를 품고 있을 때는 위험한 건 피하는 게 제일이겠지."
+	<<He_ nun>> 채찍처럼 보이는 것을 방의 뒤편에 둔다. "관중들에게 겁을 주고 싶진 않구나."
+	<br><br>
+	<<link [[다음|Museum Horse Light]]>><<bindtemp>><<npcincr Winter love 1>><</link>><<glove>>
+<<else>>
+	윈터 선생님이 돌아온다. <<He_ nun>> 무언가를 들고 있다. "완벽하구나." <<He_ ga>> 잠시 말을 멈춘다. "네게 제안하고 싶은 게 있단다. 하지만 받아들여야 한다는 압박을 받진 마라."
+	<<He_ ga>> 당신 앞에 그 물체를 들이민다. 채찍이다.
+	"사실성에도 정도가 있지. 만약 너만 괜찮다면, 과거에 그리했던 것처럼 네게 무게추를 좀 추가하고 싶구나. 채찍질도 하고. 너무 세게는 말고, 인상을 줄 정도로 말이다."
+	<br><br>
+	<<link [[받아들인다|Museum Horse Safe Word]]>><<bindtemp>><<npcincr Winter love 3>><</link>><<gpain>><<garousal>><<ggwillpower>><<gglove>><<ltrauma>>
+	<br>
+	<<link [[거절한다|Museum Horse Light]]>><<bindtemp>><<npcincr Winter love 1>><</link>><<glove>>
+<</if>>
+
+:: Museum Horse Safe Word
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+"부탁이 많다는 건 나도 안다." <<he_ ga>> 말한다. "그래서 네게 참 고맙단다. 관중들도 그럴 거야. 우린 안전 문구가 필요할 게다.
+네가 불편하다고 느끼는 지점을 넘게 되면, 바로 내가 알 수 있도록 말이다."
+<br><br>
+
+무엇을 안전 문구로 해야 할까? <<if $wintersafeword is "" or $wintersafeword is undefined>><<set $wintersafeword to "마시멜로우">><</if>>
+<<textbox "$wintersafeword" $wintersafeword>>
+<br>
+
+<<link [[다음|Museum Horse Extreme]]>>
+	<<if $wintersafeword is "" or $wintersafeword is undefined>><<set $wintersafeword to "마시멜로우">><</if>>
+	<<set $wintersafeword to Util.escape($wintersafeword).replace(/\[/g, "&#91;").replace(/\]/g, "&#93;")>>
+<</link>>
+<br>
+
+:: Museum Horse Extreme
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+윈터 선생님이 고개를 끄덕인다. <<He_ ga>> 문틈 너머를 살짝 보더니 말한다. "모두 들어왔구나. 시작할 시간이다. 신호를 줄 테니 기다려라." <<He_ nun>> 박물관으로 돌아간다.
+<br><br>
+
+"신사 숙녀 여러분." 윈터 선생님이 입을 뗀다. <<He_ nun>> 목마 옆의 단상에 올라서서, 50명 정도 되어 보이는 관중들에게 말하고 있다.
+"우리 마을에는 깊은 역사가 있습니다. 영웅적인 업적과 훌륭한 행동도 있었는가 하면, 잔혹한 일과 비극도 있었습니다. 이 <<girl_ ul>> 봐 주십시오."
+<<He_ ga>> 문에 손짓하자, 당신은 긴장한 표정으로 박물관으로 들어온다. <<person2>><<person_ i>> 당신에게서 가장 가까이에 서 있다. <<He_ ga>> 자신의 입술을 할짝인다.
+<br><br>
+
+<<person1>>"이 아이는 배를 곯고 있는 <<pher_ yi>> 형제자매들을 위해 빵을 훔치려다 붙잡혔습니다." 윈터 선생님이 말을 이어간다. "<<pShe_ nun>> 이제 영주님의 정의와 마주해야 합니다."
+당신은 목마 위로 기어올라 편하게 자세를 낮춘다. 당신은 저번처럼 목마가 당신의 사타구니를 누르는 게 느껴진다.
+<<masopain 5>><<arousal 1200 "genitals">>
+<br><br>
+
+윈터 선생님은 말을 계속하며, 목마의 세부 사항과 어떻게 사용되었는지를 이야기한다. 그러면서 <<He_ nun>> 당신 뒤로 걸어와, 당신의 팔을 묶기 시작한다.
+<<He_ nun>> 빠르게 작업을 진행하고, 머지않아 당신의 팔은 꽉 묶여 움직이지 못하게 된다.
+<br><br>
+
+관중들은 구경거리에 푹 빠져 있다. 당신의 거의 드러난 <<genitalsPost "에">> 그들의 시선이 느껴진다. "당연하게도, 수치심을 주는 것 또한 형벌의 일부였습니다."
+<<He_ nun>> 발치에 있는 상자를 열어, 안으로 손을 뻗는다. <<He_ ga>> 금속 무게추를 꺼낸다. 당신은 <<he_ ga>> 당신 옆에 무릎을 꿇기 전 무게추에 달린 끈을 보았다.
+<<He_ nun>> 무게추 하나를 당신의 발목에 묶고, 그대로 떨어트린다. 이전에는 그저 불편하기만 했지만, 이제는 아파온다.
+<<He_ nun>> 목마 반대편으로 돌아가 같은 과정을 반복한다. 당신의 눈가가 촉촉해진다.
+<<masopain 20>>
+<br><br>
+
+<<He_ ga>> 목마로부터 멀어지고는, 당신을 흘끗 쳐다본다. <<He_ nun>> 자신이 없어 보인다.
+<br><br>
+
+<<link [[안심시킨다|Museum Horse Extreme 2]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[안전 문구|Museum Horse Extreme 2]]>><<set $phase to 1>><</link>>
+<br>
+
+:: Museum Horse Extreme 2
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100)) and $phase isnot 1>>
+<span class="green">당신은 이빨을 꽉 물고 견딘다.</span> "난 아무것도 잘못한 게 없어요!" 당신은 눈물이 그렁그렁한 채 외친다. "영주는 폭군이야!"
+<<gwillpower>><<willpower 3>>
+<br><br>
+<<masopain 20>>
+윈터 선생님이 미소 짓는다. "항상 여기서 형벌이 끝나는 건 아니었습니다." <<he_ ga>> 말한다. "특히 악랄한 이들을 위해 더 많은 것이 준비되어 있었지요."
+<<He_ ga>> <<his_ yi>> 채찍을 들어올려 관중들 앞에 보여준다. 그러고는 한 마디 말도 없이, <<he_ nun>> 당신 뒤편에 선다.
+<br><br>
+
+당신은 채찍이 당신의 살갗을 파고들자 비명을 지른다. 다시, 또 다시. 관중들은 그 광경을 입을 떡 벌린 채 바라본다.
+<br><br>
+
+<<link [[견딘다|Museum Horse Extreme 3]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[안전 문구|Museum Horse Extreme 3]]>><<set $phase to 1>><</link>>
+<br>
+
+<<else>>
+버티기 힘든 고통이 엄습한다. <span class="red">"$wintersafeword!"</span> 당신은 소리친다.
+<<ggwillpower>><<willpower 10>>
+<br><br>
+
+윈터 선생님이 끈을 풀고 다리에 묶여 있는 무게추를 떼어내는 데는 거의 시간이 걸리지 않는다. <<He_ nun>> 당신이 목마에서 내리는 걸 도와주고 잠시 손을 잡아 준다.
+당신이 괜찮은 것을 확인하자, <<he_ nun>> 관중에게로 돌아선다.
+<<takeHandholdingVirginity "Winter">>
+<br><br>
+
+"시연은 여기까지입니다. 참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 저희가 전시하고 있는 다른 많은 유물들도 감상해 보기를 권합니다.
+마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신에게 손짓한다. 구경꾼들 중 다수는 시연이 더 진행되었으면 하는 것 같지만, 그래도 정중하게 박수를 쳐 준다.
+<br><br>
+
+"아주 잘 했다." 당신이 작은 방으로 돌아오자 윈터 선생님이 말한다.
+"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+<<He_ nun>> 문 근처를 살짝 본다. "내 생각엔 우리가 관심을 좀 얻은 것 같다." <<He_ nun>> 당신이 옷을 갈아입을 수 있게 방에서 나간다.
+<br><br>
+
+고통에도 불구하고, 당신은 강렬한 카타르시스를 느낀다.<<trauma -12>>
+<br><br>
+<<endevent>><<unbindtemp>>
+<<set $museuminterest += 30>>
+<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<br>
+<</if>>
+
+:: Museum Horse Extreme 3
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100)) and $phase isnot 1>>
+<span class="green">당신은 이를 꽉 깨물고 참아낸다.</span> "아파요!" 당신은 눈물이 그렁그렁해져서 소리친다. "너무 아파요!"
+<<gwillpower>><<willpower 3>>
+<br><br>
+<<masopain 5>>
+윈터 선생님은 멈추지 않는다. <<he_ nun>> 계속, 계속해서 당신의 살을 후려친다. 일부 관중들은 불안해하고, 나머지는 충격을 받은 것 같다. 개중에는 이걸 명백히 즐기고 있는 사람들도 있다.
+<br><br>
+
+당신이 기절할 것 같다고 느껴질 때 쯤, 윈터 선생님이 채찍질을 멈춘다. <<He_ nun>> 헉헉거리며 당신 앞으로 걸어나온다. "시연은 여기까지입니다." <<he_ ga>> 말한다.
+"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 저희가 전시하고 있는 다른 많은 유물들도 감상해 보기를 권합니다. 
+마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." <<He_ ga>> 당신을 가리킨다. 관중들은 박수를 쳐 준다. 눈물을 흘리기까지 하는 사람도 있다.
+<br><br>
+
+"아주 잘 했단다." 당신이 작은 방으로 돌아오자 윈터 선생님이 말한다. "등 좀 보여 봐라." 당신은 뒤돌아서 <<he_ ga>> 손가락으로 당신의 피부를 훑는 걸 느낀다.
+"너의 도움을 받을 수 있어서 다행이다." <<he_ nun>> 화끈거리는 살갗을 진정시키는 뭔가를 발라 주며 말한다. "정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다." 
+<<He_ nun>> 문 근처를 살짝 본다. "내 생각엔 우리가 관심을 좀 얻은 것 같다." <<He_ nun>> 당신이 옷을 갈아입을 수 있게 방에서 나간다.
+<br><br>
+
+고통에도 불구하고, 당신은 강렬한 카타르시스를 느낀다.<<trauma -24>>
+<br><br>
+<<endevent>><<unbindtemp>>
+<<set $museuminterest += 50>>
+<<earnFeat "Pain Rider">>
+<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<br>
+<<else>>
+버티기 힘든 고통이 엄습한다. <span class="red">"$wintersafeword!"</span> 당신은 소리친다.
+<<ggwillpower>><<willpower 10>>
+<br><br>
+
+윈터 선생님은 즉시 채찍질을 멈춘다. <<he_ ga>> 당신의 다리와 무게추를 연결하는 끈을 풀어내는 데는 거의 시간이 걸리지 않는다. 
+<<He_ nun>> 당신이 목마에서 내려오는 걸 도와주고, 잠시 당신의 손을 잡아 준다. 당신이 진정한 것을 확인하자, <<he_ ga>> 관중들에게 돌아선다. 
+<<takeHandholdingVirginity "Winter">>
+<br><br>
+
+"시연은 여기까지입니다. 참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 저희가 전시하고 있는 다른 많은 유물들도 감상해 보기를 권합니다. 
+마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다." 
+<<He_ ga>> 당신을 가리킨다. 관중들 중 다수는 시연이 다음 단계까지 진행되었으면 하는 것 같지만, 그래도 정중하게 박수를 쳐 준다.
+<br><br>
+
+"아주 잘 했단다." 당신이 작은 방으로 돌아오자 윈터 선생님이 말한다. 
+"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다." 
+<<He_ nun>> 문 근처를 살짝 본다. "내 생각엔 우리가 관심을 좀 얻은 것 같다." <<He_ nun>> 당신이 옷을 갈아입을 수 있게 방에서 나간다.
+<br><br>
+
+고통에도 불구하고, 당신은 강렬한 카타르시스를 느낀다.<<trauma -18>>
+<br><br>
+<<endevent>><<unbindtemp>>
+<<set $museuminterest += 40>>
+<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<br>
+<</if>>
+
+:: Museum Horse Light
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+윈터 선생님이 고개를 끄덕인다. <<He_ ga>> 문틈 너머를 살짝 보더니 말한다. "모두 들어왔구나. 시작할 시간이다. 신호를 줄 테니 기다려라." <<He_ nun>> 박물관으로 돌아간다.
+<br><br>
+
+"신사 숙녀 여러분." 윈터 선생님이 입을 뗀다. <<He_ nun>> 목마 옆의 단상에 올라서서, 50명 정도 되어 보이는 관중들에게 말하고 있다.
+"우리 마을에는 깊은 역사가 있습니다. 영웅적인 업적과 훌륭한 행동도 있었는가 하면, 잔혹한 일과 비극도 있었습니다. 이 <<girl_ ul>> 봐 주십시오."
+<<He_ ga>> 문에 손짓하자, 당신은 긴장한 표정으로 박물관으로 들어온다. <<person2>><<person_ i>> 당신에게서 가장 가까이에 서 있다. <<He_ ga>> 자신의 입술을 할짝인다.
+<br><br>
+
+<<person1>>"이 아이는 배를 곯고 있는 <<pher_ yi>> 형제자매들을 위해 빵을 훔치려다 붙잡혔습니다." 윈터 선생님이 말을 이어간다. "<<pShe_ nun>> 이제 영주님의 정의와 마주해야 합니다."
+당신은 목마 위로 기어올라 편하게 자세를 낮춘다. 당신은 저번처럼 목마가 당신의 사타구니를 누르는 게 느껴진다.
+<<masopain 5>><<arousal 1200 "genitals">>
+<br><br>
+
+윈터 선생님은 말을 계속하며, 목마의 세부 사항과 어떻게 사용되었는지를 이야기한다.
+그러면서 <<He_ nun>> 당신 뒤로 걸어와, 당신의 팔을 묶기 시작한다. <<He_ nun>> 빠르게 작업을 진행하고, 머지않아 당신의 팔은 꽉 묶여 움직이지 못하게 된다.
+<br><br>
+
+관중들은 구경거리에 푹 빠져 있다. 당신의 거의 드러난 <<genitalsPost "에">> 그들의 시선이 느껴진다.
+"당연하게도, 수치심을 주는 것 또한 형벌의 일부였습니다. 지금 하고 있는 것처럼, 종종 구경꾼이 모이기도 했지요.
+그리고 형벌이 모두 끝나면, 희생자는 구경꾼들이 원하는 대로 다루도록 그들에게 넘겨지기도 했습니다."
+<<person3>><<person_ un>> 눈을 반짝이며 앞으로 걸어나오려 했지만, 윈터 선생님이 앞길을 막는다.
+<<person1>>
+<br><br>
+
+"시연은 여기까지입니다. 참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 저희가 전시하고 있는 다른 많은 유물들도 감상해 보기를 권합니다.
+마지막으로, 시연을 맡아 준 우리 스타에게도 박수 한 번 주시기 바랍니다."
+<<He_ ga>> 당신을 가리킨다. 구경꾼들 중 다수는 시연이 다음 단계까지 진행되었으면 하는 것 같지만, 그래도 정중하게 박수를 쳐 준다.
+<br><br>
+
+"아주 잘 했단다." 당신이 작은 방으로 돌아오자 윈터 선생님이 말한다.
+"너의 도움을 받을 수 있어서 다행이다. 정말로 고마워. 너만 괜찮다면 다음 주 주말에 다시 한 번 시연을 열어볼까 한다."
+<<He_ nun>> 문 근처를 살짝 본다. "내 생각엔 우리가 관심을 좀 얻은 것 같다." <<He_ nun>> 당신이 옷을 갈아입을 수 있게 방에서 나간다.
+<br><br>
+<<endevent>>
+<<set $museuminterest += 20>>
+<<link [[다음|Museum]]>><<unbindtemp>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<br>
+
+
+:: Museum Famous Horse Agree
+<<if $speech_attitude is "meek">>
+	"Making some more money could be nice. I-I think I can help demonstrate the horse for a larger audience," you say.
+<<elseif $speech_attitude is "bratty">>
+	"I'm in," you say. "How much would my cut be?"
+<<else>>
+	"I've been thinking about it," you say. "I'd like to help with the larger demonstrations."
+<</if>>
+
+<br><br>
+<<npc Winter>><<person1>>
+Winter smiles. "Excellent!" <<he>> exclaims. <<He>> leads you to a back room before explaining, "Whenever you are ready, come by and we can send out an email to our new museum member distribution list. I can't imagine it would take much more than half an hour for people to flock to the museum so that we can start the demonstration. I'll give you half of the profit, if that works for you?"
+
+<br><br>
+
+You nod in acknowledgement. <<if $exhibitonism gte 500>>The thought of having an audience excites you.<<else>> You are not sure how you feel about having an even larger audience.<</if>>
+
+<br><br>
+
+"I figure we will stick to the same clothing and structure of the basic demonstration. Let me know when you are ready."
+<br><br>
+<<link [[다음|Museum]]>><<endevent>><</link>>
+
+:: Museum Famous Horse
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+
+<<if playerIsPregnant() and playerBellyVisible()>>
+	Winter leads you back to the staff computer to send out the announcement. <<He>> pauses, looking at your belly. "On second thought, maybe we should wait to take the demonstrations to the next level. Don't want to scare those watching."
+	<br><br>
+	
+	<<link [[다음|Museum]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	Winter leads you back to the staff computer to send out the announcement. "That should do it," <<he>> says. <<Hes>> beaming with excitement. "I apologise, I simply can't wait to demonstrate the horse for so many people." <<He>> leaves you to get changed.
+	<br><br>
+
+	<<undress "museum">>
+	<<upperwear 79>>
+	<<lowerwear 71>>
+
+	당신은 기억하던 것처럼 팽팽하고 노출이 심한 천조각들을 입는다. 당신은 당신이 어떻게 보일 지를 상상해 본다. 곧 관중들이 모여들 것이다.
+	<<exhibitionism1>>
+
+	Winter returns. <<He>> holds a leather-tailed flog at <<his>> side. "Perfect." <<He>> pauses. "I would like to use the flog since we have so many people, along with the same weights we used before. If you are not comfortable with that, we can still cancel the demonstration."
+	<br><br>
+	You hold the flog in your hands, considering your options.
+
+	<br><br>
+	<<link [[받아들인다|Museum Famous Horse 2]]>><<bind>><<npcincr Winter love 3>><</link>><<gpain>><<garousal>><<ggwillpower>><<gglove>><<ltrauma>>
+	<br>
+	<<link [[Cancel the demonstration|Museum Famous Horse Cancel]]>><</link>>
+<</if>>
+
+:: Museum Famous Horse 2
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+"We also need to decide on a safe word before we start," <<he>> says.
+<br><br>
+무엇을 안전 문구로 해야 할까? <<if $wintersafeword is "" or $wintersafeword is undefined>><<set $wintersafeword to "마시멜로우">><</if>>
+<<textbox "$wintersafeword" $wintersafeword>>
+<br>
+
+<<link [[다음|Museum Famous Horse 3]]>>
+	<<if $wintersafeword is "" or $wintersafeword is undefined>><<set $wintersafeword to "마시멜로우">><</if>>
+	<<set $wintersafeword to Util.escape($wintersafeword)>>
+<</link>>
+<br>
+
+:: Museum Famous Horse 3
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+윈터 선생님이 고개를 끄덕인다. <<He_ ga>> 문틈 너머를 살짝 보더니 말한다. "모두 들어왔구나. 시작할 시간이다. 신호를 줄 테니 기다려라." <<He_ nun>> 박물관으로 돌아간다.
+<br><br>
+
+<<set _famousness to fameSum('business', 'good', 'social', 'model')/8000>>
+
+"Ladies and gentlemen," Winter begins. <<He>> stands on a raised platform beside the horse, addressing a large audience. It is difficult to count exactly how many people came, but you are shocked to see at least <<if _famousness gte 0.75>>300 people in the crowd!<<elseif _famousness gte 0.50>>200 people in the crowd!<<else>>100 people in the crowd!<</if>> Among the crowd you see Mayor Quinn and Leighton.
+<br><br>
+<<set $museumDemoReward to 2000*_famousness>>
+
+"우리 마을에는 깊은 역사가 있습니다. 영웅적인 업적과 훌륭한 행동도 있었는가 하면, 잔혹한 일과 비극도 있었습니다. 이 <<girl_ ul>> 봐 주십시오."
+<<He_ ga>> 문에 손짓하자, 당신은 긴장한 표정으로 박물관으로 들어온다. <<person2>><<person_ i>> 당신에게서 가장 가까이에 서 있다. <<He_ ga>> 자신의 입술을 할짝인다.
+<br><br>
+
+<<person1>>"이 아이는 배를 곯고 있는 <<pher_ yi>> 형제자매들을 위해 빵을 훔치려다 붙잡혔습니다." 윈터 선생님이 말을 이어간다. "<<pShe_ nun>> 이제 영주님의 정의와 마주해야 합니다."
+당신은 목마 위로 기어올라 편하게 자세를 낮춘다. 당신은 저번처럼 목마가 당신의 사타구니를 누르는 게 느껴진다.
+<<masopain 5>><<arousal 1200 "genitals">>
+<br><br>
+
+Winter continues <<his>> speech, talking about the specifics of the horse and how it was used. <<He>> steps up to you and begins to tie you up. <<He>> fastens your wrists to a rope that runs up to a pulley in the rafters. <<He>> takes the other end of the rope and ties it off on a cleat fixed to a nearby pillar-not tightly enough to support any of your body weight, but enough to keep your arms firmly above your head. You are bound securely and will not be able to cover yourself at all during this demonstration.
+<br><br>
+
+관중들은 구경거리에 푹 빠져 있다. 당신의 거의 드러난 <<genitalsPost "에">> 그들의 시선이 느껴진다. "당연하게도, 수치심을 주는 것 또한 형벌의 일부였습니다."
+<<He>> throws open a chest at <<his>> feet, and reaches in. <<He>> pulls out a metal weight. You see straps dangling from it as <<he>> kneels beside you.
+<<He>> ties one to your ankle and gently releases it. It was uncomfortable before, but now it hurts.
+<<He_ nun>> 목마 반대편으로 돌아가 같은 과정을 반복한다. 당신의 눈가가 촉촉해진다.
+<<masopain 20>>
+<br><br>
+
+<<He>> steps away from the horse and glances at you. <<He>> looks unsure.
+<br><br>
+
+<<link [[Try to reassure|Museum Famous Horse 4]]>><</link>>
+<br>
+<<link [[Safe word|Museum Famous Horse 11]]>><<set $phase to 1>><</link>>
+<br>
+
+:: Museum Famous Horse 4
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+	<span class="green">당신은 이빨을 꽉 물고 견딘다.</span> "난 아무것도 잘못한 게 없어요!" 당신은 눈물이 그렁그렁한 채 외친다. "영주는 폭군이야!"
+	<<gwillpower>><<willpower 3>>
+	<br><br>
+	<<masopain 20>>
+	윈터 선생님이 미소 짓는다. "항상 여기서 형벌이 끝나는 건 아니었습니다." <<he_ ga>> 말한다. "특히 악랄한 이들을 위해 더 많은 것이 준비되어 있었지요."
+	<<He>> lifts <<his>> leather flog and holds it in front of the audience. Then, without a word, <<he>> steps behind you.
+	<br><br>
+
+	<<if $rng gte (120 - 80*(fameSum('business', 'good', 'social', 'model')/8000))>>
+
+		Before <<he>> can strike you, however, one of Mayor Quinn's aides steps forward to whisper in Winter's ear while pointing to Leighton and the Mayor, who have moved onto another exhibit. Winter nods and turns to the audience. "Please excuse me for one moment, the demonstration will continue shortly."
+		<br><br>
+		<<He>> hastily removes the weights from your ankles, giving you some small respite. To your relief, <<he>> goes to the chest and collects a small cushion and places it between your crotch and the wooden horse beneath you, putting an end to the pain and discomfort. "I'll be right back," <<he>> whispers to you before attending to the mayor.
+		<br><br>
+
+		<<link [[다음|Museum Famous Horse 5]]>><</link>>
+	<<else>>
+		<<link [[다음|Museum Famous Horse 10]]>><</link>>
+	<</if>>
+<<else>>
+	The pain is too much for you, <span class="red">"$wintersafeword!"</span> you shout.
+	<<ggwillpower>><<willpower 10>>
+	<br><br>
+
+	It only takes Winter a moment to remove the straps tying the weights to your legs and the ropes holding your arms. <<He>> helps you off the horse and holds your hand for a moment.
+	<<takeHandholdingVirginity "Winter">>
+	당신이 괜찮은 것을 확인하자, <<he_ nun>> 관중에게로 돌아선다.
+	<br><br>
+
+	"That ends our demonstration. Thank you for attending. We hope you found it informative, and we invite you to appreciate the many other antiques we have on display.
+	Last but not least, let's have a round of applause for our star." <<He>> gestures at you. The audience applaud politely, though many look like they wish it had gone further. A number of them take pictures of you in your vulnerable state before dispersing throughout the museum. <<fameexhibitionism 6>>
+	<br><br>
+
+	"You did well!" Winter says once you're back in the small room, "Here is your share of the entrance fee."
+	<br><br>
+	<<He>> hands you £<<print $museumDemoReward>>. <<set $money += $museumDemoReward>>
+	<br><br>
+	"If you would like to demonstrate it again, please come let me know. In the meantime, I think you should at least take the week to rest and recover," <<he>> says quietly, "I'll... I'll leave you to get dressed."
+	<br><br>
+	<<He>> leaves you alone to collect your belongings and get dressed before returning to the now lively museum. As you exit the room, you find that all of the visitors are watching you.
+	<<endevent>><<unbindtemp>>
+	<<set $museuminterest += 30>>
+	<br><br>
+	<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+	<br>
+<</if>>
+
+:: Museum Famous Horse 5
+You awkwardly wait in your rags, still bound in the midst of an anxious crowd. The restless murmuring of the audience reaches a critical mass when one bolder figure, a <<person2>><<person>> steps forward. <<He>> goads the crowd, "I didn't pay just to wait around! Who wants to see the demonstration continue?" The audience cheers and encourages <<him>>.
+<br><br>
+
+<<He>> struts up to you and rips the cushion from under you, forcing your bodyweight back onto the wooden horse and shoving the wedge <<if $player.ballsExist>>against your testes<<else>>between your labia<</if>> once more. <<He>> then moves to the weights left on the floor by your ankles and re-attaches them with far less gentleness and care than Winter had. <<masopain 20>>
+<br><br>
+Retrieving the flog, <<he>> moves behind you, ready to strike. The audience waits excitedly.
+<br><br>
+<<link [[Scream for Winter|Museum Famous Horse 6]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[Brace yourself|Museum Famous Horse 6]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[Stay in character|Museum Famous Horse 6]]>><<set $phase to 2>><</link>>
+
+:: Museum Famous Horse 6
+
+<<if $phase is 0>>
+	<<if $speech_attitude is "meek">>
+		"P-P-Please, Winter, help me! <span class="red">"$wintersafeword!"</span> Help!" you shout through your trembling.
+	<<elseif $speech_attitude is "bratty">>
+		"Uh, <span class="red">"$wintersafeword!"</span> Hey, Winter, I could use a hand here!" you shout at the top of your lungs.
+	<<else>>
+		"<span class="red">"$wintersafeword!"</span> Winter! Help me!" you shout as loud as you can.
+	<</if>>
+	<br><br>
+	<<if $rng gte (50*(fameSum('business', 'good', 'social', 'model')/8000) + 40)>>
+		<<set _winterRescue to 1>><<person1>>
+		Winter hears you calling for help and rushes over to you. <<He>> looks horrified as <<he>> glares at the crowd. <<He>> undoes your bindings and removes you from the horse. You stand safely back on the floor.
+		<br><br>
+		<<link [[다음|Museum Famous Horse End]]>><</link>>
+	<<else>>
+		<span class="red">Winter cannot hear you over the sound of the crowd.</span>
+	<</if>>
+<<elseif $phase is 1>>
+	<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+	You grit your teeth and brace yourself for the flog, trying not to give the audience any satisfaction.
+	<<lpain>><<pain -5>><<gwillpower>><<willpower 3>>
+	<<else>>
+		You try to keep your composure, but the anticipation is just too much. You tremble in place.<<ggwillpower>><<willpower 10>>
+	<</if>>
+<<elseif $phase is 2>>
+	"Please, my <<if $pronoun is "m">>Lord,<<else>>Lady,<</if>> I only wish to survive the famine! I meant no offense, and I shall not steal again!" you shout, staying in character.
+	<br><br>
+	The crowd applauses your willingness to go along with the demonstration. A few of them even toss a few coins into the middle to reward you for the act. <<set $money += 50*(fameSum('business', 'good', 'social', 'model')/8000)*100>> <<fameexhibitionism 5>>
+<</if>>
+
+<<if _winterRescue isnot 1>>
+	<br><br>
+	The <<person>> swings the flog hard against your back. The leather strips whip painfully against your exposed skin. <<He>> continues for a few more blows before targeting your <<bottom>>, causing you to yelp in pain. Each time you flinch however, you inadvertently drive the wooden horse deeper into your crotch, sending another wave of pain through your <<genitals>>. <<masopain 20>><<stress 6>>
+	<br><br>
+	After a moment another member of the audience steps forward. "Winter said this punishment involved humiliation, right?" <<person3>><<he>> asks, producing a pair of scissors. "I think our bread thief would learn <<pher>> lesson better if <<pshe>> was naked!"
+	<br><br>
+	<<link [[Scream for Winter|Museum Famous Horse 7]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[Brace yourself|Museum Famous Horse 7]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[Stay in character|Museum Famous Horse 7]]>><<set $phase to 2>><</link>>
+
+<</if>>
+
+:: Museum Famous Horse 7
+<<if $phase is 0>>
+	<<if $speech_attitude is "meek">>
+		"<span class="red">"$wintersafeword!"</span> <span class="red">"$wintersafeword!"</span> W-Winter, please help me! Please!" you shout through sobs.
+	<<elseif $speech_attitude is "bratty">>
+		"Hey! <span class="red">"$wintersafeword!"</span> Any time you want to help would be great, Winter!" you shout at the top of your lungs.
+	<<else>>
+		"Help me, Winter! <span class="red">"$wintersafeword!"</span>" you shout as loud as you can.
+	<</if>>
+	<br><br>
+	<<if $rng gte (50*(fameSum('business', 'good', 'social', 'model')/8000) + 40)>>
+		<<set _winterRescue to 1>><<person1>>
+		Winter hears you calling for help and rushes over to you. <<He>> looks horrified as <<he>> glares at the crowd. <<He>> undoes your bindings and removes you from the horse. You stand safely back on the floor.
+		<br><br>
+		<<link [[다음|Museum Famous Horse End]]>><</link>>
+	<<else>>
+		<span class="red">Winter cannot hear you over the sound of the crowd.</span>
+	<</if>>
+<<elseif $phase is 1>>
+	<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+		You try not to let the pain and humiliation show as your ass is flogged mercilessly.
+		<<lpain>><<pain -5>><<gwillpower>><<willpower 3>>
+	<<else>>
+		You try to hold back, but you cannot stop the tears from flowing as your ass is mercilessly flogged.
+		<<ggwillpower>><<willpower 10>>
+	<</if>>
+<<elseif $phase is 2>>
+	"Have I not suffered enough indignity this day? Please, lend me your mercy, I beg of you!" you cry, remaining in character.
+	<br><br>
+	"Wow, this slut is really into this," one of the audience members comments. "I think this whore really does want to be exposed!" Several others toss more tips on the floor next to you. <<set $money += 100*(fameSum('business', 'good', 'social', 'model')/8000)*100>> <<fameexhibitionism 7>>
+<</if>>
+<<if _winterRescue isnot 1>>
+	<br><br>
+	The <<person3>><<person>> strides forward proudly with the scissors. <<He>> slides the cold steel between your flimsy garments and your skin, cutting the rags off with ease. The flimsy rags fall to the museum floor, leaving you completely exposed. <<if $exhibitionism lte 500>> You try to pull your arms down to cover some of your body, but the rope is too taut, and the weights on your ankles keeps you firmly on the horse. <<else>> Having yourself exposed to such a large crowd fills you with intoxicating arousal. <<garousal>><<arousal 1000>><</if>>
+	<<clothesruined>>
+	<br><br>
+	Now completely exposed and helpless, the <<person2>><<person>> seizes the opportunity and moves in front of you to begin flogging your <<breasts>>. You shudder every time the leather straps strike your hardening nipples. Your chest quickly turns red and begins to sting.
+	<br><br>
+	Occasionally <<he>> aims the flog lower, whipping against your exposed <<if $player.penisExist>>penis<<else>>clit<</if>>. You squirm and shift uncomfortably, much to the enjoyment of the crowd. <<masopain 30>><<stress 9>><<arousal 1000>><<garousal>>
+	<br><br>
+
+	A <<person4>><<person>> walks over to the chest Winter had placed behind you. "I think <<pshe>> can handle a bit more," <<he>> taunts. <<He>> retrieves a set of weights from the chest and approaches.
+	<br><br>
+
+	<<link [[Scream for Winter|Museum Famous Horse 8]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[Brace yourself|Museum Famous Horse 8]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[Stay in character|Museum Famous Horse 8]]>><<set $phase to 2>><</link>>
+<</if>>
+
+:: Museum Famous Horse 8
+<<if $phase is 0>>
+	<<if $speech_attitude is "meek">>
+		"Wait, no! Don't do that! Winter, please help! <span class="red">"$wintersafeword!"</span>" you shout through sobs.
+	<<elseif $speech_attitude is "bratty">>
+		"Damn it, <span class="red">"$wintersafeword!"</span> Winter I need help!" you shout at the top of your lungs.
+	<<else>>
+		"Winter, please help! <span class="red">"$wintersafeword!"</span> I need you!" you shout as loud as you can.
+	<</if>>
+	<br><br>
+	<<person1>>
+	Winter hears you calling for help and rushes over to you. <<He>> looks horrified as <<he>> glares at the crowd. <<He>> undoes your bindings and removes you from the horse. You stand safely back on the floor.
+	<br><br>
+	<<link [[다음|Museum Famous Horse End]]>><</link>>
+
+<<else>>
+
+	<<if $phase is 1>>
+		<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+			All of your sensitive areas burn and sting, but you remain resolute.
+			<<lpain>><<pain -5>><<gwillpower>><<willpower 3>>
+		<<else>>
+			You try to hold firm, but in the end, you sob, whimper, and tremble. The crowd seems delighted.
+			<<ggwillpower>><<willpower 10>>
+		<</if>>
+	<<else>>
+		"Please, have mercy on me!" you whimper. You're in tears, but you refuse to break character.
+		<br><br>
+		"Oh man, I can't wait to see how this goes," one of the audience members says to another. "Come on, see if you split <<phim>> in half!" Several people toss tips on the floor next to you. <<set $money += 150*(fameSum('business', 'good', 'social', 'model')/8000)*100>> <<fameexhibitionism 9>>
+	<</if>>
+	<br><br>
+	The <<person4>><<person>> begins attaching the weights to your ankles. The pressure exerted on your crotch is immense now, almost drowning out the pain you feel from the repeated striking of the flog. The wood drives itself <<if $player.ballsExist>>harshly against your testes<<else>>deep into your pussy<</if>>. Through the pain, you feel some of your lewd fluid leak out of your <<if $player.vaginaExist>>slit and dribble down the wooden horse<<else>>penis and dribble down your shaft<</if>>.
+	<<masopain 20>><<stress 12>><<ggstress>><<arousal 1500>><<ggarousal>>
+	<br><br>
+	The audience takes photos and videos of your punished body in its humiliated state. One of them calls out, "I think <<pshe>>'s getting hot and bothered by this. What a slut!" Many others jeer in agreement, making lewd remarks at your expense.
+	<br><br>
+
+	This prompts another member of the crowd, a <<person5>><<person>> to step forward with a duffle bag in hand. "I think I know what will finish <<phim>> off," <<he>> says, unzipping the bag. Inside you see a variety of sex toys, including nipple clamps, a ball gag, and a vibrator.
+	<br><br>
+
+	<<link [[Scream for Winter|Museum Famous Horse 9]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[Brace yourself|Museum Famous Horse 9]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[Stay in character|Museum Famous Horse 9]]>><<set $phase to 2>><</link>>
+
+
+<</if>>
+
+:: Museum Famous Horse 9
+<<if $phase is 0>>
+	<<if $speech_attitude is "meek">>
+		"No, please no! <span class="red">"$wintersafeword!"</span> Winter, help!" you scream, sobbing and crying.
+	<<elseif $speech_attitude is "bratty">>
+		"Winter, come on! <span class="red">"$wintersafeword!"</span>" you shout as loud as you can.
+	<<else>>
+		"Winter, help! Please help me! <span class="red">"$wintersafeword!"</span>" you shout at the top of your lungs.
+	<</if>>
+	<br><br>
+	<<person1>>
+	Winter hears you calling for help and rushes over to you. <<He>> looks horrified as <<he>> glares at the crowd. <<He>> undoes your bindings and removes you from the horse. You stand safely back on the floor.
+	<br><br>
+	<<link [[다음|Museum Famous Horse End]]>><</link>>
+
+<<else>>
+	<<if $phase is 1>>
+		<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+			Everything hurts, and the humiliation is crushing, but you keep a straight face despite it all.
+			<<lpain>><<pain -5>><<gwillpower>><<willpower 3>>
+		<<else>>
+			You try to stay calm, but it is too much for you. You cry and whimper at the sight of the toys.
+			<<ggwillpower>><<willpower 10>>
+		<</if>>
+	<<else>>
+		"I know not what witchcraft this is, but please spare me from it!" you proclaim through tears.
+		<br><br>
+		"Wow, <<pshe>>'s still staying in character? That is dedication!" one person says. "I think <<pshes>> earned an orgasm. Give it to <<phim>> good!" A large majority of the crowd tosses tips on the floor next to you. <<set $money += 200*(fameSum('business', 'good', 'social', 'model')/8000)*100>> <<fameexhibitionism 9>>
+
+	<</if>>
+	<br><br>
+	"That's enough," the <<person5>><<person>> demands as <<he>> shoves the ballgag into your mouth. "I'm going to make you cum so hard, you'll never forget it."
+	<<facewear 4>>
+	<br><br>
+	With the ballgag firmly in your mouth, you can do nothing but moan as the clamps are affixed to your sensitive nipples. The <<person5>><<person>> takes out the vibrator and turns it up to its maximum setting. <<He>> drags it across your skin down to your nipples, where it clatters against the clamps, sending pain and arousal through your body. <<masopain 10>><<stress 12>><<ggstress>><<arousal 500>><<garousal>>
+	<br><br>
+	<<He>> removes the vibrator for a moment, giving you a temporary respite, before forcing it directly onto your reddened <<if $player.penisExist>>penis<<else>>clit<</if>>. <<He>> holds it against you through the spasms and jerks as you finally cum. <<set $arousal to 10000>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+	<</if>>
+
+	<<person1>>
+	The crowd cheers as you orgasm uncontrollably. Based on the camera flashes and uproarious atmosphere, you can tell that the town will be talking about your demonstration for weeks to come. The audience claps, and people toss large tips towards you. <<set $money += 250*(fameSum('business', 'good', 'social', 'model')/8000)*100>> <<fameexhibitionism 12>>
+	<br><br>
+	Finally hearing the commotion, Winter rushes over to your aid. <<He>> looks horrified as <<he>> glares at the crowd. <<He>> undoes your bindings and removes you from the horse. You stand with weak, trembling knees, safely back on the floor.
+	<br><br>
+	<<link [[다음|Museum Famous Horse End]]>><</link>>
+
+<</if>>
+
+:: Museum Famous Horse End
+"That will end our demonstration for this week, please enjoy the rest of the exhibits!" Winter shouts, dispersing the crowd to look at the rest of the museum. <<He>> helps you into the back room where your clothes reside.
+<br><br>
+"I'm so sorry for how that went," Winter says, struggling for words, "Here is your share of the entrance fee, along with the tips people left. I hope it is a decent recompense." <<He>> hands you <span class="gold">£<<print $museumDemoReward>></span>.
+<<set $money += $museumDemoReward>>
+<br><br>
+"If you would like to demonstrate it again, please come let me know. In the meantime, I think you should at least take the week to rest and recover," <<he>> says quietly, "I'll... I'll leave you to get dressed."
+<br><br>
+<<He>> leaves you alone to collect your belongings and get dressed before returning to the now lively museum. As you exit the room, you find that all of the visitors are watching you.
+<br><br>
+<<endevent>><<unbindtemp>>
+<<if $worn.face.name is "gag">>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+<</if>>
+<<set $museuminterest += 50>>
+<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+
+:: Museum Famous Horse 10
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100)) and $phase isnot 1>>
+	You scream as the flog lashes against your skin. Again and again. The audience gapes at the spectacle.
+	<br><br>
+
+	<<link [[Endure|Museum Famous Horse 11]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[Safe word|Museum Famous Horse 11]]>><<set $phase to 1>><</link>>
+	<br>
+<<else>>
+	The pain is too much for you, <span class="red">"$wintersafeword!"</span> you shout.
+	<<ggwillpower>><<willpower 10>>
+	<br><br>
+
+	It only takes Winter a moment to remove the straps tying the weights to your legs and the ropes holding your arms. <<He>> helps you off the horse and holds your hand for a moment.
+	<<takeHandholdingVirginity "Winter">>
+	<br><br>
+	당신이 괜찮은 것을 확인하자, <<he_ nun>> 관중에게로 돌아선다.
+	<br><br>
+
+	"That ends our demonstration. Thank you for attending. We hope you found it informative, and we invite you to appreciate the many other antiques we have on display.
+	Last but not least, let's have a round of applause for our star." <<He>> gestures at you. The audience applaud politely, though many look like they wish it had gone further. A number of them take pictures of you in your vulnerable state before dispersing throughout the museum. <<fameexhibitionism 7>>
+	<br><br>
+
+	"You did well!" Winter says once you're back in the small room, "Here is your share of the entrance fee."
+	<br><br>
+	<<He>> hands you £<<print $museumDemoReward>>.
+	<br><br>
+	"If you would like to demonstrate it again, please come let me know. In the meantime, I think you should at least take the week to rest and recover," <<he>> says quietly, "I'll... I'll leave you to get dressed."
+	<br><br>
+	<<He>> leaves you alone to collect your belongings and get dressed before returning to the now lively museum. As you exit the room, you find that all of the visitors are watching you.
+	<<endevent>><<unbindtemp>>
+	<<set $museuminterest += 30>>
+	<br><br>
+	<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<</if>>
+
+:: Museum Famous Horse 11
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100)) and $phase isnot 1>>
+	<span class="green">당신은 이를 꽉 깨물고 참아낸다.</span> "아파요!" 당신은 눈물이 그렁그렁해져서 소리친다. "너무 아파요!"
+	<<gwillpower>><<willpower 3>>
+	<br><br>
+	<<masopain 5>>
+	Winter doesn't stop. Again and again <<he>> lashes at your flesh. Some of the audience look disturbed, others shocked, but most are clearly enjoying it.
+	<br><br>
+
+	당신이 기절할 것 같다고 느껴질 때 쯤, 윈터 선생님이 채찍질을 멈춘다. <<He_ nun>> 헉헉거리며 당신 앞으로 걸어나온다. "시연은 여기까지입니다." <<he_ ga>> 말한다.
+	"참여해주셔서 감사합니다. 유익한 시간이 되셨기를 바라며, 저희가 전시하고 있는 다른 많은 유물들도 감상해 보기를 권합니다. 
+	Last but not least, let's have a round of applause for our star." <<He>> gestures at you. The audience applaud. Many take pictures of you in your vulnerable state before dispersing throughout the museum. <<fameexhibitionism 12>>
+	<br><br>
+
+	"You did very well!" Winter says excitedly once you're back in the small room, "Here is your share of the entrance fee."
+	<br><br>
+	<<He>> hands you £<<print $museumDemoReward>>. <<set $money += $museumDemoReward>>
+	<br><br>
+	"Given the intensity of this demonstration, I think you should take the week to rest and recover. If you would like to demonstrate it again next week, please come let me know. I'll leave you to get dressed."
+	<br><br>
+	<<He>> leaves you alone to collect your belongings and get dressed before returning to the now lively museum. As you exit the room, you find that all of the visitors are watching you.
+	<br><br>
+	<<endevent>><<unbindtemp>>
+	<<set $museuminterest += 50>>
+	<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+<<else>>
+	버티기 힘든 고통이 엄습한다. <span class="red">"$wintersafeword!"</span> 당신은 소리친다.
+	<<ggwillpower>><<willpower 10>>
+	<br><br>
+
+	Winter ceases the assault. It only takes <<him>> a moment to remove the straps tying the weights to your legs and the ropes holding your arms.
+	<<He_ nun>> 당신이 목마에서 내려오는 걸 도와주고, 잠시 당신의 손을 잡아 준다. 당신이 진정한 것을 확인하자, <<he_ ga>> 관중들에게 돌아선다. 
+	<<takeHandholdingVirginity "Winter">>
+	<br><br>
+
+	"That ends our demonstration. Thank you for attending. We hope you found it informative, and we invite you to appreciate the many other antiques we have on display.
+	Last but not least, let's have a round of applause for our star."
+	<<He>> gestures at you. The audience applaud politely, though some look like they wish it had gone further. A number of them take pictures of you in your vulnerable state before dispersing throughout the museum. <<fameexhibitionism 12>>
+	<br><br>
+
+	"You did very well!" Winter says excitedly once you're back in the small room, "Here is your share of the entrance fee."
+	<br><br>
+	<<He>> hands you £<<print $museumDemoReward>>. <<set $money += $museumDemoReward>>
+	<br><br>
+	"Given the intensity of this demonstration, I think you should take the week to rest and recover. If you would like to demonstrate it again next week, please come let me know. I'll leave you to get dressed."
+	<br><br>
+	<<He>> leaves you alone to collect your belongings and get dressed before returning to the now lively museum. As you exit the room, you find that all of the visitors are watching you.
+	<br><br>
+	<<endevent>><<unbindtemp>>
+	<<set $museuminterest += 40>>
+	<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+	<br>
+<</if>>
+
+:: Museum Famous Horse Cancel
+<<He>> looks a little disappointed, but nods in understanding. "Ok, I'll send out another email canceling the demonstration. If you change your mind next week, just let me know and we can try again."
+<br><br>
+<<endevent>>
+<<link [[다음|Museum]]>><<upperruined true>><<lowerruined true>><<storeon "museum">><</link>>
+

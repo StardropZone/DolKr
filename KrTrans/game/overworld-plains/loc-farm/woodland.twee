@@ -1,0 +1,709 @@
+:: Farm Woodland
+<<set $outside to 1>><<set $location to "alex_farm">><<set $bus to "woodland">><<effects>>
+
+<<farm_work_update>>
+
+당신은 농장의 삼림지 안에 있다.
+
+<<if Time.dayState is "night">>
+	<<if Weather.precipitation is "snow">>
+		머리 위 어두운 나뭇가지들에 눈이 수북하게 쌓여있다.
+	<<elseif Weather.precipitation is "rain">>
+		나무들이 당신을 차가운 비로부터 보호하고 있다.
+	<<else>>
+		쌀쌀한 밤바람이 이곳에서는 누그러진다.
+	<</if>>
+<<else>>
+	<<if Weather.precipitation is "snow">>
+		머리 위 나뭇가지들에 눈이 수북하게 쌓여있다.
+	<<elseif Weather.precipitation is "rain">>
+		나무들이 당신을 비로부터 보호하고 있다.
+	<<else>>
+		당신은 새들의 지저귐소리에 둘러싸여 있다.
+	<</if>>
+<</if>>
+<<if $farm_work.alex is "woodland">>
+	알렉스는 시든 나무를 제거하고 있다.
+<</if>>
+<br><br>
+
+<<if $stress gte 10000>>
+	<<passoutfarmroad>>
+<<elseif $farm_attack_timer is 0 and Time.hour gte 21>>
+	<<npc Alex>><<person1>>
+	알렉스가 달려온다. <span class="red">"레미가 왔어,"</span> <<he_ ga>> 말한다. "우리는 할 수 있어. 가서 준비해, 나는
+	<<if $farm.tower_guard>>
+		<<NPCname_ ul $farm.tower_guard>> 확인할게."
+	<<else>>
+		그들을 찾을 수 있을지 알아볼게."
+	<</if>>
+	<br><br>
+
+	<<farm_assault_intro>>
+	<br><br>
+
+	<<link [[준비한다|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 2>><</link>>
+	<br>
+<<else>>
+	<<if $farm_work.alex is "woodland">>
+			<<link [[알렉스를 도와 삼림지를 가꾼다 (0:20)|Farm Woodland Tend Alex]]>><<set $farm_work.woodland += 1>><<farm_count 20>><<physique 2>><<pass 20>><<tending 2>><<tiredness 2>><<set $farm_work.tending += 1>><</link>><<gtiredness>><<gtending>>
+			<br>
+	<<elseif $farm_work.woodland lt $farm.woodland>>
+		<<link [[삼림지를 가꾼다 (0:20)|Farm Woodland Tend]]>><<set $farm_work.woodland += 1>><<farm_count 20>><<physique 2>><<pass 20>><<tending 2>><<tiredness 2>><<set $farm_work.tending += 1>><</link>><<gtiredness>><<gtending>>
+		<br>
+	<</if>>
+	<<if $farm_work.forage isnot 1 and $farm.woodland gte 2>>
+		<<foresticon "bush">><<link [[수확한다 (1:00)|Farm Woodland Forage]]>><<set $farm_work.forage to 1>><<pass 60>><</link>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[떠난다 (0:05)|Farm Work]]>><<pass 5>><</link>>
+	<br>
+<</if>>
+
+:: Farm Woodland Tend
+<<effects>>
+
+당신은 시든 나무를 제거하고 야생에 가까운 나뭇가지들을 다듬는다.
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $worn.upper.name isnot "naked" and random(1, 2) is 2>>
+		<<set $worn.upper.integrity -= 10>>
+		<<if $worn.upper.integrity lte 0>>
+			바람이 불자 당신의 <<trClothes "upper" $worn.upper.name "name" "이">>_trResult 그런 나뭇가지 중 하나에 걸려 방해가 된다. <span class="pink">그 힘이 당신의 몸에서 천을 찢어내어, 당신의 <<undertop_ ul>> 노출시킨다.</span>
+		<<else>>
+			당신의 <<trClothes "upper" $worn.upper.name "name" "이">>_trResult 그런 나뭇가지 중 하나에 걸려 상태가 나빠졌다.
+		<</if>>
+	<<elseif $worn.lower.name isnot "naked">>
+		<<set $worn.lower.integrity -= 10>>
+		<<if $worn.lower.integrity lte 0>>
+			바람이 불자 당신의 <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 그런 나뭇가지 중 하나에 걸려 방해가 된다. <span class="pink">그 힘이 당신의 몸에서 천을 찢어내어, 당신의 <<undies_ rul>> 노출시킨다.</span>
+		<<else>>
+			당신의 <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 그런 나뭇가지 중 하나에 걸려 상태가 나빠졌다.
+		<</if>>
+	<<elseif $worn.under_upper.name isnot "naked" and random(1, 2) is 2>>
+		<<set $worn.under_upper.integrity -= 10>>
+		<<if $worn.under_upper.integrity lte 0>>
+			바람이 불자 당신의 <<trClothes "under_upper" $worn.under_upper.name "name" "이">>_trResult 그런 나뭇가지 중 하나에 걸려 방해가 된다. <span class="pink">그 힘이 당신의 몸에서 천을 찢어내어, 당신의 <<breasts_ rul>> 노출시킨다.</span>
+		<<else>>
+			당신의 <<trClothes "under_upper" $worn.under_upper.name "name" "이">>_trResult 그런 나뭇가지 중 하나에 걸려 상태가 나빠졌다.
+		<</if>>
+	<<elseif $worn.under_lower.name isnot "naked">>
+		<<set $worn.under_lower.integrity -= 10>>
+		<<if $worn.under_lower.integrity lte 0>>
+			바람이 불자 당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "이">>_trResult 그런 나뭇가지 중 하나에 걸려 방해가 된다. <span class="pink">그 힘이 당신의 몸에서 천을 찢어내어, 당신의 <<genitals_ rul>> 노출시킨다.</span>
+		<<else>>
+			당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "이">>_trResult 그런 나뭇가지 중 하나에 걸려 상태가 나빠졌다.
+		<</if>>
+	<<else>>
+		일하는 중에 나뭇가지들이 바람에 흔들려, 당신의 살갗을 긁는다.<<gpain>><<pain 4>>
+	<</if>>
+	<br><br>
+	<<link [[다음|Farm Woodland]]>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Farm Woodland]]>><</link>>
+	<br>
+<</if>>
+
+:: Farm Woodland Tend Alex
+<<effects>>
+
+<<npc Alex>><<person1>>
+당신은 알렉스가 시든 나무를 제거하고, 야생에 가까운 나뭇가지들을 다듬는 일을 돕는다.
+<br><br>
+
+<<if random(1, 4) is 4>>
+	<<He_ nun>> 위쪽 나뭇가지를 가리킨다. "닿으려면 도구가 필요할 거야," <<he_ ga>> 말한다. "내가 가져올게."
+	<br><br>
+	<<He_ ga>> 잠시 후, 긴 사다리를 한쪽 팔에 끼고 돌아온다. <<He_ nun>> 그것을 문제의 나무 아래에 세워둔다.
+
+	<<if random(1, 2) is 2>>
+		"땅이 울퉁불퉁해. 내가 잡아줄테니까 톱을 들고 올라가. 오래 걸리는 일은 아냐."
+		<br><br>
+
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			당신은 사다리를 오른다. 조금씩 덜컹대는 탓에, 당신은 머뭇거린다.
+			<br><br>
+
+			"괜찮겠어?" 알렉스가 말한다.
+			<br>
+			당신은 끄덕이고, 가장 가까운 가지에 도달한다. 당신은 톱을 대고, 그 금속을 앞뒤로 움직인다. 당신은 속도를 낸다. 그 반동이 당신을 타고 전해져, 사다리가 살짝 앞뒤로 흔들린다.
+			<br>
+			거센 바람이 다리 쪽을 스치고 지나가자, 당신의 치마가 휘날린다.
+			<br>
+			아래를 흘끗 내려다보자, <span class="pink">당신의 허벅지 사이를 똑바로 응시하고 있는 알렉스가 보인다.</span> <<His_ yi>> 뺨이 붉다.
+			<br><br>
+
+			<<link [[무시한다|Farm Woodland Tend Alex Ignore]]>><<stress 6>><<npcincr Alex lust 10>><<arousal 1000>><</link>><<ggarousal>><<gstress>><<gglust>>
+			<br>
+			<<link [[소리친다|Farm Woodland Tend Alex Call]]>><<stress -6>><<npcincr Alex love -1>><</link>><<llove>><<lstress>>
+			<br>
+			<<if hasSexStat("exhibitionism", 3)>>
+				<<link [[과시한다|Farm Woodland Tend Alex Flaunt]]>><</link>><<exhibitionist3>><<npcincr Alex lust 5>>
+				<br>
+			<</if>>
+			<<if $submissive lte 500>>
+				<<link [[도발한다|Farm Woodland Tend Alex Taunt]]>><<def 1>><</link>><<npcincr Alex dom -3>><<npcincr Alex lust 5>><<defianttext>><<lldom>><<glust>>
+				<br>
+			<</if>>
+
+		<<else>>
+			당신은 사다리를 오른다. 조금씩 덜컹대는 탓에, 당신은 머뭇거린다.
+			<br><br>
+
+			"괜찮겠어?" 알렉스가 말한다.
+			<br>
+			당신은 끄덕이고, 가장 가까운 가지에 도달한다. 당신은 톱을 대고, 그 금속을 앞뒤로 움직인다. 당신은 속도를 낸다. 그 반동이 당신을 타고 전해져, 사다리가 살짝 앞뒤로 흔들린다.
+			<br>
+			당신은 알렉스에게 미리 경고한다. 잠시 후 나뭇가지가 낙엽 쌓인 땅 위로 떨어진다.
+			<br><br>
+
+			"도와줘서 고마워." 당신이 아래로 내려오자 알렉스가 말한다.
+			<br><br>
+
+			<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		"땅이 울퉁불퉁해. 내가 올라가있는 동안 사다리 좀 잡아줄래? 오래 걸리는 일은 아냐."
+		<br><br>
+
+		당신은 <<he_ ga>> 올라간 사다리의 아래쪽에 서 있다.
+		<<if $pronoun is "f">>
+			고개를 크게 젖히지 않아도 <<his_ yi>> 치마가 올려다보인다.
+			<br><br>
+
+			<<set $skulduggerydifficulty to 700>>
+			<<link [[훔쳐본다|Farm Woodland Tend Skirt]]>><<arousal 600>><</link>><<skulduggerydifficulty>><<garousal>>
+			<br>
+			<<link [[훔쳐보지 않는다|Farm Woodland Tend No Skirt]]>><<npcincr Alex love 1>><</link>>
+			<br>
+		<<else>>
+			파편이 떨어지는 것을 대비해서 당신은 고개를 숙인다. "지금 떨어질 거야," <<he_ ga>> 말한다. 잠시 후 나뭇가지가 낙엽 쌓인 땅 위로 떨어진다.
+			<br><br>
+
+			"도와줘서 고마워," <<he_ ga>> 아래로 내려와서 말한다.<<glove>><<npcincr Alex love 1>>
+			<br><br>
+
+			<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Farm Woodland Tend Skirt
+<<effects>>
+
+
+당신이 사다리 근처를 맴돌 때 알렉스의 치마에 돌풍이 불어, 당신은 <<his_ yi>> 빨간 보이쇼츠를 분명하게 볼 수 있었다.
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<<He_ nun>> 당신의 시선을 눈치채지 못한다. 나뭇가지를 베어내고 있는 알렉스를 당신은 계속해서 훔쳐본다. "지금 떨어질 거야," <<he_ ga>> 말한다. 나뭇가지가 당신을 지나쳐 낙엽 쌓인 땅 위에 툭 떨어진다. "내려갈게."
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	"도와줘서 고마워," <<he_ ga>> 내려오자 마자 말한다.<<glove>><<npcincr Alex love 1>>
+	<br><br>
+
+	<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<<He_ ga>> 아래를 힐끗 보더니, <span class="red">짧은 비명을 지른다.</span> <<He_ nun>> 한 손으로 <<his_ yi>> 치맛자락을 <<his_ yi>> 허벅지 사이로 밀어넣다가, 거의 사다리에서 떨어질 뻔 한다.<<llove>><<gglust>><<npcincr Alex love -1>><<npcincr Alex lust 10>>
+	<br><br>
+
+	"보-보지 마," <<he_ ga>> 말한다.
+
+	<<skulduggeryuse>>
+
+	<<link [[사과한다|Farm Woodland Tend Apologise]]>><<npcincr Alex love 1>><<stress 6>><</link>><<gstress>><<glove>>
+	<br>
+	<<link [[놀린다|Farm Woodland Tend Tease]]>><<npcincr Alex dom 1>><</link>><<promiscuous1>><<gdom>>
+	<br>
+
+<</if>>
+
+
+:: Farm Woodland Tend Apologise
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"저-정말 미안해," 당신은 그렇게 말하고 눈을 돌린다. "볼 생각은 아니었어."
+<<elseif $speech_attitude is "bratty">>
+	"그래, 매너 없는 짓이었어," 당신은 그렇게 말하고 눈을 돌린다. "미안해."
+<<else>>
+	"미안해," 당신은 그렇게 말하고 눈을 돌린다. "내가 무례했어."
+<</if>>
+<br><br>
+
+"이제부터는 보지 말라고," 알렉스가 말한다. <<He_ 는>> 통나무를 톱질하면서도, 끝낼 때까지 <<his_ yi>> 다리를 오므리고 있다.
+<br><br>
+
+나뭇가지가 땅에 떨어지고 <<he_ ga>> 아래로 내려올 때까지, <<Hes_ nun>> 줄곧 얼굴을 붉히고 있다.
+<br><br>
+
+<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+<br>
+
+:: Farm Woodland Tend Tease
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"소-속옷 귀여워," 당신은 키득인다.
+<<elseif $speech_attitude is "bratty">>
+	"속옷 멋지네," 당신은 놀린다. "가리기에는 아까운걸."
+<<else>>
+	"속옷 취향이 괜찮네," 당신은 말한다.
+<</if>>
+<<promiscuity1>>
+
+알렉스의 얼굴이 더욱 붉어진다. <<He_ 는>> 계속 통나무를 톱질하면서도, 끝낼 때까지 꽉 모은 다리 사이에 <<his_ yi>> 치마를 끼우고 있다.
+<br><br>
+
+나뭇가지가 땅에 떨어지고 <<he_ ga>> 아래로 내려올 때까지, <<Hes_ nun>> 줄곧 얼굴을 붉히고 있다.
+<br><br>
+
+<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+<br>
+
+:: Farm Woodland Tend No Skirt
+<<effects>>
+
+알렉스가 나뭇가지를 톱질하는 동안 당신은 시선을 돌린다. "지금 떨어질 거야," <<he_ ga>> 말한다. 잠시 뒤 나뭇가지가 낙엽 쌓인 땅 위에 툭 떨어진다.
+<br><br>
+
+"도와줘서 고마워," <<he_ 가>> 밑으로 내려오면서 말한다.
+<br><br>
+
+<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Woodland Forage
+<<effects>>
+
+당신은 바구니를 들고 삼림지로 들어가, 나뭇가지와 땅에서 잘 익은 식물들을 찾아본다.
+<br><br>
+
+<<if $rng gte 75>>
+	<span class="green">당신은 잘 익은 <<icon "tending/strawberry.png">> 딸기들을 몇 개 찾아낸다.</span>
+	<<if $farm.woodland gte 3>>
+		<<tending_pick strawberry 10 50>>
+	<<else>>
+		<<tending_pick strawberry 5 25>>
+	<</if>>
+<<elseif $rng gte 50>>
+	<span class="green">당신은 잘 익은 <<icon "tending/peach.png">> 복숭아들을 몇 개 찾아낸다.</span>
+	<<if $farm.woodland gte 3>>
+		<<tending_pick peach 10 50>>
+	<<else>>
+		<<tending_pick peach 5 25>>
+	<</if>>
+<<elseif $rng gte 25>>
+	<span class="green">당신은 잘 익은 <<icon "tending/plum.png">> 자두들을 몇 개 찾아낸다.</span>
+	<<if $farm.woodland gte 3>>
+		<<tending_pick plum 10 50>>
+	<<else>>
+		<<tending_pick plum 5 25>>
+	<</if>>
+<<else>>
+	<span class="green">당신은 잘 익은 <<icon "tending/mushroom.png">> 버섯들을 몇 개 찾아낸다.</span>
+	<<if $farm.woodland gte 3>>
+		<<tending_pick mushroom 10 50>>
+	<<else>>
+		<<tending_pick mushroom 5 25>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if random(1, 5) is 5>>
+	매혹적인 단 향기가 난다. 향기는 당신을 이상한 보라색 꽃으로 이끈다.
+	<br><br>
+
+	<<icon "tending/strange_flower.png">> <<link [[꺾는다|Farm Woodland Harvest]]>><<drugs 60>><</link>><<garousal>>
+	<br>
+	<<link [[무시한다|Farm Woodland]]>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Farm Woodland]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Farm Woodland Harvest
+<<effects>>
+
+<<tending_pick strange_flower 1 1>>
+
+손끝에서부터 온기가 퍼져나간다. 당신은 비단결같은 꽃잎에 코를 묻고 싶은 충동을 참는다.
+<br><br>
+
+<<link [[다음|Farm Woodland]]>><</link>>
+<br>
+
+
+:: Farm Woodland Safe
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"마-마찬가지야," 당신이 말한다.
+<<elseif $speech_attitude is "bratty">>
+	"나도 여기가 훨씬 편해," 당신이 동의한다.
+<<else>>
+	"나도 그래," 당신이 말한다.
+<</if>>
+<br><br>
+
+"둘러싸여 있으니까 어쩐지 안심되는걸," 알렉스가 말한다. "조심하지 않으면 잠들겠는데.
+
+<<if Time.dayState is "night">>
+	감기 들기 전에 안에 들어가야겠다."
+<<elseif $farm_work.alex is "relax">>
+	그래도 나쁘진 않겠다. 어차피 쉬는 시간이니까."
+<<else>>
+	이 정도면 충분히 쉬었으니까, 다시 일하러 가야겠다."
+<</if>>
+<<He_ nun>> 집을 향해 걸어간다.
+<br><br>
+
+<<link [[다음|Farm Work]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Woodland Safe Alex
+<<effects>>
+<<set _alex to C.npc.Alex>>
+
+<<if $speech_attitude is "meek">>
+	"나도 안심이야," 당신은 볼을 붉히며 말한다. "네 곁에 있으니까."
+<<elseif $speech_attitude is "bratty">>
+	"보호자라면 나무 몇 그루보다야 네가 훨씬 낫지," 당신은 자신있게 선언한다.
+<<else>>
+	"나도 안심이야," 당신은 밝게 웃는다. "네 덕분에."
+<</if>>
+<br><br>
+
+알렉스는 <<his_ yi>> 가슴을 편다.
+<<if _alex.dom gte 30>>
+	"고마워, <<girl_ a>>. 이제 내가 모르는 것을 말해 줘," <<he_ ga>> 윙크한다.
+<<elseif _alex.dom lte -30>>
+	"네가 일개 <<nnpc_gendery_ rul "Alex">> 너무 믿고 있다는 생각이 드는데," <<he_ ga>> 놀린다.
+<<else>>
+	"<<nnpc_gendery_ yi "Alex">> 기분을 좋게 만드는 방법을 아는구만," <<he_ ga>> 싱긋 웃는다.
+<</if>>
+
+
+<<if Time.dayState is "night">>
+	"네가 감기 걸리기 전에 안에 들어가는 게 좋겠어."
+	<br><br>
+	<<He_ nun>> 손을 잡고 당신을 집으로 이끈다.<<takeHandholdingVirginity "Alex" "loveInterest">><<pass 5>>
+	<br><br>
+
+	<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<<elseif $farm_work.alex is "relax">>
+	<<He_ ga>> 뒤로 편히 앉는다.
+	<br><br>
+
+	<<link [[다음|Farm Work]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	"이 정도면 충분히 쉬었어. 다시 일하러 가야겠다." <<He_ nun>> 집을 향해 걸어간다.
+	<br><br>
+
+	<<link [[다음|Farm Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Farm Woodland Safe Nothing
+<<effects>>
+
+당신은 아무 말 않는다.
+
+<<if Time.dayState is "night">>
+	한 형체가 머리 위를 날아간다. 아마 박쥐일 것이다.
+	<br><br>
+<<else>>
+	새들은 사방에서 계속 지저귀고 있다.
+	<br><br>
+<</if>>
+
+<<if Time.dayState is "night">>
+	"나란히 감기 걸리기 전에 안에 들어가는 게 좋겠어," 알렉스가 말한다. <<He_ nun>> 집을 향해 걸어간다.
+<<elseif $farm_work.alex is "relax">>
+	알렉스는 모자로 <<his_ 의>> 두 눈을 덮는다.
+	<br><br>
+<<else>>
+	"다시 일하러 가야겠다," 알렉스가 말한다. "나중에도 쉴 수 있을 테니까." <<He_ nun>> 집을 향해 걸어간다.
+<</if>>
+<br><br>
+
+<<link [[다음|Farm Work]]>><<endevent>><</link>>
+<br>
+
+:: Farm Woodland Safe Indoors
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"바-밤에는 바깥에 누워있으면 안 돼," 당신이 말한다. "감기에 걸릴 거야."
+<<elseif $speech_attitude is "bratty">>
+	"이 시간에 여기서 뭐 하는 거야?" 당신이 묻는다. "얼어 죽으려구."
+<<else>>
+	"안에 들어가는 게 좋을 텐데," 당신이 말한다. "감기 들기 전에."
+<</if>>
+<br><br>
+
+알렉스는 끄덕인다. "네 말이 맞아," <<he_ 가>> 말한다. "여기 분위기가 정말 좋아서. 나중에 즐겨야겠다."
+<br><br>
+
+당신은 함께 숲을 걸어 농가로 돌아간다.
+<br><br>
+
+<<link [[다음|Farm Cottage]]>><<endevent>><</link>>
+<br>
+
+
+
+:: Farm Woodland Tend Alex Ignore
+<<effects>>
+
+당신은 알렉스의 시선을 무시하며, 다리를 오므리고, 치마를 뒤로 쓸어내린다.
+<br><br>
+
+<<if $arousal gte 10000>>
+	알렉스의 시선은 너무 뜨겁다. 당신의 몸속에 온기가 쌓이는 것이 느껴지더니, 곧 넘친다. <<orgasm>>
+
+	당신은 떨면서, 나뭇가지를 움켜쥐고 균형을 잡는다. <span class="red">그것은 당신의 체중을 견디지 못하고 부러져</span>, 당신은 바로 아래의 알렉스에게로 떨어진다.
+	<br><br>
+
+	"괘-괜찮냐?" <<he_ ga>> 묻는다. 당신이 옆으로 굴러 비키자 <<He_ nun>> 앓는 소리를 내더니, 곧 킥킥 웃는다. "나뭇가지가 부러졌어. 일 끝났네."
+	<br><br>
+
+	<<He_ nun>> 당신이 왜 떨어졌는지 눈치채지 못했고, 당신은 굳이 알려주지 않기로 한다.
+	<br><br>
+
+	<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	당신이 톱질을 끝마치자, 나뭇가지가 삼림지 땅 위로 떨어진다. 당신은 다시 아래로 내려온다. 당신은 알렉스와 눈을 마주치지 못한다.
+	<br><br>
+
+	<<link [[다음|Farm Woodland]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Farm Woodland Tend Alex Call
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"보-보지 말아줘," 당신이 우물거린다.
+<<elseif $speech_attitude is "bratty">>
+	"변태녀석," 당신이 말한다. "눈 깔아."
+<<else>>
+	"변태처럼 굴지 마," 당신이 말한다.
+<</if>>
+<br><br>
+
+"나-난," 알렉스가 고개를 숙이며 말을 더듬는다. "미-미안. 그럴 생각은..." <<He_ nun>> 말을 잇지 못한다.
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"괜찮아," 당신은 말한다. "이런 일 많이 있거든. 신경 안 써." <<He_ nun>> 갈등하는 듯한 얼굴로, 계속해서 시선을 외면한다. 당신은 하던 일로 돌아간다.
+<<elseif $speech_attitude is "bratty">>
+	"또 그러지는 않겠지, 그렇지?" <<He_ ga>> 마른침을 세게 삼키고, 고개를 끄덕인다. 당신은 하던 일로 돌아간다.
+<<else>>
+	"이제 그러지 마," 당신은 말한다. <<He_ ga>> 고개를 끄덕인다. 당신은 하던 일로 돌아간다.
+<</if>>
+<br><br>
+
+당신이 톱질을 끝마치자, 나뭇가지가 삼림지 땅 위로 떨어진다. 알렉스는 당신이 내려올 때까지 아무 말이 없다.
+<br><br>
+
+<<link [[다음|Farm Work]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Woodland Tend Alex Flaunt
+<<effects>>
+
+알렉스가 당신의 다리 사이를 응시할 때 당신의 뺨은 붉어진다. 당신은 치마가 바람에 펄럭이자 몸을 가리고 싶은 충동을 참는다. 대신, 당신은 알렉스가 당신의 <<undies_ rul>> 잘 볼 수 있게끔 모든 방법으로 몸을 굽히고 엉덩이를 흔든다.
+<<exhibitionism3>>
+
+당신은 나뭇가지를 톱질하는 것을 마치고, 다시 내려온다. 사다리만 잡고 있었음에도 불구하고, 알렉스는 당신보다 더 지쳐 보인다.
+<br><br>
+
+"뭐 잘못된 거 있어?" 당신은 <<he_ ga>> 당신과 눈을 마주치지 못하는 이유를 오롯이 알고 있는 채로 놀린다.
+<br>
+"자-잘 해줬어," <<he_ ga>> 말한다. "좀 더워서."
+
+<<if Time.season is "winter">>
+	날이 꽤 쌀쌀함에도, <<He_ nun>> 손부채질을 한다.
+<<else>>
+	<<He_ nun>> 손부채질을 한다.
+<</if>>
+<br><br>
+
+<<link [[다음|Farm Woodland Tend Alex Flaunt 2]]>><</link>>
+<br>
+
+:: Farm Woodland Tend Alex Flaunt 2
+<<effects>>
+
+"나도 좀 더운걸," 당신이 말한다. "그래서 오늘 이렇게 입은 거야." 당신은 당신의 치마를 다시 한 번 팔락거려, <<his_ yi>> 주의를 끈다. 당신은 올가미를 잡아채듯이, 당신의 <<undies_ ga>> 슬쩍 보일 정도로 옷단을 충분히 높이 들어올린다.
+<br><br>
+
+알렉스는 <<his_ yi>> 고개를 홱 돌리고 <<his_ yi>> 눈을 질끈 감는다.
+
+<<if $speech_attitude is "meek">>
+	"네가 보고 싶어하는 줄로만 알았어," 당신은 웃는다. "그래서 엿보고 있었지, 그치?"
+<<elseif $speech_attitude is "bratty">>
+	"이런 걸 원했으면서 시치미 떼지 말라고," 당신은 웃는다.
+<<else>>
+	"엿보고 있었다는 거 알아," 당신이 말한다. "이게 네 벌이야."
+<</if>>
+<br>
+
+
+<<if C.npc.Alex.lust gte 20>>
+	알렉스는 <<himself_ yi>> 마음을 단단히 먹고, <span class="lewd">당신 위로 덮친다.</span>
+	<br><br>
+
+	<<link [[다음|Farm Woodland Tend Alex Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	"나-난," 알렉스가 고개를 숙이며 말을 더듬는다. "미, 미안. 그럴 생각은..." <<He_ nun>> 말을 잇지 못한다. "이-일이나 하러 가자."
+	<br><br>
+
+	<<link [[다음|Farm Woodland]]>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Farm Woodland Tend Alex Taunt
+<<effects>>
+
+"야," 당신은 소리친다. "변태처럼 굴지 마."
+<br>
+창피함에, 알렉스는 고개를 돌린다. "내-내가 언제-"
+<br>
+"다 들켰거든," 당신은 <<him_ yi>> 말을 끊는다. "변태야." 당신은 나뭇가지를 쥐고, 힘주어 꺾어버린다. "치마 속 구경하는 거 좋아하지, 그렇지?"
+<br>
+"그-글쎄 난," 알렉스가 침을 꿀꺽 삼킨다. "바람이-"
+<br>
+"맞아 아니야?" 당신은 내려오면서 <<him_ yi>> 말을 다시 끊는다.
+<br>
+<<Hes_ nun>> 이제 사탕무처럼 붉게 물들었고, <<his_ yi>> 이마에는 땀방울이 맺혀 있는 것이 보인다. "그-" <<he_ ga>> 한번 더 마른침을 삼킨다. "맞습니다."
+<br><br>
+
+<<link [[다음|Farm Woodland Tend Alex Taunt 2]]>><</link>>
+<br>
+
+
+:: Farm Woodland Tend Alex Taunt 2
+<<effects>>
+당신은 씩 웃고는, 나뭇가지를 던져두고 사다리에서 뛰어내린다. 당신은 몸으로 <<his_ yi>> 몸을 밀면서, <<him_ i>> 뒷걸음치다 바로 뒤 나무에 기대게 만든다. "또 나한테 못된 짓 할 거지, 응?" 당신이 묻는다.
+<br><br>
+
+<<if C.npc.Alex.lust gte 20>>
+	알렉스는 시선을 피하더니, 웃음을 터트린다. "너 내가 그렇다고 말하면 어쩌려고 그래?" <<He_ nun>> 당신의 <<bottom_ ul>> 붙잡고, 당신을 <<himPost>>에게로 끌어당긴다. <<His_ 의>> 다른 손은 당신의 복부 아래에서 맴돈다.
+	<br><br>
+	<<if playerChastity()>>
+		<<He_ nun>> 당신의 <<worn_genitals_name_ ul>> 세게 잡아당긴다. "난 정조대가 탈선을 막아준다고 생각하는 사람 아니야," <<he_ ga>> 놀려댄다. "널 만족시켜줄 다른 방법들이 있지."
+	<<elseif $player.penisExist>>
+		<<He_ nun>> 한 손가락으로 당신의 <<penis_ 를>> 훑어, 무의식적인 신음을 이끌어낸다.
+		<<if $arousal gte 6000>>
+			"벌써 발기했잖아," <<he_ ga>> 놀려댄다. "내가 엿보는 게 너한테 그 정도였어? 이거 해결해 줘야겠는걸."
+		<<else>>
+			"나한테 보여지는 게 좋았던 모양이네," <<he_ ga>> 놀려댄다. "그런 것보다 널 더 철저하게 만족시켜줄 수 있어."
+		<</if>>
+	<<else>>
+		<<He_ nun>> 한 손가락으로 당신의 <<pussy_ 를>> 훑어, 무의식적인 신음을 이끌어낸다.
+		<<if $vaginaWetness gte 45>>
+			"벌써 젖었잖아," <<he_ ga>> 놀려댄다. "내가 엿보는 게 너한테 그 정도였어? 이거 해결해 줘야겠는걸."
+		<<else>>
+			"나한테 보여지는 게 좋았던 모양이네," <<he_ ga>> 놀려댄다. "그런 것보다 널 더 철저하게 만족시켜줄 수 있어."
+		<</if>>
+	<</if>>
+	<br><br>
+	<<He_ nun>> 당신을 <<him_ yi>> 위로 끌어당기며, 땅바닥에 풀썩 눕는다.
+	<br><br>
+
+	<<link [[다음|Farm Woodland Tend Alex Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	알렉스는 시선을 피하더니, 웃음을 터트린다. "너도 참 대단한 애라니까," <<he_ ga>> 말한다. <<He_ ga>> <<his_ yi>> 양손으로 당신의 <<bottom_ ul>> 꽉 잡아, 당신을 <<himPost>>에게서 밀어낸다. "앞으로는 잘할게. 다시 일하러 가볼까." <<He_ nun>> 당신의 볼에 꾹 눌러 입맞춘다.
+	<br><br>
+
+	<<link [[다음|Farm Woodland]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Farm Woodland Tend Alex Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Woodland Tend Alex Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Woodland Tend Alex Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Woodland Tend Alex Sex Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He_ nun>> 나무에 기댄다. "내가 너무 거칠진 않았어야 할텐데," <<he_ ga>> 말한다. "너는 가끔 미쳤다니까, 나까지 덩달아 미치게 만들고."<<lllust>><<glove>><<npcincr Alex love 1>><<npcincr Alex lust -10>>
+	<br><br>
+	<<tearful>> 당신은 일어선다. "그럼 다시 일하러 가볼까," <<he_ ga>> 말한다. <<He_ nun>> 당신의 <<bottom_ ul>> 찰싹 후려치고서는 걸어나간다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Farm Woodland]]>><</link>>
+<<elseif $enemyhealth lte 0>>
+	알렉스는 시든 나뭇가지에 걸려, 넘어져 땅에 쓰러진다. "미안해," <<he_ ga>> 말한다. "네가 날 너무 흥분시켜서."<<llove>><<ldom>><<npcincr Alex love -1>><<npcincr Alex dom -1>>
+	<br><br>
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Farm Woodland]]>><</link>>
+<<else>>
+	알렉스는 당신에게서 떨어진다. "미안해," <<he_ ga>> 말한다. "네가 날 너무 흥분시켜서."<<llove>><<npcincr Alex love -1>>
+	<br><br>
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Farm Woodland]]>><</link>>
+<</if>>
+

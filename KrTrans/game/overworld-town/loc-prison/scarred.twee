@@ -1,0 +1,988 @@
+:: Prison Scarred
+<<effects>>
+<<endevent>><!-- Fully make sure no event failures prior can cause a failure here with NPC gen, because saveNPC of scarred_inmate occurs later. -->
+<<generate_scarred_inmate 0>><<person1>>
+당신은 <<scarred_inmate_ yi 0 apo>> 감옥으로 들어간다.
+
+<<if $prison.scarred gte 60 and $NPCList[0].name_known isnot 1>>
+	<<He_ nun>> <<his_ yi>> 손으로 <<his_ yi>> 머리를 감싸고 침대에 앉아있다.
+	<br><br>
+
+	<<link [[무엇이 문제인지 물어본다|Prison Scarred Ask]]>><</link>>
+	<br>
+	<<link [[떠난다|Prison Walkway]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<He_ nun>> 당신을 보고 <<his_ yi>> 입술을 핥는다.
+	<br><br>
+
+	<<switch $prison.scarred_level>>
+		<<case 0>>
+			"여기로 오길 잘했어," <<he_ ga>> 말한다. <<He_ nun>> 몸을 숙이고, 킁킁댄다. "음. 신선하군." <<He_ nun>> <<his_ yi>> 손을 <<his_ yi>> 바지 아래로 넣고, 긴 끈을 꺼낸다. "돌아서 난간을 잡아라, <<bitch_ ya>>."
+			<br><br>
+
+			<<link [[돌아서 난간을 잡는다|Prison Scarred Bars]]>><<set $prison.scarred_level to 1>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+		<<case 1>>
+			"내가 보고 싶던 <<bitch_>>로군," <<he_ ga>> <<his_ yi>> 손을 <<his_ yi>> 바지 아래로 넣고 긴 끈을 꺼내며, 말한다. "돌아서 난간을 잡아라, <<bitch_ ya>>."
+			<br><br>
+
+			<<link [[돌아서 난간을 잡는다|Prison Scarred Pair]]>><<set $prison.scarred_level to 2>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+		<<case 2>>
+			"너," <<he_ ga>> <<his_ yi>> 침대에서 일어나며, 말한다. <<his_ yi>> 손에는 이미 긴 끈이 들려있다. "돌아서 난간을 잡아라, <<bitch_ ya>>."
+			<br><br>
+
+			<<link [[돌아서 난간을 잡는다|Prison Scarred Molestation]]>><<set $prison.scarred_level to 3>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+		<<case 3>>
+			"너," <<he_ ga>> <<his_ yi>> 침대에서 일어나며, 말한다. <<his_ yi>> 손에는 이미 긴 끈이 들려있다. "몸을 돌려, <<bitch_ ya>>."
+			<br><br>
+			<<link [[돌아본다|Prison Scarred Turn]]>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+		<<default>>
+			"내가 보고 싶던 <<bitch_>>로군," <<he_ ga>> <<his_ yi>> 침대에서 일어나며, 말한다. <<his_ yi>> 손에는 이미 긴 끈이 들려있다. "몸을 돌려, <<bitch_ ya>>."
+			<br><br>
+
+			<<link [[돌아본다|Prison Scarred Turn]]>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+	<</switch>>
+
+	<<link [[거절한다|Prison Scarred Refuse]]>><</link>>
+	<br>
+<</if>>
+
+:: Prison Scarred Bars
+<<effects>>
+<<bind>>
+당신은 몸을 돌려 감옥의 난간을 잡는다. <<His_ yi>> 손이 몇초만에 당신을 묶어버릴 정도의 빠른 속도로 사라진다. "좋아 이제," <<he_ ga>> 생각한다, "널 가지고 뭘 해야할까?" <<He_ nun>> 생각에 잠긴 채 당신의 무력한 <<bottom_ ul>> 더듬는다.
+<br><br>
+"내가 바본가," <<he_ ga>> 계속한다. "답이 여기 있잖아." <<He_ ga>> <<his_ yi>> 손을 위로 올렸다, 당신의 <<bottom_>>에 날카로운 한 방을 날린다.<<gpain>><<pain 4>>
+<br><br>
+
+<<link [[다음|Prison Scarred Bars 2]]>><</link>>
+<br>
+
+:: Prison Scarred Bars 2
+<<effects>>
+
+"그게 좋냐, <<bitch_ ya>>?" <<he_ ga>> 또 다른 한 방을 날리며, 묻는다.
+
+<<if $worn.face.type.includes("gag")>>
+	"너는 내 입막힌 <<slut_ iji>>, 안그래?"
+	<br><br>
+	<<link [[흐느낀다|Prison Scarred Bars Sob]]>><<pain -4>><</link>><<lpain>>
+	<br>
+<<else>>
+	"<i>'저를 징계해주셔서 감사합니다, <<mummy_>>,'</i> 이라 말해" <<He_ ga>> 당신을 다시 한번 때린다. "말해."<<gpain>><<pain 4>>
+	<br><br>
+
+	<<link [[말한다|Prison Scarred Bars Say]]>><<sub 1>><</link>><<willpowerdifficulty 1 100>>
+	<br>
+	<<link [[거절한다|Prison Scarred Bars Refuse]]>><<def 1>><</link>><<willpowerdifficulty 1 1000>>
+	<br>
+	<<link [[흐느낀다|Prison Scarred Bars Sob]]>><<sub 1>><<pain -4>><</link>><<lpain>>
+	<br>
+<</if>>
+
+
+:: Prison Scarred Bars Say
+<<effects>>
+
+<<willpowerdifficulty 1 100 no_text>>
+<<if $willpowerSuccess>>
+	<span class="green">"저를 징계해주셔서 감사합니다, <<mummy_>>,"</span> 당신은 뒤에서 날라오는 수차례의 공격에도 불구하고, 그걸 말한다.
+	<br><br>
+
+	"좋은 <<girl_ iguna>>," <<he_ ga>> 당신의 머리를 주름잡으며, 말한다. <<He_ nun>> 당신을 묶을 때와 똑같은 솜씨로 끈을 풀고, 당신은 곧 자유로워진다.
+	<<prison_unbind>>
+	<br><br>
+	"별로 나쁘진 않았지, 그렇지? 이제 가도 돼."
+	<br><br>
+<<else>>
+	당신은 그걸 말하려 하지만, 또 다른 공격이 날라와 <span class="red">고통에 울부짖는다</span>.<<gwillpower>><<gpain>><<pain 4>>
+	<br><br>
+
+	"말하라고, 이 병신 <<bitch_ ya>>!" <<He_ nun>> 점점 세게, 당신을 치고 또 치고선, 헐떡거리며, <<his_ yi>> 침대로 나가 떨어진다.
+	<br><br>
+
+	"됐어." <<He_ nun>> 일어나서, 당신을 묶을 때와 똑같은 솜씨로 끈을 푼다. "가."
+	<br><br>
+<</if>>
+
+<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+<br><br>
+<<prison_unbind>>
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Scarred Bars Refuse
+<<effects>>
+<<willpowerdifficulty 1 1000 no_text>>
+<<if $willpowerSuccess>>
+	당신은 입을 닫고 있는다. <<scarred_inmate_ ga 0 cap>> 또 다른 공격으로 당신의 침묵에 대해 처벌한다.<<gpain>><<pain 4>>
+	<br><br>
+
+	"말하라고, 이 병신 <<bitch_ ya>>!" <<He_ nun>> 점점 세게, 당신을 치고 또 치고선, <span class="green">헐떡거리며, <<his_ yi>> 침대로 나가 떨어진다.</span>
+	<br><br>
+
+	"됐어." <<He_ nun>> 일어나서, 당신을 묶을 때와 똑같은 솜씨로 끈을 푼다. "가."
+	<br><br>
+<<else>>
+	당신은 침묵하려 하지만, 또 다른 공격이 날라와 <span class="red">고통에 울부짖는다</span>.<<gwillpower>><<gpain>><<pain 4>>
+	<br><br>
+
+	"말하라고, 이 병신 <<bitch_ ya>>!" <<He_ nun>> 점점 세게, 당신을 치고 또 치고선, 헐떡거리며, <<his_ yi>> 침대로 나가 떨어진다.
+	<br><br>
+
+	"됐어." <<He_ nun>> 일어나서, 당신을 묶을 때와 똑같은 솜씨로 끈을 푼다. "가."
+	<br><br>
+<</if>>
+<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+<br><br>
+<<prison_unbind>>
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+:: Prison Scarred Bars Sob
+<<effects>>
+
+당신은 흐느낀다. <<scarred_inmate_ ga 0 cap>> <<his_ yi>> 팔을 뒤로 빼, 다음 공격을 준비하지만, 주저한다. <<He_ nun>> 손을 머리에 올린 채, <<his_ yi>> 침대에 눕는다.
+<br><br>
+"씨발 됐어," <<he_ ga>> 잠시 후 말한다. <<He_ nun>> 일어나서, 당신을 묶을 때와 똑같은 솜씨로 끈을 푼다. "가."
+<br><br>
+
+<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+<br><br>
+<<prison_unbind>>
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+:: Prison Scarred Refuse
+<<effects>>
+
+당신은 물러선다. <<scarred_inmate_ ga 0 cap>> <<his_ yi>> 이를 핥는다. "됐어," <<he_ ga>> 말한다. "넌 돌아오게 될거야. 아니면 넌 누구에게 따먹히게 될거고, 난 남은 것을 가져가겠어."
+<br><br>
+
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Scarred Pair
+<<effects>>
+<<bind>>
+당신은 몸을 돌려 감옥의 난간을 잡는다. <<His_ yi>> 손이 몇초만에 당신을 묶어버릴 정도의 빠른 속도로 사라진다. "좋아 이제," <<he_ ga>> 생각한다, "널 가지고 뭘 해야할까?" <<He_ nun>> 생각에 잠긴 채 당신의 무력한 <<bottom_ ul>> 더듬는다.
+<br><br>
+
+<<link [[다음|Prison Scarred Pair 2]]>><</link>>
+<br>
+
+:: Prison Scarred Pair 2
+<<effects>>
+
+<<generate2>><<person2>>
+한 <<person_ i>> 지나간다. "야 병신아," <<scarred_inmate_ ga 0>> 말한다. "여기 좀 와봐." 그 <<person2>><<person_ un>> 당신을 노려보곤, 복도를 지나, 감옥으로 들어온다.
+<br><br>
+
+"내가 이 <<bitch_ rul>> 가지고 뭘 해야할지 정하는 걸 도와줘."
+<br>
+"당연히 <<phim_ ul>> 따먹어야지. 그런건 물어볼 이유가 없ㅈ-"
+<br>
+<<scarred_inmate_ ga 0 cap>> <<person_ ul>> 벽으로 민다. <<person1>><<his_ yi>> 손에는 깨진 유리 파편이 들려있다. "말대꾸하지마."<<ggstress>><<stress 12>>
+<br>
+그 <<person2>><<person_ un>> <<his_ yi>> 손을 위로 올린다. "ㅊ-침착해, 침착! 아무런 의미도 없었다고."
+<br><br>
+<<link [[흉터가 있는 수감자에게 흥분을 가라앉히라 말한다|Prison Scarred Pair Calm]]>><</link>>
+<br>
+<<link [[침묵한다|Prison Scarred Pair Silent]]>><</link>>
+<br>
+
+
+:: Prison Scarred Pair Calm
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	<<gagged_speech "ㅈ-제발 <<person2>><<him_ ul>> 공격하지마,">>
+	<<person1>>
+<<elseif $speech_attitude is "bratty">>
+	<<gagged_speech "그 칼 내려놔 이 미친놈아,">> 당신이 말한다.
+<<else>>
+	<<gagged_speech "너 너무 과하게 반응하고 있어,">> 당신이 말한다. <<gagged_speech "멈춰.">>
+<</if>>
+<br><br>
+
+<<scarred_inmate_ ga 0 cap>> <<person2>><<person_ ul>> 벽에서 내려놓곤, 당신의 <<bottom_>>에 손을 날린다. "내 <<bitch_ ga>> 너보다 더 큰 처벌이 필요하겠는걸," <<person1>><<he_ ga>> 말한다. "<<phim_ ul>> 때리면 내가 널 공격하진 않겠어."
+<br><br>
+
+그 <<person2>><<person_ un>> 주저하고, <<scarred_inmate_ ga 0>> 그 칼을 <<his_ yi>> 등에 갖다댄다. <<He_ nun>> 당신의 <<bottom_ ul>> 때린다.<<gpain>><<pain 4>>
+<br><br>
+
+<<link [[다음|Prison Scarred Pair Spank]]>><</link>>
+<br>
+
+:: Prison Scarred Pair Spank
+<<effects>>
+
+"더 세게! 난 빌어먹을 눈물이 보고 싶다고." 그 <<person2>><<person_ un>> 거의 울 준비가 될 때까지, 말을 따른다.<<ggpain>><<pain 8>>
+<br><br>
+끝내, <<scarred_inmate_ ga 0>> <<person2>><<person_ ul>> 당신으로부터 놔준다. "씨발 당장 나가."
+<br><br>
+"너도." <<scarred_inmate_ nun 0 cap>> <<his_ yi>> 칼로 끈을 자른다. "가."
+<br><br>
+<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+<br><br>
+<<prison_unbind>>
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Scarred Pair Silent
+<<effects>>
+
+<<scarred_inmate_ nun 0 cap>> 웃음을 터트리고, <<person2>><<person_ yi>> 배에 펀치를 날린다. <<He_ nun>> 몸을 구부리고, <<scarred_inmate_ nun 0>> <<his_ yi>> 등에도 여러 방을 날린다.
+<br><br>
+
+"훨씬 낫군." <<He_ nun>> 절뚝이는 <<person2>><<person_ ul>> 바깥 통로로 차고, 끈을 <<his_ yi>> 칼날로 자른다 . "가."
+<br><br>
+<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+<br><br>
+<<prison_unbind>>
+
+<<link [[$NPCList[1].pronouns.him + " 의료실로 가도록 도와준다 (0:05)"|Prison Scarred Pair Help]]>><<prison_hope 1>><<trauma -6>><<pass 5>><<tiredness 3>><</link>><<ghope>><<gtiredness>><<ltrauma>>
+<br>
+<<link [[무시한다|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+:: Prison Scarred Pair Help
+<<effects>>
+
+그 <<person2>><<person_ un>> 아직 의식이 있고, 의료실은 별로 멀지 않다. 그러나, <<he_ nun>> <<his_>> 자신의 몸무게를 딛고 일어서지 못한다. 당신이 의료실에 도착하자 당신의 근육이 쑤신다.
+<br><br>
+
+<<generate_methodical_guard 2 cap>><<person3>>
+<<methodical_guard_ nun 2 cap>> 하나의 눈길도 주지 않지만, 빈 침대로 손짓을 취한다.
+<br><br>
+<<person2>>
+당신이 <<him_ ul>> 눕게 내려놓자 그 수감자는 말을 하려 하지만, 단어 하나 말하지 못한다.
+<br><br>
+
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+:: Prison Scarred Molestation
+<<effects>>
+<<bind>>
+당신은 몸을 돌려 난간을 잡는다. <<His_ yi>> 손이 몇초만에 당신을 묶어버릴 정도의 빠른 속도로 사라진다. "이걸 기다리고 있었어," <<he_ ga>>
+<<if $worn.lower.name is "naked">>
+	<<if $worn.under_lower.name is "naked">>
+		당신의 <<bottom_>> 위로 손가락을 굴리며, 말한다.
+	<<else>>
+		당신의 <<worn_under_lower_name_ ul>> 아래로 잡아당기며 말한다.
+	<</if>>
+<<else>>
+	<<if $worn.under_lower.name is "naked">>
+		당신의 <<worn_lower_name_ ul>> 아래로 잡아당기며 말한다.
+	<<else>>
+		당신의 <<worn_lower_name_ wa>> <<worn_under_lower_name_ ul>> 아래로 잡아당기며 말한다.
+	<</if>>
+<</if>>
+<<if playerChastity()>>
+	<<set _altType to setup.clothes.genitals[clothesIndex('genitals', $worn.genitals)].altDamage>>
+	<<He_ nun>> 당신의 <<worn_genitals_name_ ul>> 잡고, 당긴다.
+	<br><br>
+	"씨발," <<he_ ga>> 그렇게 말하자
+	<<switch _altType>>
+		<<case "parasite">> 기생충이 당신의 생식기를 쥐어짠다.	"이 물건은 어떻게 빼는거야?"<<garousal>><<arousal 200 "genitals">>
+		<<case "plastic">> 플라스틱이 당신의 피부를 파고든다.	"이건 어떻게 빼는거야?"<<gpain>><<pain 4>>
+		<<default>> 금속이 당신의 피부를 파고든다. "이건 어떻게 빼는거야?"<<gpain>><<pain 4>>
+	<</switch>>
+	<br><br>
+	<<set $worn.genitals.integrity -= 100>>
+	<<if $worn.genitals.integrity lte 0>>
+		<<He_ nun>> 느슨한 돌 뒤에서 다양한 도구를 가지고 온다.
+		<<if _altType is "parasite">>
+			스크류 드라이버. 칼. 가위. <<He_ nun>> 전혀 상냥하지 않았고, <span class="red">어떻게든 가위로 <<putpost_ rul _altType>> 잘라낸다.</span>
+		<<else>>
+			스크류 드라이버. 망치. 펜치. <<He_ nun>> 전혀 상냥하지 않았고, <span class="red">어떻게든 펜치로 <<putpost_ rul _altType>> 뜯어낸다.</span>
+		<</if>>
+		<br><br>
+		<<set $worn.genitals.type.push("broken")>>
+		<<genitalsruined>>
+		<<He_ nun>> 기뻐하며 당신을 때리고, 당신 뒤에 숙인다.
+		<br><br>
+
+		<<link [[다음|Prison Scarred Molestation 2]]>><</link>>
+		<br>
+	<<else>>
+		<<He_ nun>> 느슨한 돌 뒤에서 다양한 도구를 가지고 온다.
+		<<if _altType is "parasite">>
+			스크류 드라이버. 칼. 가위.
+		<<else>>
+			스크류 드라이버. 망치. 펜치.
+		<</if>>
+		<<He_ nun>> 전혀 상냥하지 않았지만, 어떤 도구도 효과적이지 않았다. <<He_ nun>> 당신의 맨살을 때리는 것으로 <<himself_ rul>> 만족시키고, <<his_ yi>> 끈을 풀어준다. "꺼져."<<ggpain>><<ggtrauma>><<ggstress>><<pain 8>><<stress 12>><<trauma 12>>
+		<<prison_unbind>>
+		<br><br>
+		<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+		<br><br>
+		<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<br><br>
+
+	<<link [[다음|Prison Scarred Molestation 2]]>><</link>>
+	<br>
+<</if>>
+
+:: Prison Scarred Molestation 2
+<<effects>>
+
+<<if $NPCList[0].penis isnot "none">>
+	당신은 잠시 당신의
+	<<if $player.penisExist>>
+		<<penis_>>에서
+	<<else>>
+		보지에서
+	<</if>>
+	<<his_ yi>> 숨길을 느끼지만, <<he_ nun>> 일어서서, <<his_ yi>> <<penisdesc_ rul $NPCList[0].penisdesc>> 당신 뒤에 둔다.
+	<br><br>
+<<else>>
+	<<if $player.penisExist>>
+		<<He_ nun>> 당신의 <<penis_ rul>> 잡고, 바닥으로 향하게 한다. "난 그걸 뒤로 빼고 싶어," <<he_ ga>> 말한다. "뒤에서 따먹게, 하지만 저번에는 통하지 않았지."
+		<br><br>
+	<<else>>
+		<<He_ nun>> 당신의 보지 위로 손가락을 굴린다. "내가 끝낼 때 까지 가만히 있어," <<he_ ga>> 말한다.
+		<br><br>
+	<</if>>
+<</if>>
+
+<<link [[다음|Prison Scarred Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Prison Scarred Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $NPCList[0].penis isnot "none">>
+		<<set $NPCList[0].penis to 0>>
+	<<else>>
+		<<set $NPCList[0].vagina to 0>>
+	<</if>>
+	<<set $position to "doggy">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1>>
+	<<set $alarm to 0>>
+	다른 수감자가 당신이 우는 것을 보지만, <span class="purple"><<scarred_inmate_ rul 0>> 보고선 지나간다.</span>
+	<br><br>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Prison Scarred Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Prison Scarred Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Prison Scarred Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He_ nun>> 당신의 <<bottom_>>에 마지막 한방을 날리고, <<his_ yi>> 끈을 푼다. "잘했어 <<bitch_ ya>>." <<he_ ga>> 말한다. "가."
+	<br><br>
+	<<tearful>> 당신은 감옥을 나온다.
+	<br><br>
+	<<clotheson>>
+	<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<endcombat>>
+	<<prison_unbind>>
+	<<link [[다음|Prison Walkway]]>><</link>>
+	<br>
+
+<<else>>
+	<<He_ nun>> 당신의 <<bottom_ ul>> 강하게 친다. "그게 니가 원하는거야?" <<he_ ga>> 연속으로 때리면서, 말한다.<<ggpain>><<gtrauma>><<gstress>><<pain 8>><<trauma 6>><<stress 6>>
+	<br><br>
+	<<He_ nun>> <<his_ yi>> 팔이나, 다른 무언가가, 지칠때까지, 당신을 가차없이 때리고 <<he_ nun>> <<his_ yi>> 끈을 푼다. "가. 씨발 꺼져."
+	<br><br>
+	<<tearful>> 당신은 감옥을 나온다.
+	<br><br>
+	<<clotheson>>
+	<br><br>
+	<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<endcombat>>
+	<<prison_unbind>>
+	<<link [[다음|Prison Walkway]]>><</link>>
+	<br>
+<</if>>
+
+:: Prison Scarred Turn
+<<effects>>
+<<bind>>
+당신은 지시받은대로 몸을 돌린다. <<scarred_inmate_ nun 0 cap>> 당신 뒤에서 당신의 팔을 묶는다.
+<<if $worn.neck.type.includes("leash")>>
+	<<He_ nun>> 당신의 목줄을 잡는다.
+<<else>>
+	<<He_ nun>> 줄을 물어 뜯고선, 당신의 개목걸이에 묶는다.
+	<<attach_leash>>
+<</if>>
+"나가서 산책 좀 하자고."
+<br><br>
+
+<<He_ ga>> 당신을 감옥 바깥으로 밀어낸다.
+<br><br>
+
+<<link [[따라간다|Prison Scarred Walk]]>><</link>>
+<br>
+<<link [[저항한다|Prison Scarred Resist]]>><</link>>
+<br>
+
+:: Prison Scarred Resist
+<<effects>>
+
+당신은 움직이길 거절한다.
+
+<<if $prison.scarred gte 80>>
+	<<scarred_inmate_ nun 0 cap>> 불만감에 으르렁거린다. "넌 정말 개자식이구나. 됐어." <<He_ nun>> 당신의 개목걸이에서 줄을 푼다. "가."<<llove>><<prison_rep scarred -5>>
+	<br><br>
+	<<prison_detach_leash>>
+	<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<prison_unbind>>
+	<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<<else>>
+	<<scarred_inmate_ ga 0 cap>> 으르렁거린다.
+	<br><br>
+
+	<<link [[다음|Prison Scarred Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+<</if>>
+
+
+
+
+:: Prison Scarred Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Prison Scarred Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Prison Scarred Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Prison Scarred Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<scarred_inmate_ nun 0 cap>> <<his_ yi>> 침대로 넘어가 <<his_ yi>> 팔을 <<his_ yi>> 얼굴에 묻는다.<<glove>><<prison_rep scarred 1>>
+	<br><br>
+	<<tearful>> 당신은 감옥에서 도망친다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Prison Walkway]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	<<scarred_inmate_ nun 0 cap>> 뒤로 비틀거리다, <<his_ yi>> 침대에 걸려 넘어진다.<<llove>><<prison_rep scarred -1>><<grespect>><<prison_inmates 1>>
+	<br><br>
+	<<tearful>> 당신은 감옥에서 도망친다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Prison Walkway]]>><</link>>
+	<br>
+
+<<else>>
+	당신은 계속 싸우기에 너무 아프다. <<scarred_inmate_ nun 0 cap>> 당신의 목줄로 당신을 안정시키고, 감옥에서 끌고 나간다.
+	<br><br>
+	<<endcombat>>
+	<<link [[다음|Prison Scarred Walk]]>><<generate_scarred_inmate 0>><<person1>><</link>>
+	<br>
+
+<</if>>
+
+<<set $daily.prison.scarredDone to true>>
+
+:: Prison Scarred Walk
+<<effects>>
+
+<<scarred_inmate_ nun 0 cap>> <<his_ yi>> 주먹으로 난간을 내리쳐 주의를 끌며, 복도를 따라 당신을 끌고 다닌다. 계단 밑에 흥미를 가진 수감자들이 모여있다.
+<br><br>
+
+"내가 내 <<bitch_ rul>> 타는거 보고 싶은 사람?" <<scarred_inmate_ ga 0>> 묻는다. 해달라는 소리가 들린다. "들었지, <<slut_ a>>. 엎드려." <<He_ nun>> 목줄을 잡아 당겨, 당신을 무릎 꿇게 만든다.
+<br><br>
+
+<<He_ nun>> 당신의 몸을 누르며, 한번에 당신 위에 올라탄다. "이제 움직여," <<he_ ga>> 말한다. "이랴!"
+<br><br>
+
+<<if $prison.scarred_level is 3>>
+	<<link [[다음|Prison Scarred Walk 2]]>><</link>>
+	<br>
+<<else>>
+	<<link [[다음|Prison Scarred Yard]]>><</link>>
+	<br>
+<</if>>
+
+:: Prison Scarred Walk 2
+<<effects>>
+
+<<scarred_inmate_ nun 0 cap>> 감옥 구역을 따라 당신을 타고 가면서, 주기적으로 당신의 <<bottom_ ul>> 때린다. 다른 수감자들은 그 광경에 관심을 가지고, 지켜본다. 몇몇은 그들이 다르게 타봐도 되냐고 물어본다. <<scarred_inmate_ nun 0 cap>> 잠깐 고려해보지만, 당신을 오직 <<himself_ yi>> 것으로 간직하기로 한다.<<lrespect>><<prison_inmates -1>>
+<br><br>
+
+<<He_ nun>> 마지막으로 당신을 한 방 때리면서, 당신의 등에서 내려온다. "이제 모두가 네가 내것이라는 걸 알겠지," <<he_ ga>> 끈을 풀면서, 말한다.
+<br><br>
+
+<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었지만,</span> <span class="red">다음은 위험할지도 모른다.</span><<set $prison.scarred_level to 4>><<set $prison.protection to "scarred">>
+<br><br>
+<<prison_unbind>>
+<<prison_detach_leash>>
+
+<<link [[다음|Prison Block]]>><<clotheson>><<endevent>><</link>>
+<br>
+
+:: Prison Scarred Yard
+<<effects>>
+
+<<scarred_inmate_ nun 0 cap>> 감옥 구역을 따라 당신을 타고 가면서, 주기적으로 당신의 <<bottom_ ul>> 때린다. 다른 수감자들은 <<he_ ga>> 당신을 밖으로 가게 하는 것을 따라온다.
+<br><br>
+
+<<He_ nun>> 당신을 타고 마당 한가운데로 가서, 당신의 목줄을 당긴다. 더 많은 수감자들이 모이고, 당신 주위로 원을 만든다. <<scarred_inmate_ nun 0 cap>> 당신의 등에서 내려오지만, 당신의 목줄은 팽팽하게 유지한다. <<He_ nun>> 잔디에 앉아, 당신을 <<his_ yi>> 무릎 위로 당기고, 날카로운 한방을 날린다.<<gpain>><<pain 4>>
+<br><br>
+
+다른 수감자들은 점점 음탕한 표정으로 당신을 지켜본다. 그들은 당신과, <<scarred_inmate_ 0>>, 그리고 서로를 보며, 그들의 기회를 기다린다. <<He_ nun>> 알아차리지 못한 것 같다. <span class="purple">당신이 사정한다면, 모든 군중이 흥분할 것이다.</span>
+<br><br>
+
+<<if $worn.face.type.includes("gag")>>
+	<span class="blue">당신의 입이 막혀, 당신은 <<him_>>에게 알릴 수 없다.</span>
+	<br>
+<<else>>
+	<<link [[알린다|Prison Scarred Yard Warn]]>><</link>>
+	<br>
+<</if>>
+<<link [[침묵한다|Prison Scarred Yard Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Prison Scarred Yard Warn
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"당신이 조심하지 않으면 그들은 절 강간할 거예요," 당신이 말한다.
+<<elseif $speech_attitude is "bratty">>
+	"우리가 조심하지 않으면 그들은 날 따먹을거야," 당신이 말한다.
+<<else>>
+	"우리가 조심하지 않으면 그들은 절 강간할 거예요," 당신이 말한다.
+<</if>>
+<br><br>
+
+<<if $prison.scarred gte 85>>
+	<<scarred_inmate_ nun 0 cap>> 주위를 둘러보곤, <span class="green">당신을 다시 감옥 구역으로 데려간다.</span> "좀 조용한 곳을 찾아야겠어."
+	<br><br>
+	수감자 중 한명이 당신을 잡으려 하지만, <<scarred_inmate_ nun 0>> <<him_ ul>> 때려 코피를 터뜨린다.
+	<br><br>
+
+	<<link [[다음|Prison Scarred Yard End]]>><</link>>
+	<br>
+<<else>>
+	<<scarred_inmate_ nun 0 cap>> <span class="red">당신의 <<bottom_ ul>> 친다.</span> "난 여기서 꿈쩍도 않을거야, <<bitch_ ya>>."
+<br><br>
+
+<<link [[다음|Prison Scarred Yard Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+<</if>>
+
+:: Prison Scarred Yard End
+<<effects>>
+
+<<scarred_inmate_ nun 0 cap>> 당신을 <<his_ yi>> 감옥으로 데려가, <<his_ yi>> 침대에 눕고, 당신을 그 위로 올리려한다.
+<br><br>
+<<endevent>>
+<<generate_scarred_inmate 0>>
+<<link [[따라간다|Prison Scarred Sex]]>><<set $sexstart to 1>><</link>><<promiscuous1>>
+<br>
+<<link [[거절한다|Prison Scarred Sex Refuse]]>><<prison_rep scarred -1>><</link>><<llove>>
+<br>
+
+:: Prison Scarred Yard Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<npcspank>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $orgasmdown gte 1>>
+	<span id="next"><<link [[다음|Prison Scarred Yard Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Prison Scarred Yard Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Prison Scarred Yard Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He_ nun>> 당신을 무릎 꿇게 한다. "운도 좋은 놈들, 무료로 쇼를 보다니." <<He_ nun>> 당신이 앞으로 쓰러질 정도로 세게 당신의 <<bottom_ ul>> 때린다.<<lrespect>><<glove>><<prison_rep scarred 1>><<prison_inmates -1>>
+	<br><br>
+	<<tearful>> 당신은 심호흡을 한다. 방금건 위험했다.
+	<br><br>
+	<<clotheson>>
+	<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<endcombat>>
+	<<prison_unbind>>
+	<<prison_detach_leash>>
+	<<link [[다음|Prison Yard]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	당신은 <<scarred_inmate_ ul 0>> 땅으로 밀쳐낸다. 구경하던 수감자들이 웃는다.<<llove>><<grespect>><<prison_rep scarred -1>><<prison_inmates 1>>
+	<br><br>
+	<<tearful>> 당신은 마당에서 도망친다
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Prison Block]]>><</link>>
+	<br>
+<<else>>
+	<<scarred_inmate_ nun 0 cap>> 너무 가까이 온 구경꾼에게 주먹을 날린다. 구경꾼의 친구가 보복을 하려한다. <<scarred_inmate_ nun 0 cap>> 그에게 또한 주먹을 날린다. 하지만 그곳엔 다른 사람과, 또다른 사람이 있다. 그들은 <<him_ ul>> 바닥으로 밀쳐내고, 다른 수감자들은 당신을 바라본다.
+	<br><br>
+
+	<<endcombat>>
+	<<link [[다음|Prison Scarred Inmate Rape]]>><<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+
+:: Prison Scarred Inmate Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Prison Scarred Inmate Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Prison Scarred Inmate Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Prison Scarred Inmate Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	호루라기 소리가 소음을 뚫고 나올때까지, 수감자들은 자신의 차례를 기다리느라 분주하다.
+	<br><br>
+	<<tearful>> 당신은 발버둥친다.
+	<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<generate_veteran_guard 0>><<person1>>
+	"넌 이곳의 평화와 평온을 방해했어," <<veteran_guard_ ga 0>> 말한다. <<He_ nun>> 당신의 어깨에 손을 올린다. "넌 나랑 같이 가야겠어."
+	<br><br>
+	<<link [[얌전히 간다|Prison Punishment]]>><<endevent>><</link>>
+	<br>
+	<<link [[싸운다|Prison Punishment Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+
+<<else>>
+	군중들은 힘에 놀라서, 당신에게서 떨어진다.<<gggrespect>><<prison_inmates 10>>
+	<br><br>
+	<<clotheson>>
+	<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<endcombat>>
+	<<tearful>> 당신은 주위를 둘러본다. 당신은 <<generate_scarred_inmate 0>><<person1>><<scarred_inmate_ ga 0>> 진흙 속에 누워있는 것을 발견한다.
+	<br><br>
+	<<link [[$NPCList[0].pronouns.him+ " 돕는다"|Prison Scarred Inmate Help]]>><<prison_rep scarred 3>><</link>><<gglove>><<gghope>><<prison_hope 3>>
+	<br>
+	<<link [[물러난다|Prison Yard]]>><<prison_inmates 3>><<endevent>><</link>><<ggrespect>>
+	<br>
+
+<</if>>
+
+:: Prison Scarred Inmate Help
+<<effects>>
+
+당신은 <<scarred_inmate_ ga 0>> 일어나도록 도와주고, <<him_ ul>> 의료실로 데려간다.
+
+<<generate_methodical_guard 1>><<person2>><<methodical_guard_ nun 1 cap>> 눈길 하나 없이 침대를 가리킨다.
+<br><br>
+
+"씨발놈들," <<scarred_inmate_ ga 0>> 눕자 말한다. "그들이 그들의 마지막 날을 즐겨 두는게 좋을 거야."
+<br><br>
+
+<<He_ nun>> 당신 뒤에 있는 문이 닫혀도 계속 웃고있다.
+<br><br>
+
+<<prison_unbind>>
+<<prison_detach_leash>>
+
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Scarred Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 50>><<promiscuity1>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Prison Scarred Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Prison Scarred Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Prison Scarred Sex Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"이곳의 최고 <<bitch_ iya>>," <<he_ ga>> 당신의 속박구를 만지작거리며 말한다. "이제 가도 돼."<<glove>><<prison_rep scarred 1>>
+	<br><br>
+	<<tearful>> 당신은 감옥을 나온다.
+	<br><br>
+	<<clotheson>>
+	<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<endcombat>>
+	<<prison_unbind>>
+	<<prison_detach_leash>>
+	<<link [[다음|Prison Walkway]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	당신은 <<scarred_inmate_ ul 0>> 당신으로부터 밀쳐낸다.<<llove>><<prison_rep scarred -1>>
+	<br><br>
+	<<tearful>> 당신은 감옥에서 도망친다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Prison Walkway]]>><</link>>
+	<br>
+<<else>>
+	"존나게 놀리네," <<scarred_inmate_ ga 0>> 당신의 속박구를 만지작거리며 말한다. "가."
+	<br><br>
+	<<tearful>> 당신은 감옥을 나온다.
+	<br><br>
+	<<clotheson>>
+	<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<endcombat>>
+	<<prison_unbind>>
+	<<prison_detach_leash>>
+	<<link [[다음|Prison Walkway]]>><</link>>
+	<br>
+<</if>>
+
+:: Prison Scarred Ask
+<<effects>>
+
+<<generate2>>
+<<if $speech_attitude is "meek">>
+	<<gagged_speech "ㅁ-뭐가 문제세요?">> 당신이 묻는다. <<gagged_speech "저한텐 말하셔도 돼요.">>
+<<elseif $speech_attitude is "bratty">>
+	<<gagged_speech "전엔 이러는 걸 본적이 없는데,">> 당신이 말한다. <<gagged_speech "뭐가 문제야?">>
+<<else>>
+	<<gagged_speech "뭐가 문제세요?">> 당신이 말한다. <<gagged_speech "저한텐 말하셔도 돼요.">>
+<</if>>
+<br><br>
+
+"꺼져," <<he_ ga>> 말한다.
+
+<<if $worn.face.type.includes("gag")>>
+	<<He_ ga>> 당신의 <<worn_face_name_ ul>> 본다. <span class="blue">"그 입을 쓸 수 있게 되면 다시 와."</span>
+	<br><br>
+
+	<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	"잠깐." <<He_ ga>> <<his_ yi>> 손을 무릎에 올리고, <<his_ yi>> 발로 일어난다. "니 도움이 필요해. 날 보러온 사람이 있는데, 난 <<person2>><<him_ ul>> 보고싶지 않아. 네가 가서 <<he_ ga>> 꺼지게 해줄래?"
+	<br><br>
+	<<person1>>
+
+	<<link [[동의한다|Prison Scarred Sibling Agree]]>><<prison_rep scarred 25>><</link>><<ggglove>>
+	<br>
+	<<link [[거절한다|Prison Scarred Sibling Refuse]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Prison Scarred Sibling Refuse
+<<effects>>
+
+"됐어," <<he>> says. "너도 같이 꺼져." <<He_ nun>> 다시 <<his_ yi>> 머리를 숙인다.
+<br><br>
+
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+:: Prison Scarred Sibling Agree
+<<effects>>
+
+<<generate_methodical_guard 2>><<person3>>
+당신은 콘크리트 복도를 따라, 면회실로 가서, 철문 옆에서 서서 기다리고 있는 <<methodical_guard_ rul 2>> 발견한다.
+<br><br>
+"내가 예상하던 사람이 아닌데," <<he_ ga>> 말한다.
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"ㅈ-죄송합니다," 당신이 말한다. "제가 <<person1>><<his_ yi>> 자리를 맡기로 했어요."
+<<elseif $speech_attitude is "bratty">>
+	"내가 <<person1>><<his_ yi>> 자리를 맡기로 했거든," 당신이 말한다.
+<<else>>
+	"제가 <<person1>><<his_ yi>> 자리를 맡기로 했어요," 당신이 말한다.
+<</if>>
+<br><br>
+
+<<methodical_guard_ nun 2 cap>> <<person3>><<his_ yi>> 클립보드에 무언갈 쓴다. "잠깐만." <<He_ ga>> 문을 연다.
+<br><br>
+
+<<link [[다음|Prison Scarred Sibling 2]]>><</link>>
+<br>
+
+:: Prison Scarred Sibling 2
+<<effects>>
+
+당신은 의자 하나와 앞에 마이크와 창문이 있는, 조그만 방으로 들어간다. 창문 반대쪽엔 <<person2>><<person_ i>> 있다. <<He_ nun>> 당신을 보고 실망한 것 같다.
+<br><br>
+
+"미안," <<he_ ga>> 말한다. "내 <<person1>><<sister_npc_ i>> 오지 않을걸 알았지만, 기대는 했는데..."
+<br><br>
+
+<<link [[솔직히 말한다|Prison Scarred Sibling 3]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[선의의 거짓말을 한다|Prison Scarred Sibling 3]]>><<set $phase to 0>><</link>>
+<br>
+
+
+
+:: Prison Scarred Sibling 3
+<<effects>>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"당신의 <<sister_npc_ ga>> 오길 원치 않았어요," 당신이 말한다. "미안해요."
+	<<elseif $speech_attitude is "bratty">>
+		"너네 <<sister_npc_ ga>> 나보고 대신 가라 하더라," 당신이 말한다.
+	<<else>>
+		"당신의 <<sister_npc_ ga>> 저보고 대신 가달라 했어요," 당신이 말한다.
+	<</if>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"당신의 <<sister_npc_ yi>> 몸이 아파요," 당신이 말한다. "그래서 <<he_ ga>> 저보고 대신 가달라 했어요."
+	<<elseif $speech_attitude is "bratty">>
+		"너네 <<sister_npc_ ga>> 맞았어," 당신이 말한다. "그래서 <<he_ ga>> 나보고 대신 가달라 하더군."
+	<<else>>
+		"당신의 <<sister_npc_ ga>> 아파요," 당신이 말한다. "그래서 <<he_ ga>> 저보고 대신 가달라 했어요."
+	<</if>>
+<</if>>
+<br><br>
+
+
+
+<<set $NPCList[0].name_known to 1>>
+<<save_scarred_inmate>>
+
+그 <<person2>><<person_ i>> 끄덕인다. "알겠어. <<scarred_inmate_ 0>>에게 우린 <<person1>><<him_ ul>> 다시 보길 고대한다 말해줘. 우리도 <<he_ ga>> 자신이 부끄럽다 생각하는 걸 알지만, <<he_ nun>> 그럴 필요 없어. 우린 <<him_ i>> 부끄럽지 않아. 우린 더 자주 방문할거지만, 여기서 나가기는 어렵더군."
+<br><br>
+<<person2>><<He_ ga>> 잠시 멈춘다. "<<person1>><<him_>>에게 <<his_ yi>> 잘못이 아니라 전해줘요, <<if $pronoun is "m">>아빠는<<else>>엄마는<</if>>... 원래 그런 사람이었다고."
+<br><br>
+
+
+<<link [[다음|Prison Scarred Sibling 4]]>><</link>>
+<br>
+
+
+:: Prison Scarred Sibling 4
+<<effects>>
+
+<<scarred_inmate_ ga 0 cap>> <<his_ yi>> 감옥에서 기다리고 있다. 당신이 말을 전해준다.
+<br><br>
+
+"난 부끄러운게 아니야," <<he_ ga>> 고집한다. "난 그냥 가족을 대하는게 존나 힘들뿐이라고. 그래도 고맙긴 하지만." <<He_ nun>> 팔을 <<his_ yi>> 흉터가 있는 얼굴 위에 올려놓은채로 <<his_ yi>> 침대 위에 눕는다
+<br><br>
+
+<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+<br><br>
+
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>
+
+:: Prison Scarred Sex Refuse
+<<effects>>
+
+"니 맘대로 해," <<person1>><<he_ ga>> 말한다. "나중엔 나에게 질질 짜게 될테니까."
+<br><br>
+
+<span class="green">당신은 <<scarred_inmate_ yi 0 apo>> 보호를 얻었다.</span><<set $prison.protection to "scarred">>
+<br><br>
+<<prison_unbind>>
+<<prison_detach_leash>>
+<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+<br>

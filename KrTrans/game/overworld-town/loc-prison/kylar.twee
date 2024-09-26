@@ -1,0 +1,195 @@
+:: Prison Kylar Intro
+<<effects>>
+
+카일라는 당황하며 당신을 바라본다. 또 다른 일이 <<him_ ul>> 현실로 돌아오게 한다. <<veteran_guard_ nun 2 cap>> <<him_ ul>> <<his_ yi>> 감방으로 가도록 한다.
+<br><br>
+
+<<methodical_guard_ nun 1 cap>> 방해에 짜증내며 원장을 닫는다. 복도 맨 끝에 있는 긴 문이 열리고 수감자들은 그곳으로 행진한다.
+<br><br>
+
+<<link [[다음|Prison Kylar Intro 2]]>><<endevent>><<npc Kylar>><<person1>><</link>>
+<br>
+
+:: Prison Kylar Intro 2
+<<effects>>
+
+카일라는 <<his_ yi>> 감옥 문이 열리자마자 달려 계단을 올라 복도로 온다. <<He_ nun>> 이곳으로 오고 있다.
+<br><br>
+
+<<He_ nun>> 당신으로부터 몇 발짝 앞에서 멈추고 <<himself_ rul>> 난간에 지탱하며 안정시킨다. <<he_ ga>> 당신을 보자 <<His_ yi>> 입이 벌어진다.
+<br><br>
+
+"지-진짜로 너야?" <<he_ ga>> 묻는다. "다-다시 널 보고 있다고?"
+<br><br>
+
+<<link [[사과한다|Prison Kylar Intro Apologise]]>><<npcincr Kylar rage -50>><<prison_inmates -1>><</link>><<lllksuspicion>><<lrespect>>
+<br>
+<<link [[정중하게 행동한다|Prison Kylar Intro Polite]]>><<npcincr Kylar rage -10>><</link>><<llksuspicion>>
+<br>
+<<link [[가라고 말한다|Prison Kylar Intro Dismiss]]>><<npcincr Kylar rage 30>><<prison_inmates 1>><</link>><<gggksuspicion>><<grespect>>
+<br>
+
+
+:: Prison Kylar Intro Apologise
+<<effects>>
+
+<<if $worn.face.type.includes("gag")>>
+	당신은 재갈 때문에 말을 할 수 없기에 사과하듯 발을 보고 중얼거린다. 당신은 요점이 잘 전달되었다고 생각한다.
+	<br><br>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"미-미안해." 당신이 말한다. "난 네가 체포되길 원치 않았어."
+	<<elseif $speech_attitude is "bratty">>
+		"여기로 오게 해서 미안하네." 당신이 말한다.
+	<<else>>
+		"여기로 오게 해서 정말 미안해." 당신이 말한다.
+	<</if>>
+	<br><br>
+<</if>>
+
+카일라는 <<his_ yi>> 무릎을 꿇고 <<his_ yi>> 고개를 숙인다. 다른 수감자들이 당신을 이상하게 바라본다. "그-그건 실수였어." <<he_ ga>> 말한다. "난 머리 속으로 생각하고 생각해봤어. 케이크, 그 내가 체-체포된 건 말이야. 오해였어."
+<br><br>
+
+<<He_ nun>> 고개를 들고 당신의 무릎에 붙는다. "내가 널 보살펴줄게. 내가 너에게 물건들을 구해줄게. 그냥 내게 시간을 좀 줘." <<He_ nun>> <<his_ yi>> 발로 일어나 복도를 따라 달려간다.
+<br><br>
+
+<<link [[다음|Prison Walkway]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+<br>
+
+
+
+:: Prison Kylar Intro Polite
+<<effects>>
+
+<<if $worn.face.type.includes("gag")>>
+	당신은 재갈 때문에 말을 할 수 없기에 당신은 <<him_>>에게 정중하게 고개를 끄덕이고 그는 지나간다.
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"이-익숙한 얼굴을 봐서 기뻐." 당신이 말한다.
+	<<elseif $speech_attitude is "bratty">>
+		"이곳에 나만 있다는게 아니여서 다행이네." 당신이 말한다.
+	<<else>>
+		"난 널 봐서 기뻐." 당신이 말한다. "익숙한 사람을 주변에 두는건 좋은 것 같아."
+	<</if>>
+	<br><br>
+	카일라가 열정적으로 고개를 끄덕인다. "그-그럼." <<he_ ga>> 말한다. "내가 널 보살펴줄게. 내가 너에게 물건들을 구해줄게. 그냥 내게 시간을 좀 줘." <<He_ nun>> 몸을 돌리고 복도를 따라 달려간다.
+<</if>>
+<br><br>
+
+<<link [[다음|Prison Walkway]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+<br>
+
+
+:: Prison Kylar Intro Dismiss
+<<effects>>
+
+<<if $worn.face.type.includes("gag")>>
+	당신은 재갈 때문에 말을 할 수 없기에 당신은 눈을 하늘에 두고 <<him_ ul>> 따로 바라보지 않고 그는 지나간다. 당신은 요점이 잘 전달되었다고 생각한다.
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"나-나로부터 떨어져." 당신이 그가 지나갈 때 말한다. "난 네가 필요하지 않아."
+	<<elseif $speech_attitude is "bratty">>
+		"넌 내가 가장 싫어하는 존재야." 당신이 그가 지나갈 때 말한다. "나로부터 떨어져 있어, 씨발놈아."
+	<<else>>
+		"난 네가 필요하지 않아." 당신이 그가 지나갈 때 말한다. "그냥 날 홀로 놔둬."
+	<</if>>
+<</if>>
+<br><br>
+
+당신은 계단을 내려오면서 당신의 감옥을 바라본다. 카일라는 보이지 않는다.
+<br><br>
+
+<<link [[다음|Prison Block]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+<br>
+
+
+:: Prison Kylar
+<<effects>>
+<<npc Kylar>><<person1>>
+당신이 들어오자 카일라는 고개를 들고 누구인지 보자마자 <<he_ nun>> 벌떡 일어난다. "네-네가 오길 고대하고 있었어." <<he_ ga>> 말한다.
+<br><br>
+
+
+<<socialiseicon>><<link [[잡담한다 (최대 1시간)|Prison Kylar Chat]]>><<set $prison_kylar_cell to 1>><<npcincr Kylar love 1>><<npcincr Kylar lust 5>><<npcincr Kylar rage -1>><</link>><<glust>><<glove>><<lsuspicion>>
+<br>
+<<getouticon>><<link [[떠난다|Prison Block]]>><<endevent>><</link>>
+<br>
+
+
+:: Prison Kylar Chat
+<<effects>>
+
+<<pass 1>><<advancetohour>>
+
+당신은 카일라와 얘기한다.
+<<rng 10>>
+<<switch $rng>>
+	<<case 1>>
+		<<He_ nun>> <<he_ ga>> 처음으로 도착했을 때 <<he_ ga>> 다른 수감자들에게 무엇을 했는지 알려준다. "그-그게 네가 여기에 왔을 때," <<he_ ga>> 말한다. "내가 독방에 있었던 이유야."<<gstress>><<stress 6>>
+	<<case 2>>
+		"난 많은 은신처를 찾았어." <<he_ ga>> 말한다. "사람들은 물건들을 숨기는 곳에 대해 똑똑하진 않은가봐."
+	<<case 3>>
+		"난 눈을 마주치길 피해." <<he_ ga>> 말한다. "사람들은 날 홀로 놔둬."
+	<<case 4>>
+		"여긴 학교랑 별반 다르지 않은걸." <<he_ ga>> 말한다.
+	<<case 5>>
+		"난 왜 사람들이 벽을 오르려 하는지 모르겠어." <<he_ ga>> 말한다. "그 새들은 크던데 말이야."
+	<<case 6>>
+		"난 그들이 식당에서 물고기를 주지 않는것에 놀랐어." <<he_ ga>> 말한다. "그럼 그들은 그 음식들을 어디서 가지고 오는거지?"
+	<<case 7>>
+		"의료실에 찬장이 있더라." <<he_ ga>> 말한다. "그곳에 뭐가 있을까."
+	<<case 8>>
+		"마당에 있던 그 잠긴 문은 재밌는 곳으로 가는 문일거야." <<he_ ga>> 말한다.
+	<<case 9>>
+		"그들은 날 첨탑에 못가게 해." <<he_ ga>> 말한다. "난 그냥 탐험하고 싶을 뿐인데."
+	<<default>>
+		"난 사람들이 널 바라보는 시선을 봤어." <<he_ ga>> 말한다. "내-내가 있을 땐 아무것도 안하던데."
+<</switch>>
+<br><br>
+
+<<if C.npc.Kylar.lust gte 20>>
+	<<set _rng to random(6, 12)>>
+	<<He_ nun>> 당신이 나가려 하자 당신의 손목을 잡는다. "내-내가 널 위해 뭘 좀 준비했어." <<He_ nun>> <<his_ yi>> 주머니로 손을 넣고 상어 이빨로 가득찬 손을 꺼낸다. "여-여기."
+	<<prison_teeth_text _rng>><<prison_teeth _rng>><<lllust>><<npcincr Kylar lust -20>>
+	<br><br>
+<</if>>
+
+<<link [[다음|Prison Block]]>><<endevent>><</link>>
+<br>
+
+:: Prison Attention Kylar
+<<effects>>
+
+<<endevent>>
+<<npc Kylar>><<generate_veteran_guard 1>>
+"카일라!" 당신이 소리친다.
+<<if $speech_attitude is "meek">>
+	"네-네가 필요해"
+<<elseif $speech_attitude is "bratty">>
+	"손 좀 빌리자."
+<<else>>
+	"나 좀 도와줘."
+<</if>>
+<br><br>
+<<set _rng to random(1, 2)>>
+<<switch _rng>>
+	<<case 1>>
+		<<person2>><<veteran_guard_ nun 1 cap>> 주변 환풍구로 가서 열어 던진다. <<He_ ga>> <<his_ yi>> 횃불로 어둠을 밝히자 <span class="green">다트가 <<his_ yi>> 목을 찌른다.</span> <<He_ nun>> 그것을 꺼내 부셔버리고 몸을 돌리자 카일라가 임시방편으로 만든 다트 총을 <<person1>><<his_ yi>> 손에 들고 있는 것을 발견한다.
+		<br><br>
+
+		카일라는 도망치려 하지만 <<veteran_guard_ nun 1>> 너무 빠르다. <<person2>><<He_ nun>> 카일라를 잡아 땅으로 박아버리기 충분한 시간만큼 독에 저항한다.
+		<br><br>
+	<<case 2>>
+		<span class="green">다트가 <<veteran_guard_ yi 1 cap>> 목을 찌른다.</span> <<He_ nun>> 범인을 찾기 위해 그 자리에서 돈다. <<He_ nun>> 주변에 있는 환풍구로 가서 손을 넣고 도망치려 하는 카일라를 잡아올린다.
+		<br><br>
+
+		<<He_ nun>> 카일라를 잡아 땅으로 박아버리기 충분한 시간만큼 독에 저항한다.
+		<br><br>
+	<<default>>
+<</switch>>
+수감자들은 이 화려한 광경을 보기 위해 몰려들고 다른 간수들은 그들의 길을 만들어 낸다. 당신은 그 혼돈 속에서 스르륵 사라진다.
+
+<span class="purple">카일라는 잠시 독방에 가게 될 것이다.</span>
+<br><br>
+
+<<destination_prison>>

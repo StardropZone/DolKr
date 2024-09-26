@@ -1,0 +1,80 @@
+:: Office Job Start
+<<location "office">><<effects>>
+당신이 키오스크 쪽으로 다가가자, 키오스크 뒤에 있던 <<generateNPC 1>> <<person1>><<personsimple_ i>> 당신을 알아차리고는, 일어나 <<his_ yi>> 손을 내민다.
+<br>
+"안녕! 이리 와, 사무실 임시직에 대해 더 설명해 줄게. 그 일에 관심 있는 거잖아, 맞지?"
+<br><br>
+<<link [[네|Office Job Start 2]]>><</link>>
+<br>
+<<link [[아니오|Office Job Deny]]>><</link>>
+<<if isPubfameTaskAccepted("office")>>
+	<br>
+	<<link [[편지를 준다|Office Job Letter]]>><</link>>
+<</if>>
+
+:: Office Job Deny
+<<effects>>
+당신은 고개를 가로젓는다. <<personsimple_ yi>> 인상이 찌푸려진다.
+<br>
+"네가 우리를 위해 일하는 것에 관심이 없다면, 더 이상 내 시간을 낭비하지 마." <<He_ nun>> 다른 지원자들에게 말을 걸러 간다.
+<br><br>
+<<link [[물러난다|Office Lobby]]>><</link>>
+
+:: Office Job Start 2
+<<effects>>
+당신은 고개를 끄덕인다.
+<br><br>
+"훌륭해! 너는 임시직으로서 여러 층에 배정되어 보조 업무를 좀 할 거야. 커피 타 오기, 소포 배달하기, 서류 정리하기나 장비 설치하기 같은 일 말이야." <<He_ nun>> 당신에게 작성할 몇 가지 양식이 담긴 클립보드를 건넨다.
+<br><br>
+"근무 시간은 <<ampm 6>>부터 <<ampm 22>>까지고, 시급은 <<printmoney 625>>야. 적어 보일 수 있지만, 일을 잘 하면 고객들이 팁을 주는 경우가 많아. 윗층의 고객들은 요구 사항이 많지만, 그만큼 팁도 더 많이 주지. 어떤 임무도 거절할 수 있지만, 그걸 습관으로 만들지 않길 바라. 우리와 함께 일할 거지, 그렇지?"
+<br><br>
+<<link [[일을 받아들인다|Office Job Accept]]>><</link>>
+<br>
+<<link [[거절한다|Office Job Deny]]>><</link>>
+
+:: Office Job Accept
+<<effects>>
+<<set $officejobintro to 1>><<set $officecomplaints to 0>><<set $officelastcomplaintday to 0>><<set $wardrobes.officeBuilding.unlocked to true>><<set $managerGift to 1>>
+당신은 <<personsimple_ 에게>> 미소 짓고는 <<his_ yi>> 손에서 클립보드를 가져간다.
+<br>
+"훌륭해! 양식을 다 작성하고 나면, 사무실로 가져와서 관리자에게 가져다 줘."
+<br><br>
+당신은 고용 양식서를 작성하는 데에 몇 분을 소요하고는, 작성을 마친 뒤 <<personsimple_ 에게>> 알린다. <<He_ nun>> 보안 데스크를 지나, 엘리베이터 뒤의 사무실로 당신을 안내한다.
+<br><br>
+
+<<endevent>>
+<<generateManager>><<person1>>
+양 옆에 두 개의 방을 둔 긴 복도는 "관리자"라고 표시된 문으로 이어진다. 문이 열리자, 조금 탄탄한 체격에 회색 정장을 입은 <<personsimple_ i "normal">> 나와 당신을 맞이한다.
+<br>
+"너는 새 지원자구나. 나는 <<office_manager_ iya>>, 그리고 이제부터 네 담당 관리자가 될 거다." <<He_ nun>> 당신에게서 양식서를 가져가고 사무실 안의 자리로 안내한다. 잠시 양식서를 살펴 본 <<office_manager_ nun>> 다시 당신에게로 관심을 돌린다.
+<br>
+"모두 적혀 있네. 나중에 네 정보를 입력할게. 일단 지금은, 사무실을 조금 구경하는 게 어때?" <<office_manager_ ga>> 당신의 어깨를 잡고 사무실 밖으로 이끈다.
+<br><br>
+<<link [[다음|Office Job Accept 2]]>><</link>>
+
+:: Office Job Accept 2
+<<effects>>
+<<office_manager_ nun>> 당신을 <<his_ yi>> 사무실 밖의 책상으로 안내한다. 거기에는 많은 정보가 표시된 대형 터치 스크린이 있다.
+<br><br>
+"여기에서 업무를 요청할 수 있어. 이걸로 층과 업무의 종류를 확인할 수 있지. 일단 업무를 수락하고 나서는 가능한 빨리 고객에게 보고해야 해. <<He_ nun>> 당신을 <<he_ yi>> 사무실 맞은편의 방으로 안내한다. 안에 있던 다른 임시 직원들이 손을 흔들며 맞이한다. "여기서 중간중간 자유롭게 쉬도록 해."
+<br>
+<<office_manager_ nun>> 당신을 <<his_ yi>> 사무실로 안내한다. "업무를 마치면 여기서 급여를 받을 수 있어. 걱정이나 불만 사항 같은 것도 나한테 말하면 돼. 그럼 난 네 서류 작업을 마치러 갈게. 일은 원하는 때에 시작할 수 있어!"
+<br><br>
+<<He_ nun>> 당신의 어깨를 가볍게 두드리고는 <<his_ yi>> 사무실로 들어간다.
+<br><br>
+<<endevent>>
+<<link [[로비로 돌아간다|Office Lobby]]>><</link>>
+
+:: Office Job Letter
+<<effects>>
+당신은 편지를 책상 위로 미끄러트린다. "이걸 지하로 가져다주세요," 당신은 말한다.
+<br><br>
+
+<<personsimple_ un>> 언짢은 표정을 짓는다. "이런 일에는 다 절차가 있어, 너도 알고 있을 텐데." <<He_ ga>> 한숨을 쉬며 편지를 캐비닛에 넣는다. "알겠어. 그래서, 일하러 온 거야 아니야?"
+<br><br>
+
+<<pubfameComplete "office">>
+
+<<link [[업무 제안을 듣는다|Office Job Start 2]]>><</link>>
+<br>
+<<link [[듣지 않는다|Office Job Deny]]>><</link>>

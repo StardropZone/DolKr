@@ -1,0 +1,3 @@
+원하는 tip을 추가합니다.
+이 이밴트는 원본 파일 game/base-system/tips.twee에 영향을 줍니다.
+    - tips 매크로 확률

@@ -1,0 +1,863 @@
+
+:: Trash Explain
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+당신은 <<himPost>>에게 길을 잃었다고 말한다.
+<<if $englishSuccess>>
+	<<He_ ga>> 당신을 말없이 쳐다보곤, 한숨을 내쉰다.
+	<span class="green">"좋아,"</span> <<he_ ga>> 말한다.
+	"출구는 저쪽이야. 다음부턴 또 잡히지 않도록 조심해. 모두가 나같이 친절한건 아니니까."
+	<br><br>
+
+	<<endevent>>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<else>>
+	<<He_ ga>> 당신을 말없이 쳐다보곤, 웃는다.
+	<span class="red">"물론 그러시겠지,"</span> <<he_ ga>> 말한다.
+	"너는 넝마주이꾼이야. 쉽게 돈 벌어볼려 하는 거지새끼지. 널 쫒아내주마." <<He_ ga>> 싱긋 웃는다. "재미 좀 보고 나서."
+	<br><br>
+
+	<<link [[다음|Trash Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+
+:: Trash Seduce
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+<<set $seductiondifficulty to 6000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
+<</if>>
+<<seductionskilluse>>
+<br><br>
+
+당신은 입술을 삐죽 내민다. "당신은 모든 손님을 이런 식으로 대하시나요?" 당신은 달콤하게 속삭이면서, <<himPost>>에게 다가간다. "그래도 괜찮아요. 이런 곳에 혼자 있으면서 너무 외로우셨나 봐요."
+<<promiscuity2>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<span class="green"><<person_ 이>> 얼굴을 붉히며 눈길을 피한다.</span>
+	"네-네가 무슨 말을 하는지 모르-" <<he_ 가>> 어떻게든 말한다. 당신이 조용히 <<his_ 의>> 팔을 잡고 <<him_ 을>> 가까이 끌어당기자 <<He_ 는>> 입을 다문다.
+	<br><br>
+
+	<<link [[다음|Trash Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+
+<<else>>
+	<span class="red"><<person_ 이>> 팔을 뻗어 당신을 막는다.</span>
+	"너 미쳤구나," <<He_ 은>> 당신의 팔을 붙잡고, 말한다. <<He_ 가>> 당신을 출구쪽으로 끌고 가려 한다.
+	<br><br>
+
+	<<link [[몸부림친다|Trash Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[저항하지 않는다|Trash Rape End]]>><</link>>
+	<br>
+
+<</if>>
+
+
+:: Trash Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>><<promiscuity5>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Trash Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Trash Sex Finish
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	헐떡이며, 한 팔을 <<his_ yi>> 얼굴 위에 덮고, <<person_ 이>> 바닥에 쓰러진다.
+	<br><br>
+	<<tearful>> 당신은 도망간다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+<<elseif $enemyhealth lte 0>>
+	<<person_ 이>> 고통스러워 하며 바닥에 쓰러진다.
+	<br><br>
+
+	<<tearful>> 당신은 기회를 놓치지 않는다. 당신은 도망친다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	"멍청한 짓은 충분해," <<He_ 은>> 당신의 팔을 붙잡고, 말한다. <<He_ 가>> 당신을 출구쪽으로 끌고 가려 한다.
+	<br><br>
+
+<<link [[몸부림친다|Trash Fight]]>><<set $molestationstart to 1>><</link>>
+<br>
+<<link [[저항하지 않는다|Trash Rape End]]>><</link>>
+<br>
+
+<</if>>
+
+
+:: Trash Run
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+당신은 <<personPost>>에게서 돌아서고, 도망친다. "멈춰!" <<he_ 이>> 소리치며, 당신을 뒤쫒는다.
+<br><br>
+
+<<if $athleticsSuccess>>
+	<span class="green">당신은 쓰레기의 미로속에서 <<him_ 을>> 따돌린다.</span>
+	<br><br>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	<span class="red">당신은 쓰레기의 미로속에서 <<him_ 을>> 따돌리는데 실패한다.</span> <<He_ 이>> 당신을 따라잡고, 달려들어 당신을 바닥에 넘어뜨린다.
+	<br><br>
+
+	<<link [[다음|Trash Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+
+<</if>>
+
+
+:: Trash Fight
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $enemyarousal to 0>>
+	<<set $enemyanger to 200>>
+
+<<elseif $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Trash Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Trash Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+	헐떡이며, <<person_ 이>> 바닥에 쓰러진다.
+	<br><br>
+
+	<<tearful>> 당신은 기회를 놓치지 않는다. 당신은 도망친다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $enemyhealth lte 0>>
+	<<person_ 이>> 고통스러워하며 바닥에 쓰러진다.
+	<br><br>
+
+	<<tearful>> 당신은 기회를 놓치지 않는다. 당신은 도망친다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+
+<<else>>
+	당신은 계속 싸우기엔 너무 많이 다쳐서, 바닥에 쓰러진다.
+	<br><br>
+
+	<<person_ 이>> 당신을 들어 올려 출구로 데려가지만, <<tearful>> 당신은 아무것도 할 수 없다.
+	<br><br>
+
+	<<link [[다음|Trash Rape End]]>><</link>>
+<</if>>
+
+
+:: Trash Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Trash Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Trash Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<clotheson>>
+
+	<<person_ 이>> 당신의 팔을 붙잡고 끌고 간다. <<tearful>> 당신은 휘청거리지 않을려고 최선을 다한다. <<Hes_ 는>> 당신을 출구로 데려간다.
+	<br><br>
+
+	<<link [[몸부림친다|Trash Fight]]>><<set $molestationstart to 1>><</link>>
+	<br>
+	<<link [[저항하지 않는다|Trash Rape End]]>><</link>>
+	<br>
+<<else>>
+	딩신은 <<person_ 을>> 오래된 욕조에 밀치고, 도망친다. 당신은 커다란 쓰레기더미를 돌아가기 전 뒤돌아보고, <<him_ 이>> 아직도 욕조에서 나올려고 몸부림 치는 것을 본다.
+	<br><br>
+
+	<<tearful>> 당신은 숨을 가다듬는다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+<</if>>
+
+
+:: Trash Rape End
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+<<pass $trash>>
+당신은 출구에 도착한다. <<He_ 이>> 문을 열고, 당신을 포장도로 위로 밀어버린다. 당신의 뒤에서 문이 쾅 닫히는 소리가 들린다.
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<<link [[다음|Elk Street]]>><<set $eventskip to 1>><</link>>
+<br>
+
+
+:: Trash Pass Out
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+<<pain 1>>
+당신은 덜컹거리는 소리에 깨어난다. 눈을 뜨자 금속 천장이 보인다. 그것은 움직이고 있다. 당신은 일어나려 하지만, 당신의 팔과 다리가 묶여있다. 당신은 컨베이어 벨트 위에 있다.
+<br><br>
+
+앞에서 쿵 하는 소리가 당신의 주의를 끈다. 압축기가 쓰레기를 팬케이크처럼 적절한 크기로 납작하게 만들고 있다. 당신은 정확히 그곳으로 가고 있다
+<<gstress>><<gtrauma>><<stress 6>><<trauma 6>>
+<br><br>
+
+당신은 묶인 것을 풀기 위해 몸부림치지만, 너무 단단히 묶여있다. 당신이 조금씩, 조금씩 가까워지던 중에, 당신은 컨베이어 벨트르 통해 진동을 느낀다.
+<<gggstress>><<gggtrauma>><<stress 18>><<trauma 18>>
+<br><br>
+
+<<link [[다음|Trash Pass Out 2]]>><</link>>
+<br>
+
+
+:: Trash Pass Out 2
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+아무런 예고도 없이, 사이렌이 울리고, 붉은 불빛이 깜빡이기 시작한다. 컨베이어 벨트가 끼익 소리를 내며 멈춘다.
+<br><br>
+
+여러개의 금속 촉수가 아래에서 미끄러져 나와, 당신의 팔과 다리를 감싼다.
+그것들이 당신의 구속을 풀고, 당신을 벨트에서 내려준다. 당신은 아래의 콘크리트 바닥에 내려선다.
+<<gpain>><<pain 4>>
+<br><br>
+
+<<if $tentacledisable is "f" and random(1)>>
+	금속 촉수들이 놔주지 않는다.
+	<br><br>
+
+	<<link [[다음|Trash Tentacles]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<generateSecurity 1>><<generateSecurity 2>><<generateSecurity 3>><<person1>>
+	금속 촉수가 당신에게서 멀어지며, 바위 틈 사이로 사라진다. 당신의 뒤에서 해치가 열린다.
+	<br><br>
+
+	<<link [[다음|Trash Pass Out 3]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Trash Tentacles
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<molested>>
+	<<controlloss>>
+
+	<<tentaclestart 8 15 "tendril" "metal">>
+<</if>>
+
+<<statetentacles>>
+
+
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[다음|Trash Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Tentacles]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Trash Tentacles Finish
+<<effects>>
+
+금속 촉수가 당신에게서 멀어지며, 콘크리트 바닥 틈 사이로 사라진다.
+<br><br>
+
+<<tearful>> 당신은 주위를 둘러본다. 당신은 어두운 복도에 있다. 당신의 위에서 컨베이어 벨트가 다시 움직이기 시작한다.
+나가는 길을 찾다가, 벽에 해치가 있는 것을 발견한다. 당신은 해치를 비집어 열고, 밖으로 빠져나간다. 뒤에서 해치가 휙 닫힌다. 당신은 엘크 가에 있다.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+<<set $stress -= 2000>>
+<<link [[다음|Elk Street]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Trash Pass Out 3
+<<set $location to "landfill">><<set $outside to 0>><<effects>>
+
+당신의 엎드린 몸 위로 빛이 쏟아진다. 몸을 돌리기도 전에, 한 손이 당신의 목줄을 잡아당겨 당신을 일으켜 세운다.
+<br><br>
+
+"잡았다," <<personsimple_ 이>> 말한다. <<he_ 이>> 복도를 따라 당신을 끌고 내려가지만, 당신은 너무 눈이 부셔서 저항하지 못한다.
+<br><br>
+
+<<link [[다음|Trash Pass Out 4]]>><</link>>
+<br>
+
+:: Trash Pass Out 4
+<<set $location to "landfill">><<set $outside to 0>><<effects>>
+
+당신은 어느 정도 걸어 가, 금속으로 된 문 앞에 도착한다. 당신은 안으로 밀쳐져, 무릎을 꿇고 넘어진다. <<person2>><<person_ 와>> <<person3>><<person_ 이>> 줄지어 서 있는 모니터 화면에서 눈을 들어 쳐다본다.
+<br><br>
+
+뒤에서, <<person1>><<person_ 이>> 당신의 등을 짓밟아, 당신을 일어나지 못하게 한다. "이 녀석을 컨베이어에서 잡았어," <<he_ 이>> 킬킬 웃는다. "누가 이런 걸 버려놓은 거야?"
+<br><br>
+
+그들은 서로를 흘깃 쳐다보더니, 의자에서 일어난다. 그들 모두가 당신 주위로 다가온다.
+<br><br>
+
+<<link [[다음|Trash Pass Out Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Trash Pass Out Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[다음|Trash Pass Out Rape Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[다음|Trash Pass Out Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Pass Out Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Trash Pass Out Rape Finish
+<<set $location to "landfill">><<set $outside to 0>><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	당신이 도망치지 못하도록, 그들이 주위를 둘러싼다.
+	<br><br>
+
+	"<<phim_ 을>> 데리고 있으면 어떨까," <<person2>><<person_ 이>> 말한다. "만약 누가 와서 뭐냐고 물어보면, <<pshe_ rul>> 처리기기에서 잡아왔다 하면 되지."
+	<br>
+	<<person3>><<person_ 이>> 끄덕인다. "조금 훈련 시키면 <<pshe_ nun>> 좋은 애완동물이 될 거야. 이제 늙은 경비견들은 필요 없겠는걸?" 그들은 웃음을 터뜨린다.
+	<br>
+	<<person1>><<person_ 이>> 웃으며, 고개를 젓는다. "그런 위험을 감수할 가치가 없어," <<he_ 이>> 말한다. "그리고 만약 <<pshe_ 이>> 도망치면 어쩌려고? 이런 애새끼들이 이 아래까지 와서 뒤지고 다니는 일은 절대 있어선 안돼."
+	<br><br>
+
+	실망한 기색이 방을 가득 채우지만, <<he_ 이>> 벌써 당신을 일으켜 세워 문 밖으로 끌고 간다. 당신은 비틀거리며 <<himPost>>에게 끌려간다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[다음|Trash Pass Out Sewer]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	당신은 <<person1>><<person_ 을>> 모니터들 쪽으로 밀친다. 불꽃과 파편이 튄다. 다른 사람들이 당신에게서 떨어진다.
+	<br><br>
+
+	"이런 씨발," <<person_ 이>> 소리친다. "<<phim_ ul>> 잡아!"
+	<br><br>
+
+	<<tearful>> 당신은 방에서 도망쳐, 왔던 길로 되돌아간다. 당신은 나가는 길을 찾다가, 벽에 해치가 있는 것을 발견한다. 당신은 해치를 비집어 열고, 밖으로 빠져나간다. 뒤에서 해치가 휙 닫힌다. 당신은 엘크 가에 있다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<set $stress -= 2000>>
+	<<link [[다음|Elk Street]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+:: Trash Pass Out Sewer
+<<set $location to "drain">><<set $outside to 0>><<effects>>
+
+당신은 다른 복도로 끌려가, 마침내 어둡고, 축축한 터널에 도착한다. 그들이 당신을 문 밖으로 밀친다.
+<br><br>
+
+"이번 일은 우리끼리만 아는 비밀로 하자, 알았지? 네가 무단침입한 사실을 다른 사람이 알면 안 되니까."
+<br><br>
+
+웃음소리가 터널을 따라 메아리치고, 문이 쾅 닫히는 소리가 그 뒤를 잇는다. <<tearful>> 당신은 몸의 먼지를 털어낸다.
+<br><br>
+
+<<set $stress -= 2000>>
+<<link [[다음|Industrial Drain]]>><</link>>
+<br>
+
+:: Trash Beast
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Trash Beast Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Beast]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Trash Beast Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+
+	<<beasttype_ 이>> 기쁜 듯 짖고는, 멀어진다.
+	<br><br>
+
+	<<tearful>> 당신은 마음을 가다듬는다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<beasttype_ 이>> 낑낑거리며, 도망친다.
+	<br><br>
+
+	<<tearful>> 당신은 마음을 가다듬는다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+<</if>>
+
+
+:: Trash Swarm
+<<set $outside to 1>><<set $location to "landfill">><<effects>>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "maggots" "swarm" "crawling" "crawl" "keep back" 2 6>>
+
+	<<set $timer to 10>>
+<</if>>
+
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+
+<<if $timer lte 0>>
+	<span id="next"><<link [[다음|Trash Swarm Finish]]>><</link>></span><<nexttext>>
+<<elseif $stress gte $stressmax>>
+	<span id="next"><<link [[다음|Trash Swarm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Swarm]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Trash Swarm Finish
+<<set $outside to 1>><<set $location to "landfill">><<effects>>
+
+<<if $stress gte $stressmax>>
+	<<endcombat>>
+	<<passouttrash>>
+<<else>>
+	구더기가 당신에게서 떨어진다. <<tearful>> 당신은 구덩이를 빠져나간다.
+	<br><br>
+
+	<<endcombat>>
+	<<clotheson>>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+
+:: Trash Slime
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+<<generate1>><<person1>>"거기 당장 멈춰," 당신의 뒤에서 소리치는 목소리가 들린다. "여긴 사유지야. 여기서 씨발 뭐하는거야?"
+<br><br>
+
+Before you can assess your options,
+<<if numberOfEarSlime() gte 2>>
+	you feel the ear slime's influence. <span class="lewd">It's stronger now, redoubled. It commands you to give yourself to the <<person>>.</span> By now you know how good it will feel to comply.
+<<else>>
+	you feel an unnatural urge<<if $earSlimeDaysStat gte 100>>, one that you're already familiar with<<elseif $earSlimeDaysStat gte 2>>, one that you've felt before<</if>>.
+	<<if $earSlimeDaysStat gte 1>>
+		<span class="lewd">A new ear slime inside pressures you to give yourself to the <<person>>.</span> You know going along with the urges will feel very good.
+	<<else>>
+		<span class="lewd">Something inside pressures you to give yourself to the <<person>>.</span> Somehow you know going along with the urges will feel very good.
+	<</if>>
+<</if>>
+<br><br>
+
+<<if hasSexStat("promiscuity", 4) and $submissive gte 1900>>
+	<<link [[기꺼이 따른다|Trash Slime Submit willingly]]>>
+		<<corruption 3>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>>
+		<<if $earSlime.promiscuity lt 4>><<set $earSlime.promiscuity to 4>><</if>>
+		<<set $earSlime.startedThreats to true>>
+	<</link>><<promiscuous4>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+	<br>
+<</if>>
+<<link [[따른다|Trash Slime Obey]]>>
+	<<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>>
+	<<if $earSlime.promiscuity lt 2>><<set $earSlime.promiscuity to 2>><</if>>
+<</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+<br>
+<<if numberOfEarSlime() gte 2 and $earSlime.startedThreats>>
+	<<link [[반항한다|Trash Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+<<else>>
+	<<link [[무시한다|Trash Slime Defy]]>><</link>>
+<</if>>
+<br>
+
+
+:: Trash Slime Submit willingly
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+당신은 <<personPost>> 앞에 무릎을 꿇는다. "날 따먹어 줘," 당신이 말한다. 슬라임이 개입을 멈춘다.
+<br>
+<<promiscuity4>>
+
+<<person_ 이>> 주위를 살피곤, 작게 미소짓는다. "내게 사람들이 이끌리는 경향이 있긴 하지," <<he_ 이>> 말하며, 천천히 다가온다.
+<br><br>
+
+<<link [[다음|Trash Slime Rape]]>><<set $sexstart to 1>><</link>>
+<br>
+
+
+:: Trash Slime Obey
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+당신은 <<personPost>> 앞에 무릎을 꿇는다. "씨-씨발," 당신이 말한다. "씨발 날 따먹어 줘." 반 정도만이 당신이 하려던 말이다.
+<br><br>
+
+<<person_ 이>> 주위를 살피곤, 작게 미소짓는다. "내게 사람들이 이끌리는 경향이 있긴 하지," <<he_ 이>> 말하며, 천천히 다가온다.
+<br><br>
+
+<<link [[다음|Trash Slime Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+
+:: Trash Slime Defy
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+<<if numberOfEarSlime() gte 2 and $earSlime.startedThreats>>
+	<<if $earSlime.defyCooldown>>
+		<<if $earSlime.growth gte 100>>
+			<<set $earSlime.defyCooldown += 2>>
+			/* Likely unreachable, but included anyway */
+			You turn and run. You feel a jolt of pain as the slime punishes you for defiance, however, <span class="red">it doesn't stop you, knowing that it can punish you in other ways.</span>
+		<<else>>
+			You turn and run. You feel a jolt of pain as the slime punishes you for defiance, however, <span class="teal">it's still worn out from overpowering you earlier.</span> You feel it try, <span class="green">but fail,</span> to force your steps in the opposite direction.
+		<</if>>
+		<br><br>
+		<<endevent>>
+
+		<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+		<<if hasSexStat("promiscuity", 4) and $earSlime.growth lt 100>>
+			<<set $earSlime.defyCooldown += 4>>
+		<<else>>
+			<<set $earSlime.defyCooldown += 8>>
+		<</if>>
+		You turn and run. You feel a jolt of pain as the slime punishes you for defiance. It tries to force you to stay still, <span class="red">and you fail</span> to resist its influence.
+		<<ggwillpower>><<willpower 3>>
+		<br><br>
+		당신은 <<personPost>> 앞에 무릎을 꿇는다. "씨-씨발," 당신이 말한다. "씨발 날 따먹어 줘." 반 정도만이 당신이 하려던 말이다.
+		<br><br>
+
+		<<person_ 이>> 주위를 살피곤, 작게 미소짓는다. "내게 사람들이 이끌리는 경향이 있긴 하지," <<he_ 이>> 말하며, 천천히 다가온다.
+		<br><br>
+		<<link [[다음|Trash Slime Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		You turn and run. You feel a jolt of pain as the slime punishes you for defiance, however, you feel it try, <span class="green">but fail,</span> to force your steps in the opposite direction.
+		<<gwillpower>><<willpower 1>>
+		<br><br>
+		<<endevent>>
+
+		<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	당신은 뒤로 돌아 도망친다. 그것이 당신에게 하게 한 약속을 기억하면서, 잠시 당신의 발걸음이 흔들린다.
+	<br><br>
+	<<tearful>> 당신은 당신이 방금 무엇을 느꼈는지 확신하지 못한 상태에서, 어떻게든 비틀거리며 도망쳐서, 낡은 차 뒤에 몸을 웅크리고 숨는다.
+	<br><br>
+	<<if numberOfEarSlime() is 1>>
+		<i>슬라임에게 순종하는 것은 이익을 제공해 주지만, 당신의 오염도를 증가시킵니다. 그것의 영향력이 커지면, 슬라임은 더욱 강력해지고, 반항하기 더욱 어려워질 것입니다.</i>
+		<br><br>
+	<</if>>
+
+	<<endevent>>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+
+:: Trash Slime Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $noFinish to 1>>
+	<<maninit>>
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<set $noFinish to 1>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Trash Slime Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Slime Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Trash Slime Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<person_ 이>> 옷을 고쳐 입고 떨어진다. "나 아직 살아있네," 당신은 <<him_ 이>> 말하는 것을 듣는다.
+	<br><br>
+
+	슬라임의 영향력이 사라지자 당신은 무릎을 펴고 일어난다.
+<<else>>
+	당신은 <<person_ 을>> 밀쳐낸다. "이런 미친-" 당신은 <<him_ 이>> 물러서며 중얼거리는 것을 듣는다.
+	<br><br>
+
+	슬라임이 반항에 대한 처벌을 내려 온몸에 찢어질 듯한 고통이 밀려온다.
+	<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><<lcorruption true>><<ggpain>><<ggtrauma>><<ggstress>>
+	<br><br>
+<</if>>
+
+<<tearful>> 당신은 몸을 바로잡는다.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+<<endevent>>
+
+<<if numberOfEarSlime() is 1>>
+	<i>슬라임에게 순종하는 것은 이익을 제공해 주지만, 당신의 오염도를 증가시킵니다. 오염도가 올라 슬라임이 더욱 강력해지면, 저항하기 더욱 힘들어집니다.</i>
+	<br><br>
+<</if>>
+
+<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+
+
+:: Trash Brace
+<<effects>>
+
+당신은 마음을 다잡는다. 당신의 뒤에서 인공적인 부속기관이 솟아오른다.
+<br><br>
+
+<<link [[다음|Trash Machine]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Trash Break
+<<effects>>
+
+<<if $physiqueSuccess>>
+	당신은 당신의 발목에 묶인 족쇄를 풀기 위해 잡아당긴다. 찰칵 하는 소리와 함께, <span class="green">닳은 금속이 당신의 힘으로 부서진다.</span> 당신은 재빨리 그 기계에서 떨어지자 인공 부속기관이 당신을 잡으려 하지만, 빈 공기만을 잡을 뿐이다.
+	<br><br>
+
+	붉은 빛이 사라지고, 기계가 다시 땅속으로 사라진다.
+	<br><br>
+
+	<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	당신은 당신의 발목에 묶인 족쇄를 풀기 위해 잡아당기지만, <span class="red">그것은 더욱 꽉 조여지며</span> 인공 부속기관이 당신 뒤의 바닥에서 튀어나온다.
+	<br><br>
+
+	<<link [[다음|Trash Machine]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Trash Machine
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<set $machine_health to 10>><<set $machine_ammo to 8>>/*Used by following widget. Must be set.*/
+	<<if $player.vaginaExist>>
+		<<machine_init vaginal arm_chains>>
+		<<set $machine.vaginal.armed to 1>>
+	<<else>>
+		<<machine_init anal arm_chains>>
+		<<set $machine.anal.armed to 1>>
+	<</if>>
+	<<set $position to "doggy">>
+	<<set $timer to 30>>
+<</if>>
+
+<<effects>>
+
+<<machine_effects>><<machine_combat>>
+<<machine_state>>
+
+
+
+<br><br>
+<<machine_actions>>
+
+<<if $machine.number lte 0 or $finish is 1 or $timer lte 1>>
+	<span id="next"><<link [[다음|Trash Machine End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Trash Machine]]>><</link>></span><<nexttext>>
+<</if>>
+<br>
+
+
+
+:: Trash Machine End
+<<effects>>
+
+불빛이 깜박거리며 사라지고, 족쇄가 풀린다. 당신이 허둥지둥 멀어지자 기계가 다시 땅속으로 사라진다.
+
+<<machine_end>>
+<<clotheson>>
+
+<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Trash Plate
+<<effects>>
+
+<<if $housekeepingSuccess>>
+	당신은 누더기가 된 천을 발견한다. 침을 좀 뱉어줘야 했지만, <span class="green">당신은 그것을 덮고 있던 먼지를 닦아낼 수 있었다.</span> 그 아래의 금속은 오히려 변색되지 않았다. 당신이 거기에서 "베일리" 라는 단어를 알아보자 당신은 근심과 불안이 복잡하게 얽히는 것을 느낀다. 두번째 단어는 "광산"이다. 거기에는 연도도 적혀 있다, 1912년.
+	<br><br>
+	그것은 어떤 표지판처럼 보인다. 어쩌면 수집가에게는 가치가 있을지도 모른다.
+	<br><br>
+	<<set $antiquemoney += 140>><<museumAntiqueStatus "antiqueminesign" "found">>
+<<else>>
+	당신은 그것을 덮고 있는 먼지를 떼어내 보지만, 그것은 너무나도 딱딱해서, 마치 색이 바랜 금속인 것 같다. 몇 분의 결실 없는 시도 끝에 <span class="red">당신은 포기한다</span>.
+	<br><br>
+
+<</if>>
+
+<<link [[다음|Trash]]>><<set $eventskip to 1>><</link>>
+<br>

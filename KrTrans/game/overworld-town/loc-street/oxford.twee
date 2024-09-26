@@ -1,0 +1,252 @@
+:: Oxford Street
+
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "oxford">><<getTarget true>>
+당신은 옥스포드 가에 있다. 다양한 건물이 늘어서 있지만, 가장 눈에 띄는 것은 학교다.
+<<if Time.schoolDay>>
+	<<if Time.dayState is "day">>
+		<<if Weather.precipitation is "rain">>
+			비가 오고 있어도 거리는 부산스럽다.
+		<<elseif Weather.isFreezing>>
+			거리는 추위에도 불구하고 붐빈다.
+		<<else>>
+			<<if Time.hour gte 7 and Time.hour lte 16>>
+				학교에서 수다 소리와 웃음 소리가 들려온다.
+			<<else>>
+				근처에 학생들이 모여있다.
+			<</if>>
+		<</if>>
+	<<elseif Time.dayState is "dawn">>
+		근처에 학생들이 모여있다.
+	<<elseif Time.dayState is "dusk">>
+		몇몇 학생들이 여전히 교복을 입은 채로 모여서 남아있다.
+	<<elseif Time.dayState is "night">>
+		도시 한복판에 위치한 탓에 이 시간에도 사람들이 걸어다니고 있다.
+	<</if>>
+<<else>>
+	<<if Time.dayState is "day">>
+		<<if Weather.precipitation is "rain">>
+			비가 오고 있어도 거리는 부산스럽다.
+		<<elseif Weather.isFreezing>>
+			거리는 추위에도 불구하고 붐빈다.
+		<<else>>
+			많은 자동차와 행인들이 지나다니고 있다.
+		<</if>>
+	<<elseif Time.dayState is "dawn">>
+		<<if Weather.precipitation is "rain">>
+			사람들은 비를 벗어나려 열심인 채, 서둘러 직장에 오고 있다.
+		<<elseif Weather.isFreezing>>
+			사람들은 추위를 피하려 열심인 채, 서둘러 직장에 오고 있다.
+		<<else>>
+			사람들이 직장에 오고 있다.
+		<</if>>
+	<<elseif Time.dayState is "dusk">>
+		<<if Weather.precipitation is "rain">>
+			사람들은 비를 벗어나려 열심인 채, 서둘러 집으로 돌아가고 있다.
+		<<elseif Weather.isFreezing>>
+			사람들은 추위를 피하려 열심인 채, 서둘러 집으로 돌아가고 있다.
+		<<else>>
+			하루의 끝에 사람들이 집으로 돌아가고 있다.
+		<</if>>
+	<<elseif Time.dayState is "night">>
+		<<if Weather.precipitation is "rain">>
+			비도 오고 시간도 늦었지만 사람들은 걸어다니고 있다.
+		<<elseif Weather.isSnow>>
+			사람들은 어둠과 눈을 무릅쓰고 걸어다니고 있다.
+		<<else>>
+			도시 한복판에 위치한 탓에 이 시간에도 사람들이 걸어다니고 있다.
+		<</if>>
+	<</if>>
+<</if>>
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "street">>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutstreet>>
+<<elseif $mathsproject is "ongoing" and $stimdealerknown isnot 1 and !$possessed>>
+	<<set $stimdealerknown to 1>>
+	<<generatey1>><<person1>>당신은 저 앞에 수학 수업을 같이 듣는 <<personPost "이">> 있는 걸 본다. <<HePost "은">> 학교 건너편 골목길 끝에 다른 여러 학생들과 함께 모여있다. 그들은 그림자 안쪽에서 두꺼운 코트를 입고 있는 인물과 대화하고 있다.
+	<br><br>
+	보고 있자니, 봉투가 손에서 손으로 오간다. <<personPost "이">> 손에 든 걸 놓치는 바람에, 보도 위에 밝은 색의 알약이 가득한 작은 비닐 봉투가 떨어진다. 멀리서 경찰차 사이렌 소리가 들려오자, 코트를 입고 있는 인물이 그림자 속으로 사라진다. 학생들이 떠나가는 동안 <<personPost "은">> 알약을 주워 담고는 다른 학생들의 뒤를 쫓아 달린다.
+	<br><br>
+	당신을 스쳐지나가며 <<hePost "을">> 비웃는 다른 학생들의 말이 들려온다. "이 약에 대한 얘기를 들어본 적이 없다니 말도 안돼."
+	<br>
+	"루저들이나 평범하게 공부하느라 시간을 낭비하는 거야..."
+	<br><br>
+	이 근처에서 딜러와 거래하는 학생들을 본 게 처음은 아니다. 하지만 학생들이 학업을 위해 약을 사는 걸 들은 건 처음이다. 그래서 이 근처에 딜러들이 자주 보이는 것 같다.
+	<br><br>
+	<span class="gold">이제 옥스포드 가에서 각성제 딜러와 만날 수 있다.</span>
+	<br><br>
+	<<link [[다음|Oxford Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif C.npc.Avery.state is "active" and $averyschoolpickup is 0 and Time.schoolDay and Time.hour is 15 and $exposed lte 0 and ((C.npc.Avery.love gte random(20, 100) and ($rng gte 50 or Weather.precipitation isnot "none")) or (C.npc.Avery.love gte 20 and Time.weekDay is 2))>>
+<<npc Avery>><<person1>>
+<<set $averyschoolpickup to 1>>
+
+	<<if $averyschoolpickupintro is 1 and Time.season is "winter" and crimeSumCurrent() lt 1000 and random(1,5) is 1>>
+		As you exit the school, you notice pedestrians hastily walking by, trying to escape the cold wind. A car pulls up beside you. The window rolls down, revealing Avery inside. <<He>> smiles at you. "Hello there, <<pcpetname "Avery">>. It's a bit chilly today."
+		<br><br>
+
+		<<if $speech_attitude is "meek">>
+			"Y-Yeah, it sure is cold." You stop and greet Avery with a shy smile.
+		<<elseif $speech_attitude is "bratty">>
+			"Yeah, it's a bit nippy today." You stop and kick a small pebble off the side of the road. "I wish somebody would warm me up."
+		<<else>>
+			"It is quite cold, isn't it?" You stop and nod at Avery.
+		<</if>>
+		<br><br>
+
+		"Get in. I'll get you something warm to drink."
+		<br><br>
+
+		<<getinicon>><<link [[Get in (0:10)|Avery Pub Winter]]>><<pass 10>><</link>><br>
+		<<refuseicon>><<link [[거절한다|Avery School Pickup Refuse]]>><<npcincr Avery rage 5>><<npcincr Avery love -1>><</link>><<garage>><<llove>>
+
+	<<elseif $averyschoolpickupintro is 1 and $fame.business gte 400 and random(1,10) is 1 and !Weather.isOvercast>>
+		당신이 건물을 막 나가려고 하는데, 엄청난 소리가 들린다. 학생 몇십 명이 밖에 모여 학교 구역 내로 내려오는 헬리콥터를 보고 있다. 헬리콥터의 탑승구 중 하나가 활짝 열린다. 에이버리가 안쪽에서 손짓한다.
+		<br><br>
+
+		"이리 와, 빨리, 온종일 기다릴 수 없다고! 중요한 사업이 기다리고 있어!"
+		<br><br>
+
+		<<link [[헬리콥터에 올라탄다 (0:20)|Avery Helicopter]]>><<npcincr Avery love 2>><</link>><<gglove>>
+		<br>
+		<<link [[걸어서 떠나간다|Avery Helicopter Walk]]>><<npcincr Avery love -1>><<npcincr Avery rage 5>><</link>><<garage>><<llove>>
+	<<else>>
+		<<npc Robin 2>><<person1>>
+		<<set _robin to statusCheck("Robin")>>
+		<<set $pickupRobinPresent to 0>>
+		<<if $robindebtevent lt 1 and _robin_location is "school" and random(1, 2) is 1>>
+			<<set $pickupRobinPresent to 1>>
+		<</if>>
+
+		<<if $averyschoolpickupintro is 1>>
+			차 한 대가 당신의 옆에 선다. 문이 열리고, <<if $pronoun is "m">>정장을 입은 남성<<else>>맵시 있는 드레스를 입은 여성<</if>>이 나타난다. 에이버리다. "내가 태워줄게." <<hePost "이">> 말한다. "타렴."
+		
+			<<if $pickupRobinPresent is 1>>
+				<br><br>
+
+				You catch a glimpse of Robin sheepishly moving next to you. <<person2>><<He>> looks at you, waiting for your answer.
+			<</if>>
+		<<else>>
+			<<set $averyschoolpickupintro to 1>>
+			비싸보이는 차가 당신의 앞에 선다. 당신 주위에 있는 대부분의 학생이 멈춰 서 경외심을 갖고 쳐다본다. 창문이 내려가자 당신은 운전자를 알아본다. 에이버리다. "거기 있었네," <<hePost "이">> 미소를 지으며 말한다. "퇴근하고 오는 길인데, 널 데리러 가야겠다고 생각이 들었어."
+			<br><br>
+
+			몇몇 학생들이 서로 속삭인다. 그들은 당신이 어떻게 그런 대우를 받을 수 있는지 놀라워한다.<<gcool>><<status 1>>
+
+			<<if $pickupRobinPresent is 1>>
+				<br><br>
+
+				Robin emerges from within the crowd.
+				<br><br>
+
+				"Is everything alright?" <<person2>><<He>> asks in a worried tone. "I thought there was a fight, why is everyone..." <<He>> stops as <<he>> recognises the vehicle and its owner.
+				<br><br>
+
+				Avery's enthusiasm dwindles when <<person1>><<he>> notices Robin standing next to you. "Your friend can come, too," <<he>> says. Robin turns to you, worried, waiting for your answer.
+			<</if>>
+		<</if>>
+		<br><br>
+		<<if $pickupRobinPresent is 1>>
+			<<getinicon>><<link [[올라탄다|Avery School Pickup Accept]]>><<set $phase to 0>><</link>>
+			<br>
+			<<refuseicon>><<link [[거절한다|Avery School Pickup Robin Refuse]]>><<npcincr Avery rage 5>><<npcincr Avery love -1>><</link>><<garage>><<llove>>
+			<br>
+		<<else>>
+			<<getinicon>><<link [[올라탄다|Avery School Pickup Accept]]>><<set $phase to 1>><</link>>
+			<br>
+			<<refuseicon>><<link [[거절한다|Avery School Pickup Refuse]]>><<npcincr Avery rage 5>><<npcincr Avery love -1>><</link>><<garage>><<llove>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "oxford">>
+			<br>
+		<</if>>
+		<<set _robin to statusCheck("Robin")>>
+		<<if $robindebtevent gte 1>>
+		<<elseif Time.hour is 15 and _robin_location is "school" and $exposed lte 0>>
+			당신은 로빈이 상점 창문을 들여다보는 걸 본다.
+			<br>
+			<<if _robin.trauma gte 80>>
+				<<homeicon>><<link [[로빈과 함께 집까지 걸어간다 (0:40)|Robin Walk Home]]>><<run setRobinLocationOverride("orphanage", 15)>><<endevent>><<pass 40>><</link>><<glove>>
+				<br><br>
+			<<else>>
+				<<if ($player.gender is "f" or $player.gender is "h") and $worn.upper.exposed gte 2 and $genderknown.includes("Robin")>>
+					<<homeicon>><<link [[로빈과 함께 집까지 걸어간다 (0:15)|Robin Walk Home Topless]]>><<run setRobinLocationOverride("orphanage", 15)>><<endevent>><<pass 15>><</link>><<glove>><<glust>>
+				<<else>>
+					<<homeicon>><<link [[로빈과 함께 집까지 걸어간다 (0:20)|Robin Walk Home]]>><<run setRobinLocationOverride("orphanage", 15)>><<endevent>><<pass 20>><</link>><<glove>>
+				<</if>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<if Time.schoolDay and Time.hour is 15 and $exposed lte 0 and Weather.precipitation is "none">>
+			근처에서 학생들이 대화를 나누고 있다. 호수에 간다는 것 같다.
+			<br>
+			<<if $town_projects.road gte 4>>
+				<<lakeicon>><<link [[동참한다 (0:15)|Lake Journey Road]]>><<pass 15>><</link>>
+			<<else>>
+				<<lakeicon>><<link [[동참한다 (0:30)|Lake Journey]]>><<pass 30>><</link>>
+			<</if>>
+			<br><br>
+		<</if>>
+		주요 장소
+		<br>
+		<<if Time.schoolDay and Time.hour gte 7 and Time.hour lte 16>>
+			<<schoolicon>><<link [[학교 (0:02)|School Front Courtyard]]>><<pass 2>><</link>>
+			<br>
+		<<else>>
+			<<schoolicon>><<link [[학교 (0:01)|School Locked]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+		<<if Time.isWeekEnd() and Time.dayState is "day" and $town_projects.diving isnot 3>>
+			<<if $exposed lte 0>>
+				<<museumicon>><<link [[박물관 (0:01)|Museum]]>><<pass 1>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $exposed lte 0>>
+				<<museumicon>><<link [[박물관 (0:01)|Museum Lock]]>><<pass 1>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $stimdealerknown is 1 and $mathsproject is "ongoing" and $exposed lte 0>>
+			<<pillicon "stimulant">><<link [[각성제 판매상|Stim Dealer]]>><</link>>
+			<br>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+		<<add_link "이동<br>">><<hideDisplay>>
+			<<starfish>>
+			<<nightingale>>
+			<<mer>>
+			<<elk>>
+			<<if $exposed lte 0>>
+				<<buswait>>
+			<</if>>
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>다른 경로<br>">><<hideDisplay>>
+		<<park>>
+		<<industrial>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "oxford">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

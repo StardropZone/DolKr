@@ -1,0 +1,662 @@
+:: Bondage Run
+
+<<effects>>
+당신은 몸을 수그리고 할 수 있는 한 빠르게 걷는다. 당신은 항상 벽 가까이에 있으려 하고, 당신이 길이라 생각하는 쪽에는 거리를 둔다. 당신은 당신이 이런 수치스러운 상황에 처한 걸 보는 이가 없기를 바라지만, 당신에게 도움이 필요하다는 점은 알고 있다.
+<br><br>
+<<set $phase to 1>>/*Makes events always trigger*/
+<<destinationbondage>>
+
+:: Bondage Hide
+
+<<effects>>
+당신은 보다 안전한 자세를 취하려 벽 옆에 몸을 수그린다.
+<br><br>
+<<destinationbondage>>
+
+:: Bondage Wolf
+
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "wolf">>
+
+당신의 발 아래에 흙이 느껴지고 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 마을의 소리가 들린다.<<else>>불쾌할 정도로 가까이서 늑대 울음소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagesouth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "nightingale">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "commercial">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "danube">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Nightingale
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "nightingale">>
+
+당신의 발 아래에 흙이 느껴지고 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 마을의 소리가 들린다.<<else>>불쾌할 정도로 가까이서 늑대 울음소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagesouth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "elk">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "park">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "wolf">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Danube
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "danube">>
+
+당신의 발 아래에 흙이 느껴지고 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 마을의 소리가 들린다.<<else>>불쾌할 정도로 가까이서 늑대 울음소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagesouth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "wolf">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "residential">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "domus">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Park
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "park">>
+
+당신의 발 아래에 흙이 느껴지고 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 마을의 소리가 들린다.<<else>>근처에서 개가 짖는다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagesouth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "oxford">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "starfish">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "high">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "nightingale">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Elk
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "elk">>
+
+근처에서 무거운 트럭들이 우르릉대는 소리가 나고, 매캐한 화학약품 냄새가 난다.
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondageeast>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "harvest">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "industrial">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "oxford">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "nightingale">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Harvest
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "harvest">>
+
+근처에서 무거운 트럭들이 우르릉대는 소리가 나고, 매캐한 화학약품 냄새가 난다.
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondageeast>>
+	<<else>>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "mer">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "industrial">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "elk">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Oxford
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "oxford">>
+
+근처에서 무거운 트럭들이 우르릉대는 소리가 나고, 매캐한 화학약품 냄새가 난다.
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondageeast>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "industrial">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "starfish">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "park">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "nightingale">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Industrial
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "industrial">>
+
+근처에서 무거운 트럭들이 우르릉대는 소리가 나고, 매캐한 화학약품 냄새가 난다.
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondageeast>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "harvest">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "mer">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "oxford">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "elk">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Mer
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "mer">>
+
+바다 냄새와 함께 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 항만에서 일하는 소리가 들린다.<<else>>파도 부서지는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagenorth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "harvest">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "starfish">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "elk">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Starfish
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "starfish">>
+
+바다 냄새와 함께 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 항만에서 일하는 소리가 들린다.<<else>>파도 부서지는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagenorth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "mer">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "cliff">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "park">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Cliff
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+
+바다 냄새와 함께 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 항만에서 일하는 소리가 들린다.<<else>>파도 부서지는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagenorth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "starfish">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "barb">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "commercial">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage High
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "high">>
+
+바다 냄새와 함께 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 항만에서 일하는 소리가 들린다.<<else>>파도 부서지는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagenorth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "park">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "cliff">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "commercial">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "wolf">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Commercial
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "commercial">>
+
+바다 냄새와 함께 <<if Time.hour gte 7 and Time.hour lte 20>>멀리서 항만에서 일하는 소리가 들린다.<<else>>파도 부서지는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagenorth>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "high">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "barb">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "connudatus">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "danube">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Connudatus
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "connudatus">>
+
+당신의 발 아래서 포장도로가 느껴지고 <<if Time.hour gte 7 && Time.hour lte 20>>근처에서 자동차와 지나다니는 사람들 소리가 들린다.<<else>>근처에서 가끔씩 차가 지나가는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagewest>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "commercial">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "cliff">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "residential">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "danube">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Barb
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "barb">>
+
+당신의 발 아래서 포장도로가 느껴지고 <<if Time.hour gte 7 && Time.hour lte 20>>근처에서 자동차와 지나다니는 사람들 소리가 들린다.<<else>>근처에서 가끔씩 차가 지나가는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagewest>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "connudatus">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "cliff">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "domus">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "danube">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Domus
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">>
+
+당신의 발 아래서 포장도로가 느껴지고 <<if Time.hour gte 7 && Time.hour lte 20>>근처에서 자동차와 지나다니는 사람들 소리가 들린다.<<else>>근처에서 가끔씩 차가 지나가는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagewest>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "residential">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "barb">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "danube">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Bondage Residential
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "residential">>
+
+당신의 발 아래서 포장도로가 느껴지고 <<if Time.hour gte 7 && Time.hour lte 20>>근처에서 자동차와 지나다니는 사람들 소리가 들린다.<<else>>근처에서 가끔씩 차가 지나가는 소리가 들린다.<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">해진 눈가리개가 당신의 머리 주위에서 조각나 버리며, 당신은 자유로워진다.</span> 당신은 눈을 가늘게 뜨고 빛을 바라본다.
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagewest>>
+	<<else>>
+		<<link [[기계 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "connudatus">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[바다 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "barb">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[자동차 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "domus">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[마을 소리가 나는 쪽으로 달린다 (0:05)|Bondage Run]]>><<set $bus to "danube">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[숨는다 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>

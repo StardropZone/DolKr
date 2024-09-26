@@ -1,0 +1,113 @@
+:: StoryData
+{
+"ifid": "A6AFB52D-38F2-4CB5-86A8-54BF665670D6",
+"format": "SugarCube",
+"format-version": "2.23.4"
+}
+
+:: StoryTitle
+Degrees of Lewdity
+
+:: Start [nosave exitCheckBypass]
+<<if $intro is undefined>>
+	<<gameStartOnly>>
+<</if>>
+
+<<if $options.images is 1>>
+	<<banner>>
+<</if>>
+
+본 작품에는 성적인 내용이 존재하며 미성년자에게는 부적절합니다. 작품에서 <span class="camouflage text"><a onclick="V.debug = 1, V.options.debugdisable = 'f', V.options.maxSessionStates = 5, V.options.historyControls = true">묘</a></span>사된 모든 등장인물은 만 18세 이상입니다. 모든 행위는 합의된 역극이고, 모든 짐승은 사실 코스튬을 차려입은 사람들입니다.
+<br><br>
+
+<div class="small-description">
+- 세이브 파일은 브라우저 캐시에 저장됩니다. 세이브 파일이 소실되지 않게 하려면 "세이브"의 내보내기/가져오기 탭에서 외부 파일이나 텍스트 형태로 저장해주시기 바랍니다.
+<br>
+- 더 많은 인-게임 설정은 사이드바의 "옵션" 탭을 확인하시기 바랍니다!
+
+<br><br></div>
+
+<<set $settingsExitPassage to "Start2">>
+<<initsettings>>
+<div id="settingsStart">
+	<<settingsStart>>
+</div>
+
+:: Start2 [nosave exitCheckBypass]
+
+<<variablesStart2>>
+
+Degrees of Lewdity의 첫 페이지에 오신 것을 환영합니다!
+<br><br>
+
+문제가 일어나는 걸 피하고 싶다면, 얌전한 옷을 입고, 안전하며 밝은 쪽에 있으세요. 밤은 특별히 위험합니다. 음란하게 차려입는다면 좋은 쪽으로든 나쁜 쪽으로든 이목을 끌게 됩니다.
+<br><br>
+
+<<if Time.season is "winter">>
+	학교의 학기는 1월의 첫 번째 월요일 <<ampm 9 0>>에 시작합니다. 마을을 돌아다니는 가장 쉬운 방법은 버스를 타는 겁니다. 교복과 책가방을 잊지 마세요!
+<<elseif Time.season is "spring" or Time.season is "summer">>
+	학교는 내일 <<ampm 9 0>>에 시작합니다. 마을을 돌아다니는 가장 쉬운 방법은 버스를 타는 겁니다. 교복과 책가방을 잊지 마세요!
+<<else>>
+	학교의 신학기는 내일 <<ampm 9 00>>에 시작합니다. 마을을 돌아다니는 가장 쉬운 방법은 버스를 타는 겁니다. 교복과 책가방을 잊지 마세요!
+<</if>>
+<br><br>
+
+<<doVersionCheck>>
+
+<<link [[다음|Orphanage Intro]]>><</link>>
+
+<br><br>
+
+<<if $debug is 1>>
+	이하의 옵션은 치트가 활성화되고 £5000를 가진 채로 시작하게 됩니다
+	<br>
+	<<link [[표준 시작|Orphanage Intro]]>><<cheatStart>><</link>>
+	<br>
+	<<link [[학교 시작|Oxford Street]]>><<cheatStart>><<pass 1 day>><</link>>
+	<br>
+	<<link [[과학 시작|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 2 hours>><</link>>
+	<br>
+	<<link [[수학 시작|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 3 hours>><</link>>
+	<br>
+	<<link [[영어 시작|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 4 hours>><</link>>
+	<br>
+	<<link [[역사 시작|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 6 hours>><</link>>
+	<br>
+	<<link [[수영 시작|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 7 hours>><</link>>
+	<br>
+	<<link [[실험실|Testing Room]]>><<cheatStart>><<upperstrip>><<lowerstrip>><<underlowerstrip>><</link>>
+	<br>
+	<<link [[로빈 낮은 트라우마 낮은 사랑|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set C.npc.Robin.love to 0>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 2>><<trauma 60>><</link>>
+	<br>
+	<<link [[로빈 낮은 트라우마 중간 사랑|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set C.npc.Robin.love to 50>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 2>><<trauma 60>><</link>>
+	<br>
+	<<link [[로빈 낮은 트라우마 높은 사랑|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set C.npc.Robin.love to 90>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 2>><<trauma 60>><</link>>
+	<br>
+	<<link [[로빈 높은 트라우마 낮은 사랑|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set C.npc.Robin.love to 0>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[로빈 높은 트라우마 중간 사랑|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set C.npc.Robin.love to 50>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[로빈 높은 트라우마 높은 사랑|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set C.npc.Robin.love to 90>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[로빈 경찰에게 벌금 지불 후|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $daily.robin.policePay to 1>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[로빈 경찰에게 몸으로 지불 후|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $daily.robin.policeBody to 1>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[로빈 빚 청산됨|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $robinpaid to 1>><<set C.npc.Robin.init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br><br>
+
+	<<link [[검은 늑대|ForestHuntDebug]]>><<cheatStart>><<npc "Black Wolf">><<ruined>><<endevent>><<set $blackwolfhunt to 1>><<set $wolfpacktrust to 10>><</link>>
+
+
+	<br><br>
+
+	<<link [[겨울 시작|Orphanage Intro]]>><<set Time.startDate to new DateTime(2022, 12, 4, 7)>><</link>> (겨울이 시작되는 날에 시작합니다. 테스트용.)
+	<br>
+
+	<<link [[크리스마스 시작|Orphanage Intro]]>><<npc Kylar>><<person1>><<endevent>><<set C.npc.Kylar.state to "active">><<set Time.startDate to new DateTime(2022, 12, 23, 7)>><<set $money += 50000>><</link>> (크리스마스 이틀 전에 시작합니다. 테스트용.)
+	<br>
+
+	<<link [[발렌타인 데이 시작|Orphanage Intro]]>><<set Time.startDate to new DateTime(2022, 2, 12, 7)>><</link>> (발렌타인 데이 이틀 전에 시작합니다. 테스트용.)
+	<br>
+
+<</if>>

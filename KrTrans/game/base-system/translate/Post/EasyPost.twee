@@ -1,0 +1,58 @@
+:: Widgets EasyPost [widget nobr]
+/* 조사 매크로를 쉽게 사용하기 위한 메타-매크로 */
+
+/*
+	대부분 EasyPost.js 로 넘어감
+	여기 남은 것들은 추가로 인수가 필요한 경우 사용되는 wrapper 및 조사가 필요없는 매크로들임.
+*/
+/*
+	구버전 체크 RegEx
+	<<([a-zA-Z0-9_]+)_(un|nun|i|ga|ul|rul|gwa|wa|irang|rang|a|ya|iyo|yo|iya|uro|ro|uroseo|roseo|urosseo|rosseo|urobuter|robuter|ira|ra|iut|yeot|irago|rago|ina|na|iran|ran|idunga|dunga|idonga|donga|idunji|dunji|idonji|donji|iyamalro|yamalro|iguna|guna|ida|da|iji|ji|yi)([ >])
+	<<\1_ \2\3
+*/
+/* 테스트 */
+<<widget "testEasyPost">><<print `testEasyPost: args[0]= ${_args[0]}, args[1]= ${_args[1]}, args[2]= ${_args[2]}, args[3]= ${_args[3]}`>><</widget>>
+
+/* wordify_i workaround 
+	구버전 체크시 wordify_i 위젯 (사용처 base-system/tending.twee)까지 걸리는 바람에 추가한 workaround 위젯
+	가급적 체크 후 해당 부분을 찾아 원래대로 돌려놓는게 좋다.
+*/
+<<widget "wordify_">><<wordify_i _args[1] _args[2]>><</widget>>
+
+/* trClothes */
+<<widget "worn_butt_plug_name">><<trClothes "butt_plug" $worn.butt_plug.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_face_name">><<trClothes "face" $worn.face.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_feet_name">><<trClothes "feet" $worn.feet.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_genitals_name">><<trClothes "genitals" $worn.genitals.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_handheld_name">><<trClothes "handheld" $worn.handheld.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_hands_name">><<trClothes "hands" $worn.hands.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_head_name">><<trClothes "head" $worn.head.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_legs_name">><<trClothes "legs" $worn.legs.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_lower_name">><<trClothes "lower" $worn.lower.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_neck_name">><<trClothes "neck" $worn.neck.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_over_head_name">><<trClothes "over_head" $worn.over_head.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_over_lower_name">><<trClothes "over_lower" $worn.over_lower.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_over_upper_name">><<trClothes "over_upper" $worn.over_upper.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_under_lower_name">><<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_under_lower_name_simple">><<trClothes "under_lower" $worn.under_lower.name_simple "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_under_upper_name">><<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "worn_upper_name">><<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>><<print _trResult>><</widget>>
+
+/* trVore */
+<<widget "vorecreature">><<trVore $vorecreature _args[0] _args[1]>><<print _trResult>><</widget>>
+
+/* trStruggle */
+<<widget "struggle_mouth_creature">><<trStruggle $struggle.mouth.creature _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "struggle_vagina_creature">><<trStruggle $struggle.vagina.creature _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "struggle_penis_creature">><<trStruggle $struggle.penis.creature _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "struggle_anus_creature">><<trStruggle $struggle.anus.creature _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "struggle_chest_creature">><<trStruggle $struggle.chest.creature _args[0] _args[1]>><<print _trResult>><</widget>>
+
+/* swarm */
+<<widget "swarmtype">><<trSwarm $swarm.type _args[0] _args[1]>><<print _trResult>><</widget>>
+<<widget "swarmname">><<trSwarm $swarm.name _args[0] _args[1] _args[2]>><<print _trResult>><</widget>>
+
+/* swarm actions */
+<<widget "swarmmove">><<trSwarmAction $swarm.move>><<print _trResult>><</widget>>
+<<widget "swarmspill">><<trSwarmAction $swarm.spill>><<print _trResult>><</widget>>
+<<widget "swarmsteady">><<trSwarmAction $swarm.steady>><<print _trResult>><</widget>>

@@ -1,0 +1,1265 @@
+:: Wolf Cave Fight
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	당신은 <<beasttypePost "을">> 더 쉽게 흥분시키기 위해서 몸을 움직인다. 
+	<<deviancy1>><<set $enemytrust -= 20>>
+		<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<set $enemytrust -= 40>>
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate '<span class="red">무리는 너무 바빠서 당신을 도울 수 없다.</span>'>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Wolf Cave Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Wolf Cave Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wolf Cave Help
+<<set $location to "wolf_cave">><<effects>>
+
+당신은 도움을 요청한다.
+
+<<if $wolfpackharmony gte 1>>
+	다른 <<beastspluralPost "이">> 공격자에게 으르렁거리고, 공격자는 이에 응하여 슬그머니 도망친다.
+	<<lharmony>>
+	<br><br>
+
+	<<destinationwolfcave>>
+<<else>>
+	다른 <<beastspluralPost "은">> 신경쓰지 않는다.
+	<br><br>
+
+	<<link [[다음|Wolf Cave Fight]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Wolf Cave Fight Finish
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>><<wolfpacktrust>>
+	<br>
+	<<beasttypePost "이">> 하품을 하며 누워있다.
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $enemyhealth lte 0>>
+	<<beasttypePost "이">> 당신에게서 멀어진다. <<if $monster is 1>>"그냥 노는거야... 너무 거칠지만..."<</if>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $rescue is 1 and $alarm is 1>><<set $rescued += 1>>
+	다른 <<beastspluralPost "이">> 으르렁거리고 <<beasttypePost "이">> 당신을 공격한다. <<bHePost "은">> 처음에 으르렁거리다, 뒤로 물러서서 당신을 내버려두고 가버린다.
+	<<lharmony>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+	<<beasttypePost "이">> 하품하고 드러눕는다.
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<destinationwolfcave>>
+
+:: Wolf Cave Rank
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $phase is 0>>
+	당신이 낮은 서열의 <<beasttypePost 0 "을">> 쓰다듬자, 그의 귀가 쫑긋 선다. 서열이 더 높은 <<beasttypePost 1 "이">> 으르렁대지만, 압박을 주진 않는다.
+	<<gharmony>><<lferocity>><<deviancy1>>
+
+	<<endevent>>
+	<<loadNPC 0 wolf_rank_1>>
+	<<clearNPC wolf_rank_1>>
+	<<clearNPC wolf_rank_2>>
+
+	<<link [[다음|Wolf Cave Fight]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<elseif $phase is 1>>
+	당신은 높은 서열의 <<beasttypePost 1 "을">> 쓰다듬는다. 낮은 서열의 <<beasttypePost 0 "은">> 꼬리를 내린 채 떠난다.
+	<<lharmony>><<gferocity>><<deviancy1>>
+	<<endevent>>
+	<<loadNPC 0 wolf_rank_2>>
+	<<clearNPC wolf_rank_1>>
+	<<clearNPC wolf_rank_2>>
+
+	<<link [[다음|Wolf Cave Fight]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<elseif $phase is 2>>
+	당신은 둘 다 쓰다듬는다. 서열이 높은 <<beasttypePost 1 "은">> 덜 만족스러워 보이지만, 소란을 피우지는 않는다. 그것은 먼저 해야 한다고 주장한다.
+	<<gharmony>><<gferocity>><<deviancy2>>
+
+	<<clearNPC wolf_rank_1>>
+	<<clearNPC wolf_rank_2>>
+	<<link [[다음|Wolf Cave Fight Duo]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	당신은 둘에게서 멀어진다. 서열이 더 높은 <<beasttypePost 1 "이">> 으르렁거리지만, 압박을 주진 않는다.
+	<br><br>
+	<<endevent>>
+
+	<<destinationwolfcave>>
+<</if>>
+
+:: Wolf Cave Intervene
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $phase is 0>>
+	당신은 부상당한 <<beasttypePost "을">> 당신의 몸으로 덮어 보호한다. 다른 <<beasttypePost "이">> 당신에게 이빨을 드러내지만, 곧 누그러진다.
+	<<gharmony>><<lferocity>>
+	<br><br>
+<<elseif $phase is 1>>
+	당신은 피를 흘리는 <<beasttypePost "을">> 쓰다듬는다. <<bHePost "은">> 공격을 예상한 듯 당신의 손길을 피해 점프하지만, 곧 <<bhePost "은">> 당신이 무엇을 하는지 깨닫고 계속하게 한다.
+	<<lharmony>><<gferocity>>
+	<br><br>
+<<else>>
+	당신은 <<beastspluralPost "을">> 무시한다. 부상당한 <<beasttypePost "이">> 흐느끼고, 다른 이들은 멈춰선다.
+	<br><br>
+<</if>>
+
+<<destinationwolfcave>>
+
+:: Wolf Cave Calm
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $phase is 0>>
+	당신은 검은 늑대에게 다가가 <<bhisPost "의">> 머리를 쓰다듬는다. <<bHePost "은">> 당신을 뿌리치고, 당신에게 <<bhisPost "의">> 성기를 들이민다.
+	<<if $monster is 1>>
+		"화났어. 도와줘.<<print ((playerHeatMinArousal() and (V.player.vaginaExist or canBeMPregnant()) and V.NPCList[0].penis !== "none") ? ' 넌 준비가 되어있네.' : '')>><<print ((playerRutMinArousal() and $NPCList[0].vagina isnot "none") ? " 난 준비됐어." : '')>>"
+	<</if>>
+<br><br>
+
+<<link [[손으로 받아들인다|Wolf Cave Black Wolf]]>><<set $sexstart to 1>><</link>><<deviant1>>
+<br>
+<<if hasSexStat("deviancy", 4)>>
+	<<link [[입으로 받아들인다|Wolf Cave Black Wolf]]>><<set $phase to 1>><<set $sexstart to 1>><</link>><<deviant4>>
+	<br>
+<</if>>
+<<if $wolfgirl gte 6 and hasSexStat("deviancy", 5)>>
+	<<if playerAwareTheyAreInHeat() and $NPCList[0].penis isnot "none" and (($player.vaginaExist and !playerChastity("vagina")) or (canBeMPregnant() and !playerChastity("anus")))>>
+		<<link [[뒤로 돌아 몸으로 받아들인다|Wolf Cave Black Wolf]]>><<set $phase to 2>><<set $sexstart to 1>><</link>><<deviant5>><<wolfgirl>><<heat>>
+		<br>
+	<</if>>
+	<<if playerRutMinArousal() and $NPCList[0].vagina isnot "none" and !playerChastity("penis")>>
+		<<link [[장난스럽게 깨문다|Wolf Cave Black Wolf]]>><<set $phase to 3>><<set $sexstart to 1>><</link>><<deviant5>><<wolfgirl>><<rut>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+<<link [[거절한다|Wolf Cave Calm]]>><<set $phase to 1>><</link>>
+<br>
+
+<<elseif $phase is 1>>
+	<<if $monster is 1>>
+		"도전하지 마, 순종해!"
+	<</if>>
+	검은 늑대는 계속해서 <<bhimPost "을">> 피하기 위해 최선을 다하는 다른 <<wolf_cave_plural_ ul>> 괴롭힌다. <<bHePost "은">> 진정했지만, 다른 무리는 불안해 한다.
+	<<lharmony>>
+	<br><br>
+
+	<<destinationwolfcave>>
+
+<<else>>
+	당신은 검은 늑대를 똑바로 보고 이빨을 드러낸다. <<bHisPost "의">> 분노는 잠시 <<bhisPost "의">> 얼굴에서 사라졌다 곧 돌아온다. <<bHePost "은">> 당신을 향해 으르렁대며 돌진한다.
+	<<if $monster is 1>>
+		"내가 우두머리다. 내가 처벌한다."
+	<</if>>
+	<br><br>
+
+	<<link [[다음|Wolf Cave Challenge]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Wolf Cave Black Wolf
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	<<if $phase is 0>>
+		당신은 <<beasttypePost>> 아래로 손을 뻗어 그것을 당신의 손에 잡는다.
+		<<npchand>><<deviancy1>>
+	<<elseif $phase is 2>>
+		<<clothesstrip>><<deviancy5>>
+		당신은 몸을 앞으로 굽혀, 손과 무릎을 바닥에 대고 복종하는 자세를 취한 다음, 어깨를 내려 엉덩이를 내밀고 당신의 <<print ($player.vaginaExist ? '<<pussy_ rul>>' : '항문을')>> 늑대에게 노출한다. <<bHe_ nun>> 당신을 짓누르며, 거대한 덩치로 당신을 깔아 고정시킨다.
+		<<npc_attempt_sex>>
+		<<set $position to "doggy">>
+		<<set $position_lock to 1>>
+		<<set $NPCList[0].location.head to "head">>
+		<<set $NPCList[0].location.genitals to "genitals">>
+	<<elseif $phase is 3>>
+		<<clothesstrip>><<deviancy5>>
+		당신은 검은 늑대에게 다가가 <<bhis_ yi>> 검은 털에 입을 가까이 가져 간다. 당신은 <<bhim_ ul>> 장난스럽게 물려고 했지만, 검은 늑대가 당신에게 <<bhis_ yi>> 발을 얹고, 별 힘도 들이지 않고 당신을 바닥 위로 쓰러뜨린다. <<bHis_ yi>> 압도적인 무게와 덩치 때문에 당신은 달리 선택지가 없다.
+		<<npc_attempt_sex>>
+		<<set $position to "missionary">>
+		<<set $position_lock to 1>>
+		<<set $NPCList[0].location.head to "head">>
+		<<set $NPCList[0].location.genitals to "genitals">>
+	<<else>>
+		당신은 <<beasttypePost "에게">> 기댄다.
+		<<npcoral>><<deviancy4>>
+	<</if>>
+	<<blackwolfhealth>><<set $enemytrust -= 20>>
+	<!--Prevents the mate event from occurring back to back with black wolf sex-->
+	<<set $daily.blackWolfHeatEvent to Time.hour>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<blackwolfhealth>><<set $enemytrust -= 40>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Wolf Cave Black Wolf Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Wolf Cave Black Wolf]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wolf Cave Black Wolf Finish
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<if $phase is 3 and $orgasmcurrent is 0 and $NPCList[0].vagina is "penis">>
+		<<set _forcedOrgasm to true>>
+		<<set $orgasmdown to 3>>
+	<</if>>
+	<<beastejaculation>><<wolfpacktrust>>
+	<br>
+
+	<<if _forcedOrgasm>>
+		절정에 이르렀는데도 불구하고, 검은 늑대는 계속해서 당신의 <<penis_ rul>> 자극시킨다.
+		<<set $penisuse to "othervagina">>
+		<<orgasm>>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<beastNEWinit 2 wolf>>
+	검은 늑대는 진정한다. 다른 <<beastspluralPost "은">> 고마워하며 안도하는 것 같다.
+	<<gharmony>>
+	<br><br>
+	<<endevent>>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<destinationwolfcave>>
+
+<<elseif $enemyhealth lte 0>>
+
+	<<if $wolfpackleader is 1>>
+		검은 늑대가 당신에게서 멀어진다. 무리들은 안도하는 것 같다.
+		<<gharmony>>
+	<br><br>
+
+	<<else>>
+		무리 전체가 검은 늑대가 굴복하여 <<bhisPost "이">> 돌아와 복종하는 것을 지켜본다.
+		<br><br>
+
+		<<tearful>> 당신은 울부짖는다. 다른 <<wolf_cave_plural_ i>> 당신과 함께 울부짖는다.
+		<<if $monster is 1>>
+			검은 늑대가 말한다. "너는... 검은 늑대보다 강하다. 너를 데려가는 건 옳은 선택이라는 것을 알았다."
+		<</if>>
+		검은 늑대는 <<bhisPost "의">> 부상을 치료하기 위해서 몸을 움직인다. <span class="gold">당신은 이제 사냥에서 무리를 이끌 수 있다.</span>
+		<<set $wolfpackleader to 1>><<earnFeat "Head of the Pack">>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<<else>>
+	검은 늑대는 당신을 괴롭히는 것을 그만두고 다른 늑대들을 계속 물고 으르렁거리고 있다.
+	<<lharmony>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<</if>>
+
+:: Wolf Cave Challenge
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<blackwolfhealth>><<set $enemyanger += 200>><<set $enemytrust -= 40>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Wolf Cave Challenge Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Wolf Cave Challenge]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wolf Cave Challenge Finish
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>><<wolfpacktrust>>
+	<br>
+
+	검은 늑대는 진정한다. 다른 <<beastspluralPost "은">> 고마워하며 안도하는 것 같다.
+	<<gharmony>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<<elseif $enemyhealth lte 0>>
+	무리 전체가 검은 늑대가 굴복하여 <<bhisPost "이">> 돌아와 복종하는 것을 지켜본다.
+	<br><br>
+
+	<<tearful>> 당신은 울부짖는다. 다른 <<beastspluralPost "이">> 당신과 함께 울부짖는다.
+	<<if $monster is 1>>
+		검은 늑대가 말한다. "너는... 검은 늑대보다 강하다. 너를 데려가는 건 옳은 선택이라는 것을 알았다."
+	<</if>>
+	검은 늑대는 자신의 부상을 치료하기 위해서 절뚝거리며 멀어진다. <span class="gold">당신은 이제 사냥에서 무리를 이끌 수 있다.</span>
+	<<set $wolfpackleader to 1>><<earnFeat "Head of the Pack">>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<<else>>
+	당신은 땅에 쓰러져 더 싸울 수 없다. 검은 늑대는 당신의 목을<<if $monster isnot 1>> 주둥아리로 물어서<</if>> 잠시 바닥에 붙들어 놓았고, 곧 풀어주었다.
+	<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+
+	<<if $wolfpackpoisoned isnot 1>>
+		<i>검은 늑대는 매우 강하다. 분명 평등하게 맞설 방법이 있을 것이다.</i>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<</if>>
+
+:: Wolf Cave Black Wolf Before Mate
+<<deviancy5>>
+<<if $phase is 1>>
+	<<if $NPCList[0].monster>>
+		당신은 검은 늑대에게 다가가 <<bhis_ yi>> 검은 털에 입을 가까이 가져 간다. 당신은 <<bHe_ rul>> 장난스럽게 깨문다. 당신은 <<bHe_ rul>> 계속해서 깨물면서 <<bhimPost>>에게 머리를 비비기 시작한다. "오늘은 정말 기운차군." <<bHe_ ga>> 말한다. "<<pPackbrotherPost "가">> 발정기에 들어간 것 같군."
+		<br><br>
+		<<bHe_ nun>> 아주 짧은 시간동안만, 당신이 깨무는 것을 용납해준다. 잠시 후, 검은 늑대가 <<bhis_ yi>> 손을 당신의 가슴에 얹어, 그다지 힘을 주지 않고도 당신을 바닥으로 밀어 쓰러뜨린다. 당신이 대응할 틈도 없이, <<bhe_ ga>> 몸을 일으켜 거대한 덩치로 당신을 깔아뭉갠다. "<<pPackbrotherPost "가">> 새끼를 원해? 그렇다면 만들어 줘야지," <<bHe_ ga>> 크고, 음탕한 미소를 지으며 말한다.
+	<<else>>
+		당신은 검은 늑대에게 다가가 <<bhis_ yi>> 검은 털에 입을 가까이 가져 간다. 당신은 <<bHe_ rul>> 장난스럽게 깨문다. 당신은 <<bHe_ rul>> 계속해서 깨물면서 <<bhimPost>>에게 머리를 비비기 시작한다. 잠시 후, <<bHe_ nun>> 스스로를 부드럽게 깨물면서 당신의 애정에 화답한다. <<bHe_ ga>> 보답으로 당신을 핥아댄다.
+		<br><br>
+		당신의 장난은 잠깐동안 계속된다. 검은 늑대가 <<bhis_ yi>> 발로 당신을 밀자, 힘을 많이 들이지 않고도 당신을 바닥에 쓰러뜨린다. <<bHe_ nun>> 음욕에 찬 눈으로 당신을 쏘아보며, <<bhis_ yi>> 눈빛이 앞으로 일어날 일을 암시하는 듯 하다. 검은 늑대가 짝짓기를 하려는 듯이, 당신을 향해 몸을 낮춘다. <<bhis_ yi>> 압도적인 무게와 덩치 때문에 당신은 달리 선택지가 없다.
+	<</if>>
+<<else>>
+	당신은 몸을 앞으로 굽혀, 손과 무릎을 바닥에 대고 복종하는 자세를 취한 다음, 어깨를 내려 엉덩이를 내밀고 당신의 <<print ($player.vaginaExist ? '<<pussy_ rul>>' : '항문을')>> 늑대에게 노출한다. 당신은 검은 늑대의 주의를 끌기 위해, 부드럽게 낑낑거린다.
+	<<if $NPCList[0].monster>>
+		<br><br>
+		"<<pPackbrother_ nun>> 짝짓기를 할 준비가 되어 있어야 해." <<bHe_ ga>> 말한다. "기쁘게 도울게." <<bHe_ nun>> 당신을 아래에 깔고, 당신을 거대한 덩치로 짓눌러 엎드리도록 한다.
+	<<else>>
+		<br><br>
+		<<bHe_ nun>> 당신의 부름을 알아채고, 당신의 생식기 냄새를 맡으려 가까이 다가온다. <<bHe_ ga>> 당신의 의도를 알아차린 듯, 거대한 덩치로 당신을 눌러, 꼼짝하지 못하도록 만든다.
+	<</if>>
+<</if>>
+<br><br>
+<<link [[다음|Wolf Cave Black Wolf Mate]]>><<set $sexstart to 1>><</link>>
+
+:: Wolf Cave Black Wolf Mate
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<clothesstrip>>
+	<<if $phase is 1>>
+		<<set $position to "missionary">>
+		<<set $position_lock to 1>>
+	<<else>>
+		<<set $position to "doggy">>
+		<<set $position_lock to 1>>
+	<</if>>
+	<<npc_attempt_sex>>
+	<<set $NPCList[0].location.head to "head">>
+	<<set $NPCList[0].location.genitals to "genitals">>
+	<<blackwolfhealth>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Wolf Cave Black Wolf Mate Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Wolf Cave Black Wolf Mate]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wolf Cave Black Wolf Mate Finish
+<<if $enemyarousal gte $enemyarousalmax and $phase is 1 and $NPCList[0].vagina is "penis">>
+	<<if $orgasmcurrent is 0>>
+		<<set _forcedOrgasm to true>>
+		<<set $orgasmdown to 3>>
+	<</if>>
+	<<beastejaculation>>
+	<br>
+	<<if _forcedOrgasm>>
+		절정에 이르렀는데도 불구하고, 검은 늑대는 계속해서 당신의 <<penis_ rul>> 자극시킨다.
+		<<set $penisuse to "othervagina">>
+		<<orgasm>>
+	<</if>>
+
+	검은 늑대는 땀 한 방울 흘리지 않고, 만족한 듯 물러난다.
+	<<if $monster is 1>>
+		"벌써 지쳤어?" <<bHe_ ga>> 도발한다. "<<ppackbrotherPost "가">> 더 하고 싶지 않은가 보군." <<bHe_ nun>> 자리에서 몸을 돌리더니, 다시 휴식을 취하기 위해 자세를 잡고 앉는다. "기분 좋았어," <<bHe_ ga>> 당신을 돌아본다. "<<ppackbrotherPost "와">> 함께한 것 만큼 기분 좋고 특별한 일은 없었어, 튼튼한 새끼들을 낳았으면 좋겠군." 
+	<<else>>
+		<<bHe_ nun>> 몸을 돌려 <<bhis_ yi>> 바위로 천천히 몸을 내려 앉는다. <<bHe_ nun>> 무심한 태도를 취하곤 있어도, 당신과 함께 있는 것에 굉장히 만족하고 심지어는 당신이 <<bhim_ gwa>> 함께 하는 것에 안도하는 것처럼 보인다.
+	<</if>>
+	<br><br>
+<<elseif $enemyarousal gte $enemyarousalmax and $phase is 0 and (($player.vaginaExist and $NPCList[0].penis is "vagina") or (!$player.vaginaExist and $NPCList[0].penis is "anus"))>>
+	<<beastejaculation>>
+	<br>
+	검은 늑대는 땀 한 방울 흘리지 않고, 만족한 듯 물러난다. 
+	<<if $monster is 1>>
+		"벌써 지쳤어?" <<bHe_ ga>> 도발한다. "<<ppackbrotherPost "가">> 더 하고 싶지 않은가 보군." <<bHe_ nun>> 자리에서 몸을 돌리더니, 다시 휴식을 취하기 위해 자세를 잡고 앉는다. "기분 좋았어," <<bHe_ ga>> 당신을 돌아본다. "<<ppackbrotherPost "와">> 함께한 것 만큼 기분 좋고 특별한 일은 없었어, 튼튼한 새끼들을 낳았으면 좋겠군." 
+	<<else>>
+		<<bHe_ nun>> 몸을 돌려 <<bhis_ yi>> 바위로 천천히 몸을 내려 앉는다. <<bHe_ nun>> 무심한 태도를 취하곤 있어도, 당신과 함께 있는 것에 굉장히 만족하고 심지어는 당신이 <<bhim_ gwa>> 함께 하는 것에 안도하는 것처럼 보인다.
+	<</if>>
+	<br><br>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<br>
+	검은 늑대는 당황한 듯 보인다.
+
+	<<if $monster is 1>>
+		"짝짓기가 필요한 게 아니었나?"
+	<<else>>
+		<<bHe_ ga>> <<bhis_ yi>> 코로 당신의 배를 쿡쿡 찌른다.
+	<</if>>
+	<br><br>
+<<else>>
+	검은 늑대는 당황한 듯 보인다.
+
+	<<if $monster is 1>>
+		"짝짓기가 필요한 게 아니었나?"
+	<<else>>
+		<<bHe_ ga>> <<bhis_ yi>> 코로 당신의 배를 쿡쿡 찌른다.
+	<</if>>
+	<br><br>
+<</if>>
+
+당신은 두 발로 일어선다.
+<br>
+<<clotheson>>
+<<endcombat>>
+
+<<destinationwolfcave>>
+
+:: Wolf Cave Young
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $phase is 0>>
+	당신은 젊은 <<beasttypePost "에게">> 달려가 <<bhisPost "의">> 머리를 쓰다듬는다. <<bHePost "은">> 당신의 얼굴을 위로하듯 핧는다. <<bHePost "은">> 괜찮다. 그저 넘어져서 화가 났을 뿐이다.
+	<<gharmony>><<lferocity>><<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
+	<br><br>
+
+	<<destinationwolfcave>>
+<<else>>
+	당신은 <<beasttypePost "을">> 무시한다. <<bHePost "은">> 곧 다시 놀기 시작한다 <<bHePost "은">> 괜찮다.
+	<<lharmony>><<gferocity>>
+	<br><br>
+
+	<<destinationwolfcave>>
+<</if>>
+
+:: Wolf Cave Plant
+<<set $outside to 1>><<set $location to "wolf_cave">><<effects>>
+
+<<if $phase is 1>>
+<<set $phase to 0>>
+	당신은 즉석에서 의상을 만들 수 있을법한 길고 튼튼한 식물을 찾는다. 당신은 적절한 표본을 찾아 당신의 가슴 주위에 묶는다. 찢어지기 쉽고 다 보이지만, 아무것도 없는 것보다 낫다.
+	<<plantupper>>
+	<br><br>
+<<elseif $phase is 2>><<set $phase to 0>>
+	당신은 즉석에서 의상을 만들 수 있을법한 길고 튼튼한 식물을 찾는다. 당신은 적절한 표본을 찾아 당신의 허리 주위에 묶는다. 찢어지기 쉽고 다 보이지만, 아무것도 없는 것보다 낫다.
+	<<plantlower>>
+	<br><br>
+<</if>>
+
+<<link [[다음|Wolf Cave Clearing]]>><</link>>
+<br>
+
+:: Wolf Cave Play Fight
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+당신은 어린 <<beasttypePost "와">> 싸운다. <<bHePost "은">> 당신의 팔을 물고 당신을 땅으로 끌고 가려고 한다. 그것이 실패하자, <<bhePost "은">> 당신의 다리를 물고 다시 시도한다. <<bHePost "은">> 그다지 강한 것 같지 않다.
+<br><br>
+
+<<destinationwolfcave>>
+
+:: Wolf Cave Lewd Play
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	당신은 짝짓기 자세를 취하고 자신을 <<beasttypePost "에게">> 보여준다.
+	<<deviancy2>><<set $enemytrust -= 20>>
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'><<beastspluralPost "은">> 자기 일로 너무 바빠서 당신을 도와줄 수 없다.</span>">>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Wolf Cave Lewd Play Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Wolf Cave Lewd Play]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wolf Cave Lewd Play Finish
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>><<wolfpacktrust>>
+	<br>
+
+	<<beasttypePost "은">> 하품하고 드러눕는다.
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $enemyhealth lte 0>>
+	<<beasttypePost "은">> 당신에게서 멀어진다.
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $rescue is 1 and $alarm is 1>><<set $rescued += 1>>
+	다른 <<beastspluralPost "이">> 으르렁대며 <<beasttypePost "이">> 당신을 공격한다. <<bHePost "은">> 처음에 으르렁대다 뒤로 물러서 당신을 내버려둔다.
+	<<lharmony>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+	<<beasttypePost "은">> 하품하며 드러눕는다.
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<destinationwolfcave>>
+
+:: Wolf Cave Fight Duo
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	<<beastTrainGenerate>>
+
+	당신은 흥분한 <<beasttypePost "이">> 일을 더 쉽게 할 수 있게 위해서 몸을 움직인다.
+	<<deviancy1>><<set $enemytrust -= 20>>
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<set $enemytrust -= 40>>
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'><<wolf_cave_plural_ un>> 자기 일로 너무 바빠서 당신을 도와줄 수 없다.</span>">>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Wolf Cave Fight Duo Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Wolf Cave Fight Duo]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wolf Cave Fight Duo Finish
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+		<<if $combatTrain.length gt 0>>
+		<<beasttypePost "은">> 고통과 비명으로 움츠러들지만, 다른 하나는 당신과 해보기를 간절히 바라는 것 같다.
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Wolf Cave Fight Duo]]>><</link>>
+	<<else>>
+		<<beasttypePost "은">> 고통과 두려움에 움찔한다.
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Wolf Cave Fight Duo Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		만족한 <<beasttypePost "이">> 움직이며 다른 하나가 차례대로 움직인다.
+		<<wolfpacktrust>>
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Wolf Cave Fight Duo]]>><</link>>
+	<<else>>
+		<<beasttypePost "은">> 만족한 채로 당신에게서 멀어진다.
+		<<combatTrainAdvance>>
+		<<wolfpacktrust>>
+		<br><br>
+		<<link [[다음|Wolf Cave Fight Duo Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<else>>
+	<<if $consensual is 1>>
+	늑대들은 서로 털을 골라주고 있다.
+	<br><br>
+	<<else>>
+		<<if $enemywounded is 1 and $enemyejaculated is 0>>
+			<<beasttypePost "은">> 는 낑낑대며 나무 사이 어둠 속으로 사라진다.
+		<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+			<<beasttypePost "은">> 당신을 풀밭에 눕힌다.
+		<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+			당신이 당신의 가치보다 더 많은 문제가 있다고 느낀 늑대들은 나무 사이로 도망친다.
+		<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+			늑대들은 당신이 풀밭 위에서 기진맥진해서 경련하고 있는 채로 둔다.
+		<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+			늑대들은 당신이 풀밭 위에서 기진맥진해서 경련하고 있는 채로 둔다.
+		<</if>>
+		<br><br>
+	<</if>>
+
+	<<tearful>> 당신은 마음을 가다듬는다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<</if>>
+
+:: Wolf Cave Howl
+<<effects>>
+<<if $phase is 0>>
+	당신은 근처 통나무 위에 앉아 상쾌한 공기 속에서 활기있게 울부짖는 <<wolf_cave_pluralPost "을">> 본다.
+	<<if $sciencetrait gte 3>>
+		당신은 당신이 들었던 생물학 수업을 회상한다. 늑대들은 유대감을 형성하거나, 서로의 위치를 알리거나, 침입자들을 피하는 등 여러 이유로 울부짖을 수 있다고 한다.
+	<<else>>
+		당신은 왜 늑대들이 서로에게 울부짖는지 확신할 수 없지만, 그것이 사교적이고 건강한 무리라는 증거가 틀림없다는 것에 만족한다.
+	<</if>>
+	<br><br>
+
+	무리와 하나가 되어 그런 활동에 기꺼이 함께 참여하는 것에 당신은 만족감을 느낀다.
+	<<stress -6>><<trauma -3>><<lstress>><<ltrauma>>
+<<else>>
+	당신은 시끄러운 늑대 무리들 사이 가운데 자리를 잡는다. 당신은 심호흡을 한 다음, 눈을 감고 고개를 들어 상쾌한 숲속 공기를 향해 울부짖는다.
+	<br><br>
+	<<if $wolfgirl gte 6>>
+		당신은 스스로를 야생적이고, 원초적인 감각에 전부 맡긴다. <span class="green">당신의 울부짖는 소리는 형제들의 울부짖음과 아름답고 자연스럽게 어우러진다.</span> 다른 <<wolf_cave_pluralPost "은">> 당신을 그들의 일원으로서 받아들이고, 무리 안의 한 늑대로서 함께 울부짖는 것에 만족하는 것 같다.
+		<<stress -12>><<trauma -12>><<llstress>><<lltrauma>>
+	<<elseif $fox gte 6>>
+		당신은 <<wolf_cave_plural_ wa>> 합류하여, 당신의 본능에 스스로를 맡긴다. 당신은 고음의 캥캥거리는 소리와 울어대는 소리를 조절해, 그다지 어색하지 않게 들리도록 한다. <<wolf_cave_plural_ un>> 주저하며 당신을 그들의 일부로 받아들이는 것 같다.
+		<<stress -6>><<lstress>>
+	<<elseif $harpy gte 6>>
+		당신은 나머지 <<wolf_cave_pluralPost "에">> 합류한다, 혹은 당신은 그렇게 생각한다. 당신의 본능이 의식을 가져갔지만, 당신의 울부짖음은 되려 경쾌한 노래를 연상시킨다. 당신의 조화로운 음색은 다른 형제들의 울부짖음과 충돌하며, 그들을 약간 화나게 만든다.
+		<<stress -3>><<lstress>>
+	<<else>>
+		당신의 노력에도 불구하고, 당신의 <<if $cat gte 6>>야옹거리는 소리는<<elseif $cow gte 6>>음메하는 소리는<<else>>목을 긁는 듯한 울부짖음은<</if>> 대부분의 <<wolf_cave_pluralPost "을">> 납득시키지 못하는 것 같다. 대부분은 개의치 않지만, 일부는 당신의 활기 없는 시도를 싫어하는 듯 하다.
+		<<stress -3>><<lstress>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<destinationwolfcave>>
+
+:: Wolf Cave Spar
+<<effects>><<beastNEWinit 1 wolf>><<person1>>
+
+당신은 다가오는 사냥을 준비하기 위해 자신들의 자리에서 쉬고 있는 사냥꾼 늑대들에게 다가간다.
+<br><br>
+
+약간의 운동이 될 것 같다는 생각으로, 당신은 네 발로 호전적인 자세를 취하고 <<if $transformationParts.traits.fangs isnot "disabled">>송곳니를<<else>>이빨을<</if>> 드러낸다.
+<br><br>
+
+사냥꾼 늑대들 중 하나인, <<beasttypePost "은">>,
+<<if $wolfpackharmony gte 10 and $wolfpackferocity gte 10>>
+	당신의 스파링 요청에 응답하고 싸울 준비를 한다.
+	<<if $monster is 1>>
+		"<<pPackbrotherPost "은">> 봐주면 안 돼!"
+	<</if>>
+<<elseif $wolfpackharmony gte 10>>
+	하품을 하며 천천히 걸어와 스파링 요청에 응한다.
+	<<if $monster is 1>>
+		"시간 죽이기엔 나쁜 방법이야."
+	<</if>>
+<<elseif $wolfpackferocity gte 10>>
+	열성적으로 뛰어 당신의 스파링 요청에 응답한다.
+	<<if $monster is 1>>
+		"<<pPackbrotherPost>>, 쓰러뜨려 주겠어!"
+	<</if>>
+<<elseif $wolfpackferocity gte 1>>
+	으르렁거리며 당신에게 걸어와, 스파링 요청에 응답한다.
+	<<if $monster is 1>>
+		"이것도 좋겠지."
+	<</if>>
+<<else>>
+	당신을 흘끗 보곤, 드러눕는다.
+	<<if $monster is 1>>
+		"<span class="red">에너지를 낭비할 수 없다. 쓸데없다.</span>"
+	<<else>>
+		<span class="red"><<bHePost "은">> 당신의 요청에 응할 정도로 기운이 나지 않는 것 같다.</span>
+	<</if>>
+	<<set _reject to 1>>
+<</if>>
+<br><br>
+
+<<if _reject>>
+	<<link [[다음|Wolf Cave Clearing]]>><</link>>
+<<else>>
+	<<pass 20>><<stress -6>>
+	<<link [[맹렬히 타격한다 (0:10)|Wolf Cave Spar 2]]>><<set $phase to 0>><</link>><<physiquedifficulty 2000 $physiquemax>>
+	<br>
+	<<link [[지구전으로 이긴다 (0:10)|Wolf Cave Spar 2]]>><<set $phase to 1>><</link>><<athleticsdifficulty 200 1000>>
+	<br>
+	<<link [[$NPCList[0].pronouns.his + " 허를 찌른다" +  "(0:10)"|Wolf Cave Spar 2]]>><<set $phase to 2>><</link>><<dancedifficulty 200 1000>>
+	<br>
+<</if>>
+
+:: Wolf Cave Spar 2
+<<effects>>
+
+<<switch $phase>>
+	<<case 0>>
+		당신은 몇 번의 강력한 타격으로 <<beasttypePost "을">> 제압하여, 빠르고 결정적이게 싸움을 끝내려 한다. <<beasttypePost "은">> 처음 두 번의 휘두르는 공격에 고개를 숙여 회피하지만,
+		<<if $physiqueSuccess>>
+			<<set _victory to 1>>
+			세 번째 공격이 <<bhimPost "을">> 강하게 타격하고 네 번째 공격이 <span class="green"> <<bhimPost "을">> 바닥에 때려눕힌다.</span>
+		<<else>>
+			당신은 세 번째 공격으로 <<bhimPost "을">> 적중시킨다. <span class="red"><<bHePost "은">> 별로 움찔거리지도 않는다.</span> <<bHePost "은">> 힘껏 당신의 무릎<<if $monster is 1>>을 걷어차고<<else>>에 돌격해 오고<</if>>, 당신은 쓰러진다.
+		<</if>>
+		<<physique 2>>
+	<<case 1>>
+		당신은 당신의 기력을 최소한으로 소모하며, <<beasttypePost "의">> 기력을 낭비하게끔 한다. <<beasttypePost "은">> 공격을 위해 돌진하고, 당신은 뒤로 물러선다. <<bHePost "은">> 다시금 돌진하고, 당신은 옆으로 피한다.
+		<<if $athleticsSuccess>>
+			<<set _victory to 1>>
+			<span class="green"><<bHePost "은">> 숨을 헐떡이고, 당신은 그 틈에 공격한다. <<bHePost "은">> 제 때 피하지 못한다.</span>
+		<<else>>
+			<span class="red">당신의 발이 나무뿌리에 걸린다.</span> 당신은 바닥에 나뒹굴고, <<bHePost "은">> 즉시 당신에게 달려든다. <<bhisPost "의">> <<if $monster is 1>>손<<else>>발톱<</if>>이 당신의 목을 감싸고, 승자가 누군지 확실해진다.
+		<</if>>
+		<<athletics 1>>
+	<<case 2>>
+		당신은 <<bhimPost "의">> 주위를 춤추듯 돌며, <<bhis_ yi>> 모든 공격을 피하면서 공격하려 시도한다.
+		<<if $danceSuccess>>
+			<<set _victory to 1>>
+			<span class="green">당신은 상대의 공격을 피하는 것이 쉽단 것을 알게 된다.</span> 당신은 <<beasttypePost "의">> 공격을 피하고 <<bhisPost "의">> <<if $monster is 1>>얼굴<<else>>주둥이<</if>>에 결정적인 한 방을 먹인다.
+		<<else>>
+			당신은 민첩하다. <span class="red">하지만 <<bhimPost "의">> 공격을 피할 만큼 민첩하지는 않다.</span> 아무리 노력해도, <<bhimPost "에게">> 한 방도 먹일 수가 없다. <<bhePost "은">> 당신을 갖고 논다는 것이 확실해지고, 당신은 결국 지쳐서 패배해 무릎을 꿇는다.
+		<</if>>
+		<<physique 1>><<danceskill 2>>
+<</switch>>
+<<gtiredness>><<tiredness 12>>
+<<if !_victory>>
+	<<pain 6>><<gpain>>
+<</if>>
+
+<<pass 10>>
+
+<br><br>
+
+<<if _victory>>
+	<<if $wolfpackharmony gte 10>>
+		고통에 몸부림치며, <<beasttypePost "은">> 몇 걸음 뒤로 물러서다가 <<bhisPost "의">> 엉덩이를 보인다.
+		<<if $monster is 1>>
+			"<<pPackbrotherPost "은">> 보상을 받을 가치가 있다."
+		<</if>>
+		<br><br>
+		<<if hasSexStat("deviancy", 3)>>
+			<<link [[제의를 받아들인다|Wolf Cave Spar Sex]]>><<set $sexstart to 1>><<set $phase to 0>><</link>><<deviant3>>
+		<<else>>
+			<span class="blue">당신은 이런 것을 수락할 만큼 이상성욕적이지 않다.</span>
+		<</if>>
+		<br>
+		<<link [[거절한다|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<<elseif $wolfpackferocity gte 10>>
+		고통에 몸부림치며, <<beasttypePost "은">> 몇 걸음 물러서며 으르렁거린다. <<bHePost "가">> 다치지 않았는지 확인하려 접근하려 할 때 <<bHePost "은">> 송곳니를 드러낸다.
+		<<if $monster is 1>>
+			"<<pPackbrotherPost "은">> 뭘 또 바라는 거지? 네가 이겼다."
+		<</if>>
+		<br><br>
+		<<link [[다음|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<<else>>
+		고통에 몸부림치며, <<beasttypePost "은">> 몇 걸음 물러선 후에 <<his_ yi>> 머리를 조아리고 <<beasttypePost "의">> 휴식처로 돌아간다.
+		<br><br>
+		<<link [[다음|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<</if>>
+<<else>>
+	<<if $wolfpackferocity gte 10>>
+		<<beasttypePost "은">> <<bhisPost "의">> 송곳니를 드러내며 당신을 땅에 고정시킨다. <<bHePost "은">> 단지 싸움에서 이기는 것에 만족하지 못한 모양이다.
+		<br><br>
+		<<if hasSexStat("deviancy", 3)>>
+			<<link [[굴복한다|Wolf Cave Spar Sex]]>><<set $sexstart to 1>><<set $phase to 1>><<sub 1>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<link [[몸부림친다|Wolf Cave Spar Sex]]>><<set $molestationstart to 1>><<def 1>><</link>>
+	<<elseif $wolfpackharmony gte 10>>
+		<<beasttypePost "은">> 만족스러운 숨을 내쉬고 <<bHisPost "의">> <<if $monster is 1>>손으<<else>>코<</if>>로 당신을 쿡쿡 찌른다. <<bHisPost "은">> 꼬리를 다정하게 흔든다.
+		<br><br>
+		<<if hasSexStat("deviancy", 3)>>
+			<<link [[보상을 준다|Wolf Cave Spar Sex]]>><<set $sexstart to 1>><<set $phase to 2>><<sub 1>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<link [[휴식을 취한다 (0:05)|Wolf Cave Clearing]]>><<endevent>><<pass 5>><</link>>
+	<<else>>
+		<<beasttypePost "은">> 만족스러운 숨을 내쉬고 <<bHisPost "의">> 휴식처로 돌아간다.
+		<br><br>
+		<<link [[휴식을 취한다 (0:05)|Wolf Cave Clearing]]>><<endevent>><<pass 5>><</link>>
+	<</if>>
+<</if>>
+
+:: Wolf Cave Spar Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+	<<if $phase is 1>>
+		당신은 몸부림치는 것이 오직 당신을 다치게 할 뿐이라 판단하고, <<beasttypePost "에게">> 협조할 의지가 있음을 보인다.
+		<<set $enemytrust -= 20>><<set $enemyanger += 20>>
+	<<elseif $phase is 2>>
+		당신은 짝짓기 자세를 취하고 자신을 <<beasttypePost "에게">> 보여준다.
+	<<else>>
+		당신은 <<beasttype_ yi>> 제의를 받아들인다.
+	<</if>>
+	<<deviancy3>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<set $enemytrust -= 40>>
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+	당신은 <<beasttypePost "가">> 당신을 이런 식으로 이용하도록 내버려두지 않고, <<bhimPost "에게">> 도전하려고 한다. <<bHePost "가">> 으르렁거린다.
+	<<if $monster is 1>>
+		"<<pPackbrotherPost "은">> 졌다! 이제 <<ppackbrother_ nun>> 복종해라!"
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'><<beastspluralPost "은">> 자기 일로 너무 바빠서 당신을 도와줄 수 없다.</span">>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Wolf Cave Spar Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Wolf Cave Spar Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wolf Cave Spar Sex Finish
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>><<wolfpacktrust>>
+	<br>
+	<<beasttypePost "은">> 하품하고 눕는다.
+<<elseif $enemyhealth lte 0>>
+	<<beasttypePost "은">> 절뚝거리며 당신에게서 멀어진다. <<if $monster is 1>>"<<pPackbrotherPost "가">> 마지막에는... 이겼다... "<</if>>
+<<elseif $rescue is 1 and $alarm is 1>><<set $rescued += 1>>
+	다른 <<beastspluralPost "가">> 당신을 괴롭히는 <<beasttypePost "에게">> 으르렁거린다. <<bHePost "은">> 처음에는 으르렁거리다가, 뒤로 물러나서 당신을 내버려 둔다.
+	<<lharmony>>
+<<else>>
+	<<beasttypePost "은">> 하품하고 <<bHePost "가">> 쉬고 있던 자리로 돌아간다.
+<</if>>
+<br><br>
+
+<<tearful>> 당신은 일어선다.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Wolf Cave Clearing]]>><</link>>
+
+
+:: Wolf Cave Dog Meet
+<<effects>>
+
+당신은 당신이 말하는 것을 들을 수 있도록, 검은 늑대의 바위 위로 높이 올라간다. "왜 인사를 안 하는 거야?" 라고 당신은 말한다.
+<br><br>
+<<if $monster is 1>>
+	늑대는 처음엔 반응하지 않는다. 당신은 바위에서 뛰어내린다. 그제서야 검은 늑대가 움직이며, 풀밭으로 펄쩍 뛰어내린다. <<bHePost "은">> 숲으로 걸어들어간다. "네가 강아지들을 놀라게 했다," 라고 당신은 듣는다. "재미있군-"
+<<else>>
+	늑대는 처음엔 반응하지 않는다. 당신은 바위에서 뛰어내린다. 그제서야 검은 늑대가 움직이며, 풀밭으로 펄쩍 뛰어내린다. <<bHePost "은">> 숲으로 걸어들어간다.
+<</if>>
+<<gharmony>>
+<br><br>
+
+<<destinationwolfcave>>
+
+:: Wolf Cave Dog Stare
+<<effects>>
+
+당신은 그들의 눈싸움을 내버려둔다.
+<<gferocity>>
+<br><br>
+
+<<destinationwolfcave>>
+
+:: Wolf Cave Baby Bunny
+<<effects>>
+
+The situation is funny enough that it makes you laugh. Some of the tension aggravating you melts away.<<lltrauma>><<llstress>><<trauma -24>><<stress -24>>
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"It's very cute," you say. "I'm glad you showed me."
+<<elseif $speech_attitude is "bratty">>
+	"You're so weird." You laugh. "Good <<if C.npc["Black Wolf"].gender is "m">>boy<<else>>girl<</if>>."
+<<else>>
+	"Thanks," you say. "That's kind of you."
+<</if>>
+<br><br>
+
+<<if $monster is 1>>
+	<<if C.npc["Black Wolf"].love gte 10>>
+		"Pack feels happier when you're happy," <<bhe>> states while wagging <<bhis>> tail.
+	<<else>>
+		"Pack is stronger when everyone's happy," <<bhe>> states with a nod.
+	<</if>>
+
+<<else>>
+	<<if C.npc["Black Wolf"].love gte 10>>
+		Emboldened by your display of gratitude, the wolf walks over you to nuzzle against your face. You laugh while protecting the baby rabbit from <<bhis>> clumsy paws with your hands.
+	<<else>>
+		The wolf simply watches you intensely before breaking eye contact.
+	<</if>>
+
+<</if>>
+<br><br>
+
+You tentatively pet the rabbit. It shivers under your touch but does not recoil. You spend some time with your gift before asking the Black Wolf to take it back. Sadly, you do not think taking in a rabbit pet among a wolf pack could end without tragedy. It's better to set it free.<<ltrauma>><<trauma -4>>
+<br><br>
+
+<<link [[다음|Wolf Cave Clearing]]>><<endevent>><</link>>
+
+:: Wolf Cave Bear
+<<effects>>
+<<if $outside>>
+	You are in the wolf cave. The ceiling hangs low. There's a breeze blowing from the back.
+<<else>>
+	You are in the clearing outside the wolf cave. A stream runs by.
+<</if>>
+Most of the pack is out hunting. Younger members of the pack growl and snap at each other, practising their fighting.
+<br><br>
+
+An alarmed yelp <<if $outside>>outside<<else>>from the treeline<</if>> attracts your attention.
+<br><br>
+
+<<link [[조사한다|Wolf Cave Bear 2]]>><<set $phase to 0>><</link>><br>
+<<link [[무시한다|Wolf Cave Bear 2]]>><<set $phase to 1>><</link>><br>
+
+:: Wolf Cave Bear 2
+<<effects>>
+<<beastNEWinit 1 bear>><<person1>>
+
+<<if $phase is 1>>
+	The <<wolf_cave_plural>> are probably just play-fighting. You decide to ignore the noise and continue with what you were doing. This doesn't last long. A large shadow falls over you, and the yelping and growling gets louder. The owner of the shadow bumps into you and groans.
+	<br><br>
+
+	You turn to find yourself face-to-face with a <<beasttype>>. The creature has been backed up into you by the <<wolf_cave_plural>> trying to drive it away. <<bHe>> focuses <<bhis>> attention on you and growls.
+
+	<<if $wolfpackleader gte 1>>
+		<br><br>
+		<<if $monsterchance gt 0 and ($hallucinations gte 1 or $monsterhallucinations is "f")>>
+			You hear <<wolf_cave_plural>> calling out for you to deal with <<bhim>><<if $monsterchance lt 100>>, alongside whines and growls of encouragement<</if>>.
+		<<else>>
+			You hear whines and growls of encouragement.
+		<</if>>
+		The pack wants you to fight.
+	<</if>>
+<<else>>
+	Curious as to the cause of the commotion,
+	<<if $outside is 1>>
+		you make your way over to a group of pups by the trees and
+	<<else>>
+		you leave the cave and
+	<</if>>
+	immediately spot a group of agitated young <<wolf_cave_plural>>. You jog over.
+	<br><br>
+
+	<<set $outside to 1>>
+
+	As you draw close, you make out the hulking form that has the group snarling. A <<beasttype>> growls and swipes at one of the <<wolf_cave_plural>> that surround <<bhim>>.
+
+	<<if $monster is 1>>
+		<br><br>
+		"Loud <<wolf_cave_plural>>," the <<beasttype>> huffs out, "disturb my sleep when hunting. Should teach you all to stay quiet."
+	<</if>>
+
+	<<if $wolfpackleader gte 1>>
+		<br><br>
+		<<generateBEAST 2 wolf>><<person2>>
+		A <<beasttype 1>> backs up to where you stand.
+		<<if $NPCList[1].monster is "monster">>
+			"Do something!"
+		<<else>>
+			<<bHe>> looks up at you with pleading eyes.
+		<</if>>
+		The pack wants you to fight.
+		<<person1>><<clearsinglenpc 2>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<set $bus to "wolfcaveclearing">> /* when event is resolved, player will be deposited in the clearing regardless of where they started */
+<<link [["Try to calm the " + $NPCList[0].type|Wolf Cave Bear Calm]]>><</link>><<tendingdifficulty 600 1200>><br>
+<<if $monster or (!$monster and $bestialitydisable is "f")>>
+	<<link [[싸운다|Wolf Cave Bear Fight]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>><br>
+<<else>>
+	<<link [[싸운다|Wolf Cave Bear Fight Finish]]>><<set $phase to 1>><</link>><br> /* autoresolve */
+<</if>>
+
+:: Wolf Cave Bear Calm
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"D-did we upset you somehow? That isn't very g-good of us. Please, let us make it up to you." You pick a bone up off the ground, a remnant from the wolves' last hunt, and show it to the bear. "S-some of our next hunt, maybe?"
+<<elseif $speech_attitude is "bratty">>
+	"Hey man, calm down! You don't think that we can come to a deal?" You pick a bone up off the ground, a remnant from the wolves' last hunt, and wave it in the air. "If we give you a cut of our next hunt, will that make you happy? Think about it, a big juicy cut of meat. Sounds good, big <<if $NPCList[0].pronoun is "m">>guy<<else>>gal<</if>>?"
+<<else>>
+	"I'm sorry that you're upset," you begin. "Are you sure we can't find a way to make you happy?" You pick a bone up off the ground, a remnant from the wolves' last hunt, and hold it up in the air. "Maybe we can give you a big cut of our next hunt?"
+<</if>>
+<br><br>
+
+<<if $tendingSuccess>>
+	<<if $monster is 1>>
+		The <<beasttype>> considers the picked-over bone. "Good deal," <<bhe>> huffs out. "Food is good. Make me plump for winter."
+	<<else>>
+		The <<beasttype>> sniffs the picked-over bone and huffs in agreement. <<bHe>> seems to accept your deal.
+	<</if>>
+	<br><br>
+
+	You hold your breath until the <<beasttype>> leaves. You hope that <<bhe>> won't return. The tension vanishes as the pack resumes play-fighting. <<gharmony>>
+	<br><br>
+
+	<<destinationwolfcave>>
+<<else>>
+	Your words only seem to enrage <<bhim>> further. With a snarl, the <<beasttype>> leaps forwards, intent on taking <<bhis>> anger out on you.
+	<br><br>
+
+	<<if $monster or (!$monster and $bestialitydisable is "f")>>
+		<<link [[싸운다|Wolf Cave Bear Fight]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>><br>
+	<<else>>
+		<<link [[싸운다|Wolf Cave Bear Finish]]>><<set $phase to 1>><</link>><br> /* autoresolve */
+	<</if>>
+<</if>>
+
+:: Wolf Cave Bear Fight
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<npcidlegenitals>>
+
+	<<set $enemyanger to 200>>
+	<<set $enemytrust -= 40>>
+
+	Letting out a loud yell, you pounce forwards, intent on defending your home.
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate '<span class="red">The <<wolf_cave_plural>> aren\'t willing to join the fray.</span>'>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Wolf Cave Bear Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Wolf Cave Bear Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wolf Cave Bear Fight Finish
+<<effects>>
+
+<<if $enemyhealth lte 0 or $phase is 1>>
+	With a scream, you kick out at the <<beasttype>>'s face, landing a strong hit. <<bHe>> lets out an equally loud <<if $monster is 1>>yell<<else>>roar<</if>> as <<bhe>> rears back. The pack snarls in delight at your victory.
+	<<if $phase is 1>> /* autoresolve */
+		However, the exertion leaves you worse for wear. <<beastescape>>
+	<</if>>
+	<br><br>
+
+	Cautious and wounded, the <<beasttype>> backs away from you and the wolves who circle around you, growing more confident and aggressive.
+	<<if $monster is 1>>
+		"Too strong. Stronger than thought," <<bhe>> breathes out,
+	<<else>>
+		<<bHe>> lets out a scared growl
+	<</if>>
+	before turning tail and fleeing. <<gferocity>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+
+	The <<beasttype>> lets out a satisfied noise and pulls away from you.
+	<<if $monster>>
+		"Noises forgotten. I will go home now."
+	<</if>>
+	<<bHe>> nuzzles at your face before turning and lumbering off, leaving you on the ground.
+	<br><br>
+
+	The <<wolf_cave_plural>> seem disappointed, but relieved that no one got hurt.
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destinationwolfcave>>

@@ -1,0 +1,91 @@
+:: Mer Street
+
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "mer">><<getTarget true>>
+당신은 메르 가에 있다. 이 거리는 부두와 해운업이 특징이다.
+<<if Time.dayState is "day">>
+	<<if Weather.precipitation is "rain">>
+		도로의 일부가 젖은 모래로 덮여있다.
+	<<elseif Weather.precipitation is "snow">>
+		이곳은 눈이 쌓이기엔 소금이 너무 많이 뿌려져 있다.
+	<<else>>
+		부두에서 소음이 계속 들려온다.
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if Weather.precipitation is "rain">>
+		바다로부터 번져온 안개가 가끔씩 도로를 덮는다.
+	<<elseif Weather.isFreezing>>
+		부두에서 아침 추위를 무릅쓰고 일하는 일꾼들이 보인다.
+	<<else>>
+		이미 부두에선 일을 시작했는지 일하는 소리가 들려온다.
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if Weather.precipitation is "rain">>
+		당신은 쏟아지는 비 속에서도 부두에서 소음을 들을 수 있다.
+	<<elseif Weather.precipitation is "snow">>
+		배수로에 반쯤 녹은 눈이 쌓여 있다.
+	<<else>>
+		이 시간에도 부두에선 소음이 들려온다.
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if Weather.precipitation is "rain">>
+		안개가 당신의 얼굴을 찔러댄다.
+	<<elseif Weather.precipitation is "snow">>
+		배수로에 반쯤 녹은 눈이 들어차 있다.
+	<<else>>
+		바닷소리만이 들려온다.
+	<</if>>
+<</if>>
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "street">>
+	<<if $exposed is 1 and $topless is 0>>
+		<span class="lewd">이런 의상은 근처 해변에서는 괜찮을지 모르지만, 여기서는 너무 야하다!</span>
+		<br><br>
+	<</if>>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutstreet>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "mer">>
+			<br>
+		<</if>>
+		주요 장소
+		<br>
+		<<docksicon>><<link [[부두 (0:02)|Docks]]>><<pass 2>><</link>>
+		<br>
+		<<if $historytrait gte 2>>
+			<<coastalpathicon>><<link [[해안 산책로 (0:30)|Coast Path Mer]]>><<pass 30>><</link>>
+			<br>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<add_link "이동<br>">><<hideDisplay>>
+			<<starfish>>
+			<<oxford>>
+			<<harvest>>
+			<<if $exposed lte 0>>
+				<<buswait>>
+			<</if>>
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>다른 경로<br>">><<hideDisplay>>
+		<<industrial>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "mer">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

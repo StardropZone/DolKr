@@ -1,0 +1,259 @@
+:: Farm Road Widgets [widget]
+<<widget "hitchhike">>
+	<<rng>>
+	<<if $exposed gt 1>>
+		당신은 자동차가 다가오는 소리를 듣는다. <<covered>> 당신은 그것이 지나갈 때까지 도로변의
+		<<if $rng gte 81>>
+			덤불 뒤에
+		<<elseif $rng gte 61>>
+			도랑 안에
+		<<elseif $rng gte 41>>
+			나무 뒤에
+		<<elseif $rng gte 21>>
+			바위 뒤에
+		<<else>>
+			풀숲 속에
+		<</if>>
+		숨는다.<<gstress>><<stress 6>>
+		<br><br>
+		<<destinationfarmroad>>
+	<<else>>
+		<<cleareventpool>>
+		<<addevent "hitchike_1">>
+		<<addevent "hitchike_2">>
+		<<addevent "hitchike_3">>
+		<<addevent "hitchike_4">>
+		<<addevent "hitchike_5">>
+		<<addevent "hitchike_6">>
+		<<addevent "hitchike_7">>
+		<<addevent "hitchike_8" 0.5>>
+		<<addevent "hitchike_9">>
+		<<runeventpool>>
+	<</if>>
+<</widget>>
+
+<<widget "hitchike_1">>
+	<<generate1>><<person1>>
+	차 한 대가 당신 옆에 멈춰 선다. 창문이 내려가고, <<person_ yi>> 모습이 보인다.
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+
+	"태워줄까?" <<he_ ga>> 말한다.
+	<<if $exposed gte 1>>
+		<<He_ nun>> 당신의 옷차림을 신경 쓰지 않거나, 시선을 잘 숨긴다.
+	<</if>>
+	"어느 쪽으로 가니?"
+
+	<br><br>
+
+	<<entertownicon>><<link [[도시 쪽으로 간다고 말한다|Farm Hitchhike Ask]]>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [[농장 쪽으로 간다고 말한다|Farm Hitchhike Ask]]>><<set $phase to 2>><</link>>
+	<br>
+	<<refuseicon>><<link [[물러난다|Farm Hitchhike Refuse]]>><</link>>
+<</widget>>
+
+<<widget "hitchike_2">>
+	<<generate1>><<person1>>
+	차 한 대가 당신 옆에 멈춰 선다. 창문이 내려가고, <<person_ yi>> 모습이 보인다.
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+
+	"도움이 필요해 보이는구나, <<girlPost "아">>," <<he_ ga>> 말한다. "네가 가고 싶은 곳으로 데려다주마." <<He_ 는>> 자동차 문을 연다. "하지만 너는 그것에 보답해야 할 필요가 있지. 무릎 꿇어."
+	<br><br>
+
+	<<if hasSexStat("promiscuity", 4)>>
+		<<link [[무릎을 꿇는다|Farm Hitchhike Kneel]]>><</link>><<promiscuous4>>
+		<br>
+	<</if>>
+	<<if $exposed gte 1 and random(1, 2) is 2>>
+		<<link [[거절한다|Farm Hitchhike Kneel Refuse 2]]>><</link>>
+	<<else>>
+		<<link [[거절한다|Farm Hitchhike Kneel Refuse]]>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "hitchike_3">>
+	<<generate1>><<person1>>
+	차 한 대가 당신 옆에 멈춰 선다. 창문이 내려가고, <<person_ yi>> 모습이 보인다.
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+
+	"여기서 혼자 뭐하니?" <<he_ ga>> 능글맞은 미소로 묻는다.
+	<<if $exposed gte 1>>"그런 옷차림으로 말이야! 대담한 <<girl_ iguna>>."<</if>>
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<entertownicon>><<link [[도시 쪽으로 가야 한다고 말한다|Farm Hitchhike Exposed Undies]]>><<set $phase to 1>><</link>>
+		<br>
+		<<farmicon "barn">><<link [[농장 쪽으로 가야 한다고 말한다|Farm Hitchhike Exposed Undies]]>><<set $phase to 2>><</link>>
+	<<else>>
+		<<entertownicon>><<link [[도시 쪽으로 가야 한다고 말한다|Farm Hitchhike Exposed]]>><<set $phase to 1>><</link>>
+		<br>
+		<<farmicon "barn">><<link [[농장 쪽으로 가야 한다고 말한다|Farm Hitchhike Exposed]]>><<set $phase to 2>><</link>>
+	<</if>>
+	<br>
+	<<refuseicon>><<link [[물러난다|Farm Hitchhike Refuse]]>><</link>>
+<</widget>>
+
+<<widget "hitchike_4">>
+	<<generate1>><<generate2>><<person1>>
+	차 한 대가 당신 옆에 멈춰 선다. 창문이 내려가고, <<person_ yi>> 모습이 보인다. <<person2>><<personPost>> 하나가 <<person1>><<himPost>> 너머로 몸을 구부린다.
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+	<<person2>>
+	<<if $player.gender_appearance is "m">>
+		"멋진 친구,"
+	<<else>>
+		"귀여운 <<girl_ a>>,"
+	<</if>>
+	<<he_ ga>> 말한다. "우리가 태워줄게. 어디로 가는지 말해줄래? 우리 사이에 앉아도 돼."
+	<br><br>
+
+	<<entertownicon>><<link [["받아들이고 도시 쪽으로 가야 한다고 말한다 (0:15)"|Farm Hitchhike Pair]]>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [["받아들이고 농장 쪽으로 가야 한다고 말한다 (0:15)"|Farm Hitchhike Pair]]>><<set $phase to 2>><</link>>
+	<br>
+	<<if $exposed gte 1 and random(1, 2) is 2>>
+		<<refuseicon>><<link [[거절한다|Farm Hitchhike Pair Refuse 2]]>><</link>>
+	<<else>>
+		<<refuseicon>><<link [[거절한다|Farm Hitchhike Pair Refuse]]>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "hitchike_5">>
+	<<generate1>>
+	얼마 지나지 않아 지평선에서 차가 보인다. 운전자는 당신을 발견하고 차를 멈춘다. 창문이 내려간다.
+	<br><br>
+	"태워줄까?" 운전자인 <<person1>><<person_ i>> 묻는다.
+	<br><br>
+	<<entertownicon>><<link [["받아들이고 도시 쪽으로 가야 한다고 말한다 (0:15)"|Farm Hitchhike Accept]]>><<pass 15>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [["받아들이고 농장 쪽으로 가야 한다고 말한다 (0:15)"|Farm Hitchhike Accept]]>><<pass 15>><<set $phase to 2>><</link>>
+	<br>
+	<<refuseicon>><<link [[거절한다|Farm Hitchhike Decline]]>><<pass 1>><</link>>
+<</widget>>
+
+<<widget "hitchike_6">>
+	<<generate1>>
+	차량이 당신 옆에 멈춰 선다. 차 안의 <<person1>><<person_ un>> 당신과 이야기하기 위해 <<his_ yi>> 창문을 내린다. "이봐, 어느 쪽으로 가니?"
+
+	<br><br>
+	<<entertownicon>><<link [["도시 쪽으로 가야 한다고 말한다 (0:15)"|Farm Hitchhike Cost Accept]]>><<pass 15>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [["농장 쪽으로 가야 한다고 말한다 (0:15)"|Farm Hitchhike Cost Accept]]>><<pass 15>><<set $phase to 2>><</link>>
+	<br>
+	<<refuseicon>><<link [[거절한다|Farm Hitchhike Cost Decline]]>><<pass 1>><</link>>
+<</widget>>
+
+<<widget "hitchike_7">>
+	당신은 엔진 소리가 다가오는 것을 듣는다. 차 하나가 커브를 돌고, 속도를 높여, 깊은 웅덩이를 지나간다.
+	<br><br>
+	<<set $_item to $worn.handheld>>
+	<<if $_item.type.contains("rainproof")>>
+		<<trClothes "handheld" $_item.name "name" "으로" "sep">>당신은 <<print _trResult+_trPost>> 당신 앞을 가린다.
+		<br>
+		<span class="teal">물이 당신의 _trResult에만 튀고, 다른 곳은 젖지 않는다.</span>
+		<br><br>
+	<<else>>
+		<span class="teal">차가운 물이 당신의 온몸에 튀어 옷을 흠뻑 적신다.</span> <<stress 5>><<gstress>>
+		<br><br>
+		<<wet_all>>
+	<</if>>
+	<<destinationfarmroad>>
+<</widget>>
+
+<<widget "hitchike_8">>
+	<<generate1>><<generate2>><<generate3>>
+	차 한 대가 당신 옆에 멈춰 선다. <<fullGroup_ i>> 내린다.
+	<br><br>
+
+	"혼자 뿐인가보네?" <<person1>><<person_ i>> 당신 뒤에 서면서 놀리듯 말한다. 다른 두 사람도 다가온다. "좋네. 같이 노는 게 좋을 거야. 여기에 널 구해줄 사람은 아무도 없거든."<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[도망간다|Farm Hitchhike Run]]>><</link>><<athleticsdifficulty 1 1000>>
+	<br>
+	<<link [[그대로 서 있는다|Farm Hitchhike Rape]]>><<set $molestationstart to 1>><</link>>
+<</widget>>
+
+<<widget "hitchike_9">>
+	<<generate1>><<person1>>
+	오래된 트럭이 당신 옆의 길에 도착해, 한 <<person_ i>> 바퀴 뒤에서 나온다.
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+
+	"Hey there, where're you headin'?" <<he>> says.
+
+	<<if $exposed gte 1>>
+		<<He_ ga>> 빠르게 당신을 위아래로 쳐다보지만, 당신의 옷차림에 대해 아무 말도 하지 않는다.
+	<</if>>
+	"어느 길로 가려는 거니?"
+
+	<br><br>
+
+	<<entertownicon>><<link [[도시 쪽으로 가야 한다고 말한다|Farm Hitchhike Assistant]]>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [[농장 쪽으로 가야 한다고 말한다|Farm Hitchhike Assistant]]>><<set $phase to 2>><</link>>
+	<br>
+	<<refuseicon>><<link [[물러난다|Farm Hitchhike Assistant Refuse]]>><</link>>
+<</widget>>
+
+<<widget "hitchhike_journey">>
+	<<pass 15>>
+	<<if $phase is 1>>
+		당신은 <<person_ yi>> 운전하는 동안 창 밖을 쳐다보며 언덕들이 지나가는 것을 구경한다. <<He_ nun>> 샛길로 가는 특이한 길을 택하지만, 똑같이 하베스트 가가 나타난다. 당신이 차에서 내리자, <<he_ nun>> 차를 몰고 떠난다.
+		<br><br>
+		<<endcombat>>
+		<<link [[다음|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		당신은 <<person_ yi>> 운전하는 동안 창 밖을 쳐다보며 언덕들이 지나가는 것을 구경한다. <<He_ nun>> 샛길로 가는 특이한 길을 택하지만, 똑같이 농가들이 나타난다. 당신이 차에서 내리자, <<he_ nun>> 차를 몰고 떠난다.
+		<br><br>
+		<<endcombat>>
+		<<link [[다음|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "hitchhike_journey_nude">>
+	<<pass 15>>
+	<<if $phase is 1>>
+		<<He_ nun>> 나머지 여정 동안 당신의 옷을 가지고 있다가, 당신이 마을에 도착하고 나서야 그것을 건네준다.
+		<br><br>
+		<<He_ nun>> 당신이 차 안에서 옷을 입으려 애쓰는 것을 즐겁게 구경한다. "서두르는 게 좋을걸," <<he_ ga>> 웃는다. "누군가 널 볼 거야."
+		<br><br>
+		<<He_ nun>> 당신이 내리자마자 차를 몰고 가버린다.
+		<br><br>
+		<<link [[다음|Harvest Street]]>><<clotheson>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<He_ nun>> 나머지 여정 동안 당신의 옷을 가지고 있다가, 당신이 농장 쪽에 도착하고 나서야 그것을 건네준다.
+		<<He_ nun>> 당신이 차 안에서 옷을 입으려 애쓰는 것을 즐겁게 구경한다. "서두르는 게 좋을걸," <<he_ ga>> 웃는다. "누군가 널 볼 거야."
+		<br><br>
+		<<He_ nun>> 당신이 내리자마자 차를 몰고 가버린다.
+		<br><br>
+		<<link [[다음|Farmland]]>><<clotheson>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "passoutfarmroad">>
+	<<if isPregnancyEnding()>>
+		<<pregnancyPassout "farmroad">>
+	<<else>>
+		<<passout>>
+		당신은 스스로를 너무 혹사시켰다. 당신은 기절한다.
+		<br><br>
+		<<set $danger to random(1, 10000)>>
+		<<if $danger gte (9900 - $allure)>>
+			<<if $location is "farm" or $location is "alex_farm" or $location is "alex_cottage">>
+				<<link [[다음|Farm Abduction wake]]>><<pass 5>><<set $stress -= 2000>><</link>>
+			<<else>>
+				<<link [[다음|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><</link>>
+			<</if>>
+			<br>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<</if>>
+<</widget>>

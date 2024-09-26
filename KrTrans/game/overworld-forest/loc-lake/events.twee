@@ -1,0 +1,1482 @@
+:: Lake Stroll Slime Defy
+<<effects>><<lakeeffects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		당신은 슬라임의 명령을 무시한다. 그러자 슬라임이 당신이 반항한 것에 대해 벌을 주듯 당신에게 고통의 충격이 느껴진다. 하지만, <span class="red">그것이 당신을 다른 방법으로 처벌할 수 있다는 것을 알기에, 그것은 당신을 제지하지 않는다.</span>
+	<<else>>
+		당신은 슬라임의 명령을 무시한다. 그러자 슬라임이 당신이 반항한 것에 대해 벌을 주듯 당신에게 고통의 충격이 느껴지고, 슬라임은 당신의 의지를 꺾으려 한다. 그렇지만, <span class="teal">그것은 이전에 당신을 압도한 것 때문에 아직 지쳐 있다.</span> 그것은 당신의 발걸음을 돌리려 시도하나, <span class="green">실패한다.</span>
+	<</if>>
+	<br><br>
+	<<link [[다음|Lake Shore]]>><<endevent>><</link>>
+	<br>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if hasSexStat("deviancy", 4) and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	슬라임이 주도권을 가로채려 시도한다. <span class="red">그것은 당신의 의지를 압도하여,</span> 당신을 강제로 호수 쪽으로 걸어가게 한다.
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+	<<link [[다음|Lake Stroll]]>>
+		<<pass 60>><<set $earSlimeLakeStroll to true>>
+		<<if $exposed gte 2>>
+			<<arousal 1000>><<rng>>
+			<<if $laketeenspresent is 1>>
+				<<set $phase to 2>>
+			<<else>>
+				<<set $phase to 3>>
+			<</if>>
+		<<else>>
+			<<set $phase to 1>>
+		<</if>>
+	<</link>><<if $exposed gte 2>><<garousal>><</if>>
+<<else>>
+	슬라임이 주도권을 가로채려 시도하지만, <span class="green">당신은 그것에 맞서 싸웠고</span> 간신히 그것이 당신에게 걸어가길 바랐던 방향에서 몸을 돌릴 수 있었다.
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	<<link [[다음|Lake Shore]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Lake Stroll
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 40>><<set $bus to "lakewaterfall">>
+<<if $earSlimeLakeStroll>>당신은 슬라임의 명령을 따른다.<</if>>
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	당신은 호수 주변을 산책한다.
+
+	물은 <<= Weather.precipitation is "rain" ? "비가 수면을 치면서 생동감 있게 움직인다" : "잔잔하다">>.
+
+	<<if $laketeenspresent is 1>>
+		<<set _in to Time.season is "winter" ? "근처" : "안">>
+		학생들이 폭포 _in에서 놀거나 저 위의 연못 _in에 앉아있는 것이 보인다.
+	<<elseif Weather.dayState is "night">>
+		달빛이 당신 주변을 밝히고 폭포수를 은의 장막으로 만든다.
+	<<else>>
+		잔잔한 바람이 당신을 부드럽게 어루만진다.
+	<</if>>
+	<br>
+	당신은 최근 일어난 일들에 대해 생각해 본다. 주변의 고요함이 그 일들을 소화할 수 있게 도와 준다.
+	<br><br>
+
+	기분이 상쾌해진다.
+
+	<<set $eventskip to 0>>
+	<br><br>
+
+	<<link [[돌아간다|Lake Shore]]>><<clotheson>><</link>>
+
+<<elseif $phase is 2>>
+	<<flaunting>> 당신은 호수 가장자리를 따라 걷는다. 주변에 사람들이 몇몇 있지만, 그들은 당신이 얼마나 노출되어 있는지 알지 못할 것 같다.
+	<<if !$earSlimeLakeStroll>><<exhibitionism5>><</if>>
+
+	<<if $player.bodyliquid.vagina.semen gte 2>> 정액 몇 방울이 당신의 <<pussyPost>>에서 떨어져 땅에 떨어진다.<</if>>
+
+	<<if $beauty gte (($beautymax / 7) * 3)>>
+		<<generate1>>걸어가던 도중 <<person1>><<personPost "이">> <<hisPost "의">> 돗자리에 누워 당신의 <<genitalsPost "을">> 훔쳐보려고 하는 것을 알아챘다. 당신은 <<himPost "을">> 향해 손을 흔들었다. <<HePost "은">> 얼굴을 붉히곤 고개를 돌렸다.
+		<br><br>
+
+		<<hisPost "의">> 반응에 즐거워하며 계속 걸어갔다.
+		<br><br>
+
+		<<endevent>>
+	<</if>>
+
+	<<if $rng gte 70 and $lakestealgold is 0>>
+		당신은<<if Time.season is "winter">> 잠수복을 입고,<</if>> 함께 수영하고 있는 연인을 발견했다. 한 사람이 물가를 가리키자, 그들은 함께 잠수한다.
+		<br>
+		그들이 가리킨 곳을 유심히 바라보니, 나무 사이의 작은 캠프가 있다.
+		<br><br>
+
+		<<link [[확인한다|Lake CampGold]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[산책을 계속한다|Lake CampGold]]>><<set $phase to 2>><</link>>
+		<br>
+	<<else>>
+		당신은 산책을 끝냈다. 기분이 상쾌해진다.
+		<br><br>
+
+		<<endevent>>
+		<<set $eventskip to 0>>
+		<<link [[돌아간다|Lake Shore]]>><<clotheson>><</link>>
+	<</if>>
+
+<<elseif $phase is 3>>
+
+	<<flaunting>> 당신은 호수 가장자리를 따라 걷는다. 주변에 다른 사람은 보이지 않지만, 이렇게 노출되는 것은 흥분된다.
+	<<if !$earSlimeLakeStroll>><<exhibitionism4>><</if>>
+
+	<<if $player.bodyliquid.vagina.semen gte 2>>
+		당신이 걷자 정액 몇 방울이 당신의 <<pussyPost>>에서 떨어져 땅에 떨어진다.
+	<</if>>
+
+	<<if $rng gte 80 and hasSexStat("deviancy", 2) and $player.vaginaExist and $swarmdisable is "f">>
+
+		몇 분 후 당신은 멋진 공터를 발견했다. 부드러운 바람에 기분이 좋아진다. 당신은 눕기로 했다.
+		<br><br>
+
+		당신은 눈을 감고 숲의 소리를 듣는다.
+		<br><br>
+
+		당신의 사타구니가 간질거린다. 아래를 보자
+		<<if $arousal gte ($arousalmax / 5) * 2>>
+			당신의 <<genitalsPost>> 주위에 벌레와 곤충들이 몰려들어, 흘러나오는 애액에 취해 있다.
+		<<else>>
+			당신의 <<genitalsPost>> 주위에 벌레와 곤충들이 기어다니고 있다.
+		<</if>>
+		<br><br>
+
+		<<if hasSexStat("deviancy", 3)>>
+			<<link [[돌아다니도록 둔다|Lake Insect]]>><<set $phase to 1>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<if hasSexStat("deviancy", 4)>>
+		<<link [[자위한다|Lake Insect]]>><<set $phase to 2>><</link>><<deviant4>>
+		<br>
+		<</if>>
+		<br>
+		<<link [[털어낸다|Lake Insect]]>><<set $phase to 3>><</link>>
+		<br>
+	<<else>>
+		당신은 산책을 끝냈다. 기분이 상쾌해진다.
+		<br><br>
+
+		<<endevent>>
+		<<set $eventskip to 0>>
+		<<link [[돌아간다|Lake Shore]]>><<clotheson>><</link>>
+	<</if>>
+<</if>>
+<<unset $earSlimeLakeStroll>>
+
+:: Lake Insect
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 40>><<set $bus to "lakewaterfall">>
+<<if $phase is 1>>
+	당신은 뒤로 누워 벌레들이 돌아다니게 둔다.
+	<<deviancy3>>
+
+	<<if $arousal gte ($arousalmax / 5) * 2>>
+		벌레와 곤충들은 맛있는 "꿀"이 나오는 곳이 어디인지 찾아다니고 있다.
+	<<else>>
+		벌레와 곤충들은 당신의 구석구석을 탐험한다.
+	<</if>>
+	간질거리는 느낌이 난다. <<genitalsPost>>에 따뜻한 느낌이 퍼져나간다.
+	<br><br>
+
+	몇 분 뒤 당신은 벌레를 모두 털어냈다. 당신은 일어나 산책을 마친다. 기분이 상쾌해진다.
+	<br><br>
+
+	<<endevent>>
+	<<set $eventskip to 0>>
+<<link [[돌아간다|Lake Shore]]>><<clotheson>><</link>>
+
+<<elseif $phase is 2>>
+	당신은 뒤로 누워 벌레들이 돌아다니게 둔다.
+	<<deviancy3>>
+
+	<<if $arousal gte ($arousalmax / 5) * 2>>
+		벌레와 곤충들은 맛있는 "꿀"이 나오는 곳이 어디인지 찾아다니고 있다.
+	<<else>>
+		벌레와 곤충들은 당신의 구석구석을 탐험한다.
+	<</if>>
+
+	간질거리는 느낌이 난다. <<genitalsPost>>에 따뜻한 느낌이 퍼져나간다. 벌레가 기어다니는 것을 느끼면서 당신은 자위하기 시작했다.
+	<<deviancy4>>
+
+	<<link [[다음|Lake Masturbation]]>><<set $bugsinside to 1>><<set $masturbationstart to 1>><</link>>
+<<elseif $phase is 3>>
+	당신은 벌레를 모두 털어내고 처음 출발했던 곳까지 산책한다. 기분이 상쾌해진다.
+	<br><br>
+
+	<<endevent>>
+	<<set $eventskip to 0>>
+<<link [[돌아간다|Lake Shore]]>><<clotheson>><</link>>
+
+<</if>>
+
+:: Lake CampGold
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 40>><<set $bus to "lakewaterfall">>
+
+<<if $phase is 1>>
+	당신은 캠프로 가서 주변을 둘러본다. 뭔가 빛나는 것이 당신의 주의를 끈다.
+	<br><br>
+
+	그것은 작은 금괴이다. 두 사람이 다이빙 도중 행운을 만난 모양이다. 당신은 그들이 수면 위로 올라오는 소리를 들었다. 그들이 돌아오고 있다.
+	<br><br>
+
+	<<link [[훔친다|Lake StealGold]]>><<crimeUp 30 "thievery">><<set $phase to 3>><<arousal 1500>><</link>><<gcrime "thievery">><<garousal>><<deviant3>>
+	<br>
+	<<link [[훔치지 않는다|Lake StealGold]]>><<endevent>><<set $phase to 4>><</link>>
+<<else>>
+<br>
+	충분히 재미를 보고 나서, 당신은 돌아가기로 결정했다. 당신은 산책을 끝냈다. 기분이 상쾌해진다.
+	<br><br>
+
+	<<set $eventskip to 0>>
+	<<link [[돌아간다|Lake Shore]]>><<clotheson>><</link>>
+<</if>>
+
+:: Lake StealGold
+
+<<if $phase is 3>>
+	<br>
+	당신은 재빠르게 생각한다. 당신은 완전히 나체이고, 뭔가 들고 있다면 그들이 바로 눈치챌 것이다.
+	<br><br>
+
+	엄청나게 음란하고 말도 안 되는 생각이 머리에 떠오른다.
+	<br>
+	당신은 '보관함' 하나를 가지고 있다. 날 때부터 가지고 있던 그것 말이다. 바로 당신의 <<print ($player.vaginaExist ? "보지" : "항문")>>!
+	<br>
+	지체 없이 당신은 금괴 하나를 집어든다. 심장이 큰 소리로 뛴다.
+	<<if $arousal gte ($arousalmax / 5) * 3>>
+		<<if $player.vaginaExist>>
+			<br><br>
+
+			당신은 완전히 흥분했고 당신의 <<pussyPost "는">> 완전히 젖어 있다. 보지에 금괴 끝을 집어넣는 데엔 별 힘이 들지 않는다.
+			<br>
+			당신은 온 힘을 다해 금괴를 집어넣는다. 보지가 금괴를 빨아들이면서 벌어진다.
+			<br>
+			<<if $player.bodyliquid.vagina.semen gte 3>> 또, 자궁에서 흘러나오는 정액이 금괴를 넣기 훨씬 편하게 해 주는 윤활액 역할을 한다.<</if>>
+			<br>
+			금괴가 자궁 입구에 맞닿는 것이 느껴지고, 마지막으로 힘을 주자 금괴가 완전히 당신의 안에 들어온다.
+		<<else>>
+			<br><br>
+
+			당신은 완전히 흥분해서 엉덩이에 금괴 끝을 집어넣는 데엔 별 힘이 들지 않는다.
+			<br>
+			당신은 온 힘을 다해 금괴를 집어넣는다. 항문이 금괴를 빨아들이면서 벌어진다.
+			<br>
+			얼마 지나지 않아 금괴가 완전히 당신의 안에 들어온다.
+		<</if>>
+	<<elseif $arousal gte ($arousalmax / 10) * 3>>
+		<<if $player.vaginaExist>>
+			<br><br>
+
+			당신은 흥분했고 당신의 <<pussyPost "는">> 약간 젖어 있다. 보지에 금괴 끝을 집어넣는 데에 크게 노력할 필요는 없다.
+			<br>
+			당신은 온 힘을 다해 금괴를 집어넣는다. 보지가 금괴를 받아들이면서 벌어진다. 약간 아프지만, 참을 만 하다.
+			<br>
+			<<if $player.bodyliquid.vagina.semen gte 3>> 또, 자궁에서 흘러나오는 정액이 금괴를 넣기 편하게 해 주는 윤활액 역할을 한다.<</if>>
+			<br>
+			금괴가 자궁 입구에 맞닿는 것이 느껴지고, 마지막으로 힘을 주자 금괴가 완전히 당신의 안으로 들어온다.
+		<<else>>
+			<br><br>
+
+			당신은 흥분했지만, 항문에 금괴 끝을 집어넣는 데엔 약간의 노력이 필요할 것이다.
+			<br>
+			당신은 온 힘을 다해 금괴를 집어넣는다. 항문이 금괴를 받아들이면서 벌어진다. 약간 아프지만, 참을 만 하다.
+			<br>
+			얼마 지나지 않아 금괴가 완전히 당신의 안에 들어온다.
+		<</if>>
+	<<elseif $arousal gte $arousalmax / 10>>
+		<<if $player.vaginaExist>>
+			<br><br>
+
+			당신의 <<pussyPost "는">> 젖어있지는 않다. 보지에 금괴 끝을 집어넣는 데에 큰 힘이 들 것이다.
+			<br>
+			당신은 온 힘을 다해 금괴를 집어넣는다. 당신의 보지가 금괴를 받아들이려 하면서 고통스럽게 벌어진다. 아프지만, 겨우 참아낸다.
+			<br>
+			<<if $player.bodyliquid.vagina.semen gte 3>> 자궁에서 흘러나오는 정액이 금괴를 넣기 편하게 해 주는 윤활액 역할을 한다.<</if>>
+			<br>
+			금괴가 자궁 입구에 맞닿는 것이 느껴지고, 마지막으로 힘을 주자 금괴가 완전히 당신의 안으로 들어온다.
+		<<else>>
+			<br><br>
+
+			당신은 흥분하지 않았고 항문에 금괴 끝을 집어넣는 데엔 굉장한 노력이 필요할 것이다.
+			<br>
+			당신은 온 힘을 다해 금괴를 집어넣는다. 당신의 엉덩이가 금괴를 받아들이려 하면서 고통스럽게 벌어진다. 아프지만, 겨우 참아낸다.
+			<br>
+			얼마 지나지 않아 금괴가 완전히 당신의 안에 들어온다.
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<link [[다음|Lake GoldCheck]]>><</link>>
+<<else>>
+	당신의 생각이 머릿속에서 쿵쿵 울렸지만, 결국 훔치지 않기로 결정한다. 당신은 최대한 빠르게 자리를 떠나고 옷을 회수한다.
+	<br>
+	모험은 충분히 했다.
+	<<endevent>>
+	<<set $eventskip to 0>>
+	<br><br>
+
+	<<link [[돌아간다|Lake Shore]]>><<clotheson>><</link>>
+<</if>>
+
+:: Lake GoldCheck
+
+당신은 정확히 시간에 맞춰서 끝냈고, 연인은 막 뭍으로 수영해 오느라 당신의 음란한 행동을 보지 못했다. 당신은 빠르게 노출된 <<genitalsPost "을">> 가린다.
+<br>
+이제 와서 달리는 것은 수상하게 보일 것 같아 당신은 털끝도 움직이지 않고, "아무것도" 하지 않은 것처럼 위장하려고 한다.
+<br>
+연인은 재빨리 도착했고 여자의 눈이 달라진 것을 찾아 움직인다.
+<br><br>
+
+"여기서 다 벗고 뭘 하는 거야?!" 남자가 당신에게 시선을 고정한 채로 여자가 묻는다.
+<br>
+"바...방금 도착해서, 그...그냥 산책 중이었어요." 당신은 노출된 <<genitalsPost "이">> 부끄러운 척 하며 거짓말한다.
+<br>
+당신은 증명을 위해 빈 손을 들어올리지만, 오히려 당신을 더 흥분시킨다.
+<br>
+<<arousal 1000>>
+
+<<if $arousal gte ($arousalmax / 5) * 3>>
+	<br>
+	연인은 당신의 <<if $player.penisExist>>완전히 발기한 자지<<else>>애액이 꿀처럼 뚝뚝 떨어지는 젖은 보지<</if>>를 보지 않으려 최대한 노력한다.
+	<br>
+	오랜 시간 뒤에 그들은 당신의 손을 바라본다.
+	<br>
+<<else>>
+	<br>
+	연인은 당신의 <<genitalsPost "을">> 확인한다. 잠시 후에 그들은 당신의 손을 바라본다.
+	<br>
+<</if>>
+<br>
+"<<pher_ yi>> 손엔 아무 것도 없는 것 같아, <<pshe_ nun>> 그냥 변태야."라고 남자가 말한다.
+<br>
+"저...저는 아무것도 훔치지 않았어요. 그냥 보...보내 주실 순 없나요?"
+<br>
+연인은 서로를 쳐다보곤 당신을 돌아본다.
+<br><br>
+
+여자가 "가."라고 말한다, "그리고 다신 돌아오지 마. 이건 우리 거야!"
+<br>
+당신은 고개를 끄덕이고는 금괴가 안에 든 채로 옷을 향해 걸어간다. 당신의 심장은 전에 없던 속도로 빠르게 뛴다.
+<br><br>
+
+이게 먹힐 거라고는 생각치도 못했다. 이 금괴는 비싼 값에 팔 수 있을 것이다...물론 씻어낸 뒤에.
+<br><br>
+<<endevent>>
+
+<<set $lakestealgold to 1>>
+<<set $eventskip to 0>>
+<<set $antiquemoney += 1500>>
+<<link [[돌아간다|Lake Shore]]>><<clotheson>><</link>>
+
+:: Lake Mermaid
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<generatey1>><<person1>>
+당신은 움직일 수 없는 상태로 일어난다. 당신의 몸은 목까지 모래로 덮여 있다.
+<br><br>
+
+"일어났군," <<personPost "이">> 말한다. <<HesPost "은">> 혼자가 아니다. "모래사장에 잠들어 있는 모습이 너무 아름다워서 말이야. 널 인어로 만들어 주기로 했지. 거의 다 끝났어, 사진만 찍으면 돼." 그들은 그들의 완성품을 보기 위해 한 발짝 물러선다. <<personPost "이">> 고개를 들고, 공포가 <<hisPost "의">> 얼굴에 비친다. <<HePost "와">> <<hisPost "의">> 친구들이 달린다.
+<br><br>
+
+<<endevent>><<generatey1>><<generatey2>><<generatey3>> 잠시 뒤에 그림자가 위에 드리운다. 한 무리의 <<fullGroupPost "이다">>. 당신은 그들을 학교에서 본 적이 있다. "이게 누구야?" <<person1>><<personPost "이">> 말한다. <<HePost "이">> 당신의 앞에 무릎을 꿇는다.
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"제..제발 하지 마," 당신은 애원한다.
+<<elseif $speech_attitude is "bratty">>
+	"내가 아무것도 못 할 거라고 생각하지 마," 당신이 말한다. "가까이 오면 찢어버릴 거야."
+<<else>>
+	"어딜 감히," 당신이 말한다.
+<</if>>
+<br><br>
+
+"걱정하지 마," <<hePost "이">> 말한다. "널 만지진 않을 거야, 다만," <<hePost "이">> <<hisPost "의">> 친구들을 향해 씨익 웃는다. "이 인어한테 화장이 필요할 거 같은데." <<hisPost "의">> 친구들이 <<himPost>>의 옆에 무릎꿇는다.
+<br><br>
+
+<<if isLoveInterest("Eden")>>
+	<<link [[에덴에게 들리도록 비명을 지른다|Lake Mermaid Eden]]>><</link>>
+	<br>
+	<<link [[비명을 지르지 않는다|Lake Mermaid 2]]>><</link>>
+<<else>>
+	<<link [[다음|Lake Mermaid 2]]>><</link>>
+<</if>>
+
+:: Lake Mermaid Eden
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+숲에서 총성이 들린다. 총알이 근처에 떨어지자, 학생들은 공포에 질려 소리를 지르며 당신에게서 떨어진다. "뭐-뭐야 그거?" 학생 중 하나가 주저하는 목소리로 묻는다.
+<br><br>
+
+두 번째 총성이 허공을 가르며 울린다. 이번에는 총알이 더 가까운 곳에 떨어졌고, 학생들은 펄쩍 뛴다. 세 번째 총성이 뒤따르고, 학생들은 패닉에 빠져 도망친다.
+<br><br>
+
+해안가에 있는 다른 사람들도, 역시 총성을 듣고, 모래에 묶인 당신을 두고 도망친다. 갑자기, 당신은 당신에게 다가오는 발소리를 듣는다.
+<br><br>
+
+<<endevent>><<npc Eden>>
+"이게 누구야?" 익숙한 목소리가 들린다. 에덴이다.
+
+<<if $edenCagedEscape>>
+	"내가 다시 너를 잡을거라고 했지." <<He_ nun>> 모래를 파내 당신을 꺼내고 허리를 붙잡는다. 당신이 일어서는 순간, <<he_ nun>> 당신을 숲으로 끌고가기 시작한다.
+	<br><br>
+
+	"너는 계속 나를 실망시키면서도, 너의 위험에서 벗어나기 위해 여전히 나에게 의지하는구나." <<He_ nun>> 눈을 가늘게 뜨고, 어깨 너머를 노려본다."벌 받을 시간이 지났어."
+	<<set $location to "forest">>
+	<br><br>
+
+	<<link [[싸운다|Eden Caged Caught Resist]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+	<<link [[밀쳐내려 시도한다 (0:01)|Eden Caged Caught Pull]]>><<pass 1>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[받아들인다 (0:30)|Eden Caged Caught]]>><<set $phase to 1>><<pass 30>><<sub 1>><<npcincr Eden dom 1>><</link>><<gdom>>
+	<br>
+<<elseif ($edenfreedom gte 2 and $edendays lt 8) or ($edenfreedom is 1 and $edendays lt 2)>>
+	"난 네가 이렇게 될줄 알았어. 여긴 위험해." <<he_ nun>> 당신을 파내고 당신이 일어서게 도와주며 말한다. "집으로 가자."
+	<br><br>
+
+	<<He_ nun>> 당신을 <<his_ yi>> 오두막집으로 다시 데려간다.
+	<br><br>
+
+	<<link [[다음 (0:30)|Eden Cabin]]>><<endevent>><<pass 30>><</link>>
+	<br>
+<<else>>
+	"난 너를 믿어." <<he_ ga>> 말한다. "내 말을 듣지 않으면 이렇게 되는거야. 너를 위해서 하는 말이야." <<he_ nun>> 당신을 파내고 당신이 일어서게 도와준다. "집으로 가자."
+	<br><br>
+
+	<<link [[다음 (0:30)|Eden Recaptured]]>><<pass 30>><</link>>
+	<br>
+<</if>>
+
+:: Lake Mermaid 2
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+<<if $NPCList[0].penis isnot "none">>
+	그들은 자지를 꺼내 당신의 얼굴 바로 앞에서 문지르기 시작한다. 당신은 모래 너머로 저항하려고 하지만, 손끝 하나 움직일 수 없다. 한 <<personPost "이">> 가장 먼저 싼다. 정액이 이마에 흩뿌려지고 눈가로 흘러내린다. 나머지도 따라서 싸기 시작하고, 곧 당신의 목 위는 완전히 정액으로 뒤덮인다.
+	<<bodyliquid "face" "semen" 5>>
+<<else>>
+	그들은 보지를 드러내고 당신의 얼굴 바로 앞에서 문지르기 시작한다. 당신은 모래 너머로 저항하려고 하지만, 손끝 하나 움직일 수 없다. 한 <<personPost "이">> 가장 먼저 싸고, 애액을 이마에 흩뿌린다. 애액은 눈가로 흘러내린다. 나머지도 따라서 싸기 시작하고, 곧 당신의 목 위는 완전히 보지즙으로 뒤덮인다.
+	<<bodyliquid "face" "goo" 5>>
+<</if>>
+<br><br>
+
+"솜씨 좋지 않아?" <<personPost "이">> 말한다. 그들은 우선 사진을 찍은 뒤에, 일어나서 떠난다. 모래사장의 다른 사람들은 구경하고 있다.
+<<gtrauma>><<trauma 6>><<famerape 30>><<status -30>><<llcool>>
+<br><br>
+
+<<endevent>>
+<<link [[저항한다 (0:30)|Lake Mershame]]>><<pass 30>><</link>>
+
+:: Lake Mershame
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<generatey1>>
+당신은 모래를 떨쳐내려 계속 저항한다. 몇몇 사람들은 가까이 보기 위해 다가와서, 웃거나 사진을 찍는다. 아니면 둘 다. <<person1>><<personPost "이">> 당신 옆에 무릎을 꿇고 당신은 파내기 전까지 계속된다. <<HePost "은">> 적어도 웃음을 참고 있다.
+<br><br>
+
+<<endevent>>
+<<link [[다음|Lake Shore]]>><<set $eventskip to 1>><</link>>
+
+:: Lake Couple
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $daily.lakeCouple to 1>>
+<<generate1>><<generatep2>>
+당신은 불길 가까이 다가간다. 이제 <<fullGroupPost "이">> 더 가까이 보인다. "어이," <<person1>><<personPost "이">> 말한다. "혼자 거기서 뭐 해? 이리 와서 같이 앉아."
+<br><br>
+
+<<link [[함께한다 (0:10)|Lake Couple 2]]>><<pass 10>><</link>>
+<br>
+<<link [[거절하고 갈 길을 간다|Lake Campsite]]>><<endevent>><</link>>
+<br>
+
+:: Lake Couple 2
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 그들 사이에 앉는다. "우리는 도시에서 떨어져 있는 시간을 즐기고 있어," <<person2>><<hisPost "의">> 어깨에 <<person1>><<personsPost>>의 머리를 기댄 상태에서 <<person2>><<personPost "이">> 말한다. 당신은 그들에게 당신에 대해 조금 말해 준다.
+<<lstress>><<stress -2>>
+<br><br>
+
+잠시 잡담을 난 뒤에, <<person1>><<personPost "이">> 몸을 떤다. "오늘 밤은 서늘한데," <<hePost "이">> 말한다. <<HePost "이">> <<hisPost "의">> 무릎을 쓰다듬는다. "자, 서로 따뜻하게 해 줘야지."
+<br><br>
+
+<<link [[무릎 위에 앉는다 (0:10)|Lake Couple 3]]>><<pass 10>><</link>>
+<br>
+<<link [[거절하고 갈 길을 간다|Lake Campsite]]>><<endevent>><</link>>
+<br>
+
+:: Lake Couple 3
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 <<person1>><<personsPost>>의 무릎에 앉는다. 두 사람이 서로 키스하는 소리가 들린다. 당신은 그들과 몇 분동안 같이 앉아, 모닥불이 타닥거리는 소리와 잔잔하게 흐르는 물소리를 듣는다.
+<<stress -2>><<trauma -1>><<lstress>><<ltrauma>>
+<br><br>
+
+<<person2>><<personPost "이">> 몸을 기울여 당신의 뺨에 키스한다. <<HePost "이">> <<person1>><<personPost>>에게 동의를 구하듯 쳐다본다. <<personPost>>도 몸을 기울여 당신에게 키스한다.
+<br><br>
+
+<<link [[같이 키스한다|Lake Couple 4]]>><</link>><<promiscuous1>>
+<br>
+<<link [[밀어내고 떠난다|Lake Campsite]]>><<endevent>><</link>>
+<br>
+
+:: Lake Couple 4
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 그들에게 키스를 돌려 준다. 한 명씩, 다른 한 명이 당신의 뺨에 키스하는 동안. 가끔 그들은 서로에게 키스를 하기도 한다. <<takeKissVirginity "Lake couple" "romantic" "human">>
+<<promiscuity1>>
+
+"미안해," <<person2>><<personPost "이">> 숨을 헐떡인다. "먼저 물어봤어야 했는데." <<hesPost "이">> 누구에게 말하는 것인지 확실치 않다.
+<br><br>
+
+<<person1>>"늦어지고 있어," <<personPost "이">> 말한다. "텐트가 기다리고 있다고."
+<br><br>
+
+<<if hasSexStat("promiscuity", 2)>>
+	<<link [[함께한다|Lake Couple 5]]>><</link>><<promiscuous2>>
+	<br>
+<</if>>
+<<if hasSexStat("exhibitionism", 3)>>
+	<<link [[옷을 벗고 함께한다|Lake Couple 5]]>><<strip>><<set $phase to 1>><</link>><<exhibitionist3>>
+	<br>
+<</if>>
+<<link [[헤어진다|Lake Campsite]]>><<endevent>><</link>>
+<br>
+
+:: Lake Couple 5
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+The <<person1>><<personPost "이">> 텐트에 다가가면서 당신의 손을 잡는다. <<takeHandholdingVirginity "Lake couple" "romantic" "human">><<HePost "이">> 들어가고 <<person2>><<personPost "이">> <<person1>><<himPost "을">> 뒤따라 들어간다.
+<<if $phase is 1>>
+	당신은 옷을 벗고 그들을 따라 들어간다. 당신은 시트 사이를 비집고 들어가 두 낯선 사람 사이에 눕는다.
+	<<exhibitionism3>>
+<<else>>
+	당신은 그들을 따라 들어가, 시트 사이를 비집고 두 낯선 사람 사이에 눕는다.
+	<<promiscuity2>>
+<</if>>
+
+<<link [[껴안는다 (0:30)|Lake Couple Cuddle]]>><<trauma -3>><<stress -6>><</link>><<ltrauma>><<lstress>>
+<br>
+<<if hasSexStat("promiscuity", 3)>>
+	<<link [[끌어안고 키스한다|Lake Couple Sex]]>><<set $sexstart to 1>><</link>><<promiscuous3>>
+	<br>
+<</if>>
+<<link [[비집고 나와 갈 길을 간다|Lake Campsite]]>><<clotheson>><<endevent>><</link>>
+<br>
+
+:: Lake Couple Cuddle
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 그들의 품에 몸을 파묻고 그들은 당신을 껴안는다. 당신은 그들의 따뜻한 몸을 느끼며 잠시 누워 있는다. 그것은 편안하지만, 작은 텐트 때문에 곧 갑갑해진다. 당신은 그들이 잠을 잘 수 있도록 나온다.
+<br><br>
+
+<<link [[다음|Lake Campsite]]>><<clotheson>><<endevent>><</link>>
+<br>
+
+:: Lake Couple Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 200>>
+	당신은 몸을 돌려 <<person1>><<personPost "을">> 끌어안는다. 당신은 <<himPost>>에게 키스한다. 당신은 <<person2>><<personPost "이">> 몸을 당신 뒤쪽으로 움직이는 것을 느낀다.
+	<<promiscuity3>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Lake Couple Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Lake Couple Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Lake Couple Sex Finish
+
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	당신은 그들의 따뜻한 몸을 느끼며 좀 더 누워 있는다. 그것은 편안하지만, 작은 텐트 때문에 곧 갑갑해진다. 당신은 그들이 잠을 잘 수 있도록 나온다.
+<<elseif $enemyhealth lte 0>>
+	당신은 그들을 밀어내고 텐트 밖으로 나온다.
+<<elseif $finish is 1>>
+	그들은 당신에게 더 이상 손대지 않고, 당신이 텐트 밖으로 나가게 해 준다.
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Lake Campsite]]>><</link>>
+
+:: Lake Journey
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $cool gte 160>>
+	그들은 당신과 함께 가고 싶어 한다. 그들은 당신을 둘러싸고 당신의 관심을 얻기 위해 다툰다. 숲이 위험하다는 것은 모두 알고 있지만, 사람들과 함께 있다면 안전할 것이다.
+	<<status 1>><<gcool>>
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<lakejourney>>
+	<<else>>
+		당신은 별 일 없이 호수에 도착했다.
+		<br><br>
+
+		<<link [[다음|Lake Shore]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $cool gte 40>>
+	그들은 당신과 함께 갈 수 있어서 기쁘다. 당신은 다른 사람과 붙어 가면서 잡담을 한다. 숲이 위험하다는 것은 모두 알고 있지만, 사람들과 함께 있다면 안전할 것이다.
+	<<status 1>><<gcool>>
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<lakejourney>>
+	<<else>>
+		당신은 별 일 없이 호수에 도착했다.
+		<br><br>
+
+		<<link [[다음|Lake Shore]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	그들은 서로를 쳐다보고는 당신의 요청을 비웃지만, 당신을 쳐내진 않는다. 숲이 위험하다는 것은 모두 알고 있지만, 사람들과 함께 있다면 안전할 것이다.
+	<<status 1>><<gcool>>
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<lakejourney>>
+	<<else>>
+		호수에 가까워졌을 때 누군가 당신을 밀친다. 당신은 땅바닥에 넘어진다. 아이들은 웃으며, 당신을 숲 속에 홀로 남겨둔다.
+		<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+		<br><br>
+
+		<<link [[다음|Forest]]>><<set $forest to 30>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Lake Journey Road
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $cool gte 160>>
+	그들은 당신과 함께 가고 싶어 한다. 그들은 당신을 둘러싸고 당신의 관심을 얻기 위해 다툰다. 당신은 숲의 위험한 것들로부터 안전한 길을 벗어나지 않는다.
+	<<status 1>><<gcool>>
+	<br><br>
+
+	당신은 별 일 없이 호수에 도착했다.
+	<br><br>
+
+	<<link [[새로운 길을 개척하자고 제안한다|Lake Journey Road Dare]]>><<status 1>><</link>><<gcool>>
+	<br>
+	<<link [[길에서 벗어나지 않는다|Lake Shore]]>><</link>>
+	<br>
+<<elseif $cool gte 40>>
+	그들은 당신과 함께 갈 수 있어서 기쁘다. 당신은 다른 사람과 붙어 가면서 잡담을 한다. 당신은 숲의 위험한 것들로부터 안전한 길을 벗어나지 않는다.
+	<<status 1>><<gcool>>
+	<br><br>
+
+	<<link [[새로운 길을 개척하자고 제안한다|Lake Journey Road Dare]]>><<status 1>><</link>><<gcool>>
+	<br>
+	<<link [[길에서 벗어나지 않는다|Lake Shore]]>><</link>>
+	<br>
+<<else>>
+	그들은 서로를 쳐다보고는 당신의 요청을 비웃지만, 당신을 쳐내진 않는다. 당신은 숲의 위험한 것들로부터 안전한 길을 벗어나지 않는다.
+	<<status 1>><<gcool>>
+	<br><br>
+
+	호수에 가까워졌을 때 누군가 당신을 밀친다. 당신은 땅바닥에 넘어진다. 아이들은 웃으며, 당신을 숲 속에 홀로 남겨둔다.
+	<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+	<br><br>
+
+	<<link [[다음|Forest]]>><<set $forest to 15>><</link>>
+	<br>
+<</if>>
+
+:: Lake Journey Road Dare
+<<effects>>
+
+당신은 학생들이 안전한 길에서 벗어나게끔 충동질한다. 누구도 겁쟁이처럼 보이고 싶지 않아 하므로, 그렇게 하기는 쉽다.
+<br><br>
+
+<<lakejourney>>
+
+:: Lake Wolf Run
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 호수로 가는 길까지 달려 다른 사람들과 합류한다. <<beasttypePost "이">> 당신을 추격했는지는 모르지만, 안전하게 도착했다.
+<br><br>
+
+<<link [[호수|Lake Shore]]>><<endevent>><</link>>
+<br>
+
+:: Lake Wolf Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	당신은 <<beasttypePost "을">> 향해 한 발 내딛는다. "가," 당신이 다른 학생들에게 말한다. "여긴 안전하지 않아, 내가 처리할게." 그들은 당신이 미쳤다고 생각할 것이다. 당신은 과장된 전투 자세를 취한다. "가!" 당신이 반복한다. 그들은 호수를 향해 뛰어간다. 혼자만 남게 되자, 당신은 바닥에 누워 자세를 잡는다.
+	<<deviancy2>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Lake Wolf Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Lake Wolf Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Lake Wolf Sex Finish
+
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	만족한 채로, <<beasttypePost "은">> 숲 깊은 곳으로 어슬렁거리며 사라진다.
+	<br><br>
+
+	<<tearful>> 당신은 호수로 나아간다.
+<<elseif $enemyhealth lte 0>>
+	<<tearful>> 당신은 <<beasttypePost "이">> 숲 깊은 곳으로 도망치는 것을 바라본다.
+<<else>>
+	<<beasttypePost "은">> 숲 깊은 곳으로 어슬렁거리며 사라진다.
+	<br><br>
+
+	<<tearful>> 당신은 호수로 나아간다.
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Lake Shore]]>><</link>>
+
+:: Lake Hang
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $rng gte 81>>
+	당신은 다른 사람들과 물수제비를 뜬다. 어떤 사람은 여섯 번이나 띄운다.
+<<elseif $rng gte 61>>
+	당신은 모래성 짓는 것을 돕다가, 모래성이 자기 무게에 무너진다. 그래도 당신은 좋은 시간을 보냈다.
+<<elseif $rng gte 41>>
+	당신은 프리스비를 던지며 놀았다.
+	<<gathletics>><<athletics 3>><<physique 1>>
+<<elseif $rng gte 21>>
+	<<if $cool gte 160>>
+		당신은 학교에서 본 몇몇 학생과 이야기를 한다. <<generates1>><<person1>><<personPost "은">> 숲에 혼자 들어가며 당신에게 깊은 인상을 주려고 한다. 무서운 소리가 <<himPost "을">> 무섭게 해서 <<hePost "은">> 멀리 가지 못한다.
+		<<ltrauma>><<trauma -3>><<endevent>>
+	<<elseif $cool gte 40>>
+		당신은 학교에서 본 몇몇 학생과 이야기를 한다.
+	<<else>>
+		당신은 학교에서 본 몇몇 학생과 이야기하려고 한다. 당신은 거의 무시당한다.
+		<<gtrauma>><<trauma 3>>
+	<</if>>
+<<else>>
+	즉흥적으로 술래잡기가 시작된다.
+	<<if currentSkillValue('athletics') gte 800>>
+		아무도 당신을 잡을 수 없다.
+		<<gcool>><<status 1>><<gathletics>><<athletics 3>><<physique 1>>
+	<<elseif currentSkillValue('athletics') gte 400>>
+		당신은 할 수 있는 대로 최대한 노력한다.
+		<<gathletics>><<athletics 3>><<physique 1>>
+	<<else>>
+		술래가 되었을 때, 당신은 한 명도 잡지 못하고 고전한다.
+		<<lcool>><<status -10>><<gathletics>><<athletics 3>><<physique 1>>
+	<</if>>
+<</if>>
+
+<<pass 30>>
+
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if Time.hour is 20>>
+	날이 늦어지고, 숲의 그림자가 길어지고 있다. 사람들은 마을로 돌아갈 준비를 하고 있다. 혼자 남길 바라는 사람은 없다.
+	<br><br>
+
+	<<if $exposed lte 0>>
+		<<link [[사람들과 같이 간다 (0:30)|Lake Return Journey]]>><<set $foresthunt to 0>><<pass 30>><</link>>
+		<br>
+	<</if>>
+	<<link [[남는다|Lake Shore]]>><</link>>
+	<br>
+<<elseif $danger gte (9900 - $allure)>>
+	<<if $cool gte 160>>
+		<<generates1>><<person1>><<personPost "이">> 다가온다. "아-안녕," <<hePost "이">> 말한다. "어, 뭐-뭐 하나 부탁해도 될까?" <<HePost "은">> 숨을 깊게 들이쉰다. "나한테 키스해 줄래? 쟤들이 너한테 키스 받으면 날 내버려 둘 거래." <<HePost "이">> 고개를 숙이고 얼굴을 붉힌다. <<hesPost "이">> 말하는 "쟤들"은 얼마 떨어지지 않은 곳의 바위에서 지켜보고 있다. 당신도 <<personPost "이">> 괴롭힘당하는 것을 전에 본 적이 있다.
+		<br><br>
+
+		<<link [[키스한다|Lake Kiss]]>><<status -10>><</link>><<promiscuous1>><<lcool>>
+		<br>
+		<<link [[거절한다|Lake Refuse]]>><</link>>
+		<br>
+		<<link [[웃는다|Lake Laugh]]>><<status 1>><</link>><<gcool>>
+		<br>
+	<<else>>
+		<<generatey1>><<person1>><<personPost "이">> 돌 뒤에서 당신을 넘어뜨리고 몸을 더듬는다.
+		<br><br>
+
+		<<if hasSexStat("promiscuity", 2)>>
+			<<link [[같이 더듬는다|Lake Hang Sex]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+			<br>
+		<</if>>
+		<<link [[밀어낸다|Lake Hang Shove]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[어울려 논다 (0:30)|Lake Hang]]>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+	<br>
+	<<link [[그만둔다|Lake Shore]]>><</link>>
+	<br>
+<</if>>
+
+:: Lake Kiss
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 <<hisPost "의">> 옷깃을 잡고 <<himPost "을">> 끌어당긴다. 놀란 <<hisPost "의">> 눈이 커지지만, 곧 감긴다. <<himPost "이">> 떠는 것이 느껴진다. 불량배들은 멍청한 얼굴로 쳐다보고 있다. 한 명이 역겨움에 빈 물병을 집어던진다. 그들은 돌에서 내려와 걸어간다.
+<<promiscuity1>><<takeKissVirginity `($pronoun is "m"?"shy boy":"shy girl")` "consensual">>
+당신은 <<personPost "을">> 놔 준다. <<HesPost "은">> 얼굴을 붉히며 눈물짓는다. "고...고마워." <<HePost "은">> 뒤돌아서 달려간다.
+<<famegood 20>>
+<br><br>
+
+<<endevent>>
+<<link [[어울려 논다 (0:30)|Lake Hang]]>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+<br>
+<<link [[그만둔다|Lake Shore]]>><</link>>
+<br>
+
+:: Lake Refuse
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 고개를 젓는다. <<HePost "은">> 미소를 짓는다. "나도 알아. 내가 부탁하는 건 말도 안 되는 거겠지. 어쨌든 고마워." <<HePost "이">> 걸어간다. 바위에 있던 불량배들이 <<himPost "을">> 야유하고 놀린다.
+<br><br>
+
+<<endevent>>
+<<link [[어울려 논다 (0:30)|Lake Hang]]>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+<br>
+<<link [[그만둔다|Lake Shore]]>><</link>>
+<br>
+
+:: Lake Laugh
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 웃음을 터뜨린다. 바위에 있던 불량배들도 따라 웃는다. <<personPost "은">> 고개를 숙이고는 숲으로 달려간다.
+<br><br>
+
+<<endevent>>
+<<link [[어울려 논다 (0:30)|Lake Hang]]>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+<br>
+<<link [[그만둔다|Lake Shore]]>><</link>>
+<br>
+
+:: Lake Hang Shove
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $rng gte 81>>
+	당신은 <<himPost "을">> 밀쳐낸다. <<HePost "은">> 당신을 비웃고는 다시 올라타서, <<hisPost "의">> 손으로 당신의 입을 막는다. "다시는 수 쓰지 마라, <<bitchPost "아">>," <<hePost "이">> 말한다. "이게 현실이다."
+	<br><br>
+
+	<<link [[다음|Lake Hang Sex]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	당신은 <<himPost "을">> 밀쳐낸다. <<HePost "은">> 으쓱하고는 괴롭힐 사람을 찾아 다른 곳으로 간다.
+	<br><br>
+
+	<<endevent>>
+	<<link [[어울려 논다 (0:30)|Lake Hang]]>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+	<br>
+	<<link [[그만둔다|Lake Shore]]>><</link>>
+	<br>
+<</if>>
+
+:: Lake Hang Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<promiscuity2>>
+<</if>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $consensual to 0>>
+	<<neutral 1>>
+	<<controlloss>>
+	<<molested>>
+	<<maninit>>
+	<<hand_gag 0 left>>
+	<<if isLoveInterest("Eden") and !$edenCagedEscape and $location is "lake" and random(1,2) is 2>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Lake Hang Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Lake Hang Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Lake Hang Sex Finish
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $enemyhealth lte 0>>
+	<<HePost "이">> 고통에 몸부림친다. <<tearful>> 당신은 <<hePost "이">> 함부로 손댈 수 없도록 공개된 곳으로 도망간다.
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<HePost "은">> 누운 채로 숨을 고른다. <<tearful>> 당신은 일어선다.
+<<elseif $rescue is 1 and $alarm is 1>>
+	숲에서 총성이 들리고, 총알이 <<person_ yi>> 발치에 떨어진다. <<He_ nun>> 공포에 질려 뒤로 물러나더니 도망친다.
+	<br><br>
+
+	<<endevent>><<npc Eden>>
+	당신은 나무들 사이로 당신을 구해준 사람을 찾아보지만, 당신은 <<him_ ul>> 볼 수 없다. <<tearful>> 당신은 일어선다.
+<<else>>
+	<<HePost "은">> 망설이면서도, 당신을 놔 준다. <<tearful>> <<hePost "이">> 떠나는 것을 보고 당신은 겨우 일어선다.
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Lake Shore]]>><</link>>
+<br>
+
+:: Lake Return Journey
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+당신은 다른 사람들과 함께 어두운 숲 속으로 들어간다. 사람들은 나무 사이로 마을의 불빛이 보일 때까지 말을 줄인다.
+<br><br>
+
+<<link [[다음|Wolf Street]]>><</link>>
+<br>
+
+:: Lake Wave
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>><<rngWraith 1>>
+당신은 <<personPost>>에게 손을 흔든다. <<HePost>>도 당신에게 손을 흔들어 준다. <<HesPost "은">> 멀리 떨어져 있지만, 당신은 <<hesPost "이">> 미소 짓고 있을 것이라고 생각한다.
+<br><br>
+
+<<if _wraithEvent>>
+	<<if ["haunt", "despair"].includes($wraith.state)>>
+		<<His_ yi>> 고개가 옆으로 기울어지더니, 얼굴이 창백해짐과 동시에 미소가 옅어진다. 순간, 당신은 <<he_ ga>> <<his_ yi>> 목을 움켜잡은 채 당신에게로 다가오는 모습을 본다. 당신이 눈을 깜빡이자, <<he_ nun>> 온데간데 없이 사라진다. <<trauma 6>><<gtrauma>>
+	<<else>>
+		자세히 들여다보니, 당신은 상아 목걸이가 <<his_ yi>> 목에 감겨 있는 게 보인다. 당신이 눈을 깜빡이자, <<he_ nun>> 갑자기 사라진다. <<trauma 3>><<gtrauma>>
+	<</if>>
+	<br><br>
+<</if>>
+
+<<link [[다음|Lake Shallows]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Lake Flash
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $worn.upper.exposed gte 2>>
+	당신은 당신의 <<breastsPost "을">> 수면 위로 내놓고 손을 흔든다. <<personPost "은">> 당신에게 휘파람을 분다.
+<<else>>
+	당신은 당신의 <<allTops_ rul>> <<pullup>>, 당신의 <<breastsPost "을">> <<personPost>>에게 보여준다. <<HePost "은">> 당신에게 휘파람을 분다.
+<</if>>
+<<exhibitionism3>>
+
+<<link [[다음|Lake Shallows]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Lake Vore
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<molested>>
+	<<controlloss>>
+	<<set $enemytype to "vore">>
+	<<set $vorestage to 1>>
+	<<set $vorecreature to "frog">>
+	<<set $vorestrength to 1>><<set $position to "doggy">>
+	<<resetLastOptions>>
+	<<getCombatDefaultsType>>
+<</if>>
+
+<<water>><<effects>><<voreeffects>>
+<<vore>>
+<<voreactions>>
+
+<<if $stress gte $stressmax>>
+	<span id="next"><<link [[다음|Lake Vore Finish]]>><</link>></span><<nexttext>>
+<<elseif $vorestage lte 0>>
+	<span id="next"><<link [[다음|Lake Vore Finish]]>><</link>></span><<nexttext>>
+<<elseif $vorestomach gte 5>>
+	<span id="next"><<link [[다음|Lake Vore Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Lake Vore]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Lake Vore Finish
+
+<<water>><<effects>>
+<<if $stress gte $stressmax or $vorestomach gte 5>>
+	상황이 당신에겐 너무 벅차다. 당신은 정신을 잃는다.
+	<br><br>
+
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<endcombat>>
+	<<passoutlake>>
+<<else>>
+	<<tearful>> 당신은 <<trVore $vorecreature "의">>_trResult 배 안에서 몸을 빼낸다. 그것은 깊은 곳으로 사라진다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Lake Depths]]>><</link>>
+	<br>
+<</if>>
+
+:: Lake Ritual
+
+<<location "forest">><<effects>>
+<<set $forest to 10>>
+<<set $leftarm to "bound">><<set $rightarm to "bound">><<handheldruined>>
+<<upperruined>><<lowerruined>><<underruined>>
+<<generateCultist 1>><<person1>>
+<<if $pronoun is "m">>
+	<<generatem2>><<generatem3>><<generatem4>><<generatem5>><<generatem6>>
+<<else>>
+	<<generatef2>><<generatef3>><<generatef4>><<generatef5>><<generatef6>>
+<</if>>
+<<for _i = 0; _i < $NPCList.length; _i++>>
+	<<npcClothesType $NPCList[_i] "temple">>
+<</for>>
+당신은 석판 위에 팔이 묶인 상태로 깨어난다. 당신 주변엔 의식용 예복을 입은 <<monks_ ga>> 어렴풋이 보인다. 그들은 당신이 알아들을 수 없는 언어로 노래한다. 순간 그들이 고요해지고, 당신을 향해 다가온다.
+<br><br>
+
+<<link [[다음|Lake Ritual Molestation]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Lake Ritual Molestation
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $consensual to 0>>
+	<<neutral 1>>
+	<<controlloss>>
+	<<molested>>
+	<<maninit>>
+	<<npcidlegenitals>>
+	<<set $enemyarousalmax /= 2>>
+	<<set $enemyarousal /= 2>>
+	<<if isLoveInterest("Eden") and !$edenCagedEscape and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+		<<enable_rescue>>
+		<<set $phase2 to 1>>
+	<<elseif $wraith.state and $wraithIntro and $hallucinations gte 2>>
+		<<enable_rescue>>
+		<<set $phase2 to 2>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Lake Ritual Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Lake Ritual Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Lake Ritual Molestation Finish
+
+<<effects>>
+<<if $enemyhealth lte 0>>
+	그들은 다음 타겟이 되고 싶지 않은지 당신으로부터 물러난다. 그들은 자기들끼리 뭔가를 속삭이더니, 숲 속으로 사라진다.
+	<br><br>
+
+	당신은 당신을 결박하고 있는 장치를 흔든다. 장치는 점점 헐거워지더니, 곧 끊어진다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<pass 20>>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	<<if $phase2 is 2>>
+		<<set $wraith.seen++>>
+		당신은 당신의 비명소리가 나무 사이로 메아리치는 것을 듣는다. 그들은 물러서더니, 소리의 출처를 찾는다. 그들은 모두 조용해진다. 잠시 후, 당신은 어둠 속에서 <<wraithEyes>> 불빛을 본다. <<rainWraith true>>
+		<br><br>
+
+		<<person1>><<monksPost>> 중 한명이 보이지 않는 힘으로 뒤로 던져져, 나무에 부딪힌다. <<he_ ga>> 바닥에 부딪치며 나무껍질 조각이 <<his_ yi>> 뒤를 따라 떨어진다. 나머지는 모두 고통으로 머리를 움켜쥐고, 귀를 막으려 한다. 당신은 아무것도 듣지 못한다.
+		<br><br>
+
+		다른 <<monk_ nun>> 도망가려 한다. 당신은 길고 반투명한 팔이 <<his_ yi>> 다리를 잡고, 무력한 <<him_ ul>> 허공으로 들어올리는 것을 본다. 흐릿한 형태가 허공에서 춤추다가, 천천히 창백한 인간의 모습으로 변한다.
+		<br><br>
+
+		"<span class="wraith">고요의 자비가 너를 떠날 것이다.</span>"
+		<br><br>
+
+		그 형상이 입을 열자 요란한 비명소리가 당신의 귀를 가득 채운다. 당신이 묶여있는 채로는, 그 소리를 막을 방법이 없다. <<stress 24>><<trauma 24>><<gggstress>><<gggtrauma>>
+		<br><br>
+
+		<<link [[다음|Lake Ritual Molestation Finish 2]]>><</link>>
+	<<else>>
+		당신의 근처에서 총소리가 들리고, 총알이 무리의 발에 떨어진다. 그들은 물러서서 그들끼리 잠시 속삭이다, 숲속으로 사라진다.
+		<br><br>
+
+		<<clotheson>>
+		<<unbind>>
+		<<endcombat>>
+		에덴이 나타나 당신의 구속을 풀고, 당신이 정신차리게 도와준다. "빌어먹을 놈들," <<nnpc_hePost "Eden" "이">> 중얼거린다. "괜찮아?"
+		<br><br>
+
+		<<if $gwylan_eden_coop gte 1>>
+			에덴은 주변을 둘러본다. "그 가게주인에게는 너무 숲 속 깊은 곳이겠지," <<nnpc_hePost "Eden" "이">> 말한다.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			에덴이 당신의 어깨를 두드린다. "우연히 여기에 와서 너를 구할 수 있었어." <<nnpc_hePost "Eden" "이">> 말한다. "<span class="gold">내가 항상 주변에 있지 않을지는 모르지만, 숲 어디에서든 너를 구할 수 있어.</span> 네가 곤란해졌을 때는 소리를 질러"
+			<br><br>
+		<</if>>
+
+		<<link [[오두막으로 돌아간다 (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[작별인사를 한다|Lake Shore]]>><<endevent>><</link>>
+	<</if>>
+<<else>>
+	<<ejaculation>>
+	"의식이 완료되었다," <<person1>><<personPost "이">> 더듬거린다. "이제 사원으로 돌아가자." 그들은 숲으로 사라진다. 당신을 풀어주지는 않는다.
+	<br><br>
+
+	당신은 당신을 결박하고 있는 장치를 흔든다. 장치는 점점 헐거워지더니, 곧 끊어진다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<pass 20>>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+<</if>>
+<br>
+<<set $stress -= 1000>>
+
+:: Lake Ritual Molestation Finish 2
+<<effects>>
+<<monk_ nun>> 허공에 높이 들어올려진 후 땅에 부딪힌다. 당신은 <<he_ ga>> 비명을 지른다고 생각하지만, 너무 시끄러워 들리지 않는다. 흙과 바위가 그 충격으로 튀어오른다. 다른 두 명의 <<monks_ ga>> 반투명한 손에 붙잡힌다. 남은 <<monks_ ga>> 도망가고, 당신은 뒤따라갈 기회를 잡는다.
+당신은 제자리에서 속박을 벗어나기 위해 저항한다. 당신은 속박이 느슨해지는 것을 느끼고, 곧 끊어진다. 시간이 아슬아슬했다.
+<br><br>
+
+<<if C.npc["Ivory Wraith"].lust gte 10>>
+	당신은 가능한 빠르게 도망치지만, 당신이 어디론가 가고 있는 것 처럼 느껴지지가 않는다. 당신이 나무들을 달려 지나치며 그것들을 보지만, 그 창백한 형체는 더 멀리 떨어지지 않는다. 그것은 당신이 어느 곳을 보든지 항상 당신의 시야 한구석에 있으면서, 서서히 당신에게 다가온다. 그것의 입은 닫혀 있지만, 비명소리는 아직 계속된다.
+	<br><br>
+
+	당신은 잠시 비틀거리고, 그 형체는 조용히 웃으며 사라지지만, 비명소리 위로 어떻게인지 모르지만 소리가 들린다. "<span class="wraith">네가 어디로도 가지 못한다는 것을 잊고. 네 죄악에서 도망치는구나.</span>"
+	<<stress 12>><<ggstress>>
+<<else>>
+	당신은 비명소리가 멀어질 때까지, 최선을 다해 도망친다. 잠시 후, 당신은 다시 그것이 말하는 것을 듣는다.
+	<br><br>
+
+	"<span class="wraith">드디어... 조용하군...</span>"
+<</if>>
+<br><br>
+
+당신은 걸음을 서두른다.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+<<pass 20>>
+<<link [[다음|Forest]]>><<endRainWraith>><<set $eventskip to 1>><</link>>
+
+:: Lake Boar Stand
+
+<<set $outside to 1>><<effects>><<lakeeffects>>
+당신은 굳건히 선다. <<beasttypePost "은">> 곧 당신에게 달려든다.
+<<if $rng gte 51>>
+	하지만 <<bhe_ ga>> 당신에게까지 다다르기도 전에, <<bhePost "은">> 반원을 그리더니 숲으로 되돌아간다. 당신의 뒤에서 <<= Weather.isFrozen("lake") ? "얼음이 부서지는 소리가" : "물이 첨벙이는 소리가">> 나지만, 뒤를 돌아봤을 땐 아무것도 없다.
+	<br><br>
+
+	<<endevent>>
+	<<set $eventskip to 1>>
+	<<destinationlake>>
+<<else>>
+	<<bhePost "은">> 단숨에 당신을 바닥으로 쓰러뜨리고는, 당신 위에 올라탄다.
+	<br><br>
+
+	<<link [[다음|Lake Boar Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Lake Boar Run
+
+<<set $outside to 1>><<effects>><<lakeeffects>>
+당신은 <<bhePost "으로부터">> 도망친다. 뒤에서 멧돼지의 발이 땅을 구르는 소리가 들린다.
+<<if $athleticsSuccess>>
+	<span class="green">당신은 멧돼지가 포기할 정도로 빠르게 달린다.</span> 당신은 돌아서서 멧돼지가 나무 틈으로 돌아가는 것을 본다.
+	<br><br>
+
+	<<endevent>>
+	<<set $eventskip to 1>>
+	<<destinationlake>>
+<<else>>
+	<span class="red">당신은 충분히 빠르지 않다.</span> <<beasttypePost "은">> 당신을 바닥으로 쓰러뜨리고 당신 위에 올라탄다.
+	<br><br>
+
+	<<link [[다음|Lake Boar Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Lake Boar Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $NPCList[0].stance to "top">>
+	<<if isLoveInterest("Eden") and !$edenCagedEscape and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Lake Boar Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Lake Boar Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Lake Boar Rape Finish
+
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	만족한 채로, <<beasttypePost "은">> 나무 틈 사이로 돌아간다.
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<set $eventskip to 1>>
+	<<destinationlake>>
+<<elseif $enemyhealth lte 0>>
+	<<beasttypePost "은">> 꽥 소리를 지르고는 나무 사이로 도망간다.
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<set $eventskip to 1>>
+	<<destinationlake>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	당신의 근처에서 총소리가 들리고, 총알이 <<beasttypePost "의">> 발에 떨어진다. 그것은 두려움에 뒤로 물러선 뒤 나무쪽으로 도망친다.
+	<br><br>
+
+	에덴이 나타나 당신의 구속을 풀고, 당신이 정신차리게 도와준다. "빌어먹을 멧돼지들," <<nnpc_hePost "Eden" "이">> 중얼거린다. "괜찮아?"
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<if $gwylan_eden_coop gte 1>>
+		에덴은 주변을 둘러본다. "그 가게주인에게는 너무 숲 속 깊은 곳이겠지," <<nnpc_hePost "Eden" "이">> 말한다.
+		<br><br>
+	<</if>>
+
+	<<if $eden_rescue isnot 1>>
+		<<set $eden_rescue to 1>>
+		에덴이 당신의 어깨를 두드린다. "우연히 여기에 와서 너를 구할 수 있었어." <<nnpc_hePost "Eden" "이">> 말한다. "<span class="gold">내가 항상 주변에 있지 않을지는 모르지만, 숲 어디에서든 너를 구할 수 있어.</span> 네가 곤란해졌을 때는 소리를 질러."
+		<br><br>
+	<</if>>
+
+	<<link [[오두막으로 돌아간다 (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+	<br>
+	<<link [[작별인사를 한다|Lake Shore]]>><<endevent>><</link>>
+<</if>>
+
+:: Lake Masturbation
+
+<<effects>><<set _enableSexToys to true>>
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+<</if>>
+<<masturbationeffects>>
+<<masturbationactions>>
+<<masturbationControls>>
+
+:: Lake Masturbation Finish
+
+<<effects>>
+
+<<endmasturbation>>
+<<endcombat>>
+
+당신은 일어난다, 당신의 <<genitalsPost "은">> 아직 얼얼하다.
+<br><br>
+
+당신은 벗어 놓은 옷을 주워 입는다. 엄청난 산책이었다.
+<<unset $bugsinside>>
+<<set $eventskip to 0>>
+<br><br>
+
+<<link [[다음|Lake Shore]]>><<clotheson>><</link>>
+<br>
+
+
+:: Lake Ice Ignore
+<<effects>>
+
+당신은 보고 싶지 않았고,
+<<if $willpowerSuccess>>
+	<span class="green">그래서 보지 않는다.</span> 공포는 생겨나자마자 없어진다.<<lstress>><<stress -6>>
+	<br><br>
+
+	<<destination_lake_ice>>
+<<else>>
+	그것이 두려웠다, <span class="red">하지만 참을 수가 없었다.</span> 당신은 얼음 아래를 본다.
+	<br><br>
+
+	<<if $rng gte 95>>
+		단 하나의, 엄청난 눈동자가 당신을 뚫어지게 쳐다본다. 별들이 당신의 시야를 채운다.
+		<br><br>
+
+		당신은 얼음 위에 눕는다.<<ggtrauma>><<gstress>><<gpain>><<gawareness>><<trauma 18>><<stress 6>><<pain 4>><<awareness 1>>
+		<br><br>
+
+		<<destination_lake_ice>>
+	<<else>>
+		거기엔 아무것도 없다. 당연하다.<<gstress>><<stress 6>><<gwillpower>><<willpower 1>>
+		<br><br>
+
+		<<destination_lake_ice>>
+	<</if>>
+<</if>>
+
+
+:: Lake Ice Look
+<<effects>>
+
+<<if $rng gte 95>>
+	단 하나의, 엄청난 눈동자가 당신을 뚫어지게 쳐다본다. 별들이 당신의 시야를 채운다.
+	<br><br>
+
+	당신은 얼음 위에 눕는다.<<ggtrauma>><<gstress>><<gpain>><<gawareness>><<trauma 18>><<stress 6>><<pain 4>><<awareness 1>>
+	<br><br>
+
+	<<destination_lake_ice>>
+<<else>>
+	거기엔 아무것도 없다. 당연하다.<<gstress>><<stress 6>>
+	<br><br>
+
+	<<destination_lake_ice>>
+<</if>>
+
+
+:: Lake Ice Careful
+<<effects>>
+
+<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+	당신은, <<bellyDescriptionPost "pc">>에 주의하며, 가능한 배로 누워 무게를 분산시킨다. 당신은 더 안전한 부분을 찾아 움직인다.
+<<else>>
+	당신은 배로 누워 무게를 분산시킨다. 당신은 더 안전한 부분을 찾아 움직인다.
+<</if>>
+<br><br>
+
+<<destination_lake_ice>>
+
+:: Lake Ice Normal
+<<effects>>
+
+<<if $rng gte 91>>
+	당신은 소리가 멈출 때까지 걸어간다.
+	<br><br>
+
+	<<destination_lake_ice>>
+<<else>>
+	당신은 계속 걷는다. 얼음은 괜찮아 보였지만, <span class="red">갑자기 산산조각이 난다.</span> 당신은 얼음물에 빠진다.<<ggstress>><<stress 18>>
+	<br><br>
+
+	<<link [[다음|Lake Underwater]]>><</link>>
+	<br>
+<</if>>
+
+:: Lake Ice Brace
+<<effects>>
+
+당신은 넘어지면서 몸을 숙이고 팔을 뻗는다. 당신은 최악의 상황으로부터 당신을 보호하고자 한다.
+<br><br>
+
+<<if $laketeenspresent is 1 and $bus is "lakeshallows">>
+	당신은 웃음소리를 듣는다. 누군가 당신이 우스꽝스럽게 넘어졌다고 생각하는 모양이다.
+	<br><br>
+<</if>>
+
+<<tearful>> 당신은 일어선다.
+<br><br>
+
+<<destination_lake_ice>>
+
+
+:: Lake Ice Stay
+<<effects>>
+
+당신은 무게중심을 조절하고, 돌면서, 
+
+<<if $danceSuccess>>
+	<span class="green">똑바로 선 자세를 유지했다.</span> 위험한 순간은 끝나고, 사실 꽤 멋지게 느껴졌다.<<lstress>><<stress -6>>
+<<else>>
+	<span class="red">다리를 하늘에 쭉 뻗고 등으로 넘어진다.</span><<ggstress>><<gpain>><<stress 6>><<pain 4>>
+
+	<<if $laketeenspresent is 1 and $bus is "lakeshallows">>
+		<br><br>
+		당신은 웃음소리를 듣는다. 누군가 당신이 우스꽝스럽게 넘어졌다고 생각하는 모양이다.<<lcool>><<status -10>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<destination_lake_ice>>

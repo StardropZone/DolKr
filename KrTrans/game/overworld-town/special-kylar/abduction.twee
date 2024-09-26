@@ -1,0 +1,1881 @@
+:: Kylar Abduction Intro
+<<location "kylarmanor">><<set $outside to 0>><<effects>>
+<<npcincr Kylar dom 100>>
+<<npcincr Kylar rage -100>>
+<<neckwear 1>>
+<<kylar_abduction_init>>
+<<npc Kylar>><<person1>>
+당신은 어두운 방에서 깨어난다. 철 목걸이가 당신 목 주위에 매여 있다. 당신은 열린 문을 마주보며, 의자에 묶여 있다. <<if $worn.handheld.name isnot "naked">>당신의 <<worn_handheld_name_ un>> 아무데도 보이지 않는다.<</if>><<bind>>
+천장 근처의 작은 창문은 약간의 빛을 들어오게 하지만, 더 밝은 것은 노트북 컴퓨터가 올려져 있는, 두번째 의자 위에 걸려 있는 알전구다. 그것은 깜박거리다, 꺼진다.
+<br><br>
+
+"내-내 사랑?" 어둠 속에서 목소리가 들려온다. 깜빡이던 불빛이 다시 켜지면서, 카일라가 당신 앞에 서 있는 모습이 드러난다. 당신은 발자국 소리 하나 듣지 못했다. <span class="pink"><<He_ nun>> 나이프를 하나 들고 있다.</span> <<His_ yi>> 주먹은 하얗다.
+<br><br>
+"<<kylar_pet_name_ i cap>> 깨어났어!" <<He_ ga>> 당신 앞에 무릎을 꿇으며, <<him_ yi>> 뒤에 있는 문을 발로 차서 쾅 닫는다. "<<kylar_pet_name_ i cap>> 깨어났고 나만의 것이야."<<gggdom>><<lllksuspicion>>
+<br><br>
+
+<i>카일라의 눈은 억제된 광기로 빛나고 있다. 당신은 <<his_ yi>> 생각을 전혀 헤아릴 수가 없다.</i>
+<br><br>
+
+<<link [[끄덕인다|Kylar Abduction Intro Nod]]>><</link>><<gmystery>>
+<br>
+<<link [[화를 낸다|Kylar Abduction Intro Angry]]>><</link>><<gmystery>>
+<br>
+<<link [[부탁한다|Kylar Abduction Intro Plead]]>><</link>><<gmystery>>
+<br>
+<<link [[아무 말도 하지 않는다|Kylar Abduction Intro Silent]]>><</link>><<gmystery>>
+<br>
+
+:: Kylar Abduction Intro Nod
+<<effects>>
+
+당신은 고개를 끄덕인다. 카일라는, 훨씬 더 열정적으로 고개를 끄덕인다. "전부 내 거야," <<he_ nun>> 한 손을 당신의 허벅지에 얹고, 다른 한 손으로 당신의 목덜미를 잡으며 말한다. <<He_ nun>> 더 가까이 몸을 기울인다.
+<br><br>
+
+<<link [[키스한다|Kylar Abduction Intro Kiss]]>><</link>><<kissvirginitywarning>>
+<br>
+<<link [[외면한다|Kylar Abduction Intro Turn]]>><</link>>
+<br>
+<<link [[깨문다|Kylar Abduction Intro Bite]]>><</link>><<kissvirginitywarning>>
+<br>
+
+:: Kylar Abduction Intro Angry
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"이건 정말 비열한 짓이야," 당신은 말한다.
+<<elseif $speech_attitude is "bratty">>
+	"넌 정말 소름끼치는 괴짜야!" 당신은 말한다.
+<<else>>
+	"이건 야비한 짓이야," 당신은 말한다. "그게 너라도 말야!"
+<</if>>
+<<ggksuspicion>><<npcincr Kylar rage 20>><br><br>
+
+카일라는 얻어맞기라도 한 것처럼, <<his_ yi>> 등이 뒤에 있는 문에 닿도록 뒷걸음질 친다. "그- 그런 뜻이 아니야," <<he_ ga>> 다시 한번, <<his_ yi>> 무릎을 꿇으며 말한다. "넌 날 사랑하잖아. 내게 증명해줘!" <<He_ nun>> 당신의 뒤통수를 움켜쥐고, 몸을 기울인다.
+<br><br>
+
+<<link [[키스한다|Kylar Abduction Intro Kiss]]>><</link>><<kissvirginitywarning>>
+<br>
+<<link [[외면한다|Kylar Abduction Intro Turn]]>><</link>>
+<br>
+<<link [[깨문다|Kylar Abduction Intro Bite]]>><</link>><<kissvirginitywarning>>
+<br>
+
+
+
+:: Kylar Abduction Intro Plead
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"제-제발 날 놔줘," 당신은 말한다. "이건 잘못된 거야!"
+<<elseif $speech_attitude is "bratty">>
+	"날 놔주지 않으면," 당신은 말한다. "넌 후회할 거야."
+<<else>>
+	"날 놔줘," 당신은 말한다. "이건 잘못된 거야."
+<</if>>
+<<gksuspicion>><<npcincr Kylar rage 10>><br><br>
+<br><br>
+
+카일라는 <<his_ yi>> 검지 손가락을 당신의 입술에 대고 누른다. "조용히 해, 내 사랑" <<he_ ga>> 말한다. "온종일 피로가 쌓였구나. 하지만 지금은 괜찮아! 넌 안전해. 나와 함께라면 안전하고 말고!" <<He_ nun>> 당신의 목덜미에 <<his_ yi>> 손을 얹고, 키스를 하기 위해 몸을 기울인다.
+<br><br>
+
+<<link [[키스한다|Kylar Abduction Intro Kiss]]>><</link>><<kissvirginitywarning>>
+<br>
+<<link [[외면한다|Kylar Abduction Intro Turn]]>><</link>>
+<br>
+<<link [[깨문다|Kylar Abduction Intro Bite]]>><</link>><<kissvirginitywarning>>
+<br>
+
+
+:: Kylar Abduction Intro Silent
+<<effects>>
+
+당신은 아무 말도 하지 않는다. "뭐라고 말 좀 해봐," 카일라가 당신의 어깨를 움켜잡으며 말한다. "제-제발 무슨 말이라도 해줘." <<his_ yi>> 손은 당신을 단단히 잡고 있다.<<gggksuspicion>><<npcincr Kylar rage 30>><<gpain>><<pain 4>>
+<br><br>
+
+<<his_ yi>> 손 한쪽이 당신의 목 뒤로 기어간다. <<He_ nun>> 더 가까이 몸을 기울인다.
+<br><br>
+
+<<link [[키스한다|Kylar Abduction Intro Kiss]]>><</link>><<kissvirginitywarning>>
+<br>
+<<link [[외면한다|Kylar Abduction Intro Turn]]>><</link>>
+<br>
+<<link [[깨문다|Kylar Abduction Intro Bite]]>><</link>><<kissvirginitywarning>>
+<br>
+
+:: Kylar Abduction Intro Kiss
+<<effects>>
+
+당신은 마늘 냄새가 나는 <<his_ yi>> 숨결을 맡는다. <<His_ yi>> 촉촉한 입술이 당신의 입술에 닿고, <<his_ yi>> 혀가 바짝 따라붙는다. 당신은 <<his_ yi>> 피부를 통해 <<his_ yi>> 맥박이 빠르게 요동치는 것을 느낀다.
+<<takeKissVirginity "Kylar" `($loveInterest.primary is "Kylar" or $loveInterest.secondary is "Kylar"?"loveRape":"rape")`>>
+<br><br>
+
+<<His_ yi>> 탐사는 불규칙하고, 필사적이며, 거의 당신의 입을 범하는 수준이다. <<He_ ga>> 몸을 뗀다. <<His_ yi>> 눈빛은 부드럽게 변했지만, 여전히 광기가 남아있다.<<npcincr Kylar lust 20>><<gglust>>
+<br><br>
+
+<<link [[다음|Kylar Abduction Intro End]]>><</link>>
+<br>
+
+:: Kylar Abduction Intro Turn
+<<effects>>
+
+당신은 고개를 돌려서, 카일라의 키스가 뺨에 닿게 한다. "왜- 왜 그래?" <<he_ ga>> 묻는다. <<He_ nun>> 상심하고, 두려워하는 것처럼 들린다. "내-내가 널 불쾌하게 했니?" <<He_ nun>> 묶여있는 당신의 허벅지를 움켜잡는다. <<His_ yi>> 손가락이 떨린다. "내가 더 잘할게! 약속해!"<<npcincr Kylar rage 20>><<ggksuspicion>>
+<br><br>
+
+<<link [[다음|Kylar Abduction Intro End]]>><</link>>
+<br>
+
+:: Kylar Abduction Intro Bite
+<<effects>>
+
+당신은 마늘 냄새가 나는 <<his_ yi>> 숨결을 맡는다. <<His_ yi>> 촉촉한 입술이 당신의 입술에 닿고, <<his_ yi>> 혀가 바짝 따라붙는다. 당신은 <<his_ yi>> 피부를 통해 <<his_ yi>> 맥박이 빠르게 요동치는 것을 느낀다.
+<<takeKissVirginity "Kylar" `($loveInterest.primary is "Kylar" or $loveInterest.secondary is "Kylar"?"loveRape":"rape")`>>
+<br><br>
+
+<<His_ yi>> 혀가 당신의 혀 위로 미끄러지며, 가능한 한 깊이 들어가려고 안간힘을 쓴다. 당신이 이빨로 깨물자, <<he_ nun>> 울부짖으며 뒤로 물러서서 엉덩방아를 찧는다. <<He_ nun>> 한 손으로 <<his_ yi>> 입을 가린 채, 놀라서 당신을 올려다본다.
+<br><br>
+
+<<His_ yi>> 표정이 딱딱한 미소와 함께 날카롭게 변한다. "<<kylar_pet_name_ cap>>," <<he_ ga>> 낮게 읊조리며, 다시 한 번 당신에게로 기어온다. "그렇게까지 강하게 날 원하고 있는거야? 아하."<<npcincr Kylar lust 30>><<ggglust>>
+<br><br>
+
+<<link [[다음|Kylar Abduction Intro End]]>><</link>>
+<br>
+
+:: Kylar Abduction Intro End
+<<effects>>
+
+불빛이 다시 깜박이면서 쿵하는 소리가 건물에 울려퍼진다. "그들이 날 위층에서 필요로 하고 있어," 카일라가 문을 열며 말한다. "곧 돌아올게 <<kylar_pet_name_>>." <<he_ ga>> 당신이 아직 거기 있다는 것을 확인하는 것처럼, 당신을 다시 한번 흘낏 보고는, 나간다.
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Abduction
+<<effects>>
+
+당신은 작은 방에 있다. 천장 근처의 가느다란 창문으로 하늘이 보인다.
+<<if !Weather.isOvercast>>
+	<<if Time.dayState is "night">>
+		별들이 반짝인다.
+	<</if>>
+<<elseif Weather.precipitation is "rain">>
+	바닥에 빗물이 고여 잠겨 있다.
+<<elseif Weather.isSnow>>
+	쌓인 눈이 시야를 거의 가리고 있다.
+<<else>>
+	<<if Time.dayState is "night">>
+		칠흑같이 어둡다.
+	<<else>>
+		날씨가 흐리다.
+	<</if>>
+<</if>>
+<br><br>
+
+<<link [[당신의 구속을 약하게 만든다 (1:00)|Kylar Abduction Weaken]]>><<pass 60>><<tiredness 6>><<pain 8>><</link>><<ggpain>><<gtiredness>>
+<br>
+<<link [[휴식한다 (1:00)|Kylar Abduction Rest]]>><<pass 60>><<tiredness -12>><</link>><<ltiredness>>
+<br>
+
+:: Kylar Abduction Weaken
+<<effects>>
+
+당신은 당신의 손목을 묶고 있는 밧줄을 잡아당긴다.
+<<if $physique gte 15000>>
+	<span class="teal">당신은 밧줄의 섬유가 당신의 힘에 굴복하는 것을 느낀다.</span>
+<<elseif $physique gte 10000>>
+	<span class="lblue"></span>
+<<elseif $physique gte 5000>>
+	<span class="blue"></span>
+<<else>>
+	<span class="purple"></span>
+<</if>>
+<<set $kylar_abduction_binds -= 1 + ($physique / 3000)>>
+<br><br>
+
+<<if $kylar_abduction_binds gte 80>>
+	<span class="pink">밧줄은 풀어지겠지만, 시간이 좀 걸릴 수도 있다.</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<elseif $kylar_abduction_binds gte 60>>
+	<span class="purple">만약 당신의 상상력이 장난을 치고 있는 것이 아니라면, 밧줄은 처음보다 느슨해졌다.</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<elseif $kylar_abduction_binds gte 40>>
+	<span class="blue">밧줄은 아까보다 느슨하다. 확실히.</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<elseif $kylar_abduction_binds gte 20>>
+	<span class="lblue">밧줄은 손목을 움직일 수 있을만큼 충분히 느슨하다.</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<elseif $kylar_abduction_binds gte 1>>
+	<span class="teal">밧줄은 더 이상 불편하게 조이지 않는다.</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<else>>
+	밧줄이 너무 느슨해서, 당신은 손을 올바른 방향으로 비틀기만 하면 된다. 당신은 손을 이리저리 움직이고, <span class="green">결국 당신의 손은 자유로워진다.</span><<unbind>>
+	<br><br>
+
+	<<link [[다음|Kylar Abduction Free]]>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Kylar Abduction Rest
+<<effects>>
+
+당신은 눈을 감고 손목을 물고 있는 밧줄을 무시하려고 노력한다. 잠이 든 것 같지는 않지만, 당신은 카일라가 들어오는 소리를 듣지 못한다.
+<br><br>
+
+<<kylar_abduction_return rest>>
+
+
+:: Kylar Abduction Event Response
+<<effects>>
+
+<<if $phase is "angry">>
+	<<if $speech_attitude is "meek">>
+		"나-나한테 손대지 마," 당신이 말한다. "이건 잘못된 거야."
+	<<elseif $speech_attitude is "bratty">>
+		"나한테서 당장 떨어져," 당신이 말한다. "안 그러면 가만 안 둬."
+	<<else>>
+		"넌 미쳤어," 당신이 말한다. "나한테서 떨어져."
+	<</if>>
+	<br><br>
+
+	당신의 분노는 카일라 안의 무언가를 일깨운다.
+<<elseif $phase is "apologise">>
+	<<if $speech_attitude is "meek">>
+		"내-내가 미-미안해," 당신이 말한다. "다른 사람 생각은 해본 적도 없어!"
+	<<elseif $speech_attitude is "bratty">>
+		"난 네 생각 뿐이야," 당신이 말한다. "그럴 의도는 없었어."
+	<<else>>
+		"미안해," 당신이 말한다. "네가 그렇게 느낄 줄은 몰랐어."
+	<</if>>
+	<br><br>
+
+	"거짓말쟁이!" 카일라가 말한다.
+<<elseif $phase is "silent">>
+	카일라의 공포가 심해진다.
+<<else>>
+	<<switch $phase>>
+		<<case "Eden">>
+			"에덴이 날 구하러 올 거야," 당신이 말한다. "<<nnpc_Hes_ nun "Eden">> 너보다 더한 것도 사냥했거든."
+			<br><br>
+
+			"에덴? 그게 누구-"
+		<<case "Robin">>
+			"로빈이 날 찾을 거야," 당신이 말한다. "로빈은 보기보다 강해. <<nnpc_Hes_ nun "Robin">> 너보다 강하다고."
+			<br><br>
+			"로빈? 난-"
+		<<case "Whitney">>
+			"휘트니가 우릴 찾기만 해 봐." 당신이 말한다. "좋은 꼴이 되진 못할걸."
+			<br><br>
+
+			"휘트니? 넌 나-나보다 일진을 더-"
+		<<case "Sydney">>
+			"시드니는 널 용서할 거야," 당신이 말한다. "<<nnpc_his_ ga "Sydney">> 복수한 후에 말이지만, 끔찍한 꼴을 보게 되겠지."
+			<br><br>
+			"시드니? 그-그렇지만 난 그 애보다 더-"
+		<<case "Avery">>
+			"에이버리는 힘 있는 <<nnpc_gender_ iya "Avery">>," 당신이 말한다. "만약 <<nnpc_he_ ga "Avery">> 이걸 알아차린다면, <<nnpc_he_ nun "Avery">> 널 가만두지 않을걸."
+			<br><br>
+
+			"에이버리? 나는-"
+		<<case "Alex">>
+			"알렉스는 항상 가축들을 다루곤 하지." 당신이 말한다. "<<nnpc_He_ ga "Alex">> 널 파묻어 버릴 수도 있을걸."
+			<br><br>
+
+			"알렉스? 무슨 말을-"
+		<<case "Wolf">>
+			"늑대들이 냄새 맡고서 날 찾아낼 거야," 당신이 말한다. "녀석들은 너처럼 조그만 것 하나를 두려워하지 않아."
+			<br><br>
+			"늑대들? 너 설마-"
+		<<case "Hawk">>
+			"나는 거대 매와 특별한 유대를 가지고 있어," 당신이 말한다. "너에게 '<<kylar_pet_namePost "으로" "sep">>'_trPost 잡혀 있지는 않을 거야."
+			<br><br>
+			"새 말하는 거야? 그거 설마-"
+	<</switch>>
+	<<he_ ga>> 말을 하려 하지만, <<him_ un>> 말을 잇지 못한다. 거의 <<hes_ ga>> 과호흡을 하고 있는 듯이 들린다.
+<</if>>
+<<kylar_abduction_rage>>
+
+
+:: Kylar Abduction Rape
+<<if $molestationstart is 1>>
+	<<set _kylar to statusCheck("Kylar")>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<set $enemyarousalmax *= 2>><<set $kylar.raped += 1>>
+	<<set $NPCList[0].lefthand to ($worn.under_lower.type.includes("naked") ? 0 : "underlowerclothes")>>
+	<<set $NPCList[0].righthand to ($worn.lower.type.includes("naked") ? 0 : "lowerclothes")>>
+	<<if _kylar.penis isnot "none" and $player.vaginaExist and (_kylar.vagina is "none" or random(0,1))>>
+		<<set $NPCList[0].penis to "vaginaentrance">><<set $vaginause to "penis">><<set $vaginastate to "entrance">><<set $vaginatarget to 0>><<set $NPCList[0].location.genitals to "genitals">>
+	<<elseif _kylar.vagina isnot "none" and $player.penisExist>>
+		<<set $NPCList[0].vagina to "penisentrance">><<set $penisuse to "othervagina">><<set $penisstate to "entrance">><<set $penistarget to 0>><<set $NPCList[0].location.genitals to "genitals">>
+	<</if>>
+<</if>>
+
+<<set $enemyarousal += 15>>
+<<He_ 는>> 당신에게 키스하고, 물고 핥으며  <<his_>>의 온몸을 당신에게 문지르고 있다.
+<br><br>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Kylar Abduction Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Kylar Abduction Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Kylar Abduction Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<His_>>의 무게가 당신을 짓누르다, <<his_>>의 머리가 당신의 어깨 너머로 떨어진다. <<He_ 는>> 뒤로 물러나며, 미친 듯한 눈빛으로 당신의 눈을 응시한다. "너에게 이런 짓을 몇 번이고 몇 번이고 반복할 거야. 오로지 나만이 널 만족시킬 수 있을 때까지."
+
+	<<if !$worn.face.type.includes("gag") and $player.virginity.kiss isnot true>>
+		<<He_ ga>> 당신의 입에 키스한다. <<takeKissVirginity "Kylar" `($loveInterest.primary is "Kylar" or $loveInterest.secondary is "Kylar"?"loveRape":"rape")`>>
+		<<if _npcKissVirginTemp>>
+			"내 첫 키스였어," <<he_ ga>> 속삭인다. "그 오랜 시간이 지나고 드디어. 앞으로 우리 사이에는 아주 많은 다른 처음이 있을 거야, <<kylar_pet_namePost>>."
+		<</if>>
+	<<else>>
+		<<He_ ga>> 당신의 이마에 키스한다.
+	<</if>>
+	<<npcincr Kylar lust -100>><<llllust>><<gstockholm>><<set $syndromekylarbuild += 1>>
+<<else>>
+	당신은 어깨로 <<him_ ul>> 확 쳐낸다. <<He_ nun>> 균형을 잃고, 당신에게서 떨어진다. "그-그럴 기분이 아니야?" <<he_ ga>> 묻는다. "괜찮아. 이 세상에서 우리들의 시간이 많이 있을 테니까."<<lllust>><<npcincr Kylar lust -40>>
+<</if>>
+<br><br>
+
+<<endcombat>>
+<<npc Kylar>><<person1>>
+
+당신은 끔찍한 쾅 하는 소리가 위에서 나는 것을 듣는다. 카일라가 급히 문으로 향한다. "곧 돌아올게, <<kylar_pet_namePost>>."
+<br><br>
+<<endevent>>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Rage
+<<effects>>
+
+<<He_ ga>> 바닥을 발로 차며, 당신으로부터, 허둥지둥 뒤로 물러나다가, <<his_ yi>> 등이 벽에 쿵 하고 부딪힌다. "뭐-뭐-뭐," <<he_ ga>> 몸을 떤다. "내가 무슨 짓을 한 거야?" <<He_ ga>> 당신에게로 기어와서, 당신이 의식이 있는 걸 깨닫자 <<he_ nun>> 안도의 한숨을 내쉰다.
+<br><br>
+"내-내가 잘못했어, <<kylar_pet_namePost>>. 제-제발 용서해 줘." <<He_ ga>> 일어서면서, 당신의 의자를 세운다. <<He_ nun>> 그것을 <<his_ yi>> 등으로 밀면서, <<his_ yi>> 온 몸을 지렛대 삼아 그것을 세운다.
+<br><br>
+<<He_ ga>> 무릎을 꿇고, 마치 당신과 눈을 마주치는 것을 두려워하는 것 처럼, <<his_ yi>> 눈을 피한다. "내가 뭐든지 할게. 제-제발 그냥 용서해 줘."
+<br><br>
+
+<<if $kylar_abduction_stupid is 1>>
+	<<link [[카일라가 당신의 지능을 모욕한 것을 비난한다|Kylar Abduction Stupid]]>><<unset $kylar_abduction_stupid>><</link>>
+	<br>
+<</if>>
+<<if $kylar_clothes isnot "formal">>
+	<<link [[카일라에게 격식을 갖춰 입으라고 한다|Kylar Abduction Formal]]>><<set $kylar_clothes_init to 1>><<set $kylar_clothes to "formal">><</link>>
+	<br>
+<</if>>
+<<if $kylar_clothes isnot "goth">>
+	<<link [[카일라에게 고스 룩을 입으라고 한다|Kylar Abduction Goth]]>><<set $kylar_clothes_init to 1>><<set $kylar_clothes to "goth">><</link>>
+	<br>
+<</if>>
+<<if $kylar_clothes is "formal" or $kylar_clothes is "goth" or $kylar_clothes is "swimsuit">>
+	<<link [[카일라에게 평상복을 입으라고 한다|Kylar Abduction Normal]]>><<set $kylar_clothes_init to 1>><<unset $kylar_clothes>><</link>>
+	<br>
+<</if>>
+<<if $kylar_abduction_grass is 1>>
+	<<link [[카일라에게 잔디를 깎으라고 한다 (1:00)|Kylar Abduction Grass]]>><<pass 60>><<set $kylar_abduction_grass to 2>><</link>><<note "당신이 있는 곳을 개선하는 데 도움이 될 것입니다" "green">>
+	<br>
+<</if>>
+<<if C.npc.Kylar.dom lte 90>>
+	<<link [[카일라에게 제대로 사과하라고 한다|Kylar Abduction Kneel]]>><</link>>
+	<br>
+<</if>>
+<<if C.npc.Kylar.dom lte 80>>
+	<<link [[카일라에게 당신을 위해 춤추라고 한다|Kylar Abduction Dance]]>><</link>>
+	<br>
+<</if>>
+<<if C.npc.Kylar.dom lte 60 and $kylar_clothes isnot "swimsuit">>
+	<<link [[카일라에게 수영복을 입으라고 한다|Kylar Abduction Swimsuit]]>><<set $kylar_clothes_init to 1>><<set $kylar_clothes to "swimsuit">><</link>>
+	<br>
+<</if>>
+<<if C.npc.Kylar.dom lte 30 and $footdisable is "f">>
+	<<link [[카일라에게 당신의 발에 키스하라고 한다|Kylar Abduction Feet]]>><</link>>
+	<br>
+<</if>>
+<<if C.npc.Kylar.dom lte 0>>
+	<<link [[카일라에게 당신을 놓아달라고 한다|Kylar Abduction Release]]>><</link>><<note "지하에서 탈출합니다" "gold">>
+	<br>
+<</if>>
+
+:: Kylar Abduction Stupid
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"너-너 나에게 예전에 멍청하다고 말했잖아," 당신이 말한다. "상처 받았어."
+<<elseif $speech_attitude is "bratty">>
+	"난 아직도 네가 한 말을 잊지 못해," 당신이 말한다. "나보고 멍청하다며. 내게 더 할 말은 없어?"
+<<else>>
+	"나보고 멍청하다며," 당신이 말한다. "거기에 더 할 얘기는 없어?"
+<</if>>
+<br><br>
+
+"내-내가?" 카일라가 진저리칠 듯한 모습으로 대답한다. "기억이 안 나! 그리고 난 무서웠다고! 그리고, 그리고-" <<He_ ga>> <<his_ yi>> 머리를 숙이고, <<his_ yi>> 목이 아플 정도로 빠르게 위아래로 끄덕인다. <<He_ ga>> 고통에 목을 잡는다. "다시는 그러지 않을 거야."<<ldom>><<npcincr Kylar dom -10>><<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+"지-진통제 좀 먹어야겠어," <<he_ ga>> 말하며, 문으로 다가간다.
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Grass
+<<effects>>
+
+카일라가 열정적으로 고개를 끄덕인다. "아-알겠어," <<he_ 가>> 말한다. "어차피 곧 할 계획이었어." <<He_ 는>> 그럴 계획이 없었다. "그-금방 끝낼게!"
+<br><br>
+
+<<He_ 가>> 사라진 지 얼마 되지 않았을 때, 당신은 엔진이 돌아가는 소리를 듣는다. 당신은 카일라가 잔디를 깎고 있다고 생각한다.
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Formal
+<<effects>>
+
+"격식?" 카일라가 묻는다. <<if $pronoun is "m">>"정장같은 것 말이야?<<else>>"드레스같은 것 말이야?<</if>> 할 수 있어!" <<He_ 는>> 발걸음을 재촉하며 서둘러 문으로 향한다. 두려움이 <<him_>>에게서 멀어진다. "금방 돌아올게, <<kylar_pet_namePost>>."<<ldom>><<npcincr Kylar dom -10>><<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Goth
+<<effects>>
+
+"고스 룩을?" 카일라가 묻는다. "할 수 있어. 저-전에도 입어봤어." <<He_ 는>> 발걸음을 재촉하며 서둘러 문으로 향한다. 두려움이 <<him_>>에게서 멀어진다. "금방 돌아올게, <<kylar_pet_namePost>>."<<ldom>><<npcincr Kylar dom -10>><<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Abduction Swimsuit
+<<effects>>
+
+"그냥 수영복?" 카일라가 묻는다. "<<kylar_pet_name_ ul>> 위해서라면 무엇이든." <<He_ ga>> 후닥닥 일어나 문으로 달려간다. 공포가 <<himPost>>에게서 사라진다. "금방 돌아올게."<<ldom>><<npcincr Kylar dom -10>><<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Abduction Normal
+<<effects>>
+
+"<<kylar_pet_name_ 이>> 원하는 건 뭐-뭐든지," <<he_ 가>> 말하고는, 발걸음을 재촉하며 서둘러 문으로 향한다. "금방 돌아올게."<<ldom>><<npcincr Kylar dom -10>><<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Kneel
+<<effects>>
+
+카일라는 망설이지 않는다. <<He_ 는>> 이마를 바닥에 박는다. "미안해," <<he_ 가>> 말한다. "미안해 미안해 미안해 미안해..."
+<br><br>
+<<He_ 는>> 숨을 쉬기 위해 멈출 때 빼고는 한동안 그것을 계속한다.<<ldom>><<npcincr Kylar dom -10>><<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+<<He_ 는>> 두 발로 일어나 선다. "이-이제부터 잘할게," <<he_ 가>> 말하곤, 뒤로 돌아 문을 향해 걸어간다. <<His_ 는>> 걸음을 옮기며 작은 꾸벅거림을 계속한다. "금방 돌아올게."
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Feet
+<<effects>>
+
+카일라는 당신의 발가락을 잠시 바라보다가, <<his_>>의 눈을 감고 몸을 더 가까이 기울인다.
+
+<<if $worn.feet.type.includes("naked")>>
+	<<He_ 는>> 당신의 발가락 하나하나에 차례로 키스하며, <<hes_ 가>> 잘하고 있는지 확인하기 위해 당신을 올려다본다.
+<<else>>
+	<<He_ 는>> 당신의 양쪽 <<worn_feet_name>>에 번갈아 가며 키스하며, 가끔 고개를 들어 <<hes_ 가>> 잘하고 있는지 확인하기 위해 당신을 올려다본다.
+<</if>>
+<<He_ 는>> 나쁘지 않은 혀놀림을 보여준다.<<ldom>><<npcincr Kylar dom -10>><<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+<<He_ 는>> 자리에서 일어난다. "이-이제부터 잘할게," <<he_ 가>> 문을 향해 뒷걸음질치며 말한다. <<His_ 는>> 걸음을 옮기며 작은 꾸벅거림을 계속한다. "금방 돌아올게."
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Abduction Dance
+<<effects>>
+
+"I-I can't dance," Kylar says. "But I'll try!" <<he>> adds in a hurry.
+<br><br>
+
+<<He>> opens <<his>> laptop. "What sort of dance?"
+<br><br>
+
+<<link [[Cool|Kylar Abduction Dance Cool]]>><</link>>
+<br>
+<<link [[Sophisticated|Kylar Abduction Dance Sophisticated]]>><</link>>
+<br>
+<<link [[Sensual|Kylar Abduction Dance Sensual]]>><</link>>
+<br>
+<<link [[Sexual|Kylar Abduction Dance Sexual]]>><</link>>
+<br>
+
+:: Kylar Abduction Dance Cool
+<<effects>>
+
+Kylar plays a popular track, and dances in the middle of the room. <<He>> isn't very good. <<He>> doesn't have the dance memorised, and needs to keep <<his>> eyes on the laptop so <<he>> can follow along.<<npcincr Kylar dom -10>><<ldom>>
+<br><br>
+
+The music stops. <<He>> waits for your appraisal.
+<br><br>
+
+<<link [[Berate|Kylar Abduction Dance Berate]]>><</link>>
+<br>
+<<link [[Compliment|Kylar Abduction Dance Compliment]]>><</link>>
+<br>
+
+:: Kylar Abduction Dance Sophisticated
+<<effects>>
+
+Kylar plays a classical track, and dances in the middle of the room. It's more swaying than dancing, really. <<Hes>> so uncoordinated it's a wonder <<he>> doesn't fall over.<<npcincr Kylar dom -10>><<ldom>>
+<br><br>
+
+The music stops. <<He>> waits for your appraisal.
+<br><br>
+
+<<link [[Berate|Kylar Abduction Dance Berate]]>><</link>>
+<br>
+<<link [[Compliment|Kylar Abduction Dance Compliment]]>><</link>>
+<br>
+
+
+
+:: Kylar Abduction Dance Sensual
+<<effects>>
+
+Kylar plays a track, and dances in the middle of the room. Does <<he>> mean to sway <<his>> hips? Whatever <<hes>> trying to do, it's not sensual in the typical way. It's negatively sensual.
+
+<<arousal -600>><<larousal>><<npcincr Kylar dom -10>><<ldom>>
+<br><br>
+
+The music stops. <<He>> waits for your appraisal.
+<br><br>
+
+<<link [[Berate|Kylar Abduction Dance Berate]]>><</link>>
+<br>
+<<link [[Compliment|Kylar Abduction Dance Compliment]]>><</link>>
+<br>
+
+:: Kylar Abduction Dance Sexual
+<<effects>>
+
+Kylar plays a track, and dances in the middle of the room. At least you think it's meant to be a dance. <<He>> kinda jerks haphazardly around, sticking limbs out at random intervals.
+
+<<npcincr Kylar dom -10>><<ldom>>
+<br><br>
+
+The music stops. <<He>> waits for your appraisal.
+<br><br>
+
+<<link [[Berate|Kylar Abduction Dance Berate]]>><</link>>
+<br>
+<<link [[Compliment|Kylar Abduction Dance Compliment]]>><</link>>
+<br>
+
+:: Kylar Abduction Dance Berate
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"I'm sure you did your best," you say. "But I'm disappointed."
+<<elseif $speech_attitude is "bratty">>
+	"That was terrible," you say. "What a waste of my time."
+<<else>>
+	"That wasn't very good," you say. "I'm disappointed."
+<</if>>
+<<llove>><<npcincr Kylar love -1>>
+<br><br>
+
+Kylar drops to <<his>> knees. "I'm sorry <<kylar_pet_name>>," <<he>> says, wrapping <<his>> arms around your leg. "I will do better next time!" <<He>> scurries from the room.<<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Dance Compliment
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"You danced very well," you say.
+<<elseif $speech_attitude is "bratty">>
+	"You've got good moves," you say.
+<<else>>
+	"You're a good dancer," you say.
+<</if>>
+<<glove>><<npcincr Kylar love 1>>
+<br><br>
+
+Kylar bobs in joy. "Thank you <<kylar_pet_name>>," <<he>> says. "I'll be back soon."<<lllksuspicion>><<npcincr Kylar rage -100>>
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Release
+<<effects>>
+
+카일라는 당신의 말에 눈물을 흘리며 무너진다. <<His_>>의 고개가 처진다. <<He_ 는>> 더이상 당신의 말을 거절할 의지가 없다. <<He_ 는>> 무릎을 꿇는다. "나-나는 단지 네가 내것이 되-되길 바랐어. 미-미안해."
+<br><br>
+
+<<He_ 는>> 잠시 동안 흐느끼다가, 일어나서 당신의 의자 뒤로 걸어간다. <<He_ 가>> 구속을 제거한다.
+<<unbind>><<set $worn.neck.type.push("broken")>><<neckruined true>>
+<br><br>
+
+<<link [[카일라를 위로한다|Kylar Abduction Comfort]]>><</link>>
+<br>
+<<link [[그냥 떠난다|Kylar Abduction Leave]]>><</link>>
+<br>
+
+:: Kylar Abduction Comfort
+<<effects>>
+
+당신은 카일라를 두 팔로 감싸안는다. <<He_ 는>> 처음엔 움찔하지만, 이내 당신에게 녹아내린다. <<His_>>의 체중을 지탱하는 것은 어렵지 않다.
+<br><br>
+
+<<He_ 는>> 잠시동안 더 울다가, 문을 바라본다. "뭐-뭔가 필요할 거야," <<he_ 가>> 말한다. "여길 떠나려면. 여기서 기다려. 오래 안 걸릴 거야. 약속할게."
+<br><br>
+
+<<He_ 는>> 방을 나간다. <<He_ 는>> 거짓말을 하지 않았고, 곧 마늘 한 줄을 들고 돌아온다. "이걸 목에 걸어," <<he_ 가>> 말한다. <<His_>>의 눈물이 <<his_>>의 뺨을 적시고 있지만, <<hes_ 는>> 더 이상 울지 않는다. "나는 좀 먹어뒀어. 날 따라와."
+<br><br>
+
+<<link [[다음|Kylar Abduction Release 2]]>><</link>>
+<br>
+
+
+
+:: Kylar Abduction Leave
+<<effects>>
+
+"기-기다려!" 당신이 문을 향해 발걸음을 옮기자 카일라가 말한다. <<He_ 는>> 눈물을 닦는다. 눈물은 단 번에 사라진다. "안전하게 여길 떠나려면 뭔가 필요할 거야. 여-여기서 기다려. 오래 안 걸릴 거야. 약속할게."
+<br><br>
+
+<<He_ 는>> 방을 나간다. <<He_ 는>> 거짓말을 하지 않았고, 곧 마늘 한 줄을 들고 돌아온다. "이걸 목에 걸어," <<he_ 가>> 말한다. <<His_>>의 눈물이 <<his_>>의 뺨을 적시고 있지만, <<hes_ 는>> 더 이상 울지 않는다. "나는 좀 먹어뒀어. 날 따라와."
+<br><br>
+
+<<link [[다음|Kylar Abduction Release 2]]>><</link>>
+<br>
+
+:: Kylar Abduction Release 2
+<<effects>>
+
+당신은 방에서 나와 카일라를 따라간다. 바깥 복도는 어둡다. 문 주위의 벗겨진 석고에 더 많은 마늘이 못으로 박혀 있다. 대부분은 썩었지만 일부는 싱싱하다.
+<br><br>
+
+카일라가 오른쪽으로 걷다가 왼쪽으로 걷는다. 당신은 다른 방들을 지나친다. 마지막 방을 제외한 모든 문들이 닫혀 있다. 그 문은 바닥 위에 부서져 있고 거대한 파편이 바깥쪽을 향하고 있다.
+<br><br>
+
+당신은 위로 이어지는 난간에 도착한다. 카일라가 난간을 오른다. 꼭대기에는 문이 있다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Release 3]]>><</link>>
+<br>
+
+:: Kylar Abduction Release 3
+<<effects>>
+
+문을 열면 넓지만 고풍스러운 주방이 펼쳐진다. 지저분한 것만 빼면. 음식 포장재가 바닥에 널려 있다. 쓰레기통은 넘쳐나고, 냄새로 짐작하건대 한동안 계속 그랬던 것 같다. 카일라는 그것을 무시하고 다른 복도로 걸어간다. <<He_ 는>> 더 위쪽으로 이어지는 난간을 올라, 바깥으로 통하는 문 앞에 도착한다.
+<br><br>
+
+<<He_ 는>> 문을 열고, 옆으로 물러선다. 무성하게 풀이 자란 정원과, 그 너머로 다뉴브 거리처럼 보이는 곳이 펼쳐진다. <<He_ 는>> 당신과 눈을 마주치지 않는다.
+<br><br>
+<<set $kylar_abduction_grass to 3>>
+<span class="pink">당신은 위에서 깊은 울림을 듣는다.</span> 그것은 으르렁거리는 소리 같았다. 카일라가 난간을 힐끗 쳐다본다. "그-그냥 가," <<he_ 가>> 말한다. "어서."
+<br><br>
+
+
+<<link [[위층을 조사한다|Kylar Abduction Release Investigate]]>><</link>>
+<br>
+<<link [[떠난다|Kylar Abduction Release 4]]>><</link>>
+<br>
+
+:: Kylar Abduction Release Investigate
+<<effects>>
+
+당신은 카일라를 무시하고, 계단을 올라간다. "안돼!" <<He_ 가>> 씩씩거리며 당신의 팔을 붙잡는다. 당신은 <<him_ 을>> 떨쳐낸다. <<He_ 는>> 다시 시도하는 것을 그만둔다.
+<br><br>
+
+발밑에서 마루판이 삐걱거린다. 카일라가 뒤를 따라오며, 당신에게 돌아가라고 설득한다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Release Investigate 2]]>><</link>>
+<br>
+
+:: Kylar Abduction Release Investigate 2
+<<effects>>
+
+위층은 장식이 다르다. 더 오래되었다. 그곳에는 가족의 초상화가 있다.
+<<if $player.gender_appearance is "f">>
+	단정하게 수염을 기른 대머리의 한 남자가 칠흑같이 긴 머리카락을 가진 여자 옆에 서 있다. 머리카락과 나이를 제외하면, <span class="purple">그녀는 당신을 꼭 닮았다.</span>
+<<else>>
+	칠흑같이 긴 머리카락을 가진 한 여자가 단정하게 수염을 기른 대머리 남자 옆에 서 있다. 머리카락과 나이를 제외하면, <span class="purple">그는 당신을 꼭 닮았다.</span>
+<</if>>
+그들 사이에 미소짓고 있는 아이가 서 있다. 카일라다. 수 년 전에 그려진 초상화처럼 보인다.
+<br><br>
+
+Kylar follows your gaze. "Those are my parents," <<he>> says. Something thuds against the wall. The portrait trembles. "Pl-please leave. It's not safe."
+<br><br>
+
+<<link [[떠난다|Kylar Abduction Release 4]]>><</link>>
+<br>
+<<link [[계속한다|Kylar Abduction Release Investigate 3]]>><</link>>
+<br>
+
+:: Kylar Abduction Release Investigate 3
+<<effects>>
+
+초상화 옆에는 문이 하나 있다. 문은 열려 있다. 당신이 그것을 끝까지 밀어서 열자 카일라는 <<his_>>의 양손으로 얼굴을 가린다.
+<br><br>
+어둠에 반쯤 가려진 네 기둥 침대 하나가 안쪽에 놓여 있다. 또 다른 으르렁거리는 소리가, 이번에는 더 크게 들린다. 침대에서 나는 소리다. 침대 위에는 아무것도 없지만, <span class="pink">그 아래에서 은빛 섬광이 보인다.</span> 당신이 받은 경고는 그것이 전부다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Release Investigate 4]]>><</link>>
+<br>
+
+:: Kylar Abduction Release Investigate 4
+<<effects>>
+
+어떤 형체가 침대 밑에서 나타나, 네 발을 모두 사용해 기어오다가, 몸을 똑바로 세우고 당신의 눈 앞에 우뚝 솟아오른다. 당신이 고작 길고 무시무시한 송곳니만 살짝 볼 수 있었을 때, 그 괴물이 당신을 덮쳐서 뒤로 넘어뜨린다.
+<br><br>
+
+카일라가 비명을 지른다. 긴 은빛 손톱이 당신의 머리 양쪽의 마룻바닥에 쿵 박힌다. 털이 없는 비인간적인 얼굴이 당신을 노려본다. 카일라는 그 괴물을 밀어내려 하지만, 아무 소용이 없다. "<<phim_ 을>> 내버려둬!" <<he_ 가>> 소리친다. 이번에는 괴물이 카일라를 한 번 힐끗 쳐다보지만, 오래 시선을 끌지는 못한다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Release Investigate 5]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Release Investigate 5
+<<effects>>
+
+그것은 더욱 가까이 몸을 기울여, 당신의 냄새를 킁킁 맡고는, 괴성을 지르며 뒤로 움츠러든다. 그러고는 당신과 카일라, 그리고 방으로부터 멀리 떨어지며 저택 안쪽 깊숙한 곳으로 사라진다.
+<br><br>
+
+카일라는 당신이 일으켜 세우고, 계단 쪽으로 끌어당긴다. 당신은 너무 떨려서 이번에는 저항하지 못한다. "마늘이 널 구했어," <<he_ 가>> 당신의 손을 <<his_>>의 양손으로 붙잡은 채 당신을 이끌고 내려가며 말한다. "그렇다고 네가 안전하다는 뜻은 아니야."
+<br><br>
+
+정문은 아직 열려 있다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Release 4]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Release 4
+<<effects>>
+
+당신은 풀이 무성하게 자란 정원으로 발을 들인다. 돌길이 구불구불 이어져 있다. 당신은 너머의 거리를 볼 수 있다.
+<br><br>
+
+당신이 그쪽으로 다가가면, 돌기둥에 새겨진 사원의 상징이 눈에 띈다. 당신은 오래된 저택을 돌아본다. 문은 열려 있다. 카일라가 한쪽 눈으로 당신을 지켜보다가 그 눈마저 감아버린다.
+<br><br>
+
+<<endevent>>
+<<kylar_abduction_end>>
+<<link [[다음|Danube Street]]>><</link>>
+<br>
+
+:: Kylar Abduction Free
+<<effects>>
+
+당신은 지하실의 작은 방에 있다. 이곳에는 카일라가 당신을 묶어둔 의자와 노트북이 있다. 문도 하나 있다. 그것은 잠겨있지 않다.
+<br><br>
+
+<<link [[노트북을 본다|Kylar Abduction Laptop]]>><</link>>
+<br>
+<<link [[창문 너머를 힐끔 본다|Kylar Abduction Free Peek]]>><</link>>
+<br>
+<<link [[방을 떠난다|Kylar Abduction Free Corridor]]>><</link>>
+<br><br>
+
+
+<<link [[앉아서 카일라를 기다린다 (1:00)|Kylar Abduction Free Wait]]>><<pass 60>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Wait
+<<effects>>
+
+당신은 의자에 앉아서, 카일라가 돌아오기를 기다린다.
+<br><br>
+<<npc Kylar>><<person1>>
+문이 삐걱거리며 열리고, <<his_>>의 작은 형체가 드러난다. <<His_>>의 발걸음은 아무런 소리도 내지 않는다. <<He_ 는>> 멈춰서서 잠시 당신을 빤히 바라본다. <<He_ 는>> 뭔가 잘못되었다는 것을 알아차린다. 그리고 <<he_ 는>> 바닥에 느슨하게 풀려 있는 밧줄을 발견한다. <<He_ 는>> 달려와서 그것을 복구한다.
+<br><br>
+
+"미-미안해 <<kylar_pet_namePost>>," <<he_ ga>> 말한다. <<His_ yi>> 양손이 너무 떨려 그것을 묶지 못한다. "네-네가 아무데도 가지 않아서 다행이야. 다-다른 데는 안전하지 않거든."
+<br><br>
+
+<<if $kylar_abduction_bailey is 1>>
+	카일라가 창문 쪽으로 고개를 돌리자, <<his_>>의 얼굴이 충격에 휩싸인다. <<He_ 는>> 테이블을 옆으로 밀어서, 시야를 더 넓게 확보하기 위해 위로 올라간다. <<He_ 가>> 울먹인다.
+	<br><br>
+	<<link [[다음|Kylar Abduction Free Rescue]]>><</link>>
+	<br>
+<<else>>
+	<<link [[다시 구속되는 것에 저항한다|Kylar Abduction Free Refuse]]>><</link>>
+	<br>
+	<<link [[카일라가 당신을 묶게 두고 죄책감을 안겨준다|Kylar Abduction Free Guilt]]>><</link>>
+	<br>
+	<<link [[조용히 카일라가 당신을 묶게 둔다|Kylar Abduction Free Silent]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Kylar Abduction Free Rescue
+<<effects>>
+
+<<npc Bailey 2>><<npc Jordan 3>><<person1>>
+카일라가 방에서 뛰쳐나간다. <<He_ 는>> 심지어 <<him_ 이>> 지나친 문을 닫지도 않는다. 당신은 창문을 통해 베일리가 정원을 가로질러 급히 걸어오는 것을 응시한다.
+<<person2>>
+<<His_>>의 눈이 당신과 마주치지만, 당신의 상상에 지나지 않을까 싶을 정도로 <<he_ 는>> 빠르게 시선을 피한다.
+<br><br>
+<<him_>>의 뒤로 한 젊은 <<person3>><<monk_ 가>> 걷고 있다.
+<<if C.npc.Jordan.init isnot 1>>
+	 <<His_>>의 복장은 머리부터 발끝까지 <<him_ 을>> 덮고 있고, 드러난 곳은 <<his_>>의 젊은 얼굴 뿐이다. 머리카락이 두건의 양 옆에서 튀어나와, 금색의 음영을 드러낸다.
+	<br><br>
+	<<link [[다음|Kylar Abduction Free Rescue 2]]>><<set $phase to 1>><</link>>
+	<br>
+<<else>>
+	사원의 사제, 조던이다.
+	<br><br>
+	<<link [[다음|Kylar Abduction Free Rescue 2]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>
+<br><br>
+
+
+
+:: Kylar Abduction Free Rescue 2
+<<effects>>
+
+<<person3>>
+베일리의 손가락이 당신이 있는 방향으로 잠깐 움직였다. 거의 알아차릴 수 없었지만,
+<<if $phase is 1>>
+	그 <<monk_>>의
+<<else>>
+	조던의
+<</if>>
+시선이 당신 쪽으로 빠르게 돌아갔다. <<He_ 는>> 길을 벗어나, 반쯤 야생 상태인 정원으로 사라진다.
+<br><br>
+
+베일리가 시야에서 사라진다. 문을 두드리는 커다란 소리와 함께, 더 멀리서 삐걱거리는 소리가 들려왔다.
+<br><br>
+
+"고아원에서 나왔다," 베일리가 말한다. "여기서 혼자 사는 건가?"
+<br>
+"아니요," 높은 곳에서 카일라가 대답한다. 둘 다 당신의 눈에 보이지는 않지만, 카일라가 위층 창문에서 말하고 있는 것이 분명하다. "우리 부모님도 여기 사세요. 지-지금 당장 나가주세요. 무단 침입했잖아요."
+<br>
+"네 부모님을 만나야겠어-"
+<br><br>
+<<if $phase is 1>>
+	<<monk_>>의
+<<else>>
+	조던의
+<</if>>
+얼굴이 창문에 나타나, 가장자리를 살핀다. <<He_ 는>> 얇은 금속 도구를 가장자리에 대고, 눌러서 밀어낸다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Rescue 3]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Rescue 3
+<<effects>>
+
+<<person3>>
+"-나가라고 했잖아, 안 그러면 겨-경찰을 부를 거야!" 카일라는 더욱 불안해하는 것 같다.
+<br>
+"우리 둘 다 그럴 일은 없을 거라는 걸 알고 있지," 베일리가 대답한다. "네가 여기 혼자 산다고 믿을만한 충분한 근거가 있거든."
+<br><br>
+
+<<if $phase is 1>>
+	<<monk_ 는>>
+<<else>>
+	조던은
+<</if>>
+유리에 금이 가자 조금 움찔하지만, 그다지 큰 소리는 나지 않는다. <<He_ 가>> 도구를 꼼지락꼼지락 움직여, 유리창을 창틀에서 떼어내는 데 성공한다. 유리가 당신의 방으로 떨어졌지만, <<he_ 는>> 손을 뻗어 그것을 아주 능숙하게 낚아챈다. <<He_ 는>> 그것을 옆으로 치우고, <<his_>>의 손을 내민다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Rescue 4]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Rescue 4
+<<set $outside to 1>><<effects>>
+
+<<person3>>
+"네 부모님은 몇 년 동안 목격된 적 없어," 베일리가 계속해서 말한다. "고아원에 널 위한 방이 있지-"
+<br>
+
+<<if $phase is 1>>
+	<<monk_ 가>>
+<<else>>
+	조던이
+<</if>>
+창문을 통해 정원 쪽으로 당신을 이끈다. "숙여요," <<he_ 가>> 집에서 시야가 닿지 않는 정원 가장자리로 당신을 끌어당기며 말한다.
+<br><br>
+
+당신은 덤불 사이로 상황을 살짝 엿본다. 베일리가 구식 현관문 앞에 서서, 2층 창문을 올려다보고 있다. 카일라의 눈이 어둠 속에서 아래를 응시한다. 그 시선이 튀어오르더니, <span class="pink">바로 당신에게로 떨어진다.</span>
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Rescue 5]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Rescue 5
+<<effects>>
+
+<<person1>>
+카일라는 창문에서 발사되는 것처럼 몸을 날려, 베일리의 머리 바로 위를 지나간다. 미친 듯이 필사적인 행동이었지만, 베일리는 재빨리 반응한다. <<person2>><<He_ 는>> 뒤로 물러서서, 양 팔로 카일라를 붙잡고, <<person1>><<him_ 을>> 강제로 바닥에 끌어내린다.
+<br><br>
+
+<<person3>>
+"여긴 안전하지 않아,"
+<<if $phase is 1>>
+	<<monk_ 가>>
+<<else>>
+	조던이
+<</if>>
+당신의 귓가에 속삭이며, 당신의 팔을 끌어당긴다.
+<br><br>
+
+<<link [[카일라를 안심시킨다|Kylar Abduction Free Rescue Reassure]]>><</link>>
+<br>
+<<link [[카일라를 조롱한다|Kylar Abduction Free Rescue Mock]]>><</link>>
+<br>
+<<link [[그냥 떠난다|Kylar Abduction Free Rescue Leave]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Rescue Reassure
+<<effects>>
+
+<<person1>>
+당신은 잔디밭을 가로질러, 카일라가 베일리의 손아귀 밑에서 몸부림치는 곳으로 걸어간다. 당신은 <<him_>>의 옆에 무뤂을 꿇는다.
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"떠나야 해서 미안해," 당신이 말한다. 당신은 <<his_>>의 콧잔등에 입을 맞추고, <<him_>>의 몸이 떨리는 것을 느낀다. "학교에서 다시 만나자."
+<<elseif $speech_attitude is "bratty">>
+	"날 너무 그리워하진 마," 당신이 말한다. 당신은 <<his_>>의 콧잔등에 입을 맞추고, <<him_>>의 몸이 떨리는 것을 느낀다. "학교에서 보자고."
+<<else>>
+	"걱정하지 마," 당신이 말한다. 당신은 <<his_>>의 콧잔등에 입을 맞추고, <<him_>>의 몸이 떨리는 것을 느낀다. "학교에서 보자."
+<</if>>
+<<ggglove "Kylar">><<npcincr Kylar love 15>>
+<br><br>
+
+<<He_ 는>> 발버둥치는 것을 멈추고, 패배한 채로, 가만히 누워 있다. 당신은
+<<person3>>
+<<if $phase is 1>>
+	<<monk_>>에게로
+<<else>>
+	조던에게로
+<</if>>
+돌아가서, 정원을 떠난다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Rescue 6]]>><</link>>
+<br>
+
+
+
+:: Kylar Abduction Free Rescue Mock
+<<effects>>
+<<person1>>
+당신은 잔디밭을 가로질러, 카일라가 베일리의 손아귀 밑에서 몸부림치는 곳으로 걸어간다. 당신은 <<him_>>의 옆에 무뤂을 꿇는다.
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"나-난 더이상 네 것이 아니야," 당신이 말한다. "다시는 그러지 마."
+<<elseif $speech_attitude is "bratty">>
+	"그동안 즐거웠길 바랄게," 당신이 말한다. "네가 날 한 번이라도 다시 건드리게 둔다면 행운인 줄 알아."
+<<else>>
+	"넌 기회를 놓친 거야," 당신이 말한다. "다시는 그러지 마."
+<</if>>
+<<gggksuspicion>><<npcincr Kylar rage 50>>
+<br><br>
+
+<<He_ 는>> 발버둥치는 것을 멈추고, 패배한 채로, 가만히 누워 있다. 당신은
+<<person3>>
+<<if $phase is 1>>
+	<<monk_>>에게로
+<<else>>
+	조던에게로
+<</if>>
+돌아가서, 정원을 떠난다.
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Rescue 6]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Rescue Leave
+<<effects>>
+
+당신은 카일라를 외면하고, 정원을 떠난다.<<gksuspicion>><<npcincr Kylar rage 5>>
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Rescue 6]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Rescue 6
+<<effects>>
+
+<<person3>>
+<<if $phase is 1>>
+	<<monk_ 가>> 문 밖에서 당신을 멈춰세운다. "저는 <<nnpc_brother "Jordan">> 조던이라고 합니다," <<he_ 가>> 말한다. "사원의 사제를 맡고 있어요." <<He_ 는>> <<his_>>의 고개를 살짝 숙인다.
+<<else>>
+	조던이 문 밖에서 당신을 멈춰세운다.
+<</if>>
+"크게 벌려보세요."
+<br><br>
+
+<<He_ 가>> 당신의 입 안을 들여다본다. "당신은 더럽혀지지 않았군요," <<he_ 가>> 말하며, 안도의 미소가 <<his_>>의 얼굴에 번진다. "이제부터 저 집과는 거리를 두도록 하세요." 베일리가 문을 통해 걸어온다. "그 어두운 아이에게서는 별 소득이 없었나요?" 조던이 묻는다.
+<br><br>
+<<person2>>
+베일리가 고개를 젓는다. <<person1>>"<<He_ 는>> 집 안으로 달아났습니다." 베일리의 목소리에는 평소처럼 단호하게 무시하는 기색이 전혀 없다. "내 피후견인을 구해줘서 고맙군요." <<person2>><<He_ 가>> 한 손을 당신의 어깨에 얹고, 당신에게 미소 짓는다. 너무나 따듯하다. 그건 사제에게 보이기 위한 퍼포먼스지만, 당신이 잘 몰랐다면 정말로 믿었을 것이다.
+<br><br>
+
+<<link [[조던에게 베일리가 영악하게 굴고 있다고 알린다|Kylar Abduction Free Rescue Inform]]>><</link>><<willpowerdifficulty 400 1000>>
+<br>
+<<link [[조용히 있는다|Kylar Abduction Free Rescue Quiet]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Rescue Inform
+<<effects>>
+<<person2>>
+당신은 조던을 본다. "<<him_ 을>> 믿지 마세요," 당신이 말한다. "<<Hes_ 는>>-"
+<br><br>
+베일리의 미소가 누그러지며, <<his_>>의 눈꺼풀이 떨린다. <<He_ 는>> <i>배신당한 것처럼</i> 보인다.
+<<if $willpowerSuccess>>
+	<<set $temple_bailey_known to 1>>
+	<<Hes_ 는>> 여전히 연기 중이지만, 그 효과는 감명깊다. 경의로운 의지가 필요하지만, <span class="green">당신은 어떻게든 계속해나간다.</span> "-<<Hes_ 는>> 거짓말을 하고 있어요. <<He_ 는>> 우리를 때려요. <<He_ 는>> 우리에게 강제로 돈을 갈취하고, 만약 우리가 돈을 내지 않으면-"
+	<br><br>
+	"힘든 하루를 보낸 모양이구나," 베일리가 말한다. 연기를 뚫고 분노가 대낮처럼 선명하게 드러난다. 당신의 어깨가 <<his_>>의 손아귀 아래에서 욱신거린다. <<He_ 는>> 조던을 향해 돌아선다. "수고하셨습니다. 이제 끝입니다."
+	<br><br>
+	<<person3>>
+	조던은 망설이다가, 고개를 끄덕인다. "가야겠어요," <<he_ 가>> 말한다. "부디 안전하시길." <<his_>>의 수도복이 산들바람에 나부끼고, <<He_ 가>> 울프 스트리트 방향으로 돌아선다. <<He_ 는>> 당신과 마지막으로 눈을 한 번 마주치고 모퉁이를 돌아 사라진다.
+	<br><br>
+	<<person2>>
+	베일리는 사제에게서 등을 돌린다. "넌 네가 재밌다고 생각하나?" <<He_ 가>> 묻는다. "넌 네 가치에 비해 너무 골칫거리야. 저 열성 신자들은 내가 빚지고 싶은 사람들이 아니야. 항상 대가가 따르지."
+	<br><br>
+<<else>>
+	<<Hes_ 는>> 여전히 연기 중이지만, <span class="red">그것은 아무런 상관이 없다.</span> 당신의 목소리가 흔들리고, 침묵이 흐른다.
+	<br><br>
+	<<person3>>
+	"용서 바랍니다," 조던이 당신에게 말을 건넨다. "당신이 더럽혀지지 않았다는 사실에 너무 안도한 나머지, 당신이 경험했을지도 모르는 평범한 공포를 간과했습니다. 정말 끔찍했을 거예요. 부디 안전하시길." <<He_ 는>> 베일리에게 고개를 숙이곤, 울프 스트리트 방향으로 돌아선다. <<his_>>의 수도복이 산들바람에 나부낀다.
+	<br><br>
+	<<person2>>
+	베일리는 사제에게서 등을 돌리고, 미소를 싹 지운다. "넌 네 가치에 비해 너무 골칫거리야," <<he_ 가>> 말한다. "저 열성 신자들은 내가 빚지고 싶은 사람들이 아니야. 항상 대가가 따르지."
+	<br><br>
+<</if>>
+
+
+<<link [[구출에 감사한다|Kylar Abduction Free Rescue Thank]]>><</link>>
+<br>
+<<link [[화를 낸다|Kylar Abduction Free Rescue Angry]]>><</link>>
+<br>
+<<link [[아무 말도 하지 않는다|Kylar Abduction Free Rescue Silent]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Rescue Quiet
+<<effects>>
+
+<<person3>>
+You remain quiet. Jordan smiles and nods. "It's no trouble," <<he>> says. "You were wise to come to us." <<He>> looks up at the house. "Our history isn't spotless. But I've said too much." <<He>> bows, and walks towards Wolf Street, <<his>> habit fluttering in the breeze.
+<br><br>
+
+<<person2>>
+Bailey turns <<his>> back to the priest, and drops <<his>> smile. "You're almost more trouble than you're worth," <<he>> says. "Now I'm in debt to those god-botherers. There's always a price."
+<br><br>
+
+<<link [[구출에 감사한다|Kylar Abduction Free Rescue Thank]]>><</link>>
+<br>
+<<link [[화를 낸다|Kylar Abduction Free Rescue Angry]]>><</link>>
+<br>
+<<link [[아무 말도 하지 않는다|Kylar Abduction Free Rescue Silent]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Rescue Thank
+<<effects>>
+
+<<person2>>
+<<if $speech_attitude is "meek">>
+	"Th-thank you for rescuing me," you say.
+<<elseif $speech_attitude is "bratty">>
+	"Thanks for the help," you say.
+<<else>>
+	"Thanks for rescuing me," you say.
+<</if>>
+<br><br>
+
+Bailey reaches for <<his>> phone before you've finished. "Fucking brats," <<he>> says, ignoring your words and thumbing through a message. "No rest for the wicked. Don't be any more trouble." <<He>> marches away.
+<br><br>
+
+<<kylar_abduction_end>>
+<<link [[다음|Danube Street]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Abduction Free Rescue Angry
+<<effects>>
+
+<<person2>>
+<<if $speech_attitude is "meek">>
+	"D-did you care that I was missing?" you ask. "Y-You don't care what happened to me? How I am?"
+<<elseif $speech_attitude is "bratty">>
+	"I'm fine, thanks," you say, voice dripping with sarcasm.
+<<else>>
+	"Weren't you worried about me?" you ask.
+<</if>>
+<br><br>
+
+Bailey reaches for <<his>> phone before you've finished. "Fucking brats," <<he>> says, ignoring your words and thumbing through a message. "No rest for the wicked. Don't be any more trouble." <<He>> marches away.
+<br><br>
+
+<<kylar_abduction_end>>
+<<link [[다음|Danube Street]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Abduction Free Rescue Silent
+<<effects>>
+
+<<person2>>
+You remain silent. Bailey reaches for <<his>> phone. "Fucking brats," <<he>> says, thumbing through a message. "No rest for the wicked. Don't be any more trouble." <<He>> marches away.
+<br><br>
+
+<<kylar_abduction_end>>
+<<link [[다음|Danube Street]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Refuse
+<<effects>>
+<<set $kylar_abduction_binds to 50>>
+<<bind>>
+당신은 카일라를 밀쳐낸다. <<His_ 의>> 놀란 표정이 광기 어린 미소로 바뀐다. "<<kylar_pet_name_ 는 cap>> 거친 걸 좋아하나봐?" <<He_ 가>> 주먹으로 <<his_>>의 가슴을 내려치자, 딸깍하는 소리가 들리고, <span class="red">옷깃 근처에서 갑작스러운 충격이 퍼져나간다.</span> 당신의 근육이 경련을 일으키고, 당신은 바닥에 쓰러진다. <<ggpain>><<pain 8>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<gggksuspicion>><<npcincr Kylar rage 30>>
+<br><br>
+
+카일라는 굳은 채로 움찔하다가, 당신을 의자로 다시 끌어다 옮긴 후 밧줄을 만지작거린다. 당신은 팔다리의 자유를 잃고 다시 단단히 구속된다.<<kylar_abduction_return none>>
+
+:: Kylar Abduction Free Guilt
+<<effects>>
+<<set $kylar_abduction_binds to 50>>
+<<bind>>
+<<if $speech_attitude is "meek">>
+	"나-날 못 믿는 거야?" 당신이 묻는다. "나는 네가 날 사랑하는 줄 알았어."
+<<elseif $speech_attitude is "bratty">>
+	"날 묶을 필요가 있어?" 당신이 말한다. "너 문제 있네."
+<<else>>
+	"이건 네가 사랑한다고 주장하는 누군가를 대하는 방법이 아니야," 당신이 말한다.
+<</if>>
+<br><br>
+
+"너-널 믿지 못하는 게 아냐!" 카일라가 대답한다. <<He_ 는>> 모멸감을 느끼는 것처럼 들린다. <<Hes_>>도 거짓말을 한다. "이-이건 네 안전을 위해서야!"
+<<gggksuspicion>><<npcincr Kylar rage 30>>
+<br><br>
+
+<<He_ 가>> 당신을 다시 한 번 의자에 묶는다.<<kylar_abduction_return none>>
+
+
+
+:: Kylar Abduction Free Silent
+<<effects>>
+<<set $kylar_abduction_binds to 50>>
+<<bind>>
+You say nothing as Kylar manages to bind you to the chair once more. "Th-there," <<he>> says. "Nice and safe." <<kylar_abduction_return none>>
+
+
+
+:: Kylar Abduction Laptop
+<<effects>>
+
+You open the laptop. It needs a password.
+<<if $kylar_abduction_password is 1>>
+	You input "longing". <span class="green">It works.</span>
+	<br><br>
+	On the desktop are two folders. One is titled "pictures", another "video". There's also an internet browser.
+	<br><br>
+
+	<<link [[Pictures|Kylar Abduction Free Pictures]]>><</link>>
+	<br>
+	<<if $kylar_camera is 2 or $kylar_camera is 3>>
+		<<link [[Video|Kylar Abduction Free Video]]>><</link>>
+		<br>
+	<</if>>
+	<<if $kylar_abduction_bailey isnot 1>>
+		<<link [[Browser|Kylar Abduction Free Browser]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	You try some common ones, but it's no use. <i>You'll need to find the password.</i>
+	<br><br>
+<</if>>
+
+<<link [[물러난다|Kylar Abduction Free]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Pictures
+<<effects>>
+
+You open the picture folder. It's full of photographs, <span class="pink">of you.</span> Some are at school, the courtyard, library, and even different classrooms. Others were taken on the street. Some are disturbingly close. You weren't aware of any of them being taken.<<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+<br><br>
+
+
+<<if $kylar_camera is 2 or $kylar_camera is 3>>
+	<<link [[Video|Kylar Abduction Free Video]]>><</link>>
+	<br>
+<</if>>
+<<if $kylar_abduction_bailey isnot 1>>
+	<<link [[Browser|Kylar Abduction Free Browser]]>><</link>>
+	<br>
+<</if>>
+<br>
+
+<<link [[물러난다|Kylar Abduction Free]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Video
+<<effects>>
+<<if $kylar_camera is 2>>
+	<<set $kylar_camera to 4>>
+	You open the video folder. It's full of videos 3 - 12 hours in length, all from the same location, and same angle. <span class="pink">From on top of the wardrobe in your bedroom.</span> Most of the previews just show you sleeping, or even an empty room. But others show you in various states of dress. Realisation dawns.<<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+	<br><br>
+
+	<span class="pink">It's the owl plushie.</span> One of its eyes is a camera.
+	<br><br>
+<<else>>
+	<<set $kylar_camera to 5>>
+	You open the video folder. It's full of videos 3 - 12 hours in length, from different parts of the orphanage. One of the orphans appears to be carrying the camera around without realising it. Realisation dawns.
+	<br><br>
+	<span class="pink">There's a camera in the owl plushie Kylar tried to gift you.</span>
+	<br><br>
+<</if>>
+
+<<link [[Pictures|Kylar Abduction Free Pictures]]>><</link>>
+<br>
+<<if $kylar_abduction_bailey isnot 1>>
+	<<link [[Browser|Kylar Abduction Free Browser]]>><</link>>
+	<br>
+<</if>>
+<br>
+
+<<link [[물러난다|Kylar Abduction Free]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Browser
+<<effects>>
+
+You open the browser.
+
+<<if $kylar_abduction_grass gte 3>>
+	You could contact Bailey, and let <<nnpc_him "Bailey">> know where you are. Anyone else would be in danger if they came here.
+	<br><br>
+
+	<<link [[Send an email to Bailey (0:05)|Kylar Abduction Free Bailey]]>><<pass 5>><</link>>
+	<br>
+<<else>>
+	You could contact someone, and let them know where you are, but you'd need to work out where that is first.
+	<br><br>
+<</if>>
+
+<<if $kylar_camera is 2 or $kylar_camera is 3>>
+	<<link [[Video|Kylar Abduction Free Video]]>><</link>>
+	<br>
+<</if>>
+<<link [[Pictures|Kylar Abduction Free Pictures]]>><</link>>
+<br>
+<br>
+
+<<link [[물러난다|Kylar Abduction Free]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Bailey
+<<effects>>
+<<set $kylar_abduction_bailey to 1>>
+"I've been kidnapped. I'm being held in a basement beneath a house on Danube Street. There's a stone pillar at the gate, with the symbol of the temple engraved on the inner side."
+<br><br>
+You add your name, <span class="green">and send it to Bailey.</span> You don't know if Bailey will consider it a priority, or bother helping at all. All you can do now is wait.
+<br><br>
+
+<<if $kylar_camera is 2 or $kylar_camera is 3>>
+	<<link [[Video|Kylar Abduction Free Video]]>><</link>>
+	<br>
+<</if>>
+<<link [[Pictures|Kylar Abduction Free Pictures]]>><</link>>
+<br>
+<br>
+
+<<link [[물러난다|Kylar Abduction Free]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Peek
+<<effects>>
+
+<<if $kylar_abduction_grass is 2>>
+	<<set $kylar_abduction_grass to 3>>
+	You stand on the chair, and look through the window. The grass has been mown, giving you a clear view of a garden. The lawn might be neat, but the bushes are wild, and the flower beds full of weeds. A gate stands closed, attached to <span class="green">a stone pillar engraved with the symbol of the temple.</span>
+	<br><br>
+
+	You see streetlights beyond the garden, and the tops of trees. <span class="green">It looks like Danube Street.</span>
+	<br><br>
+
+	That should be enough information for someone to find you.
+	<br><br>
+<<elseif $kylar_abduction_grass gte 3>>
+	You stand on the chair, and look through the window. The grass has been mown, giving you a clear view of a garden. The lawn might be neat, but the bushes are wild, and the flower beds full of weeds. A gate stands closed, attached to a stone pillar engraved with the symbol of the temple.
+	<br><br>
+
+	You see streetlights beyond the garden, and the tops of trees. It looks like Danube Street.
+	<br><br>
+<<else>>
+	You stand on the chair, and look through the window. You're faced with overgrown grass. You can't see anything beyond.
+	<br><br>
+	<<set $kylar_abduction_grass to 1>>
+	<i>If only the grass were trim, you might be able to work out where you are.</i>
+	<br><br>
+<</if>>
+
+<<link [[다음|Kylar Abduction Free]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Corridor
+<<effects>>
+
+You creep into a dark corridor. You smell garlic. Bulbs have been nailed into the frame around the door to your cell.
+<br><br>
+
+A light flickers around a corner to your left. You hear running water to your right.
+<br><br>
+
+<<link [[Enter your cell|Kylar Abduction Free]]>><</link>>
+<br><br>
+<<link [[Go towards the flickering|Kylar Abduction Free Flicker]]>><</link>>
+<br>
+<<link [[Go towards the running water|Kylar Abduction Free Water]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Flicker
+<<effects>>
+
+A lightbulb flickers above, illuminating the corridor and casting terrible shadows. There's a door. You hear a buzzing behind it. Your cell is just down the corridor. You hear a scurrying in the other direction.
+<br><br>
+
+<<if $kylar_abduction_torch isnot 1>>
+	<<link [[Enter room|Kylar Abduction Free Flicker Room]]>><</link>>
+	<br><br>
+<</if>>
+
+<<link [[Go towards your cell|Kylar Abduction Free Corridor]]>><</link>>
+<br>
+<<link [[Go towards the scurrying|Kylar Abduction Free Scurry]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Flicker Room
+<<effects>>
+
+<<set $kylar_abduction_torch to 1>>
+The door opens, revealing a table illuminated by the flickering light behind you. Plates, cups and utensils litter the surface. Others lie shattered on the ground nearby. There's also a heavy duty torch. You push the on switch, and it blazes into life, <span class="pink">revealing a familiar pair of eyes, staring right into you.</span><<gstress>><<stress 6>>
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Flicker Room 2]]>><</link>>
+<br>
+
+
+
+:: Kylar Abduction Free Flicker Room 2
+<<effects>>
+
+Before you, leaning against the wall, is a doppleganger of yourself, down to very fine detail. It's naked, and anatomically correct. <span class="pink">It's a sex doll.</span><<gstress>><<stress 6>>
+<br><br>
+
+You turn off the torch to escape its gaze. The light could be useful, at least. <span class="green">You take it with you.</span>
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Flicker]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Water
+<<effects>>
+
+A pipe runs along the wall. A deep scratch has been cut into it, releasing a trickle of water. It pools on the ground below, and disappears beneath a door. Your cell is just down the corridor. You feel a breeze from the other direction.
+<br><br>
+
+<<if $kylar_abduction_key isnot 1>>
+	<<link [[Enter room|Kylar Abduction Free Water Room]]>><</link>>
+	<br><br>
+<</if>>
+
+<<link [[Go towards your cell|Kylar Abduction Free Corridor]]>><</link>>
+<br>
+<<link [[Go towards the breeze|Kylar Abduction Free Breeze]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Water Room
+<<effects>>
+
+You enter the room. Water pools throughout, and even drips from the ceiling.
+
+<<if $kylar_abduction_torch is 1>>
+	You turn on the torch you found. The gloom recoils, revealing a metal rack on the far wall. Terrifying hooked and bladed implements hang there, but there's also a large key. <span class="green">You take it with you.</span>
+	<br><br>
+	<<set $kylar_abduction_key to 1>>
+	<<link [[다음|Kylar Abduction Free Water]]>><</link>>
+	<br>
+<<else>>
+	You can hear it landing on metal, but the dark is too thick to see more than a few feet inside. You step deeper, peering into the gloom, <span class="red">until your knee connects with unseen furniture.</span><<gpain>><<pain 4>>
+	<br><br>
+
+	The heavy object jolts, sending an echo through the basement. <span class="red">A deep growl answers.</span>
+	<br><br>
+
+	<<link [[다음|Kylar Abduction Free Hunt]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Kylar Abduction Free Scurry
+<<effects>>
+
+You glimpse small bodies flee your approach. Rats, or large mice. They scurry beneath a door. You see a light flicker down one corridor, and feel a breeze coming from the other direction.
+<br><br>
+
+<<link [[Enter room|Kylar Abduction Free Scurry Room]]>><</link>>
+<br><br>
+
+<<link [[Go towards the flickering|Kylar Abduction Free Flicker]]>><</link>>
+<br>
+<<link [[Go towards the breeze|Kylar Abduction Free Breeze]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Scurry Room
+<<effects>>
+
+You enter the room. The rodents scurry into the corners, disappearing into hidden crannies. Against the back wall stands a cabinet, barely visible in the gloom.
+<br><br>
+
+<<if $kylar_abduction_password isnot 1>>
+	<<link [[Open the cabinet|Kylar Abduction Free Cabinet]]>><</link>>
+	<br>
+<</if>>
+<<link [[떠난다|Kylar Abduction Free Scurry]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Cabinet
+<<effects>>
+
+Now closer, you can see a keyhole in the cabinet door. You try to pull it open, but it's locked.
+<br><br>
+<<if $kylar_abduction_key is 1>>
+	<<if $kylar_abduction_torch is 1>>
+		You reach for the key you found hanging on the wall. It fits. The lock clicks open, revealing a back wall covered in pictures of newly-married couples. The heads of you and Kylar have been crudely taped on top, replacing the original identities.<<gstress>><<stress 6>>
+		<br><br>
+		The shelves themselves are full of books, and a laptop. The laptop doesn't work, but stuck to the screen is a post-it note. There's a stylised, flattering drawing of you. It also bears one word: "longing".
+		<br><br>
+
+		<span class="green">It might be the laptop's password.</span>
+		<<set $kylar_abduction_password to 1>>
+		<br><br>
+
+		<<link [[다음|Kylar Abduction Free Scurry]]>><</link>>
+		<br>
+	<<else>>
+		You reach for the key you found hanging on the wall. It fits. The lock clicks open. You can't see a thing.
+		<br><br>
+
+		You feel inside. Your fingers find books, moist and decaying the damp. Your hand catches something, knocking it to the floor. <span class="red">It shatters, and a deep growl answers.</span>
+		<br><br>
+
+		<<link [[다음|Kylar Abduction Free Hunt]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	You try to tug it open. Perhaps it's only stuck. You pull so hard you scrape the furniture an inch across the floor. <span class="red">The sound echoes through the basement, and a deep growl answers.</span>
+	<br><br>
+
+	<<link [[다음|Kylar Abduction Free Hunt]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Kylar Abduction Free Hunt
+<<effects>>
+
+You hear the tortured scrape of metal on stone, and the thud of heavy footsteps echo through the basement. <span class="red">Something is hunting you.</span> Something worse than Kylar.
+<br><br>
+
+<<set $skulduggerydifficulty to 1000>>
+<<link [[숨는다|Kylar Abduction Free Hunt Hide]]>><</link>><<skulduggerydifficulty>>
+<br>
+<<link [[Run to your cell|Kylar Abduction Free Hunt Run]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Hunt Hide
+<<effects>>
+
+You hide in an adjoining room, and wait, peering through a crack in the door.
+<br><br>
+
+The footsteps get closer, and closer, until a tall shape passes in front of the door. It's too dark to make out any detail, but you can hear deep, erratic breaths.
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<pass 1>>
+	The shape moves on, and the footsteps become quieter, until you can hear them no more. You wait a moment before emerging from your hiding place. <span class="green">The danger has passed.</span>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	<<link [[다음|Kylar Abduction Free Corridor]]>><</link>>
+	<br>
+
+<<else>>
+
+	<span class="red">An eye pierces you,</span> and the door is flung open.
+	<br><br>
+
+	You black out.
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	<<link [[다음|Kylar Abduction Free Capture]]>><</link>>
+	<br>
+
+<</if>>
+
+
+:: Kylar Abduction Free Hunt Run
+<<effects>>
+
+You run. A roar echoes in response. Heavy footfalls close in on you with terrifying speed, rushing up from behind. You turn in time to see a flash of silver.
+<br><br>
+
+You black out.
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Capture]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Breeze
+<<effects>>
+
+You feel a breeze erupt from the gaps around a door. It sits at the top of a staircase. You hear the sound of running water down one corridor, and scurrying feet down another.
+<br><br>
+
+<<link [[Climb stairs|Kylar Abduction Free Stairs]]>><</link>>
+<br><br>
+
+<<link [[Go towards the running water|Kylar Abduction Free Water]]>><</link>>
+<br>
+<<link [[Go towards the scurrying|Kylar Abduction Free Scurry]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Stairs
+<<effects>><<set $lock to 1000>>
+
+You climb the creaky stairs. The door at the top is crisscrossed with padlocks.
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">Quantity over quality. You'll make short work of them.</span>
+	<br><br>
+	<<link [[Open it (0:05)|Kylar Abduction Free Sneak]]>><<pass 5>><</link>>
+	<br>
+<<else>>
+	<span class="red">The locks look beyond your ability to pick.</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+
+<<link [[Back away|Kylar Abduction Free Breeze]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Sneak
+<<effects>>
+
+The first padlock opens, and the tense chain recoils, each link smacking against the frame as it passes. It's a lot of noise, but the other locks don't take you long.
+<br><br>
+
+The door swings open, revealing a spacious, but old-fashioned and messy kitchen. Food packaging erupts from the bin and over the floor. You see a door leading outside down one corridor. Freedom is close.
+<br><br>
+
+You pass a staircase on the way to the door. You peer through the glass, at an overgrown garden. A path is barely visible among the weeds. It leads to a gate attached to a stone pillar, marked with a symbol of the temple. You see what looks like Danube Street beyond.
+<br><br>
+You hear a rumble upstairs. It sounded like a growl.
+<br><br>
+<<set $kylar_abduction_grass to 3>>
+<<link [[Investigate upstairs|Kylar Abduction Free Investigate]]>><</link>>
+<br>
+<<link [[Just leave|Kylar Abduction Free Leave]]>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Investigate
+<<effects>>
+<<npc Kylar>><<person1>>
+You climb the stairs. The decor is older up here, the colours darker. There's a portrait of a family.
+<<if $player.gender_appearance is "f">>
+	A bald man with a tidy beard stood beside a woman with long, jet-black hair. Aside from the hair and age, <span class="purple">she looks like you.</span>
+<<else>>
+	A woman with long, jet-black hair stood beside a bald man with a tidy beard. Aside from the hair and age, <span class="purple">he looks like you.</span>
+<</if>>
+Between them stands a smiling child. It's Kylar. It must have been painted years ago.
+<br><br>
+
+There's a door beside the portrait. It's ajar. You push it the rest of the way.
+<br><br>
+A four-poster bed sits inside, half-hidden in the gloom. You hear another growl, louder now. It's coming from the bed. Nothing lies atop it, <span class="pink">but you see a flash of silver beneath it.</span> That's all the warning you get.
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Investigate 2]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Investigate 2
+<<effects>>
+
+A shape emerges from beneath the bed, crawling towards you on all fours, then rearing upright and towering in front of you. You only get a glimpse of long, terrible fangs, before the creature barges into you, knocking you onto your back.
+<br><br>
+
+You black out.
+<br><br>
+
+<<link [[다음|Kylar Abduction Free Capture]]>><<pass 30>><</link>>
+<br>
+
+:: Kylar Abduction Free Capture
+<<effects>>
+<<endevent>>
+<<npc Kylar>><<person1>>
+<<bind>>
+<<set $kylar_abduction_binds to 100>>
+You awaken back in the small room, tied once more to the chair. Kylar kneels in front of you, <<his>> face a bizarre contortion of relief and rage.
+<br><br>
+<<set $kylar_abduction_stupid to 1>>
+"M-my love!" <<he>> cries. "My stupid love. You could have been hurt. But you're safe now." <<He>> tests your binds. "Don't go running off where you don't belong. You'll break my heart. And <i>they</i> will tear yours in two."
+<br><br>
+
+<<He>> walks to the door. "I'll be back soon <<kylar_pet_name>>."
+<br><br>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+:: Kylar Abduction Free Leave
+<<effects>>
+
+<<npc Kylar>><<person1>>
+You walk through the garden, and take a final glance at the old building behind you. You think you see a face watching you from an upper window, but it's gone when you blink.<<npcincr Kylar rage 50>><<gggksuspicion>>
+<br><br>
+
+You walk through the gate, to freedom. "No!" Kylar screams from behind. <<He>> emerges from the old house, raw torment contorting <<his>> face. "D-d-don't leave-" <<he>> trips on a loose stone, and <<his>> leg twists at an unhealthy angle. <<He>> tries to stand, but <<his>> leg can no longer bear <<his>> weight, and <<he>> falls. <<He>> crawls towards you.
+<br><br>
+
+<<link [[안심시킨다|Kylar Abduction Free Reassure]]>><</link>>
+<br>
+<<link [[Mock|Kylar Abduction Free Mock]]>><</link>>
+<br>
+<<link [[Just leave|Kylar Abduction Free Leave 2]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Reassure
+<<effects>>
+
+You crouch in front of Kylar.
+
+<<if $speech_attitude is "meek">>
+	"I'm sorry I have to leave," you say. You kiss <<his>> nose, and feel <<him>> tremble. "We'll see each other at school."
+<<elseif $speech_attitude is "bratty">>
+	"Don't miss me too much," you say. You kiss <<his>> nose, and feel <<him>> tremble. "We'll see each other at school."
+<<else>>
+	"Don't worry," you say. You kiss <<his>> nose, and feel <<him>> tremble. "We'll see each other at school."
+<</if>>
+<<ggglove>><<npcincr Kylar love 15>>
+<br><br>
+
+<<He>> stops, presses <<his>> face into the grass, and weeps. You turn and leave the garden.
+<br><br>
+<<kylar_abduction_end>>
+<<link [[다음|Danube Street]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Abduction Free Mock
+<<effects>>
+
+You crouch in front of Kylar.
+<<if $speech_attitude is "meek">>
+	"I-I'm not yours anymore," you say. "Don't try it again."
+<<elseif $speech_attitude is "bratty">>
+	"Hope you enjoyed that," you say. "You'll be lucky if I ever let you touch me again."
+<<else>>
+	"You missed your chance," you say. "Don't try it again."
+<</if>>
+<<gggksuspicion>><<npcincr Kylar rage 50>>
+<br><br>
+
+<<He>> stops, presses <<his>> face into the grass, and weeps. You turn and leave the garden.
+<br><br>
+<<kylar_abduction_end>>
+<<link [[다음|Danube Street]]>><</link>>
+<br>
+
+:: Kylar Abduction Free Leave 2
+<<effects>>
+
+There's no way Kylar can stop you like this. You turn and walk from the garden, leaving Kylar to wail, alone.
+<br><br>
+
+<<kylar_abduction_end>>
+<<link [[다음|Danube Street]]>><</link>>
+<br>
+
+
+
+:: Kylar Abduction Hypnosis Pretend
+<<effects>>
+
+You stare straight ahead, unmoving. "I-It worked!" Kylar announces, almost falling off your lap in <<his>> joy. "Umm." <<He>> swings the pendant in front of you again.
+<br>
+"Whenever you hear my name, you will feel safe and happy."
+<br>
+"You will think of me at least once an hour."
+<br>
+"You w-won't think of loving anyone else."
+<br><br>
+
+<<He>> takes a deep breath. "When I click my fingers, you will leave the trance. Y-you won't remember any of this." <<He>> clicks <<his>> fingers. You blink a few times, and look <<him>> in the eye.
+<br><br>
+
+"I just did a little relaxation technique," <<he>> says. "Y-you should feel better from now on."
+<br><br>
+
+You do feel a little strange.<<gstockholm>><<set $syndromekylarbuild += 1>><<npcincr Kylar lust -100>><<llllust>>
+<br><br>
+
+A dreadful thud emanates from above. Kylar hurries to the door. "I'll be back soon <<kylar_pet_name>>."
+<br><br>
+<<endevent>>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Abduction Hypnosis
+<<effects>>
+
+당신은 고개를 가로젓는다.
+<br><br>
+
+"L-let me try again," Kylar says, swinging the pendant with more vigour. "Wh-when I cl-click-" <<he>> swings with too much force, and the pendant flies off the chain, shattering against the hard floor.
+<br><br>
+
+"O-oh no," Kylar mutters, climbing off you and gathering the broken shards. "I-I'm sorry," <<he>> says. "I-I can fix it." <<He>> sounds so earnest. You can't help but feel sorry for <<him>>.<<gstockholm>><<set $syndromekylarbuild += 1>><<npcincr Kylar lust -100>><<llllust>>
+<br><br>
+
+A dreadful thud emanates from above. Kylar hurries to the door. "I'll be back soon <<kylar_pet_name>>."
+<br><br>
+<<endevent>>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>
+
+
+
+:: Kylar Abduction Hypnosis Resist
+<<effects>>
+
+<<if $willpowerSuccess>>
+	<span class="green">You tear your gaze away from the pendant.</span> Kylar swings it in front of your face with more force, but the spell is broken.
+	<br><br>
+	"I-I'm just trying to help," <<he>> says, swinging even harder. "Why won't-" The pendant flies off its chain, shattering against the floor.
+	<br><br>
+
+	"O-oh no," Kylar mutters, climbing off you and gathering the broken shards. "I-I'm sorry," <<he>> says. "I-I can fix it."
+	<br><br>
+
+	A dreadful thud emanates from above. Kylar hurries to the door. "I'll be back soon <<kylar_pet_name>>."
+	<br><br>
+	<<endevent>>
+
+	<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	You try to resist, to tear away your gaze, <span class="red">but the pendant draws in your will.</span><<lcontrol>><<control -10>>
+	<br><br>
+
+	<<link [[다음|Kylar Abduction Hypnosis Let]]>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Abduction Hypnosis Let
+<<effects>>
+
+You feel tranquil. You stare straight ahead, unmoving. "I-It worked!" Kylar announces, almost falling off your lap in <<his>> joy. "Umm." <<He>> swings the pendant in front of you again.
+<br><br>
+
+"Whenever you think of..." <<He>> gives you instructions. "...you won't remember any of this." <<He>> clicks <<his>> fingers. You blink a few times, and look <<him>> in the eye.
+<br><br>
+
+"I just did a little relaxation technique," <<he>> says. "Y-you should feel better from now on."
+<br><br>
+
+You do feel a little strange.<<gstockholm>><<set $syndromekylarbuild += 1>><<npcincr Kylar lust -100>><<llllust>>
+<br><br>
+
+A dreadful thud emanates from above. Kylar hurries to the door. "I'll be back soon <<kylar_pet_name>>."
+<br><br>
+<<endevent>>
+
+<<link [[다음|Kylar Abduction]]>><<endevent>><</link>>
+<br>

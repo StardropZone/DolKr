@@ -1,0 +1,786 @@
+:: Widgets Temple [widget]
+
+<<widget "prayoptions">>
+	<<if _sydneyPray>>
+		<<set _prayPassage to "Temple Sydney Pray">>
+	<<else>>
+		<<set _prayPassage to "Temple Pray">>
+	<</if>>
+		<<templeicon "pray">><<link [[구원을 위해 기도한다 (1:00)|_prayPassage]]>>
+			<<pass 60>><<set $phase to 2>>
+			<<if $purity gte ((1000 / 7) * 7)>>
+				<<stress -6>><<awareness -2>><<arousal -1200>>
+			<<elseif $purity gte ((1000 / 7) * 6)>>
+				<<stress -6>><<awareness -1>><<arousal -1000>>
+			<<elseif $purity gte ((1000 / 7) * 5)>>
+				<<stress -5>><<awareness -1>><<arousal -800>>
+			<<elseif $purity gte ((1000 / 7) * 4)>>
+				<<stress -4>><<awareness -1>><<arousal -600>>
+			<<elseif $purity gte ((1000 / 7) * 3)>>
+				<<stress -3>><<awareness -1>><<arousal -500>>
+			<<elseif $purity gte ((1000 / 7) * 2)>>
+				<<stress -2>><<awareness -1>><<arousal -400>>
+			<<else>>
+				<<stress -1>><<awareness -1>><<arousal -300>>
+			<</if>>
+		<</link>>
+		<<lawareness>><<lstress>><<larousal>>
+		<br>
+		<<if $insecurity_penis_tiny gte 1 and $player.penissize lte 0 and $acceptance_penis_tiny lte 999 and $daily.templePray isnot 1>>
+			<<templeicon "pray">><<link [[큰 자지를 위해 기도한다 (1:00)|_prayPassage]]>>
+				<<pass 60>><<set $phase to 4>><<set $daily.templePray to 1>>
+				<<if $purity gte ((1000 / 7) * 7)>>
+					<<stress 5>><<acceptance "penis_tiny" 20>>
+				<<elseif $purity gte ((1000 / 7) * 6)>>
+					<<stress 5>><<acceptance "penis_tiny" 18>>
+				<<elseif $purity gte ((1000 / 7) * 5)>>
+					<<stress 6>><<acceptance "penis_tiny" 16>>
+				<<elseif $purity gte ((1000 / 7) * 4)>>
+					<<stress 7>><<acceptance "penis_tiny" 14>>
+				<<elseif $purity gte ((1000 / 7) * 3)>>
+					<<stress 8>><<acceptance "penis_tiny" 12>>
+				<<elseif $purity gte ((1000 / 7) * 2)>>
+					<<stress 10>><<acceptance "penis_tiny" 10>>
+				<<else>>
+					<<stress 12>><<acceptance "penis_tiny" 8>>
+				<</if>>
+			<</link>>
+			<<gstress>><<gacceptance>>
+			<br>
+		<</if>>
+		<<if $insecurity_penis_small gte 1 and $player.penissize is 1 and $acceptance_penis_small lte 999 and $daily.templePray isnot 1>>
+			<<templeicon "pray">><<link [[큰 자지를 위해 기도한다 (1:00)|_prayPassage]]>>
+				<<pass 60>><<set $phase to 5>><<set $daily.templePray to 1>>
+				<<if $purity gte ((1000 / 7) * 7)>>
+					<<stress 5>><<acceptance "penis_small" 20>>
+				<<elseif $purity gte ((1000 / 7) * 6)>>
+					<<stress 5>><<acceptance "penis_small" 18>>
+				<<elseif $purity gte ((1000 / 7) * 5)>>
+					<<stress 6>><<acceptance "penis_small" 16>>
+				<<elseif $purity gte ((1000 / 7) * 4)>>
+					<<stress 7>><<acceptance "penis_small" 14>>
+				<<elseif $purity gte ((1000 / 7) * 3)>>
+					<<stress 8>><<acceptance "penis_small" 12>>
+				<<elseif $purity gte ((1000 / 7) * 2)>>
+					<<stress 10>><<acceptance "penis_small" 10>>
+				<<else>>
+					<<stress 12>><<acceptance "penis_small" 8>>
+				<</if>>
+			<</link>>
+			<<gstress>><<gacceptance>>
+			<br>
+		<</if>>
+		<<if $player.gender is "m">>
+			<<if $insecurity_penis_big gte 1 and $player.penissize gte 4 and $acceptance_penis_big lte 999 and $daily.templePray isnot 1>>
+				<<templeicon "pray">><<link [[작은 자지를 위해 기도한다 (1:00)|_prayPassage]]>>
+					<<pass 60>><<set $phase to 6>><<set $daily.templePray to 1>>
+					<<if $purity gte ((1000 / 7) * 7)>>
+						<<stress 5>><<acceptance "penis_big" 20>>
+					<<elseif $purity gte ((1000 / 7) * 6)>>
+						<<stress 5>><<acceptance "penis_big" 18>>
+					<<elseif $purity gte ((1000 / 7) * 5)>>
+						<<stress 6>><<acceptance "penis_big" 16>>
+					<<elseif $purity gte ((1000 / 7) * 4)>>
+						<<stress 7>><<acceptance "penis_big" 14>>
+					<<elseif $purity gte ((1000 / 7) * 3)>>
+						<<stress 8>><<acceptance "penis_big" 12>>
+					<<elseif $purity gte ((1000 / 7) * 2)>>
+						<<stress 10>><<acceptance "penis_big" 10>>
+					<<else>>
+						<<stress 12>><<acceptance "penis_big" 8>>
+					<</if>>
+				<</link>>
+				<<gstress>><<gacceptance>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $insecurity_penis_big gte 1 and $player.penissize gte 2 and $acceptance_penis_big lte 999 and $daily.templePray isnot 1>>
+				<<templeicon "pray">><<link [[작은 자지를 위해 기도한다 (1:00)|_prayPassage]]>>
+					<<pass 60>><<set $phase to 6>><<set $daily.templePray to 1>>
+					<<if $purity gte ((1000 / 7) * 7)>>
+						<<stress 5>><<acceptance "penis_big" 20>>
+					<<elseif $purity gte ((1000 / 7) * 6)>>
+						<<stress 5>><<acceptance "penis_big" 18>>
+					<<elseif $purity gte ((1000 / 7) * 5)>>
+						<<stress 6>><<acceptance "penis_big" 16>>
+					<<elseif $purity gte ((1000 / 7) * 4)>>
+						<<stress 7>><<acceptance "penis_big" 14>>
+					<<elseif $purity gte ((1000 / 7) * 3)>>
+						<<stress 8>><<acceptance "penis_big" 12>>
+					<<elseif $purity gte ((1000 / 7) * 2)>>
+						<<stress 10>><<acceptance "penis_big" 10>>
+					<<else>>
+						<<stress 12>><<acceptance "penis_big" 8>>
+					<</if>>
+				<</link>>
+				<<gstress>><<gacceptance>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $insecurity_breasts_tiny gte 1 and $player.breastsize lte 0 and ($player.gender is "f" or $player.gender is "h") and $acceptance_breasts_tiny lte 999 and $daily.templePray isnot 1>>
+			<<templeicon "pray">><<link [[큰 젖가슴을 위해 기도한다 (1:00)|_prayPassage]]>>
+				<<pass 60>><<set $phase to 7>><<set $daily.templePray to 1>>
+				<<if $purity gte ((1000 / 7) * 7)>>
+					<<stress 5>><<acceptance "breasts_tiny" 20>>
+				<<elseif $purity gte ((1000 / 7) * 6)>>
+					<<stress 5>><<acceptance "breasts_tiny" 18>>
+				<<elseif $purity gte ((1000 / 7) * 5)>>
+					<<stress 6>><<acceptance "breasts_tiny" 16>>
+				<<elseif $purity gte ((1000 / 7) * 4)>>
+					<<stress 7>><<acceptance "breasts_tiny" 14>>
+				<<elseif $purity gte ((1000 / 7) * 3)>>
+					<<stress 8>><<acceptance "breasts_tiny" 12>>
+				<<elseif $purity gte ((1000 / 7) * 2)>>
+					<<stress 10>><<acceptance "breasts_tiny" 10>>
+				<<else>>
+					<<stress 12>><<acceptance "breasts_tiny" 8>>
+				<</if>>
+			<</link>>
+			<<gstress>><<gacceptance>>
+			<br>
+		<</if>>
+		<<if $insecurity_breasts_small gte 1 and $player.breastsize gte 1 and $player.breastsize lte 5 and $acceptance_breasts_small lte 999 and $daily.templePray isnot 1>>
+			<<if $player.gender is "f" or $player.gender is "h">>
+				<<templeicon "pray">><<link [[큰 젖가슴을 위해 기도한다 (1:00)|_prayPassage]]>>
+					<<pass 60>><<set $phase to 8>><<set $daily.templePray to 1>>
+					<<if $purity gte ((1000 / 7) * 7)>>
+						<<stress 5>><<acceptance "breasts_small" 20>>
+					<<elseif $purity gte ((1000 / 7) * 6)>>
+						<<stress 5>><<acceptance "breasts_small" 18>>
+					<<elseif $purity gte ((1000 / 7) * 5)>>
+						<<stress 6>><<acceptance "breasts_small" 16>>
+					<<elseif $purity gte ((1000 / 7) * 4)>>
+						<<stress 7>><<acceptance "breasts_small" 14>>
+					<<elseif $purity gte ((1000 / 7) * 3)>>
+						<<stress 8>><<acceptance "breasts_small" 12>>
+					<<elseif $purity gte ((1000 / 7) * 2)>>
+						<<stress 10>><<acceptance "breasts_small" 10>>
+					<<else>>
+						<<stress 12>><<acceptance "breasts_small" 8>>
+					<</if>>
+				<</link>>
+				<<gstress>><<gacceptance>>
+				<br>
+			<<else>>
+				<<templeicon "pray">><<link [[작은 젖가슴을 위해 기도한다 (1:00)|_prayPassage]]>>
+					<<pass 60>><<set $phase to 8>><<set $daily.templePray to 1>>
+					<<if $purity gte ((1000 / 7) * 7)>>
+						<<stress 5>><<acceptance "breasts_small" 20>>
+					<<elseif $purity gte ((1000 / 7) * 6)>>
+						<<stress 5>><<acceptance "breasts_small" 18>>
+					<<elseif $purity gte ((1000 / 7) * 5)>>
+						<<stress 6>><<acceptance "breasts_small" 16>>
+					<<elseif $purity gte ((1000 / 7) * 4)>>
+						<<stress 7>><<acceptance "breasts_small" 14>>
+					<<elseif $purity gte ((1000 / 7) * 3)>>
+						<<stress 8>><<acceptance "breasts_small" 12>>
+					<<elseif $purity gte ((1000 / 7) * 2)>>
+						<<stress 10>><<acceptance "breasts_small" 10>>
+					<<else>>
+						<<stress 12>><<acceptance "breasts_small" 8>>
+					<</if>>
+				<</link>>
+				<<gstress>><<gacceptance>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $player.gender is "f" or $player.gender is "h">>
+			<<if $insecurity_breasts_big gte 1 and $player.breastsize gte 8 and $acceptance_breasts_big lte 999 and $daily.templePray isnot 1>>
+				<<templeicon "pray">><<link [[작은 젖가슴을 위해 기도한다 (1:00)|_prayPassage]]>>
+					<<pass 60>><<set $phase to 9>><<set $daily.templePray to 1>>
+					<<if $purity gte ((1000 / 7) * 7)>>
+						<<stress 5>><<acceptance "breasts_big" 20>>
+					<<elseif $purity gte ((1000 / 7) * 6)>>
+						<<stress 5>><<acceptance "breasts_big" 18>>
+					<<elseif $purity gte ((1000 / 7) * 5)>>
+						<<stress 6>><<acceptance "breasts_big" 16>>
+					<<elseif $purity gte ((1000 / 7) * 4)>>
+						<<stress 7>><<acceptance "breasts_big" 14>>
+					<<elseif $purity gte ((1000 / 7) * 3)>>
+						<<stress 8>><<acceptance "breasts_big" 12>>
+					<<elseif $purity gte ((1000 / 7) * 2)>>
+						<<stress 10>><<acceptance "breasts_big" 10>>
+					<<else>>
+						<<stress 12>><<acceptance "breasts_big" 8>>
+					<</if>>
+				<</link>>
+				<<gstress>><<gacceptance>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $insecurity_breasts_big gte 1 and $player.breastsize gte 6 and $acceptance_breasts_big lte 999 and $daily.templePray isnot 1>>
+				<<templeicon "pray">><<link [[작은 젖가슴을 위해 기도한다 (1:00)|_prayPassage]]>>
+					<<pass 60>><<set $phase to 9>><<set $daily.templePray to 1>>
+					<<if $purity gte ((1000 / 7) * 7)>>
+						<<stress 5>><<acceptance "breasts_big" 20>>
+					<<elseif $purity gte ((1000 / 7) * 6)>>
+						<<stress 5>><<acceptance "breasts_big" 18>>
+					<<elseif $purity gte ((1000 / 7) * 5)>>
+						<<stress 6>><<acceptance "breasts_big" 16>>
+					<<elseif $purity gte ((1000 / 7) * 4)>>
+						<<stress 7>><<acceptance "breasts_big" 14>>
+					<<elseif $purity gte ((1000 / 7) * 3)>>
+						<<stress 8>><<acceptance "breasts_big" 12>>
+					<<elseif $purity gte ((1000 / 7) * 2)>>
+						<<stress 10>><<acceptance "breasts_big" 10>>
+					<<else>>
+						<<stress 12>><<acceptance "breasts_big" 8>>
+					<</if>>
+				<</link>>
+				<<gstress>><<gacceptance>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $insecurity_pregnancy gte 1 and $acceptance_pregnancy lte 999 and playerBellySize() gte 8 and $daily.templePray isnot 1>>
+			<<set _pregnancyLink to (playerAwareTheyArePregnant() ? "당신의 임신한 배를 위해 기도한다 (1:00)" : "당신의 임신한 것처럼 보이는 배를 위해 기도한다 (1:00)")>>
+			<<templeicon "pray">><<link [[_pregnancyLink|_prayPassage]]>>
+				<<pass 60>><<set $phase to 10>><<set $daily.templePray to 1>>
+				<<if $purity gte ((1000 / 7) * 7)>>
+					<<stress 5>><<acceptance "pregnancy" 20>>
+				<<elseif $purity gte ((1000 / 7) * 6)>>
+					<<stress 5>><<acceptance "pregnancy" 18>>
+				<<elseif $purity gte ((1000 / 7) * 5)>>
+					<<stress 6>><<acceptance "pregnancy" 16>>
+				<<elseif $purity gte ((1000 / 7) * 4)>>
+					<<stress 7>><<acceptance "pregnancy" 14>>
+				<<elseif $purity gte ((1000 / 7) * 3)>>
+					<<stress 8>><<acceptance "pregnancy" 12>>
+				<<elseif $purity gte ((1000 / 7) * 2)>>
+					<<stress 10>><<acceptance "pregnancy" 10>>
+				<<else>>
+					<<stress 12>><<acceptance "pregnancy" 8>>
+				<</if>>
+			<</link>>
+			<<gstress>><<gacceptance>>
+			<br>
+		<</if>>
+		<<crimeicon "mark">><<link [[본다 (1:00)|_prayPassage]]>>
+			<<pass 60>><<set $phase to 3>>
+			<<if $purity gte ((1000 / 7) * 7)>>
+				<<stress 5>><<awareness 2>>
+			<<elseif $purity gte ((1000 / 7) * 6)>>
+				<<stress 5>><<awareness 1>>
+			<<elseif $purity gte ((1000 / 7) * 5)>>
+				<<stress 6>><<awareness 1>>
+			<<elseif $purity gte ((1000 / 7) * 4)>>
+				<<stress 7>><<awareness 1>>
+			<<elseif $purity gte ((1000 / 7) * 3)>>
+				<<stress 8>><<awareness 1>>
+			<<elseif $purity gte ((1000 / 7) * 2)>>
+				<<stress 10>><<awareness 1>>
+			<<else>>
+				<<stress 12>><<awareness 1>>
+			<</if>>
+		<</link>>
+		<<gawareness>><<gstress>>
+		<br>
+		<<if !_sydneyPray>>
+			<<link [[그만둔다|Temple]]>><</link>>
+			<br>
+		<</if>>
+<</widget>>
+
+<<widget "passouttemple">>
+	<<if isPregnancyEnding()>>
+		<<pregnancyPassout "temple">>
+	<<else>>
+		당신은 스스로를 너무 혹사시켰다.
+		<br><br>
+		<<passout>>
+		<<set $danger to random(1, 10000)>>
+		<<if $danger gte (9900 - $allure)>>
+			<<link [[다음|Lake Ritual]]>><</link>>
+			<br>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+		<<pass 1 hour>>
+		<<trauma 6>><<set $stress -= 2000>>
+	<</if>>
+<</widget>>
+
+<<widget "inittemple">>
+	<<set $temple_rank to "initiate">>
+	<<set $temple_initiate_days to 0>>
+	<<set $player.virginity.temple to true>>
+	<<set $temple_garden to 0>>
+	<<set $temple_quarters to 0>>
+	<<set $grace to 0>>
+	<<set $temple_harassed to 0>>
+	<<set $temple_chastity_timer to 30>>
+	<<set $temple_event to 1>>
+<</widget>>
+
+<<widget "prayerend">>
+	<<if Time.hour is 0>>
+		<<generate1>><<person1>>
+		<<monk_ ga>> 기도실에 들어온다. "청소하러 왔다네," <<he_ ga>> 말한다.
+
+			<<if $temple_sneak is 1>>
+				<<He_ ga>> 얼굴을 찌푸린다. "여기에 누가 있는줄은 몰랐구먼. 밤늦게까지 여기서 기도하는 건 좋은 생각이 아닐세. 아침에도 기도를 이어갈 수 있잖나. 아무튼 향이 다 타들어가고 있군."
+			<<else>>
+				"밤늦게까지 여기서 기도하는 건 좋은 생각이 아닐세. 아침에도 기도를 이어갈 수 있잖나. 아무튼 향이 다 타들어가고 있군."
+			<</if>>
+		<br><br>
+
+		<<endevent>>
+		<<link [[떠난다|Temple]]>><<unset $temple_sneak>><</link>>
+		<br>
+	<<elseif $temple_jordan_prayer is undefined and random(1, 20) is 20 and $temple_sneak is 1>><<set $temple_jordan_prayer to 1>>
+		<<npc Jordan>><<person1>>
+		기도실의 문이 열린다. 조던이 걸어 들어온다. <<He_ nun>> 당신을 보고 놀란 것처럼 보인다. <<He_ nun>> 뒤의 문을 닫고, 반대편으로 한 걸음 가서 앉는다.
+		<br><br>
+
+		"여기에 누가 있는 줄은 몰랐구나," <<he_ ga>> 속삭인다. <<He_ nun>> 몸을 가까이 기울인다. "몰래 들어왔니?"
+		<br><br>
+
+		<<link [[사실대로 말한다|Temple Prayer Truth]]>><<grace 1>><</link>><<ggrace>><<handholdingvirginitywarning>>
+		<br>
+		<<link [[거짓말한다|Temple Prayer Lie]]>><<grace -1>><</link>><<lgrace>><<handholdingvirginitywarning>>
+		<br>
+	<<elseif $temple_sneak is 1>>
+		<<link [[계속 기도한다 (1:00)|Temple Prayer]]>><<grace -5>><</link>><<llgrace>>
+		<br>
+		<<link [[그만둔다|Temple]]>><<unset $temple_sneak>><</link>>
+		<br>
+	<<else>>
+		<<link [[계속 기도한다 (1:00)|Temple Prayer]]>><</link>>
+		<br>
+		<<link [[그만둔다|Temple]]>><<unset $temple_sneak>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "eventstemple">>
+	<<if $rng gte 91>>
+		<<if $angel gte 6>>
+			<<generate1>><<person1>><<generate2>><<generatey3>>"오, 얘야," 당신 오른편의 목소리가 말한다. 목소리의 주인공은 나이 든 <<person_ ida>>. "너는 천사를 닮았구나. 내게 축복을 내려주지 않으련?"
+			<br><br>
+
+			<<link [[축복을 내린다 (0:10)|Temple Blessing]]>><<grace 3>><<pass 10>><</link>><<gggrace>>
+			<br>
+			<<link [[거절한다|Temple Blessing Refuse]]>><<grace -1>><</link>><<lgrace>>
+			<br>
+		<<elseif $demon gte 6>>
+			<<generate1>><<person1>><<generate2>>누군가가 당신의 오른편에서 새된 비명을 지른다. 비명을 지른 건 나이든 <<monk_ da>>. <<He_ nun>> 성표를 꺼내, 정신나간 듯한 눈빛으로 당신을 응시한다.
+			<br><br>
+
+			"사악한 마귀야!" <<he_ ga>> 소리친다. "이 성스러운 장소에서 사라져라. 당장!"
+			<<gstress>><<gtrauma>><<stress 6>><<trauma 6>>
+			<br><br>
+
+			<<person2>><<priest_ ga>> <<person1>><<monk_ rul>> 진정시키려 달려온다. <<person2>><<He_ nun>> 간신히 <<person1>><<him_ ul>> 당신에게서 떨어트려 놓고, 다른 방으로 데려간다.
+			<br><br>
+			<<person2>><<priest_ ga>> 당신 쪽으로 몸을 돌린다. "대단히 미안합니다," <<he_ ga>> 말한다. "우리 사람들 중 몇몇은 좀 폐쇄적이라서 말이예요." <<He_ ga>> 얼굴을 찌푸리더니, 당신의 뿔을 쳐다본다. "여기서 그런 복장을 입고 있는 건 사려야 합니다. 다른 건 몰라도 그건 실례예요."
+			<br><br>
+
+			<<endevent>>
+
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<elseif $fallenangel gte 2>>
+			<<generatey1>><<generate2>><<person1>>
+			당신은 모든 이들이 당신에게서 시선을 피한다는 걸 알아차린다. 호기심어린 눈으로, 당신의 부서진 헤일로를 바라보는 <<person_ ul>> 빼면. <<His_ yi>> <<person2>><<father_ ga>> <<person1>><<his_ yi>> 눈을 가리고 끌고 간다.
+			<<gtrauma>><<trauma 6>>
+			<br><br>
+			<<endevent>>
+
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<else>>
+			사원은 평소보다 더 바쁘다. 신도들은 붐비고, 수도자들은 모두에게 신경을 쓰려 애쓴다.
+			<br><br>
+
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<</if>>
+	<<elseif $rng gte 81>>
+		<<if _sydneyTemple and $sydney_templeWork is "garden">>
+			<<npc "Sydney">><<person1>>
+			당신이 창문을 내다보자, 많은 수련생들이 정원에 앉아 대화하는 게 보인다. 당신은 그들 사이에 시드니가 끼어 있는 걸 알아챈다.
+			<br><br>
+			<<link [[함께 대화한다 (1:00)|Temple Garden Join Sydney]]>><<pass 60>><<trauma -6>><<stress -6>><<npcincr Sydney love 1>><</link>><<ltrauma>><<lstress>><<glove>>
+			<br>
+			<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+				<<link [[그들에게 정원을 청소하라고 한다 (1:00)|Temple Garden Encourage Sydney]]>><<grace 3>><<pass 60>><<tiredness 6>><</link>><<gtiredness>><<gggrace>>
+				<br>
+			<</if>>
+			<<link [[무시한다|Temple]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			당신이 창문을 내다보자, 많은 수련생들이 정원에 앉아 대화하는 게 보인다.
+			<br><br>
+			<<if $temple_rank is undefined or $temple_rank is "prospective">>
+				<<link [[다음|Temple]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<link [[함께 대화한다 (1:00)|Temple Garden Join]]>><<pass 60>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+				<br>
+				<<link [[그들에게 정원을 청소하라고 한다 (1:00)|Temple Garden Encourage]]>><<grace 3>><<pass 60>><<tiredness 6>><</link>><<gtiredness>><<gggrace>>
+				<br>
+				<<link [[무시한다|Temple]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<<elseif $rng gte 71>>
+		당신은 수련생들 한 무리가 계단참 아래서 대화하는 게 보인다.
+		<br><br>
+		<<if $temple_rank is undefined or $temple_rank is "prospective">>
+			<<link [[다음|Temple]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[함께 대화한다 (1:00)|Temple Stairs Join]]>><<pass 60>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+			<br>
+			<<link [[그들에게 주거 구역을 청소하라고 한다 (1:00)|Temple Stairs Encourage]]>><<grace 3>><<pass 60>><</link>><<gtiredness>><<gggrace>>
+			<br>
+			<<link [[무시한다|Temple]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<elseif $rng gte 63 and playerBellyVisible() and $pregnancyspeechdisable is "f">>
+		<<generatey1>><<generate2>>
+		당신은 <<person1>><<person_ i>> 당신의 배를 응시하고 있는 걸 알아차린다. <<He_ nun>> <<person1>><<his_ yi>> <<person2>><<father_ ro>> 보이는 <<person2>><<person_>> 쪽으로 몸을 돌리고 묻는다. "<<pshe_ nun>> 임신한 거야?"
+		<br><br>
+
+		<<if $templePromised isnot "">>
+			<<He_ ga>> 대답한다. "그래 보이는구나. 기억하렴, 결혼한 뒤의 출산은 죄악이 아니란다." <<He_ nun>> 당신의 반지를 가리킨다. "어쩌면 이 마을도 아직 희망이라는 걸 갖고 있는지도."
+			<<ltrauma>><<trauma -6>><<lstress>><<stress -6>>
+		<<else>>
+			<<He_ ga>> 대답한다. "그래 보이는구나. 결혼 반지는 없지만,
+			<<if $worn.hands.name isnot "naked">>
+				<<pher_ yi>> <<worn_hands_name>> 아래에 있는 것일지도 모르겠구나."
+			<<else>>
+				그래도 우리는 <<phim_ ul>> 위해 기도해야 한단다.
+			<</if>>
+			<<gtrauma>><<trauma 6>>
+		<</if>>
+		<br><br>
+		<<endevent>>
+
+		<<link [[다음|Temple]]>><</link>>
+		<br>
+	<<elseif $rng gte 59>>
+		<<generate1>><<person1>>
+		<<if $purity gte 990>>
+			<<priest_ ga>> 옆을 지나간다. <<He_ nun>> 순결을 향한 당신의 헌신에 대해 칭찬한다.
+			<<ltrauma>><<trauma -6>>
+			<br><br>
+
+			<<endevent>>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<elseif $purity gte 900>>
+			<<priest_ ga>> 옆을 지나간다. <<He_ nun>> 당신을 무시한다.
+			<br><br>
+
+			<<endevent>>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<elseif $purity gte 500>>
+			<<priest_ ga>> 옆을 지나간다. <<He_ nun>> 당신을 멈춰세운다. "얘야, 너는 잘못된 길로 가고 있구나." <<he_ ga>> 말한다. "너는 길을 바꾸어야만 해. 순결을 추구하는 길을 찾아라."
+			<<gstress>><<stress 6>>
+			<br><br>
+
+			<<endevent>>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<else>>
+			<<priest_ ga>> 옆을 지나간다. <<He_ ga>> 당신을 멀찍이 피하며, <<his_ yi>> 숨소리 밑으로 기도를 읊조린다.
+			<br><br>
+
+			<<endevent>>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<</if>>
+	<<elseif $rng gte 51>>
+		<<if $awareness gte 800>>
+			전투로 단련된 수도자들은, 겉치장에 불과한 말들을 신도들에게 들려준다.
+			<<if $temple_confessor_intro>>
+				고해의 봉인이 깨지지 않은 채로 남아있다, 아직까지는.
+			<<else>>
+				당신은 타락이 얼마나 깊이 퍼졌는지 궁금해 한다.
+			<</if>>
+			<<gstress>><<stress 6>>
+			<br><br>
+
+			<<if _sydneyTemple>>
+				<<run statusCheck("Sydney")>>
+				<<if _sydneyStatus.includes("corrupt")>>
+					당신은 시드니도 그걸 알고 있을 거라 생각한다.
+				<<else>>
+					당신은 시드니는 이걸 모를 거라는 걸 부러워한다.
+				<</if>>
+				<br><br>
+			<</if>>
+
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<elseif $awareness gte 600>>
+			<<generate1>><<person1>>
+			긴장한 <<priest_ ga>> 벽 위의 돌기를 고친다. 다른 한 명은 신도들의 넋두리를 들으며 고개를 끄덕이면서, 위험의 소지가 있는지 방을 슥 훑어본다. <<monk_ nun>> 빨간 십자가가 표시된 문을 통해, 계단참 아래로 상자 하나를 몰래 내려보낸다.
+			<br><br>
+
+			<<endevent>>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<elseif $awareness gte 400>>
+			<<generate1>><<person1>>
+			수도자는 신도들을 돌봐 주느라 정신이 팔린 것으로 보인다. 당신은 <<monk_>> 한 명이 빨간 십자가가 표시된 문을 통해, 계단참 아래로 상자 하나를 몰래 내려보내는 것을 알아차린다.
+			<br><br>
+			<<endevent>>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<elseif $awareness gte 200>>
+			수도자는 지쳐 보인다. 신도들을 모두 상대하는 데 충분한 수가 있어 보이는데도 그렇다니, 이상한 일이다.
+			<br><br>
+
+			<<if _sydneyTemple>>
+				당신은 이게 시드니가 항상 지쳐 있는 이유일지 생각한다.
+				<br><br>
+			<</if>>
+
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<elseif $awareness gte 0>>
+			당신은 안전한 사원에 있어 안심이 된다.
+			<<lstress>><<stress -6>>
+			<br><br>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<else>>
+			당신은 순수함과 수도자들만이 가득한 이곳에서, 안전함을 느낀다.
+			<<llstress>><<stress -18>>
+			<br><br>
+
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<</if>>
+	<<elseif $rng gte 41>>
+		<<generate1>><<person1>><<generate2>> 당신은 <<priest_ ga>> <<person2>><<monkPost "에게">> 말하는 걸 우연히 듣게 된다.
+		<br><br>
+
+		"밤중에 숲이 침범해 왔소," <<person1>><<priest_ ga>> 말한다. "이번에도."
+		<br><br>
+		"어떻게 할 수 있는 게 아닙니다," <<person2>><<monk_ ga>> 대답한다. "가위를 가져 오지요. 바라건대 수련생 몇 명 정도는 지킬 수 있을 겁니다."
+		<br><br>
+		<<if $temple_rank is undefined or $temple_rank is "prospective">>
+		<<else>>
+			<<set $temple_garden -= 10>>
+		<</if>>
+		<<endevent>>
+		<<link [[다음|Temple]]>><</link>>
+		<br>
+	<<elseif $rng gte 36>>
+		<<generate1>><<person1>>
+		고개를 숙이고, 엄숙히 탄원하는 <<monks_ yi>> 행렬이 사원으로 행진한다. 그들의 수도복 밑에서 땡그랑거리는 소리가 들린다.
+		<br><br>
+
+		<<if $temple_rank is undefined or $temple_rank is "prospective" or $temple_rank is "initiate">>
+			<<link [[땡그랑거리는 소리에 대해 묻는다|Temple March Clink]]>><</link>>
+			<br>
+		<<else>>
+			<<link [[무기를 청소하는 걸 돕는다 (1:00)|Temple March Help]]>><<pass 60>><<grace 3>><</link>><<gggrace>>
+			<br>
+			<<link [[격려한다|Temple March Encourage]]>><<grace 1>><</link>><<ggrace>>
+			<br>
+		<</if>>
+		<<link [[무시한다|Temple]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 31>>
+		<<generate1>><<person1>><<generate2>>
+		당신은 두 명의 수련생들이 나누는 대화를 우연히 듣게 된다.
+		<br><br>
+
+		"숙소가 어질러져 있더군," 한 명이 말한다. "거기 사는 <<person2>><<monks_ ga>> 밤새 파티를 한 모양이야. 어째선지는 모르겠지만 온 사방에 진흙도 뿌려놓았고."
+		<br><br>
+
+		"그들이 그걸 치워야만 했다면 그렇게까지 어질러져 있지는 않을 거야," 다른 이가 답한다. "너는 그들이 그들의 맹세를 보다 진지하게 받아들이고 있을 거라고 생각하는군."
+		<br><br>
+		<<if $temple_rank is undefined or $temple_rank is "prospective">>
+		<<else>>
+			<<set $temple_quarters -= 10>>
+		<</if>>
+		<<endevent>>
+
+		<<link [[다음|Temple]]>><</link>>
+		<br>
+	<<elseif $rng gte 21>>
+		<<generate1>><<person1>>
+		<<monks_ yi>> 행렬이 아주 오래된 찬송가를 부르며 지나간다.
+		<br><br>
+		<<endevent>>
+		<<link [[다음|Temple]]>><</link>>
+		<br>
+	<<elseif $rng gte 16>>
+		<<generate1>><<person1>>
+		<<priest_ ga>> 달콤한 향기가 나는 향로를 휘두르며 지나간다.
+		<br><br>
+
+		<<endevent>>
+		<<link [[다음|Temple]]>><</link>>
+		<br>
+	<<elseif $rng gte 11>>
+		<<generateTemple 1>><<generateyTemple 2>><<generateyTemple 3>><<generateTemple 4>><<generateTemple 5>><<generateTemple 6>><<person1>>
+		<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+			<<if $temple_rank is "initiate">>
+				<<monk_ ga>> 지나간다. "아, 수련생이로군." <<he_ ga>> 말한다. "알맞은 때에 왔구나. 우리는 오늘 헌금을 받으러 갈 거고, 네 도움이 필요하다. 더 많은 수도자들이 일렬로 붙어 다닐수록 사람들은 더 관대해지지." 여러 명의 다른 수련생들이 이미 <<him_ gwa>> 동행하고 있다.
+			<<else>>
+				<<monk_ ga>> 지나간다. "<<Sister_ yo>>," <<he_ ga>> 말한다. "우리는 오늘 헌금을 받으러 갈 건데, 동행하겠나?" 여러 명의 다른 수련생들이 이미 <<him_ gwa>> 동행하고 있다.
+			<</if>>
+			<br><br>
+
+			<<link [[따라간다 (2:00)|Temple Donations]]>><<grace 3 monk>><<pass 30>><</link>><<gggrace monk>>
+			<br>
+			<<link [[거절한다|Temple]]>><<grace -3 monk>><<endevent>><</link>><<llgrace monk>>
+			<br>
+		<<else>>
+			<<monk_ ga>> 사원을 나서고 있다. 수련생들의 행렬이 <<him_ ul>> 따라 나간다.
+			<br><br>
+
+			<<endevent>>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		일에 지친 수련생이 두루마리 더미를 들고 달려들어온다.
+		<br><br>
+		<<if random(1, 5) is 5>>
+			<<generateTemple 1>><<person1>>
+			<<He_ ga>> 좌석에 걸려 넘어지고, 두루마리들이 바닥을 구른다.
+			<br><br>
+
+			<<He_ nun>> 여전히 바닥에 자빠져 있다. <<He_ nun>> 신음하는데, 그 목소리에는 고통보다는 분노가 어려 있다.
+			<br><br>
+
+			<<if $temple_rank is undefined or $temple_rank is "prospective">>
+				<<link [[돕는다 (0:05)|Temple Help]]>><<pass 5>><<trauma -6>><</link>><<ltrauma>>
+			<<else>>
+				<<link [[돕는다 (0:05)|Temple Help]]>><<pass 5>><<trauma -6>><<grace 1>><</link>><<ggrace>><<ltrauma>>
+			<</if>>
+			<br>
+			<<link [[무시한다|Temple]]>><<endevent>><</link>>
+			<br>
+		<<elseif _sydneyTemple and $sydney_templeWork isnot "pray">>
+			<<if $sydneyromance is 1>>
+				당신은 시드니가 당신 곁을 달려 지나가며 당신의 뺨에 키스하기 전까지는 <<nnpc_he_ ga "Sydney">> 시드니인지 알아보지 못한다.<<npcincr Sydney lust 1>><<glust>>
+			<<else>>
+				시드니가 있다. <<nnpc_He_ nun "Sydney">> 몸을 돌려 당신에게 손을 흔들며 미소지어 주려다가, 좌석에 걸려 넘어질 뻔 한다.
+			<</if>>
+			<br><br>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<<else>>
+			<<endevent>>
+			<<link [[다음|Temple]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "temple_effects">>
+	<<if $temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest">>
+	<br>
+	미덕:
+	<div class="meter">
+		<<set _percent to Math.floor((($grace + 100)/ 100)*50)>>
+		<<if $grace isnot 100>>
+			<<print '<div class="greenbar" style="width:' + _percent + '%"></div>'>>
+		<<else>>
+			<<print '<div class="goldbar glowbar" style="width:' + _percent + '%"></div>'>>
+		<</if>>
+	</div>
+	<</if>>
+	<br>
+
+	<<if C.npc.Sydney.init is 1 and _sydney_location is "temple">>
+		<<set _sydneyTemple to true>>
+	<</if>>
+<</widget>>
+
+<<widget "temple_title">><<silently>>
+	<<if _args[0] is "Sydney">>
+		<<switch $sydney.rank>>
+			<<case "initiate">><<set _text_output to "initiate">>
+			<<case "monk">><<set _text_output to (C.npc.Sydney.pronoun is "m" ? "monk" : "nun")>>
+			<<case "priest">><<set _text_output to "priest">>
+			<<default>><<set _text_output to "initiate">>
+		<</switch>>
+	<<elseif _args[0] is "dark">>
+		<<switch $temple_rank>>
+			<<case "initiate">><<set _text_output to "neonate">>
+			<<case "monk">>
+				<<if $temple_confessor_intro>>
+					<<set _text_output to "vessel">>
+				<<else>>
+					<<set _text_output to "apostle">>
+				<</if>>
+			<<case "priest">><<set _text_output to "dark priest">>
+			<<default>><<set _text_output to "neonate">>
+		<</switch>>
+	<<else>>
+		<<switch $temple_rank>>
+			<<case "initiate">><<set _text_output to "initiate">>
+			<<case "monk">><<set _text_output to ($player.gender_appearance is "m" ? "monk" : "nun")>>
+			<<case "priest">><<set _text_output to "priest">>
+			<<default>><<set _text_output to "initiate">>
+		<</switch>>
+	<</if>>
+<</silently>><<print _text_output>><</widget>>
+
+<<widget "temple_Title">><<silently>>
+	<<if _args[0] is "Sydney">>
+		<<temple_title "Sydney">><<capitalise>>
+	<<elseif _args[0] is "dark">>
+		<<temple_title "dark">><<capitalise>>
+	<<else>>
+		<<temple_title>><<capitalise>>
+	<</if>>
+<</silently>><<print _text_output>><</widget>>
+
+<<widget "endconfession">>
+	<<unset $attendant>>
+	<<unset $confession>>
+	<<endevent>>
+<</widget>>
+
+<<widget "endconfessionself">>
+	<<set $daily.confessed to $confession>>
+	<<endconfession>>
+<</widget>>
+
+<<widget "temple_bailey_options">>
+	<<babyRent>>
+	<<if $money gte $rentmoney + ($babyRent or 0)>>
+		<<link [[돈을 지불한다|Temple Bailey Pay]]>><</link>>
+		<br>
+		<<link [[거절한다|Temple Bailey Refuse]]>><<def 1>><<grace -30>><</link>><<lllgrace>>
+		<br>
+	<<else>>
+		<<set $baileypaychain to 0>>
+		<<set $baileyRefusedToPay += 1>>
+		<<set $baileyRefusedToPayTotal += $rentmoney + ($babyRent || 0)>>
+		<<set $baileyRefusedToPayTotalStat += $rentmoney + ($babyRent || 0)>>
+		<<if $speech_attitude is "meek">>
+			"도-돈이 없어요," 당신이 베일리에게 말한다. "그걸 사원에 대한 원망으로 삼지말아주세요."
+		<<elseif $speech_attitude is "bratty">>
+			"나한테 없어요," 당신이 베일리에게 말한다. "그리고 내 <<brothers_and_sistersPost "에게">> 둘러싸여서 물어보려면 배짱이 좀 필요하겠군요."
+		<<else>>
+			"나한테 없어요," 당신이 베일리에게 말한다. "신이 당신의 죄를 용서하길 바랍니다."
+		<</if>>
+		<br>
+		"빚은 우리를 망신시킵니다."
+		<br>
+		"우리 <<sisterPost>>님을 욕되게 합니다."<<lllgrace>><<grace -30>>
+		<br><br>
+
+		"두고 보지," 베일리가 말한다. <<nnpc_He_ nun Bailey>> 뒤돌아 떠난다.
+		<br><br>
+
+		<<link [[다음|Temple]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+	<<set $renttime to 7>><<set $rentday to Time.weekDay>>
+<</widget>>
+
+<<widget "temple_spear_mission_end">>
+	<<unset $temple_spear_mission_winter>>
+<</widget>>

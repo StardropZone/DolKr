@@ -1,0 +1,1162 @@
+:: Widgets Orgasm [widget]
+
+<<widget "orgasm">>
+	<<orgasmstat>><<orgasmcount 1>><<set $orgasmdown to 3>>
+	<<if $combat is 1>>
+		<<set $speechcum to 1>><<set $speechorgasmcount += 1>>
+	<</if>>
+	<<tinyPenisDryOrgasmChance>>
+	<<if $earSlime.growth gte 100 and $earSlime.defyCooldown gte Math.clamp(30 - Math.floor($earSlime.growth / 9), 2, 20) and !$possessed and $ruinedorgasmdisable is "f">>
+		<span class="red">당신은 몸의 감각에 거의 굴복하지만, 그 감각은 너무 빨리 끝나버린다.</span><<pain 10>><<stress 10>><<gpain>><<gstress>>
+		<<set _deniedOrgasm to true>>
+		<<set $ruinedOrgasmStat++>>
+		<<set $ruinedOrgasmTimeStat to Time.date.timeStamp>>
+		<<if $masturbating>>
+			<<set $masturbationRuinedOrgasm++>>
+		<</if>>
+	<<elseif $player.penisExist>>
+		<<if $earSlime.focus is "pregnancy" and $earSlime.growth gte 100>>
+			<<set _cumDesc to "묽은 정액">>
+		<<elseif $earSlime.focus is "impregnation" and $earSlime.growth gte 100>>
+			<<set _cumDesc to "걸쭉한 정액">>
+		<<else>>
+			<<set _cumDesc to "정액">>
+		<</if>>
+		<<if $femaleclimax is 1>>
+			<span class="pink">당신은 몸의 감각과 절정에 계집애처럼 굴복한다.</span>
+			<<semenvolume `$player.penissize is -2 ? -5 : -1`>>
+		<<elseif $semen_volume is 0 or $semen_amount lt 0.1>>
+			<span class="pink">당신은 자극과 절정에 압도되었으나, 아무것도 나오지 않는다.</span>
+			<<set $femaleclimax to 1>>
+			<<semenvolume -1>>
+		<<else>>
+			<<set $parasitePenis to $player.gender is "f" and $parasite.clit.name is "parasite" ? " 기생충" : "">>
+			<<if !playerHasStrapon()>>
+				<<bodyliquid "penis" "semen">>
+			<</if>>
+			<<if wearingCondom("player")>>
+				<<set _condom to $player.condom.state>>
+			<</if>>
+			<<if ($parasite.penis.name and $parasite.penis.name isnot "parasite") or $worn.genitals.name is "chastity parasite">>
+				/* No need for you to know it breaks */
+			<<elseif _condom is "defective">>
+				<span class="red">콘돔이 찢어졌다.</span>
+			<<elseif _condom is "sabotaged">>
+				<span class="red">콘돔의 끝이 터져, 당신의<<print $parasitePenis>> 자지 귀두를 노출시킨다.</span>
+			<</if>>
+			<<if $parasite.penis.name and $parasite.penis.name isnot "parasite">>
+				<span class="pink">당신은 몸의 감각에 굴복하여 당신의<<print $parasitePenis>> 자지에 달라붙은 기생충 안에 사정한다.</span>
+			<<elseif $worn.genitals.name is "chastity parasite">>
+				<span class="pink">당신은 몸의 감각에 굴복하여 당신의 기생충 정조대 안에서 절정한다.</span>
+			<<elseif _condom is "normal" or _condom is "used">>
+				<span class="pink">당신은 몸의 감각에 굴복하여 당신의<<print $parasitePenis>> 자지를 감싼 콘돔 안에 사정한다.</span>
+				<<set $player.condom.state to "used">>
+			<<elseif playerHasStrapon()>>
+				<span class="pink">당신은 당신의 페니스 밴드 아래에서 자극과 절정에 압도된다.</span>
+			<<elseif $penisuse is "othervagina">>
+				<<if $NPCList[$penistarget].vagina is "penis">>
+					<<personselect $penistarget>>
+					<<penileejacstat>>
+					<span class="pink">당신은 몸의 감각에 굴복하여 <<his_ yi>> 자궁 깊숙히<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+					<<if $earSlime.event is "ejaculate into someone's vagina">>
+						<<set $earSlime.event to "">>
+						<<set $_earslimeEjaculateTask to true>>
+					<</if>>
+					<<purity -1>><<internalejac>><<creampie "npc" "vagina">>
+					<<if $earSlime.focus is "pregnancy" and $earSlime.growth gte 75>>
+						<<set _orgasmSpermRng to 25>>
+					<<elseif $earSlime.focus is "impregnation" and $earSlime.growth gte 75>>
+						<<set _orgasmSpermRng to 200>>
+					<<else>>
+						<<set _orgasmSpermRng to 100>>
+					<</if>>
+					<<if $semen_amount lte ($semen_volume * (6 / 24))>>
+						<<set _orgasmSpermRng to Math.floor(_orgasmSpermRng / 2)>>
+					<</if>>
+					<<if $abomination is 1>>
+						/*ToDo: Pregnancy, figure out how the Wraith, plantpeople, etc will handle pregnancy.*/
+					<<elseif $npcrow.includes($penistarget)>>
+						<<recordSperm `{target: $NPCList[$penistarget].fullDescription, spermOwner: "pc", spermType: "human", rngModifier: _orgasmSpermRng}`>>
+					<<elseif $NPCList[$penistarget].pregnancy is 0 and ["realistic", "fetish"].includes($pregnancytype)>>
+						/* Pregnancy Count */
+						<<set $_count to Object.values($storedNPCs).reduce((prev, curr) => {
+							if(curr.pregnancy) return prev + 1;
+							return prev;
+						},0)>>
+						/* Pregnancy chance checks */
+						<<set $_impregnatedChance to 200 / (20 - $baseNpcPregnancyChance)>>
+						<<if V.sexStats.pills.pills["fertility booster"].doseTaken gt 0>>
+							<<set $_impregnatedChance to Math.ceil($_impregnatedChance * (1 + (V.sexStats.pills.pills["fertility booster"].doseTaken * 0.5)))>>
+						<</if>>
+						<<if V.sexStats.pills.pills["contraceptive"].doseTaken gt 0>>
+							<<set $_impregnatedChance to Math.ceil($_impregnatedChance * 0.1)>>
+						<</if>>
+						<<set $_impregnatedChance to Math.floor($_impregnatedChance * (_orgasmSpermRng / 100))>>
+						/*If random NPC is impregnated, compress NPC and fetus*/
+						<<if ($_impregnatedChance gte random(0,200) or _npcForceImpregnation)>>
+							<<switch $NPCList[$penistarget].type>>
+								<<case "human">><<set $_pregnancy to pregnancyGenerator.human(V.NPCList[$penistarget], "pc", true)>>
+								<<case "wolf">><<set $_pregnancy to pregnancyGenerator.wolf(V.NPCList[$penistarget], "pc", true, "vagina", false)>>
+								<<case "wolfgirl" "wolfboy">><<set $_pregnancy to pregnancyGenerator.wolf(V.NPCList[$penistarget], "pc", true, "vagina", true)>>
+							<</switch>>
+							<<if $_pregnancy and !(typeof $_pregnancy is "string" || $_pregnancy instanceof String)>>
+								<<if $consensual is 1 and ((random(0, 1 + $_count) is 0 and $_count lte 10) or (setup.pregnancy.randomAlwaysKeep.includes($location) and $_count lte 15))>>
+									<<compressNPC $penistarget "pregnancy">>
+									<<set $storedNPCs[_lastCompressedName].pregnancy to $_pregnancy>>
+									/* ToDo: Uncomment when compression when is ready */
+									/*<<run $storedNPCs[_lastCompressedName].pregnancy.fetus.forEach((child, index, array) => array[index] to childCompressor(child, false))>>*/
+								<</if>>
+								<<if $pregnancytype is "fetish">><<set _npcIsNowPregnant to $NPCList[$penistarget].fullDescription>><</if>>
+								<<set $NPCList[$penistarget].pregnancy to 1>>
+							<</if>>
+						<</if>>
+					<</if>>
+				<<elseif $NPCList[$penistarget].vagina is "penisimminent" or $NPCList[$penistarget].vagina is "penisentrance">>
+					<<personselect $penistarget>>
+					<span class="pink">당신은 몸의 감각에 굴복하여 <<his_ yi>> 보지 위에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+				<</if>>
+			<<elseif $penisuse is "otheranus">>
+				<<for $_i = 0; $_i lt $enemynomax; $_i++>>
+					<<if $NPCList[$_i].penis is "otheranus" or $NPCList[$_i].vagina is "otheranus">>
+						<<personselect $_i>>
+						<<penileejacstat>>
+						<span class="pink">당신은 몸의 감각에 굴복하여 <<his_ yi>> 장 속 깊숙한 곳에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+						<<purity -1>><<internalejac>><<creampie "npc" "anus">>
+					<<elseif $NPCList[$_i].penis is "otheranusimminent" or $NPCList[$_i].penis is "otheranusentrance" or $NPCList[$_i].vagina is "otheranusimminent" or $NPCList[$_i].vagina is "otheranusentrance">>
+						<<personselect $_i>>
+						<span class="pink">당신은 몸의 감각에 굴복하여 <<his_ yi>> 엉덩이에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+					<</if>>
+				<</for>>
+			<<elseif $penisuse is "othermouth">>
+				<<for $_i = 0; $_i lt $enemynomax; $_i++>>
+					<<if $NPCList[$_i].mouth is "penis">>
+						<<personselect $_i>>
+						<<penileejacstat>>
+						<span class="pink">당신은 몸의 감각에 굴복하여 <<his_ yi>> 입 안에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+						<<purity -1>><<internalejac>><<creampie "npc" "mouth">>
+					<<elseif $NPCList[$_i].mouth is "penisimminent" or $NPCList[$_i].mouth is "penisentrance">>
+						<<personselect $_i>>
+						<span class="pink">당신은 몸의 감각에 굴복하여 <<his_ yi>> 얼굴에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+					<</if>>
+				<</for>>
+			<<elseif $penisuse is "otherpenis">>
+				<<for $_i = 0; $_i lt $enemyno; $_i++>>
+					<<if $NPCList[$_i].penis is "penis">>
+						<<personselect $_i>>
+						<<penileejacstat>>
+						<span class="pink">당신은 몸의 감각에 굴복하여 <<his_ yi>> 자지 위에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+						<<purity -1>><<internalejac>>
+						<!-- <<creampie "npc" "penis">> -->
+					<<elseif $NPCList[$_i].penis is "penisimminent" or $NPCList[$_i].penis is "penisentrance">>
+						<<personselect $_i>>
+						<span class="pink">당신은 몸의 감각에 굴복하여 <<his_ yi>> 자지와 배 위에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+					<</if>>
+				<</for>>
+			<<elseif $penisuse is "tentacle">>
+				<<if $penisstate isnot "tentacleentrance" and $penisstate isnot "tentacleimminent">>
+					<<penileejacstat>>
+					<span class="pink">당신은 몸의 감각에 굴복한다. <<trTentacle $tentaclePenis "이">> 당신의 정액을 짜낸다.</span>
+					<<purity -1>><<internalejac>>
+					<!-- <<creampie "npc" "tentacle">> -->
+				<<else>>
+					<span class="pink">당신은 몸의 감각에 굴복하여 <<trTentacle $tentaclePenis>> 위에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정한다.</span>
+				<</if>>
+			<<elseif $mouth is "mpenisentrance">>
+				<span class="pink">
+					당신은 몸의 감각에 굴복한다. 당신의<<print $parasitePenis>> 자지에서 _cumDesc이 폭발하듯 터져나와 당신의
+					얼굴<<if $rng gte 10 and $semen_amount gt ($semen_volume / 24) * 18>>과 머리카락을 뒤덮는다.<<bodyliquid "hair" "semen">><<else>>을 뒤덮는다.<</if>>
+				</span>
+				<<if $semen_amount gt ($semen_volume / 24) * 18>>
+					<<bodyliquid "face" "semen">>
+				<</if>>
+			<<elseif $mouth is "mpenis">>
+				<<if $selfsuckDepth gte 2>>
+					<span class="pink">당신은 몸의 감각에 굴복한다. _cumDesc의 파도가 당신의<<print $parasitePenis>> 자지에서 솟구쳐 당신의 목구멍 안으로 똑바로 흘러내려간다.</span>
+				<<else>>
+					<span class="pink">당신은 몸의 감각에 굴복하고 자신의 입 안에<<if _cumDesc isnot "정액">> _cumDesc을<</if>> 사정하여, 어쩔 수 없이 사정한 정액을 재빨리 전부 삼킨다.</span>
+				<</if>>
+				<<set $_released to calculateSemenReleased()>>
+				<<if $_released gt 0>>
+					<<cumswallow "pc" $_released>>
+				<</if>>
+
+			<<elseif playerChastity()>>
+				<span class="pink">당신은 몸의 감각에 굴복한다. _cumDesc의 파도가 당신의<<print $parasitePenis>> 자지에서 <<worn_genitals_name>> 안으로 분출한다.</span>
+			<<elseif $leftarm is "mpenisentrance" or $rightarm is "mpenisentrance">>
+				<<if $leftarm is "mpenisentrance" and $semen_amount gte random(500,1500)>>
+					<<set $leftFingersSemen to 1>>
+					<<set $_hand to "왼손">>
+				<</if>>
+				<<if $rightarm is "mpenisentrance" and $semen_amount gte random(500,1500)>>
+					<<set $rightFingersSemen to 1>>
+					<<set $_hand to ($_hand is undefined ? "오른손" : "양손")>>
+				<</if>>
+				<span class="pink">당신은 몸의 감각에 굴복한다. _cumDesc의 파도가 당신의<<print $parasitePenis>> 자지에서 솟구<<if $_hand>>쳐, 그 중 일부가 당신의 $_hand에 떨어진다<<else>>친다<</if>>.</span>
+			<<else>>
+				<span class="pink">당신은 몸의 감각에 굴복한다. _cumDesc의 파도가 당신의<<print $parasitePenis>> 자지에서 솟구친다.</span>
+			<</if>>
+			<<if $semen_amount lte ($semen_volume * (6 / 24))>>
+				<span class="pink">기진맥진한 탓에, 당신의 몸은 묽은 정액 몇 방울만을 내보내고 만다.</span>
+				<<semenvolume -2>>
+			<<elseif $semen_amount lte ($semen_volume * (12 / 24))>>
+				<span class="pink">몸을 혹사시켜 피곤한 탓에, 당신의 정액은 묽고 옅다.</span>
+				<<semenvolume -1>>
+			<<elseif $semen_amount lte ($semen_volume * (18 / 24))>>
+				<span class="pink">반복된 절정으로 인한 대가를 치루듯, 몸에서 만들어지는 _cumDesc량이 감소한다.</span>
+				<<semenvolume -1>>
+			<</if>>
+
+		<</if>>
+	<</if>>
+	<<if $player.vaginaExist and !_deniedOrgasm>>
+		<<if !$player.penisExist>>
+			<span class="pink">당신은 몸의 감각과 절정에 굴복한다.</span>
+		<</if>>
+		<<if $leftarm is "mvaginafist" or $rightarm is "mvaginafist">>
+			<span class="pink">당신은 절정의 끝에 가까워지자, 당신의 근육이 당신의 손 주위에서 꽉 조이며 고동치는 것을 느낀다.</span>
+		<<elseif $leftarm is "mvagina" or $rightarm is "mvagina">>
+			<span class="pink">당신은 절정의 끝에 가까워지자, 당신의 근육이 당신의 손가락 주위에서 꽉 조이며 고동치는 것을 느낀다.</span>
+		<</if>>
+	<</if>>
+
+	<<if $arousalmasochism/$arousal gte 0.70 and !_deniedOrgasm>>
+		<!-- If over 70% arousal is from pain, PC has added reaction NG v2.7 -->
+		<span class="green"> 당신은 몸부림을 치며 더 큰 고통을 갈구한다.</span>
+		<<masochism 5>>
+	<</if>>
+
+	<<if $masturbation_bowl is 1>><<set _liquid_collection_text to []>><</if>>
+	<<if $player.penisExist and !_deniedOrgasm>>
+		<<semenOrgasm>>/*Makes changes to semen values*/
+	<</if>>
+	<<if $player.vaginaExist and !_deniedOrgasm>>
+		<<vaginaFluidOrgasm>>
+		<<if _lube_released gt 10>>
+			<span class="pink">애액이 당신의 <<pussyPost>>에서 솟구친다.</span>
+		<<elseif _lube_released gt 0>>
+			<span class="pink">애액이 당신의 <<pussyPost>>에서 새어나온다.</span>
+		<</if>>
+	<</if>>
+	<<if $lactating is 1 and $milk_volume gte 1000 and $milk_amount gte ($milk_volume / 3) and $breastsensitivity gte 1.5>>
+		<<if $worn.over_upper.exposed is 0 or $worn.upper.exposed is 0 or $worn.under_upper.exposed is 0>>
+			<<if $milk_amount gte (($milk_volume / 3) * 2) and $milk_amount gte 2500>>
+				<<breastfeed 4>><<set $_wetAmount to 100>><<set $_milkText to "뿜어져 나온다">>
+			<<else>>
+				<<breastfeed 2>><<set $_wetAmount to 50>><<set $_milkText to "새어나온다">>
+			<</if>>
+			<<if $worn.under_upper.exposed is 0>>
+				<<trClothes "under_upper" $worn.under_upper.name "name">><<set $_milkedName to _trResult>>
+				<<if !$worn.under_upper.type.includes("swim") and !$worn.under_upper.type.includes("naked")>>
+					<<underupperwet $_wetAmount>>
+				<</if>>
+			<<elseif $worn.upper.exposed is 0>>
+				<<trClothes "upper" $worn.upper.name "name">><<set $_milkedName to _trResult>>
+				<<if !$worn.upper.type.includes("swim") and !$worn.upper.type.includes("naked")>>
+					<<upperwet $_wetAmount>>
+				<</if>>
+			<<else>>
+				<<trClothes "over_upper" $worn.over_upper.name "name">><<set $_milkedName to _trResult>>
+			<</if>>
+			<span class="pink">모유가 <<breastsPost>>에서 당신의 $_milkedName 안으로 $_milkText.</span>
+			<<if $combat is 1>><<set $speechmilk to 1>><</if>>
+		<<elseif $combat is 1 and ($cheststate is "chest" or $cheststate is "chestimminent") and $breastfeedingdisable is "f">>
+			<<for $_i = 0; $_i lt $enemynomax; $_i++>>
+				<<if $NPCList[$_i].mouth is "chest">>
+					<<personselect $_i>>
+					<<if $milk_amount gte (($milk_volume / 3) * 2) and $milk_amount gte 2500>>
+						<<if $milk_amount gte 2500>>
+							<span class="pink">당신이 절정하자 <<breastsPost>>에서 모유가 뿜어져 나오기 시작한다. 당신의 모유가 <<his_ yi>> 입에서 넘쳐흐르자, <<hes_ nun>> 쿨럭거리며, 어쩔 수 없이 입을 뗀다.</span>
+							<<breastfeed 10>>
+							<<set $cheststate to "chestimminent">><<set $NPCList[$_i].mouth to "chestimminent">>
+							<<milkvolume 1>><<set $enemyanger += 10>>
+							<<set $speechmilk to 3>>
+						<<else>>
+							<span class="pink">당신이 절정하자 <<breastsPost>>에서 모유가 뿜어져 나오기 시작한다. <<He_ nun>> 그것을 모두 마시려고 고군분투한다.</span>
+							<<breastfeed 8>><<milkvolume 1>><<sex 2 "breast" $_i>>
+							<<set $speechmilk to 1>>
+						<</if>>
+					<<else>>
+						<span class="pink">당신이 절정하자 <<breastsPost>>에서 더 많은 모유가 <<his_ yi>> 갈망하는 입 속으로 흘러들어간다.</span>
+						<<breastfeed 4>><<milkvolume 1>><<sex 2 "breast" $_i>>
+						<<set $speechmilk to 1>>
+					<</if>>
+				<<elseif $NPCList[$_i].mouth is "chestimminent" or $NPCList[$_i].mouth is "chestentrance">>
+					<<personselect $_i>>
+					<<if $milk_amount gte (($milk_volume / 3) * 2) and $milk_amount gte 2500>>
+						<span class="pink">당신이 절정하자 <<breastsPost>>에서 모유가 <<his_ yi>> 얼굴 전체에 뿜어져 나오기 시작한다.</span>
+						<<breastfeed 8>>
+						<<set $speechmilk to 2>>
+					<<else>>
+						<span class="pink">당신이 절정하자 <<breastsPost>>에서 모유가 새어나온다.</span>
+						<<breastfeed 3>>
+						<<set $speechmilk to 1>>
+					<</if>>
+				<</if>>
+			<</for>>
+		<<else>>
+			<<if $milk_amount gte (($milk_volume / 3) * 2) and $milk_amount gte 2500>>
+				<span class="pink">당신의 <<breastsPost>>에서 모유가 뿜어져 나온다.</span>
+				<<set _milkEscaped to true>>
+				<<breastfeed 4>>
+			<<else>>
+				<span class="pink">당신의 <<breastsPost>>에서 모유가 새어나온다.</span>
+				<<breastfeed 2>>
+			<</if>>
+			<<if $combat is 1>><<set $speechmilk to 1>><</if>>
+		<</if>>
+	<</if>>
+
+	<<if _deniedOrgasm>>
+		<span class="blue">용서의 따뜻함이 당신을 채운다.</span>
+		당신은 그것이, 귓속의 슬라임이 당신에게 절정에 살짝 다다르는 것으로 포상해 주는 것임을 알아차린다.
+		<<gcorruption>><<ltrauma>><<trauma -1>><<corruption 1>>
+		<br>
+	<<elseif numberOfEarSlime() gte 2 and $_earslimeEjaculateTask>>
+		<span class="green">기쁨의 따뜻함이 당신을 채운다.</span>
+		세상사 모든 근심을 다 잊을 수 있을 것만 같은 기분이다. 당신은 그것이 귓속의 슬라임의 요구를 완수한 것에 대해, 절정으로 포상해 주는 것임을 알아차린다.
+		<<gcorruption>><<lltrauma>><<llstress>><<trauma -24>><<stress -24>><<corruption 2>>
+		<br>
+	<<elseif numberOfEarSlime() gte 2>>
+		<span class="blue">진정되는 온기가 몸을 가득 채운다.</span>
+		세상사 모든 근심을 다 잊을 수 있을 것만 같은 기분이다. 당신은 이것이 양쪽 귀에 들어간 슬라임이 절정을 느낀 것에 대해 포상을 내린 것임을 알아차린다.
+		<<gcorruption>><<ltrauma>><<lstress>><<trauma -12>><<stress -12>><<corruption 2>>
+		<br>
+	<<elseif $parasite.left_ear.name is "slime">>
+		<span class="blue">진정되는 온기가 몸을 가득 채운다.</span>
+		세상사 모든 근심을 다 잊을 수 있을 것만 같은 기분이다. 당신은 이것이 왼쪽 귀에 들어간 슬라임이 절정을 느낀 것에 대해 포상을 내린 것임을 알아차린다.
+		<<gcorruption>><<ltrauma>><<lstress>><<trauma -6>><<stress -6>><<corruption 1>>
+		<br>
+	<<elseif $parasite.right_ear.name is "slime">>
+		<span class="blue">진정되는 온기가 몸을 가득 채운다.</span>
+		세상사 모든 근심을 다 잊을 수 있을 것만 같은 기분이다. 당신은 이것이 오른쪽 귀에 들어간 슬라임이 절정을 느낀 것에 대해 포상을 내린 것임을 알아차린다.
+		<<gcorruption>><<ltrauma>><<lstress>><<trauma -6>><<stress -6>><<corruption 1>>
+		<br>
+	<</if>>
+
+	<!-- This code is orphaned, the $swarmchestgrab variable is not referenced or set in any other file -->
+	<<if $swarmchestgrab gte 1 and !_deniedOrgasm>>
+		<span class="pink">당신의 몸이 경련을 일으켜 <<trSwarm _swarmcreature "을">>_trResult 가슴팍에서 튕겨낸다.</span>
+		<<set $swarmchestgrab to 0>>
+	<</if>>
+
+	<<if $orgasmcount lte 4>>
+		<<set $stress -= 200>>
+		<<set $_arousalDrop to -3000 - ($orgasmcount * 1000)>>
+		<<if _deniedOrgasm>><<set $_arousalDrop += 1000>><</if>>
+		<<if $drugged gte 1>>
+			<<arousal $_arousalDrop>><<drugs -20>>
+		<<else>>
+			<<arousal `$_arousalDrop * 2`>>
+		<</if>>
+		<<if _deniedOrgasm>>
+			<span class="pink">당신은 사정을 하지 못했음에도 불구하고 몸을 떤다.</span>
+		<<else>>
+			<span class="pink">당신은 갑작스럽게 터져나오는 쾌락에 몸을 떤다.</span>
+		<</if>>
+	<<elseif $orgasmcount lte 5>>
+		<<set $stress -= 200>>
+		<<if $drugged gte 1>>
+			<<arousal -8000>><<drugs -20>>
+		<<else>>
+			<<arousal -10000>>
+		<</if>>
+		<span class="pink">몸에서 힘이 다 빠진다.</span>
+	<<elseif $orgasmcount lte 8>>
+		<<set $stress -= 100>>
+		<<if $drugged gte 1>>
+			<<set $_arousalDrop to -7000 + (($orgasmcount - 8) * 1000)>>
+			<<arousal $_arousalDrop>><<drugs -20>>
+		<<else>>
+			<<arousal -10000>>
+		<</if>>
+		<<if _deniedOrgasm>>
+			<span class="pink">절정을 금지당하고 있음에도 불구하고, 당신은 더 나올 것이 없다는 느낌을 받는다.</span>
+		<<else>>
+			<span class="pink">더는 나올 것도 없다고 생각했으나, 당신은 격렬하게 가버린다.</span>
+		<</if>>
+	<<elseif $orgasmcount lte 11>>
+		<<if $drugged gte 1>>
+			<<set $_arousalDrop to -4000 + (($orgasmcount - 9) * 1000)>>
+			<<arousal $_arousalDrop>><<drugs -20>>
+		<<else>>
+			<<arousal -10000>>
+		<</if>>
+		<span class="pink">반복되는<<if _deniedOrgasm>> 실패한<</if>> 절정으로 몸이 혹사당하고 있다.</span>
+	<<elseif $orgasmcount lte 18>>
+		<<if $drugged gte 1>>
+			<<arousal -2000>><<drugs -20>>
+		<<else>>
+			<<arousal -10000>>
+		<</if>>
+		<<set $stress += 100>>
+		<span class="pink">반복되는<<if _deniedOrgasm>> 실패한<</if>> 절정으로 몸에 가해지는 부담감이 매우 크다. 더는 가버리고 싶지 않다.</span>
+	<<elseif $orgasmcount lte 23>>
+		<<if $drugged gte 1>>
+			<<arousal -2000>><<drugs -20>>
+		<<else>>
+			<<arousal -10000>>
+		<</if>>
+		<<set $stress += 100>><<combattrauma 10>>
+		<span class="pink">당신의 정신과 신체는 계속되는<<if _deniedOrgasm>> 실패한<</if>> 절정에 무너져내린다.</span>
+	<<else>>
+		<<if $drugged gte 1>>
+			<<arousal -2000>><<drugs -20>>
+		<<else>>
+			<<arousal -10000>>
+		<</if>>
+		<<set $stress += 100>><<combattrauma 10>><<pain 1>>
+		<<if _deniedOrgasm>>
+			<span class="red">단기간에 너무 많은 실패한 절정으로 당신은 그것에 무감각해진다.</span>
+		<<else>>
+			<span class="red">단기간에 너무 많은 절정을 느껴버려 더는 그런 행위로부터 즐거움을 느끼지 못하게 되어버렸다. 신체적으로나 정신적으로나 고통스럽기만 하다.</span>
+		<</if>>
+	<</if>>
+
+	<!-- Chance to get "dick drunk" after 3rd orgasm, chance is 45% for consensual and 15% otherwise, +5% for each following orgasm, but aphrodisiacs make it 100% -->
+	<<if $orgasmcount gte 3 and $drunk lte 1000 and playerIsPenetrated() and $mouth isnot "mpenis" and !_deniedOrgasm>>
+		<<if $drugged gt 0 or (random(1,100) + ($orgasmcount * 5) gte ($consensual ? 70 : 100))>>
+			<<alcohol 25>>
+			<span class="purple"><<print either("당신은 어지럽다.", "당신은 현기증을 느낀다.", "당신은 똑바로 생각할 수 없다.")>></span>
+		<</if>>
+	<</if>>
+	<!-- If came while being choked -->
+	<<if $neckuse is "hand" and $oxygen lt $oxygenmax and !_deniedOrgasm>>
+		<<set $chokeorgasm += 1>>
+		<<if $chokeorgasm gte 35 and $choketrait isnot 1>>
+			<<set $choketrait = 1>>
+			<br><span class="green">당신은 당신이 호흡할 수 없을 때 당신의 오르가즘이 더 강렬하고 당신이 그것을 좋아한다고 느낀다.</span>
+		<</if>>
+	<</if>>
+	<<if ($halloween is 1 or $NPCList[0].fullDescription is "Ivory Wraith") and random(1, 10000) is 10000>>
+		<span class="pink">유령을 잡는 것은 당신 기분을 좋게 한다.(Ghostbusters! 패러디)</span>
+	<</if>>
+	<br><br>
+	<<if $orgasmtrait gte 1 and !_deniedOrgasm>>
+		<<set $stress -= 100>>
+	<</if>>
+
+	<<set $orgasmcurrent += 1>>
+	<<wetnessCalculate>>
+
+	<<if $masturbation_bowl is 1>>
+		<<if $masturbation_milk gt 0>>
+			<<set _liquid_collection_text.push($masturbation_milk.toFixed(1) + " mL의 모유")>>
+		<</if>>
+		<<if _liquid_collection_text.length is 0>>
+			<span class="purple">당신은 아무것도 얻지 못했다.</span>
+		<<else>>
+			<span class="gold">당신은 <<set _trResult to formatList(_liquid_collection_text, "그리고", true)>><<trPost _postNum "을">><<print _trResult>> 얻었다</span>
+		<</if>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "orgasmstreet">>
+	<<orgasm>>
+	<<if $exposed gte 1>>
+		<<if Weather.dayState isnot "night">>
+			당신은 경련이 잦아들자 몸을 추스리며, 발가벗은 상태에서 낸 소리로 인해 숨은 장소가 발각되지 않았기만을 바란다.
+		<<else>>
+			당신은 경련이 잦아들자 몸을 추스리며, 발가벗은 상태에서 낸 소리가 누군가의 관심을 끌지는 않았기만을 바란다.
+		<</if>>
+	<<else>>
+		<<if Weather.dayState isnot "night">>
+			웬 <<girlPost "이">> 경련하며 가버리는 소리는 사람들의 이목을 끈다. 당신이 몸의 통제권을 되찾자 사방에서 사람들이 쳐다보고 있는 것을 알아챈다. 당신을 얼굴을 붉히고는 그 자리에서 도망친다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+		<<else>>
+			당신은 경련이 잦아들자 몸을 추스리며, 자신이 낸 소리가 누군가의 관심을 끌지는 않았기만을 바란다.
+		<</if>>
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "orgasmforest">>
+	<<orgasm>>
+	<<if $exposed gte 1>>
+		<<if Time.dayState isnot "night">>
+			당신은 경련이 잦아들자 나무를 붙잡고 몸을 추스린다.
+		<<else>>
+			당신은 경련이 잦아들자 나무를 붙잡고 몸을 추스린다.
+		<</if>>
+	<<else>>
+		<<if Time.dayState isnot "night">>
+			당신은 경련이 잦아들자 나무를 붙잡고 몸을 추스린다.
+		<<else>>
+			당신은 경련이 잦아들자 나무를 붙잡고 몸을 추스린다.
+		<</if>>
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "orgasmbog">>
+	<<orgasm>>
+	<<if $bogwater gte 1>>
+		당신을 수면 아래로 잠시 가라앉았지만, 빠르게 수면 위로 다시 올라온다.
+	<<else>>
+		당신은 거의 물 속으로 굴러떨어질 뻔 하지만, 어떻게든 자신을 안정시킨다.
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "orgasmbeach">>
+	<<orgasm>>
+	<<if $exposed gte 1>>
+		<<if Time.dayState isnot "night">>
+			당신은 경련이 잦아들자 몸을 추스리며, 발가벗은 상태에서 낸 소리로 인해 숨은 장소가 발각되지 않았기만을 바란다.
+		<<else>>
+			당신은 경련이 잦아들자 몸을 추스리며, 해수욕장에서 발가벗고 있다는 것을 자각한다.
+		<</if>>
+	<<else>>
+		<<if Time.dayState isnot "night">>
+			웬 <<girlPost "이">> 경련하며 가버리는 소리는 사람들의 이목을 끈다. 당신이 몸의 통제권을 되찾자 해변의 사방에서 사람들이 쳐다보고 있는 것을 알아챈다. 당신을 얼굴을 붉히고는 그 자리에서 도망친다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+		<<else>>
+			당신은 경련이 잦아들자 몸을 추스리며, 야외 해수욕장에서 발가벗고 있다는 것을 자각한다.
+		<</if>>
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "orgasmstage">>
+	<<if hasSexStat("exhibitionism", 5) and $backgroundTraits.includes("lustful") and $orgasmtrait gte 1>>
+		당신은 엄청난 절정이 몰려오는 것을 느낀다.
+		<br><br>
+		당신의 <span class="lewd">성욕과</span> 당신의 <span class="lewd">쾌락에</span> 못 견뎌, 당신은
+		<<if $exposed lte 1 and $leftarm isnot "bound" and $rightarm isnot "bound">>
+			아직 당신을 가리고 있는 옷을 찢으며
+			<<clothesstrip>>
+		<</if>>
+		무대의 가장자리 끝에 무릎을 꿇고, 당신의 벌거벗은 <<body_size_textPost "과">> <<breasts_ rul>> 관중들에게 드러낸다.
+		손들이 뻗어나와 당신을 더듬는다. <<arousal 500 "breasts">><<garousal>>
+		<br><br>
+		<<set $audience += 26>>
+		/* Fills all unoccupied NPC slots; generatel not to be confused with generate1 */
+		<<if $enemyno is 0>>
+			<<generatel>><<generatel>><<generatel>><<generatel>><<generatel>><<generatel>>
+		<<elseif $enemyno is 1>>
+			<<generatel>><<generatel>><<generatel>><<generatel>><<generatel>>
+		<<elseif $enemyno is 2>>
+			<<generatel>><<generatel>><<generatel>><<generatel>>
+		<<elseif $enemyno is 3>>
+			<<generatel>><<generatel>><<generatel>>
+		<<elseif $enemyno is 4>>
+			<<generatel>><<generatel>>
+		<<elseif $enemyno is 5>>
+			<<generatel>>
+		<</if>>
+		당신의 다리와 배의 근육이 긴장한다. 당신의 골반이 앞뒤로 씰룩거린다. 당신이 신음하며 아픔과 쾌락이 섞인 경련을 하자 관객들이 환호한다.
+		<br><br>
+		<<orgasm>>
+		잠시 후, 경련이 잦아든다. 당신은 바닥에 누워 공기를 들이마시려 헉헉댄다. 음악은 멈추었다. 
+		당신 주위의 군중들은 땀과 체액으로 뒤덮인, 당신의 몸을 응시하고 있다.
+		<br><br>
+		당신은 다리를 떨며, 일어나, 허리를 굽혀 인사한다. 모여있는 관중들은 박수를 터뜨린다.
+		<<fameexhibitionism 15>>
+		<<set $audiencearousal += 80>>
+		<<set $audienceexcitement += 50>>
+		<<set $audiencemod += 5>>
+	<<else>>
+		당신은 절정이 안에서 몰려오는 것을 느끼며, 춤을 멈춘다. <<orgasm>>
+		<<if currentSkillValue('danceskill') lte 500>>
+			그것은 당신의 집중을 흐트러뜨린다. 당신은 균형을 잡으려 하지만, 당신의 무릎이 풀리며 당신은 무릎으로 넘어진다. 
+			모여있는 관중들은 당신을 비웃으며, 당신의 춤 기술을 조롱한다.
+			<br><br>
+
+			<<if $worn.feet.type.includes("heels")>>
+				당신은 발로 일어서려 하지만, 마지막 절정의 경련이 당신의 균형을 붕괴시킨다. 
+				당신의 신발 중 한 짝의 힐이 당신이 넘어지는 것을 막으며, 당신의 몸무게가 하이힐을 부러뜨린다. 
+				당신은 다시 한번 바닥에 충돌하고, 관중들에게서 웃음소리를 끌어낸다.<<ggpain>> <<pain 10>>
+				<<feetruined>>
+				<br><br>
+			<</if>>
+			<<if $dancelocation is "smuggler_forced" or $dancelocation is "underground">>
+				당신은 부끄러웠지만, 도망갈 곳이 없다.
+				<<ggtrauma>><<gggstress>><<trauma 12>><<stress 24>>
+			<<else>>
+				<<tearful>> 당신은 부끄러워 얼굴이 빨갛게 된 채로, 시선 밖으로 기어나간다.
+				<<gtrauma>><<gstress>><<trauma 10>><<stress 10>>
+				<<set $danceevent to "finish">>
+			<</if>>
+		<<elseif currentSkillValue('danceskill') gte 500 and hasSexStat("exhibitionism", 4) and hasSexStat("promiscuity", 4)>>
+			당신은 완전히 쓰러지기 전에 무릎을 꿇는다. 당신의 <<body_size_textPost "은">> 격렬한 경련으로 괴로워한다. 관중들이 당신에게 환호를 보낸다.
+			<br><br>
+			당신은 일어나 다시 춤추기 시작하고, 관중들은 야유를 보낸다.
+			<<fameexhibitionism 15>>
+			<<set $audiencearousal += 10>>
+			<<set $audienceexcitement += 5>>
+			<<set $audiencemod += 2>>
+		<<else>>
+			당신은 당신의 경련하는 <<body_size_textPost "을">> 춤 솜씨로 가리려 한다. 
+			<<if $dancelocation is "smuggler_forced" or $dancelocation is "underground">>
+				그건 견디기에는 너무 힘들었지만, 당신은 당신을 포획한 자들에 대한 공포로 그대로 있는다.
+				<<trauma 10>><<stress 12>><<gtrauma>><<ggstress>>
+			<<else>>
+				하지만 그건 견디기에는 너무 힘들었다. 당신은 가능한 한 우아하게 무대를 벗어난다.
+				<<gtrauma>><<gstress>><<trauma 5>><<stress 5>>
+				<<set $danceevent to "finish">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "orgasmLocation">>
+	<<orgasm>>
+	<<switch _args[0]>>
+		<<case "schoolHallway">>
+			<<if ["early","late","earlynoschool","latenoschool","daynoschool"].includes($schoolstate)>>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 당신은 복도가 지금 비어있다는 것이 행운이라고 생각하면서, 그 소음이 주의를 끌지 않았기를 바란다.
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었고, 당신이 몸의 통제권을 되찾고 나서 당신은 모든 방향에서 동료 학생들이 당신을 응시하고 있다는 것을 알아차린다. 그들 중 일부의 수근대는 소리가 복도에 퍼지기 시작한다. 얼굴이 빨개져서, 당신은 모퉁이를 돌아, 시야 밖으로 도망친다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "emptyClassroom">>
+			당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 당신은 교실이 지금 비어있다는 것이 행운이라고 생각하면서, 그 소음이 주의를 끌지 않았기를 바란다.
+		<<case "classroom">>
+			<<if $schoolstate is "second" and ($whitneymaths is "active" or $whitneymaths is "seat")>>
+				당신의 오르가즘을 알아채고, 휘트니가 당신을 향해 미소 짓는다.
+				<<npcincr Whitney lust 1>><<glust>>
+				<br><br>
+			<<elseif $schoolstate is "third" and ($kylarenglishstate is "watching" or $kylarenglishstate is "seat")>>
+				카일라가 당신의 오르가즘에 움직이지 못하고, 당신을 보고 있다.
+				<<npcincr Kylar lust 1>><<glust>>
+				<br><br>
+			<<elseif $schoolstate is "fourth" and $robinhistory is "seat">>
+				로빈은 정중하게 시선을 피하려 하고 있지만, 훔쳐보는 것을 그만두지 못하고 있다.
+				<<npcincr Robin lust 1>><<glust>>
+				<br><br>
+			<</if>>
+			당신은 어떻게든 신음소리를 참아냈지만, 당신의 경련이 당신 주위의 학생들에게 당신이 절정했다는 사실을 밀고하고 있다. 그들 중 일부의 수근대는 소리가 교실에 퍼지기 시작했으나, <<trNamedNPC _teacher>>_trResult 선생님에 의해 빠르게 조용해진다. <<nnpc_He_ nun _teacher>> 그 이유에 대해 모르는 것 처럼 보이지만, 당신이 교실의 수근거림의 원인이라는 것은 알고 있다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>><<detention 1>><<gdelinquency>>
+		<<case "swimClassroom">>
+			당신은 어떻게든 조용히 할 수 있었고, 메이슨의 주의를 끌지 않을 수 있었지만, 당신의 경련이 당신 주위의 학생들에게 당신이 절정했다는 사실을 밀고하고 있다. 그들 중 일부의 수근대는 소리가 수영장에 퍼지기 시작한다. <<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+		<<case "emptySwimClassroom">>
+			당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 당신은 수영장이 지금 비어있다는 것이 행운이라고 생각하면서, 그 소음이 주의를 끌지 않았기를 바란다.
+		<<case "canteen">>
+			<<if ["early","late","earlynoschool","latenoschool","daynoschool"].includes($schoolstate)>>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 당신은 식당이 지금 비어있다는 것이 행운이라고 생각하면서, 그 소음이 주의를 끌지 않았기를 바란다.
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었고, 당신이 몸의 통제권을 되찾고 나서 당신은 모든 방향에서 동료 학생들이 당신을 응시하고 있다는 것을 알아차린다. 그들 중 일부의 수근대는 소리가 식당에 퍼지기 시작한다. 얼굴이 빨개져서, 당신은 자신을 숨기려 시도한다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "library">>
+			<<if ["early","late","earlynoschool","latenoschool","daynoschool"].includes($schoolstate)>>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 당신은 도서관이 지금 비어있다는 것이 행운이라고 생각하면서, 그 소음이 주의를 끌지 않았기를 바란다.
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었고, 당신이 몸의 통제권을 되찾고 나서 당신은 모든 방향에서 동료 학생들이 당신을 응시하고 있다는 것을 알아차린다. 그들 중 일부의 수근대는 소리가 도서관에 퍼지기 시작한다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+				<<if $sydneySeen and _sydney_location is "library">>
+					<br><br>
+					시드니가 헛기침을 한다. 다른 학생들은 그 의미를 깨닫고 수근거림이 멈춘다.
+				<</if>>
+			<</if>>
+		<<case "boyChangingRoom">>
+			<<if $changingroomstate is "empty">>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 당신은 탈의실이 지금 비어있다는 것이 행운이라고 생각하면서, 그 소음이 주의를 끌지 않았기를 바란다.
+			<<elseif $player.gender_appearance is "f">>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 <<if $changingRoomGender is "girls">>소녀들의<<else>>소년들의<</if>> 주의를 끌었다. 그들의 반응은 각각 다르다. 몇몇은 당신을 응원한다. 몇몇은 시선을 피한다. 그리고 몇몇은 당신에게 온갖 종류의 욕설을 질러댄다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었고, 당신이 몸의 통제권을 되찾고 나서 당신은 모든 방향에서 동료 학생들이 당신을 응시하고 있다는 것을 알아차린다. 그들 중 일부의 수근대는 소리가 탈의실에 퍼지기 시작한다. 얼굴이 빨개져서, 당신은 얼굴을 숨기기 위해 몸을 돌린다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "girlChangingRoom">>
+			<<if $changingroomstate is "empty">>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 당신은 탈의실이 지금 비어있다는 것이 행운이라고 생각하면서, 그 소음이 주의를 끌지 않았기를 바란다.
+			<<elseif $player.gender_appearance is "m">>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 <<if $changingRoomGender is "girls">>소녀들의<<else>>소년들의<</if>> 주의를 끌었다. 그들의 반응은 각각 다르다. 몇몇은 당신을 응원한다. 몇몇은 시선을 피한다. 그리고 몇몇은 당신에게 온갖 종류의 욕설을 질러댄다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었고, 당신이 몸의 통제권을 되찾고 나서 당신은 모든 방향에서 동료 학생들이 당신을 응시하고 있다는 것을 알아차린다. 그들 중 일부의 수근대는 소리가 탈의실에 퍼지기 시작한다. 얼굴이 빨개져서, 당신은 얼굴을 숨기기 위해 몸을 돌린다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "policeStation">>
+			<<if Time.dayState is "night">>
+				<<set $_quiet to "경찰서">>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 경찰서 안에 있는 사람들의 주의를 끌었다. 그들의 반응은 섞여 있다. 몇몇 시민들은 보지 않으려 하면서 항의를 제기하고 있다. 더 많은 몇몇 범죄자들은 크게 당신을 응원한다. 당신이 몸의 통제권을 되찾고 나서, 당신은 경찰관 둘이 당신 쪽으로 오고 있는 것을 알아차린다. 얼굴이 빨개져서, 당신은 그 곳에서 도망치는 것이 최선이라고 결정한다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "danceStudio">>
+			<<if $openinghours is 0 and Time.hour isnot $closinghour>>
+				<<set $_quiet to "스튜디오">>
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 스튜디오 안에 있는 사람들의 주의를 끌었다. 그들의 반응은 섞여 있다. 몇몇은 보지 않으려 한다. 몇몇은 불쾌한 눈으로 당신을 응시한다. 다른 몇몇은 당신을 응원한다. 당신이 몸의 통제권을 되찾고 나서, 당신은 스튜디오가 얼마나 소란스러워졌는지 알아차린다. 얼굴이 빨개져서, 당신은 자신을 가능한 조그마하고 겸손하게 보이려 노력한다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "pound">>
+			한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 <<pound_textPost>>의 주의를 끌었고, 당신이 떨면서 몸을 가누는 것을 호기심에 차서 쳐다본다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<<case "danceStudioLesson">>
+			한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 스튜디오 안에 있는 사람들의 주의를 끌었다. 그들의 반응은 대부분 조용하고, 단지 댄스에 집중하면서 수상하다는 듯 엿보는 눈길만 느껴진다. 당신이 몸의 통제권을 되찾고 나서, 당신은 찰리가 얼굴이 빨개진 것을 알아차린다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>><<npcincr Charlie love 1>>
+		<<case "danceStudioHeelLesson">>
+			한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 스튜디오 안에 있는 사람들의 주의를 끌었다. 그들의 반응은 대부분 조용하고, 단지 찰리에게 집중하면서 수상하다는 듯 엿보는 눈길만 느껴진다. 당신이 몸의 통제권을 되찾고 나서, 당신은 찰리가 얼굴이 빨개진 것을 알아차린다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>><<npcincr Charlie love 1>>
+		<<case "cafe">>
+			<<if $openinghours is 0>>
+				<<set $_quiet to "카페">>
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 고객들의 주의를 끌었다. 그들의 반응은 섞여 있다. 몇몇은 보지 않으려 한다. 몇몇은 불쾌한 눈으로 당신을 응시한다. 다른 몇몇은 당신을 응원한다. 당신이 몸의 통제권을 되찾고 나서, 당신은 카페가 얼마나 소란스러워졌는지 알아차린다. 얼굴이 빨개져서, 당신은 자신을 가능한 조그마하고 겸손하게 보이려 노력한다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "arcade">>
+			<<if Weather.dayState is "night" or Weather.dayState is "dawn">>
+				<<set $_quiet to "오락실">>
+			<<else>>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 다행히, 시끄러운 주변 소리가 당신의 신음소리를 억눌렀고, 어두컴컴한 불빛이 당신의 경련을 거의 알아챌 수 없게 한다. 그래도, 당신이 주위를 둘러보자, 당신은 한 <<generatey1>><<person1>><<person_ i>> 경악과 불신감에 차서, 당신을 응시하고 있다는 것을 알아차린다. 그러나, <<His_ yi>> 관심은, <<he_ ga>> 하고 있는 게임으로 빠르게 돌아간다.
+				<<endevent>>
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "docks">>
+			<<if Weather.dayState is "night">>
+				<<set $_quiet to "선창">>
+			<<else>>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 당신은 주위를 둘러보았고, 아무도 당신의 절정을 알아차리지 못한 것 처럼 보였다. 그것은, 당신이 한 <<generate1>><<person1>><<person_ i>> 멀리서 당신을 쳐다보고 있다는 것을 알아차리기 전 까지였지만. <<He_ nun>> 당신에게 싱긋 웃어보이고는, 하던 일로 돌아간다.
+				<<endevent>>
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "stripClub">>
+			<<if Weather.dayState isnot "night" and Weather.dayState isnot "dusk" and Time.hour isnot 6>>
+				<<set $_quiet to "스트립 클럽">>
+			<<else>>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 다행히, 시끄러운 주변 소리가 당신의 신음소리를 억눌렀고, 어두컴컴한 불빛이 당신의 경련을 거의 알아챌 수 없게 한다. 그래도, 당신이 주위를 둘러보자, 당신은 한 고객이 당신을 응시하고 있다는 것을 알아차린다. <<generate1>><<person1>><<He_ nun>> 싱긋 웃으며 당신에게 윙크를 하고는, 일어나 그 자리를 떠난다.
+				<<endevent>>
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "shoppingCentre">>
+			<<if Time.dayState is "night">>
+				<<set $_quiet to "쇼핑센터">>
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 다른 쇼핑객들의 주의를 끌었다. 그들의 반응은 섞여 있다. 몇몇은 보지 않으려 한다. 몇몇은 불쾌한 눈으로 당신을 응시한다. 다른 몇몇은 당신을 응원한다. 당신이 몸의 통제권을 되찾고 나서, 당신은 그 곳이 얼마나 소란스러워졌는지 알아차린다. 얼굴이 빨개져서, 당신은 모퉁이를 돌아 도망친다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "museum">>
+			<<if Time.dayState is "night">>
+				<<set $_quiet to "박물관">>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 다른 방문객들의 주의를 끌었다. 당신이 몸의 통제권을 되찾고 나서 당신은 모든 방향에서 사람들이 당신을 응시하고 있다는 것을 알아차린다. 얼굴이 빨개져서, 당신은 그 곳에서 도망친다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "brothel">>
+			한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었다. 창관 안의 사람들이 당신을 응원하며, 모든 종류의 외설적인 말을 외쳐댄다. 당신이 몸의 통제권을 되찾고 나서, 당신은 그 곳이 얼마나 소란스러워졌는지 알아차린다. 얼굴이 빨개져서, 당신은 사람들이 붐비는 곳으로 사라진다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+		<<case "pub">>
+			한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었다. 창관 안의 사람들이 당신을 응원하며, 모든 종류의 외설적인 말을 외쳐댄다. 당신이 몸의 통제권을 되찾고 나서, 당신은 그 곳이 얼마나 소란스러워졌는지 알아차린다. 얼굴이 빨개져서, 당신은 사람들이 붐비는 곳으로 사라진다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+		<<case "spa">>
+			<<if $openinghours is 0 and Time.hour isnot $closinghour>>
+				<<set $_quiet to "온천">>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 다른 고객들의 주의를 끌었다. 그들의 반응은 섞여 있다. 몇몇은 보지 않으려 한다. 몇몇은 불쾌한 눈으로 당신을 응시한다. 다른 몇몇은 당신을 응원한다. 당신이 몸의 통제권을 되찾고 나서, 당신은 온천이 얼마나 소란스러워졌는지 알아차린다. 얼굴이 빨개져서, 당신은 선탠용 침대 뒤로 몸을 수그린다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "temple">>
+			<<if Time.dayState is "night">>
+				<<set $_quiet to "사원 벽">>
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었다. 그 고고한 정숙함은 당신의 신음소리를 더욱 두드러지게 할 뿐이다. 대부분은 당신을 경멸하는 눈으로 보고 있지만, 몇몇은 욕망이 가득한 시선을 당신에게 쏟아붓고 있다. 당신이 몸의 통제권을 되찾고 나서, 당신은 모든 방향에서 사람들이 당신을 응시하고 있다는 것을 알아차린다. 얼굴이 빨개져서, 당신은 예배석 뒤로 몸을 수그린다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "hospital">>
+			<<if Time.dayState is "night">>
+				<<set $_quiet to "병원">>
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 사람들의 주의를 끌었다. 그들의 반응은 섞여 있다. 몇몇은 보지 않으려 한다. 몇몇은 불쾌한 눈으로 당신을 응시한다. 다른 몇몇은 당신을 응원한다. 당신이 몸의 통제권을 되찾고 나서, 당신은 그 장소가 얼마나 소란스러워졌는지 알아차린다. 얼굴이 빨개져서, 당신은 그게 질병 때문인 것 처럼 가장한다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "countryside">>
+			<<switch random(1,10)>>
+				<<case 1 2 3>>
+					당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 자동차 한 대가 당신의 옆을 지나간다. 당신은 그 안의 사람들이 당신의 절정을 알아차렸는지 궁금해한다.
+					<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<<case 4>>
+					당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 트럭 한 대가 당신의 옆을 지나간다. 당신은 운전자가 당신의 절정을 알아차렸는지 궁금해한다.
+					<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<<case 5>>
+					당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 트랙터 한 대가 당신의 옆을 지나간다. 당신은 농부가 당신의 절정을 알아차렸는지 궁금해한다.
+					<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<<default>>
+					<<set $_quiet to "시골길">>
+			<</switch>>
+		<<case "meadow">>
+			<<if $rng gte 91>>
+				당신은 잎사귀들을 잡고, 경련이 잦아들자 몸을 진정시킨다. 당신은 주위에 당신이 절정하는 소리를 들은 자가 아무도 없다고 생각했지만, 한
+				<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f") or ($bestialitydisable is "t")>>
+					<<if maleChance() lt random(1, 100)>> 여우소녀가 <<else>> 여우소년이 <</if>>
+				<<else>>
+					여우가
+				<</if>>
+				풀숲에 숨어서, 당신을 쳐다보고 있는 것을 알아차린다. 녀석은 당신이 그곳에서 벗어날 수 있게 되기 전에 도망간다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<<else>>
+				당신은 잎사귀들을 잡고, 경련이 잦아들자 몸을 진정시킨다. 당신이 절정하는 소리는 산들바람을 타고 퍼졌지만, 다행히도 주위에는 들을 자가 아무도 없다.
+			<</if>>
+		<<case "alexFarmWork">>
+			<<if Time.dayState is "night">>
+				당신은 당신의 경련이 잦아들자 몸을 진정시키고, 그 소음이 동물들을 방해하지 않았기를 바란다.
+			<<elseif ($exposed gte 2 and $uncomfortable.nude is true) or ($exposed is 1 and $uncomfortable.underwear is true)>>
+				<<set $_hidden to true>>
+			<<elseif ["shower","tending","admin","clearing"].includes($farm_work.alex)>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 당신 주위의 동물들을 불안하게 했다. 다행히, 알렉스는 주위에 없어서 당신이 그런 상태라는 것을 볼 수가 없다. 당신은 몸을 진정시키고 일을 재개한다.
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 당신 주위의 동물들을 불안하게 했다. 알렉스는 그 작은 소동을 알아차리고, 당신의 절정이 잦아드는 것을 쳐다본다. 얼굴이 진홍색이 되어, 당신 둘은 눈을 마주치는 것을 피하면서, 아무 일도 일어나지 않은 척 한다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<npcincr Alex lust 1>><<glust>>
+			<</if>>
+		<<case "alexFarmTending">>
+			당신의 절정을 알아채고, 알렉스는 당신이 괜찮은지 보러 온다. 그러나, <<nnpc_he_ ga "Alex">> 당신의 절정이 잦아드는 것을 쳐다보고, 무엇이 일어났는지를 이해하자 마자, <<nnpc_he_ nun "Alex">> <<nnpc_himself_ rul "Alex">> 멈춰세운다. 얼굴이 진홍색이 되어, 당신 둘은 눈을 마주치는 것을 피하면서, 아무 일도 일어나지 않은 척 한다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<npcincr Alex lust 1>><<glust>>
+		<<case "alexFarmTendingAlone">>
+			당신은 당신의 경련이 잦아들자 몸을 진정시키고, 알렉스가 지금 여기에 없어서 당신이 그런 상태라는 것을 볼 수 없다는 사실에 고마움을 느낀다.
+		<<case "alexFarmAdmin">>
+			당신의 커다란 신음소리는 알렉스와 전화통화하고 있는 사람의 주의를 끌었다. "죄-죄송합니다," <<nnpc_he_ ga "Alex">> 말을 더듬는다. "그-그건 그냥 바람 소리였어요."
+			<br><br>
+			<<nnpc_He_ nun "Alex">> <<nnpc_his_ yi "Alex">> 얼굴이 진홍색이 된 채로 계속 통화를 하고, 당신의 경련이 잦아들자 당신 둘은 눈을 마주치는 것을 피한다.
+			<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<npcincr Alex lust 1>><<glust>>
+		<<case "sewers">>
+			당신의 커다란 신음소리가 터널을 통해 메아리친다.
+			<<if _args[1]>>
+				당신은 당신의 경련이 잦아들자, 당신은 그 소음이 또 다른 주의를 끌지 않았기를 바란다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<<set $sewerschasedstep -= 1>>
+			<<else>>
+				당신은 당신의 경련이 잦아들자, 당신은 그 소음이 주의를 끌지 않았기를 바란다.
+			<</if>>
+		<<case "lake">>
+			<<if _args[1]>>
+				당신은 당신의 경련이 잦아들자 나무에 기대 몸을 진정시킨다. 다행히, 거기에는 당신이 그런 상태라는 것을 볼 사람이 아무도 없다.
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				당신은 당신의 경련이 잦아들자 몸을 진정시킨다. 다행히, 시끄러운 주변 소리가 당신의 신음소리를 억눌렀고, 나뭇잎들이 당신의 경련을 가려주었다. 그래도, 당신이 주위를 둘러보자, 당신은 한 <<generatey1>><<person1>><<person_ i>> 당신을 응시하고 있다는 것을 알아차린다. <<he_ nun>> 싱긋 웃고는, <<his_ yi>> 친구들에게 돌아간다.
+				<<endevent>>
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "campsite">>
+			<<if Weather.precipitation !== "none" or Time.hour lt 18 or $daily.lakeCouple is 1>>
+				당신은 당신의 경련이 잦아들자 나무에 기대 몸을 진정시킨다. 다행히, 거기에는 당신이 그런 상태라는 것을 볼 사람이 아무도 없다.
+			<<elseif $exposed gte 1>>
+				<<set $_hidden to true>>
+			<<else>>
+				한 <<girl_ i>> 절정으로 경련하는 장면과 소리는 야영객들의 주의를 끌었다. 그들은 잠시간 놀란 눈으로 당신을 쳐다봤지만, 곧 당신의 선정적인 장면에 웃음짓는다. 당신이 몸의 통제권을 되찾고 나서, 당신은 그들의 욕망에 찬 시선을 알아차린다. 얼굴이 빨개져서, 당신은 그 곳에서 도망친다.
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<fameexhibitionism 10>>
+			<</if>>
+		<<case "moor">>
+			당신은 거의 낮은 잔디 위에 쓰러질 뻔 했으나, 당신의 경련이 잦아들자 어떻게든 몸을 진정시킨다.
+	<</switch>>
+	<<if $_hidden>>
+		당신은 경련이 잦아들자 몸을 추스리며, 발가벗은 상태에서 낸 소리로 인해 숨은 장소가 발각되지 않았기만을 바란다.
+	<</if>>
+	<<if $_quiet>>
+		당신의 커다란 신음소리가 텅 비어있는 <<print $_quiet>>에 메아리친다. 당신은 당신의 경련이 잦아들자, 당신은 그 소음이 주의를 끌지 않았기를 바란다.
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "breastfeed">>
+	<<set $_milk_released to random(10, 50)>>
+	<<if $cow gte 6>>
+		<<set $_milk_released *= 2>>
+	<</if>>
+	<<set $_milk_released /= 10>>
+	<<set $_milk_released to parseFloat($_milk_released.toFixed(1))>>
+
+	<<if _args[0]>><<set $_milk_released *= _args[0]>><</if>>
+
+	/* if the player doesn't have enough milk, set $_milk_released to whatever they have left */
+	<<if $milk_amount lt $_milk_released>>
+		<<set $_milk_released to $milk_amount>>
+	<</if>>
+	<<set $milk_produced_stat += Math.trunc($_milk_released)>>
+
+	<<milkvolume 1>>
+
+	<<if $worn.over_upper.exposed is 0 and $worn.upper.exposed is 0 and $worn.under_upper.exposed is 0>>
+	<<else>>
+		<<if $masturbating>>
+			<<if $masturbation_bowl is 1 and _milkEscaped>>
+				/* Milk sprays everywhere and isn't collected */
+			<<else>>
+				<<set $masturbation_milk += $_milk_released>>
+			<</if>>
+		<</if>>
+		<<if _args[1] is "pump">>
+			<<set $bottledMilk to ($bottledMilk or 0) + $_milk_released>>
+		<</if>>
+		<<if $masturbation_bowl is 1>>
+			<<if _milkEscaped>>
+				<span class="red">당신이 절정하는 힘 때문에 당신의 모유가 그릇을 완전히 비껴가며, 넓게 흩뿌려진다.</span> <<gsuspicion>><<set $chef_sus += 5>><br>
+			<<else>>
+				<!-- If the player is using both hands, only print this text the second time, and report the total milk released this turn -->
+				<<set _milk_this_turn to (_milk_this_turn is undefined ? $_milk_released : _milk_this_turn + $_milk_released)>>
+				<!-- _args[0] is how many times this widget has been called this turn -->
+				<span class="gold">당신은 <<print (_milk_this_turn).toFixed(1)>> mL의 모유를 얻었다.</span>
+			<</if>>
+		<<elseif $leftaction is "mbreastpumppump" or $rightaction is "mbreastpumppump">>
+			<span class="gold">당신은 <<print ($_milk_released).toFixed(1)>> mL의 모유를 담았다.</span>
+		<</if>>
+	<</if>>
+
+	<<milk_amount `-$_milk_released`>>
+<</widget>>
+
+<<widget "orgasmHourlyRecovery">>
+	<<if $purity gte 990>>
+		<<orgasmcount -1>>
+	<<else>>
+		<<set _orgmod to Math.floor((1100-$purity)/100)>>
+		<<set _orgmod to Math.clamp(_orgmod, 2, 11)>>
+		<<orgasmcount `-_orgmod`>>
+	<</if>>
+	<<if $cow gte 6>>
+		<<semenvolume 1>>
+		<<milkvolume 1>>
+	<</if>>
+	<<if $player.penisExist>>
+		<<if $arousal gte $arousalmax * (4/5)>>
+			<<set $_semen_gain to Math.floor($semen_volume * (3/24))>>
+		<<elseif $arousal gte $arousalmax * (3/5)>>
+			<<set $_semen_gain to Math.floor($semen_volume * (2/24))>>
+		<<else>>
+			<<set $_semen_gain to Math.floor($semen_volume * (1/24))>>
+		<</if>>
+		<<if $cow gte 6 or ($earSlime.growth gte 100 and $earSlime.focus is "impregnation")>>
+			<<set $_semen_gain *= 2>>
+		<</if>>
+		<<if $earSlime.growth gte 100 and $earSlime.focus is "pregnancy">>
+			<<set $_semen_gain /= 4>>
+		<</if>>
+		<<if $drugged gte 1>>
+			<<set $_semen_gain += Math.floor($semen_volume * (1/24))>>
+		<</if>>
+		<<semen_amount $_semen_gain>>
+
+		<<if $semen_amount gte $semen_volume>>
+			<<if $arousal gte $arousalmax * (4/5)>>
+				<<semenvolume 2>>
+			<<elseif $arousal gte $arousalmax * (3/5)>>
+				<<semenvolume 1>>
+			<</if>>
+			<<if $drugged gte 1>>
+				<<semenvolume 1>>
+			<</if>>
+			<<set $semen_amount to $semen_volume>>
+		<</if>>
+	<</if>>
+	<<set $_milk_gain to $milk_volume / 24>>
+	<<if $earSlime.growth gte 75 and $earSlime.focus is "impregnation">>
+		<<set $_milk_gain /= 4>>
+	<</if>>
+	<<if $earSlime.growth gte 75 and $earSlime.focus is "pregnancy">>
+		<<set $_milk_gain *= 2>>
+	<</if>>
+	<<milk_amount `Math.floor($_milk_gain)`>>
+	<<if $milk_amount is $milk_volume and $lactating>>
+		<<set $milkFullPain to Math.clamp(($milkFullPain || 0) + Math.ceil($milk_volume / 1000),0,200 + Math.ceil($milk_volume / 60))>>
+	<<else>>
+		<<set $milkFullPain to 0>>
+	<</if>>
+<</widget>>
+
+<<widget "semenOrgasm">>
+	<<set $_semen_released to calculateSemenReleased()>>
+
+	<<if $semen_amount gte 1 and $worn.under_lower.vagina_exposed is 1 and $worn.lower.vagina_exposed is 1 and $mouth isnot "mpenis" and $worn.genitals.name isnot "chastity parasite">>
+		<<if $masturbating>>
+			<<set $masturbation_semen += $_semen_released>>
+		<</if>>
+		<<if $masturbation_bowl is 1>>
+			<<silently>><<semenPost>><</silently>><<set _liquid_collection_text.push($masturbation_semen.toFixed(1) + " mL의 " + _trResult)>>
+		<</if>>
+	<</if>>
+
+	<<if $femaleclimax isnot 1>>
+		<<semenvolume 1>>
+	<</if>>
+
+	<<set $semen_produced_stat += $_semen_released>>
+	<<semen_amount `-$_semen_released`>>
+	<<set _semen_released to $_semen_released>>
+<</widget>>
+
+<<widget "wetnessCalculate">>
+	<<if $player.vaginaExist>>
+		<<vaginaWetnessCalculate>>
+	<</if>>
+	<<if $player.penisExist>>
+		<<set $_minimumPenis to 0>>
+		<<if playerRutMinArousal() and numberOfEarSlime() and $earSlime.focus is "impregnation" and $earSlime.growth gte 100>>
+			<<set $_minimumPenis += Math.floor(($earSlime.growth - 100) / 2)>>
+		<</if>>
+		<<set $penisWetness to setup.bodyliquid.combined("penis") * 12>>
+		<<set $penisWetness to Math.clamp($penisWetness, Math.clamp($_minimumPenis, 0, 45), 120)>>
+	<</if>>
+	<<set $anusWetness to (setup.bodyliquid.combined("anus") + setup.bodyliquid.combined("bottom")) * 6>>
+	<<set $_minimum to 0>>
+	<<if playerHeatMinArousal() and numberOfEarSlime() and $earSlime.focus is "pregnancy" and $earSlime.growth gte 100 and $player.gender is "m">>
+		<<set $_minimum += Math.floor(($earSlime.growth - 100) / 2)>>
+	<</if>>
+	<<set $anusWetness to Math.clamp($anusWetness, Math.clamp($_minimum, 0, 45), 120)>>
+	<<if $combat is 1>>
+		<<penetrationPainCalculate>>
+	<</if>>
+<</widget>>
+
+<<widget "vaginaWetnessCalculate">>
+	<<set _totalArousal = 0>>
+	<<set _length to $trackedArousal.length>>
+	<<for _ia to 0; _ia lt _length; _ia++>>
+		<<set _totalArousal += $trackedArousal[_ia] / ((_length - _ia) * 1.5)>>
+	<</for>>
+	<<if $combat is 1>>
+		<!-- combatWetBoost can be from 0 to 5, because max promiscuity/deviancy is 100. -->
+		<<if $enemytype is "man">>
+			<<set $combatWetBoost to Math.floor($promiscuity /20)>>
+		<<elseif $enemytype is "tentacles" or $enemytype is "beast">>
+			<<set $combatWetBoost to Math.floor($deviancy /20)>>
+		<<else>>
+			<<set $combatWetBoost to 0>>
+		<</if>>
+		<!-- combatArousalWetness has been replaced by vaginaArousalWetness but I don't want to remove it completely so it's commented out for now. -->
+		/* <<set $_combatArousalWetness to 75 - Math.floor(Math.pow(0.99985,_totalArousal) * 75)>>
+		<<set $combatWetBoost += $_combatArousalWetness>> */
+	<<else>>
+		<<set $combatWetBoost to 0>>
+	<</if>>
+
+	<<set $_minimum to 0>>
+	<<if playerHeatMinArousal() and numberOfEarSlime() and $earSlime.focus is "pregnancy" and $earSlime.growth gte 100>>
+		<<set $_minimum += Math.floor(($earSlime.growth - 100) / 2)>>
+	<</if>>
+
+	<<set $vaginaWetness to $vaginaArousalWetness + $combatWetBoost + (setup.bodyliquid.combined("vagina") + setup.bodyliquid.combined("vaginaoutside")) * 6>>
+	<<set $vaginaWetness to Math.clamp($vaginaWetness, Math.clamp($_minimum, 0, 45), 120)>>
+<</widget>>
+
+<<widget "penetrationPainCalculate">>
+	<<set $vaginalPain to 0>>
+	<<set $analPain to 0>>
+	<<set $penisPain to 0>>
+	<<if $demon lt 6 and $gamemode isnot "soft">>
+		<<if $player.vaginaExist>>
+			<<if $consensual is 1>>
+				<<set $vaginalPain to Math.floor(3 * Math.pow(0.4,$vaginaWetness/8))>>
+			<<else>>
+				<<set $vaginalPain to Math.floor(6 * Math.pow(0.5,$vaginaWetness/25))>>
+			<</if>>
+		<</if>>
+		<<if $player.penisExist>>
+			<<if $consensual is 1>>
+				<<set $penisPain to Math.floor(3 * Math.pow(0.4,$penisWetness/8))>>
+			<<else>>
+				<<set $penisPain to Math.floor(6 * Math.pow(0.5,$penisWetness/25))>>
+			<</if>>
+		<</if>>
+		<<if $consensual is 1>>
+			<<set $analPain to Math.floor(3 * Math.pow(0.4,$anusWetness/8))>>
+		<<else>>
+			<<set $analPain to Math.floor(6 * Math.pow(0.5,$anusWetness/25))>>
+		<</if>>
+		<<if $gamemode is "hard">>
+			<<set $vaginalPain *= 2>>
+			<<set $penisPain *= 2>>
+			<<set $analPain *= 2>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<!-- Lube is only released when vaginaArousalWetness is over 60 (also, its max value is 100)-->
+<!-- "passive" means the lube is dripping out, while "active" means it is being pushed out -->
+<<widget "vaginaFluidPassive">>
+	<<set $_lube_max to Math.round(30*Math.log10($vaginaArousalWetness - 59))>>
+	<<set _lube_released to random(0, $_lube_max)/20>>
+	<!-- Expected value is between 0 and 2.5, much more likely to be on the lower end due to wetness having a softcap -->
+	<<set _lube_released to parseFloat(_lube_released.toFixed(1))>>
+
+	<<set $masturbation_vaginaFluid += _lube_released>>
+	<<set $lube_produced_stat += _lube_released>>
+<</widget>>
+
+<<widget "vaginaFluidActive">>
+	<<set $_lube_max to Math.ceil(30*Math.log10($vaginaArousalWetness - 59))>>
+	<<set _lube_released to random(10, $_lube_max)/10>>
+	<!-- Expected value is between 1 and 5, much more likely to be on the lower end due to wetness having a softcap -->
+	<<set _lube_released to parseFloat(_lube_released.toFixed(1))>>
+
+	<<set $masturbation_vaginaFluid += _lube_released>>
+	<<set $lube_produced_stat += _lube_released>>
+<</widget>>
+
+<<widget "vaginaFluidOrgasm">>
+	<<addVaginalWetness 10>>
+	<<if $vaginaArousalWetness gte 60>>
+		<<set _lube_released to (2*Math.log10($vaginaArousalWetness - 59)) + 11>>
+	<<elseif $vaginaArousalWetness gte 30>>
+		<<set _lube_released to ($vaginaArousalWetness / 10) + 5>>
+	<<else>>
+		<<set _lube_released to 0>>
+	<</if>>
+	<!-- Expected value is either 0, or between 5 and 15 -->
+	<<set _lube_released to parseFloat(_lube_released.toFixed(1))>>
+
+	<<if $worn.under_lower.vagina_exposed is 1 and $worn.lower.vagina_exposed is 1>>
+		<<if $masturbating>>
+			<<set $masturbation_vaginaFluid += _lube_released>>
+		<</if>>
+		<<if $masturbation_bowl is 1>>
+			<<set _liquid_collection_text.push($masturbation_vaginaFluid.toFixed(1) + " mL의 애액")>>
+		<</if>>
+	<<elseif $worn.under_lower.vagina_exposed is 0>>
+		<<set $underlowerwet += Math.round(30 * Math.clamp((1 - $underlowerwet/100), 0, 1))>>
+	<</if>>
+	<<set $lube_produced_stat += _lube_released>>
+<</widget>>
+
+<<widget "tinyPenisDryOrgasmChance">>
+	<<if !$player.penisExist or $player.penissize gte 0>>
+		<!-- Cannot have a "femaleclimax" (aka an orgasm with no cum, but with extra humiliation) without a size -1 or lower penis -->
+		<<set $femaleclimax to 0>>
+	<<else>>
+		<!-- Guaranteed at size -2 -->
+		<<set $femaleclimax to 1>>
+		<!-- chance at -1, if haven't cum in a while -->
+		<<if $player.penissize is -1 and $orgasmdown lt 0>>
+			<<set $_femaleclimaxchance to 50>>
+			<<if ['penetrated', 'tentacle', 'tentacledeep', 'doublepenetrated'].includes($anusstate)>>
+				<<set $_femaleclimaxchance += 40>>
+				<<if $anusstate is "doublepenetrated">>
+					<<set $_femaleclimaxchance += 20>>
+				<</if>>
+			<</if>>
+			<<if ['penetrated', 'tentacle', 'tentacledeep'].includes($mouthstate)>>
+				<<set $_femaleclimaxchance += 20>>
+			<</if>>
+			<<if ['penetrated', 'otheranus', 'tentacle', 'tentacledeep'].includes($penisstate)>>
+				<<set $_femaleclimaxchance -= 40>>
+			<</if>>
+			<<set $femaleclimax to (random(1, 100) lte $_femaleclimaxchance ? 1 : 0)>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "orgasmcount">>
+	<<if _args[0]>>
+		<<set $orgasmcount += _args[0]>>
+		<<set $orgasmcount = Math.clamp($orgasmcount, 0, 25)>>
+	<</if>>
+<</widget>>

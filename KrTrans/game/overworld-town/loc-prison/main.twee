@@ -1,0 +1,2383 @@
+:: Prison Cell
+<<set $outside to 0>><<location "prison">><<effects>><<effects_prison>><<set $bus to "cell">>
+
+당신은 감옥에 있다. 한 구석에 침대가 있고 다른 구석에 찬장이 있다. 바리게이트가 밖에 있는 복도와 당신을 갈라놓는다. 프라이버시 따윈 없다.
+<<if $prison.poster is "man">>
+	한쪽 벽에는 섹시한 신사가 그려진 포스터가 있다.
+<<elseif $prison.poster is "woman">>
+	한쪽 벽에는 섹시한 숙녀가 그려진 포스터가 있다.
+<<elseif $prison.poster is "puppy">>
+	한쪽 벽에는 귀여운 강아지가 그려진 포스터가 있다.
+<</if>>
+<br><br>
+<<if Time.hour is 20 and $prison.evening isnot 1>>
+	방 문이 닫히며 쿵 소리가 복도로 울려퍼진다.
+	<br><br>
+	<<set $prison.evening to 1>>
+<<elseif $prison.schedule is "lockdown">>
+	문은 잠겨있다.
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax and isPregnancyEnding()>>
+	<<pregnancyPassout "prisonCell">>
+<<elseif $prison.schedule is "hunt" and $prison.morning isnot 1>>
+	<<set $prison.schedule to "wake">>
+	<<generate_methodical_guard 0>><<person1>>
+	불이 켜지고 감옥 문이 열리며 벨소리가 울려퍼진다. <<personsimple_ yi "normal">> 목소리가 복도에 울려퍼진다. "호명 시간이다." 당신은 다른 수감자들이 서 있는 걸 본다.
+	<br><br>
+
+	<<link [[같이 선다|Prison Cell Role]]>><<cell_trouble -1>><</link>>
+	<br>
+	<<link [[거절한다|Prison Cell Refuse]]>><<prison_guards 1>><<prison_inmates 1>><<pain 4>><<cell_trouble 1>><</link>><<gpain>><<gsuspicion>><<grespect>>
+	<br>
+	<<set $prison.morning to 1>>
+<<else>>
+
+	<<if $unbind is 1>>
+		<<unset $unbind>>
+		<<if $possessed>>
+			당신은 당신의 구속구를 내려다본다. 당신이 당기자, 구속구가 떨어져나가 더이상 당신을 붙잡아둘 수 없다.
+			<br><br>
+		<<else>>
+			<span class="green">당신은 날카로운 금속 조각에 당신의 구속구를 문지른다.</span> 약간의 품이 들지만, 결국 구속구는 굴복하고 당신의 팔다리를 놓아준다.
+			<br><br>
+		<</if>>
+	<</if>>
+
+	<<if $leftarm is "bound" or $rightarm is "bound">>
+		<<undobindingsicon>><<link [[구속구를 푼다 (0:10)|Prison Cell]]>><<set $unbind to 1>><<pass 10>><<arm_unbind>><</link>>
+		<br><br>
+	<</if>>
+	<<if $prison.poster and !$prison.tunnel>>
+		<<furnitureicon "poster.png">><<link [[포스터를 관찰한다|Prison Poster]]>><<set $prison.tunnel to 1>><</link>>
+		<br>
+	<<elseif $prison.tunnel is 1 and $prison.hammer is 1>>
+		<<furnitureicon "poster.png">><<link [[포스터 뒤의 벽을 쳐본다|Prison Poster 2]]>><<set $prison.tunnel to 2>><</link>>
+		<br>
+	<<elseif $prison.tunnel gte 120 and $prison.schedule is "lockdown">>
+		<<investigateicon>><<link [[터널을 조사한다|Prison Tunnel]]>><</link>>
+		<br>
+	<<elseif $prison.tunnel gte 2 and $prison.schedule is "lockdown">>
+		<<getouticon "dig">><<link [[터널을 판다|Prison Tunnel]]>><</link>>
+		<br>
+	<</if>>
+	<<if $prison.schedule is "revolt">>
+		<span class="blue">잠에 들기엔 너무 시끄럽다.</span>
+		<br>
+	<<else>>
+		<<listsleepoutfits "prison bed">>
+		<<bedicon>><<link [[다 벗고 침대에 들어간다|Prison Bed]]>><<undressSleep "prison bed">><</link>>
+		<br>
+	<</if>>
+	<<roomoptions>>
+	<<if $prison.schedule isnot "lockdown" and !$worn.face.type.includes("blindfold")>>
+		<<prisonicon "plaque">><<link [[철판을 본다|Prison Plaque]]>><</link>>
+		<br>
+	<</if>>
+	<<wardrobeicon>><<link [[찬장|Prison Wardrobe]]>><</link>>
+	<br>
+	<<if $prison.mirror gte 1>>
+		<<mirroricon>><<link [[거울|Prison Mirror]]>><<preMirror>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if $prison.schedule isnot "lockdown">>
+		<<getouticon>><<link [[떠난다|Prison Walkway]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[게임 설정|Prison Settings]]>><</link>>
+	<br>
+
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+	<<else>>
+		<<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>
+
+:: Prison Mirror
+<<effects>>
+
+<<link [[물러난다|Prison Cell]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>
+<br>
+
+<<mirror>>
+<br><br>
+
+:: Prison Poster
+<<effects>>
+
+당신은 포스터를 관찰한다.
+<<if $prison.poster is "man">>
+	그는 매혹적인 표정을 짓고 있지만 그의 눈에는 무언가가 있다. 그가 비밀을 숨기고 있는 것 처럼.
+<<elseif $prison.poster is "lady">>
+	그녀는 매혹적인 표정을 짓고 있지만 그녀의 눈에는 무언가가 있다. 그녀가 비밀을 숨기고 있는 것 처럼.
+<<elseif $prison.poster is "puppy">>
+	그 강아지는 활기차고 장난스러워보인다. 마치 무언가를 숨기고 있는 것 처럼.
+<</if>>
+<br><br>
+
+당신은 벽에 금이 간 사실을 기억해낸다. 당신은 포스터를 위로 올리고 그 틈새를 손가락으로 흝어본다. 몇몇 돌이 무너져 내린다.
+<br><br>
+<i>당신이 팔 수 있는 무언가가 있었다면 더 할 수 있었을 것이다.</i>
+<br><br>
+<<link [[다음|Prison Cell]]>><</link>>
+<br>
+
+
+:: Prison Poster 2
+<<effects>>
+
+망치를 손에 들고 소음을 내지 않으려고 노력하며 당신은 포스터 뒤 벽을 망치로 두드린다. 더 많은 돌이 무너져 내린다. <span class="purple">매우 긴 시간이 걸리겠지만</span> 팔 수 있는 망치와 그것을 가릴 수 있는 포스터로 당신은 섬 끝으로 가는 터널을 팔 수 있을 것 같다.
+<br><br>
+
+당신은 폐쇄 시간에만 팔 수 있다. 다른 시간에는 너무 위험하다.
+<br><br>
+
+<<link [[다음|Prison Cell]]>><</link>>
+<br>
+
+:: Prison Tunnel
+<<effects>>
+
+<<if $prison.tunnel gte 120>>
+	당신은 터널을 들여다본다. 끝쪽에 하늘이 보인다.
+	<br><br>
+
+	<<ind>><<link [[끝쪽으로 기어간다 (0:03)|Prison Tunnel Edge]]>><<pass 3>><</link>>
+	<br>
+<<else>>
+	<<if $prison.tunnel gte 80>>
+		터널이 어둠으로 이어진다.
+	<<elseif $prison.tunnel gte 40>>
+		터널은 교도소의 벽을 지나가 섬의 천연 바위로 들어간다.
+	<<elseif $prison.tunnel gte 20>>
+		짧은 터널이 교도소의 벽을 관통한다.
+	<<elseif $prison.tunnel gte 10>>
+		벽 속의 구멍은 당신이 들어갈 수 있을 정도의 너비다.
+	<<else>>
+		벽에 금이 가있다.
+	<</if>>
+	<br><br>
+	<<for _i to 1; _i lt 9; _i++>>
+		<<if _i is 1>>
+			<<getouticon "dig">><<link [[1시간 동안 판다|Prison Tunnel Dig]]>><<set $prison_dig to 1>><</link>><<gtiredness>>
+			<br>
+		<<else>>
+			<<capture _i>>
+				<<getouticon "dig">><<link [[_i + "시간 동안 판다"|Prison Tunnel Dig]]>><<set $prison_dig to _i>><</link>><<gtiredness>>
+				<br>
+			<</capture>>
+		<</if>>
+	<</for>>
+
+<</if>>
+
+
+<<getouticon>><<link [[떠난다|Prison Cell]]>><</link>>
+<br>
+
+
+:: Prison Tunnel Dig
+<<effects>>
+
+<<for _dig to 0; _dig lt $prison_dig; _dig++>>
+	<<set $prison.tunnel += 1>>
+	<<tiredness 6>>
+	<<advancetohour>>
+	<<if Time.hour is 6>>
+		<<set $prison.schedule to "wake">>
+		<<break>>
+	<</if>>
+<</for>>
+<<unset $prison_dig>>
+
+<<if $prison.tunnel gte 120>>
+	당신은 어둠 속으로 들어가서 계속해서 땅을 판다.
+	<br><br>
+	<span class="green">당신은 갑작스레 불어오는 상쾌한 바람을 맞는다.</span> 소금의 냄새. 당신은 마지막 돌을 파고 당신의 몸이 들어갈 수 있을 정도로 늘린다.
+	<br><br>
+	<<earnFeat "Time and Pressure">>
+	당신은 바다 위에 있는 섬 끝에 있다.
+	<br><br>
+
+<<elseif $prison.tunnel gte 100>>
+	당신은 어둠 속으로 들어가서 계속해서 땅을 판다.
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		조개 껍질이 주변 돌에 붙어 있다.
+	<<case 2>>
+		당신은 갈매기 소리를 듣지만 상상일지도 모르겠다.
+	<<case 3>>
+		당신은 우르릉 거리는 소리를 듣는다.
+	<</switch>>
+<<elseif $prison.tunnel gte 80>>
+	당신은 어둠 속으로 들어가서 계속해서 땅을 판다.
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		당신은 물이 흐르는 소리를 듣는다.
+	<<case 2>>
+		터널이 떨린다. 천장에서 흙이 떨어진다.
+	<<case 3>>
+		당신은 먼지를 마시고 기침한다.<<gstress>><<stress 6>>
+	<</switch>>
+<<elseif $prison.tunnel gte 60>>
+	당신은 구멍으로 들어가서 계속해서 땅을 판다.
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		부드러운 바위가 쉽게 부서진다.<<lstress>><<stress -6>>
+	<<case 2>>
+		당신은 거친 바위에 당신의 팔을 스친다.<<gpain>><<pain 4>>
+	<<case 3>>
+		바위들은 일관성이 균일하다.
+	<</switch>>
+<<elseif $prison.tunnel gte 40>>
+	당신은 구멍으로 기어가서 계속해서 땅을 판다.
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		당신은 무언가를 세게 친다. 그건 조약돌인것 같다. 당신은 그 주위를 파서 그것을 바위에서 파낸다.
+	<<case 2>>
+		천연 바위가 모래처럼 부서져 내린다.
+	<<case 3>>
+		석조물이 천연 바위로 흘러 들어간다. 후자가 더 부드럽다.
+	<</switch>>
+<<elseif $prison.tunnel gte 20>>
+	당신은 구멍으로 기어가서 계속해서 땅을 판다.
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		한 벽돌이 이미 물렁물렁하다. 좋은 소식이다.<<lstress>><<stress -6>>
+	<<case 2>>
+		석조물은 이미 오래됐다. 몇몇 벽돌은 서로 뒤틀렸다.
+	<<case 3>>
+		한 벽돌이 떨어져서 당신의 등에 부딪친다.<<gpain>><<gstress>><<pain 4>><<stress 6>>
+	<</switch>>
+<<elseif $prison.tunnel gte 10>>
+	당신은 구멍에 손을 뻗어 계속해서 땅을 판다.
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		포스터가 갑자기 바람에 펄럭인다. 당신은 잠깐 멈추었다 계속한다.
+	<<case 2>>
+		너무 어두워 앞이 보이진 않지만 당신은 누가 보고 있지 않은지 계속해서 힐끗거리는 자신을 발견한다.
+	<<case 3>>
+		다음 돌 층은 전 돌 층보다 단단하고 색이 어둡다.
+	<</switch>>
+<<else>>
+	당신은 벽을 조각조각 떼어낸다.
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		금이 넓어진다.
+	<<case 2>>
+		당신은 기침 소리를 듣고 잠깐 멈추었다 계속한다.<<gstress>><<stress 6>>
+	<<case 3>>
+		조금만 힘을 줘도 쉽게 무너진다.
+	<</switch>>
+<</if>>
+<br><br>
+
+<<if $prison.schedule is "wake" and $prison.morning isnot 1>>
+	<<generate_methodical_guard 0>><<person1>>
+	당신은 뒤에서 감옥 문이 열리며 벨소리를 듣는다.
+	<<if $prison.tunnel gte 20>>
+		당신은 서둘리 터널로 들어가 포스터로 입구를 가린다.
+	<<else>>
+		당신은 포스터로 입구를 가린다.
+	<</if>>
+
+	<<personsimple_ yi "normal">> 목소리가 복도에 울려퍼진다. "호명 시간이다." 당신은 다른 수감자들이 서 있는 걸 본다.
+	<br><br>
+
+	<<link [[같이 선다|Prison Cell Role]]>><<cell_trouble -1>><</link>>
+	<br>
+	<<link [[거절한다|Prison Cell Refuse]]>><<prison_guards 1>><<prison_inmates 1>><<pain 4>><<cell_trouble 1>><</link>><<gpain>><<gsuspicion>><<grespect>>
+	<br>
+	<<set $prison.morning to 1>>
+<<else>>
+	<<link [[다음|Prison Cell]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Prison Tunnel Edge
+<<effects>>
+
+<<if $phase is 1>>
+	당신은 바위를 올라가 터널로 들어간다.
+	<<set $phase to 0>>
+<<else>>
+	당신은 절벽으로 가서 가장자리를 들여다본다. 시야 밖으로 모래 사장이 펼쳐진다. 별로 멀지 않은 곳에서 파도가 거세게 몰아친다.
+	<<if !Weather.isOvercast>>
+		당신은 달빛에 비친 주변 안개를 볼 수 있다.
+	<<else>>
+		당신은 멀리 볼 수 없다.
+	<</if>>
+<</if>>
+<br><br>
+
+<<link [[감옥으로 기어간다|Prison Cell]]>><</link>>
+<br>
+<<link [[해변으로 올라간다 (0:05)|Prison Beach]]>><<pass 5>><</link>>
+<br>
+
+:: Prison Bed
+<<effects>>
+<<wearoutfit>>
+
+<<set $bus to "prison_bedroom">><<effects>>
+당신은 매트리스 위에 눕는다. 당신은 <<if ($worn.neck.name is "free use collar" or $worn.neck.name is "free use collar with leash")>>특히 목 주위 울퉁불퉁한 금속이 당신의 목을 찌르는 것 때문에 <</if>>불편함을 느낀다.
+<br><br>
+<<prison_sleep_options>>
+
+:: Prison Sleep
+<<set _autosavehere to true>>
+<<sleep>>
+<<effects>>
+
+<<wakingEffects $sleepHoursTotal>>
+<<if $nightmares gte 1 and $controlled is 0>>
+	<<if _wakingEffect isnot undefined>>
+		당신은 뭔가
+	<<else>>
+		당신은 자신이 뭔가
+	<</if>>
+	<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>창백하고<<else>>어둡고<</if>> 끔찍한 것에 뒤를 쫓기는 꿈을 꾼다.
+<<else>>
+	<<if ["dryheaving","nausea"].includes(_wakingEffect)>>
+		<br><br>
+		당신은 잠을 푹 잤지만 몸이 조금 거친걸 느낀다.
+		<br><br>
+	<<elseif $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+		당신은 잠을 자지만 더러운 꿈에 시달린다.
+		<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+		<<arousal `100 * $sleepHoursTotal`>>
+		<<if $arousal gte $arousalmax>>
+			그들은 당신을 끝으로 밀어넣는다.
+			<<orgasm>>
+		<<else>>
+			<br><br>
+		<</if>>
+	<<elseif !_wakingEffect>>
+		당신은 푹 잤다.
+		<br><br>
+	<<else>>
+		<br><br>
+	<</if>>
+<</if>>
+<<sleepeffects>>
+<<if $daily.prison.wake>>
+	종소리가 울려 당신을 잠에서 깨운다.
+	<br><br>
+	<<set $wardrobe_location to "prison">>
+	<<wardrobeSelection true>>
+	<<radiooutfits>>
+	<br><br>
+	<<link [[다음|Prison Cell]]>><<bedclotheson "prison bed">><<endevent>><</link>>
+	<br>
+
+<<else>>
+	<br><br>
+	<<set $wardrobe_location to "prison">>
+	<<wardrobeSelection true>>
+	<<radiooutfits>>
+	<br><br>
+	<<link [[일어난다|Prison Cell]]>><<bedclotheson "prison bed">><</link>>
+<</if>>
+
+:: Prison Wardrobe [exitCheckBypass]
+<<effects>>
+
+당신은 찬장을 연다.
+<br><br>
+<<set $wardrobe_location to "prison">>
+<<wardrobeSelection>>
+<div id="wardrobewear"><<wardrobewear>></div>
+<div id="wardrobeExits"><<wardrobeExits>></div>
+
+<<wardrobe>>
+
+
+:: Prison Settings [exitCheckBypass]
+<<set $settingsExitPassage to "Prison Cell">>
+<<settings>>
+
+:: Prison Plaque
+<<effects>>
+
+<span class="red">신이 보고있다.</span><br>
+간수의 말을 따르라.<br>
+간수들은 소장의 말에 복종하며<br>
+너는 매일 9시간을 일해야 한다.<br>
+<br>
+
+<<if $prison.active_punishments.includes("free use")>>
+	<span class="red">너의 "무료 변소" 개목걸이를 벗지 마라.</span>
+	<br>
+<</if>>
+<<if $prison.active_punishments.includes("nude")>>
+	<span class="pink">아무 옷도 입지 마라.</span>
+	<br>
+<<elseif $prison.active_punishments.includes("topless")>>
+	<span class="blue">허리 위론 아무 옷도 입지 마라.</span>
+	<br>
+<<elseif $prison.active_punishments.includes("bottomless")>>
+	<span class="blue">허리 아래론 아무 옷도 입지 마라.</span>
+	<br>
+<</if>>
+<<if $prison.active_punishments.includes("underwear") and $prison.active_punishments.includes("free use")>>
+	<span class="teal">오로지 속옷만 입어라.</span>
+	<br>
+<</if>>
+<<if $prison.active_punishments.includes("blindfold")>>
+	<span class="purple">너의 안대를 벗지 마라.</span>
+	<br>
+<</if>>
+<<if $prison.active_punishments.includes("leash")>>
+	<span class="lblue">너의 목줄을 벗지 마라.</span>
+	<br>
+<</if>>
+<<if $prison.active_punishments.includes("cuffs")>>
+	<span class="lblue">너의 족쇄를 풀지 마라.</span>
+	<br>
+<</if>>
+<<if $prison.active_punishments.includes("gag")>>
+	<span class="purple">너의 재갈을 풀지 마라.</span>
+	<br>
+<</if>>
+<<if $prison.active_punishments.includes("bindings")>>
+	<span class="pink">너의 구속구를 풀지 마라.</span>
+	<br>
+<</if>>
+<br>
+
+일과:
+<br>
+<<ampm 6 00>>: 목욕과 아침
+<br>
+<<ampm 7 00>>: 작업
+<br>
+<<ampm 12 00>>: 점심
+<br>
+<<ampm 13 00>>: 마당
+<br>
+<<ampm 14 00>>: 작업
+<br>
+<<ampm 18 00>>: 저녁
+<br>
+<<ampm 19 00>>: 자유 시간
+<br>
+<<ampm 20 00>>: 소등
+<br><br>
+
+당신은 출소까지 <span class="red">$prison.time</span>일 남았다
+<br><br>
+
+<<link [[물러난다|Prison Cell]]>><</link>>
+<br>
+
+:: Prison Cell Role
+<<set $bus to "walkway">><<effects>><<effects_prison>>
+
+
+<<if $prison_kylar_timer gte 1>>
+	<<set $prison_kylar_timer -= 1>>
+<</if>>
+
+당신은 감옥에서 나와 서서 <<methodical_guard_ ga 0>> 각 번호를 호명하기를 기다린다.
+<br><br>
+"...죄수 144."
+<br>
+<<if $worn.face.type.includes("gag")>>
+	"음음!" 당신이 말한다. 수감자들이 웃는다.<<lrespect>><<prison_inmates -1>>
+<<else>>
+	"네." 당신이 말한다.
+<</if>>
+<br><br>
+
+<<if C.npc.Kylar.state is "prison" and $prison.kylar is 0 and $prison_kylar_timer lte 0>>
+	<<set $prison.kylar to "active">>
+	<<unset $prison_kylar_timer>>
+	<<endevent>>
+	<<addNNPCOutfit "Kylar" "prisonJumpsuit">>
+	<<npc Kylar>><<person1>>
+	<<generate_methodical_guard 1>>
+	<<generate_veteran_guard 2>>
+	<<person2>><<He_ nun>> 다시 <<his_ yi>> 입을 열지만 어딘가 아래에서 나는 문을 치는 소리에 방해당한다. 당신은 발 아래 복도를 통해 <<veteran_guard_ ga 2>> <<person3>><<him_ >> 앞의 작은 인물을 밀치는 것을 본다.
+	<br><br>
+	그 신참을 마지막으로 밀치자 <<person1>><<his_ yi>> 발이 엉켜, <<he_ nun>> <<his_ yi>> 얼굴 쪽으로 넘어진다. <<He_ nun>> <<his_ yi>> 발로 일어나 <<his_ yi>> 얼굴에서 <<his_ yi>> 머리카락을 떼어 낸다. <span class="gold">카일라다.</span>
+	<br><br>
+
+	<<link [[다음|Prison Kylar Intro]]>><</link>>
+	<br>
+<<elseif $prison.active_punishments.includes("free use") and $worn.neck.name isnot "free use collar" and $worn.neck.name isnot "free use collar with leash">>
+	"너의 개목걸이를 어딨지?" <<he_ ga>> 묻는다. "나랑 같이 가는 것이 좋을거야."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("nude") and ($worn.upper.name isnot "naked" or $worn.lower.name isnot "naked" or $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked")>>
+	"너 벌거벗어야 하지 않았었나?" <<he_ ga>> 묻는다. "날 따라와라."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("blindfold") and !$worn.face.type.includes("blindfold")>>
+	"너의 안대는 어딨지?" <<he_ ga>> 묻는다. "나랑 같이 가는 것이 좋을거야."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("topless") and ($worn.upper.name isnot "naked" or $worn.under_upper.name isnot "naked")>>
+	"넌 상의를 탈의하고 있어야 했을텐데." <<he_ ga>> 말한다. "날 따라와라."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("bottomless") and ($worn.lower.name isnot "naked" or $worn.under_lower.name isnot "naked")>>
+	"넌 하의를 탈의하고 있어야 했을텐데." <<he_ ga>> 말한다. "날 따라와라."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("leash") and $worn.neck.collared isnot 1>>
+	"너의 목줄은 어딨지?" <<he_ ga>> 묻는다. "날 따라와라."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("underwear") and ($worn.upper.name isnot "naked" or $worn.lower.name isnot "naked")>>
+	"그건 속옷처럼 보이지 않는데." <<he_ ga>> 말한다. "날 따라와라."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("cuffs") and !$worn.feet.type.includes("shackle")>>
+	"너의 족쇄는 어딨지?" <<he_ ga>> 묻는다. "날 따라와라."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("gag") and !$worn.face.type.includes("gag")>>
+	"너의 재갈은 어딨지?" <<he_ ga>> 묻는다. "날 따라와라."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("bindings") and ($leftarm isnot "bound" or $rightarm isnot "bound")>>
+	"너의 팔이 자유로우면 안될텐데." <<he_ ga>> 말한다. "날 따라와라."
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.time lte 0>>
+	잠깐의 침묵이 이어진다. <span class="green">"너의 수감 기한이 다 됐다."</span> <<he_ ga>> 말한다. <<He_ ga>> 원장을 닫는다. "날 따라와라."
+	<br><br>
+
+	<<link [[다음|Prison End]]>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+<<elseif $prison.hours_worked lt 9>>
+	잠깐의 침묵이 이어진다. <span class="red">"넌 작업 할당량을 채우지 못했다."</span> <<he_ ga>> 말한다. <<He_ ga>> 원장을 닫는다. "날 따라와라."
+	<br><br>
+
+	<<link [[얌전히 간다|Prison Punishment]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+	<<link [[거절한다|Prison Cell Punishment Refuse]]>><</link>>
+	<br>
+<<elseif $prison_punished_days lte 0 and $prison.active_punishments.length gte 1>>
+	<<set $prison.hours_worked to 0>>
+	잠깐의 침묵이 이어진다.
+	<<if $prison.active_punishments.length gte 2>>
+		<span class="teal">"우리가 너의 처벌 중 하나를 없애줄 수 있겠군."</span> <<he_ ga>> 말한다. <<He_ nun>> 원장을 닫는다.
+	<<else>>
+		<span class="teal">"우리가 너의 처벌을 없애줄 수 있겠군"</span> <<he_ ga>> 말한다. <<He_ nun>> 원장을 닫는다.
+	<</if>>
+	<<set $prison_punished_days to 2>>
+	<<set _rng to random(0, ($prison.active_punishments.length - 1))>>
+	<<set _punishment to $prison.active_punishments[_rng]>>
+	<<switch _punishment>>
+		<<case "free use">>
+			<<set $prison.active_punishments.delete("free use")>>
+			<<He_ nun>> 복도를 따라 걸으며 <<his_ yi>> 주머니에서 열쇠를 꺼낸다.
+			<br><br>
+
+			<<link [[다음|Prison Remove Free Use]]>><</link>>
+			<br>
+		<<case "nude">>
+			<<set $prison.active_punishments.delete("nude")>>
+			<<if random(1, 2) is 2>>
+				<<set $prison.active_punishments.delete("topless")>>
+				"넌 다시 옷을 입어도 돼. <span class="pink">오로지 속옷만, 그리고 넌 여전히 하의를 탈의하고 있어야 해."</span>
+				<br><br>
+			<<else>>
+				<<set $prison.active_punishments.delete("bottomless")>>
+				"넌 다시 옷을 입어도 돼. <span class="pink">오로지 속옷만, 그리고 넌 여전히 상의를 탈의하고 있어야 해."</span>
+				<br><br>
+			<</if>>
+			<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+			<br>
+		<<case "blindfold">>
+			<<set $prison.active_punishments.delete("blindfold")>>
+			앞으로 걷자 통로가 움직인다.
+			<br><br>
+
+			<<link [[다음|Prison Remove Blindfold]]>><</link>>
+			<br>
+		<<case "topless">>
+			<<set $prison.active_punishments.delete("topless")>>
+			<<if $prison.active_punishments.includes("nude")>>
+				<<set $prison.active_punishments.delete("nude")>>
+				<<if $prison.active_punishments.includes("underwear")>>
+					"넌 브래지어나 조끼를 입어도 돼, 하지만 그 이상은 안돼. <span class="pink">허리 아래론 벗고 다녀."</span>
+					<br><br>
+				<<else>>
+					"넌 다시 셔츠를 입어도 돼. <span class="pink">하지만 허리 아래론 벗고 다녀.</span>
+					<br><br>
+				<</if>>
+			<<else>>
+				<<if $prison.active_punishments.includes("underwear")>>
+					"넌 브래지어나 조끼로 너의 가슴을 가려도 돼. <span class="pink">하지만 셔츠 같은건 안돼."</span>
+				<<else>>
+					<span class="green">"너는 다시 정상적으로 옷을 입어도 돼."</span> 그러자 다른 수감자들이 당신을 한번 더 바라본다.
+				<</if>>
+				<br><br>
+			<</if>>
+			<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+			<br>
+		<<case "leash">>
+			<<set $prison.active_punishments.delete("leash")>>
+			<<He_ nun>> 당신에게 다가가며 <<his>> 주머니에서 펜치를 꺼낸다.
+			<br><br>
+			<<link [[다음|Prison Remove Leash]]>><</link>>
+			<br>
+		<<case "underwear">>
+			<<if $prison.active_punishments.includes("nude")>>
+				<<set $prison.active_punishments.delete("nude")>>
+				<<if random(1, 2) is 2>>
+					<<set $prison.active_punishments.delete("topless")>>
+					"넌 다시 옷을 입어도 돼. <span class="pink">오로지 속옷만, 그리고 넌 여전히 하의를 탈의하고 있어야 해."</span>
+					<br><br>
+				<<else>>
+					<<set $prison.active_punishments.delete("bottomless")>>
+					"넌 다시 옷을 입어도 돼. <span class="pink">오로지 속옷만, 그리고 넌 여전히 상의를 탈의하고 있어야 해."</span>
+					<br><br>
+				<</if>>
+			<<else>>
+				<<set $prison.active_punishments.delete("underwear")>>
+				<<if $prison.active_punishments.includes("topless")>>
+					"넌 다시 바지를 입어도 돼. <span class="pink">하지만 가슴은 여전히 벗고 있어야 해."</span>
+					<br><br>
+				<<elseif $prison.active_punishments.includes("bottomless")>>
+					"넌 다시 셔츠를 입어도 돼. <span class="pink">하지만 너는 허리 아래론 여전히 벗고 있어야 해."</span>
+					<br><br>
+				<<else>>
+					<span class="green">"넌 다시 정상적으로 옷을 입어도 돼."</span> 그러자 다른 수감자들이 당신을 한번 더 바라본다.
+					<br><br>
+				<</if>>
+			<</if>>
+			<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+			<br>
+		<<case "cuffs">>
+			<<set $prison.active_punishments.delete("cuffs")>>
+			<<He_ nun>> <<his_ yi>> 주머니에서 열쇠를 꺼내며 당신에게 다가온다.
+			<br><br>
+
+			<<link [[다음|Prison Remove Cuffs]]>><</link>>
+			<br>
+		<<case "bottomless">>
+			<<set $prison.active_punishments.delete("bottomless")>>
+			<<if $prison.active_punishments.includes("nude")>>
+				<<set $prison.active_punishments.delete("nude")>>
+				<<if $prison.active_punishments.includes("underwear")>>
+					"넌 다시 속옷을 입어도 돼. <span class="pink">하지만 여전히 상의를 탈의하고 있어야 해."</span>
+				<<else>>
+					"넌 다시 바지를 입어도 돼, <span class="pink">하지만 여전히 상의를 탈의하고 있어야 해."</span>
+				<</if>>
+				<br><br>
+			<<else>>
+				<<if $prison.active_punishments.includes("underwear")>>
+					"넌 다시 속옷을 입어도 돼. <span class="pink">하지만 셔츠 같은건 안돼."</span>
+				<<else>>
+					<span class="green">"넌 다시 정상적으로 옷을 입어도 돼."</span> 그러자 다른 수감자들이 당신을 한번 더 바라본다.
+				<</if>>
+				<br><br>
+			<</if>>
+			<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+			<br>
+		<<case "gag">>
+			<<set $prison.active_punishments.delete("gag")>>
+			<<He_ ga>> 가까이 다가온다. "네가 말을 할 수 있으면 내 일이 더 쉬워져."
+			<br><br>
+
+			<<link [[다음|Prison Remove Gag]]>><</link>>
+			<br>
+		<<default>>
+			<<set $prison.active_punishments.delete("bindings")>>
+			<<he_ ga>> 당신을 향해 걸어오자 발 아래 통로가 움직인다. "넌 너의 팔이 자유로울 때 더 유용해."
+			<br><br>
+
+			<<link [[다음|Prison Remove Bindings]]>><</link>>
+			<br>
+	<</switch>>
+<<else>>
+	<<methodical_guard_ ga 0 cap>> 원장을 닫자 복도 맨 끝에 있는 긴 문이 열린다. 수감자들은 그곳으로 행진한다.
+	<br><br>
+
+	<<link [[다음|Prison Walkway]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+
+<</if>>
+
+:: Prison Cell Refuse
+<<effects>><<effects_prison>>
+
+<<if $prison.shock is 1>>
+	<<methodical_guard_ nun 0 cap>> 한숨을 쉬고 셔츠 주머니를 뒤진다. 당신의 목에서 나오는 <span class="red">끔찍한 고통이 당신의 몸을 관통한다.</span> 그건 짧은 시간이었지만 당신을 바닥으로 쓰러져 경련을 일으키게 만들기에 충분한 시간이다.<<gtrauma>><<ggstress>><<gggpain>><<trauma 4>><<stress 4>><<pain 4>>
+	<br><br>
+
+	당신은 <<methodical_guard_ ga 0>> 수갑을 채우고 감옥에서 끌고 나가는 것에 저항하기엔 너무 아프다. 당신이 지나갈 때 다른 수감자들이 조롱하지만 나쁘게 들리진 않는다.<<grespect>><<prison_inmates 1>>
+	<<bind>>
+	<br><br>
+	<<link [[다음|Prison Punishment]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+<<else>>
+	<<if $prison.cell_trouble gte 5>>
+		<<generate_veteran_guard 1>><<generate_anxious_guard 2>><<generate_relaxed_guard 3>>
+		<<methodical_guard_ yi 0 apo>> 발 아래 복도가 덜컹거린다. <<He_ nun>> 혼자가 아니다. "꼭 우리가 널 본보기로 삼게 만들어야겠어?" <<he_ ga>> 말한다. "왜냐면 우린 그렇게 할거거든."
+		<br><br>
+
+		<<He_ nun>> <<veteran_guard_ 1>>, <<anxious_guard_ wa 2>> <<relaxed_guard_ rul 3>> 뒤에 두고 당신의 감옥으로 온다. 그들은 지휘봉을 꺼낸다.
+		<br><br>
+
+		<<link [[다음|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $prison.cell_trouble gte 4>>
+		<<generate_veteran_guard 1>><<generate_anxious_guard 2>>
+		<<methodical_guard_ yi 0 apo>> 발 아래 복도가 덜컹거린다. <<He_ nun>> 혼자가 아니다. "꼭 우리가 널 본보기로 삼게 만들어야겠어?" <<he_ ga>> 말한다. "왜냐면 우린 그렇게 할거거든."
+		<br><br>
+
+		<<He_ nun>> <<veteran_guard_ wa 1>> <<anxious_guard_ rul 2>> 뒤에 두고 당신의 감옥으로 온다. 그들은 지휘봉을 꺼낸다.
+		<br><br>
+
+		<<link [[다음|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $prison.cell_trouble gte 3>>
+		<<generate_veteran_guard 1>>
+		<<methodical_guard_ yi 0 apo>> 발 아래 복도가 덜컹거린다. <<He_ nun>> 혼자가 아니다. "꼭 우리가 널 본보기로 삼게 만들어야겠어?" <<he_ ga>> 말한다. "왜냐면 우린 그렇게 할거거든."
+		<br><br>
+
+		<<He_ nun>> <<veteran_guard_ rul 1>> 뒤에 두고 당신의 감옥으로 온다. 그들은 지휘봉을 꺼낸다.
+		<br><br>
+
+		<<link [[다음|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $prison.cell_trouble gte 2>>
+		<<methodical_guard_ yi 0 apo>> 발 아래 복도가 덜컹거린다. "거기에 박혀 있는게 좋을거야." <<he_ ga>> 말한다. "아니면 넌 후회하게 될거니까."
+		<br><br>
+
+		<<He_ nun>> 침대에 누워있는 당신을 발견하고 <<his_ yi>> 옆에 매달린 지휘봉을 꺼낸다.
+		<br><br>
+
+		<<link [[다음|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<else>>
+		당신은 감옥에 남는다. "죄수 144." <<methodical_guard_ ga 0>> 말한다. "당장 감옥에서 나와라."
+		<br><br>
+		<<link [[당신의 감옥에서 나온다|Prison Cell Role]]>><</link>>
+		<br>
+		<<link [[거절한다|Prison Cell Refuse]]>><<cell_trouble 1>><<prison_guards 1>><<prison_inmates 1>><</link>><<gsuspicion>><<grespect>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Prison Cell Punishment Refuse
+<<effects>><<effects_prison>>
+
+<<if $prison.shock is 1>>
+	<<methodical_guard_ nun 0 cap>> 한숨을 쉬고 셔츠 주머니를 뒤진다. 당신의 목에서 나오는 <span class="red">끔찍한 고통이 당신의 몸을 관통한다.</span> 그건 짧은 시간이었지만 당신을 바닥으로 쓰러져 경련을 일으키게 만들기에 충분한 시간이다.<<gtrauma>><<ggstress>><<gggpain>><<trauma 4>><<stress 4>><<pain 4>>
+	<br><br>
+
+	당신은 <<methodical_guard_ ga 0>> 수갑을 채우고 감옥에서 끌고 나가는 것에 저항하기엔 너무 아프다. 당신이 지나갈 때 다른 수감자들이 조롱하지만 나쁘게 들리진 않는다.<<grespect>><<prison_inmates 1>>
+	<<bind>>
+	<br><br>
+	<<link [[다음|Prison Punishment]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+<<else>>
+	<<if $prison.cell_trouble gte 5>>
+		<<generate_veteran_guard 1>><<generate_anxious_guard 2>><<generate_relaxed_guard 3>>
+		<<methodical_guard_ yi 0 apo>> 발 아래 복도가 덜컹거린다. <<He_ nun>> 혼자가 아니다. "꼭 우리가 널 본보기로 삼게 만들어야겠어?" <<he_ ga>> 말한다. "왜냐면 우린 그렇게 할거거든."
+		<br><br>
+
+		<<He_ nun>> <<veteran_guard_ 1>>, <<anxious_guard_ wa 2>> <<relaxed_guard_ rul 3>> 뒤에 두고 당신의 감옥으로 온다. 그들은 지휘봉을 꺼낸다.
+		<br><br>
+
+		<<link [[다음|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $prison.cell_trouble gte 4>>
+		<<generate_veteran_guard 1>><<generate_anxious_guard 2>>
+		<<methodical_guard_ yi 0 apo>> 발 아래 복도가 덜컹거린다. <<He_ nun>> 혼자가 아니다. "꼭 우리가 널 본보기로 삼게 만들어야겠어?" <<he_ ga>> 말한다. "왜냐면 우린 그렇게 할거거든."
+		<br><br>
+
+		<<He_ nun>> <<veteran_guard_ wa 1>> <<anxious_guard_ rul 2>> 뒤에 두고 당신의 감옥으로 온다. 그들은 지휘봉을 꺼낸다.
+		<br><br>
+
+		<<link [[다음|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $prison.cell_trouble gte 3>>
+		<<generate_veteran_guard 1>>
+		<<methodical_guard_ yi 0 apo>> 발 아래 복도가 덜컹거린다. <<He_ nun>> 혼자가 아니다. "꼭 우리가 널 본보기로 삼게 만들어야겠어?" <<he_ ga>> 말한다. "왜냐면 우린 그렇게 할거거든."
+		<br><br>
+
+		<<He_ nun>> <<veteran_guard_ rul 1>> 뒤에  두고 당신의 감옥으로 온다. 그들은 지휘봉을 꺼낸다.
+		<br><br>
+
+		<<link [[다음|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<methodical_guard_ yi 0 apo>> 발 아래 복도가 덜컹거린다. "넌 모든 시스템을 유지하고 있어." <<He_ nun>> <<he_ ga>> 감옥에 도착하기 전 <<his_ yi>> 옆에 매달린 지휘봉을 꺼낸다.
+		<br><br>
+
+		<<link [[다음|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Prison Cell Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Prison Cell Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Prison Cell Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Prison Cell Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+	<<if $enemynomax gte 2>>
+		간수가 비틀거리며 감옥에서 나오자 다른 수감자들이 환호한다. <<veteran_guard_ ga 1>> 당신을 경계하듯 쳐다보지만 <<methodical_guard_ ga 0>> <<person1>><<his_ yi>> 머리를 절레절레 흔든다. "이것에 쓸 시간은 없어." <<he_ ga>> <<his_ yi>> 안경을 정돈하며 말한다. "우린 널 감시하겠어."<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<<else>>
+		<<methodical_guard_ ga 0>> 비틀거리며 감옥에서 나와 난간이 없었다면 복도에서 넘어질 뻔 하자 다른 수감자들이 환호한다. "이것에 쓸 시간은 없어" <<he_ ga>> <<his_ yi>> 안경을 정돈하며 말한다. "난 널 감시하겠어."<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<prison_revolt_options>>
+
+<<elseif $enemyhealth lte 0>>
+	<<if $enemynomax gte 2>>
+		간수가 비틀거리며 감옥에서 나오자 다른 수감자들이 환호한다. <<veteran_guard_ ga 1>> 당신을 경계하듯 쳐다보지만 <<methodical_guard_ ga 0>> <<person1>><<his_ yi>> 머리를 절레절레 흔든다. "이것에 쓸 시간은 없어." <<he_ ga>> <<his_ yi>> 안경을 정돈하며 말한다. "우린 널 감시하겠어."<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<<else>>
+		<<methodical_guard_ ga 0>> 비틀거리며 감옥에서 나와 난간이 없었다면 복도에서 넘어질 뻔 하자 다른 수감자들이 환호한다. "이것에 쓸 시간은 없어" <<he_ ga>> <<his_ yi>> 안경을 정돈하며 말한다. "난 널 감시하겠어."<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<</if>>
+	<<switch $enemynomax>>
+		<<case 1>>
+			<<greb>><<prison_reb 1>>
+		<<case 2>>
+			<<greb>><<prison_reb 2>>
+		<<case 3>>
+			<<ggreb>><<prison_reb 3>>
+		<<default>>
+			<<ggreb>><<prison_reb 4>>
+	<</switch>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<prison_revolt_options>>
+<<else>>
+	당신은 <<methodical_guard_ ga 0>> 수갑을 채우고 감옥에서 끌고 나가는 것에 저항하기엔 너무 아프다. 당신이 지나갈 때 다른 수감자들이 조롱하지만 나쁘게 들리진 않는다.<<grespect>><<prison_inmates 1>>
+	<<bind>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Prison Punishment]]>><</link>>
+	<<cell_trouble -5>>
+<</if>>
+
+<<set $prison.hours_worked to 0>>
+
+:: Prison Shower
+<<effects>><<effects_prison>><<set $bus to "shower">>
+
+당신은 교도소 욕실에 있다.
+<<if isPregnancyEnding() and $prison.schedule isnot "lockdown">>
+	<<pregnancyPassout "prisonShower">>
+<<elseif $prison.schedule is "wake">>
+	수감자들은 목욕을 하기 전 옷을 벗어 나무 벤치에 올려놓는다. 당신은 물이 흐르는 소리를 듣는다.
+	<<if $prison.kylar is "active">>
+		카일라가 당신을 보며 구석에 서있다.
+	<</if>>
+	<br><br>
+	<<generate_veteran_guard 0>><<person1>><<veteran_guard_ nun 0 cap>> 방을 서성거린다.
+	<br><br>
+	<<endevent>>
+	<<outfitChecks>>
+	<<if !$daily.prison.veteranGreet and $prison.veteran gte 15>>
+		<<prison_guard_greet veteran>>
+	<<elseif random(1, 5) is 5 and $eventskip isnot 1>>
+		<<prison_guard_watch veteran>>
+	<<elseif _fullyNaked>>
+		<<bathroomicon "shower">><<link [[샤워한다 (0:10)|Prison Shower Take]]>><<pass 10>><</link>>
+		<br>
+		<<getouticon>><<link [[떠난다|Prison Block]]>><</link>>
+		<br>
+	<<else>>
+		<<if hasSexStat("exhibitionism", 2)>>
+			<<skinicon "strip">><<link [[공개된 장소에서 옷을 벗는다 (0:10)|Prison Shower Open]]>><</link>>
+			<br>
+		<<else>>
+			<span class="blue">당신은 사람들 앞에서 공개적으로 옷을 벗을 수 없다.</span>
+			<br>
+		<</if>>
+		<<skinicon "strip">><<link [[옷을 벗을 은밀한 장소를 찾는다 (0:10)|Prison Shower Private]]>><</link>>
+		<br>
+		<<getouticon>><<link [[떠난다|Prison Block]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	아무도 주변에 없다. 간수들은 배수관을 1시간 동안 켜놓는다.
+	<br><br>
+
+	<<getouticon>><<link [[떠난다|Prison Block]]>><</link>>
+	<br>
+
+	<<set $eventskip to 0>>
+<</if>>
+
+
+:: Prison Walkway
+<<set $outside to 0>><<effects>><<effects_prison>><<set $bus to "walkway">>
+
+당신은 감옥 구역 상단에 있는 당신의 감옥 앞 금속 복도에 있다. 바닥으로 가는 계단이 있다.
+<br><br>
+<<if Time.hour is 20>>
+	당신은 벨소리를 듣는다. "폐쇄 시간이다." <<generate_veteran_guard 0>><<veteran_guard_ ga 0>> 소리친다. "감옥으로 돌아가."
+	<br><br>
+	당신은 다른 죄수들과 섞여 감옥으로 밀려난다.
+	<br><br>
+	<<link [[다음|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<elseif $stress gte $stressmax>>
+	<<passout_prison>>
+<<else>>
+	<<if $prison.schedule is "wake">>
+		다른 수감자들이 욕실로 간다.
+		<br><br>
+	<<elseif $prison.schedule is "free time">>
+		많은 수감자들이 침대에 누워서 휴식을 취한다.
+		<br><br>
+	<<elseif $prison.schedule is "lockdown">>
+		당신은 코를 고는 소리를 듣는다.
+		<br><br>
+	<<else>>
+
+	<</if>>
+
+	<<if $prison.schedule isnot "lockdown" and $prison.attention gte 100>>
+		<<events_prison_attention>>
+	<<else>>
+		<<if $prison.schedule isnot "lockdown" and $eventskip isnot 1>>
+			<<events_prison>>
+		<</if>>
+		<<if $prison_event_trigger>>
+			<<events_prison_triggered>>
+		<<else>>
+			당신의 감옥은 구석에 있다.
+			<br>
+
+			<<prisonicon "cell">><<link [[당신의 감옥|Prison Cell]]>><</link>>
+			<br><br>
+
+			<<if $prison.attention_level gte 1 and !$prison.protection and $prison.schedule is "free time">>
+				<<if !$prison.protection>>
+					<<if !$daily.prison.scarredDone>>
+						<<generate_scarred_inmate 0>><<person1>>
+						<<scarred_inmate_ yi 0 capo>> 감옥은 다른 감옥들보다 허전하다. 마치 비어 있는 것 처럼.
+						<<endevent>>
+						<br>
+						<<prisonicon "cell">><<link [[허전해보이는 감옥|Prison Scarred]]>><</link>>
+						<br><br>
+					<</if>>
+					/*
+					<<generate_tattooed_inmate 0>><<person1>>
+					<<tattooed_inmat_ yie 0 apo>> 감옥 벽과, 천장까지도, 음란물로 장식되어있다.
+					<<endevent>>
+					<br>
+					<<prisonicon "cell">><<link [[음란물로 장식된 감옥|Prison Tattooed]]>><</link>>
+					<br><br>
+					*/
+				<</if>>
+			<</if>>
+			탑 맞은편 무거운 나무 문이 있다. 은색 십자가 위에 색이 바랜 녹색 십자가가 장식되어 있다.
+			<br>
+			<<if $prison.schedule is "lockdown">>
+				<span class="blue">의료실로 가는 문은 닫혀있다.</span>
+				<br><br>
+			<<else>>
+				<<prisonicon "medical">><<link [[의료실|Prison Medical]]>><</link>>
+				<br><br>
+			<</if>>
+			중앙 타워를 계단이 둥글게 감싼다.
+			<br>
+			<<stairsicon "down" "prison">><<link [[아래 층으로|Prison Block]]>><</link>>
+			<br><br>
+			<<prison_map walkway>>
+		<</if>>
+		<<set $eventskip to 0>>
+	<</if>>
+<</if>>
+
+
+
+:: Prison Block
+<<set $outside to 0>><<effects>><<effects_prison>><<set $bus to "cell_block">>
+
+당신은 감옥 구역 아래에 있다. 위 통로로 가는 계단이 있고 교도소의 다른 곳으로 가는 복도가 있다.
+<br><br>
+
+<<if Time.hour is 20>>
+	당신은 벨소리를 듣는다. "폐쇄 시간이다." <<generate_veteran_guard 0>><<veteran_guard_ ga 0>> 소리친다. "감옥으로 돌아가."
+	<br><br>
+	당신은 다른 죄수들과 섞여 감옥으로 밀려난다.
+	<br><br>
+	<<link [[다음|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<elseif $stress gte $stressmax>>
+	<<passout_prison>>
+<<else>>
+	<<if $prison.schedule is "wake">>
+		다른 수감자들이 욕실로 간다.
+		<br><br>
+	<<elseif $prison.schedule is "free time">>
+		많은 수감자들이 침대에 누워서 휴식을 취한다.
+		<br><br>
+	<<elseif $prison.schedule is "lockdown">>
+		당신은 코를 고는 소리를 듣는다.
+		<br><br>
+	<<else>>
+
+	<</if>>
+
+	<<if $prison.schedule isnot "lockdown" and $prison.attention gte 100>>
+		<<events_prison_attention>>
+	<<else>>
+		<<if $prison.schedule isnot "lockdown" and $eventskip isnot 1>>
+			<<events_prison>>
+		<</if>>
+		<<if $prison_event_trigger>>
+			<<events_prison_triggered>>
+		<<else>>
+			구역 끝에는 두개의 문이 있고 두개의 표지판이 붙어있다. "욕실" 이라고 하나에 적혀있다. "섹스는 절대로 금지" 나머지에 적혀있다.
+			<<if $prison.schedule is "wake">>
+				<span class="lblue">물이 뿜어져 나온다.</span>
+			<</if>>
+			<br>
+			<<bathroomicon "shower">><<link [[샤워실|Prison Shower]]>><</link>>
+			<br><br>
+			다른 문에서 희미한 화학 약품 냄새가 난다. 가까운 감옥은 비었고 금속이 뒤틀리고 부식되어있다.
+			<br>
+			<<prisonicon "laundry">><<link [[빨래실|Prison Laundry]]>><</link>>
+			<br><br>
+
+			<<if $prison.kylar is "active" and !$prison_kylar_cell and ($prison.schedule is "free time" or $prison.schedule is "yard")>>
+				<<npc Kylar>><<person1>>
+				카일라는 <<his_ yi>> <<his_ yi>> 무릎에 있는 무언가를 가지고 야단을 떨며 감옥에 있는 침대에 앉아있다.
+				<<endevent>>
+				<br>
+				<<prisonicon "cell">><<link [[카일라의 감옥|Prison Kylar]]>><</link>>
+				<br><br>
+			<</if>>
+
+			복도가 햇빛을 향해, 이어진다.
+			<br>
+			<<getouticon>><<link [[마당|Prison Yard]]>><</link>>
+			<br><br>
+			중앙 타워를 계단이 둥글게 감싼다. 당신은 그걸 지나왔다.
+			<br>
+			<<stairsicon "up" "prison">><<link [[당신의 감옥으로 가는 계단을 올라간다|Prison Walkway]]>><</link>>
+			<br><br>
+
+			<<prison_map block>>
+		<</if>>
+		<<set $eventskip to 0>>
+	<</if>>
+<</if>>
+
+:: Prison Laundry
+<<set $bus to "laundry">><<set $outside to 0>><<effects>><<effects_prison>>
+
+당신은 빨래실에 있다. 벽들은 어느순간부터 가공되지 않은 돌의 재질로 이루어진다. 거친 표면에서 두꺼운 파이프가 불규칙하게 뻗어있다.
+<<if $prison.schedule is "work">>
+	수감자들이 옷을 분류하고 큰 기계가 소리를 낸다.
+	<br><br>
+	<<generate_relaxed_guard 0>><<relaxed_guard_ nun 0 cap>> 짧은 테이블 옆 의자에 앉아 방을 둘러보면서 주사위를 굴리고 있다.
+	<<endevent>>
+	<br><br>
+<<else>>
+	기계는 가만히 있다.
+	<br><br>
+<</if>>
+
+
+<<if isPregnancyEnding()>>
+	<<pregnancyPassout "prisonLaundry">>
+<<elseif Time.hour is 20>>
+	당신은 벨소리를 듣는다. "폐쇄 시간이다." <<generate_relaxed_guard 0>><<relaxed_guard_ ga 0>> 소리친다. "감옥으로 돌아가."
+	<br><br>
+	당신은 다른 죄수들과 섞여 감옥으로 밀려난다.
+	<br><br>
+	<<link [[다음|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if !$daily.prison.prisonRelaxedGreet and $prison.relaxed gte 15 and $prison.schedule is "work">>
+		<<prison_guard_greet relaxed>>
+	<<elseif random(1, 5) is 5 and $eventskip isnot 1 and $prison.schedule is "work">>
+		<<prison_guard_watch relaxed>>
+	<<else>>
+		<<if $prison.schedule is "work">>
+			<<if $prison.job is "laundry">>
+				<<ind>><<link [[작업한다|Prison Laundry Work]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<span class="blue">당신의 작업 공간은 여기가 아니다.</span>
+				<br>
+			<</if>>
+		<</if>>
+		<<getouticon>><<link [[떠난다|Prison Block]]>><</link>>
+		<br>
+
+		<<prison_map laundry>>
+	<</if>>
+<</if>>
+
+
+:: Prison Medical
+<<set $bus to "medical">><<set $outside to 0>><<effects>><<effects_prison>>
+
+당신은 의료실에 있다. 침대 줄이 길게 뻗어있고 많은 사람들이 차지하고 있다. 주변과 상반되는 현대적인 매커니즘으로 잠겨져 있는 찬장이 있다.
+<br><br>
+
+<<if $prison.schedule is "work">>
+	<<generate_methodical_guard 0>><<person1>> <<methodical_guard_ nun 0 cap>> 한 침대 위에 서서 클립보드에 무언가를 쓰고 있다.
+	<br><br>
+	<<endevent>>
+<<else>>
+
+<</if>>
+<<if Time.hour is 20>>
+	당신은 벨소리를 듣는다. "폐쇄 시간이다." <<generate_methodical_guard 0>><<methodical_guard_ ga 0>> 소리친다. "감옥으로 돌아가."
+	<br><br>
+	당신은 다른 죄수들과 섞여 감옥으로 밀려난다.
+	<br><br>
+	<<link [[다음|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if random(1, 5) is 5 and $eventskip isnot 1 and $prison.schedule is "work">>
+		<<prison_guard_watch methodical>>
+	<<else>>
+		<<if $prison.schedule is "work">>
+			<<if $prison.job is "medical">>
+				<<link [[작업한다|Prison Medical Work]]>><</link>>
+				<br>
+			<<else>>
+				<span class="blue">당신의 작업 공간은 여기가 아니다.</span>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $prison.shock is 1>>
+			<br>
+			한 구석에 검은색과 노란색으로 이루어진 문이 있다.
+			<br>
+			<<link [[다가간다|Prison Medical Door]]>><</link>>
+			<br><br>
+		<</if>>
+		<<link [[떠난다|Prison Walkway]]>><</link>>
+		<br>
+		<<prison_map medical>>
+	<</if>>
+<</if>>
+
+:: Prison Medical Door
+<<effects>>
+
+당신은 검은색과 노란색으로 이루어진 문으로 다가간다. 눈에 보이는 잠금 장치는 없지만 옆에 키패드가 있다.
+
+<<if $prison.code is 1>>
+	렌은 <<nnpc_he_ ga Wren>> 알려준 코드가 작동할거라 말했다.
+	<<if $prison.schedule is "work">>
+		<<generate_methodical_guard 0>><<person1>>
+		당신은 시도를 해보기 전에 <<methodical_guard_ ga 0>> 나가길 기다려야 한다.
+		<br><br>
+	<<else>>
+		<br><br>
+		<<link [[들어간다|Prison Medical Shock]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	당신은 코드를 찾아야 할 것이다.
+	<br><br>
+<</if>>
+
+<<link [[떠난다|Prison Medical]]>><<endevent>><</link>>
+<br>
+
+:: Prison Medical Shock
+<<effects>>
+
+당신은 코드를 입력한다. 문 위에서 녹색 불이 깜빡이고 문이 열린다.
+<br><br>
+
+내부는 다른 감옥들과 비교대도 어둡다. 입구 주변 망치, 드라이버 및 다른 도구들이 놓여진 찬장이 있다. 당신의 눈이 어둠에 적응하자 작은 버스 크기의 마찬가지로 노란색과 검은색으로 이루어진 기계를 발견한다. 천장에서 금속 코일들이 튀어나온다. 한 금속 판이 있다. 당신이 먼지를 닦아내자 정전기가 발생한다.
+<br><br>
+
+"실험적 전기 충격기. 사용하려면 특별한 권한이 필요함."
+<br><br>
+
+이 기계는 안정적으로 보이지도 들리지도 않는다. 당신은 아마 주변에 있는 도구들을 이용해서 돌이킬 수 없는 피해를 입힐 수 있겠지만 도망치진 못할 것이다.
+<br><br>
+
+<<link [[부순다|Prison Medical Sabotage]]>><<prison_hope 20>><<prison_reb 20>><<set $prison.shock to 0>><<prison_guards -20>><<prison_inmates 20>><</link>><<gggsuspicion>><<gggreb>><<ggghope>><<gggrespect>>
+<br>
+<<link [[떠난다|Prison Medical]]>><</link>>
+<br>
+
+:: Prison Medical Sabotage
+<<effects>>
+
+<<earnFeat "Breaker">>
+당신은 가장 큰 손잡이가 나무인 망치를 들고 작업을 시작한다. 당신은 파이프를 부수고 유리를 깨트리며 접시를 찌그러뜨린다.
+
+<<if currentSkillValue('physique') gte 10000>>
+	당신의 힘을 사용해서 간수들이 도착하기 전 상당한 피해를 입힐 수 있었다.<<ggrespect>><<prison_inmates 10>>
+<<else>>
+	당신의 힘의 한계가 있음에도 간수들이 도착하기 전 상당한 피해를 입힐 수 있었다.
+<</if>>
+<br><br>
+
+<<generate_methodical_guard 0>>
+<<generate_veteran_guard 1>>
+
+<<methodical_guard_ ga 0 cap>><<person1>> <<veteran_guard_ rul 1>> 데리고 도착한다. "너 무슨 짓을 한거야." <<he_ ga>> <<his_ yi>> 셔츠 주머니에 손을 넣으며 묻는다. <<He_ nun>> 리모컨을 꺼내 당신을 향하여 버튼을 누른다. <span class="green">아무런 일도 일어나지 않는다.</span> <<He_ nun>> 다시 해보고 또 다시 해보지만 아무것도 변하지 않는다.
+<br><br>
+
+"초심으로 돌아가야겠군." <<veteran_guard_ ga 1>><<person2>> <<his_ yi>> 지휘봉을 준비하고 앞으로 걸어오며 말한다. "좋아. 조용히 따라오는게 좋을거야."
+<br><br>
+
+<<link [[얌전히 간다|Prison Punishment]]>><<endevent>><</link>>
+<br>
+<<link [[싸운다|Prison Medical Fight]]>><<set $fightstart to 1>><</link>>
+<br>
+
+
+:: Prison Medical Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	수감자들은 구경하기 위해 문에 모인다. 몇몇은 붕대를 감고 있다.
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Prison Medical Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Prison Medical Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Prison Medical Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	그들은 에너지가 고갈되어 비틀거리다 망가진 기계 위로 넘어진다. 수감자들은 <<veteran_guard_ ga 1>> 몸을 돌려 <<his_ yi>> 지휘봉을 들 때까지 그들을 조롱한다.<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<br><br>
+	"그만해." <<methodical_guard_ ga 0>> 말한다. "사람들을 좀 불러야겠어."
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<prison_revolt_options>>
+<<elseif $enemyhealth lte 0>>
+	그들은 당신으로부터 떨어져 문으로 향한다. 수감자들은 <<veteran_guard_ ga 1>> 몸을 돌려 <<his_ yi>> 지휘봉을 들 때까지 그들을 조롱한다. <<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>><<greb>><<prison_reb 1>>
+	<br><br>
+	"그만해." <<methodical_guard_ ga 0>> 말한다. "사람들을 좀 불러야겠어."
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<prison_revolt_options>>
+<<else>>
+	더이상 계속할 수 없을 정도로 다쳐서, 당신은 땅에 쓰러진다. <<He_ nun>> 당신에게 수갑을 채우고 당신의 발을 잡고 끌고간다. 당신이 지나갈 때 다른 수감자들이 조롱하지만 나쁘게 들리진 않는다.<<grespect>><<prison_inmates 1>>
+	<<bind>>
+	<br><br>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Prison Punishment]]>><</link>>
+	<br>
+<</if>>
+
+:: Prison Yard
+<<set $location to "prison">><<set $bus to "yard">><<set $outside to 1>><<effects>><<effects_prison>>
+
+당신은 교도소 마당에 있다. 넓은 공간이지만 주변 벽이 엄청나게 높고 안쪽으로 휘어진 것 같이 보인다.
+<br><br>
+
+<<if $prison.schedule is "yard">>
+	수감자들은 바벨을 들고 얘기한다. <<generate_veteran_guard 0>><<veteran_guard_ ga 0 cap>> 근엄한 시선으로 바라본다.<<endevent>>
+	<br><br>
+<<elseif $prison.schedule is "revolt">>
+	<<beastNEWinit 6 hawk>>
+	<<beastsplural_ i>> 하늘을 날자 그들의 그림자가 잔디를 배회한다. 수감자들은 마당을 가로질러 가거나 그림자에 숨어 다닌다. 몇몇은 잡혀 하늘로 잡혀간다. 당신은 그들이 어디로 갔을지 모른다.
+	<<endevent>>
+	<br><br>
+<</if>>
+<<if Time.hour is 20>>
+	당신은 벨소리를 듣는다. "폐쇄 시간이다." <<generate_veteran_guard 0>><<veteran_guard_ ga 0>> 소리친다. "감옥으로 돌아가."
+	<br><br>
+	당신은 다른 죄수들과 섞여 감옥으로 밀려난다.
+	<br><br>
+	<<link [[다음|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<elseif $stress gte $stressmax>>
+	<<passout_prison>>
+<<elseif $prison_wren_intro is 1 and $prison.schedule is "yard">>
+	<<npc "Wren">><<person1>>
+	<<if $wren_seen>>
+		"당신을 여기서 보니 기분이 묘하네요." 젊고 <<if $pronoun is "m">>짧은 머리를 가진 남자가<<else>>어깨까지 오는 머리를 가진 여자가<</if>> 말한다. <span class="gold"><<= $wren_seen is "pregnancy" ? "당신이 부두에서 진통을 느끼고 있을 때 당신을 구해 준 사람이다" : "렌이다">>.</span>
+		<br><br>
+
+		<<if $wren_seen is "pregnancy">>
+			"위험한 곳을 들쑤시고 다니는 취미를 참지 못했나 보군요, 그렇죠? <<= playerBellyVisible() ? "거기다 또 임신한 것 같고요." : "최소한 이번에는 임신하지는 않은 것 같군요.">>
+			<<set $phase to "intro">>
+		<<elseif $wren_seen is "winter">>
+			"늙은 윈터씨의 요청이 법의 테두리 밖으로 나갔었나 보죠?
+		<<else>>
+			"당신이 <<= $wren_seen is "catsuit" ? "몰래 숨어다니던" : "잠입하던">> 게 잘 되지 않은 게 유감이네요.
+		<</if>>
+		그래도 우리가 서로를 도와줄 수 있을 것 같네요."
+		<br><br>
+
+		<<link [[다음|Prison Wren Intro]]>><<unset $prison_wren_intro>><<set $wren_seen to "prison">><</link>>
+	<<else>>
+		"신참인가?" 젊고 <<if $pronoun is "m">>짧은 머리를 가진 남자가<<else>>어깨까지 오는 머리를 가진 여자가<</if>> 물어본다. "그냥 내 취향이길래." <<He_ nun>> 죄수복을 입고 있지만 다른 수감자들보다 더 자유롭고 달라보인다.
+		<br><br>
+
+		<<link [[다음|Prison Wren Intro]]>><<set $phase to "intro">><<unset $prison_wren_intro>><<set $wren_seen to "prison">><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $prison.schedule isnot "lockdown" and $prison.attention gte 100>>
+		<<events_prison_attention>>
+	<<else>>
+		<<if $prison.schedule isnot "lockdown" and $eventskip isnot 1>>
+			<<events_prison>>
+		<</if>>
+		<<if $prison_event_trigger>>
+			<<events_prison_triggered>>
+		<<else>>
+			<<if $prison.schedule is "yard" and !$daily.prison.veteranGreet and $prison.veteran gte 15>>
+				<<prison_guard_greet veteran>>
+			<<elseif $prison.schedule is "yard" and random(1, 5) is 5 and $eventskip isnot 1>>
+				<<prison_guard_watch veteran>>
+			<<else>>
+				<<if $prison.schedule isnot "revolt">>
+					<<if $worn.feet.type.includes("shackle")>>
+						<span class="blue">당신의 다리가 묶인채로 달릴 순 없다.</span>
+						<br>
+					<<else>>
+						<<prisonicon "run">><<link [[달린다 (0:30)|Prison Yard Run]]>><<endevent>><<tiredness 4>><</link>><<gathletics>><<gphysique>>
+						<br>
+					<</if>>
+					<<if $leftarm is "bound" or $rightarm is "bound">>
+						<span class="blue">당신의 팔이 묶인채로 바벨을 들 순 없다.</span>
+						<br>
+					<<else>>
+						<<prisonicon "lift">><<link [[바벨을 들어올린다 (0:30)|Prison Yard Exercise]]>><<endevent>><<tiredness 6>><</link>><<gtiredness>><<ggphysique>>
+						<br>
+					<</if>>
+				<</if>>
+				<<if $prison.schedule is "yard">>
+					<<if $worn.face.type.includes("gag")>>
+						<span class="blue">당신은 재갈을 찬 채로 간수나 수감자들과 얘기할 수 없다.</span>
+						<br>
+					<<else>>
+						<<socialiseicon>><<link [[간수와 얘기한다 (0:30)|Prison Yard Speak]]>><<pass 30>><<prison_rep veteran 1>><<endevent>><</link>><<glove>>
+						<br>
+						<<link [[수감자들에게 귀엽게 추파를 날린다 (0:30)|Prison Yard Flirt]]>><<set $phase to 0>><<pass 30>><<prison_hope 1>><<endevent>><</link>><<promiscuous1>><<ghope>>
+						<br>
+						<<if hasSexStat("promiscuity", 2)>>
+							<<link [[수감자들에게 음탕하게 추파를 날린다 (0:30)|Prison Yard Flirt]]>><<set $phase to 1>><<pass 30>><<prison_reb 1>><<endevent>><</link>><<promiscuous2>><<greb>>
+							<br>
+						<</if>>
+					<</if>>
+				<</if>>
+				<<if $prison.schedule is "yard" and Time.weekDay is 6>>
+					<br>
+					<<npc Wren>><<person1>>
+					<span class="teal">렌이 벽에 기대고 있다.</span> 간수들은 <<him_ ul>> 알아차려도 못 본 척 한다.
+					<br>
+
+					<<socialiseicon>><<link [[렌과 얘기한다|Prison Wren]]>><<endevent>><</link>>
+					<br>
+				<</if>>
+				<br>
+				땅이 완만하게 경사져 넓은 문으로 이어진다. 오래된 음식 냄새가 공기로 퍼져 나온다.
+				<br>
+				<<prisonicon "canteen">><<link [[식당|Prison Canteen]]>><<endevent>><</link>>
+				<br><br>
+
+				벽이 튀어나와 다른 곳보다 훨씬 높은 첨탑이 있다. 아래에 금속으로 된 문이 있다.
+				<br>
+				<<if $prison.job is "spire">>
+					<<link [[탑을 오른다 (0:05)|Prison Spire]]>><<tiredness 6>><<pass 5>><</link>><<gtiredness>>
+					<br>
+					<<if $prison.schedule isnot "revolt">>
+						<<if $prison.rope is 1>>
+							<br>
+							당신은 첨탑 아래에 있는 구멍으로 밧줄을 내릴 수 있을 것 같다.
+							<br>
+							<<link [[밧줄을 사용한다|Prison Spire Rope]]>><<set $prison.rope to 2>><</link>>
+							<br>
+						<<elseif $prison.rope is 2>>
+							<<link [[첨탑을 내려간다 (0:05)|Prison Spire Descend]]>><<tiredness 6>><<pass 5>><</link>><<gtiredness>>
+							<br>
+						<<else>>
+							<br>
+							첨탑 아래 깊은 구멍이 있다.
+							<br>
+							<<link [[구멍을 살펴본다|Prison Spire Hole]]>><</link>>
+							<br>
+						<</if>>
+					<</if>>
+				<<else>>
+					<span class="blue">당신은 첨탑에서 신뢰 받지 못한다.</span>
+					<br>
+				<</if>>
+				<br>
+				시야에서 가려진 작은 공간이 숨겨져있다. 커다란 잠긴 문이 주변 돌과 어우러진다.
+				<br>
+				<<if $prison.yard_door is 1>>
+					<<prisonicon "door">><<link [[해변으로 몰래 들어간다 (0:01)|Prison Beach]]>><<endevent>><<pass 1>><</link>>
+					<br>
+				<<else>>
+					<<prisonicon "door">><<link [[커다란 문|Prison Yard Door]]>><<endevent>><</link>>
+					<br>
+				<</if>>
+				<br>
+				<<getinicon>><<link [[감옥 구역|Prison Block]]>><<endevent>><</link>>
+				<br>
+				<<prison_map yard>>
+			<</if>>
+		<</if>>
+		<<set $eventskip to 0>>
+	<</if>>
+<</if>>
+
+:: Prison Spire Hole
+<<set $outside to 1>><<effects>>
+
+당신은 조심히 구멍으로 다가가 가장자리 너머를 들여다본다. 조잡한 석조물들이 구멍 안에 늘어져있다. 당신은 이상하고 삐걱거리는 소리와 가끔씩 물이 흐르는 소리를 듣지만 어둠 너머론 아무것도 보이지 않는다. 그 아래 무엇이 있을지에 대한 생각에 불안감이 엄습한다.<<stress 2>><<gstress>>
+<br><br>
+
+당신은 아래에 무엇이 있을지 궁금하지만 <span class="blue">첩탑을 내려갈 도구가 없으면 알 방도가 없다.</span>
+<br><br>
+
+당신은 마당으로 돌아간다.
+<br><br>
+
+<<link [[다음|Prison Yard]]>><</link>>
+<br>
+
+:: Prison Spire Rope
+<<location "underground">><<set $outside to 0>><<effects>>
+
+당신은 밧줄을 단단히 묶고 밧줄의 반대쪽을 구멍으로 던진다. 몇 초 후 당신은 밧줄이 떨어진 소리를 듣는다. 당신은 밧줄을 테스트한다. 그건 안전해 보인다. 당신은 당신이 원하는 언제든지 내려갈 수 있다.
+<br><br>
+
+<<link [[다음|Prison Yard]]>><<location "prison">><</link>>
+<br>
+
+:: Prison Spire Descend
+<<location "underground">><<set $outside to 0>><<effects>>
+
+
+당신은 첨탑 아래이자 교도소 아래 암흑 안으로 내려간다.
+
+<<if $prison_egg is 1 or $prison.watchers_friend is 2>>
+	당신은 바닥에 있는 매끄러운 돌에 미끄러질 뻔 한다. 이곳은 당신이 알을 찾은 동굴이다. 당신은 불안감을 느끼고 이곳을 이유없이 다시 탐험하기 싷어서 다시 밖으로 올라간다.
+	<br><br>
+<<else>>
+	당신은 바닥에 있는 매끄러운 돌에 미끄러질 뻔 한다. 아래에 그림자에 가려진 무언가가 있다. 당신이 계속해서 전진한다면 왔던 길을 다시 되찾기가 힘들 것이다.
+	<br><br>
+
+	<<link [[흔적을 탐색한다|Prison Rut]]>><<set $rut to 0>><<set $rut_entry to "rope">><</link>>
+	<br>
+<</if>>
+
+<<link [[다시 올라간다|Prison Yard]]>><<location "prison">><</link>>
+<br>
+
+:: Prison Yard Door
+<<effects>>
+
+당신은 커다란 문으로 다가간다. 문은 잠겨있다.
+<br><br>
+
+<<if $prison.yard_key is 1>>
+	<<lakeicon "key">><<link [[열쇠를 사용한다|Prison Yard Door Key]]>><<set $prison.yard_door to 1>><</link>>
+	<br>
+<<else>>
+	<<set $lock to 1000>>
+
+	문이 굳게 잠겨 있다.
+	<br><br>
+
+	<<if currentSkillValue('skulduggery') gte $lock>>
+		<span class="green">이 자물쇠는 따기 쉬워 보인다.</span>
+		<br><br>
+
+		<<lockpickicon>><<link [[문을 딴다 (0:05)|Prison Yard Door Pick]]>><<set $prison.yard_door to 1>><<pass 5>><</link>>
+		<br>
+	<<else>>
+		<span class="red">이 자물쇠는 당신의 자물쇠따기 능력 바깥의 물건이다.</span><<skulduggeryrequired>>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<getouticon>><<link [[떠난다|Prison Yard]]>><</link>>
+<br>
+
+:: Prison Yard Door Key
+<<effects>>
+
+열쇠는 맞지만 돌리기 위해 많은 힘이 필요하다. 문이 삐걱거리며 열린다. 일직선으로 뻗은 돌 터널이 아래쪽으로 경사져있다. 바닥에 빛이 있다.
+<br><br>
+
+당신은 당신 뒤 문을 닫고 빛을 향해 걸어가자 해변이 나온다.
+<br><br>
+
+<<link [[다음|Prison Beach]]>><</link>>
+<br>
+
+
+:: Prison Yard Door Pick
+<<effects>>
+
+잠금 장치는 정교하다. 아마 여기선 그래야 할 것이다. 하지만 여전히 당신의 상대가 되지 않는다. 문이 삐걱거리며 열린다. 일직선으로 뻗은 돌 터널이 아래쪽으로 경사져있다. 바닥에 빛이 있다.
+<br><br>
+
+당신은 당신 뒤에 있는 문을 닫고 빛을 향해 걸어가자 해변이 나온다.
+<br><br>
+
+<<link [[다음|Prison Beach]]>><</link>>
+<br>
+
+
+:: Prison Yard Speak
+<<effects>>
+
+<<generate_veteran_guard 0>><<person1>>
+<<generate2>>
+<<if $prison.veteran gte 60 and !$NPCList[0].name_known>>
+	<<generatep3 0>>
+	당신은 <<veteran_guard_ ga 0>> 무언가를 <<his_ yi>> 손바닥 위에 올려놓고 있는걸 발견한다. <<He_ nun>> <<he_ ga>> 당신이 다가오는 것을 보자 <<his_ yi>> 주먹을 쥔다. <<He_ nun>> 너무 정신이 팔려 처음엔 당신이 있는지도 몰랐다. <<he_ nun>> <<person2>><<person_ i>> <<person1>><<him_>>에게로 뒷걸음질 치는것조차 알아차리지 못한다.
+	<br><br>
+	그 충돌은 사고였지만 <<veteran_guard_ nun 0>> 지휘봉을 꺼내들고 <<person2>><<person_ yi>> 배로 공격을 가한다. 그 물건이 <<person1>><<his_ yi>> 손에서 떨어져 잔디 위로 떨어진다.
+	<br><br>
+
+	<<link [[줍는다|Prison Yard Locket]]>><</link>>
+	<br>
+<<else>>
+	<<generate3>>
+	당신은 <<veteran_guardPost 0>>에게 다가간다.
+
+	<<He_ nun>> <<his_ yi>> 거칠어보이는 태도에도 불구하고 얘기를 할 수 있어 기뻐보인다.
+	<br><br>
+
+	<<if $rng gte 81>>
+		한 <<person2>><<person_ i>> 벽을 오르려 한다. <<veteran_guard_ nun 0 cap>><<person1>> 걱정하는 것 처럼 보이지 않는다. "이참에 알게 되겠네." <<he_ ga>> 웃는다. "계속 도전해봐."
+	<<elseif $rng gte 61>>
+		당신은 <<he_ ga>> 마당을 가로질러가 <<person2>><<person_ ul>> <<person1>><<his_ yi>> 지휘봉으로 때리러 가는 것을 따라간다.
+	<<elseif $rng gte 41>>
+		<<He_ nun>> <<person2>><<person_ i>> 스쿼트를 하는 것을 흘겨본다.
+	<<elseif $rng gte 21>>
+		"그들은 저 벽을 넘으면 우리가 교도소를 탈출하도록 놔둔다고 생각하나봐." <<he_ ga>> 첨탑을 보며 웃는다. "하지만 그건 우리에게 달려있지는 않지."
+	<<else>>
+		<<He_ nun>> <<person2>><<person_ gwa>> <<person3>><<person_ yi>> 싸움을 멈춘다.
+	<</if>>
+	<br><br>
+
+	<<link [[다음|Prison Yard]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Prison Yard Locket
+<<effects>>
+
+<<set $NPCList[0].name_known to 1>>
+<<save_veteran_guard>>
+
+그건 열려있는 로켓이다. 그 안엔 어린 <<person3>><<personsimple_ yi>> 사진이 있다. 그린게 사진보다 나을 것 같지만 디테일이 풍부하다. "내 <<veteran_guardPost 0>>에게." 라고 적혀있다. "영원히 당신의 것."
+<br><br>
+
+헐떡거리며 <<veteran_guard_ nun 0>> 웅크리고 있는 <<person2>><<person_ urobuter>> 떨어져 나온다. 당신은 로켓을 내민다. <<person1>><<He_ nun>> 그것을 당신의 손으로부터 낚아채고 당신에게 사악한 표정을 짓는다.
+<br><br>
+
+<<link [[다음|Prison Yard]]>><<endevent>><</link>>
+<br>
+
+:: Prison Spire
+<<set $bus to "spire">><<set $outside to 1>><<effects>><<effects_prison>>
+
+<<if $prison.spire_intro isnot 1>>
+	당신이 문을 두드리자 금속 문이 철컹거린다. 위에 설치된 카메라가 당신을 바라본다. 기계음이 들리고 딸깍거리는 소리가 들린다. 문이 열리고 바람이 불어온다.
+	<br><br>
+
+	안에는 위아래로 가는 나선형 계단밖에 없지만 내려가는 계단은 큰 구멍으로 이어진다. 당신은 올라가기로 한다.
+	<br><br>
+
+	<<link [[다음|Prison Spire Intro]]>><<set $prison.spire_intro to 1>><<set $prison.birds to 0>><</link>>
+	<br>
+<<else>>
+	<<beastNEWinit 5 "hawk">><<generate_anxious_guard 5>><<person1>>
+	당신은 첨탑 위 작은 오두막에 있다.
+	<<if $prison.schedule is "work">>
+		<<anxious_guard_ nun 5 cap>> 여러 보안용 컴퓨터 앞에 앉아있지만 <<person6>><<his_ yi>> 눈은 밖에있는 <<person1>><<beastsplural_ ul 0>> 향하고 있다.
+	<<else>>
+		당신은 창문을 통해 <<person1>><<beastsplural_ ul 0>> 본다.
+	<</if>>
+	<<endevent>>
+	<br><br>
+	<<if Time.hour is 20>>
+		<<generate_anxious_guard 0>>
+		당신은 벨소리를 듣는다. "폐쇄 시간이다" <<anxious_guard_ ga 0>><<person1>> 한숨쉰다. "마침내. 감옥으로 꺼져."
+		<br><br>
+		당신은 생물체가 반응하기 전 <<anxious_guard_ wa 0>> 계단으로 달려간다. <<He_ nun>> 계단을 내려가 마당을 지나 감옥 구역으로 가서 당신의 감옥까지 안내한다.
+		<br><br>
+		<<link [[다음|Prison Cell]]>><<endevent>><</link>>
+		<br>
+	<<elseif $prison.birds gte 30 and !$prison.watchers_friend>>
+		<<beastNEWinit 6 hawk>><<person1>>
+		<<beastsplural_ nun>> 조용히 당신을 바라본다. 그 후 한마리가 발톱을 뻗고 공중으로 날아오른다. 당신은 겁에 질려 넘어지지만 <<bhe_ ga>> 당신을 잡아 공중으로 날아오른다.
+		<br><br>
+		<<bHe_ nun>> 첩탑 주위를 돌고 다른 놈들은 노래를 부른다. 그러고는 등대에 착지한다.
+		<br><br>
+
+		<<link [[다음|Prison Spire Beacon]]>><<set $prison.watchers_friend to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $prison.schedule is "work">>
+			<<if !$daily.prison.anxiousGreet and $prison.anxious gte 15>>
+				<<prison_guard_greet anxious>>
+			<<elseif random(1, 5) is 5 and $eventskip isnot 1>>
+				<<prison_guard_watch anxious>>
+			<<else>>
+				<<if $prison.birds gte 30>>
+					<span class="green">감시자들은 당신을 좋아한다.</span>
+				<<elseif $prison.birds gte 20>>
+					<span class="teal">감시자들은 당신이 유용하다 생각한다.</span>
+				<<elseif $prison.birds gte 10>>
+					<span class="lblue">감시자들은 당신을 기억한다.</span>
+				<<else>>
+					<span class="blue">감시자들은 당신을 고깃덩이로 본다.</span>
+				<</if>>
+				<br><br>
+				<<if $prison.job is "spire">>
+					<<link [[작업한다|Prison Spire Work]]>><</link>>
+					<br>
+				<<else>>
+					<span class="blue">당신의 작업 공간은 여기가 아니다.</span>
+					<br>
+				<</if>>
+				<<if $prison.watchers_friend is 1 and $prison_egg is 1>>
+					<<link [[알을 건넨다|Prison Spire Egg]]>><</link>>
+					<br>
+				<</if>>
+				<<if $harpy gte 6 and $birdFly gte 1>>
+					<br>
+					당신은 날개가 있고 바람은 강하다. 당신은 여기서부터 본토까지 날아갈 수 있을거라 생각한다.
+					<br>
+					<<link [[본토로 날아간다|Prison Soar]]>><</link>>
+					<br><br>
+				<</if>>
+				<<link [[떠난다 (0:05)|Prison Yard]]>><<pass 5>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $harpy gte 6 and $birdFly gte 1>>
+				당신은 날개가 있고 바람은 강하다. 당신은 여기서부터 본토까지 날아갈 수 있을거라 생각한다.
+				<br>
+				<<link [[본토로 날아간다|Prison Soar]]>><</link>>
+				<br><br>
+			<</if>>
+			<<link [[떠난다 (0:05)|Prison Yard]]>><<pass 5>><</link>>
+			<br>
+		<</if>>
+		<<prison_map spire>>
+	<</if>>
+<</if>>
+
+
+:: Prison Soar
+<<effects>>
+
+<<beastNEWinit 2 hawk>><<person1>>
+당신은 달려서 점프해 당신의 날개가 바람이 타도록 한다. 당신은 날아오른다.
+
+
+<<if $prison.schedule is "revolt">>
+	<<beastsplural_ un>> 반란을 멈추느라 너무 바쁘거나 아예 당신을 눈치채지도 못한다. <span class="green">그 어떤 것도 당신의 탈출을 막지 않는다.</span>
+	<br><br>
+
+	<<link [[탈출한다 (0:30)|Prison Soar Escape]]>><<tiredness 12>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>><<ggtiredness>>
+	<br>
+	<<link [[착지한다|Prison Spire]]>><<endevent>><</link>>
+	<br>
+<<elseif $prison.watchers_friend gte 2>>
+	두 <<beastsplural_ i>> 잠시 당신 양쪽에서 같이 날아간다.
+	<<if $monster is 1>>
+		"안전하게 여정하길." 한 놈이 바람 너머 말한다.
+	<<else>>
+
+	<</if>>
+	그들은 몸을 돌려 첨탑으로 돌아간다.
+	<span class="green">그 어떤 것도 당신의 탈출을 막지 않는다.</span>
+	<br><br>
+
+	<<link [[탈출한다 (0:30)|Prison Soar Escape]]>><<tiredness 12>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>><<ggtiredness>>
+	<br>
+	<<link [[착지한다|Prison Spire]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<span class="red">두 <<beastsplural_ ga>> 당신을 뒤쫓아온다.</span> 당신은 한놈을 피하지만 다른 놈이 <<his_ yi>> 발톱으로 당신을 잡는다. <<He_ nun>> 당신을 다시 첩탑으로 데려간다.<<gpain>><<gtrauma>><<gstress>><<pain 4>><<trauma 6>><<stress 6>>
+	<br><br>
+	<<if $monster is 1>>
+		"우리가 보고 있어." <<bhe_ ga>> 경고한다. "잊지말라고." <<bHe_ nun>> 등대로 돌아간다.
+	<<else>>
+		<<bHe_ nun>> 경고를 하고선 다시 등대로 돌아간다.
+	<</if>>
+	당신은 <<beastsplural_ ul>> 어떻게든 따돌리거나 친구가 되지 않고선 날아갈 순 없을 것이다.
+	<br><br>
+
+	<<link [[다음|Prison Spire]]>><</link>>
+	<br>
+<</if>>
+
+:: Prison Soar Escape
+<<effects>>
+<<earnFeat "Not Meant to be Caged">>
+당신은 섬으로부터 나와 안개를 너머 본토를 향해 날아간다.
+
+<<if Time.dayState is "night">>
+	<<if !Weather.isOvercast>>
+		당신은 마을의 불빛이 수평선을 비추는 것을 본다.
+	<<else>>
+		어둠 속에선 멀리 볼 순 없지만 당신은 거기에 본토가 있을걸 안다.
+	<</if>>
+<<else>>
+	당신은 수평선에 있는 마을을 본다.
+<</if>>
+<br><br>
+
+<<prison_bondage_removal>>
+<<if _punishments_removed is true>>
+	당신은 공기가 당신의 속박구를 조각조각 벗겨내는 걸 느낀다.
+<</if>>
+
+힘든 여정이었지만 바람은 당신 편에 있다. 새처럼 자유롭게 당신은 해변으로 날아간다.
+<br><br>
+
+<<link [[다음|Beach]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+
+:: Prison Spire Beacon
+<<effects>>
+
+등대는 대부분 유목들로 만들어진 둥지로 차있다. 다른 <<beastsplural_ i>> 착지해 당신을 둘러싼다. 당신은 악의를 느끼진 않는다. 당신을 데리고 온 놈이 <<his_ yi>> 고개를 숙이곤 둥지들 중간에 있는 한 둥지를 문지른다. 무언가 있었던 것 처럼 음푹 들어간 부분이 있다.
+<br><br>
+
+<<if $monster is 1>>
+	"달걀을 도난당했어." <<bhe_ ga>> 말한다. "달걀들은 귀해. 제발 아래서 찾아줘. 아래에 있어! 엄청 아래에." 다른 놈들은 우울하게 곡을 부른다.
+<<else>>
+	그들이 달걀을 도난당한걸까? 손이 닿지 않는 곳에 숨겼어야 했을텐데.
+<</if>>
+
+<<if $prison_egg is 1>>
+	당신은 이미 아래에서 달걀을 찾았다. 당신은 그것을 건네준다. <span class="green">그 <<beastsplural_ un>> 놀라서 뛰어다니곤 흥분과 안도감에 지저귄다.</span>
+	<br><br>
+
+	<<link [[다음|Prison Spire Egg 2]]>><<set $spraymax += 1>><<spray 5>><<set $prison.watchers_friend to 2>><</link>>
+	<br>
+<<else>>
+	<br><br>
+	다른 <<beasttype_ i>> 당신의 어깨를 잡고선 다시 땅으로 당신을 데려다준다.
+	<br><br>
+
+	<<link [[다음|Prison Spire]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Prison Spire Egg
+<<effects>>
+
+<<beastNEWinit 6 hawk>><<person1>>
+당신은 등대 앞에 서서 달걀을 꺼내든다. 한 <<beasttype_ ga>> 알아차리곤 흥분감에 뛰어다니곤 노래한다. 그건 다른 놈들의 주의를 끈다. 그들은 그들의 둥지에서 나와 합창단에 참여한다. 한 놈이 날아와서 당신을 잡고 올라간다.
+<br><br>
+
+<<bHe_ nun>> 당신을 등대까지 날아 올려주고 빈 둥지 옆에 조심히 내려준다. 다른 놈들도 착지해서 당신 주변에 원을 만든다.
+<br><br>
+
+<<link [[다음|Prison Spire Egg 2]]>><<set $spraymax += 1>><<spray 5>><<set $prison.watchers_friend to 2>><</link>>
+<br>
+
+:: Prison Spire Egg 2
+<<effects>>
+<<unset $prison_egg>>
+당신은 둥지에 달걀을 놓는다. 그 <<beasttype_ un>> <<bhis_ yi>> 깃털을 세우고 그 위에 앉는다.
+<<earnFeat "Friends in the Sky">>
+<<if $monster is 1>>
+	"고마워." <<he_ ga>> 말한다. "우린 이제 친구야. 여기." <<He_ nun>> 무거운 유목 덩어리를 건네준다.
+<<else>>
+	<<bHe_ nun>> <<his_ yi>> 고개를 숙이고 무거운 유목 덩어리를 건네준다.
+<</if>>
+그 아래엔 원통 모양의 무언가가 있고 바닥엔 컴퓨터 칩이 있다. 그건 여분의 후추 스프레이처럼 보인다. 그 <<beasttype_ nun>> 그걸 당신에게 굴려주고, 당신은 그것을 집어넣는다.
+<<gspraymax>>
+<br><br>
+
+<span class="green">당신은 감시자들과 친구가 됐고</span> <span class="gold">여분의 후추 스프레이를 획득했다.</span>
+<br><br>
+
+다른 <<beasttype_ i>> 당신의 어깨를 잡고선 다시 땅으로 당신을 데려다준다.
+<br><br>
+
+<<link [[다음|Prison Spire]]>><<endevent>><</link>>
+<br>
+
+:: Prison Spire Intro
+<<set $outside to 1>><<effects>>
+
+계단을 오르자 숨이 찬다. 당신은 또 다른 금속 문을 지나 넓고 열린 공간으로 온다. 그곳엔 조금 멀리 또 다른 비슷한 탑이 있다. 그 꼭대기에선 빛이 자리잡고 있지만 지금은 희미하다. 등대다.
+<br><br>
+
+거대한 바람이 울부짖는다. 당신은 감옥으로부터 꽤 높이 있다.
+<br><br>
+
+<<link [[다음|Prison Spire Intro 2]]>><</link>>
+<br>
+
+:: Prison Spire Intro 2
+<<set $outside to 1>><<effects>>
+<!-- fuckity fuck. <<generate_x_guard N>> expects $NPCList[N] slot. <<beastNEWinit N>> expects the number of beasts to generate, NOT slot number. <<generateBEAST N>> expects npc number ($NPCList[N+1]), NOT $NPCList[N] slot. <<beastsplural N>> - expects $NPCList[N] slot. and <<personN>> expects npc number. <<bHe>> and <<beastsplural>> expect npclist slot and do not respect <<personN>>. WHY -->
+<<generate_anxious_guard 0>><<generateBEAST 2 "hawk">>
+<<person1>>"여기야." 당신 옆의 목소리가 말한다. <<anxious_guard_ da 0>>. <<He_ nun>> 조그만 콘크리트 앞에 한발을 여전히 넣고 서있다. <<He_ nun>> 하늘을 본다. "빨리."
+<br><br>
+
+당신은 무언가 <<him_>>에게 바람이 지나가는 듯이 휙 소리를 내며 그에게 달려가는 걸 듣는다. "씨발." <<anxious_guard_ ga 0>> 그 건물로 들어가면서 말한다. "달려!"
+<br><br>
+끔찍한 공포에 휩싸여 당신은 뒤도 안 돌아보고 문을 향해 달려간다. 한 <<beasttype_ i 1>> 발톱을 뻗고 공중에서 갑작스레 내려온다.<<ggstress>><<stress 12>>
+<br><br>
+당신은 <<beasttype_ i 1>> 착지하기 전에 오두막에 도착하고 <<anxious_guard_ nun 0>> 당신 뒤 문을 닫는다. 그 <<beasttype_ un 1>> 다시 날아오르며 돌에 발톱 자국을 남긴다. 당신은 창문 너머로 <<beastsplural_ i 1>> 내려와 등대 주변에 착지하는 것을 본다.
+<br><br>
+
+<<link [[다음|Prison Spire Intro 3]]>><</link>>
+<br>
+
+
+:: Prison Spire Intro 3
+<<set $outside to 1>><<effects>><<effects_prison>>
+
+<<person1>>"그들은 사냥을 마치고 오면 항상 흥분하고 있더라니까." <<anxious_guard_ ga 0>> 말한다. "이 위는 결코 안전하지 않아. 전 놈보다 오래 버텼으면 좋겠네." <<He_ ga>> 조금 멀리 있는 곳을 가리킨다. "끝으로부터 떨어져 있어. 벽은 사라진지 오래야."
+<br><br>
+
+"한번 개목걸이를 걸어보려곤 했었는데." <<He_ nun>> <<his_ yi>> 머리를 흔든다. "아무튼 할 일은 그들한테 먹이를 주고 상어 이빨을 모으고 밀수품을 압수하는거야. 그들이 어디서 그걸 들고 오는진 모르겠지만 우리가 아무것도 하지 않으면 망하고 말거야."
+<br><br>
+
+<<link [[다음|Prison Spire]]>><<endevent>><</link>>
+<br>
+
+
+
+:: Prison Tattooed
+<<effects>>
+
+<<link [[다음|Prison Walkway]]>><</link>>
+<br>
+
+
+:: Prison Spire Precipice
+<<effects>>
+
+<<anxious_guard 0 cap>> 소리를 지르지만 <<his_ ga>> 하는 말은 모순적이다. <<He_ nun>> 떨어지기 전 높이도 멀리도 잡혀가진 않았지만 힘에 의해 <<him_ nun>> <span class="red">가장자리에서 굴러 넘어진다.</span>
+<br><br>
+
+오직 <<his_ yi>> 손가락이 절박한 심정으로 끝을 잡고 있다.
+<br><br>
+
+<<link [[도와준다|Prison Spire Precipice Help]]>><<famegood 20>><<prison_rep anxious 1>><</link>><<ggglove>>
+<br>
+<<link [[요구를 한다|Prison Spire Precipice Demand]]>><<def 3>><</link>>
+<br>
+
+:: Prison Spire Precipice Help
+<<effects>>
+
+당신은 끝으로 달려가 <<anxious_guard_ yi 0 apo>> 손을 잡는다. 당신은 <<him_ ul>> 위로 들어 올릴 수 있었다.
+<br><br>
+
+<<He_ nun>> 비틀거리며 오두막으로 가지만 몇 걸음 못가 <<his_ yi>> 무릎이 떨려 넘어진다. 당신은 <<him_ i>> 다시 일어나도록 도와주고 안전한 곳에 도달할 때 까지 <<his_ rul>> 잡아준다.
+<br><br>
+<<set $NPCList[0].name_known to 1>>
+<<save_anxious_guard>>
+<<pass 10>>
+<<He_ nun>> 앉아서 말을 할 수 있을 때까지 몇 분 쉰다. "고마워." <<he_ ga>> 말한다. "아무튼 난 <<anxious_guard_ iya 0>>. 우리의 이름을 말하면 안되지만 좆까라 해. 닌 그게 날 위한 거라 생각해."
+<br><br>
+<<if $replayScene>>
+	<<link [[다음|Prison Spire]]>><<endevent>><</link>>
+<<else>>
+	<<prison_spire_options>>
+<</if>>
+
+:: Prison Spire Precipice Demand
+<<effects>>
+
+"나-난 아무것도 없어." <<anxious_guard_ ga 0>> 말한다. "제발 그냥 들ㅇ... 잠깐. 나 열쇠가 있어! 해변으로 가는 열쇠 말이야. 네가 날 살려준다면 이 열쇠를 주고 아무한테도 네가 열쇠를 가지고 있다 말하지 않을게."
+<br><br>
+
+<<if $skulduggery gte 1000>>
+	그 열쇠는 재능을 가진 당신에겐 별로 필요 없어보이지만 다른 사람한테는 유용할지 모른다.
+<</if>>
+<br><br>
+
+당신은 <<anxious_guard_ yi 0 apo>> 손을 잡는다. 당신은 <<him_ ul>> 위로 들어 올릴 수 있었다.
+<br><br>
+
+<<He_ nun>> 비틀거리며 오두막으로 가지만 몇 걸음 못가 <<his_ yi>> 무릎이 떨려 넘어진다. 당신은 <<him_ i>> 다시 일어나도록 도와주고 안전한 곳에 도달할 때 까지 <<his_ rul>> 잡아준다.
+<br><br>
+<<set $NPCList[0].name_known to 1>>
+<<save_anxious_guard>>
+<<pass 10>>
+<<He_ nun>> 앉아서 말을 할 수 있을 때까지 몇 분 쉰다. "고마워." <<he_ ga>> 말한다. "아무튼 난 <<anxious_guard_ iya 0>>. 우리의 이름을 말하면 안되지만 좆까라 해. 닌 그게 날 위한 거라 생각해."
+<br><br>
+
+당신은 당신의 손을 내민다. "그-그렇지." <<he_ ga>> 말한다. "내가 한 말은 지켜야지." <<He_ nun>>  <<his_ yi>> 주머니에서 무거운 철 열쇠를 꺼낸다. "네가 이걸 들키더라도 어디서 얻었는지는 말하지 마."
+<br><br>
+
+<<set $prison.yard_key to 1>>
+<br><br>
+<<if $replayScene>>
+	<<link [[다음|Prison Spire]]>><<endevent>><</link>>
+<<else>>
+	<<prison_spire_options>>
+<</if>>
+
+:: Passout Prison
+<<effects>>
+당신은 스스로를 너무 혹사시켰다.
+<br><br>
+<<passout>>
+<<link [[일어난다|Passout Prison 2]]>><</link>>
+<br>
+<<pass 1 hour>>
+<<trauma 6>><<set $stress -= 2000>>
+
+:: Passout Prison 2
+<<location "prison">><<effects>>
+
+<<generate_veteran_guard 0>><<person1>>
+"일어나, 이 새끼야." <<personsimple_ yi "normal">> 목소리가 말한다. <<veteran_guard_ da 0>>. "너의 감옥에서 말고 다른 곳에서 잠은 허용되지 않아. 일어나." <<He_ nun>> 당신의 옷깃을 잡고 일어나는데 도와준다.
+<br><br>
+
+<<He_ nun>> 당신이 완전히 회복하기도 전 당신을 데려간다.
+<br><br>
+
+<<link [[다음|Prison Punishment]]>><<endevent>><</link>>
+<br>
+
+:: Prison Revolt Refuse
+<<effects>>
+
+지금은 당신의 승리를 만끽하는 것으로도 충분하다.
+<br><br>
+
+<<destination_prison>>
+
+:: Prison Revolt
+<<effects>>
+<<set $prison.schedule to "revolt">>
+<<if $worn.face.type.includes("gag")>>
+	당신은 근처 수감자들에게 중얼거린다. 그들은 당신의 재갈을 잡아당긴다. 조금의 노력이 들어갔지만 그들은 당신이 뺄 수 있을 정도로 약하게 한다.
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+	<br><br>
+<</if>>
+<<if $speech_attitude is "meek">>
+	"그들이 우릴 괴롭히는 것을 끝낼 시간이야." 당신이 소리친다. "우리도 밀리지 않는다는 것을 보여주자!"
+<<elseif $speech_attitude is "bratty">>
+	"난 나한테 이래라 저래라 하는 개새끼들한테 질렸어." 당신이 소리친다. "그들을 조져버리자!"
+<<else>>
+	"이곳에 변화를 줄 시간이야." 당신이 소리친다. "이제 우리가 여기를 지배한다!"
+<</if>>
+<br><br>
+<<generate1>><<person1>><<generate2>>
+수감자들이 환호한다. 한 <<person_ un>> 창문 주변 난간을 잡고 <<his_ yi>> 맨손으로 분리시킨다. 다른 사람들은 돌을 던진다. 이미 조명들은 깨져있다. 무정부 상태가 시작되었다.
+<br><br>
+<<set $prison.attention to 0>>
+<<destination_prison>>
+
+:: Pregnancy Birth Prison
+<<set $outside to 0>><<effects>>
+<<set $first_birth to !$pregnancyStats.humanToysUnlocked>>
+<<generate_methodical_guard 0>><<person1>>
+<<generate_relaxed_guard 1>>
+<<generate_anxious_guard 2>>
+<<generate_veteran_guard 3>>
+당신은 의료실 침대에서 일어난다. 몇몇 흐릿한 형체들이 돌아다닌다. 한 사람이 가까이 다가온다. <<his_ yi>> 특징은 <<methodical_guard_ wa 0>> 많이 비슷하다. "진정해. <<if $prison.schedule is "lockdown">>누군가가 너를 발견해서 다행이야. 이런 상황이니, 네가 감방 밖에 있던 것은 묵과해 주지. 넌 지금 의료실이야.<<else>>네가 까먹었을 수도 있으니 말해주는데 넌 지금 의료실이야. 넌 지금 분만 중이야.<</if>>"
+<br><br>
+
+당신은 팔에 가벼운 찌릿함을 느끼고 당신의 감각이 점점 희미해진다. "진정제의 효과가 곧 들거야..." <<his_ yi>> 다시 흐릿해진다. 고통이 점점 사라진다.
+<br><br>
+
+<<person3>>
+몽롱함을 뚫고 다른 목소리가 들려온다. <<anxious_guard_ yi 2>> 목소리인 것 같다 "미-믿을 수가 없어. 네가 지금 하는게 무슨 짓인지 알고 하는거야? <<phim_ ul>> 본토로 데려가서-"
+<br>
+"닥쳐. <<pShe_ nun>> 절대 그곳으로 가지 못할거야. <<phim_ ul>> 봐봐, <<pshe_ nun>> 출산할 준비가 됐다고!" 그건 <<veteran_guard_ 2>>처럼 들린다.
+<br>
+"<<He_ nun>> 감시 하에 출산을 해야할거야. 본토에서 누가 도와주러 오기 전까진 이게 최선이야."  <<relaxed_guard_ yi 1>> 목소리가 말한다.
+<br><br>
+
+"조용히 해. 이제 너의 옷을 벗길거야."
+<<if playerChastity("hidden")>>
+	<<He>> 는 당신의 <<worn_genitals_name_ ul>> 보고 가슴 높이의 찬장을 연다 <<He_ nun>> 쌍으로 갈래가 있지만 더 큰 도구를 가지고 온다. "우린 그걸 뺄거야. 별로 아프진 않을거야."
+	<br><br>
+	<<He_ nun>> 당신의 <<worn_genitals_name_ ul>> 두개의 갈래로 잡고 손잡이에 달린 버튼을 누른다. 당신은 그 도구에서 나는 소리를 듣는다. <span class="pink">그 도구는 금속을 부러뜨린다.</span>
+	<<set $worn.genitals.type.push("broken")>>
+<</if>>
+<br><br>
+<<wash>><<undress "prison_birth">>
+
+<<link [[다음|Pregnancy Birth Prison 2]]>><</link>>
+<br>
+
+:: Pregnancy Birth Prison 2
+<<effects>>
+
+<<methodical_guard_ nun 0 cap>> 당신의 얼굴 위에 마스크를 올린다. 당신은 다시 의식이 희미해지는걸 느낀다.
+<br><br>
+
+<<set _pregnancy to getPregnancyObject()>>
+<<if _pregnancy.totalBirthEvents gte 5>>
+	<<set _min to 15>>
+	<<set _max to 60>>
+<<elseif _pregnancy.totalBirthEvents gte 3>>
+	<<set _min to 30>>
+	<<set _max to 120>>
+<<else>>
+	<<set _min to 60>>
+	<<set _max to 180>>
+<</if>>
+
+<<set _max to Math.floor(_max * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+<<set _min to Math.floor(_min * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+
+<<set _timeCalc to random(_min, _max)>>
+<<set _hours to Math.floor(_timeCalc / 60)>>
+<<set _minutes to _timeCalc % 60>>
+
+<<switch playerNormalPregnancyType()>>
+	<<case "human">>
+		<<methodical_guard_ yi 0 capo>> 목소리가 안개 속을 떠다닌다. "머리가 아래로 내려왔어. 우린 운이 좋았어. 넌 그냥..."
+		<br><br>
+
+		시간이 빨라지고 느려지며 고통이 점점 강해진다. 당신은 "숨쉬고" 와 "내보내고" 를 계속해서 듣고 최선을 다한다.
+		<br><br>
+
+		<<link [["다음 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Prison 3]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+	<<case "wolf">>
+		<<methodical_guard_ yi 0 capo>> 목소리가 안개 속을 떠다닌다. "이건... 예상치 못했네. 인간이 아닌 것을 출산한다라. 집중하자..."
+		<br><br>
+
+		시간이 빨라지고 느려지며 고통이 점점 강해진다. 당신은 "숨쉬고" 와 "내보내고" 를 계속해서 듣으며 최선을 다한다.
+		<br><br>
+
+		<<link [["다음 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Prison Wolf]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+<</switch>>
+
+:: Pregnancy Birth Prison 3
+<<effects>>
+<<generate5>><<person5>>
+<<set $litter_size to getPregnancyObject().fetus.length>>
+당신은 의료실에서 일어난다. 미소를 띤 조산사가
+<<if $litter_size is 1>>
+	<<his_ yi>> 팔로 아기를 들고 서있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 아기를 건네며 말한다. 아기는 당신의 품에 안겨, 눈을 감은 채, 가슴을 오르락내리락하며 부드럽게 호흡한다.
+	<br><br>
+
+	"전 가능한 빨리 왔어요. 저 간수가 당신이 아기를 분만하는데 정말 잘 해주었어요. 아무튼 모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 이름은 생각해 봤나요?"
+	<br><br>
+
+<<elseif $litter_size is 2>>
+	<<his_ yi>> 팔로 쌍둥이를 들고 서있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 아기한 명을 건네주고 나머지도 건내주며 말한다. 아기들은 당신의 팔 양쪽에 앉아, 눈을 감은 채, 가슴을 오르락내리락하며 부드럽게 호흡한다.
+	<br><br>
+
+	"전 가능한 빨리 왔어요. 저 간수가 당신이 아기를 분만하는데 정말 잘 해주었어요. 아무튼 모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 그들의 이름은 생각해 봤나요?" 조산사가 묻는다.
+	<br><br>
+
+<<else>>
+
+	<<his_ yi>> 팔로 세 쌍둥이를 들고 서있다.
+	<br><br>
+
+	"너의 엄마가 깬 것 같네." <<he_ ga>> 당신에게 한 명을 건네주고 나머지도 건네주며 말한다. 아기는 당신의 팔 양쪽에 앉는다. 조산사는 당신 가슴 바로 앞에서 세번째 아기를 들고 있다. 그들은 눈을 감은 채, 가슴을 오르락내리락하며 부드럽게 호흡한다.
+	<br><br>
+
+	"전 가능한 빨리 왔어요. 저 간수가 당신이 아기를 분만하는데 정말 잘 해주었어요. 아무튼 모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 이름은 생각해 봤나요?" 조산사가 묻는다.
+	<br><br>
+<</if>>
+
+<<set $bornChildrenIds to []>>
+<<run getPregnancyObject().fetus.forEach(child => $bornChildrenIds.push(child.childId))>>
+
+<<setBabyIntro "pc" "Bailey">>
+<<birthUi "pc" "prison" "home" "Pregnancy Birth Prison 4" 120>>
+
+:: Pregnancy Birth Prison 4
+<<effects>>
+<<getChildrenIds>><<childSelect _childrenIds.last()>>
+<<set _pregFame to ($litter_size * 5)>>
+<<famepregnancy _pregFame>>
+<<if $litter_size is 1>>
+
+	당신은 한참 동안 <<childtype_ rul>> 안고, <<childhis_ yi>> 작은 숨소리와 움직임을 즐긴다. <<childHe_ nun>> 대부분의 시간을 자면서 보내지만, 가끔 <<childhis_ yi>> 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+	<<if $first_birth>>
+		<<He_ nun>> <<childname_ yi>> 기저귀를 가는 방법과 <<childhim_ ul>> 목욕시키는 방법을 가르쳐준다.
+	<<else>>
+		<<He_ nun>> <<childname_ yi>> 기저귀를 가는 것과 <<childhim_ ul>> 목욕시키는 것을 도와준다.
+	<</if>>
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 아기는 저희가 대신 돌봐드릴게요. 당신은 오늘 하루 업무가 면제됐어요"
+	<br><br>
+	당신은 <<childname_ rul>> 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<<elseif $litter_size is 2>>
+	당신은 한참 동안 당신의 아기들을 안고, 그들의 작은 숨소리와 움직임을 즐긴다. 그들은 대부분의 시간을 자면서 보내지만, 가끔 그들의 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+
+	<<if $first_birth>>
+		<<He_ nun>> 그들의 기저귀를 가는 방법과 그들을 목욕시키는 방법을 알려준다.
+	<<else>>
+		<<He_ nun>> 그들의 기저귀를 가는 것과 그들을 목욕시키는 것을 도와준다.
+	<</if>>
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 그들은 저희가 대신 돌봐드릴게요. 당신은 오늘 하루 업무가 면제됐어요"
+	<br><br>
+	당신은 쌍둥이를 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<<elseif $litter_size is 3>>
+	당신은 한참 동안 당신의 아기들을 안고, 그들의 작은 숨소리와 움직임을 즐긴다. 그들은 대부분의 시간을 자면서 보내지만, 가끔 그들의 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+
+	<<if $first_birth>>
+		<<He_ nun>> 그들의 기저귀를 가는 방법과 그들을 목욕시키는 방법을 알려준다.
+	<<else>>
+		<<He_ nun>> 그들의 기저귀를 가는 것과 그들을 목욕시키는 것을 도와준다.
+	<</if>>
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 그들은 저희가 대신 돌봐드릴게요. 당신은 오늘 하루 업무가 면제됐어요"
+	<br><br>
+	당신은 세 쌍둥이를 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<</if>>
+
+<<link [[다음|Pregnancy Birth Prison 5]]>><<storeon "prison_birth">><<pass 24 hour>><<stress -40>><</link>>
+<br><br>
+
+:: Pregnancy Birth Prison 5
+<<effects>>
+
+<<if $litter_size gte 2>><<childrenNames_ nun $bornChildrenIds>><<else>><<childname_ un>><</if>> 요람에 누워있고 조산사는 당신이 설 수 있게 도와준다.
+
+<<if $first_birth or playerNormalPregnancyTotal() is 0>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받지만, <<he_ ga>> 정상적인 현상이라고 단언한다.
+	<br><br>
+
+	통증에도 불구하고, 당신은 출산 전보다 훨씬 더 편안하게 걷고 있다고 느낀다. 뱃속에 아기들이 없다면 얼마나 쉽게 움직일 수 있는지 당신은 까맣게 잊고 있었다.
+	<br><br>
+
+	조산사가 당신이 옷을 입는 것을 도와준다.
+<<elseif between(playerNormalPregnancyTotal(), 1, 2)>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받는다. 당신은 지난번 출산할 때 느꼈던 이 느낌을 기억하고 있으며, 이것이 정상적인 현상이라는 것을 알고 있다.
+	<br><br>
+
+	통증에도 불구하고, 당신은 출산 전보다 훨씬 더 편안하게 걷고 있다고 느낀다. 뱃속에 아기들이 없다면 얼마나 쉽게 움직일 수 있는지 당신은 까맣게 잊고 있었다.
+	<br><br>
+
+	조산사는 당신이 옷을 입도록 도와준다.
+<<elseif between(playerNormalPregnancyTotal(), 3, 7)>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받는다. 당신은 여전히 그 느낌이 익숙하지 않다.
+	<br><br>
+
+	당신은 다시 꽤 쉽게 걸을 수 있게 된다. 조금 어색하지만, 변화가 예전처럼 심하지는 않다. 몸 안에 다른 아기들이 없을 때 움직이기가 여전히 더 쉬운 것 같다.
+	<br><br>
+
+	조산사는 당신이 옷을 입는걸 도와주길 고집한다.
+<<elseif between(playerNormalPregnancyTotal(), 8, 49)>>
+	당신은 아무런 어려움 없이 일어선다. 훨씬 더 민첩해진 느낌은 있지만, 더 이상 느낌의 차이는 거의 없다.
+	<br><br>
+
+	<<He_ ga>> 당신의 움직임에 감탄하며, 당신의 안정을 위해 팔로 당신을 감싼다. "많은 사람들을 봐 왔지만 이렇게 빨리 회복하는 사람은 별로 없었어요. 정말 강인하시네요!"
+	<br><br>
+
+	조산사는 당신이 옷을 입는걸 도와주길 고집한다.
+<<elseif playerNormalPregnancyTotal() gte 50>>
+	당신은 누군가의 도움 없이 일어서면서, 속이 텅 빈 느낌을 받는다. 당신은 임신했을 때의 느낌이 벌써 그리워진다.
+	<br><br>
+
+	<<He_ ga>> 아무런 도움 없이 걷는 당신을 바라보며, 입을 쩍 벌린다. 당신은 재빨리 옷을 다시 입는다.
+	<br><br>
+
+	"이-이제 가셔도 돼요" <<he_ ga>> 말한다.
+<</if>>
+"당신의 아이들은 당신이 석방될 때 까지 임시 보호를 위해 고아원으로 보내질거고 그 이후엔 당신에게 양육권이 돌아갈 거예요."
+<br><br>
+
+<<link [[다음|Pregnancy Birth Prison 6]]>><<endevent>><</link>>
+
+:: Pregnancy Birth Prison 6
+<<effects>>
+
+당신은 당신의 감옥으로 돌아온다. 당신은 벌써 <<childrenNames_ yi $bornChildrenIds>> 포옹을 그리워한다. 당신은 이곳을 떠나고 싶다는 새로운 결심을 가진다. <<stress -10>><<llstress>><<trauma -10>><<lltrauma>>
+<br><br>
+
+<<link [[다음|Prison Cell]]>><<unset $litter_size>><<unset $first_birth>><<endevent>><<unset $bornChildrenIds>><</link>>
+<br>
+
+:: Pregnancy Birth Prison Wolf
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<endevent>>
+<<generate1>><<person1>>
+<<set $litter_size to getPregnancyObject().fetus.length>>
+<<trBeasttypeFun `getPregnancyObject().fetus[0].type`>><<set _baby_type to _trResult>>
+당신은 다른 방에서 깨어난다. 희미하게 낑낑거리는 소리가 들린다. 미소 띤 조산사가 당신의 침대 옆에 서서,
+<<if $litter_size is 1>>
+	포대기에 싸여 있는 _baby_type 강아지를 <<his_ yi>> 품에 안고 있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 강아지를 건네며 말한다. 강아지는 당신의 품에 안겨, 눈을 감은 채, 가슴을 오르락내리락하며 부드럽게 호흡한다.
+	<br><br>
+
+	"전 가능한 빨리 왔어요. 저 간수가 당신이 강아지를 분만하는데 정말 잘 해주었어요. 아무튼 모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 이름은 생각해 봤나요?"
+	<br><br>
+
+<<else>>
+	<<trNumber $litter_size>> 마리의 _baby_type 강아지가 안에 있는 유아용 침대를 밀고 있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 유아용 침대를 당신의 손이 닿는 곳으로 밀면서 말한다. 당신이 강아지들을 하나하나 안아주자, 강아지들은 눈을 감고, 가슴을 오르내리며 부드럽게 숨을 내쉰다.
+	<br><br>
+
+	"전 가능한 빨리 왔어요. 저 간수가 당신이 아기를 분만하는데 정말 잘 해주었어요. 아무튼 모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 그들의 이름은 생각해 보셨나요?" 조산사가 묻는다.
+	<br><br>
+
+<</if>>
+
+<<set $bornChildrenIds to []>>
+<<run getPregnancyObject().fetus.forEach(child => $bornChildrenIds.push(child.childId))>>
+
+<<birthUi "pc" "prison" "wolf_cave" "Pregnancy Birth Prison Wolf 2" 180>>
+
+:: Pregnancy Birth Prison Wolf 2
+<<effects>>
+<<getChildrenIds>><<childSelect _childrenIds.last()>>
+<<famebestiality $litter_size>>
+<<if $litter_size is 1>>
+	당신은 한참 동안 <<childtype_ rul>> 안고, <<childhis_ yi>> 작은 숨소리와 움직임을 즐긴다. <<childHe_ nun>> 대부분의 시간을 자면서 보내지만, 가끔 <<childhis_ yi>> 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 강아지는 저희가 대신 돌봐드릴게요."
+	<br><br>
+	당신은 <<childname_ rul>> 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<<else>>
+	당신은 한참 동안 강아지들을 안고, 그들의 작은 숨소리와 움직임을 즐긴다. 강아지들은 대부분의 시간을 잠을 자면서 보내지만, 가끔 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 강아지들은 저희가 대신 돌봐드릴게요."
+	<br><br>
+	당신은 강아지들을 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<</if>>
+
+<<link [[다음|Pregnancy Birth Prison Wolf 3]]>><<storeon "prison_birth">><<pass 24 hour>><<stress -40>><</link>>
+<br>
+
+:: Pregnancy Birth Prison Wolf 3
+<<effects>>
+
+<<if $litter_size gte 2>><<childrenNamesPost $bornChildrenIds "가">><<else>><<childname_ ga>><</if>> 요람에 누워 있는 동안 조산사가 당신을 일으켜 세워 준다.
+
+<<if $first_birth or playerNormalPregnancyTotal() is 0>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받지만, <<he_ ga>> 정상적인 현상이라고 단언한다.
+	<br><br>
+
+	통증에도 불구하고, 당신은 출산 전보다 훨씬 더 편안하게 걷고 있다고 느낀다. 뱃속에 늑대들이 없다면 얼마나 쉽게 움직일 수 있는지 당신은 까맣게 잊고 있었다.
+	<br><br>
+
+	조산사가 당신이 옷을 입는 것을 도와준다.
+<<elseif between(playerNormalPregnancyTotal(), 1, 2)>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받는다. 당신은 지난번 출산할 때 느꼈던 이 느낌을 기억하고 있으며, 이것이 정상적인 현상이라는 것을 알고 있다.
+	<br><br>
+
+	통증에도 불구하고, 당신은 출산 전보다 훨씬 더 편안하게 걷고 있다고 느낀다. 뱃속에 늑대들이 없다면 얼마나 쉽게 움직일 수 있는지 당신은 까맣게 잊고 있었다.
+	<br><br>
+
+	조산사가 당신이 옷을 입는 것을 도와준다.
+<<elseif between(playerNormalPregnancyTotal(), 3, 7)>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받는다. 당신은 여전히 그 느낌이 익숙하지 않다.
+	<br><br>
+
+	당신은 다시 꽤 쉽게 걸을 수 있게 된다. 조금 어색하지만, 변화가 예전처럼 심하지는 않다. 몸 안에 다른 늑대들이 없을 때 움직이기가 여전히 더 쉬운 것 같다.
+	<br><br>
+
+	조산사가 여전히 당신이 옷을 입는 것을 돕겠다고 고집한다.
+<<elseif between(playerNormalPregnancyTotal(), 8, 49)>>
+	당신은 아무런 어려움 없이 일어선다. 훨씬 더 민첩해진 느낌은 있지만, 더 이상 느낌의 차이는 거의 없다.
+	<br><br>
+
+	<<He_ ga>> 당신의 움직임에 감탄하며, 당신의 안정을 위해 팔로 당신을 감싼다. "많은 사람들을 봐 왔지만 이렇게 빨리 회복하는 사람은 별로 없었어요. 정말 강인하시네요!"
+	<br><br>
+
+	조산사가 여전히 당신이 옷을 입는 것을 돕겠다고 고집한다.
+<<elseif playerNormalPregnancyTotal() gte 50>>
+	당신은 누군가의 도움 없이 일어서면서, 속이 텅 빈 느낌을 받는다. 당신은 임신했을 때의 느낌이 벌써 그리워진다.
+	<br><br>
+
+	<<He_ ga>> 아무런 도움 없이 걷는 당신을 바라보며, 입을 쩍 벌린다. 당신은 재빨리 옷을 다시 입는다.
+	<br><br>
+
+	"이-이제 가셔도 돼요" <<he_ ga>> 말한다.
+<</if>>
+"강아지들은 스스로를 보호할 수 있게 되면 숲으로 방생될 거예요."
+<br><br>
+
+<<link [[다음|Pregnancy Birth Prison 6]]>><<endevent>><</link>>
+<br>

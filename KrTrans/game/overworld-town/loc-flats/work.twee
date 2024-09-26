@@ -1,0 +1,1247 @@
+:: Flats Knock
+<<effects>>
+
+<<if $flats_progress is 1 and random(1, 10) is 10>>
+	당신은 한 집에 다가가, 문을 두드리려고 한다. 그러다가 당신은 <span class="purple">연꽃 모양의 문손잡이</span>를 발견하고, 그것에 대한 경고를 기억해 낸다. 나쁜 사람들이 살고 있다는 것 같다.
+	<br><br>
+	<<dooricon>><<link [[아무튼 노크한다|Flats Lotus]]>><<set $flats_progress to 2>><</link>>
+	<br>
+	<<getouticon>><<link [[물러난다|Flats]]>><</link>>
+	<br>
+<<else>>
+	<<cleareventpool>>
+
+	<<addinlineevent "flats_vacant" 2>>
+		당신은 한 집에 다가가 문을 두드린다. 대답이 없다.
+		<br><br>
+
+		<<lockpickicon>><<link [[침입한다|Flats Lock]]>><</link>>
+		<br>
+		<<dooricon>><<link [[다음 집으로 간다 (0:01)|Flats Knock]]>><<pass 1>><</link>>
+		<br>
+	   <<getouticon>><<link [[그만둔다|Flats]]>><</link>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "flats work_1" 1>>
+		<<generate1>><<person1>>
+		당신은 한 집에 다가가 문을 두드린다. 문이 열리고 <<person_ i>> 나온다. <<He_ nun>> 문틀에 기대어 선다. "귀여운 손님이네," <<he_ ga>> 말한다. "무슨 일인가요?"
+		<br><br>
+		<<askicon>><<link [[도울 일이 있는지 묻는다|Flats Lecherous Ask]]>><</link>>
+		<br>
+		<<getouticon>><<link [[주소를 잘못 찾아왔다고 말하고 떠난다|Flats]]>><<endevent>><</link>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "flats work_2" 1>>
+		<<generate1>><<person1>>
+		당신은 한 집에 다가가 문을 두드린다. 짖는 소리가 돌아온다.
+		<br><br>
+		"조용히 해!" <<personsimple_ i>> 응답한다. "멍청한 똥개 같으니라고." 문이 열리고 <<person_ i>> 나온다. <<his_ yi>> 등 뒤로 너덜너덜해진 소파 커버가 바닥에 널브러져 있는 모습이 보인다. "무슨 일이죠?"
+		<br><br>
+		<<askicon>><<link [[도울 일이 있는지 묻는다|Flats Dog Ask]]>><</link>>
+		<br>
+		<<getouticon>><<link [[주소를 잘못 찾아왔다고 말하고 떠난다|Flats]]>><<endevent>><</link>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "flats work_3" 1>>
+		<<generate1>><<person1>>
+		당신은 한 집에 다가가 문을 두드린다. 문이 열리고 <<person_ i>> 나온다. <<He_ nun>> 문틀에 기대어 선다. "귀여운 손님이네," <<he_ ga>> 말한다. "무슨 일인가요?"
+		<br><br>
+		<<askicon>><<link [[도울 일이 있는지 묻는다|Flats Kitchen Ask]]>><</link>>
+		<br>
+		<<getouticon>><<link [[주소를 잘못 찾아왔다고 말하고 떠난다|Flats]]>><<endevent>><</link>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "flats work_4" 1>>
+		<<generate1>><<person1>>
+		당신은 한 집에 다가가 문을 두드린다. 문이 열리고, 잘 차려입은 모습의 <<person_ i>> 나온다. "내가 예상한 사람이 아니네," <<he_ ga>> 말한다. "무슨 일이죠?"
+		<br><br>
+		<<askicon>><<link [[도울 일이 있는지 묻는다|Flats Laundry Ask]]>><</link>>
+		<br>
+		<<getouticon>><<link [[주소를 잘못 찾아왔다고 말하고 떠난다|Flats]]>><<endevent>><</link>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "flats work_5" 1>>
+		<<generate1>><<generate2>><<person1>>
+		당신이 문에 다가가기도 전에 목소리가 들린다. 당신이 노크하자, 문이 열리고 <<person_ i>> 나온다.
+		<br><br>
+		"누구야?" 안쪽에서 <<person2>><<persons_ yi>> 목소리가 들려온다.
+		<br>
+		"어떤 <<girl_ iya>>," <<person1>><<person_ i>> 대답한다.
+		<br><br>
+
+		<<askicon>><<link [[도울 일이 있는지 묻는다|Flats Pair Ask]]>><</link>>
+		<br>
+		<<getouticon>><<link [[주소를 잘못 찾아왔다고 말하고 떠난다|Flats]]>><<endevent>><</link>>
+		<br>
+	<</addinlineevent>>
+
+	<<runeventpool>>
+<</if>>
+
+
+:: Flats Lotus
+<<effects>>
+
+<<npc "Bailey">><<person1>><<generate2>>
+당신이 문을 두드리자, 연꽃 손잡이가 덜컹거린다. 발소리가 가까이 다가오고 문이 활짝 열린다. 한 사람이 불이 붙지 않은 담배를 입에 물고 서 있다. 당신은 고아원에서 <<him_ ul>> 본 적이 있다. <<He_>> 또한 당신을 잘 알고 있다. <span class="pink">베일리다.</span>
+<br><br>
+<<He_ ga>> 고요한 눈으로 당신을 바라본다. "그 멍청한 표정을 보아하니," <<he_ ga>> 말한다. "날 볼거라곤 기대하지 않았나 본데. 잘 됐군. 다시는 여기서 나를 귀찮게 하지 마." <<He_ nun>> 문을 쾅 닫는다.
+<br><br>
+<<link [[다음|Flats]]>><<endevent>><</link>>
+<br>
+
+
+:: Flats Lecherous Ask
+<<effects>>
+
+"있죠, 사실 있긴 해요," <<person1>><<person_ i>> 그렇게 말하며, 당신이 지나갈 공간을 만든다. "어젯밤에 파티를 열었는데, 그것 때문에 발코니가 엉망진창이에요. 도와주면 <span class="gold">£10</span>를 드리죠."
+<br><br>
+
+<<link [[받아들인다 (1:00)|Flats Lecherous]]>><<housekeeping 1 200>><</link>><<ghousekeeping 200>>
+<br>
+<<link [[거절한다|Flats]]>><<endevent>><</link>>
+<br>
+
+:: Flats Lecherous
+<<effects>>
+
+You enter the flat, and see the damage at once. The door to the balcony is wedged open by several empty whisky bottles. Empty beer cans, pizza boxes, and other rubbish litter a table beyond. One of the bottles is broken. Shattered glass litters the floor.
+<br><br>
+
+"Fun night," the <<person>> says with pride. "I'll put the kettle on."
+<br><br>
+
+You sweep up the remains of broken glass, take the bottles to recycling, and throw away the trash.
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	The <<person>> walks onto the balcony as you wipe down the railing, and rests <<his>> arms either side of you. "Nice view from up here," <<he>> says, pushing <<his>> groin against your <<bottom>>.
+	<<if $NPCList[0].penissize gte 2>>
+		<span class="lewd">You feel <<his>> <<npcPenis>> through the fabric.</span>
+	<</if>>
+	<<gtrauma>><<trauma 6>><<gstress>><<stress 6>><<garousal>><<arousal 600>>
+	<br><br>
+	It is a nice view, you can see much of the town from here, from the docks to the forest. It's hard to appreciate right now however.
+	<br><br>
+
+	<<link [[화를 낸다|Flats Lecherous Angry]]>><<def 1>><<trauma -6>><<stress 6>><</link>><<gstress>><<ltrauma>>
+	<br>
+	<<link [[Endure|Flats Lecherous Endure]]>><<sub 1>><<trauma 6>><<arousal 600>><</link>><<gtrauma>><<garousal>>
+	<br>
+	<<if hasSexStat("promiscuity", 2)>>
+		<<link [[Charge extra|Flats Lecherous Rub]]>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+<<else>>
+	The balcony is spotless when you're done, far cleaner than it must have been before the party. The <<person>> walks out, mug of tea in hand, and stretches.
+	<br><br>
+
+	"Much better," <<he_ ga>> 말한다. "Here you go." You make <<moneyGain 10>>.
+	<br><br>
+
+	You finish the last of your drink, and walk outside.
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Flats Lecherous Angry
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"Pl-please don't," you say. "Just let me work in peace."
+<<elseif $speech_attitude is "bratty">>
+	"Get away from me," you say. "Pervert."
+<<else>>
+	"Get away from me!" you say.
+<</if>>
+<br><br>
+
+<<if random(1, 2) is 2>>
+	"Forgot my manners," the <<person>> says, trailing a hand over your shoulder as <<he>> pulls away. "I apologise." <<He>> doesn't harass you again.
+	<br><br>
+	The balcony is spotless when you're done, far cleaner than it must have been before the party. The <<person>> walks out, mug of tea in hand, and stretches.
+	<br><br>
+
+	"Much better," <<he_ ga>> 말한다. "Here you go." You make <<moneyGain 10>>.
+	<br><br>
+
+	You finish the last of your drink, and leave the flat.
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<<else>>
+	"Surely a smart <<girl>> like you knows how these things work," <<he>> says, reaching into <<his>> pocket. <<He>> waves another <span class="gold">£10</span> in front of your face. "You wanted money, right?"
+	<br><br>
+
+	<<link [[Endure|Flats Lecherous Endure]]>><<sub 1>><</link>>
+	<br>
+	<<link [[Stomp on foot|Flats Lecherous Stomp]]>><<def 1>><<famescrap 1>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+	<br>
+<</if>>
+
+
+:: Flats Lecherous Stomp
+<<effects>>
+
+You stomp on the <<persons>> foot. <<He>> recoils with a yelp. "F-fucking crazy!" <<he>> stammers, hopping away. "Get the fuck out of my flat."
+<br><br>
+
+You finish the last of your drink, and leave the flat.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+:: Flats Lecherous Endure
+<<effects>>
+
+You endure as the <<person>> rubs <<his>> groin against your <<bottom>>. "I love the view of the sea," <<he>> says, resting <<his>> hands on yours. "And the breeze." <<He>> trails a hand over your shoulder as <<he>> pulls away.
+<br><br>
+
+"Looks clean enough," <<he_ ga>> 말한다. "Here's a little extra, for the trouble." You make <<moneyGain 20>>.
+<br><br>
+
+You finish the last of your drink, and leave the flat.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+:: Flats Lecherous Rub
+<<effects>>
+
+You rest your hands on <<his>>, and push your <<bottom>> into <<his>> crotch. "This sort of cleaning is extra," you say. "<span class="gold">£20</span> extra."
+<<promiscuity2>>
+
+"S-sounds good to me," <<he>> says.
+
+<<if $NPCList[0].penis isnot "none">>
+	You feel <<his>> <<print $NPCList[0].penisdesc>> harden through <<his>> <<print $NPCList[0].clothes.lower.name>>. You line it up between your cheeks, and rub against it, arching your back as you do. <<He>> humps back, matching your rhythm, until <<he>> shudders into orgasm.
+<<else>>
+	You rub against <<his>> pussy through <<his>> <<print $NPCList[0].clothes.lower.name>>, arching your back as you do. <<He>> humps back, matching your rhythm, until <<he>> shudders into orgasm.
+<</if>>
+<br><br>
+
+<<He>> slumps onto a chair. You reach into <<his>> pocket, and help yourself to <<moneyGain 30>> before leaving the flat.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+:: Flats Dog Ask
+<<effects>>
+
+The <<person>> strokes <<his>> chin in thought. You hear the barking again, from behind another closed door. The <<person>> turns to face it. "I said shut it!" <<he>> shouts. "Tell you what, I'll give you <span class="gold">£10</span> if you clear the mess the mutt made of my furniture."
+<br><br>
+
+<<link [[받아들인다 (1:00)|Flats Dog]]>><<housekeeping 1 200>><</link>><<ghousekeeping 200>>
+<br>
+<<link [[거절한다|Flats]]>><<endevent>><</link>>
+<br>
+
+:: Flats Dog
+<<effects>>
+
+You enter the flat, and the <<person>> releases the source of the barking,
+<<saveNPC 0 "flats_2">>
+<<endevent>>
+<<beastNEWinit 1 "dog">>
+a <<beasttype>>.
+<br><br>
+
+Freed from <<bhis>> prison, <<bhe>> runs a lap around your legs, then bolts into the kitchen.
+<br><br>
+
+You right a fallen table, restore a lamp to its position, test it, then begin to pick up the shredded upholstery. The sofa is ruined, but you can make the room presentable.
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	<<if $bestialitydisable is "f" or $monster is 1>>
+		You fill a bin bag with shredded fabric, then drop to the floor to clear beneath the sofa. It's raised above the ground just enough to fit.
+		<br><br>
+		You're buried from the waist up, when you feel something prod your nethers. The <<beasttype>> mounts you.
+		<br><br>
+
+		<<link [[다음|Flats Dog Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		It takes a couple of bin bags, but you get the room clean. When you turn to leave however, you find the <<beasttype>> facing you. <<bHe>> growls, <span class="pink">then lunges.</span>
+		<br><br>
+
+		You manage to escape to the safety of a bedroom, but not unscathed. <<beastescape>>
+		<br><br>
+
+		<<endevent>>
+		<<loadNPC 0 "flats_2">>
+		<<clearNPC "flats_2">>
+		"Bad dog!" says the <<person1>><<person>>. You hear a thud, then a whine, then the bedroom door opens. "Sorry about that," <<he_ ga>> 말한다. "Here's your pay, and a little extra for the trouble." You make <<moneyGain 15>>.
+		<br><br>
+		<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	The <<beasttype>> watches with a quizzical expression while you work. It takes a couple of bin bags, but you get the room clean.
+	<<endevent>>
+	<<loadNPC 0 "flats_2">>
+	<<clearNPC "flats_2">>
+	"Good work," the <<person1>><<person>> says. "Here you go." You make <<moneyGain 10>>.
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Flats Dog Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<enable_rescue>>
+	<<set $NPCList[0].stance to "top">>
+	<<set $position to "doggy">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Flats Dog Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Flats Dog Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Flats Dog Rape Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation knot>>
+	<<if _knotted>>
+		The <<beasttype>> moves <<bhis>> hips this way and that, trying to work <<bhis>> penis free. It's lodged deep however. Instead, <<bhe>> pulls your body free from the sofa, and drags you across the carpet.
+		<br><br>
+		"How you doing in there?" calls a voice from the kitchen. The <<beasttype>>'s ears prick at the sound of <<bhis>> master's voice. <<bHe>> scrambles towards the kitchen, dragging you with <<bhim>>, <span class="pink">still attached to <<bhis>> $NPCList[0].penisdesc.</span>
+		<br><br>
+		<<link [[Grab hold of something|Flats Dog Rape Physique]]>><</link>><<physiquedifficulty 1 16000>>
+		<br>
+		<<link [[Tell it to stop|Flats Dog Rape Tending]]>><</link>><<tendingdifficulty 1 300>>
+		<br>
+		<<link [[Brace yourself|Flats Dog Rape Caught]]>><<trauma 12>><<stress 6>><<famebestiality 1>><<set $phase to 1>><</link>><<ggtrauma>><<gstress>>
+		<br>
+	<<else>>
+		The <<beasttype>> leaves you be. <<tearful>> you escape from beneath the sofa.
+		<br><br>
+
+		<<link [[다음|Flats Dog Rape Escape]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $enemyhealth lte 0>>
+	The <<beasttype>> yelps and leaves you be. <<tearful>> you escape from beneath the sofa.
+	<br><br>
+
+	<<link [[다음|Flats Dog Rape Escape]]>><</link>>
+	<br>
+
+<<else>><<set $rescued += 1>>
+	<<if $rapeavoid is 0 and $NPCList[0].stance is "top">>
+		"Coming!" The sound of <<bhis>> master's voice isn't enough to stop the <<beasttype>> fucking you. You try to push <<bhim>> away, but to no avail.
+
+		<<endcombat>>
+
+		<<loadNPC 0 "flats_2">>
+		<<clearNPC "flats_2">>
+
+		The <<person1>><<person>> arrives to find you half-trapped beneath the ruined sofa, being fucked by <<his>> pet.
+		<br><br>
+
+		<<if random(1, 2) is 2>>
+			<<He>> laughs, <span class="pink">and points <<his>> phone at you.</span> "A bad mutt indeed," <<he>> says, putting the phone away. <<He>> grasps <<his>> pet by the ear, and pulls it away from you. "Bad dog!" <<He>> drags it into a bedroom while you struggle from beneath the sofa, and locks it inside.
+			<br><br>
+
+			<<link [[다음|Flats Dog Rape Caught 2]]>><</link>>
+			<br>
+		<<else>>
+			<<He>> recovers from <<his>> shock, grasps the creature by the collar, and yanks it away from you. <<He>> drags it into a bedroom while you struggle from beneath the sofa, and locks it inside.
+			<br><br>
+			<<clotheson>>
+			<<exposure>>
+			"I'm very sorry," <<he>> says, unable to look you in the eye.
+			<<if $exposed gte 1>>
+				<<towelup>>
+				<<He>> hands you some towels to cover with.
+			<</if>>
+			"Here's a little extra for the trouble." <<He>> hands you <<moneyGain 30>>.
+			<br><br>
+
+			<<tearful>> you leave the flat
+			<br><br>
+
+			<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		"Coming!" The <<beasttype>> pulls away at the sound of <<bhis>> master's voice. <<tearful>> you struggle from beneath the sofa.
+		<br><br>
+		<<endcombat>>
+		<<clotheson>>
+		<<exposure>>
+
+		<<loadNPC 0 "flats_2">>
+		<<clearNPC "flats_2">>
+		<<person1>>
+		<<if $exposed gte 1>>
+			<<towelup>>
+			You find some towels to cover yourself with right before the <<person>> walks in. <<He>> frowns at your state of dress, but doesn't comment.
+		<<else>>
+			The <<person>> enters the room, looks around, and seems satisfied.
+		<</if>>
+		<br><br>
+		"Mutt giving you trouble?" <<he>> asks. "Sorry. You got the place clean though. Here's your money, with a little extra." You gain <<moneyGain 15>>
+		<br><br>
+
+		<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<</if>>
+
+:: Flats Dog Rape Physique
+<<effects>>
+
+You grasp the sofa leg, and pull against the <<beasttype>>.
+<<if $physiqueSuccess>>
+	With a loud plop, <span class="green">The <<print $NPCList[0].penisdesc>> comes free.</span> The <<beasttype>> continues into the kitchen. <<tearful>> you struggle to your feet.
+	<br><br>
+	<<link [[다음|Flats Dog Rape Escape]]>><</link>>
+	<br>
+<<else>>
+	The tension builds, until the leg <span class="red">snaps off.</span> You're pulled through the room by the <<print $NPCList[0].penisdesc>>, into the kitchen.
+	<br><br>
+
+	<<link [[다음|Flats Dog Rape Caught]]>><</link>>
+	<br>
+<</if>>
+
+:: Flats Dog Rape Tending
+<<effects>>
+
+<<if $tendingSuccess>>
+	"Bad dog!" you say. "Sit!" <span class="green">The <<beasttype>> obeys,</span> as far as it can with you attached to <<bhis>> <<print $NPCList[0].penisdesc>>.
+	<br><br>
+	From this angle you can take the shaft in hand. You manage to pry yourself free. The <<beasttype>> continues into the kitchen.
+	<br><br>
+
+	<<link [[다음|Flats Dog Rape Escape]]>><</link>>
+	<br>
+<<else>>
+	"B-bad dog," you say. "Let me go at once!" The <<beasttype>>'s master calls from the kitchen again. <span class="red"><<bHe>> forgets you, and continues <<bhis>> journey.</span>
+	<br><br>
+
+	<<link [[다음|Flats Dog Rape Caught]]>><</link>>
+	<br>
+<</if>>
+
+
+
+
+:: Flats Dog Rape Escape
+<<effects>>
+
+<<clotheson>>
+<<endcombat>>
+<<exposure>>
+
+<<loadNPC 0 "flats_2">>
+<<clearNPC "flats_2">>
+<<person1>>
+<<if $exposed gte 1>>
+	<<towelup>>
+	You find some towels to cover yourself with right before the <<person>> walks in. <<He>> frowns at your state of dress, but doesn't comment.
+<<else>>
+	The <<person>> enters the room, looks around, and seems satisfied.
+<</if>>
+"Good work," <<he_ ga>> 말한다. "Here's your pay." You make <<moneyGain 10>>.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+
+:: Flats Dog Rape Caught
+<<effects>>
+
+The <<beasttype>> pulls you in front of <<bhis>> shocked master.
+<<if $phase isnot 1>>
+	<<ggtrauma>><<ggstress>><<famebestiality 1>>
+<</if>>
+<<endcombat>><<clotheson>>
+
+<<loadNPC 0 "flats_2">>
+<<clearNPC "flats_2">>
+<<person1>>
+
+<<if random(1, 2)>>
+	<<He>> soon recovers, <<his>> expression replaced with a grin. "A bad mutt indeed," <<he_ ga>> 말한다. "Or did you want this?" <<He>> lifts <<his>> phone from the counter, points it at your face, then crouches to get a close-up of the knot.
+	<br><br>
+
+	"It'll shrink soon enough," <<he_ ga>> 말한다. Just hang tight. <<Hes>> not wrong. It exits with a plop. Fluid floods out after it, pooling beneath you.
+	<br><br>
+	"Bad dog!" <<he>> says, kicking <<his>> pet from the room and shutting the door.
+	<br><br>
+	<<link [[다음|Flats Dog Rape Caught 2]]>><</link>>
+	<br>
+<<else>>
+	<<He>> recovers from <<his>> shock, and grabs <<his>> pet by the waist. <<He>> pulls, and the knot exits with a plop. Fluid floods out after it, pooling beneath you.
+	<br><br>
+
+	<<clotheson>>
+	<<exposure>>
+
+	<<He>> drags the creature from the room and shuts the door, and
+	<<if $exposed gte 1>>
+		<<towelup>>
+		avoids eye contact as <<he>> hands you some towels to cover with.
+	<<else>>
+		avoids eye contact as <<he>> turns to face you.
+	<</if>>
+	"I'm so sorry," <<he_ ga>> 말한다. "Here's your money, and a little extra for the trouble." You make <<moneyGain 30>>.
+	<br><br>
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Flats Dog Rape Caught 2
+<<effects>>
+
+<<He>> crouches in front of you, and shows you <<his>> phone. "Now how about I upload this to the internet?" <<he>> muses. "I know a good site. Unless you want to convince me otherwise?" <<He>> pats <<his>> crotch. "With your mouth, of course. Your other end belongs to animals."
+<br><br>
+
+<<link [[Agree|Flats Dog Rape Oral]]>><<set $molestationstart to 1>><</link>>
+<br>
+<<link [[거절한다|Flats Dog Rape Refuse]]>><</link>>
+<br>
+<<set $skulduggerydifficulty to 300>>
+<<link [[Deceive|Flats Dog Rape Deceive]]>><</link>><<skulduggerydifficulty>>
+<br>
+
+:: Flats Dog Rape Refuse
+<<effects>>
+
+<<famebestiality 10>>
+"If you insist," <<he_ ga>> 말한다. "Here's your money, doggy slut." You make <<moneyGain 10>>.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+:: Flats Dog Rape Deceive
+<<effects>>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	You look the <<person>> dead in the eye, and open your mouth. <<He>> drops <<his>> phone in <<his>> haste to remove <<his>> <<print $NPCList[0].clothes.lower.name>>. You swipe it from the ground, shove <<him>> off balance, and run for the door.
+	<br><br>
+	"You fucking brat!" <<he>> shouts, tripping on <<his>> half-removed clothing. You escape the flat, down a flight of steps, and around a corner. You hear <<his>> footsteps thunder after you, <span class="green">but <<he>> misses your hiding place.</span>
+	<br><br>
+	You delete the offensive footage from the phone. Now to decide what to do with it. It might be worth something.
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	<<link [["Leave it somewhere " + $NPCList[0].pronouns.he + "'ll find"|Flats]]>><<pass 60>><<famegood 1>><<endevent>><</link>>
+	<br>
+	<<link [[Keep it|Flats]]>><<pass 60>><<set $blackmoney += 50>><<endevent>><</link>>
+	<br>
+<<else>>
+	You open your mouth, as if in assent. The <<person>> puts <<his>> phone down to remove <<his>> <<print $NPCList[0].clothes.lower.name>>. You try to snatch it, <span class="red">but <<he>> grasps your wrist.</span>
+	<br><br>
+	"Not so fast, slut." <<He>> grabs the back of your head, and pulls you towards <<his>> groin.
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	<<link [[다음|Flats Dog Rape Oral]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Flats Dog Rape Oral
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<npcoral>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Flats Dog Rape Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Flats Dog Rape Oral]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Flats Dog Rape Oral Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"Nice work cleaning up," <<he>> says, dropping some cash on you. "There's a little extra there. You can show yourself out." You make <<moneyGain 30>>.
+	<br><br>
+	<<tearful>> you leave the flat.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	You shove the <<person>> away from you, snatch <<his>> phone, and bolt for the door. <<He>> tries to pursue, but <<his>> pet darts between your legs, and leaps atop <<him>>.
+	<br><br>
+	"Get off you dumb mutt!" <<tearful>> you escape the flat.
+	<br><br>
+
+	You run down a flight of steps, and around a corner. You hear <<his>> footsteps thunder after you, <span class="green">but <<he>> misses your hiding place.</span>
+	<br><br>
+	You delete the offensive footage from the phone. Now to decide what to do with it. It might be worth something.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Leave it somewhere they'll find|Flats]]>><<pass 60>><<famegood 1>><</link>>
+	<br>
+	<<link [[Keep it|Flats]]>><<pass 60>><<set $blackmoney += 50>><</link>>
+
+<</if>>
+
+:: Flats Kitchen Ask
+<<effects>>
+
+"The kitchen's a tip," the <<person>> says. "I'll give you <span class="gold">£15</span> if you tidy it up. What do you say?"
+<br><br>
+
+<<link [[받아들인다 (1:00)|Flats Kitchen]]>><<housekeeping 1 200>><</link>><<ghousekeeping 200>>
+<br>
+<<link [[거절한다|Flats]]>><<endevent>><</link>>
+<br>
+
+:: Flats Kitchen
+<<effects>>
+
+You enter the <<persons>> flat, and walk through a spotless living room, into a filthy kitchen. A stack of plates fills the sink, and crumbs cover all the counters.
+<br><br>
+"I said it was a tip," <<he_ ga>> 말한다. <<He>> sounds embarrassed. "Parents are visiting soon. You arrived at the right time." <<He>> opens the fridge, and retrieves a can of cider. "I'll be in the living room."
+<br><br>
+
+The porcelain floor is sticky. You start there, cleaning it with a mop. Then you clear the counters with a dustpan and brush, before wiping them down.
+<br><br>
+
+The dishes take a while. Some are badly chipped, worse than the ones at the orphanage, but you clean them all the same.
+<br><br>
+
+<<link [[다음|Flats Kitchen 2]]>><</link>>
+<br>
+
+:: Flats Kitchen 2
+<<effects>>
+
+You enter the living room. "All done?" <<he>> asks, rising from in front of the television with a stretch.
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	"Now, ah, about your payment. I'm skint." <<He>> shrugs with an apologetic smile. "I only have a fiver."
+	<br><br>
+	<<link [[Accept the fiver|Flats Kitchen Fiver]]>><</link>>
+	<br>
+	<<if hasSexStat("promiscuity", 3)>>
+		<<link [[유혹한다|Flats Kitchen Seduce]]>><</link>><<promiscuous3>>
+		<br>
+	<<else>>
+		<span class="blue">You're not promiscuous enough to 'negotiate'.</span>
+		<br>
+	<</if>>
+	<<if $submissive lte 500>>
+		<<link [[Threaten to take the television|Flats Kitchen Threaten]]>><<stress -6>><</link>><<defianttext>><<lstress>>
+		<br>
+	<<else>>
+		<span class="blue">You're not defiant enough to cause a fuss.</span>
+		<br>
+	<</if>>
+<<else>>
+	"Now, ah, about your payment. I'm skint." <<He>> shrugs with an apologetic smile, seeming to wait for your reaction. "Just kidding. Here you go."
+	<br><br>
+
+	You make <<moneyGain 15>>.
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Flats Kitchen Fiver
+<<effects>>
+
+The <<person>> hands you a five-pound note. You make <<moneyGain 5>>.
+<br><br>
+
+<<He>> apologises again as you leave the flat.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+:: Flats Kitchen Seduce
+<<effects>>
+
+
+<<set $seductiondifficulty to 6000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+"I'm sure you can find the money somewhere," you say, running a finger down <<his>> chest. "I'll make it worth your while."
+<<promiscuity3>>
+
+<<if $seductionrating gte $seductionrequired>>
+
+	<span class="green">"I-I might have some cash after all,"</span> <<he>> says, fumbling in <<his>> pocket. The notes tumble out, but it looks like there's <span class="gold">£50</span> there. You push <<him>> onto the sofa.
+	<br><br>
+
+	<<link [[다음|Flats Kitchen Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+
+	The <<person1>><<person>> looks away. "Fuck," <<he_ ga>> 말한다. <span class="red">"Now I really wish I wasn't skint. Sorry love."</span> <<He>> holds out a five pound note. You take it and leave.
+	<br><br>
+
+	You make <<moneyGain 5>>
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Flats Kitchen Threaten
+<<effects>>
+
+"Skint?" you nod at the television. "That's alright. You can pay with your hardware instead. I don't mind carrying it."
+<br><br>
+
+The <<person>> throws <<his>> arms between you and the screen in a protective gesture. "Hang on!" <<he_ ga>> 말한다. "Maybe I do have the money squirreled away somewhere." 'Squirreled away somewhere' turns out to mean 'in my pocket.' You take the money, and leave the flat.
+<br><br>
+
+You make <<moneyGain 15>>.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+
+:: Flats Kitchen Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[다음|Flats Kitchen Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Flats Kitchen Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Flats Kitchen Sex Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	You gather the fallen cash, leaving the <<person>> sprawling, spent, on the sofa.
+	<br><br>
+	<<tearful>> you leave the flat. You make <<moneyGain 50>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+	<<tearful>> you escape from the flat.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+:: Flats Laundry Ask
+<<effects>>
+
+"You're timely," <<he_ ga>> 말한다. "My clothes need ironing. I'll give you <span class="gold">£20</span> if you do the lot."
+<br><br>
+
+<<link [[받아들인다 (1:00)|Flats Laundry]]>><<housekeeping 1 200>><</link>><<ghousekeeping 200>>
+<br>
+<<link [[거절한다|Flats]]>><<endevent>><</link>>
+<br>
+
+:: Flats Laundry
+<<effects>>
+
+You enter the <<person>>'s flat. The living room is small but lavishly decorated. An open book rests on a table beside a tall chair, beneath a grandfather clock.
+<br><br>
+
+<<He>> leads you through a well-maintained kitchen, down a thin corridor, and into a small room. An ironing board sits in the centre, and railing full of freshly-laundered clothes stands beside it.
+<br><br>
+
+"I expect it'll take an hour. Can I get you a cup of tea?"
+<br><br>
+
+<<link [[Drink tea|Flats Laundry Tea]]>><<stress -6>><</link>><<lstress>>
+<br>
+<<link [[Say you prefer coffee|Flats Laundry Coffee]]>><<tiredness -6>><</link>><<ltiredness>>
+<br>
+<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+	<span class="blue">You can't bring yourself to drink anything with alcohol while you know you're with child.</span>
+<<else>>
+	<<link [[Say you prefer booze|Flats Laundry Booze]]>><<set $drunk += 120>><</link>>
+<</if>>
+<br>
+<<link [[Don't drink|Flats Laundry Refuse]]>><</link>>
+<br>
+
+
+:: Flats Laundry Tea
+<<effects>><<wearProp "tea">>
+
+You get to work, ironing the clothes and folding them neatly in a pile. The <<person>> returns with a tray carrying a pot of tea, a small jug of milk, a bowl of sugar, and a china teacup. It tastes nice.
+<br><br>
+
+<<link [[다음|Flats Laundry Drink]]>><</link>>
+<br>
+
+
+:: Flats Laundry Coffee
+<<effects>><<wearProp "coffee">>
+
+You get to work, ironing the clothes and folding them neatly in a pile. The <<person>> returns with a mug of coffee. "Instant I'm afraid. I only keep it for guests." It doesn't taste bad.
+<br><br>
+
+<<link [[다음|Flats Laundry Drink]]>><</link>>
+<br>
+
+:: Flats Laundry Booze
+<<effects>><<wearProp "wine">>
+
+You get to work, ironing the clothes and folding them neatly in a pile. The <<person>> returns with a glass of champagne. "Odd accompanyment to ironing," <<he_ ga>> 말한다. "But a guest brought some, and I've half a bottle left." It tastes expensive.
+<br><br>
+
+<<link [[다음|Flats Laundry Drink]]>><</link>>
+<br>
+
+
+:: Flats Laundry Refuse
+<<effects>>
+
+You refuse the drink, and get to work ironing the clothes and folding them neatly in a pile.
+<br><br>
+
+<<link [[다음|Flats Laundry No Drink]]>><</link>>
+<br>
+
+:: Flats Laundry Drink
+<<effects>><<silently>><<handheldon>><</silently>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	You begin to heat up as you finish. It's a small room, and the iron is hot, but this feels wrong. Lascivious thoughts assault your mind, and you struggle to stay upright.
+	<<if $awareness gte 200>>
+		<span class="pink">There was something in the drink.</span>
+	<</if>>
+	<<ggarousal>><<set $drugged += 120>><<arousal 1200>>
+	<br><br>
+
+	You stagger from the room, into the arms of the <<person>>. "You look even more fuckable like this," <<he>> says, politeness discarded. <<He>> shoves you down the corridor, into a dead end, and traps you with <<his>> body.
+	<br><br>
+
+	<<link [[다음|Flats Laundry Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	You finish up, and return to the living room. You find the <<person>> sat in a chair, a pair of spectacles on <<his>> nose. "Aha," <<he_ ga>> 말한다. "Done, I take it? I left your money by the shoe rack. Thanks for the help."
+	<br><br>
+
+	You make <<moneyGain 20>>.
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Flats Laundry No Drink
+<<effects>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	You finish up, and find the <<person>> in the corridor outside. <<He>> walks into you, forcing you to step back. "I'll need one more thing from you, whore," <<he>> says, politeness discarded. <span class="purple"><<He>> shoves you into a dead end,</span> and traps you with <<his>> body. <<His>> eyes are filled with lust.
+	<br><br>
+	<<link [[Endure|Flats Laundry Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+	<<link [[Slap|Flats Laundry Slap]]>><<trauma -6>><</link>><<ltrauma>><<physiquedifficulty 1 16000>>
+	<br>
+<<else>>
+	You finish up, and return to the living room. You find the <<person>> sat in a chair, a pair of spectacles on <<his>> nose. "Aha," <<he_ ga>> 말한다. "Done, I take it? I left your money by the shoe rack. Thanks for the help."
+	<br><br>
+
+	You make <<moneyGain 20>>.
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Flats Laundry Slap
+<<effects>>
+
+<<if $physiqueSuccess>>
+	You deliver a hard smack to the <<persons>> face. <span class="green"><<He>> recoils,</span> almost stumbling. "I-I'm sorry," <<he>> stutters. "I don't know what came over me. I left your money by the shoe rack."
+	<br><br>
+
+	You leave <<him>> leaning against the kitchen counter, rubbing <<his>> eyes.
+	<br><br>
+
+	You make <<moneyGain 20>>
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<<else>>
+	You try to slap the <<person>>, <span class="red">but <<he>> grasps your wrist.</span> "Feisty," <<he_ ga>> 말한다. "This'll be fun."
+	<br><br>
+
+	<<link [[다음|Flats Laundry Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Flats Laundry Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Flats Laundry Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Flats Laundry Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Flats Laundry Rape Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"I left your money by the shoe rack," <<he>> says, panting against the wall. "Well-earned, whore."
+	<br><br>
+	<<tearful>> you leave the flat. You make <<moneyGain 20>>.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+	You shove the <<person>> into the small room, and slam the door.
+	<br><br>
+	<<tearful>> escape the flat. You find the money <<he>> promised near the door. You make <<moneyGain 20>>.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<link [[다음|Flats]]>><</link>>
+<br>
+
+:: Flats Pair Ask
+<<effects>>
+
+"I don't think we need anything," the <<person1>><<person>> says.
+<br><br>
+"Wait!" shouts the other voice. "Offer <<phim>> <span class="gold">£10</span> to clean up in here. Because I know your lazy arse won't do it."
+<br><br>
+The <<person1>><<person>> looks ready to argue, but relents. "Fine." <<He>> turns to you. "I think you heard the offer."
+<br><br>
+
+<<link [[받아들인다 (1:00)|Flats Pair]]>><<housekeeping 1 200>><</link>><<ghousekeeping 200>>
+<br>
+<<link [[거절한다|Flats]]>><<endevent>><</link>>
+<br>
+
+:: Flats Pair
+<<effects>>
+
+You enter the living room. The second voice belongs to a <<person2>><<person>>. <<He>> waves, but doesn't look up, as you enter, being transfixed by a chess board in front of <<him>>.
+<br><br>
+
+"The carpet needs cleaning," the <<person1>><<person>> says. "And the silver polished." <<He>> gestures at a stack of shelves, carrying a number of ornaments.
+<br><br>
+
+You can't use a vacuum cleaner as the noise would disturb their game, so you take a dustpan and brush, and get to cleaning the carpet.
+<br><br>
+
+<<link [[다음|Flats Pair 2]]>><</link>>
+<br>
+
+
+:: Flats Pair 2
+<<effects>>
+
+The <<person1>><<person>> and <<person2>><<person>> remain motionless as you work, staring at the board in front of them. You finish the carpet, and move on to the silverware.
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	You hear a decisive thud from the board. "Checkmate."
+	<br>
+	"Fuck," the <<person1>><<person>> replies. "The <<girl>> distracted me."
+	<br>
+	"You were already finished."
+	<br>
+	The <<person>> flips the board, scattering the pieces. The <<person2>><<person>> laughs. "Sorry for more work <<girl>>. I'll give you an extra <span class="gold">£10</span> if you clean this up as well."
+	<br><br>
+	The <<person1>><<person>> paces up and down the room, furious.
+	<br><br>
+
+	<<link [[Agree|Flats Pair 3]]>><</link>>
+	<br>
+	<<link [[거절한다|Flats Pair 2 Refuse]]>><</link>>
+	<br>
+<<else>>
+	You finish cleaning, and turn to find the pair still staring at their game. The <<person2>><<person>> hands you the money without looking up. You make <<moneyGain 10>>.
+	<br><br>
+
+	<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Flats Pair 2 Refuse
+<<effects>>
+
+"Alright," the <<person2>><<person>> says, fishing money from a pocket. "Here you go." You make <<moneyGain 10>>.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+:: Flats Pair 3
+<<effects>>
+
+You drop to all fours to retrieve the pieces. Many have bounced beneath furniture.
+<br><br>
+
+The <<person1>><<person>> grabs your hair, and turns your head to face <<him>>. "This is your fucking fault."<<gtrauma>><<gstress>><<gpain>><<trauma 6>><<stress 6>><<pain 4>>
+<br>
+"I didn't know you were such a sore loser," the <<person2>><<person>> interjects.
+<br>
+"I know what will cheer me up," the <<person1>><<person>> says, leering at your body.
+<br>
+The <<person2>><<person>> sighs. "I'll throw an extra <span class="gold">£50</span> in if you let my friend vent <<person1>><<his>> frustrations."
+<br><br>
+
+<<if hasSexStat("promiscuity", 3)>>
+	<<link [[Agree|Flats Pair Agree]]>><</link>><<promiscuous3>>
+	<br>
+	<<link [[Ask for £100|Flats Pair Seduce]]>><</link>><<promiscuous3>>
+	<br>
+<<elseif $uncomfortable.prostituting is false>>
+	<<His>> offer repulses you, but you need the money.
+	<br><br>
+	 <<link [[Agree|Flats Pair Agree]]>><<set $desperateaction to 1>><</link>><<promiscuous3>>
+	<br>
+	<<link [[Ask for £100|Flats Pair Seduce]]>><<set $desperateaction to 1>><</link>><<promiscuous3>>
+	<br>
+<</if>>
+<<link [[거절한다|Flats Pair 3 Refuse]]>><</link>>
+<br>
+
+
+:: Flats Pair 3 Refuse
+<<effects>>
+
+"Alright," the <<person2>><<person>> sighs. "Get your mitts off the <<girl>>." The <<person1>><<person>> releases you while the <<person2>><<person>> fishes money from <<his>> pocket. You make <<moneyGain 20>>.
+<br><br>
+
+<<link [[다음|Flats]]>><<pass 60>><<endevent>><</link>>
+<br>
+
+
+:: Flats Pair Agree
+<<effects>>
+
+"I'll be leaving you to it, then," the <<person2>><<person>> says. "I'll leave the money by the door."
+<br><br>
+<<saveNPC 0 "flats_5">>
+<<endevent phaseless>>
+<<loadNPC 0 "flats_5">>
+<<clearNPC "flats_5">>
+<<person1>>
+The <<person>> delivers a hard smack to your <<bottom>>.
+<br><br>
+
+<<link [[다음|Flats Pair Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Flats Pair Seduce
+<<effects>>
+
+<<set $seductiondifficulty to 8000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+<<if $speech_attitude is "meek">>
+	"I-I'll do it for £100," you say. "This <<personsimple>> is too scary for less."
+<<elseif $speech_attitude is "bratty">>
+	"I'm not letting this loser go any further for less than £100," you say.
+<<else>>
+	"I'll do it," you say. "But it'll cost £100."
+<</if>>
+<<promiscuity3>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<set $phase to 1>>
+
+	The <<person1>><<person>> seems eager. The <<person2>><<person>> looks ready to rebuke you, but then sighs and shakes <<his>> head. "Fine. <span class="green">£100 it is.</span>"
+	<br><br>
+
+	<<link [[다음|Flats Pair Agree]]>><<set $phase to 1>><</link>>
+	<br>
+
+<<else>>
+
+	The <<person1>><<person>> seems eager, <span class="red">but the <<person2>><<person>> shakes <<his>> head.</span> "It'll be cheaper to buy booze at that point. £50, take it or leave it."
+	<br><br>
+
+	<<link [[가져간다|Flats Pair Agree]]>><</link>>
+	<br>
+	<<link [[Leave it|Flats Pair 3 Refuse]]>><</link>>
+	<br>
+
+<</if>>
+
+:: Flats Pair Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemyanger += 100>><<promiscuity3>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[다음|Flats Pair Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Flats Pair Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Flats Pair Sex Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"I think I'm ready to forgive you," the <<person>> says. "Take your money and get out."
+	<br><br>
+	<<tearful>> you leave the flat. You find the money the <<person>>'s friend left on a table by the front door.
+	You make
+	<<if $phase is 1>>
+		<<moneyGain 120>>.
+	<<else>>
+		<<moneyGain 70>>.
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	The <<person>> stumbles backwards, treading on a chess piece and falling to the floor.
+	<br><br>
+	<<tearful>> you flee the flat. You swipe the cash from a table by the front door.
+	You make
+	<<if $phase is 1>>
+		<<moneyGain 120>>.
+	<<else>>
+		<<moneyGain 70>>.
+	<</if>>
+<<else>>
+	The <<person1>><<person>> accompanies you to the door, pushes some cash into your hands, then shoves you outside.
+	<br><br>
+	You make <<moneyGain 70>>.
+<</if>>
+<br><br>
+
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Flats]]>><<pass 60>><</link>>
+<br>

@@ -1,0 +1,163 @@
+:: Tutorial
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<enable_rescue>>
+	<<maninit>>
+	<<set $NPCList[0].chest to "none">>
+	<<HePost "은">> 당신을 향해 손을 뻗는다.
+	<<set $NPCList[0].fullDescription to "Tutorial " + ($NPCList[0].pronoun is "m"?"man":"woman")>>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+
+__전투 튜토리얼__
+<br>
+
+<<if $gamemode is "soft">>
+	<i>당신의 캐릭터는 처음에는 꽤 수동적일 겁니다. 캐릭터가 더욱 음란해지고, 적극적으로 행동하는 데에 편안함을 느끼게 될 수록 더욱 많은 행동을 할 수 있게 됩니다.
+	<br><br>
+	<span class="sub">적극적</span>이거나 <span class="meek">온순한</span> 행동은 상대방의 성욕을 자극하며, 더욱 오르가즘에 가깝게 만들어 줍니다. 또한 당신을 더욱 신뢰하게 되고요.
+	<br><br>
+	<span class="brat">건방진</span> 행동은 상대방을 짜증나게 만듭니다. 자주 반항적인 행동을 한다면 상대방은 더욱 거칠게 행동하고 당신을 덜 신뢰하게 됩니다.
+	<br><br>
+	몇몇 행동은 사용할 신체 부위의 기술과 상대방이 당신을 얼마나 신뢰하고 있느냐에 따라 성공 확률이 달라집니다.
+	<br><br>
+	당신의 신체 부위는 각각 한 턴에 한 가지 행동을 할 수 있습니다. 행동을 선택한 뒤, 다음 버튼을 누르거나 엔터키를 눌러서 진행하세요.</i>
+	<br><br>
+<<else>>
+	<i>공격자로부터 도망갈 방법은 보통 세 가지 입니다. 맞서 싸우거나, 성적으로 만족시켜주거나, 구조를 받는 것이죠.
+	<span class="def">반항적</span>인 행동은 상대방에게 고통을 줍니다. 상대방이 충분히 고통을 받으면 당신은 도망칠 수 있게 됩니다. 하지만 <span class="def">반항적</span>인 행동은 상대방을 화나게 만들고, 더욱 폭력적으로 만듭니다.
+	<br><br>
+	공격자들은 기꺼이 당신을 수동적인 장난감으로 사용하고자 할 겁니다만, <span class="sub">순종적</span>인 행동은 그들을 더욱 빠르게 가버리게 만듭니다. 일단 한 발 빼고 나면, 보통 당신을 내버려둘 겁니다. 어떤 <span class="sub">순종적</span>인 행동은 상대방의 성기를 사용하여, 더 위험한 방식으로 성기를 사용하지 못하게 합니다.
+	<br><br>
+	<span class="meek">온순한</span> 행동은 직접적으로 성적인 행위를 하지 않으면서도 상대방이 당신을 귀여워하게 만듭니다. <span class="meek">온순한</span> 행동은 상대방이 당신을 더욱 신뢰하게 만드며, 가끔은 당신을 도와줄 효과를 갖기도 합니다.
+	<br><br>
+	<span class="brat">건방진</span> 행동은 공격자를 다치게 하지 않으면서도 그들의 의지를 거스르는 형태로 당신을 보호합니다. <span class="brat">건방진</span> 행동은 신뢰를 감소시키고 분노를 증가시킵니다.
+	<br><br>
+	마지막으로, 도와달라 소리칠 수도 있습니다. 그게 도움이 될지 아니면 상황을 악화시킬지는 당신의 고함소리를 들을 누군가가 주변에 있는지에 달려있습니다. 밤에나 황야에서 소리치는 것은 공격자를 화나게 만들 뿐입니다. 만약 공격자가 당신의 입을 막고 있다면 당신은 소리칠 수도, 말을 할 수도 없게 됩니다.
+	지금 나올 상황에서, 소리치는 것으로 당신은 구출될 겁니다. 당신의 신체 부위는 각각 한 턴에 한 가지 행동을 할 수 있습니다. 행동을 선택한 뒤, 다음 버튼을 누르거나 엔터키를 눌러서 진행하세요.</i>
+	<br><br>
+<</if>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[다음|Tutorial Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Tutorial]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Tutorial Finish
+
+<<effects>><<set $eventskip to 1>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemyanger gte 60>>
+		"맛이 어떠냐, 걸레야." <<HePost "은">> 당신을 바닥에 널부러진 채로 내버려둔다.
+		<br><br>
+	<<else>>
+		"착한 아이로구나. 조금이지만 수고한 값이란다." <<HePost "은">> 당신을 바닥에 널부러진 채로 내버려둔다.
+		<br><br>
+		<<tearful>> 당신은 일어선다. <<moneyGain 5>>를 얻었다.
+		<br><br>
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<if $gamemode is "soft">>
+		<<generate1>><<person1>><<personPost "이">> 당신에게로 달려온다. "괜찮니?" <<HePost "은">> 팔을 뻗어 당신이 일어나는 걸 도와준다.
+		<br><br>
+	<<else>>
+		<<generate1>><<person1>><<personPost "이">> 당신에게로 달려온다. "저 악마가 너한테 한 짓을 봤단다. 괜찮니?" <<HePost "은">> 팔을 뻗어 당신이 일어나는 걸 도와준다.
+		<br><br>
+	<</if>>
+	<i>공격당하면 통제감이 감소합니다. 통제력이 떨어질수록 더욱 트라우마에 취약해지게 됩니다.
+	"음란도", "노출증"이나 "이상성욕"으로 표기된 행동은 스트레스와 트라우마를 감소시킵니다. 또한 당신의 통제감을 회복시켜줍니다. 충분히 자주 그러한 행동을 취한다면 같은 종류의 더 음란한 행동을 해제하지만, 더 약한 행동의 효과를 낮춥니다. 충분히 조심하지 않는다면, 수치심 없고 터무니없는 행동을 하지 않고서는 통제 가능한 상태에 도달하지 못하게 될 겁니다.</i>
+	<br><br>
+	<<link [[추파를 던진다|Tutorial Flirt]]>><<set $spraymax++>><<spray 5>><</link>><<promiscuous1>>
+	<br>
+	<<link [[감사를 표한다|Tutorial Thank]]>><<set $spraymax++>><<spray 5>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	<<personPost "은">> 고통에 움찔거린다. "이 미친 새끼," <<hePost "은">> 그렇게 말하고는 절뚝이며 도망간다. <<tearful>> 당신은 자리에서 일어난다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<if $gamemode is "soft">>
+		<<generate1>><<person1>><<personPost "은">> 당신에게로 달려온다. "괜찮니?" <<HePost "은">> 팔을 뻗어 당신을 부축해준다.
+		<br><br>
+	<<else>>
+		<<generate1>><<person1>><<personPost "은">> 당신에게로 달려온다. "저 악마가 너한테 한 짓을 봤단다. 괜찮니?" <<HePost "은">> 팔을 뻗어 당신을 부축해준다.
+		<br><br>
+	<</if>>
+	<i>공격당하면 통제감이 감소합니다. 통제력이 떨어질수록 더욱 트라우마에 취약해지게 됩니다.
+	"음란도", "노출증"이나 "이상성욕"으로 표기된 행동은 스트레스와 트라우마를 감소시킵니다. 또한 당신의 통제감을 회복시켜줍니다. 충분히 자주 그러한 행동을 취한다면 같은 종류의 더 음란한 행동을 해제하지만, 더 약한 행동의 효과를 낮춥니다. 충분히 조심하지 않는다면, 수치심 없고 터무니없는 행동을 하지 않고서는 통제 가능한 상태에 도달하지 못하게 될 겁니다</i>
+	<br><br>
+	<<link [[추파를 던진다|Tutorial Flirt]]>><<set $spraymax++>><<spray 5>><</link>><<promiscuous1>>
+	<br>
+	<<link [[감사를 표한다|Tutorial Thank]]>><<set $spraymax++>><<spray 5>><</link>>
+	<br>
+<<elseif $rescue is 1 and $alarm is 1>>
+	<<set $rescued += 1>>
+	<<HePost "은">> 당신의 고함소리에 여러 사람들이 시선을 돌리는 것을 보고는, 희롱하던 손을 멈추고는 다급히 도망간다.
+	<br><br>
+	<<tearful>> 당신은 자리에서 일어난다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<if $gamemode is "soft">>
+		<<generate1>><<person1>><<personPost "은">> 당신에게로 달려온다. "괜찮니?" <<HePost "은">> 팔을 뻗어 당신을 부축해준다.
+		<br><br>
+	<<else>>
+		<<generate1>><<person1>><<personPost "은">> 당신에게로 달려온다. "저 악마가 너한테 한 짓을 봤단다. 괜찮니?" <<HePost "은">> 팔을 뻗어 당신을 부축해준다.
+		<br><br>
+	<</if>>
+	<i>공격당하면 통제감이 감소합니다. 통제력이 떨어질수록 더욱 트라우마에 취약해지게 됩니다.
+	"음란도", "노출증"이나 "이상성욕"으로 표기된 행동은 스트레스와 트라우마를 감소시킵니다. 또한 당신의 통제감을 회복시켜줍니다. 충분히 자주 그러한 행동을 취한다면 같은 종류의 더 음란한 행동을 해제하지만, 더 약한 행동의 효과를 낮춥니다. 충분히 조심하지 않는다면, 수치심 없고 터무니없는 행동을 하지 않고서는 통제 가능한 상태에 도달하지 못하게 될 겁니다</i>
+	<br><br>
+	<<link [[추파를 던진다|Tutorial Flirt]]>><<set $spraymax++>><<spray 5>><</link>><<promiscuous1>>
+	<br>
+	<<link [[감사를 표한다|Tutorial Thank]]>><<set $spraymax++>><<spray 5>><</link>>
+	<br>
+<</if>>
+
+:: Tutorial Flirt
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<if $tutorialExit is undefined>><<set $tutorialExit to "Domus Street">><</if>>
+당신은 <<hisPost "의">> 팔을 잡고는 일어서며 <<hePost "을">> 잡아당겨, <<hePost "이">> 당신이 넘어지는 걸 막기 위해 강제로 껴안도록 만든다. 당신은 <<hisPost "의">> 눈을 바라본다. "이제 안전한 것 같아요." 당신이 말한다.
+<<promiscuity1>>
+<<HePost "은">> 얼굴을 붉힌다. "괘-괜찮다니 다행이네." <<HePost "은">> 천천히 팔을 빼며, 당신이 균형을 잡았는지 확인하고는 그렇게 말한다. <<HePost "은">> 주변을 둘러본다. "자." <<HePost "은">> 작은 통을 하나 건넨다. "신중하게 써. 합법적인 물건도 아니고, 딱 한 번 쓸 분량 밖에는 없으니까."
+<<gspraymax>>
+<br><br>
+<<if $tutorialExit.includes("Robin")>>
+	"이제 친구에게 가 보는게 좋겠구나, <<nnpc_he_ ga "Robin">> 나를 이쪽으로 불러서 온 것이거든. <<nnpc_He_ nun "Robin">> 유령처럼 얼굴이 하얘져 말도 하지 못하는 것 같구나. 나는 이제 가 봐야겠다. 조심하렴."
+<<else>>
+	"난 이제 가봐야 해. 너도 조심하렴."
+<</if>>
+<br><br>
+
+<<link [[다음|$tutorialExit]]>><<endevent>><<set $eventskip to 1>><<unset $tutorialExit>><<set $tutorial to 1>><</link>>
+
+:: Tutorial Thank
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<if $tutorialExit is undefined>><<set $tutorialExit to "Domus Street">><</if>>
+당신이 <<hisPost "의">> 팔을 잡자 <<hePost "은">> 당신을 일으켜 세워준다. "고맙습니다." 당신이 말한다. "이젠 괜찮아요."
+<br><br>
+<<HePost "은">> 주변을 둘러본다. "자." <<HePost "은">> 작은 통을 하나 건넨다. "신중하게 써. 합법적인 물건도 아니고, 딱 한 번 쓸 분량 밖에는 없으니까."
+<<gspraymax>>
+<br><br>
+<<if $tutorialExit isnot "Domus Street">>
+	"이제 친구에게 가 보는게 좋겠구나, <<nnpc_he_ ga "Robin">> 나를 이쪽으로 불러서 온 것이거든. <<nnpc_He_ nun "Robin">> 유령처럼 얼굴이 하얘져 말도 하지 못하는 것 같구나. 나는 이제 가 봐야겠다. 조심하렴."
+<<else>>
+	"난 이제 가봐야 해. 너도 조심하렴."
+<</if>>
+<br><br>
+
+<<link [[다음|$tutorialExit]]>><<endevent>><<set $eventskip to 1>><<unset $tutorialExit>><<set $tutorial to 1>><</link>>

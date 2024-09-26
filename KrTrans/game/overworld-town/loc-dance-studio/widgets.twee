@@ -1,0 +1,111 @@
+:: Widgets Dance Studio [widget]
+<<widget "dancingclothes">>
+	<<wearoutfit>>
+	<<set _store_location to "dance_studio">>
+	<<set _earSlimeEnableDancewear to true>>
+
+	<<storeon _store_location "check">>
+	<<set _clothes to clothingInStorage(_store_location)>>
+	<<if $wearoutfittext isnot undefined>>
+		<<if $wearoutfittext and _clothes and _clothes.length>>
+			<<set _slots to _clothes.filter(item => setup.clothingLayer.torso.includes(item.slot))>>
+			<<set _arrayClothes to _slots.map(slot => slot.name)>>
+			<<set _them to ((_arrayClothes.length gt 1 or _slots[0].word is "n") ? "them" : "it")>>
+			<<set _hooks to (_arrayClothes.length gt 1 ? "the hooks" : "a hook")>>
+			<<set _clothing to formatList(_arrayClothes)>>
+
+			<span class="purple">
+				You remove your _clothing, and hang _them on _hooks.
+			</span>
+		<<else>>
+			<span class="purple">
+				You put your clothes on.
+			</span>
+		<</if>>
+		<<unset $wearoutfittext>>
+	<</if>>
+	<<if _store_check is 1>>
+
+		<<if _clothes.length gt 0>>
+			<<if _clothes.length gt 2>>
+				Your clothes are hanging on the hooks on the wall.
+				<br>
+			<<elseif _clothes.length is 2>>
+				Your _clothes[0].name and _clothes[1].name are hanging on the hooks on the wall.
+				<br>
+			<<else>>
+				Your _clothes[0].name is hanging on one of the hooks.
+				<br>
+			<</if>>
+			<<dressasyouwereicon>><<link [[Change to your clothes|$passage]]>><<set $eventskip to 1>><<set $wearoutfittext to 2>><<storeload _store_location>><</link>>
+		<</if>>
+	<<else>>
+		You could equip a leotard or similar dance clothes here.
+	<</if>>
+	<br>
+	<br>
+	<<if $worn.under_upper.type.includes("dance") and $worn.under_lower.type.includes("dance")
+		and setup.clothingLayer.torso_outer.some(slot => $worn[slot].name isnot "naked" and ($worn[slot].one_piece isnot 1 or $worn[slot].outfitSecondary is undefined))
+		and clothingInStorage(_store_location).length is 0
+	>>
+		<<link [[Strip down to your dance clothes|$passage]]>>
+			<<if clothingInStorage(_store_location).length is 0>>
+					<<storesave _store_location>>
+					<<for _slot range setup.clothingLayer.all.except(setup.clothingLayer.torso_outer)>>
+						<<storeload _store_location _slot>>
+					<</for>>
+			<<else>>
+				<<for _slot range setup.clothingLayer.torso_outer>>
+					<<generalUndress _store_location _slot>>
+				<</for>>
+			<</if>>
+		<</link>>
+		<br>
+		<br>
+	<</if>>
+	<<if !$worn.under_upper.type.includes("dance") gt 0 or clothingInStorage(_store_location).length is 0>>
+		<<if $wardrobe.under_upper.filter(a => a.type.includes("dance")) lte 0>>
+			//You currently have no dancing clothes.//
+		<<else>>
+			//Dancing clothes://
+			<br>
+			<<listdancingclothes _store_location>>
+		<</if>>
+		<br>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget "danceStudioIntro">>
+	/* Requires the name of the exit passage as an argument */
+	<<set $danceStudioIntroExit to _args[0]>>
+
+	<<set $dancestudiointro to 1>>
+	<<npc Charlie>><<person1>>
+	당신이 접수원에게 수업료를 내자 접수원은 왼쪽 문으로 당신을 안내한다. 당신은 나무 바닥과 벽을 따라 늘어선 거울들이 있는 커다란 방으로 들어선다. 벌써 십여 명의 사람이 들어와 있다. 강사를 찾아내기는 어렵지 않다. <<he_ nun>> 엉덩이에 손을 얹고, 방 앞쪽에 서서, 학생들에게 바른 자세를 취하는 것의 중요성을 설명하고 있다.
+	<br><br>
+	당신 뒤쪽의 문이 닫혀, <<himPost "에게">> 당신이 온 것을 알린다. <<He_ nun>> 에메랄드빛 눈을 당신에게 향하고 미소 짓는다. "새로운 학생이 왔네요! 잘 오셨어요." 짧은 생강색 머리가 <<his_ yi>> 주근깨투성이 얼굴을 덮고 있다. <<His_ yi>> 몸에 딱 붙는 옷이 <<his_ yi>> 탄력있고 탄탄한 몸을 과시한다.
+	<<if $pronoun is "m">>
+		당신은 <<his_ yi>> 아랫도리에 <<his_ yi>> 자지가 불룩하게 튀어나와 있는 걸 의식하지 않을 수 없다.
+	<<elseif $pronoun is "f">>
+		<<if $NPCList[0].breastsize gte 5>>
+			<<His_ yi>> 풍만한 가슴이 몸통 쪽으로 밀착해, 몸 선을 늘씬하게 보이게 한다.
+		<<elseif $NPCList[0].breastsize gte 3>>
+			<<His_ yi>> 가슴이 몸통 쪽으로 밀착해, 몸 선을 늘씬하게 보이게 한다.
+		<<elseif $NPCList[0].breastsize gte 1>>
+			<<His_ yi>> 작은 가슴이 몸통 쪽으로 밀착해, 몸 선을 늘씬하게 보이게 한다.
+		<<else>>
+			<<His_ yi>> 평평한 가슴이 몸 선을 늘씬하게 보이게 한다.
+		<</if>>
+	<</if>>
+	<br><br>
+	<<he_ nun>> 당신의 음란한 시선을 눈치챈 건지 아닌지, 아무런 기색을 보이지 않는다. 당신은 자신을 소개해야 하는데, 어떻게 할 것인가?
+	<br><br>
+
+	<<link [[소심하게|Dance Studio Introduction]]>><<npcincr Charlie love 20>><<set $phase to 1>><</link>><<ggglove>>
+	<br>
+	<<link [[자신감 있게|Dance Studio Introduction]]>><<set $phase to 2>><</link>>
+	<br>
+	<<link [[추파를 던지듯|Dance Studio Introduction]]>><<npcincr Charlie love -10>><<stress -12>><<trauma -6>><<set $phase to 3>><</link>><<promiscuous1>><<lllove>><<lstress>><<ltrauma>>
+	<br>
+<</widget>>

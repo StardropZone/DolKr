@@ -1,0 +1,615 @@
+:: Temple Prayer Entrance
+
+<<temple_effects>><<effects>>
+<<generate1>><<person1>>
+당신은 기도실 바깥에 있다. 근엄한 표정의 <<monk_ ga>> 문을 지키고 있다.
+<br><br>
+<<if $temple_garden gte 100 and $temple_quarters gte 100>>
+	<span class="green">"정원과 숙소 모두 잘 정돈되어 있구나."</span> <<he_ ga>> 말한다. "원한다면 언제든 기도실을 이용할 수 있단다."
+	<br><br>
+	<<templeicon "pray">><<link [[기도한다 (1:00)|Temple Prayer Enter]]>><</link>>
+	<br>
+<<elseif $temple_garden gte 100>>
+	"숙소는 더 정돈해야 하겠구나." <<he_ ga>> 말한다. "허나 <span class="green">정원은 잘 정돈되어 있어.</span> 원한다면 언제든 기도실을 이용할 수 있단다."
+	<br><br>
+	<<templeicon "pray">><<link [[기도한다 (1:00)|Temple Prayer Enter]]>><</link>>
+	<br>
+<<elseif $temple_quarters gte 100>>
+	"정원은 더 정돈해야 하겠구나." <<he_ ga>> 말한다. "허나 <span class="green">숙소는 잘 정돈되어 있어.</span> 원한다면 언제든 기도실을 이용할 수 있단다."
+	<br><br>
+	<<templeicon "pray">><<link [[기도한다 (1:00)|Temple Prayer Enter]]>><</link>>
+	<br>
+<</if>>
+<<if $historytrait gte 3>>
+	<<templeicon "prayer room">><<link [[몰래 숨어든다 (1:00)|Temple Prayer Sneak]]>><<endevent>><<grace -5>><</link>><<llgrace>><<note "역사" "blue">>
+	<br>
+<</if>>
+<br>
+<<getouticon>><<link [[떠난다|Temple]]>><<endevent>><</link>>
+<br>
+
+:: Temple Prayer Explore
+
+<<temple_effects>><<effects>>
+당신은 사원의 전에는 출입이 금지되었던 영역을 탐사한다. 위층으로 가면 사제들이 묵는 숙소가 있다. 기도실 바깥, 사원 건물의 뒤편에는 신도들이 꽃을 키우는 커다란 정원이 있다. 산울타리로 된 미로가 숲속으로 이어져 있다.
+<br><br>
+당신은 빨간 십자가가 그려진 문을 여럿 발견한다. 조던은 당신에게 거기 들어가선 안 된다 경고했지만, 어차피 문은 다 잠겨서 막혀 있다. 하나만 빼고. 당신은 건물의 뒤편 모서리에서 그 문을 찾아낸다. <<generate1>><<person1>>근엄한 표정의 <<monk_ ga>> 그 앞에 서 있다. <<His_ yi>> 눈은 감겨 있지만, 당신은 <<him_ i>> 당신을 바라보고 있는 것 같은 기분이 든다.
+<br><br>
+<<link [[다음|Temple Prayer Explore 2]]>><</link>>
+<br>
+
+:: Temple Prayer Explore 2
+
+<<temple_effects>><<effects>>
+
+"새로운 신도인가?" <<monk_ ga>> <<his_ yi>> 눈을 뜨지 않은 채로 묻는다. <<He_ nun>> 당신의 대답을 기다리지 않는다. "내 뒤편에 있는 것은 기도실이다. 그 안에는 환상을 보여주는 특별한 향이 켜져 있지. 강렬한 예배의 일종으로써, 방에 들어서는 이들은 한 번에 적어도 한 시간은 안에 갇히게 된다."
+<br><br>
+
+"어떤 이들은 이를 구시대적이고 어쩌면 이단적이라고도 본다. 나머지는 그저 신께 닿기 위한 적절한 방법의 하나일 뿐이라 하고. 그들은 보통 보호구로써 <span class="gold">신성한 목걸이</span>를 가지고 오고는 했지. 아무튼, 여기 들어가는 건 소수에게만 허락된 일이다. 사원과 땅이 그런 상태일 때는 누구도 들어갈 수 없지."
+<br><br>
+
+"그대는 분명 흥미가 동했을 것이다." <<he_ ga>> 계속 말한다. "사원에 도움을 준 후 돌아와라. 숙소와 정원이 모두 최상의 상태에 있을 때, 그대를 여기 들여보내는 걸 고려해보지."
+<br><br>
+
+<<endevent>>
+<<link [[다음|Temple]]>><</link>>
+<br>
+
+:: Temple Prayer Enter
+<<temple_effects>><<effects>>
+
+<<monk_ ga>> 옆으로 비켜 서서 당신이 들어갈 수 있게 한다.
+<<if $worn.neck.name is "dark pendant">>
+	그러나 당신이 들어가려 움직이는 순간, <<he_ nun>> <<his_ yi>> 팔을 재빨리 뻗어 당신과 문 사이를 가로막는다. <<His_ yi>> 눈이 뜨였다. "그걸 어떻게 얻었는지는 모르겠으나," <<he_ ga>> 당신의 목걸이를 가리키며 말한다. "그건 금지된 물건이다. 그걸 차고선 들어갈 수 없다. 이리 내라."
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[목걸이를 건넨다|Temple Prayer Pendant]]>><<neckruined>><</link>>
+	<br>
+	<<link [[거부한다|Temple Prayer Pendant Refuse]]>><<grace -5>><</link>><<llgrace>>
+	<br>
+<<else>>
+	<<if $worn.neck.name is "holy pendant">>
+		"훌륭한 장신구로군." 당신이 지나가자 <<he_ ga>> 당신의 신성한 목걸이를 가리키며 말한다. 당신은 계속 들어간다.
+	<<elseif $worn.neck.name is "stone pendant">>
+		당신이 지나가려 하자, <<His_ yi>> 손이 당신의 어깨 위에 놓인다. "흥미롭군." <<he_ ga>> 당신의 돌 목걸이를 가리키며 말한다. <<He_ nun>> 잠시 고민하더니, 당신의 어깨를 놓아준다. 당신은 계속 들어간다.
+	<<else>>
+
+	<</if>>
+	<br><br>
+
+	당신의 뒤편에서 문이 철컥하며 닫힌다. 당신은 육각형의 작은 방 안에 있으며, 방은 어디로도 이어지지 않는 계단으로 빙 둘러쳐져 있다. 각 면의 벽 저 높은 곳에는 창문이 하나씩 달려 있다. 한가운데에는 쿠션이 놓여 있다.
+	<br><br>
+
+	이곳의 공기는 달콤한 향의 냄새로 가득하다. 향이 어디에서 타고 있는지는 보이지 않는다.
+	<br><br>
+	<<endevent>>
+	<<link [[다음|Temple Prayer]]>><</link>><<note "???" "blue">>
+	<br>
+
+<</if>>
+
+:: Temple Prayer Pendant
+<<temple_effects>><<effects>>
+
+당신은 목에서 목걸이를 벗어, <<monkPost "에게">> 건넨다. <<He_ nun>> 목걸이를 받아들기 전 여러 겹의 천으로 <<his_ yi>> 손을 감싸고, 목걸이를 들어 <<his_ yi>> 몸에서 멀리 떨어트려 놓는다.
+<br><br>
+
+"이제 들어가도 좋다." <<he_ ga>> 말한다. 당신은 그렇게 한다.
+<br><br>
+
+당신의 뒤편에서 문이 철컥하며 닫힌다. 당신은 육각형의 작은 방 안에 있으며, 방은 어디로도 이어지지 않는 계단으로 빙 둘러쳐져 있다. 각 면의 벽 저 높은 곳에는 창문이 하나씩 달려 있다. 한가운데에는 쿠션이 놓여 있다.
+<br><br>
+
+이곳의 공기는 달콤한 향의 냄새로 가득하다. 향이 어디에서 타고 있는지는 보이지 않는다.
+<br><br>
+
+<<endevent>>
+<<link [[다음|Temple Prayer]]>><</link>><<note "???" "blue">>
+<br>
+
+:: Temple Prayer Pendant Refuse
+<<temple_effects>><<effects>>
+
+당신은 목걸이를 건네주길 거부한다. "그렇군." <<monk_ ga>> 말한다. "그렇다면 그대의 영혼도 그러하겠구나. 그러면 방에 들여보낼 수 없다."
+<br><br>
+<<endevent>>
+<<link [[다음|Temple]]>><</link>>
+<br>
+
+:: Temple Prayer Sneak
+<<temple_effects>><<effects>>
+
+사원은 아주 오래되었고, 비밀 통로로 가득하다. 당신은 그중 하나를 안다.
+<br><br>
+
+당신은 근처의 복도로 간다. 당신은 무릎을 꿇고 벽에서 작은 틈을 찾아낼 때까지 잠시 주변을 수색한다. 당신은 당신의 손톱으로 틈을 파고들어, 문을 연다. 문의 외형은 주변의 돌 벽돌과 유사하도록 만들어져 있었다.
+<br><br>
+
+당신은 문을 조용히 닫은 후, 통로를 따라 기어간다. 다른 문에 닿기까지 그리 오래 기어갈 필요는 없었다. 당신은 문을 밀어 바닥으로 내려간다.
+<br><br>
+
+당신은 육각형의 작은 방 안에 있으며, 방은 어디로도 이어지지 않는 계단으로 빙 둘러쳐져 있다. 각 면의 벽 저 높은 곳에는 창문이 하나씩 달려 있다. 한가운데에는 쿠션이 놓여 있다.
+<br><br>
+
+이곳의 공기는 달콤한 향의 냄새로 가득하다. 향이 어디에서 타고 있는지는 보이지 않는다.
+<br><br>
+<<endevent>>
+<<link [[기도한다|Temple Prayer]]>><<set $temple_sneak to 1>><</link>><<note "???" "blue">>
+<br>
+
+:: Temple Prayer
+<<temple_effects>><<pass 60>><<effects>>
+<<set _rng to random(1,7)>>
+
+<<hallucinogen 60>>
+당신은 쿠션에 앉아 기도한다. 향 냄새가 당신의 머리를 멍하고 어지럽게 한다.
+
+<<switch _rng>>
+	<<case 1>>
+		<<if C.npc.Robin.love gte 60 and random(1, 2) is 2>>
+			당신은 로빈을 떠올리고,
+				<<if C.npc.Robin.trauma gte 21>>
+					<<nnpc_he_ ga "Robin">> 겪고 있는 고통을 떠올린다.
+					<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+				<<else>>
+					반사적으로 미소 짓는다.
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<</if>>
+		<<elseif $trauma gte ($traumamax / 5) * 4>>
+			당신은 사람들이 얼마나 무자비하게 그들의 끔찍한 취향을 추구해왔는지를 떠올린다. 당신은 그럼에도 불구하고 살아남아 있다는 것을 깨닫는다.
+			<<gawareness>><<awareness 1>>
+		<<elseif $trauma gte ($traumamax / 5) * 3>>
+			당신은 사람들이 당신에게 저지른 모든 끔찍한 일들을 떠올린다. 기묘하게도 카타르시스가 느껴진다.
+			<<lltrauma>><<trauma -12>>
+		<<elseif $trauma gte ($traumamax / 5) * 2>>
+			당신은 당신이 견뎌온 모든 고통을 떠올린다. 기묘하게도 카타르시스가 느껴진다.
+			<<ltrauma>><<trauma -6>>
+		<<elseif $trauma gte $traumamax / 5>>
+			당신은 몇몇 사람들이 얼마나 끔찍해질 수 있는지를 떠올린다. 하지만 생각했던 것보다 그리 복수하려는 마음은 들지 않는다.
+			<<gpurity>><<purity 1>>
+		<<else>>
+			당신은 어떻게든, 그 모든 일들에도 불구하고, 자신을 지켜냈다는 사실을 떠올린다.
+			<<lstress>><<stress -6>>
+		<</if>>
+	<<case 2>>
+		<<run statusCheck("Kylar")>>
+		<<if C.npc.Kylar.love gte 60 and C.npc.Kylar.state is "active" and random(1, 2) is 2>>
+			당신은 카일라를 떠올리고,
+				<<if _kylarStatus.includes("Rage")>>
+					<<nnpc_he_ ga "Kylar">> 당신을 찾고 있을지 궁금해한다. 아마 <<nnpc_he_ nun "Kylar">> 그럴 것이다.
+					<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+				<<else>>
+					<<nnpc_hePost "Kylar" "이">> 그린 당신의 낙서를 떠올린다.
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<</if>>
+		<<elseif $stress gte ($stressmax / 5) * 4>>
+			당신은 눈을 감으려 애쓰지만, 문을 계속 바라보느라 눈을 뜨게 된다. 당신은 당신이 악의어린 습격에 얼마나 민감해져 있는지를 알아차린다. 당신은 스스로에게 사원은 누군가 습격하도록 두지 않으리라고 말한다.
+			<<gcontrol>><<control 10>>
+		<<elseif $stress gte ($stressmax / 5) * 3>>
+			당신은 쉬고 있는 동안조차도, 심장이 얼마나 빨리 뛰고 있었는지 알아차린다. 당신은 조금 진정한다.
+			<<llstress>><<stress -12>>
+		<<elseif $stress gte ($stressmax / 5) * 2>>
+			당신은 당신의 심장 박동을 느낀다. 심장은 시간이 지날수록 차분해진다.
+			<<lstress>><<stress -6>>
+		<<elseif $stress gte $stressmax / 5>>
+			당신은 집으로 돌아가는 길에 공격당할지 모른다는 걱정이 든다. 당신은 스스로에게 지금은 걱정할 필요가 없다고 말한다.
+			<<gcontrol>><<control 5>>
+		<<else>>
+			당신은 평화를 느낀다.
+			<<ltrauma>><<trauma -6>>
+		<</if>>
+	<<case 3>>
+		<<if C.npc.Whitney.love gte 21 and C.npc.Whitney.state isnot "dungeon" and random(1, 2) is 2>>
+			당신은 휘트니를 떠올리고,
+				<<if C.npc.Whitney.dom gte 14>>
+					어떻게 <<nnpc_he_ ga "Whitney">> 항상 당신을 통제하려 든다는 걸 떠올린다.
+					<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+				<<else>>
+					<<nnpc_him_ gwa "Whitney">> 함께 있으면 기묘하게도 안전한 느낌이 든다는 걸 떠올린다. 적어도, 다른 사람들에게는.
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<</if>>
+		<<elseif $arousal gte ($arousalmax / 5) * 4>>
+			당신이 아무리 노력해도, 섹스 생각이 떠오르는 걸 막을 수가 없다.
+			<<gstress>><<larousal>><<stress 6>><<arousal -6>>
+		<<elseif $arousal gte ($arousalmax / 5) * 3>>
+			섹스 생각이 비집고 들어온다. 당신은 그 생각을 멀리 떼어두려고 안간힘을 쓴다.
+			<<larousal>><<arousal 600>>
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			섹스 생각이 계속 떠오르지만, 당신은 간신히 그 생각을 멀리 떼어둔다.
+			<<larousal>><<arousal 600>>
+		<<elseif $arousal gte $arousalmax / 5>>
+			당신은 정신을 깔끔히 하고 집중해 있으려고 최대한 노력한다.
+		<<else>>
+			당신은 정신을 깔끔히 하고 집중한 채로 있을 수 있다.
+			<<gwillpower>><<willpower 1>>
+		<</if>>
+	<<case 4>>
+		<<if C.npc.Eden.love gte 120 and random(1, 2) is 2>>
+			당신은 에덴을 떠올리고,
+			<<if C.npc.Eden.lust gte 60>>
+				<<nnpc_his_ yi "Eden">> 채울 수 없는 욕망을 떠올린다.
+				<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+			<<else>>
+				<<nnpc_he_ ga "Eden">> 숲에서 어떻게 지내고 있을지 궁금해한다.
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+			<</if>>
+		<<elseif $control gte ($controlmax / 5) * 4>>
+			당신은 안전하고, 평화로우며 안심되는 기분을 느낀다.
+			<<gpurity>><<purity 1>><<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+		<<elseif $control gte ($controlmax / 5) * 3>>
+			두꺼운 벽이 당신을 안심시킨다.
+			<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+		<<elseif $control gte ($controlmax / 5) * 2>>
+			당신은 무언가가 몰래 들어올까봐 눈을 감은 채로 있지 못하고 있다.
+			<<ltrauma>><<trauma -6>>
+		<<elseif $control gte $controlmax / 5>>
+			공포가 당신의 정신을 장악하지만, 당신의 심장이 규칙적으로 뛰며 시간이 지날수록 덜 불안해진다.
+			<<gcontrol>><<control 10>>
+		<<else>>
+			당신은 공포가 다가오지 못하게 하려고 노력한다. 당신의 심장이 규칙적으로 뛰며 시간이 지날수록 덜 불안해진다.
+			<<gcontrol>><<control 10>>
+		<</if>>
+	<<case 5>>
+		<<if C.npc.Avery.love gte 60 and C.npc.Avery.state is "active" and random(1, 2) is 2>>
+			당신은 에이버리를 떠올리고,
+			<<if C.npc.Avery.rage gte 60 and $averyragerevealed is 1>>
+				당신이 <<nnpc_him_ ul "Avery">> 실망시켰을 때 <<nnpc_his_ yi "Avery">> 태도를 떠올린다. 당신은 당신의 팔을 꽉 붙잡는다.
+				<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+			<<else>>
+				<<nnpc_him_ gwa "Avery">> 한 데이트를 떠올린다. <<nnpc_he_ nun "Avery">> 당신을 상냥하게 대해 준다.
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+			<</if>>
+		<<elseif $awareness gte 800>>
+			당신은 어떤 힘이 당신을 누르는 것을 느낀다. 무언가 보이지 않는 것이.
+			<<ggwillpower>><<gtrauma>><<willpower 3>><<trauma 6>><<gstress>><<stress 6>>
+		<<elseif $awareness gte 600>>
+			당신은 이 장소가 아무데나 지어진 게 아님을 안다. 그들은 이걸 어떠한 이유로 여기에 지었다. 사제들이 무엇을 알고 무엇을 몰랐을지 궁금해하니, 당신은 불안해진다.
+			<<gwillpower>><<willpower 1>><<gtrauma>><<trauma 6>>
+		<<elseif $awareness gte 400>>
+			당신은 이 방이 정말 보이는 것처럼 안전할지 의문을 갖는다.
+			<<gstress>><<stress 6>>
+		<<elseif $awareness gte 200>>
+			당신은 바닥의 쇠살대에서 떠오른 향의 흔적을 따라간다.
+		<<else>>
+			향은 당신 주변을 떠돌다 내려앉아 예쁜 무늬를 만들어낸다.
+			<<lstress>><<stress -6>>
+		<</if>>
+	<<case 6>>
+		<<run statusCheck("Sydney")>>
+		<<if C.npc.Sydney.love gte 90 and random(1, 2) is 2>>
+			당신은 시드니를 떠올리고,
+			<<if ($templePromised is "Sydney" and $player.virginity.temple isnot true) or C.npc.Sydney.virginity.temple isnot true or ($templePromised isnot "Sydney" and !_sydneyVirgin)>>
+				당신이 깨 버린 사원과의 맹세를 떠올린다.
+				<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+			<<else>>
+				<<if $sydneySeen.includes("corruptroom")>>
+					이전에 이 방을 어떻게 사용했는지를 떠올린다. 당신의 얼굴이 붉어진다.
+					<<garousal>><<arousal 600>>
+				<<else>>
+					<<nnpc_he_ ga "Sydney">> 과거에도 이 방을 썼을지 궁금해한다.
+				<</if>>
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+			<</if>>
+		<<elseif $tiredness gte (C.tiredness.max / 5) * 4>>
+			당신의 몸은 언제라도 쓰러질 것만 같다. 하지만 어떻게든 깨어 있다.
+			<<ggwillpower>><<willpower 6>><<gstress>><<stress 6>><<ltiredness>><<tiredness -12>>
+		<<elseif $tiredness gte (C.tiredness.max / 5) * 3>>
+			당신은 눈이 감기는 게 느껴지지만, 향의 냄새를 맡으며 허벅지를 꼬집어서 깨어 있다.
+			<<gwillpower>><<willpower 3>><<ltiredness>><<tiredness -6>>
+		<<elseif $tiredness gte (C.tiredness.max / 5) * 2>>
+			당신은 잠깐 멍해졌다가, 도로 현실로 끌려들어왔다.
+			<<gtiredness>><<tiredness 6>>
+		<<elseif $tiredness gte (C.tiredness.max / 5)>>
+			당신은 숨을 깊게 들이마시고 어깨를 편하게 둔다.
+			<<lstress>><<stress -6>><<ltiredness>><<tiredness -6>>
+		<<else>>
+			향이 당신의 근육 사이로 스며들어 당신에게 안정감을 준다. 당신은 만족스러운 한숨을 내쉰다.
+			<<lstress>><<stress -6>><<ltrauma>><<trauma -6>><<gtiredness>><<tiredness 6>>
+		<</if>>
+	<<case 7>>
+		<<if C.npc.Alex.love gte 60 and random(1, 2) is 2>>
+			당신은 알렉스와, 농장을 떠올린다.
+			<<if $farm_attacked is 1>>
+				당신은 습격을 놓쳤으며, <span class="red">당신이 없는 동안 레미가 공격했으리라는 것을</span> 알아차린다. 당신의 심장이 철렁 내려앉는다.
+				<<lcontrol>><<control -10>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<<elseif $farm_attack_timer is 0>>
+				<<if Time.hour gte 21>>
+					<<if Time.hour is 23 and Time.minute gte 30>>
+						레미는 오늘밤 공격할 것이고, <span class="red">당신은 도움이 필요한 순간 농장에 있을 수 없을 것이다</span>. 당신의 심장이 철렁 내려앉는다.
+						<<lcontrol>><<control -10>>
+					<<else>>
+						<span class="pink">이미 레미가 공격을 하는 중일지도 모른다.</span>
+					<</if>>
+				<<else>>
+					<span class="purple">레미는 오늘밤 공격하러 올 것이다.</span>
+				<</if>>
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<<elseif $farm.aggro gte 60>>
+				레미의 똘마니들은 당신이 혼자 떠나도록 두지 않을 것이다.
+				<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+			<<else>>
+				당신은 수확을 많이 하기를 바란다.
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+			<</if>>
+		<<else>>
+			당신은 베일리를 떠올린다.
+			<<if $renttime lte 0>>
+				<<babyRent true>>
+				<<if $money gte $rentmoney + ($babyRent or 0)>>
+					당신은 <<nnpc_himPost "Bailey" "에게">> 낼 돈이 충분하다.
+					<<if $baileydefeatedchain gte 1>>
+						하지만 그럴 필요가 있을까 싶다.
+					<<else>>
+						다행스럽게도.
+					<</if>>
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<<else>>
+					당신은 <<nnpc_himPost "Bailey" "에게">> 낼 돈이 충분하지 않다.
+					<<if $baileydefeatedchain gte 1>>
+						하지만 돈이 필요하기나 할까 싶다.
+					<<else>>
+						당신은 빠르게 돈을 벌 수단이 있을지 궁금해한다.
+					<</if>>
+					<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<</if>>
+			<<else>>
+				<<babyRent true>>
+				<<if $money gte $rentmoney + ($babyRent or 0)>>
+					당신은 <<rentday>>에 <<nnpc_himPost "Bailey" "에게">> 낼 돈이 충분하다.
+					<<if $baileydefeatedchain gte 1>>
+						하지만 그럴 필요가 있을까 싶다.
+					<<else>>
+						다행스럽게도.
+					<</if>>
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<<else>>
+					당신은 <<rentday>>에 <<nnpc_himPost "Bailey" "에게">> 낼 돈이 충분하지 않다.
+					<<if $baileydefeatedchain gte 1>>
+						하지만 돈이 필요하기나 할까 싶다.
+					<<else>>
+						당신은 빠르게 돈을 벌 수단이 있을지 궁금해한다.
+					<</if>>
+					<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<</if>>
+			<</if>>
+		<</if>>
+<</switch>>
+<br><br>
+
+<<rng>>
+<<if $rng is 100 or $rng gte 91 and $worn.neck.name is "holy pendant">>
+	<span class="green">당신은 인기척을 느낀다.</span> 향의 연기가 뽀얀 진주빛으로 변해간다. 당신이 새하얀 바다에 둘러싸여 있는 것처럼 될 때까지, 향의 연기는 점점 밝아지고 짙어진다.
+	<br><br>
+	당신은 무언가 상상을 초월할 정도로 강력하지만 악의는 없는 존재가 당신을 지켜주고 있는 듯, 확고한 안정감을 느낀다.
+	<br><br>
+	온기가 당신의 정신에 밀려든다.
+	<br><br>
+
+	<<link [[받아들인다|Temple Prayer Holy Embrace]]>><<control 50>><<trauma -50>><<stress -50>><<awareness 12>><<purity 12>><</link>><<ggpurity>><<gggcontrol>><<llltrauma>><<lllstress>><<ggawareness>>
+	<br>
+	<<link [[떨쳐낸다|Temple Prayer Holy Snap]]>><<willpower 5>><<control 20>><<trauma -18>><<stress -18>><</link>><<ggwillpower>><<ggcontrol>><<lltrauma>><<llstress>>
+	<br>
+<<elseif $rng is 99 or $rng gte 91 and $worn.neck.name is "stone pendant">>
+	<span class="blue">당신은 인기척을 느낀다.</span> 당신을 둘러싸고 있던 벽이 안개 속에 감춰져 보이지 않게 될 때까지 향의 연기가 짙어진다. 당신은 숨을 참는다.
+	<br><br>
+
+	무언가가 당신을 관찰하고 있다. 무언가 거대한 것이. 당신은 그것에게서 악의를 느낄 수 없다. 그저 호기심뿐.
+	<br><br>
+
+	당신 주변의 바닥이 위로 솟는다. 아니면 당신이 가라앉고 있는 것이거나. 당신은 분간할 수 없다.
+	<br><br>
+
+	<<link [[받아들인다|Temple Prayer Stone Embrace]]>><<arousal 5000>><<scienceskill 12>><<mathsskill 12>><<historyskill 12>><<purity 6>><<awareness 24>><</link>><<gpurity>><<gggawareness>><<gghistory>><<ggscience>><<ggmaths>><<gggarousal>>
+	<br>
+	<<link [[떨쳐낸다|Temple Prayer Stone Snap]]>><<historyskill 3>><<mathsskill 3>><<scienceskill 3>><<set $school += 9>><<willpower 5>><</link>><<ggwillpower>><<ghistory>><<gscience>><<gmaths>>
+	<br>
+<<elseif $rng is 98 or $rng gte 91 and $worn.neck.name is "dark pendant">>
+	<span class="red">당신은 인기척을 느낀다.</span> 벽에 걸린 횃불이 휙 꺼지고, 당신은 칠흑같은 어둠으로 낙하한다. 분명히 높은 곳의 창문으로 빛이 들어와야 할 테지만, 한 줄기의 빛도 들어오지 않는다.
+	<br><br>
+
+	당신은 발밑의 쿠션을 더이상 느낄 수가 없다. 당신은 공허 속에 떠 있다. 당신은 혼자가 아니다. 까마득하게 먼 거리에서 무언가가 당신에게 닥쳐오고 있다. 원초적인 공포가 당신의 정신을 장악한다.
+	<<ggstress>><<stress 6>>
+	<br><br>
+
+	<<link [[받아들인다|Temple Prayer Dark Embrace]]>><<awareness 24>><<purity -36>><<willpower 12>><<stress 36>><</link>><<gggawareness>><<lllpurity>><<ggwillpower>><<gggstress>>
+	<br>
+	<<link [[떨쳐낸다|Temple Prayer Dark Snap]]>><<awareness 6>><<purity -6>><<willpower 6>><<stress 6>><</link>><<gawareness>><<lpurity>><<gwillpower>><<gstress>>
+	<br>
+<<elseif $rng gte 91>>
+	당신은 어떤 존재가 당신을 보고 있다는 느낌을 받는다. 그 느낌은 곧 사라진다. 당신은 긴장한 채, 주변을 둘러본다.
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 81>>
+	향의 냄새가 당신의 머리를 붕 뜨게 한다.
+	<<lstress>><<stress -6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 71>>
+	향의 냄새가 당신을 따뜻하게 한다.
+	<<garousal>><<arousal 600>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 61>>
+	향의 냄새가 당신을 편안하게 한다.
+	<<ltrauma>><<trauma -6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 51>>
+	바깥에서 새가 지저귀는 소리가 들려온다.
+	<<lstress>><<stress -6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 41>>
+	향의 냄새가 당신이 집중하는 데 도움이 된다.
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 31>>
+	향의 냄새가 당신의 정신을 말끔하게 한다.
+	<<larousal>><<arousal -6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 21>>
+	향의 냄새가 당신을 안전하다고 느끼게 한다.
+	<<gcontrol>><<control 10>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 12>>
+	향의 연기가 부드러운 안개처럼 주변을 감싼 채, 당신의 피부를 간질인다.
+	<<hallucinogen 60>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 9>>
+	학교 생각이 난다. 당신은 지난 수학 수업을 떠올린다. 당신은 그 내용을 새로운 관점에서 본다.
+	<<gmaths>><<mathsskill 3>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 6>>
+	학교 생각이 난다. 당신은 지난 영어 수업을 떠올린다. 당신은 그 내용을 새로운 관점에서 본다.
+	<<genglish>><<englishskill 3>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 3>>
+	학교 생각이 난다. 당신은 지난 과학 수업을 떠올린다. 당신은 그 내용을 새로운 관점에서 본다.
+	<<gscience>><<scienceskill 3>>
+	<br><br>
+
+	<<prayerend>>
+<<else>>
+	학교 생각이 난다. 당신은 지난 역사 수업을 떠올린다. 당신은 그 내용을 새로운 관점에서 본다.
+	<<ghistory>><<historyskill 3>>
+	<br><br>
+
+	<<prayerend>>
+<</if>>
+
+:: Temple Prayer Holy Embrace
+<<temple_effects>><<effects>>
+
+당신은 온기가 당신을 감싸안도록 둔다. 온기는 당신의 정신 구석구석을 채워, 당신이 어디에 있으며 어떻게 여기로 왔는지를 잊게 한다. 중요한 것은 아름다운 지금 뿐이다.
+<br><br>
+
+몇 분이 지나자 온기는 당신으로부터 물러가고, 당신은 현실로 돌아온다. 당신은 더 해볼 수 있겠다는 기분이 든다.
+<br><br>
+
+<<prayerend>>
+
+:: Temple Prayer Holy Snap
+<<temple_effects>><<effects>>
+
+당신은 발밑의 쿠션과 주변의 달콤한 공기를 느끼려 애쓰며, 고개를 세차게 흔든다. 천천히, 공허는 물러가고 당신은 현실로 돌아온다.
+<br><br>
+
+<<prayerend>>
+
+:: Temple Prayer Stone Embrace
+<<temple_effects>><<effects>>
+
+당신은 당신이 어두운 돌들로 둘러싸일 때까지 가라앉도록 둔다. 당신은 당신이 마치 돌들의 일부인 것 같은 기분이 든다. 당신의 인지는 더욱 넓어져, 돌을 타고 위로 솟아 사원까지 뻗는다. 당신을 가로지르는 사제와 수녀들의 발이 느껴진다.
+<br><br>
+
+당신의 정신은 더 멀리 나아가, 광대한 숲 안으로 뻗어나간다. 나무뿌리에 싫증난 돌 안으로, 그리고 그 나무들 안으로. 당신은 바람이 당신을 스쳐지나는 것이 느껴진다. 새들이 당신의 가지에 둥지를 틀고 있다. 청설모가 당신의 발을 기어다닌다.
+<br><br>
+
+무언가가 당신을 부드럽게 안았다가, 당신을 다시 밀어낸다. 당신은 당신의 몸으로 돌아온다. 천천히 당신의 몸은 돌을 뚫고 올라가 방으로 다시 돌아온다. 바닥에는 아무런 흔적도 없다. 마치 아무 일도 일어나지 않았던 듯 하지만, 당신은 더 해볼 수 있겠다는 기분이 든다.
+<br><br>
+
+<<prayerend>>
+
+:: Temple Prayer Stone Snap
+<<temple_effects>><<effects>>
+
+당신은 발밑의 쿠션과 주변의 달콤한 공기를 느끼려 애쓰며, 고개를 세차게 흔든다. 천천히, 당신을 감싸던 돌들은 아래로 들어가고 당신은 현실로 돌아온다.
+<br><br>
+<<prayerend>>
+
+:: Temple Prayer Dark Embrace
+<<temple_effects>><<effects>>
+
+그 존재가 빠르게 다가와, 당신을 감싸안는다. 그것이 당신의 몸과 정신을 어루만지고, 안으로 스며들어, 어떠한 저항도 없이 당신의 몸을 타고 흐른다. 그것이 속삭인다. 당신은 당신이 소리를 지르고 있다는 것을 알아차린다.
+<br><br>
+
+그것은 공허와 함께, 그것이 올 때만큼이나 빨리 떠난다. 당신은 방 안의 쿠션 위에 앉아 있다. 당신의 심장이 가슴 속에서 빠르게 요동치지만, 당신은 더 해볼 수 있겠다는 기분이 든다.
+<br><br>
+
+<<prayerend>>
+
+:: Temple Prayer Dark Snap
+<<temple_effects>><<effects>>
+
+마치 악몽에서 깨려고 하듯이, 당신은 공허를 피해 몸부림친다. 그 존재가 거의 도착하기 직전, 방이 다시 나타난다. 아무런 일도 일어나지 않았던 것처럼 횃불이 타고 있다.
+<br><br>
+
+<<prayerend>>
+
+:: Temple Prayer Truth
+
+<<temple_effects>><<effects>>
+<<if $speech_attitude is "meek">>
+	"죄- 죄송해요." 당신이 말한다. "밖에 경비가 들여보내 주질 않아서요."
+<<elseif $speech_attitude is "bratty">>
+	"그런 거 맞아." 당신이 말한다. "난 이래라저래라 하는 대로 하는 거 싫어."
+<<else>>
+	"미안해요." 당신이 말한다. "문제가 될 줄은 몰랐어요."
+<</if>>
+<br><br>
+조던은 손을 <<his_ yi>> 입에 가져다 대어 웃음이 나오는 걸 참는다. "나도 그 지름길을 알고 있지." <<he_ ga>> 말한다. "학교에서 그런 내용을 읽었던 기억이 나는구나." <<He_ ga>> 당신의 손을 잡아 <<his_ yi>> 손에 포갠다. "함께 기도하겠니?"
+<<takeHandholdingVirginity "Jordan">>
+<br><br>
+<<link [[기도한다 (1:00)|Temple Jordan Prayer]]>><<pass 60>><<trauma -12>><<stress -12>><</link>><<lltrauma>><<llstress>>
+<br>
+<<link [[떠난다|Temple Jordan Prayer Leave]]>><</link>>
+<br>
+
+:: Temple Prayer Lie
+
+<<temple_effects>><<effects>>
+<<if $speech_attitude is "meek">>
+	"아- 아뇨." 당신이 말한다. "경비가 절 들여보내 줬어요."
+<<elseif $speech_attitude is "bratty">>
+	"아니." 당신이 말한다. "그래도 저 늙은 경비가 잊어먹었다는 게 놀랍진 않네."
+<<else>>
+	"아뇨." 당신이 말한다. "경비가 절 들여보내 줬어요."
+<</if>>
+<br><br>
+조던이 미소 짓는다. "그래?" <<he_ ga>> 묻는다. "비밀 문으로 들어온 게 아니라고? 학교 역사 교과서에 적혀 있는 그거 말이야." <<He_ ga>> 웃는다. "주교님께선 아실지 모르겠구나."
+<br><br>
+<<He_ ga>> 당신의 손을 잡아 <<his_ yi>> 손에 포갠다. "함께 기도하겠니?"
+<<takeHandholdingVirginity "Jordan">>
+<br><br>
+<<link [[기도한다 (1:00)|Temple Jordan Prayer]]>><<pass 60>><<trauma -12>><<stress -12>><<tiredness -6>><</link>><<lltrauma>><<llstress>><<ltiredness>>
+<br>
+<<link [[떠난다|Temple Jordan Prayer Leave]]>><</link>>
+<br>
+
+:: Temple Jordan Prayer
+
+<<temple_effects>><<effects>>
+당신은 눈을 감는다. 조던이 큰 소리로 기도문을 외우자, <<his_ yi>> 감미로운 목소리가 작은 방에 메아리친다.
+<br><br>
+시간이 빠르게 지나간다. 어쩌면 당신은 깜빡 졸았을지도 모르겠다. 조던이 당신의 손을 놓는다. "고맙구나." <<he_ nun>> <<his_ yi>> 발로 일어서며 말한다. "네가 여기에 있었다는 건 아무에게도 말하지 않을게."
+<br><br>
+<<He_ ga>> 방을 떠난다.
+<br><br>
+<<endevent>>
+<<prayerend>>
+
+:: Temple Jordan Prayer Leave
+
+<<temple_effects>><<effects>>
+조던이 고개를 끄덕인다. "그렇다면야," <<he_ nun>> 미소를 지은 채 말한다. "걱정 마렴. 네가 여기에 있었다는 건 아무에게도 말하지 않을게."
+<br><br>
+<<link [[다음|Temple]]>><<endevent>><<unset $temple_sneak>><</link>>

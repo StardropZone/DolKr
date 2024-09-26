@@ -1,0 +1,78 @@
+:: Widgets custom Settings [widget nobr]
+<<widget "init_customSetting">>
+    <<if $custom is undefined>>
+        <<set $custom to {}>>
+    <</if>>
+    <<if $gateway is undefined>>
+        <<set $gateway to {}>>
+    <</if>>
+
+
+    <<if $custom.variables isnot undefined>>
+        <<set _custom_variables_temp to $custom.variables>>
+        <<overwrite _custom_variables_temp "$custom">>
+        <<delete "$custom.variables">>
+    <</if>>
+
+    <<if $custom.tipsActive is undefined>>
+        <<set $custom.tipsActive to false>>
+    <</if>>
+
+    <<if $custom.restActive is undefined>>
+        <<set $custom.restActive to false>>
+    <</if>>
+
+    <<if $custom.homeActive is undefined>>
+        <<set $custom.homeActive to false>>
+    <</if>>
+
+    <<if $custom.storeActive is undefined>>
+        <<set $custom.storeActive to false>>
+    <</if>>
+
+    <<if $custom.pervertpointActive is undefined>>
+        <<set $custom.pervertpointActive to false>>
+    <</if>>
+<</widget>>
+
+<<widget "customSettingButton">>
+	<div id="settingsCustom">
+		<<subsectionSettingsTabButton "커스텀 기능 설정" "custom">>
+	</div>
+<</widget>>
+
+<<widget "customSettings">>
+    <div class="solidBorderContainer settings-container">
+		<div class="settingsGrid">
+			<div class="settingsHeader">
+				커스텀 기능 설정
+			</div>
+			<div class="settingsToggleItem">
+				<label>
+				<<checkbox "$custom.tipsActive" false true autocheck>> 커스텀 기능 팁 활성화
+				</label>
+			</div>
+			<div class="settingsToggleItem">
+				<label>
+				<<checkbox "$custom.restActive" false true autocheck>> 휴식 활성화
+				</label>
+			</div>
+			<div class="settingsToggleItem">
+				<label>
+				<<checkbox "$custom.homeActive" false true autocheck>> 플레이어 집 활성화
+				</label>
+			</div>
+			<div class="settingsToggleItem">
+				<label>
+				<<checkbox "$custom.storeActive" false true autocheck>> 상점 활성화 *미완성
+				</label>
+			</div>
+			<div class="settingsToggleItem">
+				<label>
+				<<checkbox "$custom.pervertpointActive" false true autocheck>> 포인트 활성화 *미완성
+				</label>
+			</div>
+		</div>
+		<div style="clear:both;">/*Keep at end of toggles*/</div>
+    </div>
+<</widget>>

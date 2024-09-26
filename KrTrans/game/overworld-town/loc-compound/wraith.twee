@@ -1,0 +1,630 @@
+:: Elk Compound Wraith Give
+<<effects>><<wraithPossess>>
+
+<<if C.npc["Ivory Wraith"].lust gt 10 and ($wraith.state is "haunt" or $wraith.offspring is "dead")>>
+	<<set $compoundWraith to "accepted">>
+	그것이 움직이는 것인지는 알 수 없지만, 여전히 잔상은 남는다. 당신은 순순히 무릎꿇는다.
+<<else>>
+	<<set $compoundWraith to "willing">><<canvas-model-override "mouth" "neutral">>
+	<<if $wraith.seen gte 5>>주저하며, 당신이<<else>>당신이<</if>> 형체의 손을 잡자, 그것이 부드럽게 당신의 손을 감싼다. 차가운 감촉이다. <<takeHandholdingVirginity "Ivory Wraith">>
+<</if>>
+<br><br>
+
+형체는 순식간에 발끝부터 하얀 안개로 흩어지기 시작한다. 당신은 입이 떡 벌어지는 것을 느낀다. 아무런 감각도 느껴지지 않는다.
+<br><br>
+
+안개가 당신의 입 안으로 흘러들어오자, 당신의 몸 전체가 차갑고 뻣뻣해진다. 형체는 사라졌다. 당신은 자리에서 일어서지만 다리에는 감각이 없다.
+<br><br>
+
+<span class="nextLink"><<link [[다음|Elk Compound Possessed Intro]]>><</link>></span>
+
+:: Elk Compound Wraith Resist
+<<effects>><<set $compoundWraith to "resisted">>
+
+당신은 소용돌이치는 형상들을 머릿속에서 떨치기 위해 고개를 돌린다. 창백한 형체가 
+<<if $wraith.state is "haunt" or $wraith.offspring is "dead">>
+	얼굴을 꿈틀거린다. "<span class="wraith">그럼에도 불구하고, 난 부탁하는 것이 아니었어.</span>"
+<<else>>
+	얼굴을 찌푸린다. "<span class="wraith">단 한번이라도, 머무를 순 없겠나?</span>"
+<</if>>
+<<initWraith "abomination">><<startWraith>>
+"<span class="wraith">이렇게든 저렇게든. 그들을 위해.</span>"
+<br><br>
+
+<<link [[다음|Elk Compound Wraith Fight]]>><<set $molestationstart to 1>><</link>>
+
+:: Elk Compound Wraith Fight
+<<if $struggle_start is 1>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<if $player.penisExist>>
+		<<set $struggle.penis.creature to "pale slime">><<set $penisuse to "struggle">><<set $penisstate to "struggle">><<set $struggle.enemy[0].location to "penis">>
+	<<else>>
+		<<set $struggle.vagina.creature to "pale slime">><<set $vaginause to "struggle">><<set $vaginastate to "struggle">><<set $struggle.enemy[0].location to "vagina">>
+	<</if>>
+	<<unset $struggle_start>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $enemytype to $wraith.type>>
+<</if>>
+<<effectsWraith>>
+
+<<switch $wraith.type>>
+	<<case "man">>
+		<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+			<span id="next"><<link [[다음|Elk Compound Wraith Fight Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Elk Compound Wraith Fight]]>><</link>></span><<nexttext>>
+		<</if>>
+	<<case "tentacles">>
+		<<if $tentacles.active lte ($tentacles.max / 2)>>
+			<span id="next"><<link [[다음|Elk Compound Wraith Fight Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Elk Compound Wraith Fight]]>><</link>></span><<nexttext>>
+		<</if>>
+	<<case "slime">>
+		<<if $struggle.done gte $struggle.number>>
+			<span id="next"><<link [[다음|Elk Compound Wraith Fight Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Elk Compound Wraith Fight]]>><</link>></span><<nexttext>>
+		<</if>>
+<</switch>>
+
+:: Elk Compound Wraith Fight Finish
+<<effects>>
+<<if !$wraithCount>>
+	<<if $wraith.state isnot "haunt" and !["dead","sold"].includes($wraith.offspring)>>
+		<<set $wraithCount to 1>><<set $wraithMax to 1>>
+	<<else>>
+		<<set $wraithCount to 0>>
+		<<set $wraithMax to 3>>
+		<<if ["dead","sold"].includes($wraith.offspring)>>
+			<<set $wraithMax++>>
+		<</if>>
+		<<if $tentacledisable is "t">>
+			<<set $wraithMax -->>
+		<</if>>
+	<</if>>
+<</if>>
+<<if $enemyhealth lte 0>>
+	<<person_ nun>> 뒤로 비틀거리며 충격에 휩싸인 표정으로 당신을 내려다본다.
+	<<if $wraith.gen is "abomination">>
+		촉수들은 힘없이 어둠 속으로 곤두박질치더니, 분홍색 연기로 승화된다.
+	<<elseif $wraith.gen is "arms">>
+		<<His_ yi>> 수많은 팔이 물러난다.
+	<</if>>
+	<<His_ yi>> 머리가 뒤로 젖혀지고, 당신의 정신에 울려퍼지는 짧은 비명과 함께 <<he_ ga>> 허공으로 사라진다. 귀가 울린다. 울부짖는 소리가 들린 것만 같다. <<He_ ga>> 무어라 말하지만, 당신은 알아들을 수 없다.
+	<br><br>
+	<<tearful>> 당신은 주위를 둘러보며 <<he_ ga>> 정말로 사라졌는지 확인한다.
+	<<endRainWraith true>>
+	<<set $wraith.defeated++>>
+	<<clotheson>>
+	<<endcombat>><<endWraith>><<clearWraith>>
+	<<set $wraithCompoundCooldown to 10>>
+	<<set $wraithCompoundChance to 10>>
+	<<link [[다음|Elk Compound]]>><</link>>
+<<elseif $enemyarousal gte $enemyarousalmax or $pain gte 100 and $willpowerpain is 0 or ($wraith.type is "tentacles" and $tentacles.active lte ($tentacles.max / 2)) or ($wraith.type is "slime" and $struggle.done gte $struggle.number)>>
+	<<set $wraithCount++>>
+	<<ejacW>>
+	<<if $wraithCount gte $wraithMax>>
+		<<kissWraith "stress">>
+		<br><br>
+		<<if $pain gte 100 or $stress gte $stressmax>>
+			<<if $pain gte 100>>
+				<span class="red">당신은 심하게 다치고 멍들어서 저항할 수 없다.</span>
+			<<else>>
+				더 이상 견딜 수 없다. 의식이 희미해지는 것이 느껴진다.
+			<</if>>
+			형체는 순식간에 발끝부터 하얀 안개로 흩어지기 시작한다. 당신은 입이 떡 벌어지는 것을 느낀다. 아무런 감각도 느껴지지 않는다.
+			<br><br>
+			안개가 당신의 입 안으로 흘러들어오자, 당신의 몸 전체가 차갑고 뻣뻣해진다. 형체는 사라졌다. 당신은 자리에서 일어서지만 다리에는 감각이 없다.
+			<br><br>
+			<<link [[다음|Elk Compound Possessed Intro]]>><<endWraith>><<clearWraith>><<clotheson>><<endcombat>><<wraithPossess>><</link>>
+			<br>
+		<<elseif $wraith.state is "haunt" or ["dead","sold"].includes($wraith.offspring)>>
+			형체가 당신을 노려본다. "<span class="wraith">내게서 가져갈 만큼 가져가지 않았나? 나는 다른 방법을 찾겠어.</span>" <<He_ nun>> 돌연 말을 멈추고 쏟아지는 물 속으로 사라진다.
+			<br><br>
+			<<tearful>> 당신은 주위를 둘러보며 <<he_ ga>> 정말로 사라졌는지 확인한다.
+			<<endRainWraith true>>
+			<<clotheson>>
+			<<endcombat>><<endWraith>><<clearWraith>>
+			<<set $wraithCompoundCooldown to 10>>
+			<<set $wraithCompoundChance to 10>>
+			<<link [[다음|Elk Compound]]>><</link>>
+		<<else>>
+			형체가 얼굴을 찌푸린다. "<span class="wraith">바위에서 피를 짜내는 것처럼. 다른 방법을 찾겠어.</span>" <<He_ nun>> 돌연 말을 멈추고 쏟아지는 물 속으로 사라진다.
+			<br><br>
+			<<tearful>> 당신은 주위를 둘러보며 <<he_ ga>> 정말로 사라졌는지 확인한다.
+			<<endRainWraith true>>
+			<<clotheson>>
+			<<endcombat>><<endWraith>><<clearWraith>>
+			<<set $wraithCompoundCooldown to 10>>
+			<<set $wraithCompoundChance to 10>>
+			<<link [[다음|Elk Compound]]>><</link>>
+		<</if>>
+	<<else>>
+		<<continueWraith>>
+		<br><br>
+		<<link [[다음|Elk Compound Wraith Fight]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Elk Compound Possessed Intro
+<<effects>>
+<<set $wraithWillMessage to true>>
+<<set $wraithCompoundSeen to true>> /* currently unused */
+당신은 웅덩이로 <<wraithShamble>>. 웅덩이 속에서 <<wraithEyes>> 눈을 한 창백한 <<girl_ i>> 당신을 마주본다.
+<br><br>
+당신은 시험이라도 하는 양 손가락을 하나씩 움직인다.
+<br><br>
+<<if $compoundWraith is "willing">>
+	당신의 머리가 만족스럽게 뚝 소리를 내며 옆으로 기울어진다. 당신은 중앙 건물을 빤히 바라본다.
+	<br><br>
+	당신의 입에서 말이 흘러나온다.
+	"<span class="wraith">우리는 날아오른다.</span>" 그것이 당신의 고개를 단호하게 끄덕인다.
+<<else>>
+	당신의 머리가 소름끼치게 부러지는 소리를 내며 옆으로 휙 기울어진다. 당신은 중앙 건물을 빤히 바라본다.
+	<br><br>
+	당신의 입에서 말이 흘러나온다.
+	"<span class="wraith">나는 날아오른다.</span>" 그것이 당신의 입꼬리를 비틀어 웃음짓는다.
+<</if>>
+<br><br>
+<span class="nextLink"><<link [[다음.|Elk Compound Possessed]]>><</link>></span>
+<br>
+
+:: Elk Compound Possessed
+<<effects>>
+
+당신은 엘크 가의 단지 안에 있다. 붉은 벽돌로 된 건물 세 개를 철사 울타리가 둘러싸고 있다. 보안 요원이 정문을 지킨다.
+<<if $compoundalarm gte 1>>
+	<span class="red">당신은 무단 침입 중이다.</span>
+<</if>>
+<br><br>
+
+당신은 중앙 건물의 문을 향해 <<wraithShamble>>. 당신은 문 손잡이를 잡고 밀어 열어본다. 잠겨있다.
+<br><br>
+
+<<if $compoundWraith is "willing">>
+	<<set $lock to 300>>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+		<span class="green">이 자물쇠는 따기 쉬워보인다.</span> 당신의 손에 감각이 돌아온다.
+		<br><br>
+		<<lockpickicon>><<link [[침입한다 (0:05)|Elk Compound Possessed 2]]>><<set $phase to 1>><<pass 5>><</link>>
+		<br>
+		<<ind>><<link [[창백한 형체에게 맡긴다|Elk Compound Possessed 2]]>><<set $phase to 2>><</link>><<gtrauma>>
+	<<else>>
+		<span class="red">이 자물쇠는 당신의 능력으로는 딸 수 없다.</span>
+		<<skulduggeryrequired>>
+		<br><br>
+
+		창백한 형체는 당신의 목을 가다듬고, 아랑곳하지 않고 앞으로 걸어가게 한다. 당신의 몸은 젤리를 뚫고 지나가는 것처럼 문을 통과한다. 매우 기이한 느낌이다.
+		<<trauma 6>><<gtrauma>>
+		<br><br>
+
+		<span class="nextLink"><<link [[다음.|Elk Compound Possessed 2]]>><<set $phase to 0>><</link>></span>
+	<</if>>
+<<else>>
+	창백한 형체는 당신의 목을 가다듬고, 아랑곳하지 않고 앞으로 걸어가게 한다. 당신의 몸은 젤리를 뚫고 지나가는 것처럼 문을 통과한다. 매우 기이한 느낌이다.
+	<<trauma 6>><<gtrauma>>
+	<br><br>
+
+	<span class="nextLink"><<link [[다음.|Elk Compound Possessed 2]]>><<set $phase to 0>><</link>></span>
+<</if>>
+
+:: Elk Compound Possessed 2
+<<effects>>
+
+<<if $phase is 1>>
+	당신은 성공적으로 자물쇠를 따고 문을 연다. "<span class="wraith">손이 민첩하군,</span>" 당신의 목소리가 말한다. 형용할 수 없는 만족감이 퍼져나가 당신의 마음을 따뜻하게 데운다.
+	<<stress -6>><<trauma -6>><<lstress>><<ltrauma>>
+	<br><br>
+
+	당신이 앞으로 걸어가자 그것이 다시 몸의 통제권을 쥔다.
+<<elseif $phase is 2>>
+	당신이 창백한 형체를 마음 속으로 쿡 찌르자, 그것이 당신의 목으로 킥킥 웃으며 통제권을 탈환한다. 당신의 몸은 젤리를 뚫고 지나가는 것처럼 문을 통과한다. 매우 기이한 느낌이다.
+	<<trauma 6>><<gtrauma>>
+	<br><br>
+<</if>>
+
+건물 안은 거대한 승강기가 차지하고 있다. 작동시킬 방법은 보이지 않지만, 창백한 형체는 신경쓰지 않는 것 같다. 당신이 승강기 앞에 서 팔을 흔들자, 승강기 문이 안개를 내뿜으며 강제로 열린다.
+<br><br>
+
+당신이 승강기에 올라타자 승강기는 문도 닫지 않은 채 곧장 아래로 낙하한다. 승강기는 바닥에 닿기 전 속도를 
+<<if $compoundWraith is "willing">>
+	낮추고, 부드럽게 멈춰선다.
+<<else>>
+	낮추지만, 충격 없이 멈춰서기엔 충분하지 못하다.
+	<<pain 4>><<gpain>>
+<</if>>
+<br><br>
+
+당신의 눈앞에 이곳저곳으로 이어진 수많은 콘크리트 복도가 펼쳐진다. 천장에 줄지어 달린 형광등은 대부분이 꺼졌고, 천장 밖으로 드러난 파이프와 전선에 얽혀 있다. 바닥 타일은 군데군데가 더럽고 금이 갔으며, 곧장 동굴로 이어지는 복도도 한둘이 아니다.
+<br><br>
+
+<span class="nextLink"><<link [[다음.|Elk Compound Possessed 3]]>><</link>></span>
+
+:: Elk Compound Possessed 3
+<<effects>><<generate1>><<generate2>><<person1>>
+
+당신은 한 복도에 머리를 집중하고 그곳을 향해 성큼성큼 걸어간다. 복도엔 아무도 없다. 근처의 방에 과학자들이 몇 보이긴 하지만 당신을 눈치채지는 못한다.
+<br><br>
+
+마침내 시선이 향하던 방에 다다른 당신은 조용히 모퉁이를 돈다. 벽에는 철제 상자가 쌓여 있고, <<person2>><<person_ i>> 상자 하나를 벽으로 옮기는 동안 <<person1>><<person_ i>> 그 모습을 주시한다.
+<br><br>
+
+"이게 마지막일 거야," <<person_ i>> 말한다. "조심해서 다뤄. <b>퀸</b> 시장님께서는 최상의 상태를 원하시니까."
+<<stress 2>><<gstress>>
+<br><br>
+
+"<b>퀸</b> 시장이고 뭐고 좆까라 그래," <<person2>><<person_ i>> 툴툴거린다. "씨발, 뒤지게 무겁네. 그래서 이게 대체 뭔데?"
+<<stress 2>><<gstress>>
+<br><br>
+
+퀸의 이름이 언급될 때마다, 느껴본 적 없는 분노가 당신의 머릿속에 스쳐지나간다. 당신은 창백한 형체가 다른 속셈을 품은 것은 아닐지 의심한다.
+<br><br>
+
+당신이 방에 들어서자 경비원들이 당신을 돌아본다. <<person1>><<person_ un>> 재빨리 들고 있던 클립보드를 치우고 엉덩이 쪽에 달린 버튼을 누른다. 그러고는, <<person2>><<person_ gwa>> 함께 당신을 향해 걸어온다.
+<br><br>
+
+<<if $compoundWraith is "willing">>
+	<span class="nextLink"><<link [[싸워라.|Elk Compound Possessed Fight]]>><<set $fightstart to 1>><</link>></span>
+<<else>>
+	<span class="nextLink"><<link [[저들을 때려눕혀라.|Elk Compound Possessed Fight]]>><<set $fightstart to 1>><</link>></span>
+<</if>>
+
+:: Elk Compound Possessed Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>><<set $noAdmire to true>><<set $noBodyWriting to true>>
+	<<if $compoundWraith is "willing">>
+		"<span class="wraith">내가 너를 책임지도록 해 줘, 내가 저들을 책임지도록 해 줘,</span>" 당신의 목소리가 속삭인다.
+	<<else>>
+		"<span class="wraith">깊이 떨어져라, 더 깊이,</span>" 당신의 목소리가 비웃는다.
+	<</if>>
+	<<if !$wraith.will>>
+		<<set $wraith.will to random(1300, 1700)>>
+	<</if>>
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+<<if _resist gte 1 and $compoundWraith is "willing">>
+	<<set $finish to 1>>
+	<span class="black">당신의 저항에 창백한 형체에게서 순간적인 혼란이 느껴진다.</span>
+	<br><br>
+<<elseif _resist gte 1 and $compoundWraith is "accepted">>
+	<<set $compoundWraith to "resisted">>
+	<span class="black">당신의 저항에 창백한 형체에게서 순간적인 경멸이 느껴진다.</span>
+	<br><br>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or _controlRegain is 1>>
+	<span id="next" class="nextWraith"><<link [[다음.|Elk Compound Possessed Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next" class="nextWraith"><<link [[다음.|Elk Compound Possessed Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Elk Compound Possessed Fight Finish
+<<effects>>
+<<if $enemyhealth lte 0>>
+	경비원들이 앓는 소리를 내며 바닥에 쓰러진다. 당신은 당신을 붙잡고 있는 <<person1>><<persons_ yi>> 팔을 짓밟고 벽에 쌓인 상자를 향해 걸어간다.
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+	<<if $compoundWraith is "willing">>
+		<<canvas-model-override "mouth" "smile">>
+	<</if>>
+
+	<span class="nextLink"><<link [[다음.|Elk Compound Possessed Creatures]]>><<endevent>><<set $pain to 0>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+	경비원들이 앓는 소리를 내며 바닥에 쓰러진다. 당신은 당신을 붙잡고 있는 <<person1>><<persons_ yi>> 팔을 짓밟고 벽에 쌓인 상자를 향해 걸어간다.
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+	<<if $compoundWraith is "willing">>
+		<<canvas-model-override "mouth" "smile">>
+	<</if>>
+
+	<span class="nextLink"><<link [[다음.|Elk Compound Possessed Creatures]]>><<endevent>><<set $pain to 0>><</link>></span><<nexttext>>
+<<elseif $finish is 1>>
+	<<wraithExorcise true true>>
+	당신은 뒤로 비틀거린다. 당신의 가슴에서 창백한 형제가 빠져나온다. "<span class="wraith">어쩌면 다른 접근법을.</span> <span class="tentacle">둘로써, 둘로-</span>"
+	<br><br>
+
+	"저게 대체 뭐야?!" <<person2>><<person_ un>> 비명을 지르며 허둥지둥 도망치려다 넘어질 뻔 한다. "저게- 저거- <<pher_ yi>> 가슴에서 저게 튀어나왔잖아! 너도 봤지!"
+	<br><br>
+
+	"그래, 나도 봤다," <<person1>><<person_ i>> 눈을 굴리며 말한다. "시장님께서 말씀해 주셨잖아. 이 지랄맞을 것들 근처에 있으면-" <<he_ ga>> 상자들을 향해 엄지를 까딱한다- "환각을 보게 될 거라고. 그냥 무시해."
+	<br><br>
+
+	"말이야 쉽지!" 창백한 형체가 사악한 미소를 지으며 <<himPost>> 주변을 맴돌자 <<person2>><<person_ i>> 공포에 소리친다. <<person1>><<person_ un>> <<his_ yi>> 파트너의 비명소리는 무시하고, 한숨을 내쉬며 당신에게 다가온다.
+	<br><br>
+
+	<<saveNPC 0 "compound_guard">>
+	<<endcombat>>
+	<<loadNPC 0 "compound_guard">><<clearNPC "compound_guard">>
+
+	<<link [[다음|Elk Compound No Longer Possessed Fight]]>><<set $fightstart to 1>><</link>>
+<<else>>
+	<<wraithExorcise true true>>
+	<span class="gold">당신은 멈춘다.</span> 그것이 당신에게 계속 하라고, 계속 싸우라고 등을 떠미는 것이 느껴지지만, 당신은 발을 바닥에 딱 붙이고 정신을 집중한다. 당신은 몸을 되찾았고, 다시는 내어주지 않을 것이다. 경비원들은 당신이 싸우는 것을 멈추자 당혹스러운 눈빛으로 당신을 쳐다본다.
+	<br><br>
+
+	당신은 고통으로 몸을 구부린다. 그것이 패배를 깨닫고 당신의 몸에서 빠져나온다. 창백하고 투명한 팔 한 쌍이 당신의 가슴에서 돋아난다. 그것은 간신히 당신의 안에서 자신을 쫓아낸다.
+	<br><br>
+
+	그것의 고개가 제자리로 돌아온다. 그것은 당신의 정신 속에 울리는, 분노에 찬 으르렁거림만을 남기고는 허공으로 흩어져 사라진다. 귀가 울린다. 사방에서 그것의 목소리가 들린다. "<span class="wraith">이토록 가까웠는데, 너는 칼날을 비틀어 버리는구나. 얼마나 잔혹한가.</span>" 경비원들은 당신을 보고, 충격에 빠져 뒷걸음질친다. <<tearful>> 당신이 복도로 도망치자, 경비들이 당신을 뒤쫓는다.
+	<br><br>
+
+	당신은 따라잡히기 전에 승강기에 도착한다. 문이 저절로 닫힌다. 경비들이 문을 두들기지만, 그 소리는 당신이 위로 올라가자 점차 사그라든다. 마침내 승강기가 멈추고, 당신은 문 밖으로 달려나가 단지로 되돌아간다.
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+	<<set $wraithCompoundCooldown to 10>>
+	<<set $wraithCompoundChance to 10>>
+
+	<<link [[다음|Elk Compound]]>><<unset $compoundWraith>><<endRainWraith>><<endWraith>><<clearWraith>><<set $compoundalarm += 5>><<set $eventskip to 1>><</link>>
+<</if>>
+
+:: Elk Compound No Longer Possessed Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>><<set $apologised to 1>>
+	<<set $enemynomax to 1>>
+	<<set $timer to 5>>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<if $timer is 1>>
+	나머지 경비원이 고통에 신음하며 쓰러진다. 창백한 형체가 당신의 곁에 부유하며 손가락으로 당신의 이마에 모양을 그려, <span class="green">당신을 진정시키고 기력을 채워준다.</span>
+	<<set $pain to 0>><<llpain>>
+	<<person1>>
+	<br><br>
+<<elseif $timer lte 0>>
+	창백한 형체가 당신의 몸을 진정시킨다.
+	<<set $pain to 0>><<llpain>>
+	<br><br>
+<</if>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Elk Compound No Longer Possessed Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Elk Compound No Longer Possessed Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Elk Compound No Longer Possessed Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+<</if>>
+<<person_ i>> 앓는 소리를 내며 바닥에 쓰러진다. <<He_ nun>> 몸을 일으키려 하지만, 창백한 형체가 <<his_ yi>> 팔을 짓밟는다. 그것이 당신에게 따라오라는 손짓을 하고 상자들이 늘어선 벽을 향해 걸어간다.
+<br><br>
+
+<<endcombat>><<clotheson>>
+
+<<link [[다음|Elk Compound Possessed Creatures]]>><</link>>
+
+:: Elk Compound Possessed Creatures
+<<effects>>
+<<world_corruption "soft" -3>>
+<<if $possessed and $compoundWraith is "willing">>
+	<<wraithExorcise true true>>
+	당신은 도중에 걸음을 멈춘다. 가슴이 꽉 조이는 느낌이 든다. 창백한 팔 하나가 나타나고, 또다른 팔이 그 뒤를 따른다. 창백한 형체가 당신의 몸에서 빠져나와 당신은 잠시 비틀거린다.
+	<br><br>
+<</if>>
+
+<<if $compoundWraith is "willing">>
+	창백한 형체가 손가락을 튕기자 각 상자의 철창이 뒤틀리고 변형된다. 뜯어져 나간 한 상자에서 하얗고 거의 투명한 물질이 새어나온다. 그것은 파도의 형상을 취해 상자에서 빠져나와 형체를 향해 어기적거린다. <span class="gold">창백한 슬라임이다.</span>
+	<br><br>
+
+	창백한 형체는 몸을 숙여 그것을 들어올린 뒤 부드럽게 쓰다듬는다. 다른 상자들도 하나둘씩 부서지고 열리며 상아처럼 창백한 온갖 생명체들을 드러낸다. 슬라임, 기다란 촉수, 덩굴손에 뒤덮인 생명체, 그 외에도 많다.
+	<<if $wraith.offspring is "sold">>
+		<span class="green">심지어 당신이 팔았던 창백한 자손들도 보인다.</span>
+	<</if>>
+	생명체들은 전부 창백한 형체를 둘러싸고 모인다. 그것의 어깨가 마침내 긴장을 풀고 축 늘어진다.
+	<br>
+	당신의 허리께까지 오는, 가죽같은 다리가 여럿 달린 창백한 생명체 하나가 당신에게 총총 걸어온다. 당신은 반사적으로 팔을 들어올려 방어하지만, 그것은 공격하지 않는다. 대신 당신의 옆구리에 조심스레 몸을 비비고는 기분 좋게 찍찍거리며 뛰어서 제자리로 돌아간다.
+	<<stress -6>><<lstress>>
+	<br><br>
+
+	잠시 뒤, 창백한 형체가 슬라임을 내려놓고 한쪽 팔로 손짓한다. 회전하는 보랏빛 원반이 바닥에 나타나더니, 생명체들이 두려워하는 기색 없이 그 안으로 뛰어든다. 당신의 어깨에 손 하나가 등 뒤에서 조심스레 내려앉는다. 창백한 형체는 당신의 눈앞에 앉아 있지만, 당신은 그 손이 주인이 그것임을 알고 있다.
+	<<if $wraith.state is "haunt">>
+		"<span class="wraith">회개하고자 하는 자여.</span>"
+	<<else>>
+		"<span class="wraith">끝없는 너그러움을 품은 자여.</span>"
+	<</if>>
+	<br>
+	<<if $museumAntiques.antiques.antiquehourglass isnot "found" and $museumAntiques.antiques.antiquehourglass isnot "talk" and $museumAntiques.antiques.antiquehourglass isnot "museum">>
+		<<set $antiquemoney += 1400>><<museumAntiqueStatus "antiquehourglass" "found">>
+		그것은 아무 생명체도 들어있지 않는 것 같은 상자 하나에 손을 뻗더니, 정체를 알 수 없는 금속으로 정교하게 장식된 모래시계를 꺼낸다. 모서리에는 수많은 문구가 새겨져 있다. 수집가라면 관심을 가질 지도 모른다. "<span class="wraith">모래는 오래 전에 말랐지만, 그럼에도 저들에게는 이것을 가질 자격이 없어. 꼭 쥐어, 손가락 사이로 흘러내리기 전에.</span>"
+	<<else>>
+		<<set $blackmoney += 1000>>
+		그것은 덩굴손을 뻗어 근처 벽에 달린 장치 몇 개를 떼어내 당신에게 건넨다. 암시장의 누군가라면 관심을 가질 지도 모른다. "<span class="wraith">감사의 징표. 저들을 상처입히는 것은 또 다른 호재일 뿐.</span>"
+	<</if>>
+	<<npcincr "Ivory Wraith" love 3>><<gglove>><<lobsession 1>>
+<<else>>
+	당신이 손가락을 튕기자 각 상자의 철창이 뒤틀리고 변형된다. 부러진 한 상자에서 하얗고 거의 투명한 물질이 새어나온다. 그것은 파도의 형상을 취해 상자에서 빠져나와 밖으로 어기적거린다. <span class="gold">창백한 슬라임이다.</span>
+	<br><br>
+
+	그것은 주저하는 듯 하지만, 당신의 <<wraithEyes>> 눈이 번득이자 당신을 향해 기어온다. 당신은 그것을 들어올려 부드럽게 쓰다듬는다. 다른 상자들도 하나둘씩 부서지고 열리며 상아처럼 창백한 온갖 생명체들을 드러낸다. 슬라임, 기다란 촉수, 덩굴손에 뒤덮인 생명체, 그 외에도 많다.
+	<<if $wraith.offspring is "sold">>
+		<span class="green">심지어 당신이 팔았던 창백한 자손들도 보인다.</span>
+	<</if>>
+	생명체들은 전부 당신을 둘러싸고 모인다. 당신의 어깨가 마침내 긴장을 풀고 축 늘어진다.
+	<br>
+	당신의 허리께까지 오는, 가죽같은 다리가 여럿 달린 창백한 생명체 하나가 당신에게 총총 걸어온다. 당신의 뱃속에 시커먼 구덩이가 내려앉지만, 그것은 공격하지 않는다. 대신 당신의 옆구리에 조심스레 몸을 비비고는 기분 좋게 찍찍거리며 뛰어서 제자리로 돌아간다.
+	<br><br>
+
+	잠시 뒤, 당신은 슬라임을 내려놓고 한쪽 팔로 손짓한다. 회전하는 보랏빛 원반이 바닥에 나타나더니, 생명체들이 두려워하는 기색 없이 그 안으로 뛰어든다.
+	<br><br>
+
+	<<if $compoundWraith is "accepted">>
+		<<if $wraith.state is "haunt">>
+			"<span class="wraith">도굴꾼.</span>"
+		<<else>>
+			"<span class="wraith">도살자.</span>"
+		<</if>>
+		그것이 당신의 입을 통해 말하지만, 이번만큼은 화난 것 같지 않다. "<span class="wraith">속죄. 많은 것 중 첫 걸음. 언젠가는, 도구 그 이상으로.</span>"
+		<br>
+		<<if $museumAntiques.antiques.antiquehourglass isnot "found" and $museumAntiques.antiques.antiquehourglass isnot "talk" and $museumAntiques.antiques.antiquehourglass isnot "museum">>
+			<<set $antiquemoney += 1400>><<museumAntiqueStatus "antiquehourglass" "found">>
+			그것은 아무 생명체도 들어있지 않는 것 같은 상자 하나에 손을 뻗더니, 정체를 알 수 없는 금속으로 정교하게 장식된 모래시계를 꺼낸다. 모서리에는 수많은 문구가 새겨져 있다. 수집가라면 관심을 가질 지도 모른다. "<span class="wraith">저들의 손보다는, 너의 손 안에 있는 것이 더 신뢰할 수 있어. 꼭 쥐어라, 손가락 사이로 흘러내리기 전에.</span>"
+		<<else>>
+			<<set $blackmoney += 1000>>
+			그것은 덩굴손을 뻗어 근처 벽에 달린 장치 몇 개를 떼어내 당신에게 건넨다. 암시장의 누군가라면 관심을 가질 지도 모른다. "<span class="wraith">감사의 징표. 저들을 상처입히는 것은 또 다른 호재일 뿐.</span>"
+		<</if>>
+		<<npcincr "Ivory Wraith" love 1>><<glove>><<if $wraith.offspring is "sold">><<lobsession 1>><<else>><<lobsession 3>><</if>>
+	<</if>>
+<</if>>
+<<if $wraith.offspring is "sold">>
+	<<unset $wraithAngerCooldown>>
+	<<set $wraith.offspring to "">>
+<</if>>
+<<set $wraithCompoundCooldown to 30>>
+<<unset $wraithCompoundChance>>
+<br><br>
+
+<<if $possessed>>
+	<span class="nextLink"><<link [[다음.|Elk Compound Possessed Creatures 2]]>><</link>></span><<nexttext>>
+<<else>>
+	<<link [[다음|Elk Compound Possessed Creatures 2]]>><</link>><<nexttext>>
+<</if>>
+
+:: Elk Compound Possessed Creatures 2
+<<effects>><<generate1>><<generate2>><<generate3>><<person1>>
+
+갑작스러운 소음에 당신의 주의가 끌린다. <<person_ i>> 이끄는, 세 명의 경비원 무리가 방 안으로 뛰어들어온다. <<He_ nun>> 바닥에 쓰러진 경비원들을 슥 보고는 당신을 향해 돌아선다. "<<phim_ ul>> 잡아." <<fullGroup_ i>> 덤벼든다.
+<br><br>
+
+<<switch $compoundWraith>>
+	<<case "willing">>
+		창백한 형체가 손 하나를 당신의 어깨에 올리고, 당신의 귀를 두 손으로 감싼다. "<span class="wraith">저들의 발톱 하나 너에게 닿지 못할지니. 물러나거라, <<pcpetname_ iyo "Wraith">>.</span>" 그것은 당신의 귀를 손으로 감싼 채 날카로운 비명을 내지른다. 귀를 막았음에도 어마어마하게 큰 소리다. 경비원들에겐 얼마나 크게 들릴 지는 상상에 맡길 뿐이다. 경비원들은 곧바로 비틀대며 쓰러진다.
+		<br><br>
+
+		형체는 입을 다물고, 손을 치운 뒤 모습을 감춘다. 당신은 복도를 달려나가 승강기에 올라탄다. 문이 저절로 닫힌다. 승강기가 위층에 도달하고, 당신은 문 밖으로 걸어나가 단지로 되돌아간다.
+		<br><br>
+
+		<<link [[다음|Elk Compound]]>><<endevent>><<unset $compoundWraith>><<endRainWraith>><<endWraith>><<clearWraith>><<set $compoundalarm += 5>><<set $eventskip to 1>><</link>>
+	<<case "accepted">>
+		<<wraithExorcise true true>>
+		팔 두 개가 당신의 등 뒤에서 나타나 당신의 귀를 감싼다. "<span class="wraith">네가 나를 도왔으니, 나 또한 그리 하겠어, <<pcpetname_ iyo "Wraith">>.</span>" 그것은 당신의 귀를 손으로 감싼 채 날카로운 비명을 내지른다. 귀를 막았음에도 어마어마하게 큰 소리다. 경비원들에겐 얼마나 크게 들릴 지는 상상에 맡길 뿐이다. 경비원들은 곧바로 비틀대며 쓰러진다. 당신의 목이 생으로 긁힌 듯이 아프다.
+		<<pain 2>><<gpain>>
+		<br><br>
+
+		창백한 형체가 등을 통해 당신의 몸에서 빠져나와 당신은 잠시 비틀거린다. 형체가 사라지고 당신은 비틀대며 달려간다. 당신은 복도를 달려나가 승강기에 올라탄다. 문이 저절로 닫힌다. 승강기가 위층에 도달하고, 당신은 문 밖으로 걸어나가 단지로 되돌아간다.
+		<br><br>
+
+		<<link [[다음|Elk Compound]]>><<endevent>><<unset $compoundWraith>><<endRainWraith>><<endWraith>><<clearWraith>><<set $compoundalarm += 5>><<set $eventskip to 1>><</link>>
+	<<case "resisted">>
+		<<set _wraithWill to Math.clamp(Math.floor(1 + $wraith.will) - $control, 1, 1000)>>
+		경비원들이 당신을 둘러싸고 팔을 붙잡는다. "심문하게 <<phim_ ul>> 데려가," <<person_ i>> 말한다. "털어놓을 게 아주 많을 테니." 당신은 빠져나가려 애쓰지만, <span class="red">창백한 형체가 당신의 몸을 붙들어 놓는다.</span>
+		<br><br>
+
+		<<link [[온 힘을 다해 저항한다|Elk Compound Possessed Guards]]>><<def 1>><<set $phase to 0>><<stress 12>><</link>><<willpowerdifficulty 1 _wraithWill>><<gstress>>
+		<br>
+		<span class="nextLink"><<link [[항복해라.|Elk Compound Possessed Guards]]>><<sub 1>><<set $phase to 1>><</link>></span>
+<</switch>>
+
+:: Elk Compound Possessed Guards
+<<effects>><<unset $compoundWraith>><<wraithExorcise true true>>
+
+<<if $phase is 0>>
+	당신은 주도권을 되찾기 위해 몸부림치고, 
+	<<if $willpowerSuccess>>
+		<span class="green">마침내 성공한다.</span> 당신은 팔다리를 휘둘러 경비들을 쓰러트린다. 창백한 형체가 당신의 가슴을 통해 빠져나와 당신을 노려본다. "<span class="wraith">그래, 좋다. 네가 내 손에 바스러지지 않는다면, 저들의 손에 바스라지겠지.</span>" 그것은 차갑고 하얀 안개 속으로 사라진다.
+		<br><br>
+
+		경비원들이 몸을 추스르고 당신에게 덤벼든다.
+		<br><br>
+
+		<<link [[다음|Elk Compound Possessed Guards Fight]]>><<set $fightstart to 1>><</link>>
+	<<else>>
+		<span class="red">결국 실패한다.</span> 당신의 몸은 꽉 붙잡혀 있다. "침입자를 제압했습니다," <<person_ i>> 무전기에 대고 말한다. <<He_ ga>> 당신의 머리에 손을 대자 당신의 몸에 충격이 내달린다. 창백한 형체가 당신의 몸을 떠나, 의식을 잃어가는 당신에게 손을 흔든다.
+		<br><br>
+
+		<<link [[다음|Elk Compound Experiment]]>><<upperruined>><<lowerruined>><<underruined>><<underupperruined>><<handheldruined>><<endWraith>><<clearWraith>><<endRainWraith>><</link>>
+	<</if>>
+<<else>>
+	<span class="pink">당신은 그것이 당신을 붙들도록 내버려둔다.</span> "침입자를 제압했습니다," <<person_ i>> 무전기에 대고 말한다. <<He_ ga>> 당신의 머리에 손을 대자 당신의 몸에 충격이 내달린다. 창백한 형체가 당신의 몸을 떠나, 의식을 잃어가는 당신에게 손을 흔든다.
+	<br><br>
+
+	<<link [[다음|Elk Compound Experiment]]>><<upperruined>><<lowerruined>><<underruined>><<underupperruined>><<handheldruined>><<endWraith>><<clearWraith>><<endRainWraith>><</link>>
+<</if>>
+
+:: Elk Compound Possessed Guards Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	<<set $enemynomax to 1>>
+	<<set $timer to 4>>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Elk Compound Possessed Guards Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Elk Compound Possessed Guards Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Elk Compound Possessed Guards Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	경비원들이 고통에 신음하며 한 무더기가 되어 쓰러진다. <<tearful>> 당신은 기회를 틈타 복도를 달려나가 승강기에 올라탄다. 문이 저절로 닫힌다. 승강기가 위층에 도달하고, 당신은 문 밖으로 걸어나가 단지로 되돌아간다.
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+
+	<<link [[다음|Elk Compound]]>><<endWraith>><<clearWraith>><<endRainWraith>><<set $compoundalarm += 5>><<set $eventskip to 1>><</link>>
+<<elseif $enemyhealth lte 0>>
+	경비원들이 고통에 신음하며 한 무더기가 되어 쓰러진다. <<tearful>> 당신은 기회를 틈타 복도를 달려나가 승강기에 올라탄다. 문이 저절로 닫힌다. 승강기가 위층에 도달하고, 당신은 문 밖으로 걸어나가 단지로 되돌아간다.
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+
+	<<link [[다음|Elk Compound]]>><<endWraith>><<clearWraith>><<endRainWraith>><<set $compoundalarm += 5>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<tearful>> 당신은 움직이기엔 너무 심하게 다쳐, 바닥에 주저앉는다. "침입자를 제압했습니다," <<person1>><<person_ i>> 무전기에 대고 말한다. <<He_ ga>> 당신의 머리에 손을 대자 당신의 몸에 충격이 내달린다. 당신은 의식을 잃는다.
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+
+	<<link [[다음|Elk Compound Experiment]]>><<endWraith>><<clearWraith>><<endRainWraith>><</link>>
+<</if>>

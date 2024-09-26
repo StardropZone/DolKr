@@ -1,0 +1,1058 @@
+:: Wraith Snatched Home Mirror
+<<effects>>
+당신은 비틀거리며 거울로 향한다. <<wraithEyes>> 눈을 한 창백한 <<girl_ ga>> 비친다.
+<br><br>
+<<link [[물러난다 (0:01)|Wraith Snatched Home Mirror 2]]>><<pass 1>><</link>>
+<br>
+<span class="nextLink"><<link [[응시한다 (0:01)|Wraith Snatched Home Mirror 2]]>><<pass 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Home Mirror 2
+<<effects>>
+당신은 마치 테스트하듯, 손가락을 하나씩 움직여본다.
+<br><br>
+당신은 거울에 손을 갖다 댄다.
+<<if Time.hour is 3 and $hallucinations gte 2 and $daily.mirrorTentacles isnot 1 and $tentacledisable is "f">>
+	표면이 소름 끼치는 붉은색으로 빛난다. 반대편에 빈 공간이 보이지만, 순식간에 사라져 버린다.
+<<else>>
+	표면이 느껴지지 않는다.
+<</if>>
+<br><br>
+머리가 한쪽으로 휙 기울어지더니, 소름 끼치는 뚝 소리가 들려온다. 당신은 두 손을 벌렸다가 꽉 쥔다.
+<br><br>
+<<set $wraithWillMessage to true>>
+<i><span class="red">몸을 되찾기 위해서는 </span><span class="green">통제력을</span><span class="red"> 완전히 회복해야 한다.</span></i>
+<br><br>
+<span class="nextLink"><<link [[물러난다 (0:01)|Bedroom]]>><<pass 1>><<set $phase2 to 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Home Window
+<<pass 10>><<effects>><<getTarget>>
+당신은 벽에 몸을 기대고 창문으로 몸을 밀어 넣는다.
+<br><br>
+<<if Time.hour gte 6 and $moonstate is "morning">>
+	해가 떠오르기 시작했다. 당신은 한참 동안 수평선을 바라본다. 집중력이 회복되는 것이 느껴진다. 팔을 움직여 본다. <span class="green">경련이 일어난다.</span>
+	<br><br>
+	당신은 한숨을 쉬며, 유리에 비친 모습을 바라본다. 더 이상 창백해 보이지 않는다. 당신은 킥킥 웃는다.
+	<br><br>
+	"<span class="nextLink">또 보자,</span>" 거울에 비친 모습이 말한다. <<trauma 50>><<gggtrauma>>
+	<br><br>
+	당신은 비틀거리며 침대로 돌아가, 이불 속으로 기어 들어간다. 피부, 손, 다리, 자기 자신을 다시 느낄 수 있게 되면서 천천히 제자리로 돌아가는 자신을 느낀다. <<control 50>><<ggcontrol>>
+	<br><br>
+	<span class="blue"><i>당신은 다음 붉은 달이 뜨기까지는 안전하다.</i></span>
+	<br><br>
+	<<endWraith>>
+	<<clearWraith>>
+	<<link [[떨어진다|Sleep]]>><<set $sleephour to 1>><<unset $possessed>><<canvas-model-override "clear">><</link>><<ltiredness>>
+	<br>
+<<else>>
+	<<set $nextPassage to "Wraith Snatched Home Leave">>
+	<<set $nextPassageCheck to "Wraith Snatched Home Leave">>
+	붉은 달이 당신을 소름 끼치는 한기로 가득 채운다. 반투명한 창백한 팔이 조용히 창문을 연다. 당신은 창틀에 손을 얹는다.
+	<br><br>
+	<span class="nextLink"><<link [[가라.|Wraith Snatched Home Leave]]>><</link>></span>
+	<br>
+	<<link [[창틀을 잡는다|Bedroom]]>><</link>>
+	<br>
+<</if>>
+
+:: Wraith Snatched Home Leave
+<<pass 10>><<effects>><<getTarget>><<rainWraith>>
+당신은 창문 밖으로 몸을 내밀어 밤공기를 마신다.
+<br><br>
+바닥이 당신을 향해 돌진한다. 그러나 당신은 절대 부딪히지 않는다.
+<br><br>
+부딪히기 직전, 당신은 공중에서 속도를 늦추고 몸을 바로 세운다. 어떠한 흔들림도 소음도 없이 발끝이 지면에 부드럽게 닿는다. 피부에 닿는 <<weather_ ga `Weather.precipitation`>> 느껴지지 않는다.
+<br><br>
+길고 반투명한 팔이 고아원 벽을 슬금슬금 기어올라 창문을 닫는다.
+<br><br>
+<span class="nextLink"><<link [[걸어라.|Domus Street]]>><<set $location to "town">><<set $wraith.exit to "town">><<set $bus to "domus">><<set $phase2 to 1>><<set $phaseWraith to 0>><</link>></span>
+<br>
+
+:: Wraith Snatched Cabin Mirror
+<<effects>>
+당신은 비틀거리며 거울로 향한다. <<wraithEyes>> 눈을 한 창백한 <<girl_ ga>> 비친다.
+<br><br>
+<<link [[물러난다 (0:01)|Wraith Snatched Cabin Mirror 2]]>><<pass 1>><</link>>
+<br>
+<span class="nextLink"><<link [[응시한다 (0:01)|Wraith Snatched Cabin Mirror 2]]>><<pass 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Cabin Mirror 2
+<<effects>>
+당신은 마치 테스트하듯, 손가락을 하나씩 움직여본다.
+<br><br>
+당신은 거울에 손을 갖다 댄다.
+표면이 느껴지지 않는다.
+<br><br>
+머리가 한쪽으로 휙 기울어지더니, 소름 끼치는 뚝 소리가 들려온다. 당신은 두 손을 벌렸다가 꽉 쥔다.
+<br><br>
+<<set $wraithWillMessage to true>>
+<i><span class="red">몸을 되찾기 위해서는 </span><span class="green">통제력을</span><span class="red"> 완전히 회복해야 한다.</span></i>
+<br><br>
+<span class="nextLink"><<link [[물러난다 (0:01)|Cabin Actions]]>><<pass 1>><<set $phase2 to 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Cabin Leave
+<<effects>><<getTarget>><<rainWraith>>
+당신의 시선이 마지막으로 에덴에게 향한다. 당신은 문을 열고, <<trWeather `Weather.precipitation`>>_trResult 속으로 걸어 들어가 숲으로 달아난다.
+<br><br>
+<span class="nextLink"><<link [[걸어라.|Forest]]>><<endevent>><<set $location to "forest">><<set $wraith.exit to "forest">><<set $forest to 90>><<set $phase2 to 1>><<set $phaseWraith to 0>><</link>></span>
+
+:: Wraith Snatched Cave Reflection
+<<effects>>
+당신은 개울에 다가간다. 손을 뻗자 수면이 완전히 잔잔해진다.
+<br><br>
+물에 당신의 모습이 비친다. <<wraithEyes>> 눈을 한 창백한 <<girl_ ga>> 비친다.
+<br><br>
+<<link [[물러난다 (0:01)|Wraith Snatched Cave Reflection 2]]>><<pass 1>><</link>>
+<br>
+<span class="nextLink"><<link [[응시한다 (0:01)|Wraith Snatched Cave Reflection 2]]>><<pass 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Cave Reflection 2
+<<effects>>
+당신은 마치 테스트하듯, 손가락을 하나씩 움직여본다.
+<br><br>
+머리가 한쪽으로 휙 기울어지더니, 소름 끼치는 뚝 소리가 들려온다. 당신은 두 손을 벌렸다가 꽉 쥔다. <<wolf_cave_plural_ ga>> 꼬리를 길게 늘어뜨린 채 짖고 울부짖기 시작한다.
+<br><br>
+<<set $wraithWillMessage to true>>
+<i><span class="red">몸을 되찾기 위해서는 </span><span class="green">통제력을</span><span class="red"> 완전히 회복해야 한다.</span></i>
+<br><br>
+<span class="nextLink"><<link [[물러난다 (0:01)|Wolf Cave Clearing]]>><<pass 1>><<set $phase2 to 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Cave Leave
+<<pass 10>><<effects>><<getTarget>>
+당신이 손가락으로 가리킨다. 반투명한 팔이 <<beastNEWinit 1 wolf>><<beasttype_ rul>> 가격하자, 녀석이 낑낑거리더니 비틀거리며 도망친다. <<endevent>>
+<br><br>
+다른 녀석들도 뒤로 물러난다. 당신은 숲으로 걸어 들어가지만, 몇 마리가 당신을 따라오려고 하는 것이 보인다.
+<br><br>
+<span class="nextLink"><<link [[걸어라.|Forest]]>><<set $location to "forest">><<set $wraith.exit to "forest">><<set $forest to 90>><<set $phase2 to 1>><<set $phaseWraith to 0>><</link>></span>
+
+:: Wraith Snatched Far Mirror
+<<effects>><<endevent>>
+당신은 비틀거리며 거울로 향한다. <<wraithEyes>> 눈을 한 창백한 <<girl_ ga>> 비친다.
+<br><br>
+<<link [[물러난다 (0:01)|Wraith Snatched Far Mirror 2]]>><<pass 1>><</link>>
+<br>
+<span class="nextLink"><<link [[응시한다 (0:01)|Wraith Snatched Far Mirror 2]]>><<pass 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Far Mirror 2
+<<effects>>
+당신은 마치 테스트하듯, 손가락을 하나씩 움직여본다.
+<br><br>
+당신은 거울에 손을 갖다 댄다. 손이 그대로 통과한다. 표면이 소름 끼치는 붉은색으로 빛난다.
+<br><br>
+머리가 한쪽으로 휙 기울어지더니, 소름 끼치는 뚝 소리가 들려온다. 당신은 자유로운 두 손을 벌렸다가 꽉 쥔다.
+<br><br>
+<span class="nextLink"><<link [[안으로 들어간다 (0:01)|Wraith Snatched Far Mirror 3]]>><<pass 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Far Mirror 3
+<<effects>><<set $location to "tentworld">><<set $outside to 0>>
+당신은 발을 앞으로 내딛는다. 발이 그대로 통과한다. 나머지 손도 넣는다.
+<br><br>
+당신이 앞으로 넘어지자, 모든 것이 화려한 보라색으로 변한다. 하늘을 뒤덮고 있는 꿈틀대는 덩어리들과 끝없이 늘어선 촉수가 보인다. 오래 지속되지는 않는다.
+<br><br>
+당신은 소용돌이치는 보라색 원반을 지나 숲으로 빠져나온다. 도시 근교의 숲인 것 같다. 뒤를 돌아보니 정신병원이 보인다.
+<br><br>
+머리가 다시 빠르게 돌아가면서 더 많은 뚝 소리가 들려온다. 더 이상 아무것도 느껴지지 않는다.
+<br><br>
+<<set $wraithWillMessage to true>>
+<i><span class="red">몸을 되찾기 위해서는 </span><span class="green">통제력을</span><span class="red"> 완전히 회복해야 한다.</span></i>
+<br><br>
+<span class="nextLink"><<link [[걸어라.|Forest]]>><<set $location to "forest">><<set $wraith.exit to "forest">><<set $forest to 90>><<set $phase2 to 1>><<set $phaseWraith to 0>><</link>></span>
+<br>
+
+:: Wraith Snatched Pirate Mirror
+<<effects>>
+You shamble over to an empty bottle on the floor. You pick it up. Against the tinted glass, a pale <<girl>> with <<wraithEyes>> eyes stares back.
+<br><br>
+<<link [[Drop it (0:01)|Wraith Snatched Pirate Mirror 2]]>><<pass 1>><</link>>
+<br>
+<span class="nextLink"><<link [[Stare (0:01)|Wraith Snatched Pirate Mirror 2]]>><<pass 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Pirate Mirror 2
+<<effects>><<getTarget>><<rainWraith>>
+당신은 마치 테스트하듯, 손가락을 하나씩 움직여본다.
+<br><br>
+
+You place your finger against the bottle. The surface flashes a terrible red, and you see an glimpse of an open space on the other side. You hold it up to you, as if judging the size.
+<br><br>
+
+You drop the bottle to your feet, shattering it. Your head quickly tilts to the side, making sickening cracks. Your hands open and clench.
+<br><br>
+
+<<set $wraithWillMessage to true>>
+<i><span class="red">몸을 되찾기 위해서는 </span><span class="green">통제력을</span><span class="red"> 완전히 회복해야 한다.</span></i>
+<br><br>
+
+<span class="nextLink"><<link [[Step away (0:01)|Pirate Bilge]]>><<pass 1>><<set $phase2 to 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Pirate Railing
+<<effects>><<getTarget>>
+You grip the railing and look down. The waves, reflecting a red light, churn beneath you.
+<br><br>
+
+You stare at the water below. Slowly, the area directly below you begins to calm, until a perfect circle of still water floats amidst the waves, undisturbed even by the <<print Weather.precipitation>>.
+<br><br>
+
+You reach down toward the circle, and it flashes purple, the water beginning to swirl. You grip the railing, preparing to heft yourself over the side.
+<br><br>
+
+<span class="nextLink"><<link [[Dive (0:01)|Wraith Snatched Pirate Railing 2]]>><<pass 1>><</link>></span>
+<br>
+
+:: Wraith Snatched Pirate Railing 2
+<<effects>><<npc "Zephyr">><<person1>>
+
+"What you be doing out here?" a voice calls behind you. It's Captain Zephyr, blinking wearily. "Thought I heard a bottle break. It's awful late to be admiring the view, <<if $pirate_rank is 0>><<girl>><<else>><<lass>><</if>>. Especially on the night of the blood sea."
+<<outfitChecks>>
+<<if _fullyNaked>>
+	<<He>> takes in your nudity. "Your rags better not be overboard."
+<</if>>
+<br><br>
+
+You turn to look at Zephyr, stepping away from the railing. The circle stills once more. Words spill from your mouth.
+<<if $spear_holder is "Zephyr">>
+	"<span class="wraith">You found warmth and locked it in a cage.</span>"
+<<elseif $wraith.state is "despair">>
+	"<span class="wraith">A thief, proud. Did you take it? No, no...</span>"
+<<else>>
+	"<span class="wraith">A nuisance. You'll try to keep <<phim>>, won't you?</span>"
+<</if>>
+Your head tilts at an unnatural angle.
+<br><br>
+
+Zephyr frowns. On a whim, <<he>> takes <<his>> spyglass from <<his>> side and peers at you. <<He>> clicks <<his>> tongue. "Ah. That'd do it." With a silent glare, <<he>> strides toward you.
+<br><br>
+
+<span class="nextLink"><<link [[Fight.|Wraith Snatched Pirate Fight]]>><<set $fightstart to 1>><</link>></span>
+
+:: Wraith Snatched Pirate Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust to -100>>
+	<<set $enemyanger to 200>>
+	<<npcidlegenitals>>
+	<<set $noAdmire to true>><<set $noBodyWriting to true>>
+	Your body is made to laugh. "<span class="wraith">Maybe this time you'll finally drown.</span>"
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or _controlRegain is 1>>
+	<span id="next" class="nextWraith"><<link [[Next.|Wraith Snatched Pirate Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next" class="nextWraith"><<link [[Next.|Wraith Snatched Pirate Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Wraith Snatched Pirate Fight Finish
+<<effects>><<getTarget true>>
+<<if $control gte $controlmax>>
+	<<wraithExorcise true true>><<clearWraith>><<endWraith>>
+	<span class="gold">You stop.</span> You can feel it pushing you to keep going, to keep fighting, but you dig your heels in and focus. You have your body back, and you don't plan on giving it up.
+	<br><br>
+
+	당신은 고통에 몸부림친다. 그것이 자신이 패배했다는 것을 깨닫고 당신의 몸에서 빠져나온다. 가슴에서 창백하고 반투명한 팔 한 쌍이 튀어나온다. 막대한 노력을 쏟아붙자 그것이 당신 몸에서 빠져나간다.
+	<br><br>
+
+	Its head snaps back, and it dissipates into nothingness with a brief shriek that echoes in your mind. Your ears ring, and you hear its voice all around you. "<span class="wraith">It's a great misfortune, learning to swim.</span>" Below you, the circle of still water returns to crashing waves.
+	<br><br>
+
+	<<npc "Zephyr">><<person1>>
+	<<if Weather.precipitation isnot "none">>
+		Zephyr scowls as the figure disappears.
+	<<else>>
+		Zephyr scowls as the <<print Weather.precipitation>> begins to clear up.
+	<</if>>
+	"And stay gone, dredgie." <<He>> looks you over. "I don't know what ye did to earn that thing's ire. You'd best keep its business out of me ship." <<He>> slaps you in the face twice, shocking you out of your stupor, before trudging back to <<his>> cabin.
+	<<pain 2>><<gpain>>
+	<br><br>
+
+	<<tearful>> you gather yourself.
+	<br><br>
+
+	<<endcombat>>
+
+	<<link [[다음|Pirate Deck]]>><<clotheson>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<set $zephyr_seen to "wraith">>
+	<<if $enemyarousal gte $enemyarousalmax>><<ejaculation "short">><</if>>
+
+	Zephyr is shoved away from you, falling over <<himself>>. <<He>> slowly stands <<himself>> up, a grim look on <<his>> face.
+	<br><br>
+
+	You turn away from <<him>>, gripping the railing and lifting yourself up. Below you, the circle of undisturbed water ripples, becoming an angry purple whirlpool. You look over your shoulder at <<him>>. "<span class="wraith">Someday, captain mine, the waves will chew you too.</span>"
+	<br><br>
+
+	"No!" <<he>> bellows, already back on <<his>> feet. <<He>> charges at you, stretching out <<his>> arm. <<Hes>> too late. You slip off the railing and through the whirlpool. Everything goes a brilliant purple. You see writhing masses blotting out the sky, and an endless expanse of tendrils. It doesn't last.
+	<br><br>
+
+	당신은 소용돌이치는 보라색 원반을 지나 숲으로 빠져나온다. 도시 근교의 숲인 것 같다. 뒤를 돌아보니 정신병원이 보인다.
+	<br><br>
+
+	머리가 다시 빠르게 돌아가면서 더 많은 뚝 소리가 들려온다. 더 이상 아무것도 느껴지지 않는다.
+	<br><br>
+
+	<<endcombat>>
+
+	<span class="nextLink"><<link [[Walk.|Forest]]>><<clotheson>><<set $location to "forest">><<set $wraith.exit to "forest">><<set $forest to 90>><<set $phase2 to 1>><<set $phaseWraith to 0>><</link>></span>
+<</if>>
+
+:: Wraith Snatched Guest
+<<pass 10>><<effects>><<getTarget>>
+<<set $nextPassage to "Wraith Snatched Guest 2">>
+<<if $location is "home">>
+	<<if $robinbed is "yours" or $robinbed is "theirs">>
+		<<set _bedGuest to "Robin">>
+	<<else>>
+		<<set _bedGuest to "Kylar">>
+	<</if>>
+<<elseif $location is "cabin">>
+	<<set _bedGuest to "Eden">>
+<</if>>
+당신은 조용히 침대로 다가간다. 당신은 가만히 <<namedNPC_ rul _bedGuest>> 바라본다.
+<br><br>
+당신은 오로지 <<nnpc_himPost _bedGuest>>에게만 집중한다. 당신은 팔을 들어 <<nnpc_him_ ul _bedGuest>> 향해 뻗는다.
+<br><br>
+<<link [[비명을 지른다|Bedroom]]>><</link>>
+<br>
+<<if C.npc["Ivory Wraith"].lust gte random(12, 16) or !$wraithIntro>>
+	<span class="nextLink"><<link [[잡아라.|Wraith Snatched Guest 2]]>><</link>></span>
+<<else>>
+	<<set $wraithBedSpeech to true>>
+	<span class="nextLink"><<link [[만져라.|Wraith Snatched Guest 2]]>><</link>></span>
+<</if>>
+<br>
+
+:: Wraith Snatched Guest 2
+<<pass 5>><<effects>><<getTarget>><<set $phase2 to 1>>
+<<if $willpowerSuccess>>
+	<span class="green">당신은 힘겹게 짧은 숨을 내쉰다.</span>
+	<br><br>
+<</if>>
+<<if $location is "home">>
+	<<if $robinbed is "yours" or $robinbed is "theirs">>
+		<<set _bedGuest to "Robin">>
+	<<else>>
+		<<set _bedGuest to "Kylar">>
+	<</if>>
+<<elseif $location is "cabin">>
+	<<set _bedGuest to "Eden">>
+<</if>>
+당신은 <<nnpc_his_ yi _bedGuest>> 뺨에 손을 얹는다. 촉감이 느껴지지 않는다. 당신은 조심스럽게 쓰다듬는다.
+<br><br>
+<<if $wraithBedSpeech>>
+	<<silently>><<speechWraith _bedGuest>><</silently>>
+	당신은 아무런 소리도 내지 않고 말한다. "<span class="wraith">_line1<<if $rng lte 10>> _line2<</if>></span>"
+	<br><br>
+
+	당신은 천천히 돌아선다.
+<<else>>
+	<<if $tentacledisable is "f" and random(0, 1)>>
+		희미하게 미끄러지는 소리가 들린다. 이불이 움직인다. 창백한 촉수가 꿈틀거리며 침대 위와 <<nnpc_him_ yi _bedGuest>> 몸 위로 기어오르기 시작하는 것이 시야에 들어온다.
+		<br><br>
+		<<nnpc_He_ ga _bedGuest>> 살짝 몸을 움직이자, 모든 촉수들이 일제히 소리도 없이 시야 밖으로 사라진다.
+	<<else>>
+		다른 손이 부드럽게 <<nnpc_him_ ul _bedGuest>> 만진다. 그리고, 또 다른 손이 <<nnpc_his_ yi _bedGuest>> 가슴을 만진다. 또 다른 손은 <<nnpc_his_ yi _bedGuest>> 배를 따라 내려가기 시작한다.
+		<br><br>
+		<<nnpc_He_ ga _bedGuest>> 살짝 몸을 움직이자, 모든 팔들이 일제히 소리도 없이 시야 밖으로 사라진다.
+	<</if>>
+	<br><br>
+	<<nnpc_He_ nun _bedGuest>> 가만히 누워있다. 당신은 자신이 숨 쉬는 게 느껴지지 않는다.
+<</if>>
+<br><br>
+<<switch $wraith.exit>>
+	<<case "home">>
+		<span class="nextLink"><<link [[물러난다|Bedroom]]>><</link>></span>
+	<<case "cabin">>
+		<span class="nextLink"><<link [[물러난다|Cabin Actions]]>><</link>></span>
+<</switch>>
+<br>
+
+:: Wraith Snatched Offspring
+<<control 20>><<effects>><<getTarget>>
+당신은 어설프게 <<putpost $container[$location].name "으로">> 걸어간다.
+<<set $outside to 0>>
+<<set _container to $container[$location]>>
+<<set $checkboxResult to {}>><<set _paleCount to 0>>
+<<for _i to 0; _i lt Object.keys(_container.creatures).length; _i++>>
+	<<if _container.creatures[_i] isnot null and _container.creatures[_i].creature.includes("Pale")>>
+		<<set _paleCount ++>>
+	<</if>>
+<</for>>
+당신은 창백한 <<if _paleCount isnot 1>>아이들을<<else>>아이를<</if>> 열성적으로 살펴보면서, <<if _paleCount isnot 1>>아이들을<<else>>아이를<</if>> 꺼내 품에 안는다.
+<br>
+<<creatureVisit>>
+<br><br>
+당신은 <<if _paleCount isnot 1>>아이들을<<else>>아이를<</if>> 가까이 들어보인다. 몸속에서 이상한 온기가 느껴지고 시야가 흐릿해지기 시작한다.
+<br><br>
+당신은 울고 있다. <<set $pain to 100>><<set $phase2 to 2>>
+<br><br>
+얼마나 오래 거기에 앉아 있었는지 모른다. 아무것도 느껴지지 않는다. 당신의 얼굴은 여전히 차갑고 무표정하다. <<set _palePass to (45 + (15 * _paleCount))>><<pass _palePass>><<ggcontrol>>
+<br><br>
+마침내, 당신의 시선이 <<if $wraith.exit is "home" and ($robinbed is "yours" or $robinbed is "theirs" or $kylarbed is 1)>><<if $robinbed is "yours" or $robinbed is "theirs">>로빈에게로 향한다.<<else>>카일라에게로 향한다.<</if>><<else>>호수로 향한다.<</if>>
+<br><br>
+
+<<switch $wraith.exit>>
+	<<case "home">>
+		<<set $nextPassage to "Bedroom">>
+		<<set $nextPassageCheck to "Bedroom">>
+		<span class="nextLink"><<link [[물러난다|Bedroom]]>><</link>></span>
+		<br>
+		<<link [[가만히 있으려 한다|Containers]]>><</link>>
+	<<case "lake">>
+		<<set $nextPassage to "Lake Waterfall">>
+		<<set $nextPassageCheck to "Lake Waterfall">>
+		<span class="nextLink"><<link [[호수.|Lake Waterfall]]>><</link>></span>
+		<br>
+		<<link [[가만히 있으려 한다|Containers]]>><</link>>
+	<<case "alex_farm">>
+		<<set $nextPassage to "Bedroom">>
+		<span class="nextLink"><<link [[물러난다|Bedroom]]>><</link>></span>
+		<br>
+		<<link [[가만히 있으려 한다|Containers]]>><</link>>
+<</switch>>
+<br>
+
+:: Wraith Snatched Intro
+<<effects>>
+<<set $wraithWillMessage to true>>
+<<if $location is "park">>
+	당신은 비틀거리며 분수대에 다가가,
+<<elseif $location is "forest" or $location is "moor">>
+	당신은 비틀거리며 <<if Weather.isSnow>>얼어붙은 <</if>>물웅덩이에 다가가,
+<<elseif $bus is "lakeshore">>
+	당신은 비틀거리며 호숫가에 다가가,
+<<elseif $location is "lake_ruin">>
+	당신은 벽에 반사되는 곳으로 헤엄쳐가,
+<<elseif $location is "drain">>
+	당신은 통로 끝을 들여다보며,
+<<elseif $location is "sewers">>
+	당신은 비틀거리며 근처의 깨진 유리조각에 다가가,
+<<else>>
+	당신은 비틀거리며 창문으로 다가가,
+<</if>>
+자신의 모습을 비춰본다. <<wraithEyes>> 눈을 한 창백한 <<girl_ ga>> 비친다.
+<br><br>
+당신은 마치 테스트하듯, 손가락을 하나씩 움직여본다.
+<br><br>
+머리가 한쪽으로 휙 기울어지더니, 소름 끼치는 뚝 소리가 들려온다. 당신은 두 손을 벌렸다가 꽉 쥔다.
+<br><br>
+<i><span class="red">몸을 되찾기 위해서는</span> <span class="green">통제력을</span> <span class="red"> 완전히 회복해야 한다.</span></i>
+<br><br>
+<span class="nextLink"><<exitWraith true>></span><<rainWraith>><<set $phase2 to 1>>
+<br>
+
+:: Wraith Resisted
+<<effects>>
+<<if Time.hour gte 6 and $moonstate is "morning">>
+	수평선 위로 햇빛이 쏟아져 내리자 몸이 무거워지기 시작한다. 당신은 팔을 움직여본다. <span class="green">경련이 일어난다.</span>
+	<br><br>
+	당신의 무릎이 꿇어지고 시야가 점점 뿌옇게 흐려진다. 당신의 몸에서 창백하고 반투명한 팔이 튀어나온다. 몸이 굳어지면서 뒤로 젖혀지기 시작한다.
+	<br><br>
+	<<if $wraithIntro>>
+		창백한 형체가 당신의 몸에서 빠져나와,
+		<<if $wraith.state is "haunt">>
+			상처가 난 자신의 목을 할퀴며 경멸하는 듯한 눈빛으로 당신을 바라본다.
+			<br><br>
+
+			"<span class="wraith">넌 내 거야, 도둑.</span>"
+		<<elseif $wraith.state is "despair">>
+			상처가 난 자신의 목을 할퀴며 애처롭게 당신을 바라본다.
+			<br><br>
+
+			"<span class="wraith">제발... 찾을 수 있도록 도와줘...</span>"
+		<<else>>
+			상아로 만든 목걸이에 엄지손가락으로 장난스럽게 만지작거린다.
+			<br><br>
+
+			"<span class="wraith">넌 내 거야.</span>"
+		<</if>>
+		<<trauma 50>><<gggtrauma>>
+		<br><br>
+	<<else>>
+		아름답고 창백한 형체가 당신의 몸에서 빠져나와 당신 위에 우뚝 선다.
+		<<if $wraith.state is "haunt">>
+			그것은 자신의 목을 손톱으로 할퀴며 분노에 찬 눈으로 당신을 내려다본다. 그것이 당신의 턱 밑에 손을 갖다 댄다.
+			<br><br>
+
+			"<span class="wraith">끊겼네. 다음에 하자. 또 보자, <<pcpetnamePost "Wraith">>.</span>"
+		<<elseif $wraith.state is "despair">>
+			그것이 상처투성이인 자신의 목을 애처롭게 할퀴며 당신을 내려다본다. 
+			<br><br>
+
+			"<span class="wraith">내 목걸이 봤어? 난...</span>"			
+		<<else>>
+			그것은 목에 걸고 있는 화려한 상아 목걸이를 제외하곤 벌거벗고 있다. 그것이 당신의 턱 밑에 손을 갖다 댄다.
+			<br><br>
+
+			"<span class="wraith">끊겼네. 다음에 하자. 또 보자, <<pcpetnamePost "Wraith">>.</span>"
+		<</if>>
+		<<trauma 50>><<gggtrauma>>
+		<br><br>
+	<</if>>
+	그것이 급류 속으로 사라진다. 몸의 감각이 차츰 돌아오자 당신은 일어나려 한다. 몇 번의 시도 끝에 당신은 마침내 몸을 일으켜 세운다.
+	<br><br>
+	<<tearful>> 당신은 당신에게 무슨 일이 일어난 건지 이해해 보려 한다.
+	<br><br>
+<<else>>
+	<span class="gold">당신은 멈춘다.</span>
+	<br><br>
+	그것이 한 걸음 더 나아가라고 당신을 밀어붙인다. 그것이 우위를 점하려고 당신의 몸과 마음을 밀어내며 당신과 맞서 싸운다. 당신은 현재 우위를 점하고 있기에 포기하지 않는다.
+	<br><br>
+	당신은 고통에 몸부림친다. 그것이 자신이 패배했다는 것을 깨닫고 당신의 몸에서 빠져나온다. 가슴에서 창백하고 반투명한 팔 한 쌍이 튀어나온다. 막대한 노력을 쏟아붙자 그것이 당신 몸에서 빠져나간다.
+	<br><br>
+	<<if $wraithIntro>>
+		창백한 형체가 앞에서 둥둥 떠다니며, 		
+		<<if $wraith.state is "haunt">>
+			경멸하는 듯한 눈빛으로 당신을 바라본다.
+			<br><br>
+
+			"<span class="wraith">넌 내 거야. 넌 영원히 나를 대적할 수 없어, 도둑.</span>" 
+		<<elseif $wraith.state is "despair">>
+			상처투성이인 목을 할퀴면서 애절하게 울부짖는다.
+			<br><br>
+
+			"<span class="wraith">제발... 찾을 수 있도록 도와줘...</span>"
+		<<else>>
+			상아로 만든 목걸이에 엄지손가락으로 장난스럽게 만지작거린다.
+			<br><br>
+
+			"<span class="wraith">넌 내 거야. 넌 영원히 나를 대적하지 못해.</span>" 
+		<</if>>
+		<<trauma 50>><<gggtrauma>>
+		<br><br>
+	<<else>>
+		아름다운 창백한 형체가 앞에서 둥둥 떠다닌다.
+		<<if $wraith.state is "haunt">>
+			그것은 화가 난 듯 자신의 목을 할퀴며 당신을 내려다본다. 그것이 당신의 턱 밑에 손을 갖다 댄다.
+			<br><br>
+
+			"<span class="wraith">머지않아 널 가질 거야, 도굴꾼. 곧.</span>"
+		<<elseif $wraith.state is "despair">>
+			그것이 상처투성이인 자신의 목을 애처롭게 할퀴며 당신을 내려다본다.
+			<br><br>
+
+			"<span class="wraith">내 목걸이 봤어? 난...</span>"			
+		<<else>>
+			그것은 목에 걸고 있는 화려한 상아 목걸이를 제외하곤 벌거벗고 있다. 그것이 당신의 턱 밑에 손을 갖다 댄다.
+			<br><br>
+
+			"<span class="wraith">네 의지는 강해. 네가 맘에 들어.</span>"
+		<</if>>
+		<<trauma 50>><<gggtrauma>>
+		<br><br>
+	<</if>>
+	아래에서 어마어마한 양의 급류가 솟구쳐 오르더니 그것을 완전히 집어삼킨다. 물속에서 빛나는 <<wraithEyes>> 눈동자만 보인다. 급류가 지나가자 형체가 사라졌다. <<tearful>> 당신은 방금 겪은 일을 이해해 보려 한다.
+	<br><br>
+<</if>>
+<<exposure>>
+<<clotheson>>
+<<exitWraith>>
+<<clearWraith>>
+
+:: Wraith Resisted Lake
+<<effects>>
+<<if Time.hour gte 6 and $moonstate is "morning">>
+	깊은 곳까지 햇빛이 비추자 몸이 무거워지기 시작한다. 당신은 팔을 움직여본다. <span class="green">경련이 일어난다.</span>
+	<br><br>
+	당신은 물속을 정처 없이 떠다니고, 시야가 점점 뿌옇게 흐려진다. 당신의 몸에서 창백하고 반투명한 팔이 튀어나온다. 몸이 굳어지면서 뒤로 젖혀지기 시작한다.
+	<br><br>
+	<<if $wraithIntro>>
+		창백한 형체가 당신의 몸에서 빠져나와,
+		<<if $wraith.state is "haunt">>
+			경멸하는 듯한 눈빛으로 당신을 바라본다.
+			<br><br>
+
+			"<span class="wraith">넌 내 거야, 도둑.</span>"
+		<<elseif $wraith.state is "despair">>
+			상처가 난 목을 할퀴며 당신을 바라본다.
+			<br><br>
+
+			"<span class="wraith">어디에 있어?</span>"
+		<<else>>
+			상아로 만든 목걸이에 엄지손가락으로 장난스럽게 만지작거린다.
+			<br><br>
+
+			"<span class="wraith">넌 내 거야.</span>"
+		<</if>>
+		<<trauma 50>><<gggtrauma>>
+		<br><br>
+	<<else>>
+		아름답고 창백한 형체가 당신의 몸에서 빠져나와 당신 위에 우뚝 선다.
+		<<if $wraith.state is "haunt">>
+			그것은 화가 난 듯 자신의 목을 할퀴며 당신을 내려다본다. 그것이 당신의 턱 밑에 손을 갖다 댄다.
+			<br><br>
+
+			"<span class="wraith">끊겼네. 다음에 하자. 또 보자, <<pcpetnamePost "Wraith">>.</span>"
+		<<elseif $wraith.state is "despair">>
+			그것이 상처투성이인 자신의 목을 애처롭게 할퀴며 당신을 내려다본다.
+			<br><br>
+
+			"<span class="wraith">내 목걸이 봤어? 난...</span>"			
+		<<else>>
+			그것은 목에 걸고 있는 화려한 상아 목걸이를 제외하곤 벌거벗고 있다. 그것이 당신의 턱 밑에 손을 갖다 댄다.
+			<br><br>
+
+			"<span class="wraith">끊겼네. 다음에 하자. 또 보자, <<pcpetnamePost "Wraith">>.</span>"
+		<</if>>
+		<<trauma 50>><<gggtrauma>>
+		<br><br>
+	<</if>>
+	그것이 눈부신 섬광과 함께 사라진다. 몸의 감각이 차츰 돌아오자 헤엄을 쳐본다. 몇 번의 시도 끝에 당신은 몸을 다시 움직인다.
+	<br><br>
+	<<tearful>> 당신은 당신에게 무슨 일이 일어난 건지 이해해 보려 한다.
+<<else>>
+	<span class="gold">당신은 멈춘다.</span>
+	<br><br>
+	그것이 계속 진행하라고 당신을 밀어붙인다. 그것이 우위를 점하려고 당신의 몸과 마음을 밀어내며 당신과 맞서 싸운다. 당신은 현재 우위를 점하고 있기에 포기하지 않는다.
+	<br><br>
+	당신은 고통에 몸부림친다. 그것이 자신이 패배했다는 것을 깨닫고 당신의 몸에서 빠져나온다. 가슴에서 창백하고 반투명한 팔 한 쌍이 튀어나온다. 막대한 노력을 쏟아붙자 그것이 당신 몸에서 빠져나간다.
+	<br><br>
+	<<if $wraithIntro>>
+		창백한 형체가 눈앞에 둥둥 떠다니며, 		
+		<<if $wraith.state is "haunt">>
+			경멸하는 듯한 눈빛으로 당신을 바라본다.
+			<br><br>
+
+			"<span class="wraith">넌 내 거야. 넌 영원히 나를 대적할 수 없어, 도둑.</span>" 
+		<<elseif $wraith.state is "despair">>
+			상처가 난 자신의 목을 할퀴면서 애처롭게 당신을 바라본다.
+			<br><br>
+
+			"<span class="wraith">제발... 찾을 수 있도록 도와줘...</span>"
+		<<else>>
+			상아로 만든 목걸이에 엄지손가락으로 장난스럽게 만지작거린다.
+			<br><br>
+
+			"<span class="wraith">넌 내 거야. 넌 영원히 나에게 대적하지 못해.</span>" 
+		<</if>>
+		<<trauma 50>><<gggtrauma>>
+		<br><br>
+	<<else>>
+		당신의 눈앞에 아름다운 창백한 형체가 떠다닌다.
+		<<if $wraith.state is "haunt">>
+			그것은 화가 난 듯 자신의 목을 할퀴며 당신을 내려다본다. 그것이 당신의 턱 밑에 손을 갖다 댄다.
+			<br><br>
+
+			"<span class="wraith">머지않아 널 가질 거야, 도굴꾼. 곧.</span>"
+		<<elseif $wraith.state is "despair">>
+			그것이 상처투성이인 자신의 목을 애처롭게 할퀴며 당신을 내려다본다.
+			<br><br>
+
+			"<span class="wraith">내 목걸이 봤어? 난...</span>"			
+		<<else>>
+			그것은 목에 걸고 있는 화려한 상아 목걸이를 제외하곤 벌거벗고 있다. 그것이 당신의 턱 밑에 손을 갖다 댄다.
+			<br><br>
+
+			"<span class="wraith">네 의지는 강해. 네가 맘에 들어.</span>"
+		<</if>>
+		<<trauma 50>><<gggtrauma>>
+		<br><br>
+	<</if>>
+	눈부신 섬광이 눈앞을 가린다. 빛이 사그라 들자 그 형체는 사라지고 없다. <<tearful>> 당신은 방금 겪은 일을 이해해 보려 한다.
+	<br><br>
+<</if>>
+<<exposure>>
+<<clotheson>>
+<<exitWraith>>
+<<clearWraith>>
+
+:: Forest Blood Deeper
+<<effects>>
+DEBUG PASSAGE. Should be unreachable.
+<br><br>
+<<link [[Fuck|Bedroom]]>><<endevent>><</link>>
+
+:: Forest Blood Less Deep
+<<effects>>
+DEBUG PASSAGE. Should be unreachable.
+<br><br>
+<<link [[Fuck|Bedroom]]>><<endevent>><</link>>
+
+:: Lake Depths Ice Break
+<<effects>><<getTarget>>
+당신은 아래를 내려다본다. 얼음에 비친 당신의 모습이 보인다. 여전히 <<wraithEyes>> 눈을 한 창백한 <<girl_ ga>> 비친다.
+<br><br>
+당신은 얼음을 깨뜨리지도 않고 그대로 통과해, 쉴 새 없이 아래로 가라앉는 자신을 발견한다.
+<br><br>
+<span class="nextLink"><<link [[아래로.|Lake Underwater]]>><<set $phase2 to 1>><</link>></span>
+<br>
+
+:: Widgets Wraith Snatched [widget]
+<<widget "getTarget">>
+	<<if $possessed>>
+		<<set $eventskip to 1>>
+		<<if _args[0]>>
+			<<switch $passage>>
+				<<case "Bedroom">>
+					<<pass 1>>
+					<<set $wraith.exit to "home">>
+					<<if !$nextPassageCheck>>
+						<<set $phaseWraith to 0>>
+						<<set $nextPassageCheck to "Mirror">>
+						<<set $nextPassage to "Wraith Snatched Home Mirror">>
+						<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+							<<set $unbind to 1>>
+						<</if>>
+					<<else>>
+						<<if $phaseWraith lt 1 and $container and $container.home and $container.home.count gte 1 and !$wraithPaleVisit>>
+							<<for _i to 0; _i lt Object.keys($container.home.creatures).length; _i++>>
+								<<if $container.home.creatures[_i] isnot null and $container.home.creatures[_i].creature.includes("Pale")>>
+									<<set $wraithPaleVisit to "home">>
+								<</if>>
+							<</for>>
+							<<set $phaseWraith to 1>>
+						<</if>>
+						<<if $phaseWraith lt 2 and $wraithPaleVisit and $wraithPaleVisit is "home">>
+							<<set $nextPassageCheck to "Containers">>
+							<<set $nextPassage to "Wraith Snatched Offspring">>
+							<<set $phaseWraith to 2>>
+						<<elseif $phaseWraith lt 3 and ($robinbed is "yours" or $robinbed is "theirs" or $kylarbed is 1)>>
+							<<set $nextPassageCheck to "Bed">>
+							<<set $nextPassage to "Wraith Snatched Guest">>
+							<<set $phaseWraith to 3>>
+						<<else>>
+							<<set $nextPassageCheck to "Bedroom">>
+							<<set $nextPassage to "Wraith Snatched Home Window">>
+							<<set $phaseWraith to 4>>
+						<</if>>
+					<</if>>
+				<<case "Eden Cabin">>
+					<<pass 1>>
+					<<set $wraith.exit to "cabin">>
+					<<if !$nextPassageCheck>>
+						<<set $nextPassageCheck to "Cabin Actions">>
+						<<set $nextPassage to "Cabin Actions">>
+						<<set $phaseWraith to 0>>
+					<<else>>
+						<<set $phaseWraith to 4>>
+						<<set $nextPassageCheck to "Eden Clearing">>
+						<<set $nextPassage to "Wraith Snatched Cabin Leave">>
+					<</if>>
+				<<case "Cabin Actions">>
+					<<pass 1>>
+					<<if $phaseWraith is 0>>
+						<<set $phaseWraith to 1>>
+						<<set $nextPassageCheck to "Eden Mirror">>
+						<<set $nextPassage to "Wraith Snatched Cabin Mirror">>
+					<<elseif $phaseWraith lt 2>>
+						<<set $nextPassageCheck to "Eden Cabin Bed">>
+						<<set $nextPassage to "Wraith Snatched Guest">>
+						<<set $phaseWraith to 2>>
+					<<elseif $phaseWraith lt 3>>
+						<<set $nextPassageCheck to "Eden Cabin">>
+						<<set $nextPassage to "Eden Cabin">>
+						<<set $phaseWraith to 3>>
+						<<endevent>>
+						<<set $phase2 to 1>>
+					<</if>>
+				<<case "Wolf Cave">>
+					<<pass 1>>
+					<<if !$nextPassageCheck>>
+						<<set $nextPassageCheck to "Wolf Cave Clearing">>
+						<<set $nextPassage to "Wolf Cave Clearing">>
+						<<set $phaseWraith to 0>>
+					<</if>>
+				<<case "Wolf Cave Clearing">>
+					<<pass 5>>
+					<<if $phaseWraith is 0>>
+						<<set $nextPassageCheck to "Wolf Cave Wash">>
+						<<set $nextPassage to "Wraith Snatched Cave Reflection">>
+						<<set $phaseWraith to 1>>
+					<<else>>
+						<<set $nextPassageCheck to "Forest">>
+						<<set $nextPassage to "Wraith Snatched Cave Leave">>
+					<</if>>
+				<<case "Bird Tower">>
+					<<set $nextPassageCheck to "Bird Tower Mirror">>
+					<<set $nextPassage to "Wraith Snatched Far Mirror">>
+				<<case "Farm Alex Bedroom">>
+					<<set $nextPassageCheck to "Farm Bedroom">>
+					<<set $nextPassage to "Farm Bedroom">>
+				<<case "Farm Bedroom">>
+					<<set $nextPassageCheck to "Farm Mirror">>
+					<<set $nextPassage to "Wraith Snatched Far Mirror">>
+				<<case "Pirate Bilge">>
+					<<if $phaseWraith is 0>>
+						<<set $nextPassageCheck to "Wraith Snatched Pirate Mirror">>
+						<<set $nextPassage to "Wraith Snatched Pirate Mirror">>
+						<<set $phaseWraith to 1>>
+					<<else>>
+						<<set $nextPassageCheck to "Pirate Cabin">>
+						<<set $nextPassage to "Pirate Cabin">>
+					<</if>>
+				<<case "Pirate Cabin">>
+					<<set $nextPassageCheck to "Pirate Deck">>
+					<<set $nextPassage to "Pirate Deck">>
+				<<case "Pirate Deck">>
+					<<set $nextPassageCheck to "Wraith Snatched Pirate Railing">>
+					<<set $nextPassage to "Wraith Snatched Pirate Railing">>
+				<<case "Domus Street" "Barb Street" "Danube Street" "Residential Drain">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Residential alleyways">>
+					<<set $nextPassage to "Residential alleyways">>
+				<<case "Residential alleyways">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Connudatus Street">>
+					<<set $nextPassage to "Connudatus Street">>
+				<<case "Connudatus Street" "Cliff Street" "Wolf Street" "Commercial Drain">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Commercial alleyways">>
+					<<set $nextPassage to "Commercial alleyways">>
+				<<case "Commercial alleyways">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "High Street">>
+					<<set $nextPassage to "High Street">>
+				<<case "Drain Exit">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Industrial Drain">>
+					<<set $nextPassage to "Industrial Drain">>
+				<<case "Sewers Residential" "Sewers Commercial" "Sewers Industrial">>
+					<<set $nextPassageCheck to "Sewers Possessed">>
+					<<set $nextPassage to "Sewers Possessed">>
+				<<case "Sewers Scrap" "Sewers Wood">>
+					<<set $nextPassageCheck to "Sewers Residential">>
+					<<set $nextPassage to "Sewers Residential">>
+				<<case "Sewers Mud" "Sewers Ruins">>
+					<<set $nextPassageCheck to "Sewers Commercial">>
+					<<set $nextPassage to "Sewers Commercial">>
+				<<case "Sewers Waterfall" "Sewers Algae" "Sewers Rubble">>
+					<<set $nextPassageCheck to "Sewers Industrial">>
+					<<set $nextPassage to "Sewers Industrial">>
+				<<case "Sewers Lake">>
+					<<set $nextPassageCheck to "Sewers Waterfall">>
+					<<set $nextPassage to "Sewers Waterfall">>
+				<<case "Sewers Webs">>
+					<<set $nextPassageCheck to "Sewers Wood">>
+					<<set $nextPassage to "Sewers Wood">>
+				<<case "Sewers Shrooms">>
+					<<set $nextPassageCheck to "Sewers Mud">>
+					<<set $nextPassage to "Sewers Mud">>
+				<<case "Sewers Hole">>
+					<<set $nextPassageCheck to "Sewers Ruins">>
+					<<set $nextPassage to "Sewers Ruins">>
+				<<case "Sewers Workshop">>
+					<<set $nextPassageCheck to "Sewers Scrap">>
+					<<set $nextPassage to "Sewers Scrap">>
+				<<case "Harvest Street" "Mer Street" "Industrial Drain">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Industrial alleyways">>
+					<<set $nextPassage to "Industrial alleyways">>
+				<<case "Industrial alleyways">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Oxford Street">>
+					<<set $nextPassage to "Oxford Street">>
+				<<case "Oxford Street" "Starfish Street" "High Street">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Park">>
+					<<set $nextPassage to "Park">>
+				<<case "Park" "Elk Street">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Nightingale Street">>
+					<<set $nextPassage to "Nightingale Street">>
+				<<case "Nightingale Street">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Forest">>
+					<<set $nextPassage to "Forest">>
+					<<set $forest to 0>>
+					<<set $wraith.exit to "forest">>
+				<<case "Forest">>
+					<<pass 8>>
+					<<if $forest lte 20>>
+						<<set $nextPassageCheck to "Forest Blood Deeper">>
+						<<set $nextPassage to "Forest">>
+						<<if $phaseWraith isnot 5>>
+							<<set $phaseWraith to 5>>
+						<<else>>
+							<<set $forestmod to 1.5>><<set $forest += 5>>
+							<<if $forest is 25>>
+								<<set $nextPassageCheck to "Lake Shore">>
+								<<set $nextPassage to "Lake Shore">>
+								<<set $wraith.exit to "lake">>
+							<</if>>
+						<</if>>
+					<<elseif $forest gt 40 and $forest lte 50>>
+						<<set $nextPassageCheck to "Lake Fishing Rock">>
+						<<set $nextPassage to "Lake Fishing Rock">>
+						<<set $wraith.exit to "lake">>
+					<<elseif $forest gt 30>>
+						<<set $nextPassageCheck to "Forest Blood Less Deep">>
+						<<set $nextPassage to "Forest">>
+						<<if $phaseWraith isnot 5>>
+							<<set $phaseWraith to 5>>
+						<<else>>
+							<<set $forestmod to 1.5>><<set $forest -= 5>>
+							<<if $forest is 50>>
+								<<set _nextPassageCheckTemp to "Lake Fishing Rock">>
+								<<set _nextPassageTemp to "Lake Fishing Rock">>
+							<</if>>
+						<</if>>
+					<<else>>
+						<<set $nextPassageCheck to "Lake Shore">>
+						<<set $nextPassage to "Lake Shore">>
+						<<set $wraith.exit to "lake">>
+					<</if>>
+				<<case "Lake Campsite">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Fishing Rock">>
+					<<set $nextPassage to "Lake Fishing Rock">>
+					<<set $wraith.exit to "lake">>
+				<<case "Lake Fishing Rock">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Waterfall">>
+					<<set $nextPassage to "Lake Waterfall">>
+					<<set $wraith.exit to "lake">>
+				<<case "Lake Firepit">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Shore">>
+					<<set $nextPassage to "Lake Shore">>
+					<<set $wraith.exit to "lake">>
+				<<case "Lake Waterfall">>
+					<<pass 5>>
+					<<if $phaseWraith lt 1 and $container and $container.lake and $container.lake.count gte 1 and !$wraithPaleVisit>>
+						<<for _i to 0; _i lt Object.keys($container.lake.creatures).length; _i++>>
+							<<if $container.lake.creatures[_i] isnot null and $container.lake.creatures[_i].creature.includes("Pale")>>
+								<<set $wraithPaleVisit to "lake">>
+							<</if>>
+						<</for>>
+						<<set $phaseWraith to 1>>
+					<</if>>
+					<<if $wraithPaleVisit and $wraithPaleVisit is "lake" and $phaseWraith lt 3>>
+						<<set $nextPassageCheck to "Containers">>
+						<<set $nextPassage to "Wraith Snatched Offspring">>
+						<<set $phaseWraith to 3>>
+					<<else>>
+						<<set $nextPassageCheck to "Lake Shore">>
+						<<set $nextPassage to "Lake Shore">>
+						<<set $wraith.exit to "lake">>
+					<</if>>
+				<<case "Lake Shore">>
+					<<pass 5>>
+					<<if $phaseWraith lt 1 and $container and $container.lake and $container.lake.count gte 1 and !$wraithPaleVisit>>
+						<<for _i to 0; _i lt $container.lake.count; _i++>>
+							<<if $container.lake.creatures[_i].creature.includes("Pale")>>
+								<<set $wraithPaleVisit to "lake">>
+							<</if>>
+						<</for>>
+						<<set $phaseWraith to 1>>
+					<</if>>
+					<<if $phaseWraith lt 2 and $wraithPaleVisit and $wraithPaleVisit is "lake">>
+						<<set $nextPassageCheck to "Lake Waterfall">>
+						<<set $nextPassage to "Lake Waterfall">>
+						<<set $phaseWraith to 2>>
+					<<else>>
+						<<if Weather.isFrozen("lake")>>
+							<<set $nextPassageCheck to "Lake Shallows Ice">>
+							<<set $nextPassage to "Lake Shallows Ice">>
+						<<else>>
+							<<set $nextPassageCheck to "Lake Shallows">>
+							<<set $nextPassage to "Lake Shallows">>
+						<</if>>
+					<</if>>
+				<<case "Lake Shallows">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Depths">>
+					<<set $nextPassage to "Lake Depths">>
+				<<case "Lake Shallows Ice">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Depths Ice">>
+					<<set $nextPassage to "Lake Depths Ice">>
+				<<case "Lake Depths">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Underwater">>
+					<<set $nextPassage to "Lake Underwater">>
+				<<case "Lake Depths Ice">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Depths Ice Break">>
+					<<set $nextPassage to "Lake Depths Ice Break">>
+				<<case "Lake Underwater" "Lake Ruin Deep">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Ruin">>
+					<<set $nextPassage to "Lake Ruin">>
+				<<case "Lake Ruin">>
+					<<pass 2>>
+					<<set $nextPassageCheck to "Lake Ruin Prison Intro">>
+					<<set $nextPassage to "Lake Ruin Prison Intro">>
+			<</switch>>
+		<</if>>
+		<<if !$wraith.will>>
+			<<if $wraith.state is "haunt">>
+				<<set $wraith.will to random(1300, 1700)>>
+			<<else>>
+				<<set $wraith.will to random(1100, 1500)>>
+			<</if>>
+		<</if>>
+		<<set _wraithWill to Math.floor(1 + $wraith.will)>>
+		<<if $wraith.possessCount is undefined>>
+			<<if $location is "forest" or $location is "lake">>
+				<<set _wraithWill /= 3>>
+			<<else>>
+				<<set _wraithWill /= 2>>
+			<</if>>
+		<</if>>
+		<<if $wraithWillMessage and !$combat>>
+			<<if $phase2 is 1>>
+				<<set $phase2 to 0>>
+				<<controlcaption>>
+				<br>
+			<<elseif ($passage isnot "Forest" or $passagePrev isnot "Forest") and $passage is $nextPassageIntended or $nextPassageCheck is $nextPassageIntended>>
+				<<controlcaption>>
+				<<set $willpowerSuccess to 0>>
+				<br>
+				<span class="pink">당신은 그것에게 몸을 맡긴다.</span>
+				<<pain -2>><<stress -12>><<sub 2>><<lpain>><<llstress>><<set $wraith.will += 30>>
+				<<if numberOfEarSlime() and $worn.genitals.name is "chastity parasite" and $earSlime.vibration lt 60 and !$earSlime.defyCooldown>><<set $earSlime.vibration to 60>><<garousal>><</if>>
+				<br><br>
+			<<else>>
+				<<if numberOfEarSlime() and $earSlime.growth gte 100>><<set $earSlime.vibration to 0>><<set $earSlime.defyCooldown++>><</if>>
+				<<set $willpowerSuccess to 0>>
+				<<willpowerdifficulty 1 _wraithWill true>>
+				<<if $willpowerSuccess>>
+					<<control `Math.floor(currentSkillValue('willpower') / 80)`>>
+					<<controlcaption>>
+					<br>
+					<span class="green">당신은 통제권을 잡기 위해 싸운다. 그것의 속도가 느려진다.</span>
+					<<pass 4>><<pain 4>><<stress 12>><<trauma 12>><<def 2>><<gpain>><<ggtrauma>><<ggstress>><<gcontrol>><<set $wraith.will -= Math.floor(currentSkillValue('willpower') / 8)>>
+					<br><br>
+				<<else>>
+					<<controlcaption>>
+					<br>
+					<span class="red">당신의 몸이 따르지 않는다.</span>
+					<<stress 6>><<trauma 6>><<willpower 1>><<def 1>><<gtrauma>><<gstress>><<gwillpower>><<set $wraith.will -= Math.floor(currentSkillValue('willpower') / 10)>>
+					<br><br>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if _nextPassageCheckTemp>>
+			<<set $nextPassage to _nextPassageTemp>>
+			<<set $nextPassageCheck to _nextPassageCheckTemp>>
+		<</if>>
+		<<if $phase2 is 2>>
+			<<set $phase2 to 0>><<set $pain to 0>>
+		<</if>>
+		<<if _args[0]>>
+			<<if $bus isnot "lake_ruin_prison" and (Time.hour gte 6 and $moonstate is "morning" and $wraith.exit isnot "home" or $control gte $controlmax)>>
+				<<if $location is "lake_ruin">>
+					<<set $nextPassage to "Wraith Resisted Lake">>
+				<<else>>
+					<<set $nextPassage to "Wraith Resisted">>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>

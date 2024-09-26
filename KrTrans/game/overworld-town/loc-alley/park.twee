@@ -1,0 +1,304 @@
+:: Park
+
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">><<getTarget true>>
+당신은 공원에 있다.
+<<if Time.dayState is "dawn">>
+	산책이나 조깅을 하고 있는 사람들이 있다. 어떤 사람들은 개를 데리고 있다.
+<<elseif Time.dayState is "day">>
+	<<if Weather.precipitation is "rain">>
+		몇몇 사람들이 밖에 나와, 길에 생긴 물웅덩이들을 지나쳐 걷고 있다.
+	<<elseif Weather.precipitation is "snow">>
+		사람들이 많이 밖에 나와, 그들의 개와 산책하거나 조깅하면서, 추위에 몸을 따뜻하게 감싸고 있다.
+	<<else>>
+		사람들이 많이 밖에 나와, 그들의 개와 산책하거나 조깅하고 있다. 당신은 놀이터에서 노는 아이들의 목소리를 듣는다.
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	주변에 사람들이 많다. 학생들이 놀이터에서 놀고 있다.
+<<elseif Time.dayState is "night">>
+	<<if $park_fame gte 60>>
+		<span class="pink">그림자에 섬뜩한 형상이 숨어 있다.</span> <i>당신의 음란한 달리기 소식이 퍼졌다. 진정시키려면 며칠 동안은 노출한 상태로 뛰지 말아야 한다.</i>
+	<<elseif $park_fame gte 20>>
+		<span class="pink">당신은 주시당하고 있다고 생각하고 있다.</span> <i>당신의 음란한 달리기 소식이 퍼졌다. 진정시키려면 한동안은 노출한 상태로 뛰지 말아야 한다.</i>
+	<<else>>
+		주변에 아무도 없다.
+	<</if>>
+<</if>>
+
+튤립이 강둑 근처에서 잘 자라고 있다.
+
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "park">>
+	<<if Time.dayState isnot "night">>
+		당신은 하이 가로부터 소란스러운 소리를 듣는다. 이 모습으로는 건너갈 수 없다. 하지만, 길 건너편에 상자들을 운반하는 창고가 있다. 어쩌면, 당신은 그것들 중 하나에 숨을 수도 있다.
+		<br><br>
+	<</if>>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutpark>>
+<<else>>
+	<<run statusCheck("Robin")>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($halloween_kylar is 1 or C.npc.Kylar.love gte 60) and $halloween_kylar_proposed isnot 1 and Time.dayState is "night" and C.npc.Kylar.init is 1 and C.npc.Kylar.state is "active" and (($halloween is 1 and Time.monthDay is 31 and Time.hour gte 21) or (Time.monthName is "November" and Time.monthDay is 1 and Time.hour lte 6)) and !$possessed>>
+		<<halloweenkylar>>
+	<<elseif ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<elseif $robinReunionScene isnot undefined and _robin_location is "park" and $exposed lte 0 and !$possessed>>
+		<<npc Robin>><<person1>>
+		<<if $robinReunionScene is "dungeon">>
+			<<unset $robinReunionScene>><<set $robinPostMortem to true>>
+			당신은 로빈이 <<his_ yi>> 핫초코 가판대 뒤에 서 있는 것을 볼 수 있다. <<he_ nun>> 당신을 보자 입을 떡 벌리더니, 당신을 향해 달려온다.
+			<br><br>
+
+			"믿을 수 없어!" <<he_ nun>> 당신의 가슴에 안기며 소리를 질렀다. "나, 나는 네가 영원히 사라진 줄 알았어! 집에서 얘기 좀 하자. 준비가 되면."
+			<br><br>
+
+			당신은 <<his_ yi>> 가판대로 다시 안내된다. 두 사람이 찍힌 작은 사진이 위에 놓여있다. <<He_ nun>> 그것을 치운다.
+			<br>
+			<<He_ nun>> 당신에게 핫초코 한 잔을 만들어주고 당신을 보내준다.
+			<br>
+			"나중에 만나는 거 잊지 마." "라고 <<he_ ga>> 걱정스러운 표정으로 말한다. "네가 이야기해야 할 필요가 있다면 나는 항상 너를 위해 여기에 있을게."
+			<br><br>
+
+			<<link [[다음|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<<elseif $robinReunionScene is "dungeonRobin">>
+			<<unset $robinReunionScene>>
+			당신은 로빈이 <<his_ yi>> 핫초코 가판대 뒤에 서 있는 것을 볼 수 있다. <<he_ nun>> 당신을 보자 입을 떡 벌리더니, 당신을 향해 달려온다.
+			<br><br>
+
+			"빠져나왔구나!" <<he_ ga>> 당신의 가슴팍에 안겨들며 꽥 소리지른다. "네가 다시 잡혀갔을 때, 난 어떻게 해야 할 지 몰랐어."
+			<br><br>
+
+			당신은 <<his_ yi>> 가판대로 다시 이끌려 간다. 두 사람이 찍힌 작은 사진이 위에 놓여있다. <<He_ nun>> 그것을 치운다.
+			<br>
+			<<He_ nun>> 당신에게 핫초코 한 잔을 만들어주고 당신을 보내준다.
+			<br>
+			"나중에 만나는 거 잊지 마." <<he_ ga>> 걱정스러운 표정으로 말한다. "나는 항상 너를 위해 여기에 있다는 거, 절대 잊지 마."
+			<br><br>
+
+			<<link [[다음|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<<elseif $robinReunionScene is "asylum">>
+			<<unset $robinReunionScene>>
+			당신은 로빈이 <<his_ yi>> 핫초코 가판대 뒤에 서 있는 것을 볼 수 있다.
+
+			<<if C.npc.Robin.trauma gte 40>>
+				<<He_ nun>> 믿을 수 없다는 듯이 당신을 바라본다.
+				<br><br>
+
+				"안녕," 하고 <<he_ ga>> 조용히 말하며 다가온다. "의사들이 널 데려간 줄 알았어. 네가 도-돌아올 줄 알았더라면 뭐라도 준비해뒀을텐데." 로빈의 목소리가 떨렸다.
+			<<else>>
+				<<He_ nun>> 너를 보자 신이 나서 손짓한다.
+				<br><br>
+
+				"와, 너 나왔구나!" <<he_ nun>> 가까이 다가가면서 말한다. "나는 네가 한동안 병원에 있는 줄 알았어. 네가 돌아올 줄 알았더라면 뭐라도 준비해둘걸 그랬네." 라고 로빈이 설명한다.
+			<</if>>
+			<br><br>
+
+			당신은 고개를 저으며, 그들은 당신에게 별다른 도움이 되지 않을 것이고, 그래서 당신이 일찍 "나왔다"고 말한다. 로빈은 혼란스러워 보이지만, 개의치 않고 고개를 끄덕인다. <<He_ nun>> 당신을 안아준다.
+			<br>
+
+			<<if C.npc.Robin.trauma gte 40>>
+				"음, 네가 자유로워져서 기뻐," 라고 <<he_ ga>> 당신을 꼭 껴안으며 중얼거린다.
+			<<else>>
+				"음, 다시 만나서 반가워! 기분이 나아졌으면 좋겠어."
+			<</if>>
+			<br>
+			둘이서 잠시 사소한 잡담을 나눈다. 결국, 로빈은 <<his_ yi>> 가판대로 돌아가야 한다고 말한다.
+
+			<<if C.npc.Robin.trauma gte 40>>
+				<<He_ nun>> 시선을 바닥에 고정한 채, 천천히 몸을 뒤척인다.
+			<<else>>
+				<<He_ nun>> 웃으며 작별 인사를 건넨다.
+			<</if>>
+			<br><br>
+
+			<<link [[다음|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<<else>>
+			당신은 로빈이 <<his_ yi>> 핫초코 가판대에 있는 것을 발견한다. <<His_ yi>> 눈은 순간적으로 당신을 지나치지만, <<he_ nun>> 응시하지 않는다. 마치 <<he_ ga>> 당신을 알아보지도 못하는 것 같다.
+			<br><br>
+
+			<<link [[다음|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<elseif C.npc.Robin.init is 0 and Time.season is "winter" and Time.isWeekEnd() and between(Time.hour, 9, 16) and $exposed lte 0 and !$possessed>>
+		<<set $robindebt to 0>><<set $robindebtlimit to 5>>
+		<<npc Robin>><<person1>>당신은 공원 가판대에서 친숙한 누군가가 일하고 있는 것을 봤다. <<He_ nun>> 거의 동시에 당신의 존재를 알아차린다. "어이!" 로빈이다. <<He_ nun>> 고아원에서 함께 사는 아이다. <<He_ nun>> 당신과 같은 나이임에도, 당신을 항상 동경해왔다. <<He_ nun>> 머그컵을 닦으면서, 당신에게 손을 흔든다. <<He_ ga>> 머그컵을 내려놓고, 당신이 다가오자 당신을 껴안아 준다.
+		<br><br>
+			"고아원에서 널 못 본지 한참 됐어. 우린 서로를 계속 생각해 줘야 해. <span class="gold">고아원에서 내 방으로 오기만 하면 언제든 날 만날 수 있다는 걸</span> 기억해. 너한테 뭘 좀 보여주려고 하고 있었어. 완전 기대 중이야!" <<He_ nun>> 당신의 뒤를 보고, 손님들이 오고 있다는 걸 알아차린다. "난 이제 다시 일해야 해. 원한다면 여기 계속 있어도 되고, 도와주는 것도 환영이야." <<He_ nun>> 가판대 뒤의 자기 자리로 돌아간다.
+		<br><br>
+		<<endevent>>
+		<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<elseif _robin_location is "park" and $exposed lte 0 and $balloonStand.open is true and $balloonStand.robin.status is "unaffected">>
+		<<balloonRobinIntro>>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "park">>
+			<br>
+		<</if>>
+		주요 장소
+		<br>
+		<<if $exposed lte 0>>
+			<<if $scienceproject is "ongoing" and $sciencelichenknown is 1 and $sciencelichenpark is 0>>
+				<<scienceicon "white lichen">><<link [[과학 프로젝트를 위해 이끼를 조사한다|Park Lichen]]>><</link>>
+				<br>
+			<</if>>
+			<<if !$plants_known.includes("tulip")>>
+				<<if $sciencetrait gte 1>>
+					<<icon "tending/tulip.png">> <<link [[씨앗을 찾는다 (0:30)|Park Tulip]]>><<set $plants_known.push("tulip")>><<pass 30>><<tending 6>><</link>><<gtending>>
+					<br>
+				<<else>>
+					<span class="blue">과학 기술이 뛰어나다면, 튤립 씨앗을 찾을 수 있을 것 같다.</span>
+					<br>
+				<</if>>
+			<</if>>
+			<<icon "tending/tulip.png">> <<link [[튤립을 딴다 (0:20)|Park Tulip Pick]]>><<pass 20>><<crimeUp 20 "petty">><</link>><<tendingdifficulty 1 200>><<crime "petty">>
+			<br>
+			<<if _robin_location is "park">>
+				<!-- if robin met, is not missing, trauma < 80%, on winter sundays 09:00 - 16:59 -->
+				<<robinicon "cocoa">><<link [[로빈의 핫초코 가판대|Robin Chocolate]]>><</link>>
+				<br>
+			<</if>>
+			<<set _kylarLocation to getKylarLocation()>>
+			<<if _kylarLocation.area is "park">>
+				<<if _kylarLocation.state is "fountain">>
+					<br>
+					카일라는 분수대에 앉아 가끔 동전을 던진다.
+					<br>
+					<<parkicon "fountain">><<link [[다가간다|Kylar Park]]>><<set $kylar_text_trigger to true>><</link>>
+				<<else>>
+					<br>
+					카일라는 벤치에 앉아 무언가를 스케치한다.
+					<br>
+					<<parkicon>><<link [[다가간다|Kylar Park]]>><<set $kylar_text_trigger to true>><</link>>
+				<</if>>
+				<br><br>
+			<</if>>
+			<<if isInPark("whitney")>>
+				<br>
+				당신은 우산 아래에서 연기가 올라오는 것을 본다. 휘트니가 틀림없다. <<nnpc_He_ ga "Whitney">> 공원 분수 근처의 나무 아래에 서 있다.
+				<br>
+				<<parkicon "fountain">><<link [[다가간다|Whitney Park]]>><<set $daily.whitney.textTrigger to true>><<if $daily.whitney.text is undefined>><<set $daily.whitney.text to 0>><<else>><<set $daily.whitney.text += 1>><</if>><</link>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<maleicon>><<link [[남자 화장실 (0:01)|Men's Toilets]]>><<pass 1>><</link>>
+		<br>
+		<<femaleicon>><<link [[여자 화장실 (0:01)|Women's Toilets]]>><<pass 1>><</link>>
+		<<if $leftleg is "bound" or $rightleg is "bound">>
+			<br>
+			<<set $_boundType to ($leftleg is "bound" ? ($rightleg is "bound" ? "양 다리" : "왼쪽 다리") : "오른쪽 다리")>>
+			당신의 $_boundType가 묶인 채로는 달릴 수 없다.
+		<<elseif $worn.feet.type.includes("heels") and ($exposed is 0 or Time.dayState is "night")>>
+			<br>
+			<<heelsicon>><<link [[하이힐을 신고 운동한다 (0:30)|Park Exercise Heels]]>><<athletics 3>><<physique 1>><<pass 30>><<tiredness 4>><<stress -1>><<slimeEventEnd "running">><</link>><<ggtiredness>><<gathletics>><<lstress>>
+		<<else>>
+			<<if Time.dayState is "night">>
+				<<if $exposed gte 2 and hasSexStat("exhibitionism", 3)>>
+					<br>
+					<<runicon>><<link [[달리러 간다 (0:30)|Park Run Exposed]]>><<athletics 4>><<set $phase to 0>><<tiredness 3>><<stress -3>><<slimeEventEnd "running">><</link>><<exhibitionist3>><<gtiredness>><<gathletics>><<lstress>>
+				<<elseif $exposed is 1>>
+					<br>
+					<<runicon>><<link [[달리러 간다 (0:30)|Park Run Exposed]]>><<athletics 4>><<set $phase to 1>><<tiredness 3>><<stress -3>><<slimeEventEnd "running">><</link>><<exhibitionist1>><<gtiredness>><<gathletics>><<lstress>>
+				<<elseif $exposed is 0>>
+					<br>
+					<<runicon>><<link [[달리러 간다 (0:30)|Park Run]]>><<athletics 4>><<physique 1>><<pass 30>><<tiredness 3>><<stress -3>><<slimeEventEnd "running">><</link>><<gtiredness>><<gathletics>><<lstress>>
+				<</if>>
+			<<elseif $exposed is 0>>
+				<br>
+				<<runicon>><<link [[달리러 간다 (0:30)|Park Run]]>><<athletics 4>><<physique 1>><<pass 30>><<tiredness 3>><<stress -3>><<slimeEventEnd "running">><</link>><<gtiredness>><<gathletics>><<lstress>>
+			<</if>>
+		<</if>>
+		<<if (Weather.precipitation is "none" or $worn.handheld.type.includes("rainproof"))>>
+			<<if $milkshake gte 1 and $exposed lte 0>>
+				<br>
+				<<foodicon "milkshake">><<link [[밀크셰이크를 마신다 (0:10)|Beach Milkshake]]>><<pass 10>><<set $milkshake -= 1>><<stress -5>><</link>><<lstress>>
+			<</if>>
+			<<if $popcorn gte 1 and $exposed lte 0>>
+				<br>
+				<<foodicon "popcorn">><<link [[팝콘을 먹는다 (0:10)|Balloon Consume]]>><<pass 10>><<set $popcorn -= 1>><<wearProp "popcorn">><<trauma -3>><<set $phase to "park">><</link>><<ltrauma>>
+			<</if>>
+		<</if>>
+		<<if Time.dayState is "night" and !Weather.isFrozen("fountain") and hasSexStat("exhibitionism", 4) and $daily.ex.fountain is undefined>>
+			<br>
+			<<parkicon "fountain">><<link [[분수에서 목욕한다 (0:10)|Park Fountain]]>><<set $daily.ex.fountain to 1>><</link>><<exhibitionist4>>
+		<</if>>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+			<br>
+			<<ind>><<link [[상자 안에 숨는다 (0:10)|Crate Ex]]>><<pass 10>><</link>>
+			<br>
+			<<if $exposed gte 2 and hasSexStat("exhibitionism", 5)>>
+				<<link [[육교를 건너 공업 지구로 간다 (0:05)|Flyover Ex Naked]]>><</link>><<if $daily.ex.flyover is undefined>><<exhibitionist5>><</if>>
+			<<elseif $exposed is 1 and hasSexStat("exhibitionism", 3)>>
+				<<link [[육교를 건너 공업 지구로 간다 (0:05)|Flyover Ex Undies]]>><</link>><<if $daily.ex.flyover is undefined>><<exhibitionist3>><</if>>
+			<</if>>
+		<<else>>
+			<<customRest "park">><br><br>
+			<<add_link "이동<br>">><<hideDisplay>>
+			<<high>>
+			<<starfish>>
+			<<oxford>>
+			<<nightingale>>
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>다른 경로<br>">>
+		<<if $exposed gte 1 and Time.dayState isnot "night">><<hideDisplay>>
+		<<else>>
+			<<commercial>>
+			<<industrial>>
+		<</if>>
+		<<stormdrain>>
+		<<if $historytrait gte 1 and $parktunnelintro gte 1>>
+			<<add_link "<<schoolicon 'building'>><<link [[학교로 가는 비밀 통로 (0:05)|School Rear Courtyard]]>><<pass 5>><</link>>">>
+			<br>
+		<</if>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "park">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>
+
+:: Park Tulip
+<<effects>>
+
+당신은 튤립들 사이를 걸으며, 씨앗이 있진 않은지 찾고 있고 꽃을 밟지 않도록 조심하고 있다.
+<br><br>
+
+<span class="gold">당신은 이제 <<icon "tending/tulip.png">> 튤립을 키울 수 있다.</span>
+<br><br>
+
+<<link [[다음|Park]]>><</link>>
+<br>
+
+:: Park Tulip Pick
+<<effects>>
+
+당신이 강둑에서 제일 예쁜 <<icon "tending/tulip.png">> 튤립을 찾는다면, 누군가는 기꺼이 돈을 지불할 것이다. 이것들은 엄밀하게는 야생화가 아니다. 당신은 눈에 띄지 않으려 조심한다.
+<br><br>
+
+<<if $tendingSuccess>>
+	<span class="green">당신은 활력이 넘치는 표본을 찾는다.</span>
+	<<tending_pick tulip>>
+	<br><br>
+<<else>>
+	당신은 몇몇 좋은 표본을 찾는다, <span class="red">그러나 조심성이 없는 나머지, 꽃들을 찢어버린다.</span> 결국 초췌하고 시들어버리게 만든다.<<gtending>><<tending 2>>
+	<br><br>
+<</if>>
+
+<<if $rng gte 91>>
+	당신은 강 옆의 오래된 벽 뒤를 조사한다. 거기에는 튤립은 없었다. 대신 당신은 비어있는 청량음료 캔 두 개, 비어있는 감자칩 봉지 하나, 그리고 수백장의 사용된 즉석복권들을 찾았다.
+	<br><br>
+<</if>>
+
+<<link [[다음|Park]]>><</link>>
+<br>

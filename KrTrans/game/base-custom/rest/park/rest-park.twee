@@ -1,0 +1,45 @@
+:: Widgets custom rest park [widget nobr]
+<<widget "customRestPark">>
+    <<if $exposed is 0>>
+		<br>
+  		<<switch Time.dayState>>
+   		<<case "night">>
+            <<ind>><<link [[휴식한다 (0:10)|custom rest park night]]>><<tiredness -5>><<pass 10>><</link>><<ltiredness>>
+        <<case "dawn">>  /*06~09*/
+            <<ind>><<link [[휴식한다 (0:10)|custom rest park dawn]]>><<tiredness -5>><<pass 10>><</link>><<ltiredness>>
+        <<case "day">>   /*09~18*/
+            <<ind>><<link [[휴식한다 (0:10)|custom rest park day]]>><<tiredness -5>><<pass 10>><</link>><<ltiredness>>
+         <<default>>
+            <<ind>><<link [[휴식한다 (0:10)|custom rest park dusk]]>><<tiredness -5>><<pass 10>><</link>><<ltiredness>>
+        <</switch>>
+    <</if>>
+<</widget>>
+
+<<widget "customRestParkReturn">>
+    <<link [[다음|Park]]>><</link>>
+<</widget>>
+
+
+:: custom rest park night [nobr]
+당신은 한밤중에 공원에서 휴식을 취한다.<br>
+하늘에 달이 높게 떠 있다.<br>
+<br>
+<<customRestParkNightEvents>>
+
+
+:: custom rest park dawn [nobr]
+당신은 아직 이른 아침에 공원 의자에 앉아 휴식을 취한다.<br>
+주변에는 일찍 일어난 사람들이 움직이는 풍경이 보인다.<br>
+<<customRestParkReturn>>
+
+
+:: custom rest park day [nobr]
+당신은 따스한 햇살을 받으며 공원 의자에 앉아 휴식을 취한다.<br>
+주위에는 여러 사람들이 지나다니고 있다.<br>
+<<customRestParkReturn>>
+
+
+:: custom rest park dusk [nobr]
+당신은 해질녘에 공원 의자에 앉아 휴식을 취한다.<br>
+그림자가 점점 길어지고, 하늘이 어두워지기 시작한다.<br>
+<<customRestParkReturn>>

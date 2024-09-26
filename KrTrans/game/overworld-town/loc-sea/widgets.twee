@@ -1,0 +1,490 @@
+:: Widgets Events Sea [widget]
+<<widget "eventsseabeach">>
+	<<if Time.dayState isnot "night" and !Weather.isOvercast>>
+		<<if $rng gte 96>>
+			<<sea1>>
+		<<elseif $rng gte 81>>
+			<<seabeach1>>
+		<<elseif $rng gte 61>>
+			<<sea5>>
+		<<elseif $rng gte 36>>
+			<<seatangle>>
+		<<else>>
+			<<sea2>>
+		<</if>>
+	<<elseif Time.dayState isnot "night" and Weather.precipitation isnot "none">>
+		<<if $rng gte 96>>
+			<<sea1>>
+		<<elseif $rng gte 81>>
+			<<seabeach2>>
+		<<elseif $rng gte 71>>
+			<<searape>>
+		<<elseif $rng gte 51>>
+			<<sea5>>
+		<<elseif $rng gte 36>>
+			<<seatangle>>
+		<<else>>
+			<<sea2>>
+		<</if>>
+
+	<<elseif Time.dayState isnot "night">>
+
+		<<if $rng gte 81>>
+			<<sea1>>
+		<<elseif $rng gte 71>>
+			<<searape>>
+		<<elseif $rng gte 51>>
+			<<sea5>>
+		<<elseif $rng gte 36>>
+			<<seatangle>>
+		<<else>>
+			<<sea2>>
+		<</if>>
+
+	<<else>>
+
+		<<if $rng gte 95>>
+			<<if $swarmdisable is "f">><<sea3>><<else>><<sea1>><</if>>
+		<<elseif $rng gte 81>>
+			<<sea1>>
+		<<elseif $rng gte 61>>
+			<<sea5>>
+		<<else>>
+			<<sea2>>
+		<</if>>
+
+	<</if>>
+<</widget>>
+
+<<widget "eventssea">>
+	<<set _dangerevent to random(1, 100)>>
+	<<if _dangerevent lte 10>>
+		<<if $swarmdisable is "f">>
+			<<sea3>>
+		<<else>>
+			<<sea1>>
+		<</if>>
+	<<elseif _dangerevent lte 20>>
+		<<sea1>>
+	<<elseif _dangerevent lte 30>>
+		<<searape>>
+	<<elseif _dangerevent lte 50>>
+		<<sea5>>
+	<<elseif _dangerevent lte 60>>
+		<<seatangle>>
+	<<elseif _dangerevent lte 80>>
+		<<sea2>>
+	<<elseif _dangerevent lte 100>>
+		<<sea7>>
+	<</if>>
+<</widget>>
+
+<<widget "eventsdeepsea">>
+	<<set _dangerevent to random(1, 96)>>
+	<<if _dangerevent lte 10>>
+		<<if $swarmdisable is "f">>
+			<<sea3>>
+		<<else>>
+			<<sea1>>
+		<</if>>
+	<<elseif _dangerevent lte 20>>
+		<<sea1>>
+	<<elseif _dangerevent lte 30>>
+		<<sea4>>
+	<<elseif _dangerevent lte 40>>
+		<<seavore>>
+	<<elseif _dangerevent lte 50>>
+		<<sea5>>
+	<<elseif _dangerevent lte 60>>
+		<<seatentacles>>
+	<<elseif _dangerevent lte 70>>
+		<<sea6>>
+	<<elseif _dangerevent lte 80>>
+		<<seaflotsam>>
+	<<elseif _dangerevent lte 90>>
+		<<sea_struggle>>
+	<<elseif _dangerevent lte 91>>
+		<<sea_eye>>
+	<<elseif _dangerevent lte 96>>
+		<<sea_chest>>
+	<</if>>
+<</widget>>
+
+:: Widgets Sea [widget]
+<<widget "seabeach1">>
+	<<rng>>
+
+	<<generate1>><<person1>> <<person_ i>> 다가와 당신의 엉덩이를 움켜쥔다. <<if $worn.under_lower.type.includes("naked") and $worn.lower.type.includes("naked")>> "아무것도 안 입었잖아? 진짜 음탕한 <<girl_ yeot>>네."<</if>> <<He_ nun>> 점점 더 열정적으로 당신을 애무한다.
+	<br><br>
+
+	<<if $rng gte 81>>
+		<<link [[끌어당긴다|Sea Beach Molestation]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		<<link [[끌어당긴다|Sea Beach Molestation Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+	<br>
+
+	<<link [[허락한다|Sea Beach Molestation]]>><<set $sexstart to 1>><</link>><<promiscuous1>>
+<</widget>>
+
+<<widget "seabeach2">>
+	<<rng>>
+	큰 파도가 당신에게 다가온다. 그러나 파도가 당신을 덮치기 전에 서핑 보드를 타고 있던 <<generate1>><<person1>><<person_ i>> 당신을 물에서 끌어올린다. <<He_ nun>> 당신의 팔을 붙잡은 뒤 입을 막는다.
+	<br><br>
+
+	<<link [[다음|Sea Beach Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+<</widget>>
+
+<<widget "sea1">>
+	<<beastNEWinit 3 dolphin>>
+	<<rng>>
+	<<if $rng gte 81 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+		3마리의 <<beastsplural_ i>> 당신에게 다가와 장난스럽게 쿡쿡 찌른다. 당신은 그들을 쓰다듬고 보내주려고 하지만, 그들은 끈질기다. 그중 한 마리는 당신에게 몸을 문지르기 시작하고, 나머지 두 마리는 당신이 떠나는 것을 막는다.
+		<br><br>
+
+		<<link [[다음|Sea Dolphins]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<elseif $rng gte 25 and numberOfEarSlime() and ($monster is 1 or $bestialitydisable is "f") and ($earSlime.growth gte 80 - ($earSlime.deviancy * 10))>>
+		3마리의 <<beastsplural_ i>> 당신에게 다가와 장난스럽게 쿡쿡 찌른다. 당신은 그들을 쓰다듬어준다.
+		<br><br>
+		<span class="lewd">당신은 머릿속의 슬라임이 <<if $exposed gte 2>>옷을 벗고 <</if>>그들에게 몸을 주라고 명령하는 것을 느낀다.</span> 응한다면 보답을 할 거라 약속하지만, 따르지 않는다면 어떤 일이 벌어질지 모른다며 협박한다.
+		<br><br>
+
+		<<if hasSexStat("deviancy", 4) and $submissive gte 1900>>
+			<<link [[기꺼이 굴복한다|Sea Slime Dolphins Submit willingly]]>><<corruption 3>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>><</link>><<deviant4>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+			<br>
+		<</if>>
+		<<link [[복종한다|Sea Slime Dolphins Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<link [[반항한다|Sea Slime Dolphins Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br>
+	<<else>>
+		3마리의 <<beastsplural_ i>> 당신에게 다가와 장난스럽게 쿡쿡 찌른다. 당신은 그들을 쓰다듬어준다.
+		<<lstress>><<ltrauma>><<stress -12>><<trauma -6>>
+		<br><br>
+
+		<<if hasSexStat("deviancy", 3) and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+			<<link [[음란하게 쓰다듬는다|Sea Dolphins Sex]]>><<set $sexstart to 1>><</link>><<deviant3>>
+			<br>
+		<</if>>
+
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "sea2">>
+	<<rng>>
+	거대한 파도가 당신을 향해 다가온다.
+
+	<<if $uncladtest isnot 1>> /* unused. This outcome always happens */
+		당신은 파도를 타고 위쪽으로 빨려 들어갔다가, 반대편 수면에 부드럽게 착지한다. 재밌었다! <<lstress>><<stress -6>>
+	<<else>>
+		당신은 파도를 타고 위쪽으로 빨려 들어간다. 그 힘에 당신의 옷이 찢겨 나간다!
+
+		<<if $rng gte 81>>
+			파도가 지나간 후 당신은 잃어버린 옷을 찾아 주변을 둘러보지만, 어디에서도 찾을 수 없었다. 옷을 잃어버렸기 때문에, 당신은 당신의 <<nudity_ rul>> 강하게 의식한다.<<nudityPostend>>
+			<<garousal>><<gstress>><<arousal 600>><<stress 6>>
+			<<set $unclad to 0>> /* unused */
+			<<if $uncladoutfit is 1>><<set $uncladoutfit to 0>>
+				<<upperruined>><<lowerruined>>
+			<</if>>
+			<<if $uncladupper is 1>><<set $uncladupper to 0>>
+				<<upperruined>>
+			<</if>>
+			<<if $uncladlower is 1>><<set $uncladlower to 0>>
+				<<lowerruined>>
+			<</if>>
+			<<if $uncladunder is 1>><<set $uncladunder to 0>>
+				<<underruined>>
+			<</if>>
+			<<handheldruined>>
+		<<else>>
+			파도가 지나간 후 당신은 잃어버린 옷을 찾아 주변을 둘러본다. 그렇게 멀지 않은 곳에 떠 있는 옷을 발견한다. 당신은 몸을 가리기 전까지는 안심할 수 없어 옷을 향해 헤엄친다.
+		<</if>>
+	<</if>>
+	<br><br>
+	<<destinationeventend>>
+<</widget>>
+
+<<widget "sea3">>
+	<<rng>>
+	당신은 다리에 뭔가가 스치는 것을 느낀다. 내려다보니 그것은 장어였다. 다른 장어들이 점점 더 많이 몰려온다. 그들이 당신의 주위를 빙빙 도는 동시에 점액질을 내뿜으며 애무하기 시작하자 당신은 역겹고 부끄러운 감정을 느낀다. 주위를 둘러보니 그리 멀지 않은 곳에 부표가 보인다. 부표까지 갈 수만 있다면, 안전한 곳으로 올라갈 수 있을 것이다.
+	<br><br>
+
+	<<link [[다음|Sea Eels]]>><<set $molestationstart to 1>><</link>>
+<</widget>>
+
+<<widget "sea4">>
+	<<generate1>><<generate2>>
+	어선 한 척이 당신을 향해 뱃머리를 돌려 다가온다. 당신은 그물에 감싸여 배 위로 끌어올려진다.
+	<br><br>
+	<<fullGroup_ i>> 이 미소를 짓는다. "아주 싱싱한 걸 낚았군." <<person1>><<person_ i>> 말한다.
+	<br><br>
+
+	<<link [[다음|Boat Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</widget>>
+
+<<widget "sea5">>
+	<<if $bestialitydisable is "f">>
+		<<if $squidcount is 0>>
+
+			당신은 당신의 <<genitalsPost>>에 부드러운 것이 닿는 것을 느낀다. 물아래를 보니 작은 오징어가 촉수로 당신을 문지르고 있다.
+			<<garousal>><<arousal 600 "genitals">>
+			<br>
+
+		<<elseif $squidcount is 1>>
+
+			당신은 당신의 <<breastsPost>>에 부드러운 것이 닿는 것을 느낀다. 물아래를 보니 작은 오징어가 촉수로 당신을 문지르고 있다.
+			<<garousal>><<arousal 600 "breasts">>
+			<br>
+
+		<<elseif $squidcount is 2>>
+
+			당신은 당신의 <<breastsPost>>에 부드러운 것이 닿는 것을 느낀다. 물아래를 보니 작은 오징어가 촉수로 당신을 문지르고 있다.
+			<<garousal>><<arousal 600 "breasts">>
+			<br>
+
+		<<elseif $squidcount is 3>>
+
+			당신은 당신의 <<bottomPost>>에 부드러운 것이 닿는 것을 느낀다. 물아래를 보니 작은 오징어가 촉수로 당신을 문지르고 있다.
+			<<garousal>><<arousal 600 "bottom">>
+			<br>
+
+		<<else>>
+
+			당신은 당신의 피부에 부드러운 것이 닿는 것을 느낀다. 물아래를 보니 작은 오징어가 촉수로 당신을 문지르고 있다.
+			<<garousal>><<arousal 600>>
+			<br>
+
+		<</if>>
+		<br>
+		<<link [[내버려 둔다|Sea Squid]]>><</link>><<deviant1>>
+		<br>
+		<<link [[밀어낸다|Sea Pull]]>><</link>>
+		<br>
+
+	<<else>>
+		<<sea2>>
+	<</if>>
+<</widget>>
+
+<<widget "sea6">>
+	어선 한 척이 지나간다. 배에 탄 사람 중 그 누구도 당신을 알아채지 못한다.
+	<br><br>
+	적어도 해안에 도착하는 데 도움이 될 수도 있다.
+	<br><br>
+	<<link [[도움을 요청한다|Sea Boat Call]]>><</link>>
+	<br>
+	<<link [[무시한다|Sea Boat Ignore]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "seavore">>
+	<<if $voredisable is "f">>
+		<<set $rng to random(1,4)>>
+		<<if $rng lte 2>>
+			거대한 생물이 당신의 향기에 이끌려 깊은 바다에서 나타난다. 당신이 그것의 존재를 눈치채기도 전에 그 생물은 당신의 다리를 물고 꽉 붙잡는다.
+			<br><br>
+			<<link [[다음|Sea Vore]]>><<set $molestationstart to 1>><<set $vorecreature to "whale">><</link>>
+		<<else>>
+			당신이 물을 헤치며 이동하려고 하자, 무언가가 당신의 다리를 짓누르는 것을 느낀다. 몸을 비틀어 확인해 보니 거대한 굴이 당신을 집어삼키려고 하고 있다!
+			<br><br>
+			<<link [[다음|Sea Vore]]>><<set $molestationstart to 1>><<set $vorecreature to "oyster">><</link>>
+		<</if>>
+	<<else>>
+		<<sea1>>
+	<</if>>
+<</widget>>
+
+<<widget "seatangle">>
+	<<if !$worn.lower.type.includes("naked")>>
+		당신의 허리에 해초 줄기가 엉켰다. <<bottoms_ rul>> 먼저 벗는다면 쉽게 풀 수 있을 것 같고, 주변에는 다른 사람이 아무도 없다...
+		<br><br>
+		<<link [[벗는다|Sea Tangle Undress]]>><</link>><<exhibitionist1>>
+		<br>
+		<<link [[벗지 않는다 (0:01)|Sea Tangle]]>><<pass 1>><<stress 6>><</link>><<gstress>>
+		<br>
+	<<else>>
+		당신의 허리에 해초 줄기가 엉켰다. 푸는 것만으로도 1분이 걸렸다.
+		<<pass 1>><<stress 1>><<gstress>>
+		<br><br>
+		<<destinationeventend>>
+		<br><br>
+	<</if>>
+<</widget>>
+
+<<widget "searape">>
+	<<generate1>><<person1>><<npcClothesType $NPCList[0] "beachDive">>
+	무언가가 당신의 발목을 꽉 붙잡고 물아래로 끌어당긴다. 다이빙 마스크를 쓴 <<person_ i>> 어두운 물 속에서 튀어나온다.
+	<br><br>
+
+	<<link [[다음|Sea Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</widget>>
+
+<<widget "seatentacles">>
+	<<if $tentacledisable is "f" and $hallucinations gte 2>>
+		당신의 다리에 부딪힌 무언가가 허리로 올라와 휘감는다. 물속에서 촉수들이 솟아오른다.
+		<br><br>
+
+		<<link [[다음|Sea Tentacles]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<seavore>>
+	<</if>>
+<</widget>>
+
+<<widget "seaflotsam">>
+	나무와 부스러기가 해초로 뒤덮여 떠다닌다. 그 안쪽에 반짝거리는 무언가가 보이는 것 같다.
+	<br><br>
+
+	<<link [[손을 뻗는다|Sea Flotsam Reach]]>><</link>>
+	<br>
+	<<link [[무시한다|Sea Flotsam Ignore]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "sea_struggle">>
+	<<if $bestialitydisable is "f">>
+		당신은 무언가가 다리를 감싸는 것을 느낀다. 아래를 내려다보니, 수많은 촉수들이 꿈틀대고 있다.
+		<br><br>
+
+		<<link [[다음|Sea Struggle]]>><<set $struggle_start to 1>><</link>>
+		<br>
+	<<else>>
+		<<seaflotsam>>
+	<</if>>
+<</widget>>
+
+<<widget "sea_eye">>
+	<<if $hallucinations gte 2>>
+		당신은 아래에서 무언가의 시선을 느낀다. 당신은 갑작스러운 공포에 휩싸인다.<<gstress>><<stress 6>>
+		<br><br>
+
+		<<link [[아래를 본다|Sea Eye]]>><<awareness 1>><<stress 6>><</link>><<gstress>><<gawareness>>
+		<br>
+		<<link [[보지 않는다|Sea Eye Refuse]]>><</link>>
+		<br>
+	<<else>>
+		<<seaflotsam>>
+	<</if>>
+<</widget>>
+
+<<widget "sea_chest">>
+	물보라 속에서, 파도에 부딪혀 매끄럽게 닳은 바위가 해초에 뒤덮인 채 여럿 모여있는 것이 보인다.
+	<br><br>
+
+	<<link [[조사한다 (0:10)|Sea Chest]]>><<pass 10>><</link>><<swimmingdifficulty 1 1000>>
+	<br>
+	<<link [[무시한다|Sea]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</widget>>
+
+<<widget "sea7">>
+	<<generatey1>><<generatey2>><<person1>>
+	<<person_>> 그리고 <<person2>><<person_ i>> 근처에 떠 있다. 해변에서 이곳까지 헤엄쳐 온 사람이다. 그들은 당신을 향해 미소를 짓고, 가까운 곳까지 헤엄쳐 온다.
+	<<if $exposed gte 1>>
+		<span class="lewd">당신은 수면 아래에 숨겨진 <<lewdness_ rul>> 의식한다.</span> 어쩌면 계속 숨길 수도 있을 것이다.
+	<</if>>
+	<br><br>
+
+	<<link [[인사한다|Sea Pair Greet]]>><</link>>
+	<br>
+	<<link [[떠난다|Sea Pair Swim]]>><</link>><<swimmingdifficulty 1 1000>>
+	<br>
+<</widget>>
+
+<<widget "passoutsea">>
+	<<if isPregnancyEnding()>>
+		<<pregnancyPassout "sea">>
+	<<else>>
+		<<link [[모든 것이 암흑 속으로 사라져간다...|Passout Sea]]>><</link>>
+	<</if>>
+<</widget>>
+
+:: Widgets Sea Beach [widget]
+<<widget "seabeach">>
+	<<beachicon>><<link [[해변 쪽으로 헤엄친다 (0:10)|Sea Beach]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<</widget>>
+
+<<widget "seabeachquick">>
+	<<beachicon>><<link [[해변 쪽으로 헤엄친다|Sea Beach]]>><</link>>
+<</widget>>
+
+<<widget "seabeacheventend">>
+	<<link [[다음|Sea Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</widget>>
+
+:: Widgets Sea Docks [widget]
+<<widget "seadocks">>
+	<<docksicon>><<link [[부두 쪽으로 헤엄친다 (0:10)|Sea Docks]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<</widget>>
+
+<<widget "seadocksquick">>
+	<<docksicon>><<link [[부두 쪽으로 헤엄친다|Sea Docks]]>><</link>>
+<</widget>>
+
+<<widget "seadockseventend">>
+	<<link [[다음|Sea Docks]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</widget>>
+
+:: Widgets Sea Cliffs [widget]
+<<widget "seacliffs">>
+	<<coastalpathicon>><<link [[절벽 쪽으로 헤엄친다 (0:10)|Sea Cliffs]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<</widget>>
+
+<<widget "seacliffsquick">>
+	<<coastalpathicon>><<link [[절벽 쪽으로 헤엄친다|Sea Cliffs]]>><</link>>
+<</widget>>
+
+<<widget "seacliffseventend">>
+	<<link [[다음|Sea Cliffs]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</widget>>
+
+:: Widgets Deep Sea [widget]
+<<widget "seamove">>
+	<<link [[다음 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<</widget>>
+
+<<widget "seamovequick">>
+	<<link [[다음|Sea]]>><</link>>
+<</widget>>
+
+<<widget "seamoveeventend">>
+	<<link [[다음|Sea]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</widget>>
+
+:: Widgets Sea Rocks [widget]
+<<widget "searocks">>
+	<<beachicon "rocks">><<link [[바위 쪽으로 헤엄친다 (0:10)|Sea Rocks]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<</widget>>
+
+<<widget "searocksquick">>
+	<<beachicon "rocks">><<link [[바위 쪽으로 헤엄친다|Sea Rocks]]>><</link>>
+<</widget>>
+
+<<widget "searockseventend">>
+	<<link [[다음|Sea Rocks]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</widget>>
+
+<<widget "sea_pair_orgasm">>
+<<if $arousal gte $arousalmax>>
+	이것은 당신에게는 너무 벅찬 일이다. <<orgasm>>
+	"이 걸레, 살짝 만졌는데도 가는 것 좀 봐!" 경련이 가라앉기도 전에 <<person2>><<person_ i>> 웃는다.
+	<br><br>
+	"오, 재밌겠는데." <<person1>><<person_ i>> 가까이 다가온다.
+	<br><br>
+	<<link [[다음|Sea Pair Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	"여긴 뭐 하러 왔어?" <<person1>><<person_ i>> 묻는다. "우리만큼 괜찮은 놈들 만나기란 쉬운 일이 아니거든."
+	<br><br>
+	<<link [[수영 연습 중이라고 한다|Sea Pair Practise]]>><<swimmingskilluse>><</link>><<gswimming>>
+	<br>
+	<<link [[바다로 끌려들어 온 사람이 없는지 확인 중이라고 한다|Sea Pair Dragged]]>><<famegood 2>><</link>>
+	<br>
+	<<link [[강간범을 잡고 있다고 한다|Sea Pair Hunt]]>><<famescrap 2>><</link>>
+	<br>
+<</if>>
+<</widget>>

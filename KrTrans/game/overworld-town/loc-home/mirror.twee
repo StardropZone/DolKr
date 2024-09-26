@@ -1,0 +1,154 @@
+:: Eerie Mirror
+
+<<effects>>
+당신은 거울에 다가가서, 거울의 깊이를 들여다 본다. 거울은 더 이상 반사된 주변을 보이지 않고, 기이한 빛을 발한다. 보라색이나 분홍색, 어쩌면 빨간색으로.
+<br><br>
+빛은 형태를 갖추고, 당신 앞에서 공간을 확장한다. 하나의 촉수가 나타났다. 가까이에서 춤을 추고 있다.
+<br><br>
+<<link [[본다|Eerie Mirror 2]]>><</link>><<deviant1>>
+<br>
+<<link [[물러난다|Eerie Mirror Stop]]>><</link>>
+<br>
+
+:: Eerie Mirror Stop
+
+<<effects>>
+당신은 거울에서 물러난다. 빛이 곧 꺼진다.
+<br><br>
+<<link [[물러난다|Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>
+<<mirror>>
+
+:: Eerie Mirror 2
+
+<<effects>>
+촉수가 당신의 볼을 어루만진다. 녀석이 맥동한다. 각각의 파동이 당신의 피부 속에 스며들어, 당신의 몸에 잔물결을 일으킨다. 당신은 떨고 있다. 냄새가 달콤한다.
+<<deviancy1>>
+<<link [[핥는다|Eerie Mirror 3]]>><</link>><<deviant1>>
+<br>
+<<link [[물러난다|Eerie Mirror Stop]]>><</link>>
+<br>
+
+:: Eerie Mirror 3
+
+<<effects>>
+당신은 혀를 내밀고 촉수가 더 가까이 움직이기 시작하자, 가슴이 설레인다. 촉수는 몸 주변에 얽힐 때까지 빠르게 움직인다.
+녀석이 당신의 입술에 쿡 누른다. 당신에게 키스하고 있다. <<takeKissVirginity "Eerie Mirror Tentacle" "tentacle">>
+<<deviancy1>>
+끝부분에서 분홍색 액체가 떨어진다.
+<br><br>
+<<if hasSexStat("deviancy", 2)>>
+	<<link [[핥는다|Eerie Mirror 4]]>><</link>><<drugs 60>><<deviant2>>
+	<br>
+<</if>>
+<<link [[물러난다|Eerie Mirror Stop]]>><</link>>
+<br>
+
+:: Eerie Mirror 4
+
+<<effects>>
+당신은 촉수의 끝을 핥아, 분홍색 액체의 맛을 본다. 달콤하고, 따뜻하다. 당신은 핥짝거리면서, 오싹한 따뜻함을 느낀다.
+당신의 입과 목이 벌어진다.
+<<deviancy2>>
+다른 촉수 몇 개가 빛에서 형성된다. 녀석들은 가까이에서 춤을 추고 있다.
+<br><br>
+<<if hasSexStat("deviancy", 2)>>
+	<<link [[핥는다|Eerie Mirror 5]]>><<drugs 60>><</link>><<deviant2>>
+	<br>
+<</if>>
+<<link [[물러난다|Eerie Mirror Stop]]>><</link>>
+<br>
+
+:: Eerie Mirror 5
+<<effects>>
+<<if $moonstate is "morning">>
+	당신은 계속해서 촉수의 끝을 핥짝거리며, 달콤한 액체를 맛본다. 녀석은 원하는 것처럼 당신의 혀를 밀어낸다.
+	당신의 입 속으로 들어간다.
+	<<deviancy2>>
+	그 빛은 섬뜩한 빨간 빛으로 밝아지고, 다른 촉수들이 당신의 손, 팔, 다리, 엉덩이를 휘감는다. 기쁨의 전율이 느껴진다.
+	녀석들이 닿는 어느 부분이든지. 녀석들은 부드러운 리듬에 맞춰 쥐어짜고, 애무한다.
+	<br><br>
+	<<if hasSexStat("deviancy", 5)>>
+		<<link [[삼킨다|Eerie Mirror 6]]>><</link>><<oralvirginitywarning>><<deviant5>>
+		<br>
+	<</if>>
+	<<link [[물러난다|Eerie Mirror Stop]]>><</link>>
+	<br>
+<<else>>
+	첫번째 촉수가 물러나고, 당신에게 깊은 갈망을 남긴다. 끝이 아니다. 다른 촉수가 당신의 팔과 다리, 엉덩이에 휘감긴다. 
+	녀석들이 닿는 곳 마다 기쁨의 전율이 느껴진다.
+	녀석들은 부드러운 리듬에 맞춰 쥐어짜고, 애무한다.
+	<<deviancy2>>
+	빛이 희미해지고, 촉수가 그와 함께 사라진다.
+	<br><br>
+	<<link [[물러난다|Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>
+	<br><br>
+
+	<br><br>
+	<<mirror>>
+<</if>>
+
+:: Eerie Mirror 6
+<<effects>>
+당신은 첫번째 촉수를 
+<<if $player.virginity.oral is true>>
+	처녀 입으로 받아 들이고 빨기 시작한다. <span class="red">이상한 맛이 난다.</span>
+<<else>>
+	입으로 받아 들이고 빨기 시작한다.
+<</if>>
+당신은 달콤하고 따뜻한 액체를 꿀꺽 마신다.
+<<takeVirginity "Eerie Mirror Tentacle" "oral">>
+<<oralstat>>
+<<oralejacstat>>
+<<ejacstat>>
+<<deviancy5>>
+<<undress "wardrobe">>
+다른 촉수들은 화려한 솜씨로 당신의 옷을 벗기고, 당신의 팔과 다리, 엉덩이에 더욱 휘감기는 동시에,
+당신의 <<genitalsPost>> 가까이에서 꿈틀댄다.
+<br><br>
+<<link [[다음|Eerie Mirror Tentacles]]>><<set $sexstart to 1>><</link>>
+
+:: Eerie Mirror Tentacles
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<set $enemytype to "tentacles">>
+	<<neutral 1>>
+
+	<<set $enemytrust += 100>>
+	<<tentaclestart 10 15>>
+	<<set $mouthstate to "tentacledeep">><<set $mouthuse to "tentacle">><<set $tentacles[0].shaft to "shoulders">><<set $tentacles[0].head to "mouthdeep">><<set $mouthtarget to "tentacles">>
+<</if>>
+<span class="lewd">붉은 안개가 거울에서 나와, 당신의 기분을 이상하게 만들고 있다.</span><<drugs 1>>
+<br>
+<<statetentacles>>
+
+
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[다음|Eerie Mirror Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Eerie Mirror Tentacles]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Eerie Mirror Tentacles Finish
+<<effects>>
+
+아무런 경고 없이, 촉수가 당신을 꽉 잡고 거울 쪽으로 끌어당긴다.
+<br><br>
+당신은 비명을 질러 도움을 구하려 했지만, <span class="pink">최음제가 목소리를 음란한 신음으로 만든다.</span> 어떤 것들은 당신의 <<genitalsPost>>에 문지르고 있지만, 대부분은 당신을 끌어당긴다.
+<br><br>
+<<endcombat>>
+
+<<link [[다음|Eerie Mirror Tentacle Plains]]>><<set $sexstart to 1>><</link>>
+
+:: Eerie Mirror Tentacle Plains
+<<location "tentworld">><<set $outside to 0>><<effects>>
+<<tentacleworldintro>>
+거울을 들여다 보자, 이질적인 풍경을 발견한다.
+거대한 촉수가, 하늘을 향해 몸을 비틀고 있다. <span class="red">여기에서 오르가즘을 느끼는 것은 위험할 것이다.</span>
+<br><br>
+<<link [[다음|Tentacle Plains]]>><<set $tentacleEntrance to "mirror">><</link>>

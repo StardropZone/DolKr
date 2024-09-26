@@ -1,0 +1,105 @@
+:: Widgets trBeasttype [widget nobr]
+<<widget "trBeasttypeFun">><<silently>>
+    <<if _args[0].slice(-3) is "boy">>
+        <<set _trgender to " 소년">>
+        <<set _trType to _args[0].slice(0,-3)>>
+    <<elseif _args[0].slice(-4) is "girl">>
+        <<set _trgender to " 소녀">>
+        <<set _trType to _args[0].slice(0,-4)>>
+    <<else>>
+        <<set _trgender to "">>
+        <<set _trType to _args[0]>>
+    <</if>>
+
+    <<if setup.trBeasttypeList is undefined>>
+		<<run trinit_beastsList()>>
+		<<run trinit_beastAdjList()>>
+    <</if>>
+	
+	<<set _trType to _trType.trim()>>
+
+    <<if setup.trBeasttypeList[_trType] is undefined>>
+		<<if setup.trBeastAdjList[_trType] is undefined>>
+			<<set _trResult to "trBeasttypeList/AdjList에 정의되지 않음: "+_trType>>
+		<<else>>
+			<<set _trResult to setup.trBeastAdjList[_trType] + _trgender>>
+		<</if>>
+    <<else>>
+		<<set _trResult to setup.trBeasttypeList[_trType].ko + _trgender>>
+    <</if>>
+
+    <<if _args[1] isnot undefined>>
+        <<if _args[0].slice(-3) is "boy">>
+            <<trPost 0 _args[1] _args[2]>>
+        <<elseif _args[0].slice(-4) is "girl">>
+            <<trPost 1 _args[1] _args[2]>>
+        <<else>>
+			<<if setup.trBeasttypeList[_trType] isnot undefined>>
+				<<trPost setup.trBeasttypeList[_trType].post _args[1] _args[2]>>
+			<</if>>
+        <</if>>
+    <</if>>
+<</silently>><</widget>>
+
+
+<<widget "beasttypePost">><<silently>>
+    <<if typeof _args[0] is "number">>
+        <<set _na to _args[0]>>
+        <<trBeasttypeFun $NPCList[_na].type _args[1] _args[2]>>
+    <<else>>
+        <<set _na to 0>>
+        <<trBeasttypeFun $NPCList[_na].type _args[0] _args[1]>>
+    <</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "beasttypesPost">><<beasttypePost _args[0] _args[1]>><</widget>>
+
+
+<<widget "beastspluralPost">><<silently>>
+<<if typeof _args[0] is "number">>
+	<<set _na to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+<<else>>
+	<<set _na to 0>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+<</if>>
+<<if $NPCList[_na].type is "wolf" and $monster isnot 1>>
+	<<set _trResult to "늑대들">><<trPost 2 $_post $_sep>>
+<<elseif $NPCList[_na].type is "fox" and $monster isnot 1>>
+	<<set _trResult to "여우들">><<trPost 2 $_post $_sep>>
+<<elseif $NPCList[_na].type is "harpy">>
+	<<set _trResult to "하피들">><<trPost 2 $_post $_sep>>
+<<elseif $monster isnot 1 or $NPCList[_na].type is "centaur">>
+	<<trBeasttypeFun $NPCList[_na].type>> <<set _trResult += "들">><<trPost 2 $_post $_sep>>
+<<else>>
+	<<for $_i = 0; $_i < $NPCList.length; $_i++>>
+		<<if $NPCList[$_i].pronoun is "m">>
+			<<set _malespresent to true>>
+		<</if>>
+		<<if $NPCList[$_i].pronoun is "f">>
+			<<set _femalespresent to true>>
+		<</if>>
+	<</for>>
+	<<if (_malespresent isnot true or _femalespresent isnot true)>>
+		<<trBeasttypeFun $NPCList[0].type>> <<set _trResult += "들">>
+	<<elseif !$NPCList[2].pronoun>>
+        <<trBeasttypeFun $NPCList[0].type "과">> <<set _trTemp to _trResult>>
+        <<trBeasttypeFun $NPCList[1].type _args[0] _args[1]>>
+		<<set _trResult to _trTemp + _trResult>>
+	<<else>>
+		<<switch $NPCList[0].type>>
+			<<case "lizardgirl" "lizardboy">><<set _trResult to "도마뱀 소년소녀들">>
+			<<case "wolfgirl" "wolfboy">><<set _trResult to "늑대 소년소녀들">>
+			<<case "doggirl" "dogboy">><<set _trResult to "개 소년소녀들">>
+			<<case "dolphingirl" "dolphinboy">><<set _trResult to "돌고래 소년소녀들">>
+			<<case "beargirl" "bearboy">><<set _trResult to "곰 소년소녀들">>
+			<<case "catgirl" "catboy">><<set _trResult to "고양이 소년소녀들">>
+			<<case "piggirl" "pigboy">><<set _trResult to "돼지 소년소녀들">>
+			<<case "boargirl" "boarboy">><<set _trResult to "멧돼지 소년소녀들">>
+			<<case "foxgirl" "foxboy">><<set _trResult to "여우 소년소녀들">>
+			<<case "cowgirl" "bullboy">><<set _trResult to "숫소 소년들과 암소 소녀들">>
+			<<case "spidergirl" "spiderboy">><<set _trResult to "거미 소년소녀들">>
+			<<default>><<set _trResult to $NPCList[0].type + " 생물체들">>
+		<</switch>>
+		<<trPost 2 $_post $_sep>>
+	<</if>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>

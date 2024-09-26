@@ -1,0 +1,326 @@
+:: Widgets School Projects [widget]
+<<widget "scienceprojectstart">>
+	<<set $sciencelichentemple to 0>>
+	<<set $sciencelichenpark to 0>>
+	<<set $sciencelichenlake to 0>>
+	<<set $sciencelichendrain to 0>>
+
+	<<set $sciencelichentempleready to 0>>
+	<<set $sciencelichenparkready to 0>>
+	<<set $sciencelichenlakeready to 0>>
+	<<set $sciencelichendrainready to 0>>
+
+	<<set $scienceshroomwolf to 0>>
+	<<set $scienceshroomheart to 0>>
+
+	<<set $scienceshroomwolfready to 0>>
+	<<set $scienceshroomheartready to 0>>
+
+	<<set $sciencephallusready to 0>>
+
+	<<set $sciencephallus to 0>>
+
+	<<set $sciencephalluspenis to 0>>
+	<<set $sciencephallusclit to 0>>
+
+	<<set $sciencefaircheat to 0>>
+<</widget>>
+
+<<widget "scienceprojectfinish">>
+	<<unset $sciencelichentemple>>
+	<<unset $sciencelichenpark>>
+	<<unset $sciencelichenlake>>
+	<<unset $sciencelichendrain>>
+
+	<<unset $sciencelichentempleready>>
+	<<unset $sciencelichenparkready>>
+	<<unset $sciencelichenlakeready>>
+	<<unset $sciencelichendrainready>>
+
+	<<unset $scienceshroomwolf>>
+	<<unset $scienceshroomheart>>
+
+	<<unset $scienceshroomwolfready>>
+	<<unset $scienceshroomheartready>>
+
+	<<unset $sciencephallus>>
+
+	<<unset $sciencephallusready>>
+
+	<<unset $sciencephalluspenis>>
+	<<unset $sciencephallusclit>>
+
+	<<unset $sciencefaircheat>>
+	<<unset $sciencelichenchance>>
+	<<unset $scienceshroomchance>>
+	<<unset $sciencephalluschance>>
+
+	<<unset $scienceprojectwarning>>
+<</widget>>
+
+<<widget "mathsprojectstart">>
+	<<set $mathschance to 0>>
+		<<if $mathsstim is undefined>>
+		<<set $mathsstim to 0>>
+		<</if>>
+	<<set $mathsstimused to 0>>
+	<<set $mathsstimbought to 0>>
+	<<set $mathsstimstolen to 0>>
+	<<set $mathsinfo to 0>>
+<</widget>>
+
+<<widget "mathsprojectfinish">>
+	<<unset $mathschance>>
+
+	<<unset $mathsprojectdays>>
+	<<unset $mathsstimused>>
+	<<unset $mathsstimbought>>
+	<<unset $mathslibraryknown>>
+	<<unset $mathsdruggedstudent>>
+	<<unset $mathsinfo>>
+	<<unset $mathsstimstolen>>
+	<<unset $mathsstimrobin>>
+	<<unset $mathsstimbeg>>
+	<<unset $mathsprojectwhitney>>
+	<<unset $mathschancestart>>
+	<<unset $river_help>>
+	<<unset $mathsprojectwarning>>
+<</widget>>
+
+<<widget "englishplaystart">>
+	<<set $englishPlayReadiness to 0>>
+	<<set $englishPlayApproval to 0>>
+		<<set $englishPlayRoles to {
+			Player: "none",
+			Kylar: "none",
+			Sydney: "none",
+			KylarKnown: false,
+			KylarCount: 0,
+			SydneyKnown: false,
+			SydneyCount: 0
+		}>>
+<</widget>>
+
+<<widget "englishplayfinish">>
+	<<unset $englishPlayDays>>
+	<<unset $englishPlayReadiness>>
+	<<unset $englishPlayWarning>>
+	<<set $englishPlayRolePlayed to $englishPlayRoles.Player>>
+	<<unset $englishPlayRoles>>
+	<<unset $englishPlayKylarReplace>>
+	<<unset $englishPlayKylarTalk>>
+	<<unset $englishPlaySydneyTalk>>
+	<<unset $englishPlaySydneyWatch>>
+	<<unset $englishPlayRobinWatch>>
+	<<unset $englishPlayWatch>>
+	<<unset $randomPlayPool>>
+	<<unset $englishPlayPronouns>>
+	<<unset $englishPlayKylarLeave>>
+	<<set $englishPlay to "done">>
+<</widget>>
+
+<<widget "projectoptions">>
+	<<if $scienceproject is "ongoing">>
+		<<icon "projectScience.png">><<link [[과학 프로젝트에 몰두한다|Science Project]]>><</link>>
+		<br>
+	<</if>>
+	<<if $mathsproject is "ongoing">>
+		<<icon "projectMaths.png">><<link [[수학 프로젝트에 몰두한다|Maths Project]]>><</link>>
+		<br>
+	<</if>>
+	<<if $englishPlay is "ongoing" and $englishPlayRoles.Player isnot "none" and $location is "home">>
+		<<icon "projectEnglish.png">><<link [[당신의 역할을 연습한다 (2:00)|English Play Rehearse Alone]]>><<pass 2 hours>><<englishskill 6>><</link>><<genglish>><<greadiness>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "scienceprojectchance">>
+	<<set $sciencelichenchance to $sciencelichenparkready * 25 + $sciencelichenlakeready * 25 + $sciencelichendrainready * 25 + $sciencelichentempleready * 25>>
+	<<set $scienceshroomchance to $scienceshroomwolfready * 10 + $scienceshroomheartready * 10>>
+	<<set $sciencephalluschance to $sciencephallusready * 10>>
+<</widget>>
+
+<<widget "mathsphone">>
+	그들은 찍은 사진들을 비교한다. 그 중 둘이 당신의 눈 앞에 핸드폰 화면을 들이민다.
+	<br><br>
+
+	<<if $mathsab1 is "smile">>
+	첫 번째 사진에서 당신은 손가락으로 브이 자를 그리며 웃고 있다. 모르고 봤다면 협박 당해 찍힌 사진이라는 것을 모를 수도 있을 것 같다.
+	<<elseif $mathsab1 is "frown">>
+	첫 번째 사진에서 당신은 눈살을 찌푸린 채로, 손으로 카메라를 향해 욕을 하고 있다.
+	<<elseif $mathsab1 is "cover">>
+	첫 번째 사진에서 당신은 얼굴을 가리고 있다. 이것만 봐서는 사진 속 인물이 당신이라는 것을 알 순 없을 것 같다.
+	<<elseif $mathsab1 is "tearsmile">>
+	첫 번째 사진에서 당신은 손가락으로 브이 자를 그리며 웃고 있다. 얼굴이 눈물로 젖어있고, 미소도 억지로 짓는 티가 난다.
+	<<elseif $mathsab1 is "tearfrown">>
+	첫 번째 사진에서 당신은 눈살을 찌푸린 채로, 화가 나서 눈물을 흘리고 있다. 또한 손으로 카메라를 향해 욕을 하고 있다.
+	<<elseif $mathsab1 is "tearcover">>
+	첫 번째 사진에서 당신은 얼굴을 가리고 있다. 손 밑으로 눈물이 흐르고 있다.
+	<</if>>
+	시간 간격을 두고 찍힌 두 번째 사진에서 당신은 보다 흐트러진 모습이다. 무언가 매끄럽고 번들거리는 것에 뒤덮여 있다.
+	<<if $mathsab2 is "smile">>
+	미소를 짓고 있긴 하나, 눈초리가 뭔가 이상하다.
+	<<elseif $mathsab2 is "frown">>
+	당신은 화가 나, 반항적인 표정을 하고 있다.
+	<<elseif $mathsab2 is "cover">>
+	당신은 얼굴을 가리고 있다.
+	<<elseif $mathsab2 is "tearsmile">>
+	미소를 짓고 있긴 하나, 당시 상황에 눈물이 흐르고 있는 것이 보인다.
+	<<elseif $mathsab2 is "tearfrown">>
+	얼굴은 눈물 투성이이나, 화가 나서 반항적인 표정을 하고 있다.
+	<<elseif $mathsab2 is "tearcover">>
+	당신은 얼굴을 가리고 있으나, 분명히 눈물이 흘러내리고 있다.
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "greadiness">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ 준비</span>
+	<</if>>
+<</widget>>
+
+<<widget "ggreadiness">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ + 준비</span>
+	<</if>>
+<</widget>>
+
+<<widget "gggreadiness">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ + + 준비</span>
+	<</if>>
+<</widget>>
+
+<<widget "gapproval">>
+	<<if $statdisable is "f">> |
+		<span class="teal">+ 만족</span>
+	<</if>>
+<</widget>>
+
+<<widget "ggapproval">>
+	<<if $statdisable is "f">> |
+		<span class="teal">+ + 만족</span>
+	<</if>>
+<</widget>>
+
+<<widget "gggapproval">>
+	<<if $statdisable is "f">> |
+		<span class="teal">+ + + 만족</span>
+	<</if>>
+<</widget>>
+
+<<widget "lapproval">>
+	<<if $statdisable is "f">> |
+		<span class="red">- 만족</span>
+	<</if>>
+<</widget>>
+
+<<widget "llapproval">>
+	<<if $statdisable is "f">> |
+		<span class="red">- - 만족</span>
+	<</if>>
+<</widget>>
+
+<<widget "lllapproval">>
+	<<if $statdisable is "f">> |
+		<span class="red">- - - 만족</span>
+	<</if>>
+<</widget>>
+
+<<widget "playReadiness">>
+<<set $englishPlayReadiness = Math.clamp($englishPlayReadiness, 0, 100)>>
+<<if $englishPlayReadiness is 0>>
+	<span class="black">당신은 아직 연습조차 시작하지 않았다.</span>
+<<elseif $englishPlayReadiness lte 10>>
+	<span class="pink">당신은 아직 몇번이고 대본을 다시 봐야 한다. 대사를 읽을 때마다 혀가 꼬인다.</span>
+<<elseif $englishPlayReadiness lte 25>>
+	<span class="purple">어려운 부분은 좀 있지만, 슬슬 감을 잡기 시작했다.</span>
+<<elseif $englishPlayReadiness lte 55>>
+	<span class="blue">당신은 이제 연극을 훨씬 잘 이해하고 있고, 몇몇 대사를 외워서 말할 수 있다.</span>
+<<elseif $englishPlayReadiness lte 69>>
+	<span class="lblue">당신은 가장 어려운 몇 줄을 빼고는 대부분의 대사를 파악했다.</span>
+<<elseif $englishPlayReadiness lte 99>>
+	<span class="teal">당신은 자기 배역을 연기할 준비가 되었다. 대사를 기억하고 자연스럽게 전달할 수 있다.</span>
+<<else>>
+	<span class="green">당신은 내용 전체를 암기했고, 연기에도 자신이 있다.</span>
+<</if>>
+<</widget>>
+
+<<widget "playLinePool">>
+	<<set _englishPlayLinePool to {
+		Cass: [
+			"크리스마스 이브에 이토록 가슴 찢어지는 싸움을 목도하다니, 도저히 보고 있을 수가 없구나!",
+			"거지인 저의 말은 저 자신만큼이나 가치가 없다는 것은 알지만, 제게도 할 말이 있어요.",
+			"평생 동안, 저는 병약한 어머니와 함께 살면서...",
+			"제 삶에 위안이 되는 건 테일러 뿐이에요. 그러니 이렇게 간청하건대, 단 한번이라도 사랑하는 사람과 함께 밤을 보내게 해 주세요."
+		],
+		Taylor: [
+			"제발 제 말을 들어주세요! 캐스를 향한 제 감정은 단순한 호기심이 아니에요! 우린 진정으로 함께 할 운명이라구요!",
+			"전 평생을 당신이 시키는 대로, 선택한 대로만 살아 왔어요.",
+			"이 일로 제가 싫어졌다 해도 제가 할 수 있는 건 없죠. 하지만 제가 원하는 건 이것 뿐이라는 걸 알아두세요.",
+			"당신의 축복을 받으니 진심으로 기뻐요."
+		],
+		Sterling: [
+			"도저히 믿을 수가 없군... 내 자식이, 더러운 거지 녀석한테 홀렸다고? 당장 돌아가자꾸나, 테일러. 집에 도착하면 전부 설명해야 할 게다..",
+			"네가 이 세상에 태어난 순간부터, 난 네가 진정한 행복을 찾기만을 바라 왔단다.",
+			"나 또한 근시안적인 부모님의 엄격한 지도 아래 길러졌으나...",
+			"...하지만 이기적으로 내 성공만을 쫓느라 그저 나의 만족감을 채우고 있었을 뿐이라는 걸 알아차리지 못했구나."
+		]
+	}>>
+<</widget>>
+
+<<widget "randomPlay">><<silently>>
+	<<generates1>><<person1>>
+	<<if !$randomPlayPool>>
+		<<set $randomPlayPool to [
+			"연극은 엉망진창이다. 주연 <<actorPost '은'>> <<hisPost>> 자신의 대사조차 외우지 모르고 있다. 실망한 도렌이 중간에 끼어들어 급히 연극을 끝마친다.",
+			"주연 두 명이 로맨스 연극을 핑계 삼아 무대에서 애정행각을 벌인다. 도렌은 배우들이 대사를 계속하게 하기 위해 둘 사이를 갈라놓을 수밖에 없다.",
+			"뱀파이어에 대한 연극으로, 학생들은 짙은 분장을 하고 나온다. 조금 있으면 그 중 몇 명이 화장실에서 분장을 지우려고 애쓰는 광경을 볼 수 있을 것이다.",
+			"주연 <<actorPost '이'>> 몸이 안 좋아서, 연극은 빨리 끝난다.",
+			"<<actorPost '이'>> <<actorAroused>>, 도렌이 연극을 빨리 끝낸다.",
+			"아동용 동화를 바탕으로 한 연극이지만, 어두컴컴한 내용으로 보아 원작은 독일에서 온 것 같다.",
+			"배우들이 자기 대사를 거의 까먹어서 즉흥적으로 진행하기로 한다. 그들이 자기들만 아는 농담을 하며 배역에서 벗어나기 시작하자, 도렌이 끼어들어 대본을 읽게 시킨다.",
+			"주연 <<actorPost '이'>> 수제 코스튬을 기쁜 듯 선보이며 훌륭한 연기를 보여준다. 도렌이 그 코스튬을 허락해 줬을 리가 없는 건 분명하다.",
+			"예상치 못한 반전으로, 주연 <<actorPost '이'>> 마지막 장에 옷을 벗는다. 연극이 이미 끝나서 도렌은 개입할 기회가 없었다.",
+			"대격전에 대한 이야기를 따르는 연극으로, 배우들은 엉성한 중세시대 갑옷을 입고 있다.",
+			"배우들이 자신의 남편에 대한 환멸을 느끼고, 자신의 인생을 찾기 위해 떠나는 주부에 대한 짧은 극을 연기한다.",
+			"공연 도중, 배우 한 명의 옷이 찢어져 모두에게 맨살이 드러난다. 도렌은 황급히 담요를 던져주고 <<him_ ul>> 무대 뒤로 데려간다.",
+			"학생 하나가 대본에 쓰인 것보다 독백을 훨씬 길게 이어가는 바람에, 연극은 점점 늘어진다.",
+			"공연 도중, 학생 하나가 다른 <<actorPost '이'>> <<him_ ul>> 건드리자 비명을 질러, 도렌이 공연을 급히 끝내고 상대 배우를 집에 돌려보낼 수 밖에 없게 한다.",
+			"연극 도중에 한 <<actorPost '의'>> 의상에 문제가 생겨, <<his_ yi>> 옷이 흘러내리고 모든 관객 앞에 맨살이 드러난다.",
+			"연극이 반쯤 진행되었을 때, 배경에 서 있던 학생 하나가 기회를 틈타 자신의 바지를 내린다. 도렌이 <<himPost>>에게 뭐라고 따진다. 나머지는 어찌저찌 계획대로 흘러간다.",
+			"1920년대 가정의 고난을 묘사한 연극이다. 배우들은 더러운 옷과 누더기를 입고 있다.",
+			"문제가 가득한 가족들이 휴일을 맞아 한 자리에 모인다는 내용의 다크 코미디 연극이다.",
+			"학생들이 성추문에 휩싸인 시장에 대한 풍자극을 연기한다. 관객 중 소수가 특별히 관심을 보인다.",
+			"학생들이 희극적인 장면에서 진지하게 연기하며 배역에서 벗어나지 않으려고 고군분투한다. 의외로, 연기는 좋은 평가를 받았다.",
+			"로맨틱 코미디가 학생 두 명이 담요 아래에 숨는 장면을 기점으로 지나치게 성적으로 변한다. 남들이 보는 앞에서 관계를 맺고 있는 것이 명백하다.",
+			"연극이 잘 진행되던 도중, 주연 <<actorPost '이'>> 독백을 하다 말고 바지를 내린다. 도렌은 <<him_ ul>> 담요로 가리고 무대 뒤로 데려간다."
+		]>>
+	<</if>>
+	<<set _randomPlay to $randomPlayPool.pluck()>>
+<</silently>><<print _randomPlay>><</widget>>
+
+<<widget "sterlingTitle">><<silently>>
+	<<set _trResult to ($englishPlayPronouns.Sterling is "m" ? "씨" : "부인")>><<set _postNum to ($englishPlayPronouns.Sterling is "m" ? 1 : 0)>><<trPost _postNum _args[0] _args[1]>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "sterlingFather">><<silently>>
+	<<set _trResult to ($englishPlayPronouns.Sterling is "m" ? "아버지" : "어머니")>><<trPost 1 _args[0] _args[1]>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "sterlingSir">><<silently>>
+	<<set _trResult to ($englishPlayPronouns.Sterling is "m" ? "선생님" : "마님")>><<trPost 0 _args[0] _args[1]>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "taylorSon">><<silently>>
+	<<set _trResult to ($englishPlayPronouns.Taylor is "m" ? "아들" : "딸")>><<trPost 2 _args[0] _args[1]>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "taylorSibling">><<silently>>
+	<<set _trResult to ($englishPlayPronouns.Taylor is "m" ? "남동생" : "여동생")>><<trPost 0 _args[0] _args[1]>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "cassBoy">><<silently>>
+	<<set _trResult to ($englishPlayPronouns.Cass is "m" ? "소년" : "소녀")>><<set _postNum to ($englishPlayPronouns.Cass is "m" ? 0 : 1)>><<trPost _postNum _args[0] _args[1]>>
+<</silently>><<print _trResult>><</widget>>

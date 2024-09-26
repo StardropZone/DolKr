@@ -1,0 +1,45 @@
+:: Widget custom pervertpoint [widget nobr]
+<<widget "init_pervertpoint">>
+<<set $custom.pervertpoint to {
+    version: 0,
+    point: 0,
+    used: 0,
+    bought: 0
+}>>
+<</widget>>
+
+<<widget "update_pervertpoint">>
+<<if $custom.pervertpoint is undefined>>
+    <<init_pervertpoint>>
+<<else>>
+    <<set _custom_pervertpoint_version to 0>>
+    <<if $custom.pervertpoint.version lt _custom_pervertpoint_version>>
+        /*bugfix*/
+        
+
+        /*update*/
+        <<set _temp to $custom.pervertpoint>>
+        <<delete "$custom.pervertpoint">>
+        <<init_pervertpoint>>
+        <<overwrite _temp "$custom.pervertpoint">>
+
+        /*set*/
+
+        <<set $custom.pervertpoint.version to _custom_pervertpoint_version>>
+    <</if>>
+<</if>>
+<</widget>>
+
+
+:: custom pervertpoint [nobr]
+미완성
+<br>
+<<link [[확인|$settingsExitPassage]]>><<unset $settingsExitPassage>><</link>>
+<br>
+<hr>
+보유 포인트: $custom.pervertpoint.point
+<br>
+사용된 포인트: $custom.pervertpoint.used
+<br><br>
+
+포인트 구매

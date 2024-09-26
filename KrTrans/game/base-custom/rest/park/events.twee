@@ -1,0 +1,10 @@
+:: Widgets custom rest park events [widget nobr]
+<<widget "customRestParkNightEvents">>
+    <<set _ran to random(1,100)>>
+    <<if _ran lte 1>>
+        별동별이다! 당신은 소원을 빈다. 당신은 왠지 좋은 예감을 느낀다.<<stress -18>><<lstress>>
+    <</if>>
+
+    <br>
+    <<customRestParkReturn>>
+<</widget>>

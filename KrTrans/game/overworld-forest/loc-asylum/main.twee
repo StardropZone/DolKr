@@ -1,0 +1,3177 @@
+:: Asylum Intro
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if $gamemode is "hard" and $asylumintro is 0>>
+	<<set $asylumintro to 1>>
+	<<if $ironmanmode isnot true>><<set $gamemode to "normal">><</if>>
+	<span class="gold">당신은 <<print Time.days>>일 동안 살아남았다. <<if $ironmanmode isnot true>>하드 모드가 해제되었다.<</if>></span>
+	<<set $hardmodedays to Time.days>>
+	<br><br>
+<</if>>
+<<if $asylumescaped is 1>>
+	<<set $asylumescaped to 0>>
+	<<set $suspicion to 80>><<set $asylumstatus to 40>><<set $asylumbound to 3>>
+<<else>>
+	<<set $suspicion to 20>><<set $asylumstatus to 0>><<set $asylumbound to 1>>
+<</if>>
+<<set $asylumkeycard to 0>>
+<<set $asylumdistracted to 0>>
+<<wash>>
+<<set $wardrobe_location to "asylum">>
+<<wardrobeSelection true>>
+<<if $asylumintro is 1>>
+	<<npc Harper>><<person1>>
+	<<bind>><<upperwear 35>>
+	당신은 사방이 흰 방의 침대 위에서 깨어났다. 벽과 바닥은 모두 완충재가 덧대어져 있다. 하퍼 선생님이 당신을 지켜본다.
+	"일어났구나." <<hePost "이">> 말한다. <<HePost "은">> <<hisPost "의">> 서류철에 뭔가를 적어내려간다. "다시 돌아온 걸 환영한단다." 당신의 두 팔은 묶여 있다. "안타깝게도, 지난 번에는 널 제대로 치료하지 못했다는 사실을 인정해야겠구나. 이번엔 그런 일 없을 거다."
+	<br><br>
+	<<HePost "은">> <<hisPost "의">> 메모를 다시 본다. "일정표는 기억나니? <<ampm 22>>에 취침. <<ampm 6>>에 아침 식사. 하루에 두 번, <<ampm 10>>와 <<ampm 15>>에 치료를 받게 된다. 매일 저녁, <<ampm 20>>에는 상태를 체크받을 거란다. 만약 잊어버려도 걱정하지 마라. 누군가는 다시 알려줄 테니까."
+	<br><br>
+	<<HePost "은">> 일어서서 출구를 향해 걷는다. "낮에는 건물을 자유롭게 돌아다녀도 된단다. 직원 전용이라 적힌 문에는 들어가지 말고, 지시를 잘 따르렴. 직원들이 하는 일은 모두 널 위한 행동이니까 말야.
+	<<if $asylumstate is "sleep">>
+		일단 지금은 아침이 될 때까지 네 방에 있어야 한단다." 문이 쾅 하고 닫히고, 잠금쇠가 걸리는 소리가 난다.
+	<<else>>
+		" <<HePost "은">> 방문을 열어 둔 채로 떠난다.
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<link [[다음|Asylum Cell]]>><</link>>
+	<br>
+<<else>>
+	<<set $asylumintro to 1>>
+	<<npc Harper>><<person1>>
+	<<bind>><<upperwear 35>>
+	당신은 사방이 흰 방의 침대 위에서 깨어났다. 벽과 바닥은 모두 완충재가 덧대어져 있다. 하퍼 선생님이 당신을 지켜본다.
+	<br><br>
+	"일어났구나." <<hePost "이">> 말한다. <<HePost "은">> <<hisPost "의">> 서류철에 뭔가를 적어내려간다. "불안해할 것 없단다. 넌 여기에 괜찮아지려고 온 거야." <<HePost "은">> 당신 곁으로 다가온다. "우린 숲속에 있는 다른 병원에 있단다." 당신의 두 팔은 몸통 앞으로 단단히 묶여 있어, 움직일 수 없다. "그건 네 스스로의 안전을 위해서란다. 말을 잘 들으면, 내일이나 모레 쯤에는 풀어줄 거야."
+	<br><br>
+	<<HePost "은">> <<hisPost "의">> 메모를 다시 본다. "우린 일정표에 따라 생활한단다. <<ampm 22>>에 취침. <<ampm 6>>에 아침 식사. 하루에 두 번, <<ampm 10>>와 <<ampm 15>>에 치료를 받게 된다. 매일 저녁, <<ampm 20>>에는 상태를 체크받을 거란다. 만약 잊어버려도 걱정하지 마라; 누군가는 다시 알려줄 테니까."
+	<br><br>
+	<<HePost "은">> 일어서서 출구를 향해 걷는다. "낮에는 건물을 자유롭게 돌아다녀도 된단다. 직원 전용이라 적힌 문에는 들어가지 말고, 지시를 잘 따르렴. 직원들이 하는 일은 모두 널 위한 행동이니까 말야.
+	<<if $asylumstate is "sleep">>
+		일단 지금은 아침이 될 때까지 네 방에 있어야 한단다." 문이 쾅 하고 닫히고, 잠금쇠가 걸리는 소리가 난다.
+	<<else>>
+		" <<HePost "은">> 방문을 열어 둔 채로 떠난다.
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<i>당신의 트라우마와 성지식이 아주 낮아지면 이곳에서 풀려날 것입니다. 하지만 다른 탈출 수단들도 존재합니다.</i>
+	<br><br>
+	<<link [[다음|Asylum Cell]]>><</link>>
+	<br>
+<</if>>
+
+:: Asylum Cell
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+<<if isPregnancyEnding()>>
+	<<pregnancyPassout "asylum">>
+<<elseif $daily.eden.distract gte 1 and Time.hour is 21 and $daily.eden.distract isnot 4>>
+	<<npc Eden>><<person1>>
+	어딘가 먼 곳으로부터 귀를 찢는 폭발음이 들려온다. 그 소리는 환자들을 겁에 질려 반쯤 제정신이 아닌 상태로 만들었고, 경비들은 폭발의 정체를 조사하기 위해 달려간다.
+	<br><br>
+ 	당신은 기회를 놓치지 않고 건물을 둘러싼 울타리로 기어오른다. 반쯤 올라왔을 때, 당신은 어깨 너머를 슬쩍 돌아본다.
+	<<if $daily.eden.distract is 2>>
+		경비들은 이 주변에 없고, <span class="green">감시탑의 탐조등은 작동하지 않는 것으로 보인다.</span> 당신은 울타리를 마저 기어올라 곧장 에덴의 품으로 달려든다. <<HePost "은">> 당신의 손을 붙잡고 오두막으로 데려간다.
+		<br><br>
+		<<link [[다음|Eden Asylum Rescue]]>><</link>>
+	<<else>>
+		경비들은 이 주변에 없지만, <span class="red">감시탑의 탐조등이 켜져 있다.</span> 빛줄기가 당신을 비추자, 당신은 반사적으로 두 팔로 얼굴을 가린다. 호루라기 소리가 들리고, 어깨에 따끔한 통증이 느껴진다. 당신은 미처 땅에 쓰러지기도 전에 정신을 잃었다.
+		<br><br>
+		<<link [[다음 (0:30)|Eden Asylum Fail]]>><<pass 30>><</link>>
+	<</if>>
+<<elseif $asylumstate is "sleep">>
+	문은 잠겨 있고, 당신은 침대에 있어야 하는 것으로 되어 있다.
+	<br><br>
+	<<roomoptions>>
+	<<if Time.hour isnot 6>>
+		<<asylumicon  "bed">><<link [[침대로 간다|Asylum Bed]]>><</link>>
+		<br><br>
+	<<else>>
+		알람이 켜져 있는 상태에서는 잘 수 없다.
+		<br><br>
+	<</if>>
+	<<if $eden_asylum_window is 1 and Time.hour gte 22>>
+		에덴이 분명 보고 있을 것이다. 당신은 창문으로 수건을 던져 당신의 위치를 알릴 수 있다.
+		<br>
+		<<towelicon>><<link [[수건을 던진다|Eden Towel Throw]]>><</link>>
+		<br>
+	<</if>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		당신의 옷가지가 든, 완충재로 덧대어진 장롱이 벽에서 돌출되어 있다. 하지만 두 팔이 묶인 채로는 사용할 수 없다.
+		<br>
+	<<else>>
+		당신의 옷가지가 든, 완충재로 덧대어진 장롱이 벽에서 돌출되어 있다.
+		<br>
+		<<asylumicon "wardrobe">><<link [[연다|Asylum Wardrobe]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if $asylumstate isnot "sleep">>
+		<<getouticon>><<link [[나간다|Asylum]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[게임 설정|Asylum Settings]]>><</link>>
+	<br>
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+	<<else>>
+		<<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br><br>
+<<elseif Time.hour is 6>>
+	알람이 온 건물 전체에 시끄럽게 울린다.
+	<br><br>
+	<<roomoptions>>
+	<<if Time.hour isnot 6>>
+		<<asylumicon  "bed">><<link [[침대로 간다|Asylum Bed]]>><</link>>
+		<br><br>
+	<<else>>
+		알람이 켜져 있는 상태에서는 잘 수 없다.
+		<br><br>
+	<</if>>
+	<<if $eden_asylum_window is 1 and Time.hour gte 22>>
+		에덴이 분명 보고 있을 것이다. 당신은 창문으로 수건을 던져 당신의 위치를 알릴 수 있다.
+		<br>
+		<<towelicon>><<link [[수건을 던진다|Eden Towel Throw]]>><</link>>
+		<br>
+	<</if>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		당신의 옷가지가 든, 완충재로 덧대어진 장롱이 벽에서 돌출되어 있다. 하지만 두 팔이 묶인 채로는 사용할 수 없다.
+		<br>
+	<<else>>
+		당신의 옷가지가 든, 완충재로 덧대어진 장롱이 벽에서 돌출되어 있다.
+		<br>
+		<<asylumicon  "wardrobe">><<link [[연다|Asylum Wardrobe]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if $asylumstate isnot "sleep">>
+		<<getouticon>><<link [[나간다|Asylum]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[게임 설정|Asylum Settings]]>><</link>>
+	<br>
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+	<<else>>
+		<<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br><br>
+<<else>>
+	당신은 정신병원의 당신 방 안에 있다. 벽과 바닥은 모두 완충재가 덧대어져 있으며, 한참 높은 곳에 창문이 하나 나 있다.
+	<br><br>
+	<<roomoptions>>
+	<<if Time.hour isnot 6>>
+		<<asylumicon  "bed">><<link [[침대로 간다|Asylum Bed]]>><</link>>
+		<br><br>
+	<<else>>
+		알람이 켜져 있는 상태에서는 잘 수 없다.
+		<br><br>
+	<</if>>
+	<<if $eden_asylum_window is 1 and Time.hour gte 22>>
+		에덴이 분명 보고 있을 것이다. 당신은 창문으로 수건을 던져 당신의 위치를 알릴 수 있다.
+		<br>
+		<<towelicon>><<link [[수건을 던진다|Eden Towel Throw]]>><</link>>
+		<br>
+	<</if>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		당신의 옷가지가 든, 완충재로 덧대어진 장롱이 벽에서 돌출되어 있다. 하지만 두 팔이 묶인 채로는 사용할 수 없다.
+		<br>
+	<<else>>
+		당신의 옷가지가 든, 완충재로 덧대어진 장롱이 벽에서 돌출되어 있다.
+		<br>
+		<<asylumicon  "wardrobe">><<link [[연다|Asylum Wardrobe]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if Time.weekDay is 1 and $daily.massAttended isnot 1>>
+		<<if $fallenangel gte 2>>
+			<<link [[기도한다 (1:00)|Asylum Pray Fallen Angel]]>><<purity 63>><<pass 60>><<stress 10>><<set $daily.massAttended to 1>><</link>><<gggpurity>><<gstress>>
+		<<elseif $angel gte 6>>
+			<<link [[기도한다 (1:00)|Asylum Pray Angel]]>><<purity 10>><<pass 60>><<stress -10>><<set $daily.massAttended to 1>><</link>><<gpurity>><<lstress>>
+		<<elseif $demon gte 6>>
+			<<link [[비춘다 (1:00)|Asylum Pray Demon]]>><<purity -10>><<pass 60>><<stress 10>><<set $daily.massAttended to 1>><</link>><<lpurity>><<gstress>>
+		<<else>>
+			<<link [[기도한다 (1:00)|Asylum Pray]]>><<purity 10>><<pass 60>><<stress -10>><<set $daily.massAttended to 1>><</link>><<gpurity>><<lstress>>
+		<</if>>
+	<</if>>
+	<br>
+	<<if $asylumstate isnot "sleep">>
+		<<getouticon>><<link [[나간다|Asylum]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[게임 설정|Asylum Settings]]>><</link>>
+	<br>
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+	<<else>>
+		<<link [[태도|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br><br>
+<</if>>
+
+
+:: Asylum Pray Fallen Angel
+당신은 머리를 숙이고 당신을 여기로 데려다놓은 사건을 곱씹는다. 멀리서 다른 환자들이 울부짖고 비명지르는 소리가 종종 기도를 방해하지만, 당신의 노력이 헛되지 않았음이 느껴진다.
+<br><br>
+<<link [[다음|Asylum Cell]]>><</link>>
+<br>
+:: Asylum Pray Angel
+당신은 머리를 숙이고 눈을 감은 채로 기도한다. 멀리서 다른 환자들이 울부짖는 소리가 점차 흐려져가며, 당신에게 절실히 필요한 평화를 가져다준다.
+<br><br>
+<<link [[다음|Asylum Cell]]>><</link>>
+<br>
+:: Asylum Pray Demon
+당신은 무릎을 꿇고 눈을 감는다. 다른 환자들이 울부짖는 소리 때문에 침묵이 깨진다. 그 소리를 무시하려 할수록, 소리는 점점 더 부자연스럽게 느껴진다. 당신은 그들이 겪고 있을 트라우마를 상상하는 걸 그만둘 수 없다.
+<br><br>
+<<link [[다음|Asylum Cell]]>><</link>>
+<br>
+:: Asylum Pray
+당신은 머리를 숙이고 눈을 감은 채로 기도한다. 멀리서 울부짖는 소리가 종종 명상을 방해한다.
+<br><br>
+<<link [[다음|Asylum Cell]]>><</link>>
+<br>
+:: Eden Towel Throw
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<npc Eden>><<person1>>
+<<set $eden_asylum_window to 2>>
+당신은 장롱에서 수건을 가져와 창살이 쳐진 창문에 어떻게든 던져넣는다. 수건이 밤공기를 맞아 덜렁거린다.
+<br><br>
+몇 분 기다리자, 밧줄이 날아와 창살 사이로 들어온다. 당신은 문손잡이에 밧줄 끝을 묶고, 가볍게 한 번 잡아당긴다. 밧줄이 팽팽해진다. 에덴이 밧줄을 타고 벽을 기어오르고 있는 것 같다.
+<br><br>
+창살 사이로 걱정어린 얼굴이 나타난다. 에덴은 당신을 바라본다. <<HePost "은">> 가져온 가방에서 톱을 꺼내더니, 금속으로 된 창살에 가져다 댄다.
+<br><br>
+	<<if $daily.eden.asylumDisarm is 2>>
+		<<unset $eden_asylum_window>>
+		<span class="green">알람은 울리지 않는다.</span> 벽을 내려가기 전, 에덴은 창살을 톱질해 자른다. 당신은 문 손잡이에 걸린 밧줄을 다시 풀어 창문으로 기어오르는 데 쓴다. 당신은 에덴의 팔로 뛰어든다. <<HePost "은">> 밧줄과 톱을 다시 가방에 집어넣고, 당신을 다시 오두막으로 데려간다.
+		<br><br>
+		<<link [[다음|Eden Asylum Rescue]]>><</link>>
+	<<else>>
+		<<set $eden_asylum_window to 2>>
+		<span class="red">방이 붉은 빛으로 가득 채워지며, 알람이 시끄럽게 울린다.</span> 창살 앞으로 금속 차폐문이 내려오며, 걸려 있던 밧줄을 잘라버렸다.
+		<br><br>
+		<<link [[다음|Eden Towel Throw 2]]>><<endevent>><</link>>
+	<</if>>
+<br>
+
+:: Eden Towel Throw 2
+<<effects>>
+
+<<npc Harper>><<generate2>><<person2>>
+<<bind>><<upperwear 35>>
+복도에 발걸음 소리가 울리고, 경비들이 문을 밀치고 들어온다. <<personPost "이">> 당신을 침대에 누르고, 다른 한 사람이 밧줄을 살핀다.
+<br><br>
+
+하퍼 선생님이 들어온다. "안심하렴." <<person1>><<hePost "은">> 당신의 침대 위에 앉으며 말한다. <<person2>><<personPost "은">> 당신을 계속 붙잡고 있다. <<person1>> "누군가가 너를 납치하려고 시도했지만, 이젠 안전해." <<HePost "은">> 문 방향을 바라보며 고갯짓한다.
+<br><br>
+
+경비가 더 들어오고, 그들은 당신에게 구속복을 입히려고 애쓴다. "널 확실히 안전하게 하려고 그러는 거란다." 하퍼가 말한다. 알람이 그치고, 전등은 흰색으로 돌아온다. 당신은 저 아래 땅에서 개들이 짖는 소리를 들었다.
+<br><br>
+
+하퍼 선생님과 경비들은 방에 당신을 남겨두고 나간다. 차폐문은 그대로 닫혀 있는 상태다.
+<br><br>
+
+<<link [[다음|Asylum Cell]]>><<endevent>><</link>>
+
+:: Asylum Bed
+
+<<effects>>
+당신은 이불 밑으로 파고들어간다.
+<br><br>
+<<generateSleepLinks "Asylum Sleep">>
+<<link [[침대에서 나온다|Asylum Cell]]>><<loadTempHairStyle>><</link>>
+<br><br>
+
+:: Asylum Sleep
+<<set _autosavehere to true>>
+<<sleep>>
+<<effects>>
+<<wakingEffects $sleepHoursTotal>>
+<<if ["dryheaving","nausea"].includes(_wakingEffect)>>
+	<br><br>
+	당신은 깊이 잠들었으나, 지금은 약간 몸이 좋지 않은 기분이 든다.
+	<br><br>
+<<elseif $nightmares gte 1 and $controlled is 0>>
+	당신은 <<if _wakingEffect>>뭔가<<else>>자신이 뭔가<</if>> <<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>창백하고<<else>>어둡고<</if>> 끔찍한 것에 뒤를 쫓기는 꿈을 꾼다.
+<<else>>
+	<<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte ($arousalmax / 10) * 9>>
+		당신은 자는 동안 <<if _wakingEffect>>꿨던<<else>>계속 해서<</if>> 추잡한 꿈 때문에 괴로워한다.
+		<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+		<<arousal `100 * $sleepHoursTotal`>>
+		<<if $arousal gte $arousalmax>>
+			그러한 꿈들로 인해 한계까지 내몰린다.
+			<<orgasm>>
+		<<else>>
+			<br><br>
+		<</if>>
+	<<elseif !_wakingEffect>>
+		당신은 편안히 잠을 잤고, 상쾌한 기분으로 일어난다.
+		<br><br>
+	<<else>>
+		<br><br>
+	<</if>>
+<</if>>
+<<sleepeffects>>
+<<if isPregnancyEnding()>>
+	<<asylumeffects>>
+	<<pregnancyPassout "asylum">>
+<<elseif _sleepinterrupt>>
+	<<asylumeffects>>
+	<<if $rapewake is 1>>
+		<<set $rapewake to 0>>
+		<<generate1>><<generate2>><<person1>>
+		<<if _wakingEffect is "dryheaving">>
+			한 <<person_ i>> 당신의 등을 문지른다. "이제 좀 나아졌어?" <<hePost "이">> 말한다. "나랑 여기 내 친구는 너희 정신병자들을 안전하게 지키느라 항상 죽어라 고생하는데, 약간의 보답을 해주는 건 어떠려나?" <<HePost "은">> 당신을 붙잡는다.
+		<<else>>
+			<<personPost "이">> 당신을 흔들어 깨운다. "어이, 일어나!" <<hePost "이">> 말한다. "나랑 여기 내 친구는 너희 정신병자들을 안전하게 지키느라 항상 죽어라 고생하는데, 약간의 보답을 해주는 건 어떠려나?" <<HePost "은">> 당신을 붙잡는다.
+		<</if>>
+		<br><br>
+		<<link [[다음|Asylum Cell Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<elseif $asylumstate is "firsttreatment" and $daily.asylumTreatment1 isnot 1>>
+		<<set $daily.asylumTreatment1 to 1>>
+		<<generate1>><<person1>>
+		<<if _wakingEffect is "dryheaving">>
+			한 <<person_ i>> 당신의 등을 문지른다. <<He_ nun>> 간호사다.
+			<br><br>
+		<<else>>
+			<<personPost "이">> 당신을 흔들어 깨운다. <<He_ nun>> 간호사다.
+			<br><br>
+		<</if>>
+		<<asylumoptions>>
+		"의사 선생님께서 치료 받을 시간이라고 하셨다." <<hePost "이">> 말한다. "따라와."
+		<br><br>
+		<<endevent>>
+		<<asylumtreatments>>
+	<<elseif $asylumstate is "secondtreatment" and $daily.asylumTreatment2 isnot 1>>
+		<<set $daily.asylumTreatment2 to 1>>
+		<<generate1>><<person1>>
+		<<if _wakingEffect is "dryheaving">>
+			한 <<person_ i>> 당신의 등을 문지른다. <<He_ nun>> 간호사다.
+			<br><br>
+		<<else>>
+			<<personPost "이">> 당신을 흔들어 깨운다. <<He_ nun>> 간호사다.
+			<br><br>
+		<</if>>
+		<<asylumoptions>>
+		"의사 선생님께서 치료 받을 시간이라고 하셨다." <<hePost "이">> 말한다. "따라와."
+		<br><br>
+		<<endevent>>
+		<<asylumtreatments>>
+	<<elseif $asylumstate is "assessment" and $daily.asylumAssessment isnot 1>>
+		<<set $daily.asylumAssessment to 1>>
+		<<generate1>><<person1>>
+		<<if _wakingEffect is "dryheaving">>
+			한 <<person_ i>> 당신의 등을 문지른다. <<He_ nun>> 간호사다.
+			<br><br>
+		<<else>>
+			<<personPost "이">> 당신을 흔들어 깨운다. <<He_ nun>> 간호사다.
+			<br><br>
+		<</if>>
+		<<asylumoptions>>
+		"의사 선생님께서 상태를 보신다고 하셨다." <<hePost "이">> 말한다. "따라와."
+		<br><br>
+		<<endevent>>
+		<<asylumassessment>>
+	<<else>>
+		<<if _wakingEffect is "dryheaving">>
+			시끄러운 버저 소리가 어깨 너머에서 계속되고 있다. 
+			<br><br>
+		<<else>>
+			시끄러운 버저 소리가 당신을 깨운다. 
+			<br><br>
+		<</if>>
+		<br><br>
+		<<getouticon>><<link [[침대에서 나온다|Asylum Cell]]>><</link>>
+		<br><br>
+	<</if>>
+<<else>>
+	<br><br>
+	<<getouticon>><<link [[침대에서 나온다|Asylum Cell]]>><</link>>
+	<br><br>
+<</if>>
+<<set $phase to 0>>
+
+:: Asylum Settings [exitCheckBypass]
+<<set $settingsExitPassage to "Asylum Cell">>
+<<settings>>
+
+:: Asylum
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 숲속 깊은 곳에 있는 정신병원에 있다. 건물은 한 100년은 넘은 것 같고, 곳곳을 현대적인 디자인에 맞게 개수한 흔적이 있다. 경비들은 건물과 건물을 둘러싼 울타리 사이의 공터를 순찰하고 있다.
+<<if $asylumstate is "sleep">>
+	당신은 당신의 방에 있어야 하는 것으로 되어 있다.
+	<br><br>
+<<else>>
+	다른 환자들은 휴게실에서 쉬거나 바깥에서 운동을 하고 있다. 대다수가 혼자 있다.
+	<<if $o_long_and_beautiful gte 1 and $o_long_and_beautiful lte 7 and $rng % 4 == 0>>
+		아주 긴 산발머리를 한 날씬한 소녀가 멀리서 <<print either("복도를","개인실을","환자들의 방을","정원을")>> 배회하고 있다.
+	<</if>>
+	<br><br>
+	<<asylumstats>>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passoutasylum>>
+<<elseif $daily.eden.distract gte 1 and Time.hour gte 21 and $daily.eden.distract isnot 4>>
+	어딘가 먼 곳으로부터 귀를 찢는 폭발음이 들려온다. 그 소리는 환자들을 겁에 질려 반쯤 제정신이 아닌 상태로 만들었고, 경비들은 폭발의 정체를 조사하기 위해 달려간다.
+	<br><br>
+	당신은 기회를 놓치지 않고 건물을 둘러싼 울타리로 기어오른다. 반쯤 올라왔을 때, 당신은 어깨 너머를 슬쩍 돌아본다.
+	<<if $daily.eden.distract is 2>>
+		<<npc Eden>><<person1>>
+		<<unset $eden_asylum_fence>>
+		경비들은 이 주변에 없고, <span class="green">감시탑의 탐조등은 작동하지 않는 것으로 보인다.</span> 당신은 울타리를 마저 기어올라 곧장 에덴의 품으로 달려든다. <<HePost "은">> 당신의 손을 붙잡고 오두막으로 데려간다.
+		<br><br>
+		<<link [[다음|Eden Asylum Rescue]]>><<pass 10>><</link>>
+	<<else>>
+		경비들은 이 주변에 없지만, <span class="red">감시탑의 탐조등이 켜져 있다.</span> 빛줄기가 당신을 비추자, 당신은 반사적으로 두 팔로 얼굴을 가린다. 호루라기 소리가 들리고, 어깨에 따끔한 통증이 느껴진다. 당신은 미처 땅에 쓰러지기도 전에 정신을 잃었다.
+		<br><br>
+		<<link [[다음 (0:30)|Eden Asylum Fail]]>><<pass 30>><</link>>
+	<</if>>
+<<elseif $asylumstate is "firsttreatment" and $daily.asylumTreatment1 isnot 1>>
+	<<set $daily.asylumTreatment1 to 1>>
+	<<generateDoctor 1>><<person1>><<personPost "이">> 당신을 흔들어 깨운다. <<HesPost "은">> 간호사다.
+	<br><br>
+	<<asylumoptions>>
+	"의사 선생님께서 치료 받을 시간이라고 하셨다." <<hePost "이">> 말한다. "따라와."
+	<br><br>
+	<<endevent>>
+	<<asylumtreatments>>
+<<elseif $asylumstate is "secondtreatment" and $daily.asylumTreatment2 isnot 1>>
+	<<set $daily.asylumTreatment2 to 1>>
+	<<generateDoctor 1>><<person1>><<personPost "이">> 당신을 흔들어 깨운다. <<HesPost "은">> 간호사다.
+	<br><br>
+	<<asylumoptions>>
+	"의사 선생님께서 치료 받을 시간이라고 하셨다." <<hePost "이">> 말한다. "따라와."
+	<br><br>
+	<<endevent>>
+	<<asylumtreatments>>
+<<elseif $asylumstate is "assessment" and $daily.asylumAssessment isnot 1>>
+	<<set $daily.asylumAssessment to 1>>
+	<<generateDoctor 1>><<person1>><<personPost "이">> 당신을 흔들어 깨운다. <<HesPost "은">> 간호사다.
+	<br><br>
+	<<asylumoptions>>
+	"의사 선생님께서 상태를 보신다고 하셨다." <<hePost "이">> 말한다. "따라와."
+	<br><br>
+	<<endevent>>
+	<<asylumassessment>>
+<<elseif $asylumstate is "exercise" and $daily.asylumExcercise isnot 1>>
+	<<set $daily.asylumExcercise to 1>>
+	<<generateDoctor 1>><<person1>><<personPost "이">> 다가온다. <<HesPost "은">> 잡역부다.
+	<br><br>
+	<<asylumoptions>>
+	"운동할 시간이다." <<hePost "이">> 말한다. "의사 선생님이 기다리고 계신다."
+	<br><br>
+	<<endevent>>
+	<<npc Harper>><<person1>>
+	하퍼는 건물 바깥 공터에서 기다리고 있다. 환자들이 <<himPost "의">> 근처에 일렬로 서자, <<HesPost "이">> 호루라기를 쥔다. "일일 운동 시간입니다!" <<hePost "이">> 말한다. "호루라기를 불면, 공터를 따라 원 모양으로 도세요. 다시 호루라기를 불기 전까지는 그대로 쭉 달리세요!"
+	<br><br>
+	<<HePost "이">> 호루라기를 불고, 당신은 달린다. 따라가기 힘든 속도는 아니지만, 잡역부들이 환자들 뒤를 따라오며 낙오된 이들을 매질하고 있다.
+	<<gathletics>><<athletics 2>><<pass 30>>
+	<br><br>
+	<<HePost "이">> 호루라기를 다시 불자, 달리던 이들이 멈춘다. 몇몇은 땅바닥에 주저앉는다. "아직 다 끝난 게 아니에요!" <<hePost "이">> 말한다.
+	<br><br>
+	<<link [[다음|Asylum Shower]]>><</link>>
+	<br>
+<<elseif Time.hour is 22>>
+	<<generateDoctor 1>><<person1>>"취침 시간입니다." 간호사가 말한다. "모두 각자 방으로 돌아가 주십시오."
+	<br><br>
+	<<asylumicon  "cell">><<link [[방으로 들어간다 (0:02)|Asylum Cell]]>><<pass 2>><<endevent>><</link>>
+	<br>
+	<<refuseicon>><<link [[숨는다 (1:00)|Asylum Hide]]>><<pass 60>><</link>>
+	<br>
+<<elseif $asylumstate is "sleep">>
+	<<asylumicon "door">><<link [[직원 전용 문으로 들어간다|Asylum Staff]]>><</link>>
+	<br>
+	<<asylumicon  "cell">><<link [[방으로 들어간다|Asylum Cell]]>><</link>>
+	<br>
+<<elseif numberOfEarSlime() and !$daily.earSlimeAsylum and random(0,100) gte 92>>
+	<<set $daily.earSlimeAsylum to true>>
+	<<if earSlimeMakingMundaneRequests()>>
+		<<set _asylumEvents to [
+			["바깥에 나가 운동을","Asylum Exercise"],
+			["사교 활동을","Asylum Socialise"],
+			["공부를","Asylum Study"],
+		]>>
+		<<if Time.hour is 6>>
+			<<run _asylumEvents.push(["have breakfast","Asylum Breakfast"])>>
+		<</if>>
+		<<set $asylumEarSlimeEvent to _asylumEvents.random()>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">당신은 머릿속의 슬라임이 <<print $asylumEarSlimeEvent[0]>> 하라고 명령하는 것을 느낀다.</span> 응한다면 보답을 할거라 약속<<if $earSlime.startedThreats>>하지만, 따르지 않는다면 어떤 일이 벌어질지 모른다며 협박<</if>>한다.
+		<br><br>
+		<<set _nextPassage to $asylumEarSlimeEvent[1]>>
+		<<link [[복종한다|_nextPassage]]>>
+			<<if ($exposed is 1 and $exhibitionism lt 35) or ($exposed is 2 and $exhibitionism lt 75)>>
+				<<set $desperateaction to "귓속 슬라임이 그렇게 하라고 명령하고 있다">>
+			<</if>>
+			<<switch $asylumEarSlimeEvent[1]>>
+				<<case "Asylum Breakfast">><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>>
+				<<case "Asylum Exercise">><<tiredness 3>><<stress -6>><<pass 30>>
+				<<case "Asylum Socialise">><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>>
+				<<case "Asylum Study">><<pass 50>><<schoolskill>>
+			<</switch>>
+			<<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>>
+			<<unset $asylumEarSlimeEvent>>
+		<</link>><<gcorruption>><<lpain>><<lltrauma>><<llstress>>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[반항한다|Asylum Mundane Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[무시한다|Asylum]]>><<unset $asylumEarSlimeEvent>><</link>>
+		<</if>>
+	<<else>>
+		<<generate1>><<person1>>근처의 환자 한 명이 당신 옆으로 지나간다. <<He_ nun>> 당신에게 고개를 끄덕여 인사하고는 다시 가던 길을 간다.
+		<br><br>
+		<span class="lewd">당신은 머릿속의 슬라임이 <<himPost "에게">> 몸을 주라고 명령하는 것을 느낀다.</span> 응한다면 보답을 할거라 약속하지만, 따르지 않는다면 어떤 일이 벌어질지 모른다며 협박한다.
+		<br><br>
+
+		<<if hasSexStat("promiscuity", 4) and $submissive gte 1900>>
+			<<link [[기꺼이 굴복한다|Asylum Patient Slime Submit willingly]]>><<corruption 3>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>><</link>><<promiscuous4>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+			<br>
+		<</if>>
+		<<link [[복종한다|Asylum Patient Slime Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<link [[반항한다|Asylum Patient Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $exposed gte 1>>
+		<<dressasyouwereicon>><<link [[옷을 달라고 요청한다|Asylum Towels]]>><<trauma 6>><<stress 3>><<suspicion 1>><</link>><<gsuspicion>><<gtrauma>><<gstress>>
+		<br>
+	<</if>>
+	<<if $daily.eden.distract is 1>>
+		<<investigateicon>><<link [[통제실을 찾는다|Asylum Breaker]]>><</link>>
+		<br>
+	<</if>>
+	<<if $daily.eden.asylumDisarm is 1>>
+		<<investigateicon>><<link [[알람 장치를 찾는다|Asylum Alarm]]>><</link>>
+		<br>
+	<</if>>
+	<<if $exposed gte 2 and hasSexStat("exhibitionism", 5)>>
+		<<if Time.hour is 6>>
+			<<foodicon "pancakes">><<link [[아침 식사를 한다 (1:00)|Asylum Breakfast]]>><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>><</link>><<exhibitionist5>><<gcool>><<llawareness>><<ltrauma>><<lstress>>
+			<br>
+		<</if>>
+		<<exerciseicon>><<link [[바깥에서 운동한다 (0:30)|Asylum Exercise]]>><<tiredness 3>><<stress -6>><</link>><<exhibitionist5>><<gtiredness>><<lstress>><<gathletics>>
+		<br>
+		<<socialiseicon>><<link [[환자들과 대화한다 (0:30)|Asylum Socialise]]>><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>><</link>><<exhibitionist5>><<gcool>><<ltrauma>><<lstress>>
+		<br>
+		<<schoolicon "library">><<link [[공부한다 (0:50)|Asylum Study]]>><<pass 50>><<schoolskill>><</link>><<exhibitionist5>><<gschool>>
+		<br>
+		<<gardenicon>><<link [[정원으로 간다 (0:02)|Asylum Garden]]>><<pass 2>><</link>>
+		<br>
+	<<elseif $exposed gte 1 and hasSexStat("exhibitionism", 3)>>
+		<<if Time.hour is 6>>
+			<<foodicon "pancakes">><<link [[아침 식사를 한다 (1:00)|Asylum Breakfast]]>><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>><</link>><<exhibitionist3>><<gcool>><<llawareness>><<ltrauma>><<lstress>>
+			<br>
+		<</if>>
+		<<exerciseicon>><<link [[바깥에서 운동한다 (0:30)|Asylum Exercise]]>><<tiredness 3>><<stress -6>><</link>><<exhibitionist3>><<gtiredness>><<lstress>><<gathletics>>
+		<br>
+		<<socialiseicon>><<link [[환자들과 대화한다 (0:30)|Asylum Socialise]]>><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>><</link>><<exhibitionist3>><<gcool>><<ltrauma>><<lstress>>
+		<br>
+		<<schoolicon "library">><<link [[공부한다 (0:50)|Asylum Study]]>><<pass 50>><<schoolskill>><</link>><<exhibitionist3>><<gschool>>
+		<br>
+		<<gardenicon>><<link [[정원으로 간다 (0:02)|Asylum Garden]]>><<pass 2>><</link>>
+		<br>
+	<<elseif $exposed is 0>>
+		<<if Time.hour is 6>>
+			<<foodicon "pancakes">><<link [[아침 식사를 한다 (1:00)|Asylum Breakfast]]>><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>><</link>><<gcool>><<llawareness>><<ltrauma>><<lstress>>
+			<br>
+		<</if>>
+		<<exerciseicon>><<link [[바깥에서 운동한다 (0:30)|Asylum Exercise]]>><<tiredness 3>><<stress -6>><</link>><<gtiredness>><<lstress>><<gathletics>>
+		<br>
+		<<socialiseicon>><<link [[환자들과 대화한다 (0:30)|Asylum Socialise]]>><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>><</link>><<gcool>><<ltrauma>><<lstress>>
+		<br>
+		<<schoolicon "library">><<link [[공부한다 (0:50)|Asylum Study]]>><<pass 50>><<schoolskill>><</link>><<gschool>>
+		<br>
+		<<gardenicon>><<link [[정원으로 간다 (0:02)|Asylum Garden]]>><<pass 2>><</link>>
+		<br>
+	<</if>>
+	<<if $asylumstatus gte 80 and $asylumdistracted isnot 1>>
+		<<askicon>><<link [[다른 환자들에게 병원 잡역부들의 주의를 끌어 달라고 부탁한다|Asylum Distract]]>><<set $asylumdistracted to 1>><<asylumstatus -30>><</link>><<lllcool>>
+		<br>
+	<</if>>
+	<br>
+	<<asylumicon  "cell">><<link [[방으로 들어간다 (0:02)|Asylum Cell]]>><<pass 2>><</link>>
+	<br>
+<</if>>
+
+:: Asylum Breaker
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 정신병원을 돌아다니며, 통제실을 찾는다. 운 좋게도, 당신은 눈에 잘 띄지 않는 장소에 숨겨진 길을 발견했다.
+<br><br>
+에덴이 당신에게 준 자물쇠따개로 통제실 문을 열고, 문을 안쪽에서 잠근 후 제어장치 앞에 선다.
+<br><br>
+<<link [[감시탑의 탐조등에 연결된 전원을 끊으려 시도한다 (0:30)|Asylum Disable]]>><<pass 30>><</link>> <<note "과학 실력이 높을수록 성공할 가능성이 높아집니다" "italic">>
+<br>
+<<link [[통제실을 나간다|Asylum]]>><</link>>
+
+:: Asylum Disable
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if random(1, 200) lte (currentSkillValue('science') + 100)>>
+	<<set $daily.eden.distract to 2>>
+	당신은 감시탑의 탐조등에 연결된 전원을 끊는 데 성공했다. 이 행동이 탈출하는 데 시간을 벌어 주길 기대해 보자.
+	<br><br>
+	<<link [[다음|Asylum]]>><</link>>
+<<else>>
+	당신은 실수로 휴게실 전원 스위치를 꺼버리고 말았다. 빠르게 실수를 알아채자마자, 당신은 누군가가 당신을 잡으러 오기 전에 스위치를 다시 켜놓고 숨는다. 아무래도 다시 시도해 봐야 할 듯하다.
+	<br><br>
+	<<link [[다음|Asylum]]>><</link>>
+<</if>>
+
+:: Asylum Alarm
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+정신병원을 돌아다니다 보니, 당신은 구석진 곳 벽에 붙어 있는 무선 알람 장치를 발견했다. 당신은 식당에서 가져온 버터 나이프를 꽉 쥐고 제어 장치의 덮개를 벗겨낸다. 그 안에는 주 전원 장치와 알람 시스템을 연결하는 수많은 전선이 들어 있다.
+<br><br>
+<<link [[알람을 해제하려 시도한다 (0:30)|Asylum Disconnect]]>><<pass 30>><</link>> <<note "과학 실력이 높을수록 성공할 가능성이 높아집니다" "italic">>
+<br>
+<<link [[그만두고 떠난다|Asylum]]>><</link>>
+
+
+:: Asylum Disconnect
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if random(1, 200) lte (currentSkillValue('science') + 100)>>
+	<<set $daily.eden.asylumDisarm to 2>>
+	당신은 주 전원 장치와 알람 시스템 간의 연결을 해제하는 데 성공했다. 탈출할 때까지 아무도 신경쓰지 않았으면 좋겠다.
+	<br><br>
+	<<link [[다음|Asylum]]>><</link>>
+<<else>>
+	당신은 멀리서 다가오는 발소리를 듣고, 빠르게 덮개를 다시 덮은 후 잡히기 전에 빠져나왔다. 아무래도 다시 시도해 봐야 할 듯하다.
+	<br><br>
+	<<link [[다음|Asylum]]>><</link>>
+<</if>>
+
+:: Asylum Distract
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 잡역부들의 주의를 분산시키는 것을 도와줄 사람을 찾아본다. 당신은 이를 수락할 사람을 찾는 데 어려움을 겪다가, 한 <<generate1>><<person1>><<person_ ga>> 수락한다. <<He_ ga>> <<his_ yi>> 친구들을 바라보다가, 다시 당신을 바라본다. "알겠어," <<he_ ga>> 말한다. "그 훌륭한 의사와 오붓한 시간 충분히 가질 수 있도록 도와줄게." <i>다음 번 공격 때 하퍼는 도움을 받지 못할 것이다</i>
+<br><br>
+<<link [[다음|Asylum]]>><<endevent>><</link>>
+<br>
+
+:: Asylum Towels
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<generateDoctor 1>><<person1>><<set _towel to random(0,4)>>
+당신은 간호사에게 살금살금 다가간다. "실례합니다," 당신이 말한다.
+<<if $worn.upper.name is "straightjacket" or $worn.lower.name is "straightjacket bottom">>
+	<<He_ ga>> 돌아서서, 당신의 망가진 구속복을 보고
+	<<if ($beauty gte ($beautymax / 3) * 2) and _towel lte 1>>
+		히죽히죽 웃는다. <<covered>> "옷 좀 주시겠어요?"
+		<br><br>
+		"안 돼, 네 모습이 섹시하잖아." <<He_ ga>> 휴대폰을 꺼낸다. "난 네가 가서 다른 사람에게 부탁하는 것을 보고 싶어."
+		<<fameexhibitionism 2 "pic">>
+	<<else>>
+		얼굴을 찌푸린다. <<covered>> "옷 좀 주시겠어요?"
+		<br><br>
+		"어떻게 그 꼴로 만든 거야? 아니, 신경 쓰지 마. 알고 싶지 않아." <<He_ ga>> 클립보드에 메모를 한다. "의사 선생님께 알려야겠어."<<set $suspicion += 1>><<gsuspicion>>
+		<br><br>
+		<<if $leftarm is "bound" and $rightarm is "bound">>당신의 팔을 옆으로 내리도록 해 주면서, <</if>><<He_ ga>> 남아있는 구속복 잔해를 제거한다. 자유를 만끽하는 것도 오래지 않아 <<he_ ga>> 당신에게 새로운 구속복을 강제로 입힌다.
+		<<bind>><<upperwear 35>><<lowerwear 38>><<fameexhibitionism 1>>
+	<</if>>
+<<elseif ($beauty gte ($beautymax / 3) * 2) and _towel lte 3>> /* 1 in 5 to skip beauty*/
+	<<if _towel is 0>> /*1 in 4 chance*/
+		<<He_ ga>> 돌아서서, 당신을 보고 욕망에 가득 찬 미소를 짓는다. <<covered>> "옷 좀 주시겠어요?"
+		<br><br>
+		"안 돼, 네 모습이 섹시하잖아." <<He_ ga>> 휴대폰을 꺼낸다. "난 네가 가서 다른 사람에게 부탁하는 것을 보고 싶어."
+		<<fameexhibitionism 2 "pic">>
+	<<else>>
+		<<He_ ga>> 돌아서서, 당신을 보고 욕망에 가득 찬 미소를 짓는다. <<covered>> "옷 좀 주시겠어요?"
+		<br><br>
+		"그 모습을 볼 수 없게 돼서 아쉽지만, 물론이지," <<he_ ga>> 고개를 끄덕이며, 당신에게 옷을 둘러준다.
+		<<unbind>><<upperwear 87>><<fameexhibitionism 1>>
+	<</if>>
+<<elseif $player.penissize gte 3>>
+	<<He_ ga>> 돌아서서, 당신을 보고 미소짓는다. <<covered>> "옷 좀 주시겠어요?"
+	<br><br>
+	"잠시만," <<he_ ga>> 말한다. <<He_ ga>> 휴대폰을 꺼내서 재빨리 당신의 <<genitals_ rul>> 찍는다.
+	<<He_ ga>> 화면을 보며 고개를 끄덕이더니, 당신에게 옷을 던진다. "이걸 감춘다는 건 정말 아쉽네."
+	<<unbind>><<upperwear 87>><<fameexhibitionism 2 "pic">>
+<<elseif $player.breastsize gte 7>>
+	<<He_ ga>> 돌아서서, 당신을 보고 미소짓는다. <<covered>> "옷 좀 주시겠어요?"
+	<br><br>
+	"잠시만," <<he_ ga>> 말한다. <<He_ ga>> 휴대폰을 꺼내서 재빨리 당신의 <<breasts_ ul>> 찍는다.
+	<<He_ ga>> 화면을 보며 고개를 끄덕이더니, 당신에게 옷을 던진다. "이걸 감춘다는 건 너무 아쉽네."
+	<<unbind>><<upperwear 87>><<fameexhibitionism 2 "pic">>
+<<elseif _towel gte 2>>
+	<<He_ ga>> 돌아서서, 당신을 보지만 전혀 동요하지 않는 듯 하다. <<covered>> "옷 좀 주시겠어요?"
+	<br><br>
+	<<He_ ga>> 고개를 끄덕이며, 당신에게 환자복 가운을 건네준다.
+	<<unbind>><<upperwear 87>><<fameexhibitionism 1>>
+<<else>>
+	<<He_ ga>> 돌아서서, 당신을 보자 웃음을 감추기 위해 손으로 입을 가린다. <<covered>> "옷 좀 주시겠어요?"
+	<br><br>
+	<<He_ ga>> 고개를 끄덕이며, 당신에게 환자복 가운을 건네준다.
+	<<unbind>><<upperwear 87>><<fameexhibitionism 1>>
+<</if>><br><br><<unset _towel>>
+<<link [[다음|Asylum]]>><<endevent>><</link>>
+<br>
+
+:: Asylum Exercise
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if isPregnancyEnding()>>
+	<<pregnancyPassout "asylumOutside">>
+<<elseif C.npc.Eden.love gte 100 and ($edenfreedom is 1 and $edendays gte 2 and !$daily.eden.asylumRescue and $eden_asylum_fence isnot 1 and $leftarm isnot "bound" and $rightarm isnot "bound" and $trauma lte $traumamax / 2) or ($edenfreedom gte 2 and $edendays gte 8 and !$daily.eden.asylumRescue and $eden_asylum_fence isnot 1 and $leftarm isnot "bound" and $rightarm isnot "bound" and $trauma lte $traumamax / 2)>>
+	<<set $eden_asylum_fence to 1>>
+	<<set $daily.eden.asylumRescue to 1>>
+	당신은 나무 사이에 숨어 있는 형체가 움직이는 것을 본다. 형체가 점점 가까이 다가온다. <span class="green">에덴이다.</span>
+	<br><br>
+
+	<<npc Eden>><<person1>>
+	당신은 울타리까지 뛰어가서, 울타리에 기대어 숨을 고른다. 에덴이 당신을 보고 대담해져, 시야가 탁 트인 곳으로 달려온다.
+	<br><br>
+	<<He_ ga>> 창살 사이로 손을 뻗어 당신의 손을 잡는다. "내가 주의를 분산시킬게," <<he_ ga>> 말한다. "몇 분 후면 건물 반대편에서 폭발음이 들릴 거야. 그 때 울타리를 뛰어넘으면, 내가 오두막으로 데려다줄게. 알겠지?"<<takeHandholdingVirginity "Eden" "romantic">>
+	<br><br>
+
+	<<getinicon>><<link [[동의한다|Eden Distraction Plan]]>><</link>>
+	<br>
+	<<refuseicon>><<link [[거절한다|Eden Distraction Refuse]]>><</link>>
+	<br>
+<<elseif $exposed is 2>>
+	<<flaunting>> 당신은 정신병원 운동장을 뛰어다닌다. 경비원들이 당신을 예의주시하고 있으며, 당신이 주변의 울타리에 너무 가까이 가면 경고를 보낸다.
+	<<athletics 2>><<pass 30>>
+	<br><br>
+	당신의 <<lewdness_ ga>> 드러나자 사람들의 이목이 집중된다.
+	<<exhibitionism5>>
+	<<asylumevents>>
+<<elseif $exposed is 1>>
+	<<flaunting>> 당신은 정신병원 운동장을 뛰어다닌다. 경비원들이 당신을 예의주시하고 있으며, 당신이 주변의 울타리에 너무 가까이 가면 경고를 보낸다.
+	<<athletics 2>><<pass 30>>
+	<br><br>
+	당신의 <<lewdness_ ga>> 드러나자 사람들의 이목이 집중된다.
+	<<exhibitionism3>>
+	<<asylumevents>>
+<<else>>
+	<<if $leftarm is "bound" and $rightarm is "bound" and $worn.upper.name is "straightjacket">>
+		당신은 구속복을 입었음에도 불구하고, 정신병원 운동장을 계속 뛰어다닌다.
+		<<if currentSkillValue('danceskill') + currentSkillValue('athletics') gte 1600>>
+			당신의 민첩하고 탄탄한 동작으로, 훌륭한 운동을 해낸다.
+			<<athletics 2>><<physique 4>><<pass 30>>
+		<<elseif currentSkillValue('danceskill') + currentSkillValue('athletics') gte 1100>>
+			당신의 숙련된 움직임으로, 적절한 운동을 해낸다.
+			<<athletics 2>><<physique 3>><<pass 30>>
+		<<elseif currentSkillValue('danceskill') + currentSkillValue('athletics') gte 650>>
+			힘들지만 적당한 민첩성과 움직임 덕분에 어느 정도 운동을 해낸다.
+			<<athletics 2>><<physique 2>><<pass 30>>
+		<<else>>
+			당신은 <<print either("거의 곧바로","곧")>>
+			<<if random(0,1)>>나무뿌리에 걸려 넘어져 바닥을 향해 얼굴을 묻듯이 미끄러져 엎어진다.
+			<<else>>돌에 걸려, 균형을 잃고, 넘어지면서 나무에 얼굴을 들이받는다. 당신은 기절하여, 바닥에 쓰러진다.
+			<</if>>
+			여러 사람들이 박수를 친다.<<gpain>><<pain 6>><br>
+			마침내 누군가가 당신을 일으켜 준다. 별로 운동이 되지는 못했다.
+			<<athletics 2>><<pass 30>>
+		<</if>><br><br>
+		경비원들이 당신을 보고 즐거워하면서도, 당신이 주변의 울타리에 너무 가까이 뛰어가면 경고를 보낸다.
+		<br><br>
+		<<asylumevents>>
+	<<else>>
+		당신은 정신병원 운동장을 뛰어다닌다. 경비원들이 당신을 예의주시하고 있으며, 당신이 주변의 울타리에 너무 가까이 가면 경고를 보낸다.
+		<<athletics 2>><<pass 30>>
+		<br><br>
+		<<asylumevents>>
+	<</if>>
+	<br><br>
+<</if>>
+
+:: Eden Asylum Ignore
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 형체를 무시하고 운동에 집중하기로 결정한다.
+<br><br>
+<<link [[다음|Asylum Exercise]]>><</link>>
+
+
+:: Eden Distraction Refuse
+<<effects>>
+
+당신은 고개를 가로젓는다. "너무 위험해요," 당신이 말한다.
+<br><br>
+
+"난 저놈들이 널 가두고 있게 놔두지 않을 거야," 에덴이 으르렁거린다. "하지만 네가 원한다면 더 안전한 방법을 찾아볼게." <<He_ ga>> 당신의 손을 꽉 쥐었다가, 돌아서서 숲으로 성큼성큼 걸어 들어간다.
+<br><br>
+
+당신은 운동을 재개한다.
+<br><br>
+
+<<link [[다음|Asylum Exercise]]>><<endevent>><</link>>
+<br>
+
+:: Eden Distraction Plan
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<set $daily.eden.distract to 1>>
+<<npc Eden>><<person1>>
+에덴의 계획에 동의하려던 순간, 당신은 무언가를 떠올리며 멈칫한다. "감시탑," 당신이 말한다. "제가 울타리를 오르는 걸 그들이 보게 될 거예요."
+<br><br>
+그것을 깨닫고 에덴의 얼굴이 굳어진다. "주의를 분산시키는 것을 <<ampm 21>>로 미룰게," <<he_ ga>> 말한다. "그럼 네 모습을 보지 못할 거야."
+<br><br>
+"탐조등은 어쩌죠?" 당신이 묻는다.
+<br><br>
+"어딘가에 전력을 공급하는 배전실이 있을 거야. 폭발이 일어나기 전에, 차단기를 내리고 숲에서 만나자," <<he_ ga>> 말하며, 자물쇠따개를 당신의 손에 쥐어주고 몰래 빠져나간다.
+<br><br>
+<<link [[다음|Asylum Exercise]]>><</link>>
+<br>
+
+:: Eden Asylum Fail
+<<effects>>
+<<set $daily.eden.distract to 4>>
+
+<<npc Harper>><<generate2>><<person2>>
+<<bind>><<upperwear 35>>
+당신은 침대에 묶인 채로 깨어난다. 빛이 환하게 당신의 눈을 비춘다. 빛이 희미해지자 흰 가운을 입은 늙은 <<person_ i>> 보인다. 하퍼 선생님이 <<him_ yi>> 옆에 서있다.
+<br><br>
+
+"장기적인 효과는 없군," <<person_ ga>> 물러서며 말한다.
+<br>
+"잘 됐네요," 하퍼가 말한다. "넌 울타리를 오르려고 했어. 그 너머의 숲이 얼마나 위험한지 알고 있니? 우리는 널 도와주려고 여기 온 거야. 너의 안전을 위해서."
+<br><br>
+
+당신은 일어서려고 하지만, 팔을 움직일 수 없다. "좀 나아질 때까지 구속복을 입도록 하렴." <<he_ ga>> 말을 이으며, 당신의 어깨를 잡는다. <<He_ ga>> 당신을 일으켜 세워준다. 당신은 작고, 어두운 방에 있다.
+<br><br>
+
+<<He_ ga>> 당신을 문 쪽으로 안내한 다음, 밖으로 내보낸다. 당신은 또 다른 문을 지나, 환자 공용 구역으로 보내진다.
+<br><br>
+
+"잘 지내렴," 하퍼가 문을 닫으며 말한다.
+<br><br>
+
+<<link [[다음|Asylum]]>><<endevent>><</link>>
+<br>
+
+
+
+:: Asylum Socialise
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 다른 환자들과 대화를 나눈다.
+<<if $exposed is 2>>
+	당신의 <<lewdness_ ga>> 드러나자 사람들의 이목이 집중된다.
+	<<exhibitionism5>>
+<<elseif $exposed is 1>>
+	당신의 <<lewdness_ ga>> 드러나자 사람들의 이목이 집중된다.
+	<<exhibitionism3>>
+<<else>>
+<</if>>
+<<if $asylumstatus gte 80>>
+	그들은 당신과 이야기하게 되어 기뻐한다.
+<<elseif $asylumstatus gte 20>>
+<<else>>
+	대부분은 당신을 피하지만, 몇몇은 기꺼이 당신의 이야기를 들어주려 한다.
+<</if>>
+<<generate1>><<person1>><br>
+
+<<if C.npc.Eden.love gte 100 and ($edenfreedom is 1 and $edendays gte 2 and !$daily.eden.asylumRescue and !$eden_asylum_window and $leftarm isnot "bound" and $rightarm isnot "bound" and $trauma lte $traumamax / 2) or ($edenfreedom gte 2 and $edendays gte 8 and !$daily.eden.asylumRescue and !$eden_asylum_window and $leftarm isnot "bound" and $rightarm isnot "bound" and $trauma lte $traumamax / 2)>>
+	<<set $daily.eden.asylumRescue to 1>>
+	<<set $eden_asylum_window to 1>>
+	<<set $daily.eden.asylumDisarm to 1>>
+	<br>
+	창 밖으로, 당신은 울타리 너머의 나무들을 바라본다. 당신은 어둠 속에 숨어 있는 형체가 움직이는 것을 본다. <span class="green">그 형체는 에덴을 닮았다.</span>
+	<br><br>
+	<<endevent>>
+	<<npc Eden>><<person1>>
+	당신은 더 자세히 보기 위해 창문을 연다. 오른쪽에서 쿵 하는 소리가 들린다. 화살 하나가 벽돌 벽에 박혀있다. 화살대에는 종이가 감겨있다.
+	<br><br>
+	당신은 혹시 감시당하고 있지는 않은지 확인하기 위해 뒤를 힐끗 쳐다본다. 모두들 정신이 팔려있는 듯 하다. 당신은 화살을 뽑고, 종이를 펼친다. 필체는 조잡하지만, 읽을 수 있다.
+	<br><br>
+	<i>"널 데리러 갈게. <<ampm 22>>에 수건으로 창문에 표시해. - 에덴"</i>
+	<br><br>
+	당신은 숲을 돌아보지만, 그 형체는 이미 사라졌다.
+	<br><br>
+	<<link [[다음|Asylum Eden Towel]]>><<endevent>><</link>>
+
+<<elseif $rng gte 95>>
+	<<if $rng % 2>>
+		"말썽 피우지 말고 점잖게 행동해," <<person_ ga>> 말한다. "만약 직원들이 널 의심하게 되면 몰래 뭔가 하기가 어려울 거야."
+	<<else>>
+		"미리 경고하지: 여기선 그들과 우리가 대치하고 있어," <<person_ ga>> 당신에게 말한다. "만약 네가 경비원, 간호사, 의사, 그리고 다른 모든 쓰레기들과 친하게 지낸다면,
+		우리한테서 아무것도 기대하지 마."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 90>>
+	오늘은 방이 흥분으로 들썩이고 있다. 인기가 많던 환자가 완치되어 퇴원하기 때문이다. 환자들이 창가에 모여
+	환하게 웃고 있는 <<personPost "에게">> 손을 흔들고, <<he_ ga>> 하퍼 선생님과 함께 찻길 옆에 서 있다.
+	<br><br>
+
+	잠시 후, 정문이 열리고 차 한 대가 들어온다. 차는 진입로를 한 바퀴 돌고 웃고 있는 환자 옆에 정차한다.
+	<<if $rng % 2>>
+		이상하게도 이 차는 택시나 미니버스가 아니다. 동물 운반용 차량처럼 보인다. 운전사가 나와서 승객들을 맞이한다.
+		<<if $fluid_forced_stat gte 100>>당신은 운전사를 어디선가 본 것 같다는 생각이 든다.<</if>>
+		마지막으로 손을 흔들고는, <<person_ un>> 차량 뒷쪽으로 안내된다. <<he_ ga>> 닫히는 문 너머로 사라지는 순간
+		<<his_ yi>> 얼굴이 마지막에 당혹감으로 휩싸인다.
+		<br>
+		운전사가 차 문을 닫고 자물쇠를 건다.
+		<<if $fluid_forced_stat gte 100>>
+			운전사가 하퍼 선생님과 이야기를 나누는 동안, 당신은 갑작스레 <<him_ ga>> 레미의 농장 일꾼 중 한 명임을 기억해 낸다.
+			당신이 무언가를 말하기도 전에
+		<<else>>
+			하퍼 선생님과의 짧은 대화가 끝나기 무섭게
+		<</if>>
+		운전사가 차에 올라타더니 차를 몰고 떠나버린다.
+	<<else>>
+		<<person_ ga>> 대기 중인 택시에 올라타더니, 창문 너머로 손을 흔든다. 엔진 소리가 커지고 택시가
+		<<person_ rul>> 태우고 마을로 출발한다.
+	<</if>>
+	<br><br>
+	"잘 지내렴," 당신은 하퍼 선생님이 떠나는 차 뒤로 외치는 것을 듣는다.
+	<br>
+	지켜보던 사람들이 흩어진다.
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 85>><<generate2>><<generate3>>
+<br>
+	"조심해, 친구!" <<person_ ga>> 당신의 시선을 사로잡는다. "살짝 통과할 수 있는 문을 조심해!"
+	<br>
+	"뭐라고, 형씨?" 근처에 있던 <<person2>><<person_ ga>> <<person1>><<him_ rul>> 돌아본다. "너 머리가 텅 비었냐? 어떻게 문이 통일 수 있겠어?"
+	<br>
+	"어떻게...? 그냥 그렇다는 거지. 그들은 문을 제대로 닫지 않는다고. 마치 부주의한 사람들이-"
+	<br>
+	"진짜라니까, 나 참!" 근처에 있던 <<person3>><<person_ ga>> 끼어든다. "문은 정말로 통이 될 수 있어. 마치 거대한 통처럼 말이야. 내 말은, 난 그런 식으로
+	생각한 적은 없지만, 이 건물은 마치, 찬장 같아. 통으로 가득 찬 찬장. 그게 문이야. 말 그대로, 문이 통이라는 거지.
+	그리고 우리는... 도시로 나가려는 잼이고, 도시는 그러니까 토스트야... 이... ...이 비유에서는?
+	내 말은, 그래 - 문은 통이야 - 이해했어. 완전히 이해했어." <<He_ nun>> <<himselfPost>>에 대해 상당히 확신하는 것 같다.
+
+	/*Disabled due to feedback
+	<<person1>><<person_ ga>> 그들 사이에서 혼란스러워 하며, 눈을 가늘게 뜬다. <<his_ ga>> 당신을 바라보며 생각의 궤도를 되돌린다.
+	<br>
+
+	"그래, 그 문을 조심해, 친구. 그 매혹적인 시들지 않는 광채를 조심해; 그 유혹적인 향기를 조심해; 그 너머에서 자유를 속삭이는 감미로운 바람을 조심해.
+	그 문을 통과하면, 그 자유는 그냥 신기루 - 끝이 없이, 계속 변화하는 평원에서의 환영에 불과하다는 것을 알게 될 거야."
+	<br>
+	<<person2>><<person_ wa>> <<person3>><<person_ ga>> 넋을 잃고 <<person1>><<person_ rul>> 바라본다.
+	<br>
+	"뭐 없이?"
+	<br>
+	"지도가 없어," <<he_ ga>> 계속 말한다. "네가 배울 수 있는 '올바른 길'은 없어. 오직 굶주림만이 있을 뿐이야. 저 생명체들의 끝없는, 탐욕스러운 굶주림.
+	그 생명체들이 저 밖에 있어. 만약 네가 저 길을 지나가면, <<if $player.gender_appearance is "f">>얘야,<<else>>얘야,<</if>> 그들이 널 가질거야. 내가 아는 건 이 정도야."
+	<br><br>
+
+	<<He_ ga>> <<his_ yi>> 이야기를 듣는 사람들을 번갈아 바라본다.
+	<br>
+	"저 문을 통과한 대부분의 영혼들은, 깨어나면 부서지고 학대당한 채로, 여기로 돌아오게 돼. 뭔가 잃어버린 채로. 몇몇은 아예 돌아오지 않아. 그들은 어디로 갔을까? 소문에 의하면 탈출했다고 해.
+	하! 아니. 아니야. 내 생각은 뭔지 알아? 그들도 이젠 그놈들이 되었을 거야. 내 생각에, 평원에서 길을 잃고, 그들은 결국 그 탐욕스러운 굶주림에 굴복하고 그것이 그들을 변화시켰겠지.
+	그들의 존재 자체가, 욕망의 촉수로 변해버렸어. 그들은 여전히 평원을 배회하면서, 지금도, 널 찾아 헤매는 것 같아."*/
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 80>>
+	"그들은 밤에 우리 방에 가스를 주입해, 맹세하지," <<person_ ga>> 말한다. "우리를 고분고분하게 만든다고."
+	<<if $rng % 2>>
+		<br>
+		"<<print either("가스 따위가 없어도 널 고분고분하게 만들 수 있어!","네가 가스를 만드는 것에 대해 논할 자격이 있냐!")>>" 누군가 비꼬는 듯한 목소리로 중얼거린다.
+		<br>
+		<<person_ ga>> 그들을 향해 욕을 한다.
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 75>>
+	<<if $o_long_and_beautiful gte 1 and $o_long_and_beautiful lte 7>><<set $o_long_and_beautiful += 1>>
+		매우 길고, 지저분하고, 헝클어진 머리카락을 가진 마른 소녀가 창가에 서서 정원 건너편 나무를 바라보고 있다.
+		<br>
+		당신은 그녀 옆에 서서 대화를 시도해 보지만, 그녀는 전혀 반응하지 않는다. 그녀는 얼굴의 대부분을
+		길고, 헝클어진 머리카락으로 가리고 있어서 당신의 말을 듣고 있는지 조차 알 수 없다.
+		<br><br>
+
+		창문을 통해 당신은 작은 비행기가 숲, 아니 어쩌면 그 너머에 있는 마을 위를 낮게 지나가는 것을 본다.
+		<br>
+		당신이 다시 옆을 쳐다보니 긴 머리 소녀는 어느새 사라져 있다.
+	<<else>>
+		<<person_ ga>> 창가에 서서 정원과 그 너머의 숲을 내려다보고 있다. <<He_ ga>> 비행기를 가리킨다.
+		<br>
+		"정말 많은 비행기가 저기를 날아다녀," <<he_ ga>> 말한다. "매일."
+		<br><br>
+
+		아니나 다를까, 창밖으로 작은 비행기가 수목선 위로 아주 낮게 지나가는 것이 보인다.
+		<br>
+		"어떻게 생각해? 숲을 지나가는 걸까 아니면 도시를 지나가는 걸까?"
+		<br>
+		<<if currentSkillValue('science') gte 400 and currentSkillValue('maths') gte 600>>
+			당신은 좌우로 몇 발자국씩 걸으며 머릿속으로 대략적인 계산을 한다.
+			<br>
+			"시차로 미루어 보건대, 아마 도시일 거예요," 당신이 말한다.
+		<<else>>
+			당신은 어깨를 으쓱한다.
+			<br>
+		<</if>>
+		<br>
+
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 70>>
+	<<if $rng %2>>
+		"난 여기 환자가 아니야, 그거 알아? 난 의사야," <<person_ ga>> 말한다. "난 정말- 난 정말 공부를-
+		공부를- 많은 것을 공부했어. 정말 많은 것들을. 하지만 더 이상 아무도 날 믿지 않아. 난 의사로 여기 왔지만 지금은-
+		심지어 다른 의사들도- 그들도 날 환자 취급해. 내 말을 듣지 않아. 아무도 듣지 않아. 난..."
+		<<He_ ga>> 당신의 팔을 잡는다. "난 미치지 않았어."
+	<<else>>
+		"내가 왜 여기 있는지 모르겠어," <<person_ ga>> 말한다. "내가 도시로 가는 버스를 타려고 했다는 것을 기억해. 나는 버스 정류장에 도착했어. 그리고 나에게
+		택시나 버스를 타고 집으로 돌아갈 잔돈이 없었던 게 기억나. 난 다뉴브 거리의 사원 근처에 살고 있어서, 그리 멀지 않았어. 공원 옆을 꽤 즐겁게 걷고 있었지만, 그렇지만... 그리 멀리 가지는 못했어.
+		내가 정류장에서 나와 엘크 가로 갔던 기억이 나... 그러고 나서...
+		<<print either("","소리가 났고...","뭔가가... 울타리를 넘어와서...","유니폼을 입은 경비병들이, 무언가를 쫓고 있었어, 그리고...")>>
+		여기서 깨어났어. 내가 끔찍한 일을 저질렀다고 하더라."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 65>>
+	"나는 학교에서 일한 적이 있어," <<person_ ga>> 말한다.
+	<<if $rng %2>>
+		"그 교장에 대한 역겨운 소문을 들었어.
+		<<print either("그럴 리가 없어. 학생들이 문제를 일으키려는 것일 수도 있어.","말하지만, 아니 땐 굴뚝에서 연기 날 리가 없지.","누군가 조사해 봐야 해.")>>"
+	<<else>>
+		"넌 그 역사 선생이 <<nnpc_his_ yi "Winter">> 찬장에 보관하고 있는 역겨운 물건들을 봐야 해. 한 번은 한 학생이- 음, 만약 사람들이 진실을 알았다면, <<nnpc_he_ nun "Winter">> 아마 우리와 여기에 함께 앉아 있을 거라고만 말해두지."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 60>>
+	<<if $rng % 2>>
+		"경비가 삼엄해," <<person_ ga>> 말한다. "경비원들 몰래 빠져나갈 수 있는 방법이 없어. 주의를 분산시키지 않고는 말이야."
+	<<else>>
+		"가끔은 그들이 내게 구속복을 입혀," <<person_ ga>> 말한다. "난 너무 무력해. 놈들이 내게 원하는 건 뭐든지 할 수 있어."
+		<br>
+		<<He_ ga>> 미소짓는다.
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 55>>
+	<<if $rng % 2>>
+		"작년에 환자들이 여기서 비디오 게임기를 설치해 달라고 시위를 했어," <<person_ ga>> 말한다.
+		"<<print either("그게 무슨 의미가 있을까? 다행히 의사들은 안 된다고 말했어.","의사 말로는 건강에 지장을 줄 수도 있대. 하지만 여기서 우리가 할 수 있는 더 나은 일이 있는 것 같지는 않아.")>>"
+	<<else>>
+		"가끔씩," <<person_ ga>> 당신에게 말하듯 혼잣말을 중얼거린다. "이 도시의 경찰들은 진짜로는 우리를 보호하지 않는 것 같아."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 50>>
+	"넌 아프지 않아," <<person_ ga>> 당신에게 속삭인다. "우리 중 아무도. 저놈들이 아픈 거야. 저놈들이.
+	<<if $rng % 2>>
+		저놈들은 우리에게 약을 테스트하기 위해 우리가 아프다고 말하는 거라고. 그리고 아무도 저놈들을 막지 않지. 이건 큰 제약회사야. 그 제약회사가 맨 꼭대기에 있는 거라고."
+	<<else>>
+		저놈들은 우리가 제정신이기 때문에 우리 같은 사람들을 가둔 거야. 우리가 저놈들의 권력에게 위협이 되니까."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 45>>
+	<<if $rng % 2>>
+		"여기 있는 정신 나간 놈들 중 일부는 너에게 직원들이 모두 세계 정복에 혈안이 된 도마뱀 인간들이라고 말할 거야."
+		<<person_ ga>> <<his_ yi>> 고개를 절레절레 흔든다. "무슨 개소리야. 저놈들은 분명히 외계인이야."
+	<<else>>
+		"여기 미친놈들 중 일부는 너에게 직원들이 모두 은하 연방에 가입할 준비를 하는 외계인이라고 말할 거야."
+		<<person_ ga>> <<his_ yi>> 눈을 굴린다. "어림없는 소리: 저놈들은 확실히 도마뱀 인간이야."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 40>>
+	<<if $rng % 2>>
+		"이 안은 상황이 좋지 않아," <<person_ ga>> 말한다. "하지만 밖은 더 나빠."
+	<<else>>
+		<<generate2>><<generate3>>
+		<<person1>><<person_ wa>>, <<person2>><<personPost>> 그리고 <<person3>><<person_ ga>> 탈출을 모의한다.
+		<br><br>
+		"어떻게?" <<person_ ga>> 묻는다. "어떻게 나갈 거야?"
+		<br>
+		<<person1>><<person_ ga>> 방 안을 정신없이 둘러본다. "저걸로!" <<he_ ga>>
+		<<print either("커피 자판기를 가리킨다.","수상한 기계를 가리킨다.","식수대를 가리킨다.","무거운 목제 책상을 가리킨다.")>>
+		"이걸로 좆같은 창문으로 박살 낼 거야, 그게 방법이야!"
+		<br>
+		"저걸 들어서 창문으로 던지겠다고?"
+		<br>
+		"씨발, 그래!" <<person_ ga>> 말한다.
+		<br>
+		"혼자서?" <<person2>><<person_ ga>> 묻는다. "저걸?"
+		<br>
+		"방금 내가 그러겠다고 말했잖아?"
+		<br>
+		"말도 안돼."
+		<br>
+		"개소리," <<person3>><<person_ ga>> 말한다. "네가 실패한다에 내 입을 건다!"
+		<br>
+		"뭐라고?"
+		<br>
+		"그래!"
+		<br>
+		"뭐?"
+		<br>
+		"간단해. 만약 네가 해낸다면 내가 여기서 바로 <<person1>><<if $NPCList[0].penis isnot "none">>네 자지를 빨아줄게<<else>>네 보지를 빨아줄게<</if>>," <<person3>><<person_ ga>> 말한다.
+		"아무 조건 없이. 만약 네가 해내지 못한다면 나에게 <<if $NPCList[0].pronoun is $NPCList[2].pronoun>>똑같은 걸<<else>>동등한 걸<</if>> 해줘."
+		<br>
+		"좋아," <<person1>><<person_ ga>> 말한다. "해보자."
+		<br>
+		"나도," <<person2>><<person_ ga>> 말한다. "나도 할래!"
+		<br>
+		"존나 많을수록 좋지," <<person1>><<person_ ga>> 말한다. "이 새끼들아 얼굴에 숱 많은 <<if $NPCList[0].penis isnot "none">>자지<<else>>보지<</if>> 맞이할 준비나 해라!"
+		<br><br>
+
+		근처에 있던 두 경비들이 즐거워하며 지켜보고 있다.
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 35>>
+	<<if $rng % 2>>
+		"거기 안녕," <<person_ ga>> 말한다. "잘 들어, 뭔가 애매하거나 어려운 말을 쓰면서 너에게 뭔가를 계속 경고하는 환자를 보면,
+		나 대신 주먹을 한 방 날려 줘. 오늘 아침에 너무 바빠서 시간이 없었거든."
+	<<else>>
+		"어느 것도 <<print either("중요하지 않아,","진짜가 아냐,","달라지는 것은 없어,")>>" <<person_ ga>> 말한다. "우리는 모두
+		<<print either("미래의 슈퍼컴퓨터가 만들어낸 가상 현실에 살고 있을 뿐이야","누군가의 게임 속 NPC 들일 뿐이야","책 속의 등장인물일 뿐이야","죽었다는 사실을 모르는 유령일 뿐이야","죽음과 재생의 영겁의 굴레를 겪는 한갖 물방울일 뿐이야")>>
+		- 하지만 아무도 진실을 깨닫지 못해."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $o_long_and_beautiful gte 8 and $o_long_and_beautiful lte 9 and $hy_sibling and $hy_parent>> /* approx. 1/3 chance once right stage is reached. */
+	<<generate2>><<set $NPCList[0] to clone($hy_sibling)>><<set $NPCList[1] to clone($hy_parent)>><<person1>>
+	오늘은 모두가 기운이 빠져 보인다. 그 누구도 입을 열지 않는다. 당신이 의자에 털썩 주저앉아 다음으로 뭘 해야 할지 한창 고민하던 찰나,
+	뒤에서 누군가가 1년쯤 전 유행했던 경쾌한 팝송을 부르기 시작한다. <span class="teal">익숙한 노래다.</span>
+	뒤돌아보니 <<person_ ga>> 당신을 향해 미소짓고 있다.
+	<br><br>
+	"너일 줄 알았어," <<he_ ga>> 말한다.
+	<<if $hairlength gte 500>>
+		"그 길고, 아름다운 머리카락을 본 순간 알아봤어."
+	<<else>>
+		"네 머리카락 정말 길고 아름다웠는데. 왜 잘랐어?"
+	<</if>>
+	<br>
+	잠시 후, 당신은 <<him_ ga>> 얼마 전 도무스 가에서 당신의 머리를 땋아준 수줍은 <<person_ rago>> 생각한다.
+	근처 어딘가에서 고성이 들린다.
+	<br>
+	"여기가 네가 그동안 숨어있던 곳이구나?" <<he_ ga>> 말한다.
+	<<if $chef_state gte 7 and ($chef_rework is undefined or $chef_rework is 0)>>
+		<<if C.npc.Sam.gender>>"그 남자,<<else>>"그 여자,<</if>>
+		오션 브리즈의 주인인 샘이 고아들에게 널 찾아달라며 돈을 줬어.
+		고객들이 크림 빵이 부족하다고 화를 내고 있어.
+	<<elseif $orphan_hope gte 25>>
+		"고아들이 널 찾고 있었어. 해변을 따라 수색대를 만들어서.
+	<<elseif $orphan_hope lte -10>>
+		"널 비난하는 건 아냐. 요새 그 고아들 비참해 보였거든.
+	<<elseif C.npc.Kylar.love gte 30 and C.npc.Kylar.state is "active">>
+		"너와 같이 놀던 그 수줍음이 많은 <<nnpc_gendery_ ga "Kylar">> 널 찾으러 길거리를 서성이고 있더라.
+	<<elseif $fame.exhibitionism gte 500>>
+		"동네 변태들이 널 그리워하는 것 같더라. 차에 탄 어떤 얼간이는 나한테 돈을 줄 테니 옷을 벗으라 했어!
+	<<else>>
+		한동안 널 못 본 것 같은데.
+	<</if>>
+	그래서 내 여동생은 만나봤어? 걘 지금 여기 있어. 아주 마르고 긴 머리. 내가 걔에 대해 말했잖아. 해변 파티에서 공격당했다고.
+	걘 이제 영원히 여기 있을 거야. 그 애의 긴 머리는 정말 아름다웠는데 지금은 아무도-"
+	<br>
+	뒤에서 날카로운 고성이 들린다. <<person2>><<person_ ga>> 한 잡역부와 실랑이를 벌이고 있다.
+	<br><br>
+	"저 사람은 <<if $NPCList[0].pronoun is "m">>아빠야. 아빠는<<else>>엄마야. 엄마는<</if>> 그들에게 내 여동생을 더 잘 돌보라고 말하는 중이야.
+	그 애의 상태가 다시 나빠지고 있는 것 같거든. 걘 이제 자책하며 스스로 '자초한 일'이라고 생각해. 의사 중 한 명도
+	걔한테 계속 그런 말을 하더라. 그 애를 정말 화나게 했지. 그 애는 이제 누구와도 이야기하지 않아. 더 이상 우릴 만나려고 하지도 않아. 머리도 지저분해졌어.
+	그들은 빗질조차 해주지 않아. 내가 해주고 싶지만, 그 애는 날 보지 않으려 해. 이건 정말-"
+	<br><br>
+	"이제 가야 해," 한 손이 <<person1>><<persons_ yi>> 어깨를 잡는다. "이 쓸모없는-" <<person2>><<person_ ga>> 당신과 눈이 마주치자 말을 잇지 못한다.
+	넌? 나 너 기억해. 머리가 길었지. 일거리를 찾으러 우리 집 문을 두드렸잖아. 그때 도와준 적 있었지. 그래서 이제는 여기에 온 거야?!
+	네가 무사했으면 좋겠어. 그리고 이... 사람들이 널 잘 대해줬으면 좋겠어. 우린 이제 떠나야 해. 좋은 하루 보내."
+	<br>
+	<<He_ ga>> 손을 흔드는 <<person1>><<person_ rul>> 출구 쪽으로 끌고 간다.
+	<br><br>
+	당신은 떠나는 그들의 모습을 보면서, 치료실 문 앞에서 길고, 지저분한 머리를 한 마른 소녀가 지켜보고 있는 것을 발견한다.
+	요란한 소리와 함께, <<fullGroup_ i>> 방범문을 통해 빠져나온다.
+	치료실을 되돌아보니, 그 긴 머리의 소녀는 어디에도 보이지 않는다.
+	<br><br>
+	<span class="teal">여동생인 걸까?</span><<set $o_long_and_beautiful to 10>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 30>>
+	<<if $rng % 2>>
+		"건물의 비어 있는 구역에는 접근하지 마," <<person_ ga>> 말한다. "한 번은 누군가 거기 갔다가, 사라졌어."
+	<<else>>
+		<<person_ ga>> 당신을 위아래로 훑어본다.
+		<br>
+		"누가 널 공격하면, 나한테 알려줘," <<he_ ga>> 미소짓는다. "난 구경하는 거 좋아하거든."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 25>>
+	<<if $chef_state gte 3>>
+		<<if $chef_state gte 7 and $rng gte 27>>
+			<<person_ ga>> 입을 쩍 벌리고 당신을 바라본다.
+			<br>
+			"샘의 오션 브리즈에 새로 부임한 셰프지, 그렇지 않아?" <<he_ ga>> 묻는다. "세상에, 네가 여기 있다니 믿을 수가 없어.
+			난 그 빵이 너무 그리워! 혹시 여기서 만들어 줄 수 있어? 응?!"
+			<<lstress>><<stress -2>><<asylumstatus 2>><<gcool>>
+		<<else>>
+			"이런 곳에서 그리운 것들이 있다는 게 참 우습지," <<person_ ga>> 당신에게 말한다. "클리프 가에 있는 오션 브리즈 카페가 너무 그리워.
+			샘이 새로 고용한 셰프가 정말 끝내주는 크림 빵을 만들었거든."
+		<</if>>
+	<<else>>
+		"내가 그리워하는 게 딱 하나 있어," <<person_ ga>> 당신에게 말한다. "해변에 앉아 수영하는 사람들을 구경하는 거.
+		거기에 오션 브리즈라는 카페가 있어. 기회가 된다면 꼭 한번 가봐. 맛있는 크림 빵을 팔거든. 샘에게 부탁해 봐."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 20>>
+	<<if $rng % 2>>
+		"아무에게도 말하지 마," <<person_ ga>> 은밀히 말한다. "난 아프지 않아. 정말로. 그냥 여기 있는 게 좋아서 아픈 척하고 있는 거야. 여긴 참 좋거든. 미친 놈들이나 저기 밖으로 돌아갈 거야."
+	<<else>>
+		"여기 있는 모두가 그렇게 말하는 것을 알아," <<person_ ga>> 말한다. "하지만 난 사실 미치지 않았어. 나는 경찰 소속
+		<<print either("형사야","수사관이야","경감이야", "경관이야")>>
+		경찰청에서 난 거물이었어. 몇 개의 큰 사건을 해결했지. 신문에도 자주 실렸어. 사건을 해결하기 위해 여기로 전출된 거야."
+		<br>
+		<<He_ ga>> 씁쓸하게 웃는다.
+		<br>
+		"믿을 수 있겠어? 진짜야. 우린 이곳에 대한 소문을 들었어. 끔찍한 것들. 그래서 난 백마 탄 왕자님이
+		되어, 악당들을 쫓아내라고 여기로 보내진 거야. 대신에 그들이 날 쫓아냈지. 난 표면상으론 'PTSD'를 갖고 있어."
+		<br>
+		<<He_ ga>> 침묵한다.
+		<br><br>
+
+		"이봐!" 당신이 떠나려고 하자 <<he_ ga>> 말한다. "부탁 하나만 들어줘. 만약 네가 다시 밖으로 나가게 된다면: 이 도시의 경찰은 절대 믿지 마. 좋은 사람들도 있지만,
+		대부분은 범죄자들과 한통속이야 - 네가 그걸 확실하게 알게 됐을 때는 이미 너무 늦은 거야. 내가 그랬던 것처럼. 일부 의사들도 범죄에 가담하고 있어.
+		사람들이 사라지고 있어."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 15>>
+	<<if $rng % 2>>
+		"의사가 더 이상 날 부르지 않아," <<person_ ga>> 투덜댄다. "몇 주 동안 치료를 받지 못했어.
+		<<if $beauty gte ($beautymax / 3) * 2>>
+			의사들은 항상 너처럼 작고 귀여운 사람들과 있느라 바쁘니까 난 절대 나아질 수 없을 거야."
+			<<gstress>><<stress 1>>
+		<<else>>
+			우리는 항의해야 해! 의사들은 매력적인 사람들만 돕는 게 아니라, 우리 모두를 도와야 해."
+		<</if>>
+	<<else>>
+		"며칠 전 오후에 그 젊은 의사에게서 소 배설물 냄새가 났어," <<person_ ga>> 속삭인다. "혹시 <<nnpc_he_ ga "Harper">> 농장 같은 데서 사나!?"
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 10>>
+	<<if $rng % 2>>/*11 13*/
+		"의사가 내게 야한 짓을 시켰어," <<person_ ga>> 말한다. "예전에는 싫었지만, 이제는 다음 치료가 기다려져."
+	<<else>>
+		모든 사람들이 현재 각자 활동하느라 바쁘다.
+		<br><br>
+		당신이 창문 옆에 서자, 하퍼 선생님이 벌거벗은 <<personsimple_ rul>> 데리고 레크리에이션 구역으로 향한다.
+
+		완전히 벌거벗은 채,
+		<<if $rng gte 14>>/*14*/
+			<<person_ nun>> 자신이 의사라고 믿는 것 같다. 체계적으로, 하퍼는 <<him_ rul>> 방의 다른 환자들에게 데려가
+			의학적 소견을 묻는다. <<person_ nun>> 가상의 클립보드를 참조하면서
+			<<if currentSkillValue('science') gte 500>>
+				환자들에게 성실하지만 아무런 의미가 없는 허위 '진단'을 내린다.
+			<<else>>
+				각 환자마다 의학적인 진단을 내린다.
+			<</if>>
+			<br>
+			<<he_ ga>> 무슨 말을 하든 하퍼는 진지하게 고개를 끄덕이며 말한다, "그렇군요. 감사합니다, 선생님." 그러고는 <<him_ rul>> 다른 환자에게 데려간다.
+			<br><br>
+
+			일곱 또는 여덟 명의 환자를 본 후, 그들은 함께 떠난다.
+		<<else>>/*10 12*/
+			하퍼의 손에 들고있는 목줄 달린 개 목걸이만 착용하고서, <<person_ nun>> 자신이 개라고 믿는 듯, <<his_ yi>> 손과 무릎을 꿇고
+			기어 다니고 있다. 하퍼가 <<him_ rul>> 데리고 방으로 들어가자 <<he_ nun>> 책상 밑을 기어 다니며 환자들의
+			다리 냄새를 맡으려고 한다.
+			<br><br>
+
+			방 중앙에서, 하퍼는 <<persons_ yi>> 목줄을 풀고, 하퍼가 멈춰서서 잡역부 중 한 명과 대화를 나누는 동안 <<him_ ga>> 방 안을 마음껏
+			방 안을 마음껏 돌아다닐 수 있도록 한다. 하퍼가 대화를 나누는 동안, <<person_ nun>> 환자들 사이를 기어 다니며, 그들이 <<his_ yi>> 머리를 쓰다듬게 하고,
+			그들의 사타구니 냄새를 맡거나, 몸을 뒤집어 <<his_ yi>> 배를 문지르게 한다.
+			<br>
+
+			갑자기
+			<<if $NPCList[0].penis isnot "none">> <<he_ ga>> <<his_ yi>> 다리를 들고 오줌 싸려고 하자
+			<<else>> <<he_ ga>> 책상 옆에 쪼그리고 앉아 오줌을 싸려고 하자
+			<</if>>
+			하퍼가 달려와 <<his_ yi>> 목줄을 잡는다. "이제 그만 하렴."
+			<br>
+			하퍼가 재빨리 <<him_ rul>> 방에서 데리고 나간다.
+		<</if>>
+		<br><br>
+		많은 사람들이 흥미롭게 지켜본다. 일부는 음흉하게. 일부는 당황스럽게.
+		<br>
+		확실히 아무도 놀라지 않는 것 같다.
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<elseif $rng gte 5>>
+	<<if $rng % 2>>
+		"그 하퍼는 의사가 아니야," <<person_ ga>> 중얼거린다. "그렇지 않아. 내가 처음 이곳에 왔을 때 하퍼는 우리와 같은 환자였어.
+		하지만 이젠 갑자기 하퍼가 우리의 의사래. 그들은 모두 한통속이고, 그 사실을 기억할 만한 사람들은 모두 편리하게도 잊혀졌지. 혹은 사라졌거나."
+		<br>
+		<<He_ ga>> 매섭게 주변을 둘러본다.
+	<<else>>
+		한 <<person_ ga>> 당신을 향해 미소짓고 있다. 당신이 <<him_ yi>> 근처에 앉아있을 때 <<his_ ga>> 한 손을 옷 속에 넣고, 리드미컬하게
+		<<if $NPCList[0].penis isnot "none">><<his_ yi>> 좆을 문지르는 걸 알아차린다.<<else>><<his_ yi>> 보지를 문지르는 걸 알아차린다.<</if>>
+		<br><br>
+
+		"거기 가만히 있어," <<he_ ga>> 숨을 내쉰다.
+		<<if $beauty gte ($beautymax / 3) * 2 and $rng % 3>>"널 보고 있는 것만으로도 많은 도움이 돼."
+		<<elseif $player.perceived_breastsize gte 6>><<He_ ga>> 손을 더 빠르게 움직이면서 당신의 <<breasts_ ul>> 뚫어져라 쳐다본다.
+		<<elseif $physique gte ($physiquesize / 7) * 6>>"그 근육으로 날 마치 <<if $NPCList[0].penis isnot "none">>암캐처럼<<else>>창녀처럼<</if>> 지배할 수 있을 텐데."
+		<<elseif $purity lte 400 or $awareness gte 500>>"나한테 추잡한 말 좀 해봐. 잘 아는 것처럼 보이는데."
+		<<elseif $beauty lte ($beautymax / 3)>>"네 못생긴 얼굴이 내가 더 오래 버티게 해줄 거야."
+		<<else>>움직임이 더 빨라진다.
+		<</if>>
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<<else>>
+	"저놈들이 우리의 팔을 너무 꽉 묶었어," <<person_ ga>> 말한다.
+	<<if $rng % 2>>
+		"이러고선 할 수 있는 게 별로 없어. 심지어 찬장도 제대로 열지 못해."
+	<<else>>
+		"자위조차 제대로 할 수 없어. 가끔씩 경비원을 불러 가려운 곳을 긁어달라고 해야 해."
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<asylumevents>>
+<</if>>
+
+:: Asylum Eden Towel
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 방 위의 창문에 대해 생각한다. 창문은 평범해 보이지만 보이지만, 의심할 여지없이 경보 시스템과 연결되어 있을 것이다.
+<br><br>
+이 계획을 실행하려면, 해당 경보 시스템을 찾아서 비활성화해야만 한다.
+<br><br>
+<<link [[다음|Asylum]]>><</link>>
+
+:: Asylum Study
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 먼지가 많은 도서관에서 오래된 교과서를 읽는다. 대부분의 내용이 여전히 유효한 것이다.
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	당신의 팔은 묶여있기에,
+	<<if $asylumstatus gte 60>>
+		가까운 환자가 책장을 념겨준다.
+	<<else>>
+		코로 대신 책장을 넘긴다.
+	<</if>>
+<<elseif $asylumstatus gte 80>>
+	다른 환자들이 당신을 반갑게 맞아주며 자리를 마련해 준다.
+<<elseif $asylumstatus gte 60>>
+	주변 몇몇 환자들이 미소를 짓거나 고개를 끄덕이며 반갑게 맞이한다.
+<</if>>
+<br><br>
+
+<<if isPregnancyEnding()>>
+	<<pregnancyPassout "asylumLibrary">>
+<<else>>
+	<<if $exposed is 2>>
+		당신의 <<lewdness_ ga>> 드러나자 사람들의 이목이 집중된다.
+		<<exhibitionism5>>
+	<<elseif $exposed is 1>>
+		당신의 <<lewdness_ ga>> 드러나자 사람들의 이목이 집중된다.
+		<<exhibitionism3>>
+	<<else>>
+	<</if>>
+	<<if $rng gte 81>>
+		<<generateDoctor 1>><<person1>>잡역부 복장을 한 <<person_ ga>> 당신 옆에 멈춰 선다. "도움이 필요하니?" <<he_ ga>> 묻는다.
+		<br><br>
+		<<link [[받아들인다|Asylum Study Help]]>><<schoolskill>><</link>><<gschool>>
+		<br>
+		<<link [[거절한다|Asylum]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<asylumevents>>
+	<</if>>
+<</if>>
+
+:: Asylum Study Help
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 고개를 끄덕인다. 잡역부가 의자를 가져와 앉는다.
+<br><br>
+<<He_ ga>> 교재를 가지고 당신을 도와준다. <<Hes_ nun>> 꽤 박식하다.
+<br><br>
+<<link [[감사를 표한다|Asylum Study Thank]]>><<set $suspicion -= 1>><</link>><<lsuspicion>>
+<br>
+<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+<<link [[한쪽 손을 그의 허벅지 위에 올린다|Asylum Study Thigh]]>><</link>><<promiscuous1>>
+<</if>>
+<br>
+
+:: Asylum Study Thank
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if $speech_attitude is "meek">>
+	"도움을 주셔서 감사해요," 당신이 말한다. "당신이 없었다면 이해할 수 없었을 거예요."
+<<elseif $speech_attitude is "bratty">>
+	"도와줘서 고마워요," 당신이 말한다.
+<<else>>
+	"고마워요," 당신이 말한다. "정말 친절하시네요."
+<</if>>
+<br><br>
+<<person_ ga>> 미소짓는다. "언제든 물어봐," <<he_ ga>> 말한다. "난 다시 일하러 갈게. 이제 스스로 해봐."
+<br><br>
+<<link [[다음|Asylum]]>><<endevent>><</link>>
+<br>
+
+:: Asylum Study Thigh
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 상대방이 무언가를 설명하는 동안 상대의 허벅지에 손을 얹는다. 상대의 목소리가 흔들린다. 당신은 당신을 향한 상대의 시선을 무시한다. 아무 일도 없었다는 듯이, 당신은 눈앞의 책에 몰두한다.
+<<promiscuity1>>
+<<link [[감사한다|Asylum Study Thank]]>><</link>>
+<br>
+<<if hasSexStat("promiscuity", 3)>>
+	<<if $NPCList[0].penis isnot "none">>
+		<<link [[지퍼를 내린다|Asylum Study Hand]]>><<set $phase to 0>><</link>><<promiscuous3>>
+		<br>
+	<<else>>
+		<<link [[치마를 올린다|Asylum Study Hand]]>><<set $phase to 1>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Asylum Study Hand
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<famesex 1>>
+<<if $phase is 0>>
+	당신은 <<his_ yi>> 바지 지퍼를 내린다.
+<<else>>
+	당신은 <<his_ yi>> 치마를 들춘다.
+<</if>>
+<<if $NPCList[0].penis isnot "none">>
+	<<bodyliquid "rightarm" "semen">>
+	<<Hes_ yi>> 아래쪽은 벌써 단단해져 있다. 당신은 손가락을 <<his_ yi>> 육봉을 따라 움직이며, <<him_ ga>> 당신의 손길에 몸을 부들부들 떠는 것을 느낀다. <<He_ ga>> 도서관 주변을 슬쩍 훑어보지만, 환자나 직원 중 누구도 눈치채지 못했다.
+	<br><br>
+	당신의 손가락이 <<his_ yi>> 귀두에 닿자, <<his_ yi>> 입술에서 신음 소리가 흘러나온다. <<He_ ga>> 손으로 <<his_ yi>> 입을 막는다. 쾌락의 물결이 <<He_ yi>> 몸에 휘몰아치더니 얼마 지나지 않아 <<him_ nun>> 당신의 손에 사정한다.
+	<br><br>
+<<else>>
+	<<Hes_ yi>> 아래쪽은 벌써 젖어 있다. 당신은 손가락을 <<his_ yi>> 갈라진 틈을 따라 움직이며, <<him_ ga>> 당신의 손길에 몸을 부들부들 떠는 것을 느낀다. <<He_ ga>> 도서관 주변을 슬쩍 훑어보지만, 환자나 직원 중 누구도 눈치채지 못했다.
+	<br><br>
+	당신의 손가락이 <<his_ yi>> 클리토리스에 닿자, <<his_ yi>> 입술에서 신음 소리가 흘러나온다. <<He_ ga>> 손으로 <<his_ yi>> 입을 막는다. 쾌락의 물결이 <<He_ yi>> 몸에 휘몰아치더니 얼마 지나지 않아 <<him_ nun>> 당신의 손으로 절정한다.
+	<br><br>
+<</if>>
+<<if $phase is 0>>
+	당신은 <<his_ yi>> 바지 지퍼를 올리고 손을 뺀다.
+<<else>>
+	당신은 <<his_ yi>> 치마를 내리고 손을 뺀다.
+<</if>>
+<<if $speech_attitude is "meek">>
+	"제게 친절하시네요," 당신이 속삭인다. "저도 친절하게 굴어야 공평하죠."
+<<elseif $speech_attitude is "bratty">>
+	"도와줘서 고마워요," 당신이 속삭인다.
+<<else>>
+	"도움이 됐어요," 당신이 속삭인다. "그게 감사의 표시가 되었기를 바라요."
+<</if>>
+<br><br>
+<<He_ ga>> 여전히 얼굴을 붉힌 채 고개를 끄덕인다. "나-난 다시 일하러 가야 겠어," <<he_ ga>> 말한다. <<He_ ga>> 비틀거리며 방을 빠져나간다.
+<br><br>
+<<link [[다음|Asylum]]>><<endevent>><</link>>
+<br>
+
+:: Asylum Breakfast
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 자리에 앉아 다른 환자들과 함께 아침 식사를 즐긴다.
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	당신의 팔은 묶여있기에,
+	<<if $asylumstatus gte 66>>
+		주변의 환자가 당신의 식사를 돕는다.
+		<br>
+		"여기선 서로 돌봐야 해."
+		<br>
+	<<elseif $asylumstatus gte 33>>
+		접시에 얼굴을 바짝 갖다 대고 식사를 한다.
+	<<else>>
+		접시에 얼굴을 바짝 갖다 대고 식사를 한다.
+		근처에 있던 사람이 <<print either("당신의 머리를 잡고 음식에 얼굴을 쑤셔 박는다.","바보 같은 표정을 지으며 당신이 먹는 모습을 흉내낸다.","당신을 가리키며 웃어댄다.","당신이 소시지를 먹는 방식에 대해 음란한 말을 한다.")>>
+		많은 사람들이 웃는다.
+	<</if>>
+<</if>>
+음식은 맛있고, 당신은 따스하고 행복한 기분을 느낀다. 비단 당신뿐만이 아니다. 다른 환자들은 더 사교적으로 보인다.
+<br><br>
+<<if isPregnancyEnding()>>
+	<<pregnancyPassout "asylumCafe">>
+<<elseif $exposed is 2>>
+	당신의 <<lewdness_ ga>> 드러나자 사람들의 이목이 집중된다.
+	<<exhibitionism5>>
+<<elseif $exposed is 1>>
+	당신의 <<lewdness_ ga>> 드러나자 사람들의 이목이 집중된다.
+	<<exhibitionism3>>
+<<elseif $asylumstatus gte 80>>
+	다른 환자들은 당신과 대화하기를 열망하는 것 같다.
+<<elseif $asylumstatus gte 60>>
+	주변의 여러 환자들이 아침 식사를 하며 당신과 대화를 나눈다.
+<<elseif $asylumstatus gte 40>>
+	가까이에 있던 환자들이 마지못해 대화에 응한다.
+<<else>>
+	하지만, 당신이 어떤 말을 하든 싸늘한 침묵만이 돌아온다.
+<</if>>
+<br>
+<<asylumevents>>
+
+:: Asylum Staff
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 키 카드 잠금장치가 있는 직원 출입문에 접근한다.
+<<if $asylumkeycard is 1>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		키 카드를 가지고 있지만, 팔이 묶여 있어서 사용할 수 없다.
+	<<else>>
+		원한다면 키 카드로 문을 열 수 있다.
+	<</if>>
+<<else>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		팔이 묶여 있어, 키 카드가 있다 하더라도 손을 뻗을 수 없다.
+	<<else>>
+		키 카드가 있다면 문을 열 수 있을 것이다.
+	<</if>>
+<</if>>
+<br><br>
+<<if $asylumkeycard is 1>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+	<<else>>
+		<<link [[연다|Asylum Open]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<link [[돌아간다|Asylum]]>><</link>>
+<br>
+
+:: Asylum Open
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 문을 열고 안을 들여다본다.
+<<if $asylumstate is "sleep">>
+	복도 너머는 어둡고 텅 비어 있다. 당신은 발끝으로 조심스럽게 지나간다.
+	<br><br>
+	당신은 가끔씩 순찰하는 직원을 피해, 정신병원의 직원 구역을 탐색한다. 당신은 화면으로 가득 찬 방에 다다른다. 카메라들이 각 감방 내부를 비추고 있다. 두 명의 환자가 자위를 하고 있다.
+	<br><br>
+	화면 하나에 "<span class="red">공기 중 최음제 살포량: 3%</span>" 이라고 적혀 있다. 그 아래엔 아무것도 쓰여 있지 않은 버튼들과 다이얼들이 많이 붙어 있다.
+	<br><br>
+ 	<<link [[작동시키려 시도한다 (1:00)|Asylum Cameras]]>><<pass 60>><</link>> <<note "과학 실력이 높을수록 성공할 가능성이 높아집니다. 성공한다면 탈출 단계를 시작합니다." "italic">>
+	<br>
+	<<link [[그만둔다|Asylum]]>><</link>>
+	<br>
+<<else>>
+	복도 너머는 업무를 처리하느라 분주한 직원들로 붐빈다. 이곳에 계속 머물러 있다면 눈에 띌 것이다. 아마 밤이라면 한산해질 것이다.
+	<br><br>
+	<<link [[다음|Asylum]]>><</link>>
+<</if>>
+
+:: Asylum Cameras
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if random(1, 1000) lte (currentSkillValue('science') + 100)>>
+	<<if currentSkillValue('science') gte 400>>
+		당신은 기계를 작동시키는 방법을 알아내려 한다. 기계에는 일정한 규칙이 있고, 여러 시행착오를 거쳐 최음제를 켜는 방법을 알아낸다. 아무런 조짐도 없이, 경보가 울려 퍼진다. 이제 화면엔 "<span class="red">''경고'' 최음제 투여 활성화: 2000%</span>" 라고 표시된다. 고함소리가 들려온다.
+		<br><br>
+	<<else>>
+		당신은 기계를 작동시키는 방법을 알아내려 한다. 당신은 무작위로 버튼을 누르고 다이얼을 돌리는 데 의존한다. 아무런 조짐도 없이, 경보가 울려 퍼진다. 이제 화면엔 "<span class="red">''경고'' 최음제 투여 활성화: 2000%</span>" 라고 표시된다. 고함소리가 들려온다.
+		<br><br>
+	<</if>>
+	<<link [[다음|Asylum Escape]]>><</link>>
+	<br>
+<<else>>
+	당신은 기계를 작동시키는 방법을 알아내려고 하지만, 어떻게 해도 아무런 반응이 없다.
+	<br><br>
+	<<if $asylumstate is "sleep">>
+		<<link [[다시 시도한다 (1:00)|Asylum Cameras]]>><<pass 60>><</link>>
+		<br>
+		<<link [[그만둔다|Asylum]]>><</link>>
+		<br>
+	<<else>>
+		방 밖에서 목소리가 들려온다. 그들은 지나쳐 가지만, 여기에 계속 머물러 있다가는 금방 발각될 것이다. 당신은 몰래 빠져나온다.
+		<br><br>
+		<<link [[다음|Asylum]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Asylum Escape
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 정신없이 뛰어다니는 경비원들을 피해, 벽감을 통해 몸을 숨겨가며 환자 구역으로 돌아간다. 당신이 도착했을 때는, 이미 모든 것이 아수라장이 되어 있었다. 감방 문은 열려 있고, 갇혀 있던 환자들은 모두 풀려나 있다. 일부 경비원들은, 이미 유니폼이 벗겨진 채 쓰러져 있다. 여러 명의 환자들이 서로를 공격하고 있다. 경비원들이 동료들을 구출하려 하지만, 그들의 곤봉으로는 환자들의 숫자와 욕망을 감당할 수 없다. 대다수의 환자들은 쓰러진 보안 요원을 보며 만족하지만, 다른 환자들은 탁자나 의자 또는 바닥에서 서로 섹스를 하고 있다.
+<br><br>
+당신은 창 밖을 쳐다본다. 위협을 막기 위해 모든 인력이 출동하면서 감시탑은 비어 있으며 순찰대도 보이지 않는다. 하퍼 선생님이 경비병들에 둘러싸인 채, 반대편 문으로 들어온다. 지금이 절호의 찬스다.
+<br><br>
+당신은 아무런 방해도 받지 않고 앞문으로 달려나가, 운동장을 가로지른다. 당신은 울타리를 넘어 숲으로 탈출한다.
+<br><br>
+<<endevent>>
+<<asylumescape>>
+<<link [[다음|Forest]]>><<set $forest to 100>><</link>>
+<br>
+
+:: Asylum Hide
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 레크리에이션 실의 의자 밑에 몸을 웅크리고 기다린다. 불이 꺼지고, 어둠 속에 홀로 남겨진다.
+<br><br>
+<<endevent>>
+<<link [[다음|Asylum]]>><</link>>
+
+:: Asylum Shower
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if $rng gte 71>>
+	하퍼가 당신과 다른 환자들을 실내의 샤워실로 안내한다. "물이 이제 나올 겁니다," <<he_ ga>> 말한다. "위생은 중요합니다. 전 여러분이 씻는 모습을 보고 싶어요."
+	<br><br>
+	다른 환자들이 옷을 벗자 <<he_ ga>> 당신의 어깨에 손을 얹는다. "아까도 말했지만, 위생은 중요하단다. 내가 직접 너의 위생상태가 규칙에 맞는지 확인해도 괜찮겠니?"
+	<br><br>
+	<<link [[샤워한다|Asylum Shower Accept]]>><<strip>><<wash>><<stress 6>><<arousal 1800>><<set $suspicion -= 1>><<npcincr Harper love 1>><</link>><<exhibitionist1>><<gstress>><<garousal>><<lsuspicion>>
+	<br>
+	<<link [[거부한다|Asylum Shower Refuse]]>><<set $suspicion += 1>><<npcincr Harper love -1>><</link>><<gsuspicion>>
+	<br>
+<<else>>
+	하퍼가 당신과 다른 환자들을 실내의 샤워실로 안내한다. "물이 이제 나올 겁니다," <<he_ ga>> 말한다. "위생은 중요합니다. 전 여러분이 씻는 모습을 보고 싶어요."
+	<br><br>
+	대부분의 환자들은 이에 익숙해져서, 아무런 문제 없이 옷을 벗는다. 일부는 머뭇거린다. 하퍼가 잡역부를 보내 환자들이 옷을 벗는 것을 돕도록 한다.
+	<br><br>
+	<<link [[옷을 벗고 눈에 띄지 않는 곳을 찾는다|Asylum Shower Secluded]]>><<strip>><<wash>><</link>><<exhibitionist1>>
+	<br>
+	<<if hasSexStat("exhibitionism", 2)>>
+		<<link [[옷을 벗고 다른 사람들 근처에서 씻는다|Asylum Shower Wash]]>><<strip>><<wash>><</link>><<exhibitionist2>>
+		<br>
+	<</if>>
+	<<link [[슬쩍 빠져나간다|Asylum]]>><<endevent>><<suspicion 5>><</link>><<ggsuspicion>>
+	<br>
+<</if>>
+
+:: Asylum Shower Refuse
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 고개를 가로젓는다. 하퍼가 인상을 찌푸리지만, 강요하지는 않는다. <<He_ nun>> 몇몇 다른 환자들이 옷을 벗는 것을 망설이는 것을 발견한다. <<He_ ga>> 잡역부를 보내 환자들이 옷을 벗는 것을 돕도록 한다.
+<br><br>
+<<link [[옷을 벗고 눈에 띄지 않는 곳을 찾는다|Asylum Shower Secluded]]>><<strip>><<wash>><</link>><<exhibitionist1>>
+<br>
+<<if hasSexStat("exhibitionism", 2)>>
+	<<link [[옷을 벗고 다른 사람들 근처에서 씻는다|Asylum Shower Wash]]>><<strip>><<wash>><</link>><<exhibitionist2>>
+	<br>
+<</if>>
+<<link [[슬쩍 빠져나간다|Asylum]]>><<endevent>><<suspicion 5>><</link>><<ggsuspicion>>
+<br>
+
+:: Asylum Shower Accept
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 고개를 끄덕인다. 하퍼가 미소를 지으며 당신의 옷을 벗기기 시작한다. <<His_ yi>> 움직임은 무미건조하다. <<covered>> <<He_ nun>> 당신의 옷을 깔끔하게 개어 놓고 당신이 샤워기 아래 서자 스펀지를 집어 든다.
+<<exhibitionism1>>
+<<he_ ga>> 당신의 몸을 위에서 아래로 문지르며, 먼저 목에 집중하고, 팔, 몸통, 배, 등, 다리, 엉덩이까지 닦을 동안 당신은 가만히 서 있는다. <<He_ ga>> 좀 더 부드럽게 문지른다. 당신은 평소와 같이 호흡하려 애쓴다.
+<br><br>
+<<He_ ga>> 스펀지를 당신의 <<genitalsPost "에">> 대고 누른다. 당신은 비명을 지르려는 것을 억누른다. <<He_ ga>> 당신 바로 뒤에 서서, 다른 사람들이 무슨 일이 일어나고 있는지 보지 못하게 한다. <<he_ ga>> 스펀지로 당신을 쓰다듬고 마사지하며, 쾌락의 파도를 당신의 등줄기에 흘려보낸다.
+<br><br>
+힘이 빠지는 순간 당신은 야릇한 한숨을 내쉰다. <<He_ ga>> 두 손가락을 당신의 입 위에 얹으며, 조용히 하라는 신호를 보낸다.
+<br><br>
+<<if $arousal gte $arousalmax>>
+	<<orgasm>>
+	당신이 <<his_ yi>> 손에 허리를 굽히고, 신음을 억누르며 절정하는 동안 <<he_ ga>> 계속해서 당신을 부드럽게 마사지한다.
+	<br><br>
+<</if>>
+<<he_ ga>> 멈출 때 쯤, 당신의 다리에 힘이 풀리는 것이 느껴진다. 목욕이 끝나자 <<He_ ga>> 당신의 뺨에 살짝 키스를 한다.
+<br><br>
+<<link [[다음|Asylum]]>><<clotheson>><<endevent>><</link>>
+<br>
+
+:: Asylum Shower Secluded
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 잡역부들이 문제삼지 않을 정도의 속도로, 천천히 옷을 벗는다. 당신의 <<lewdness_ ga>> 노출될 때 쯤엔 다른 환자들은 이미 샤워실에 들어가있다. 당신은 그들을 따라가되, 감시를 받지 않는 한적한 곳을 찾는다. 당신은 다른 환자들이 샤워를 마치기 전에, 신속하게 씻고 옷을 입는다.
+<<exhibitionism1>>
+<<endevent>>
+<<link [[다음|Asylum]]>><<clotheson>><</link>>
+<br>
+
+:: Asylum Shower Wash
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<generate2>><<generate3>>
+<<if $o_long_and_beautiful gte 1 and $o_long_and_beautiful lte 7 and $rng % 3 == 0>><<set $o_long_and_beautiful += 1>>
+	당신이 옷을 벗자, 두 명의 잡역부 <<person2>><<person_ wa>> <<person3>><<person_ ga>> 당신 근처에 앉아 있는 길고, 헝클어지고, 엉겨붙은 머리카락을 가진 날씬한 소녀를 향해 다가간다.
+	<br>
+	"벗어," <<person_ ga>> 소리친다. "당장."
+	<br>
+	그녀는 움직이지 않는다. <<person2>><<person_ ga>> 그녀의 어깨를 잡고 윗도리를 잡아당기자, 소녀는 갑자기 비명을 지르며 <<persons_ yi>> 얼굴을 할퀸다.
+	<<person3>><<person_ ga>> 재빨리 소녀의 머리채를 잡고, 머리를 뒤로 힘껏 잡아당겨 등쪽으로 바닥에 쓰러뜨린다. 긴 머리의 소녀가 바닥에 세게 부딪히지만,
+	그녀는 바닥에서 미친 듯이 발버둥을 치고, 비명을 지르며 사방으로 할퀴어대어 그들이 그녀를 붙잡기 위해 고군분투한다.
+	<br>
+	당신은 이쪽을 보지 않으려 하면서 다른 곳을 바라보고 있는 하퍼 선생님을 힐끗 쳐다본다.
+	<br>
+	소녀를 고정시킨 채, 잡역부들이 그녀의 옷을 벗기기 시작한다. 그러자마자 소녀가 갑자기 조용해진다. 그녀를 내려다보니, 그들이 그녀의 옷을 벗기는 동안,
+	그녀의 몸이 축 늘어지고 그녀의 눈에서는 눈물이 흘러내린다.
+	<br>
+	하퍼 선생님은 여전히 의도적으로 다른 곳을 주시하고 있다.
+	<br>
+	"왜 매번 이런 일을 하게 만드는 건지," <<person2>><<person_ ga>> 소녀의 마지막 속옷을 벗기면서 내뱉는다. "우리가 이런 것에 흥분한다고 생각해?"
+	<br>
+	"그리고 그 망할 머리도 좀 감아," <<person3>><<person_ ga>> 덧붙여 말한다. 그들은 고개를 가로젓는다.
+	<br>
+	소녀는 완전히 벌거벗은 채 누워 꼼짝도 하지 않고, 텅 빈 눈으로 눈물을 흘리고 있다.
+	<br><br>
+
+	"뭘 봐?" <<person2>><<person_ ga>> 당신을 노려본다. "너도 우리의 도움이 필요해?"
+	<br>
+	<<if $speech_attitude is "meek">>
+		"죄송해요," 당신은 재빨리 옷을 벗으며 말한다. 당신은 하퍼에게 달려간다. "선생님, 호- 혹시 제가 여기 남아서 저 여자애를 도와줘도 될까요. 저- 저 여자애를 아는 것 같아요."
+		<br>
+		하퍼가 당신을 보며 잠시 어리둥절한 표정을 짓는다. "그래. 그래, 괜찮아. 씻는 것만 잊지 말렴. 위생은 중요하니까."
+	<<elseif $speech_attitude is "bratty">>
+		"''하퍼 선생님''," 당신이 소리친다. 하퍼가 돌아본다. "여기 있는 두 천재들이
+		<<if currentSkillValue('science') gte 600>>
+			외상 후 유발 반응을 인식하지 못하는 것 같아요.
+		<<else>>
+			상황을 더 악화시키고 있는 것 같아요.
+		<</if>>
+		여기 남아서 제 친구를 돌봐줘도 될까요?"
+		<br>
+		하퍼가 당신을 보며 잠시 어리둥절한 표정을 짓는다. "그래. 그래, 괜찮아. 둘 다 씻는 것만 잊지 말렴. 위생은 중요하니까."
+	<<else>>
+		당신은 재빨리 옷을 벗고 하퍼에게 달려간다.
+		<br>
+		"선생님, 부탁이에요. 저 여자애 좀 봐주세요.
+		<<if currentSkillValue('science') gte 600>>외상 후 유발 반응처럼 보이고 <</if>>저 둘이 상황을 더 악화시키는 것 같아요.
+		제가 그녀를 돕기 위해 여기 남아 있어도 되나요. 저- 저 그녀를 좀 아는 것 같아요."
+		<br>
+		하퍼가 잠시 호기심 어린 표정을 짓는다. "그래. 그래, 그러렴. 씻는 것만 잊지 말렴. 위생은 중요하니까."
+	<</if>>
+	<br>
+	하퍼가 잡역부들에게 당신을 내버려 두라는 신호를 보낸다.
+	<<exhibitionism2>>
+	<<endevent>>
+	<<link [[다음|Asylum Shower Wash Hair]]>><</link>>
+<<else>>
+	당신은 옷을 벗고 샤워실에 들어간다. 당신은 커다란 방 한가운데 서서 다른 환자들과 함께 씻는다.
+	당신은 <<person2>><<person_ wa>> <<person3>><<person_ ga>> 당신을 살펴보고 있다는 것을 알아챘지만, 대부분은 당신에게 관심을 기울이지 않는다.
+	당신은 다시 옷가지가 있는 곳으로 돌아와 몸을 말리고 옷을 입는다.
+	<<exhibitionism2>>
+	<<endevent>>
+	<<link [[다음|Asylum]]>><<clotheson>><</link>>
+	<br>
+<</if>>
+
+
+:: Asylum Shower Wash Hair
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<pass 25>>
+완전히 벗은 채로, 당신은 날씬하고, 긴 머리의 소녀와 한참 동안 앉아 있는다. 당신은 그녀를 만지지 않고, 그저 조용히 그녀에게 말을 건다.
+<<if currentSkillValue('english') gte 500>>
+	잠시 후, 그녀가 당신을 쳐다보고 있는 것을 알아차린다. 당신의 설득력이 빛을 발하는 것 같다.
+	<<if $o_long_and_beautiful lt 9>>
+		<<set $o_long_and_beautiful += 1>>
+	<</if>>
+<<else>>
+	한참 후, 그녀는 정신을 차린 것 같다.
+<</if>>
+<br><br>
+마침내, 그녀가 속삭인다: "알았어." 당신 둘은 함께 샤워실로 가서 씻는다. 거기에는 당신들 둘만 있고, 나머지 사람들은 모두 한참 전에 샤워를 마쳤다. 긴 머리 소녀는
+<<if $o_long_and_beautiful gte 6>>
+	씻으면서 정신병원에서의 삶에 대해 조금 이야기를 한다.
+<<elseif $o_long_and_beautiful gte 4>>
+	적절히 씻는다. 당신은 그녀가 당신을 향해 방긋 웃은 것 같다고 몇 차례 생각한다.
+<<else>>
+	재빨리 몸을 씻느라 더 이상 당신을 주목하지 않는 것 같다.
+<</if>>
+당신은 다시 옷가지가 있는 곳으로 돌아와 몸을 말리고 옷을 입는다.
+<br><br>
+<<link [[다음|Asylum]]>><<clotheson>><</link>>
+<br>
+
+
+:: Asylum Harper Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<promiscuity1>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[다음|Asylum Harper Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Asylum Harper Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Asylum Harper Sex Finish
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if $enemyhealth lte 0>>
+	당신은 <<him_ rul>> 밀어낸다. <<He_ nun>> 화가 난 듯 하지만, 곧 평정심을 되찾는다. "넌 여전히 분노 조절에 문제가 있구나," <<he_ ga>> 말한다. "하지만 그 점 때문에 여기 온 건 아니지. 매주 금요일마다, 병원에서 계속 만났으면 좋겠구나. 도시로 데려다줄 차가 기다리고 있단다. 잘 지내렴."
+	<br><br>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He_ ga>> 잠시 당신 위에 누워, 숨을 깊게 내쉰다. <<He_ ga>> 한 발짝 물러서서 <<his_ yi>> 옷을 고쳐 입는다. "너-널 도시로 데려다 줄 차가 기다리고 있단다. 매주 금요일마다, 병원에서 계속 만났으면 좋겠구나. 잘 지내렴."
+<<else>>
+	<<He_ nun>> 화가 난 듯 하지만, 곧 평정심을 되찾는다. "치료가 끝날 때까지 널 데리고 있을 수만 있다면," <<he_ ga>> 한숨을 내쉰다. "널 도시로 데려다 줄 차가 기다리고 있단다. 매주 금요일마다, 병원에서 계속 만났으면 좋겠구나. 잘 지내렴."
+<</if>>
+<br><br>
+<<clothesontowel>>
+<<endcombat>>
+<<if $suspicion gte 80>>
+	잡역부 한 무리가 당신을 하퍼의 사무실에서 데리고 나와, 정신병원의 주요 구역으로 데려간다.
+<<elseif $suspicion gte 20>>
+	두 잡역부가 당신을 하퍼의 사무실에서 데리고 나와, 정신병원의 주요 구역으로 데려간다.
+<<else>>
+	한 간호사가 당신을 하퍼의 사무실에서 데리고 나와, 정신병원의 주요 구역으로 데려간다.
+<</if>>
+<<if $asylumstatus gte 80>>
+	다른 환자들이 당신에게 작별 인사를 한다.
+<<elseif $asylumstatus gte 20>>
+	다른 환자들이 당신을 무시한다.
+<<else>>
+	다른 환자들은 당신을 비웃는다.
+<</if>>
+당신은 직원용 문과, 더 큰 이중문을 지나 대기 중인 차에 올라탄다.
+<br><br>
+차가 움직이기 시작하고, 철문을 지나 숲으로 들어간다. 도로는 어둡고, 수풀이 무성하게 자라 있다. 당신은 빠르게 이동하지 못한다. 운전자는 아무 말도 하지 않는다.
+<br><br>
+<<pass 60>>
+당신은 도시에서 멀리 떨어진 숲을 빠져나왔지만, 도로는 황무지와 농지를 지나 북쪽으로 굽어 있다. 당신은 곧 문명 사회로 다시 돌아온다. 북적이는 하베스트 가가 당신을 맞이한다. 당신은 고아원이 시야에 들어올 때까지 계속 걷는다.
+<br><br>
+<<asylumend>>
+<<endevent>>
+<<link [[다음|Asylum Return]]>><</link>>
+
+:: Asylum Harper Shove
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 의사를 밀어낸다. <<He_ nun>> 화가 난 듯 하지만, 곧 평정심을 되찾는다. "넌 여전히 분노 조절에 문제가 있구나," <<he_ ga>> 말한다. "하지만 그 점 때문에 여기 온 건 아니지. 매주 금요일마다 병원에서 계속 만났으면 좋겠구나. 도시로 데려다줄 차가 기다리고 있단다. 잘 지내렴."
+<br><br>
+<<if $suspicion gte 80>>
+	잡역부 한 무리가 당신을 하퍼의 사무실에서 데리고 나와, 정신병원의 주요 구역으로 데려간다.
+<<elseif $suspicion gte 20>>
+	두 잡역부가 당신을 하퍼의 사무실에서 데리고 나와, 정신병원의 주요 구역으로 데려간다.
+<<else>>
+	한 간호사가 당신을 하퍼의 사무실에서 데리고 나와, 정신병원의 주요 구역으로 데려간다.
+<</if>>
+<<if $asylumstatus gte 80>>
+	다른 환자들이 당신에게 작별 인사를 한다.
+<<elseif $asylumstatus gte 20>>
+	다른 환자들이 당신을 무시한다.
+<<else>>
+	다른 환자들은 당신을 비웃는다.
+<</if>>
+당신은 이중문을 지나 대기 중인 차에 올라탄다.
+<br><br>
+차가 움직이기 시작하고, 철문을 지나 숲으로 들어간다. 도로는 어둡고, 수풀이 무성하게 자라 있다. 당신은 빠르게 이동하지 못한다. 운전자는 아무 말도 하지 않는다.
+<br><br>
+<<pass 60>>
+당신은 도시에서 멀리 떨어진 숲을 빠져나왔지만, 도로는 황무지와 농지를 지나 북쪽으로 굽어 있다. 당신은 곧 문명 사회로 다시 돌아온다. 북적이는 하베스트 가가 당신을 맞이한다. 당신은 고아원이 시야에 들어올 때까지 계속 걷는다.
+<br><br>
+<<asylumend>>
+<<endevent>>
+<<link [[다음|Asylum Return]]>><</link>>
+
+:: Asylum Return
+
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<if C.npc.Robin.init is 1 and $robinmissing is 0>>
+	<<if C.npc.Robin.trauma gte 80>>
+		당신은 고아원에 들어가서 당신의 방으로 향한다. 당신은 누구와도 마주치지 못한다. 쪽지가 붙어 있는 작은 케이크가 창틀에 놓여 있다.
+		<br><br>
+		"돌아온 걸 환영해!
+		<br>
+		- 로빈"
+		<br><br>
+	<<elseif C.npc.Robin.trauma gte 20>>
+		당신은 고아원에 들어가서 당신의 방으로 향한다. 당신은 <<npc Robin>><<person1>>로빈이 당신을 기다리고 있는 것을 발견한다. <<He_ ga>> 자리에서 벌떡 일어나 당신을 안는다. "베일리가 병원에서 연락이 왔었다고 했어," <<he_ ga>> 말한다. "네가 곧 돌아올 거라고 했어." <<He_ ga>> 뒤로 물러서며 미소를 짓는다. "병원에서 면회를 허락해주지 않더라. 네게 줄 게 있어." <<He_ ga>> 무릎을 꿇고 침대 밑에서 무언가를 꺼낸다. 작은 케이크다.
+		<br><br>
+		"숨겨둘 수밖에 없었어." <<He_ ga>> 다시 당신을 껴안는다. "돌아온 걸 환영해. 보고 싶었어."
+		<br><br>
+		당신은 <<him_ wa>> 잠시 대화를 나눈다. <<He_ ga>> 당신이 어디에 있었는지 묻는다. 당신의 방은 어땠는지, 음식은 맛있었는지, 사람들은 친절했는지 묻는다. 당신은 <<himPost "에게">> 어디까지 말해야 할지 확신하지 못한다. "난 가봐야겠어," <<he_ ga>> 한참 뒤 말한다. "베일리가 집안일을 시켰거든." <<He_ ga>> 떠나면서 손을 흔든다.
+		<<ltrauma>><<lstress>><<trauma -12>><<stress -12>>
+		<br><br>
+	<<else>>
+		고아원에 가까워지자 창문에 익숙한 얼굴이 보인다. 로빈이다. 당신이 안으로 들어서자 <<npc Robin>><<person1>><<He_ ga>> 달려들어, 포옹을 하다가 거의 당신을 넘어뜨릴 뻔 한다. "베일리가 병원에서 연락이 왔었다고 했어," <<he_ ga>> 말한다. "네가 곧 돌아올 거라고 했어." <<He_ ga>> 뒤로 물러서며 미소를 짓는다. "병원에서 면회를 허락해주지 않더라. 네게 줄 게 있어. 날 따라와." <<He_ ga>> 당신의 손을 잡고 <<him_ yi>> 뒤로 잡아당긴다.
+		<br><br>
+		<<He_ ga>> 당신의 방에 무릎을 꿇더니, 당신의 침대 밑에서 무언가를 꺼낸다. 작은 케이크다. "숨겨둘 수밖에 없었어." <<He_ ga>> 다시 당신을 껴안는다. "돌아온 걸 환영해. 보고 싶었어."
+		<br><br>
+		당신은 <<him_ wa>> 잠시 대화를 나눈다. <<He_ ga>> 당신이 어디에 있었는지 묻는다. 당신의 방은 어땠는지, 음식은 맛있었는지, 사람들은 친절했는지 묻는다. 당신은 <<himPost "에게">> 어디까지 말해야 할지 확신하지 못한다. "난 가봐야겠어," <<he_ ga>> 한참 뒤 말한다. "베일리가 집안일을 시켰거든." <<He_ ga>> 떠나면서 손을 흔든다.
+		<<ltrauma>><<lstress>><<trauma -12>><<stress -12>>
+		<br><br>
+	<</if>>
+<<else>>
+	당신은 고아원에 들어가서 당신의 방으로 향한다. 당신은 누구와도 마주치지 못한다.
+	<br><br>
+<</if>>
+
+<<endevent>>
+<<link [[다음|Bedroom]]>><</link>>
+<br>
+
+:: Asylum Truth
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 <<persons_ ga>> 숨은 곳을 가리킨다. <<person2>><<person_ ga>> 그 옆에서 몸을 숙이고 손을 뻗어, 몸부림치는 <<person1>><<person_ yi>> 팔을 잡아당긴다. "하퍼 선생님이 당신은 여기에 머물러야 한다고 하셨어요," <<person2>><<he_ ga>><<person1>><<he_ rul>> 끌고 가면서 말한다. "당신을 위한 거예요."
+<br><br>
+<<endevent>>
+<<link [[다음|Asylum]]>><</link>>
+<br>
+
+:: Asylum Lie
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<person2>><<person_ nun>> 눈살을 찌푸리지만, 더 이상 문제 삼지 않고 지나간다. 그러자 <<person1>><<person_ ga>> 나타나 당신에게 고개를 숙여 감사의 인사를 건넨다.
+<br><br>
+<<endevent>>
+<<link [[다음|Asylum]]>><</link>>
+<br>
+
+:: Asylum Intervene
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 <<person1>><<persons_ yi>> 팔을 <<person2>><<personPost "에게서">> 떼어낸다. 둘 다 충격받은 듯하다. "만지지 마," <<person1>><<person_ ga>> 말한다. "네가 뭐라도 되는 줄 알아?" <<person2>><<person_ ga>> 당신에게 감사의 미소를 짓는다.
+<br><br>
+<<endevent>>
+<<link [[다음|Asylum]]>><</link>>
+<br>
+
+:: Asylum Flirt
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+당신은 <<personPost "에게">> 미소로 화답한다. <<He_ ga>> 다가와서 당신과 즐거운 대화를 나눈다.
+<<promiscuity1>>
+<<link [[작별 인사를 한다|Asylum]]>><<endevent>><</link>>
+<br>
+<<if hasSexStat("promiscuity", 2)>>
+	<<link [[유혹한다|Asylum Seduce]]>><</link>><<promiscuous2>>
+	<br>
+<</if>>
+
+:: Asylum Seduce
+
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<set $seductiondifficulty to 6000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span><</if>><<seductionskilluse>>
+<br><br>
+당신은 <<personPost "에게">> 몸을 더 가까이 기댄다. "여긴 조용한 장소가 많아요," 당신이 속삭인다. "어떤 일이 벌어질지 누가 알까요."
+<<promiscuity2>>
+<<if $seductionrating gte $seductionrequired>>
+	<<He_ ga>> 주위를 둘러보더니 당신의 손을 잡는다. <<He_ ga>> 당신을 빈 방으로 이끌더니, 돌아서서 당신을 껴안는다.
+	<br><br>
+	<<link [[다음|Asylum Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	"마-만나서 반가웠어," <<he_ ga>> 말한다. <<He_ ga>> 떠난다.
+	<br><br>
+	<<endevent>>
+	<<link [[다음|Asylum]]>><</link>>
+	<br>
+<</if>>
+
+:: Asylum Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 50>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Asylum Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Asylum Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Asylum Sex Finish
+
+<<set $outside to 1>><<set $location to "asylum">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"의사가 내게 사람들에게 다가가는 것을 좀 더 받아들이라고 말했어," <<he_ ga>> 말한다. "그동안 좋은 기회를 놓치고 있었던 셈이지."
+	<br><br>
+	<<He_ ga>> 당신의 뺨에 키스하고 떠난다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $enemyhealth lte 0>>
+	당신은 <<person_ rul>> 밀치고 복도로 도망친다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $finish is 1>>
+	"의사가 내게 사람들에게 다가가는 것을 좀 더 받아들이라고 말했어," <<he_ ga>> 말한다. "그동안 좋은 기회를 놓치고 있었던 셈이지."
+	<br><br>
+	<<He_ ga>> 당신의 뺨에 키스하고 떠난다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+<br><br>
+<<link [[다음|Asylum]]>><</link>>
+
+:: Asylum Cell Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Asylum Cell Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Asylum Cell Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Asylum Cell Rape Finish
+
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"누구에게도 징징대며 말하지 마," <<person1>><<person_ ga>> 말한다. "아무도 믿지 않겠지만." 두 사람이 웃으며 감방 문을 찰칵하고 잠근다. <<tearful>> 당신은 다시 침대에 눕는다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Asylum Cell]]>><</link>>
+<<else>>
+	<<group_ i>> 고통스러워하며 몸을 움츠린다. "그냥 가자," <<person2>><<person_ ga>> 말한다. "얘 보다 더 쉬운 <<girlsPost "들">>도 많아." 감방 문이 찰칵하고 잠긴다. <<tearful>> 당신은 다시 침대에 눕는다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Asylum Cell]]>><</link>>
+<</if>>
+
+:: Asylum Exposure Accept
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"아-알겠어요," 당신이 말한다. "보여주셔도 돼요."
+<<elseif $speech_attitude is "bratty">>
+	"물론이죠," 당신이 말한다. "제가 확인해 드릴게요."
+<<else>>
+	"알겠어요," 당신이 말한다. "보여주셔도 돼요."
+<</if>>
+<br><br>
+
+<<person_ nun>> 망설이다가, 가운을 펼쳐서, <<his_ yi>>
+<<if $pronoun is "m">>
+	<<if $NPCList[0].penis isnot "none">>
+		<<penisdesc_ rul $NPCList[0].penisdesc>> 드러낸다.
+	<<else>>
+		보지를 드러낸다.
+	<</if>>
+<<else>>
+	<<if $NPCList[0].penis isnot "none">>
+		<<breastsdesc_ wa $NPCList[0].breastsdesc>> <<penisdesc_ rul $NPCList[0].penisdesc>> 드러낸다.
+	<<else>>
+		<<breastsdesc_ ul $NPCList[0].breastsdesc>> 드러낸다.
+	<</if>>
+<</if>>
+
+<<He_ nun>> 눈을 감고, 양손을 <<his_ yi>> 옆구리에 붙이고 가만히 서 있다. <<He_ ga>> 숨죽여 숫자를 센다.
+<br><br>
+
+한숨과 함께, <<he_ ga>> 몸을 숙여 <<his_ yi>> 가운을 집어들고, 황급히 <<him_ yi>> 몸을 감싼다. "고-고마워," <<he_ ga>> 서둘러 자리를 뜨며 말한다.
+<br><br>
+
+<<endevent>>
+
+<<link [[다음|Asylum]]>><</link>>
+<br>
+
+:: Asylum Exposure Refuse
+<<effects>>
+
+당신은 고개를 가로젓는다. <<person_ nun>> 잠시 안도하는 듯 보이지만, <<his_ yi>> 시련은 끝나지 않았다. <<He_ ga>> 자신의 몸을 보여줄 다른 사람을 찾기 위해 떠난다.
+<br><br>
+
+<<endevent>>
+<<link [[다음|Asylum]]>><</link>>
+<br>
+
+:: Asylum Exposure Shut
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"아-알겠어요," 당신은 직원들이 들을 만큼 큰 소리로 말한다. "보여주셔도 돼요."
+<<elseif $speech_attitude is "bratty">>
+	"물론이죠," 당신은 직원들이 들을 만큼 큰 소리로 말한다. "제가 확인해 드릴게요."
+<<else>>
+	"알겠어요," 당신은 직원들이 들을 만큼 큰 소리로 말한다. "보여주셔도 돼요."
+<</if>>
+당신은 눈을 감는다.
+<br><br>
+
+<<persons_ yi>> 가운이 바닥에 떨어지는 소리가 난다. <<He_ nun>> 숨죽여 숫자를 세기 시작한다. <<He_ ga>> 열까지 세자, 또 다른 소음이 들려온다.
+<br><br>
+
+"고마워!" <<he_ ga>> 말한다. 당신은 눈을 뜬다. <<person_ ga>> 안도한 표정으로 미소짓는다. "고마워." <<He_ ga>> 서둘러 자리를 뜬다.
+<br><br>
+
+<<endevent>>
+<<link [[다음|Asylum]]>><</link>>
+<br>
+
+:: Asylum Exposure Peek
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"아-알겠어요," 당신이 말한다. "보여주셔도 돼요."
+<<elseif $speech_attitude is "bratty">>
+	"물론이죠," 당신이 말한다. "제가 확인해 드릴게요."
+<<else>>
+	"알겠어요" 당신이 말한다. "보여주셔도 돼요."
+<</if>>
+당신은 눈을 감은 시늉을 하지만, 실제로는 눈을 약간 뜬다. 충분히 볼 수 있을 만큼.
+<br><br>
+
+<<person_ nun>> 망설이다가, 가운을 펼쳐서, <<his_ yi>>
+<<if $pronoun is "m">>
+	<<if $NPCList[0].penis isnot "none">>
+		<<penisdesc_ rul print $NPCList[0].penisdesc>> 드러낸다.
+	<<else>>
+		보지를 드러낸다.
+	<</if>>
+<<else>>
+	<<if $NPCList[0].penis isnot "none">>
+		<<breastsdesc_ wa $NPCList[0].breastsdesc>> <<penisdesc_ rul $NPCList[0].penisdesc>> 드러낸다.
+	<<else>>
+		<<breastsdesc_ ul $NPCList[0].breastsdesc>> 드러낸다.
+	<</if>>
+<</if>>
+
+<<He_ nun>> 눈을 감고, 양손을 <<his_ yi>> 옆구리에 붙이고 가만히 서 있다. <<He_ ga>> 숨죽여 숫자를 센다.
+<br><br>
+
+한숨과 함께, <<he_ ga>> 몸을 숙여 <<his_ yi>> 가운을 집어들고, 황급히 <<him_ yi>> 몸을 감싼다. "고마워!" <<he_ ga>> 말한다. 당신은 눈을 뜨는 시늉을 한다. <<person_ ga>> 안도한 표정으로 미소짓는다. "고마워." <<He_ ga>> 서둘러 자리를 뜬다.
+<br><br>
+
+<<link [[다음|Asylum]]>><<endevent>><</link>>
+<br>
+
+:: Asylum Garden
+<<set $outside to 1>>
+<<effects>>
+
+각각의 환자들에게 자유롭게 가꿀 수 있는 텃밭이 제공되어 있다. 대부분은 관리되지 않은 상태이지만, 일부는 작고, 근사한 모습으로 꾸며져 있다.
+<br><br>
+
+<<plot_effects>>
+
+<<if $asylum_plot_intro is 1>><<unset $asylum_plot_intro>>
+	<<plots_init asylum 1 earth 3 small>>
+<</if>>
+
+<<display_plot asylum>>
+
+<<if !$plants_known.includes("poppy")>>
+	<<icon "tending/poppy.png">> <<link [[씨앗을 찾는다 (0:30)|Asylum Garden Seeds]]>><<set $plants_known.push("poppy")>><<pass 30>><</link>>
+	<br>
+<<elseif $rng % 4 == 0 and $o_long_and_beautiful gte 1 and $o_long_and_beautiful lte 7>>/*1 in 4 chance if in right stage*/
+	<<if $o_long_and_beautiful lt 9>><<set $o_long_and_beautiful += 1>><</if>>
+	<br>
+	지저분하고, 헝클어진, 긴 머리를 한 소녀가 근처 밭에서 지켜보고 있는 것 같다.
+	<<if currentSkillValue('tending') gte 600>>그녀는 당신의 관리 스킬에 감명받은 것 같다. 뭐라 딱 잘라 말하긴 힘들다.<<if $o_long_and_beautiful lt 9>><<set $o_long_and_beautiful += 1>><</if>><</if>>
+<</if>>
+<br>
+
+<<getouticon>><<link [[나간다|Asylum]]>><</link>>
+<br>
+
+<<unset $event_trigger>>
+
+:: Asylum Garden Seeds
+<<effects>>
+
+대부분의 땅은 관리되지 않은 채, 야생 양귀비가 외부 울타리에서 건물까지 자라고 있다. 당신은 씨앗을 채집한다.
+<br><br>
+
+<span class="gold">당신은 이제 <<icon "tending/poppy.png">> 양귀비를 재배할 수 있다.</span>
+<br><br>
+
+<<link [[다음|Asylum Garden]]>><</link>>
+<br>
+
+
+:: Asylum Fake Treatment Accept
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<set $phase to 0>>
+당신은 그들과 함께 가는 데 동의한다. 두 사람이 당신을 많은 잡역부들이 기다리고 있는 '직원 전용,'이라고 표시된 문으로 데려간다.
+<br>
+그들이 문을 열고, 당신을 밝지만 텅 빈 감방에 넣는다. 한쪽 벽을 커다란 거울이 덮고 있다.
+<br><br>
+<<link [[다음|Asylum Fake Treatment]]>><</link>>
+
+
+
+:: Asylum Fake Treatment Refuse
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<set $phase to 1>>
+당신은 그들과 함께 가기를 거부하고, 자리를 뜨기 시작한다.
+<<if $physiqueSuccess>>
+	<<person2>><<person_ ga>> 당신을 붙잡으려 하지만, <span class="green">당신은 <<him_ rul>> 밀치고 환자들 사이로 도망친다.</span>
+	<br><br>
+	잡역부들은 다른 사람들 앞에서 소란을 피울 준비가 되지 않은 것
+	<<if $asylumstatus gte 20>>
+		<<if $asylumstatus gte 75>>
+			같고, 다른 환자들이 당신을 중심으로 모여 보호막을 형성한다.<<suspicion 2>> 잡역부들이
+		<<else>>
+			같다. 그들은 <<suspicion 1>>
+		<</if>>
+		눈살을 찌푸리며 자리를 뜬다.<<gsuspicion>>
+		<br><br>
+		<<link [[다음|Asylum]]>><</link>>
+	<<else>>
+		같지만, <span class="red">다른 환자들이 모두 당신에게서 멀어진다.</span>
+		<<if $speech_attitude is "bratty">>
+			당신은 군중 속에서 움직이려다, 다른 환자가 발을 걸어 당신은 바닥에 나뒹군다.
+		<</if>>
+		<<person2>><<person_ wa>> <<person1>><<person_ ga>> 당신을 붙잡고 더 많은 잡역부들이 기다리고 있는 '직원 전용' 이라고 적힌
+		문으로 데려간다.
+		<br>
+		그들이 문을 열고, 당신을 밝지만 텅 빈 감방에 넣는다. 한쪽 벽을 커다란 거울이 덮고 있다.
+		<br><br>
+		<<link [[다음|Asylum Fake Treatment]]>><</link>>
+	<</if>>
+	<br>
+<<elseif $asylumstatus gte 75>>
+	<span class="red"><<person2>><<person_ ga>> 당신을 붙잡고 바닥에 패대기친다.</span>
+	<<person_ ga>> 당신의 팔을 붙잡고 비틀려고 할 때, <span class="green">비명과 함께, <<he_ ga>> 공중으로 들어올려져 방안으로 내던져진다.</span>
+	당신 주위에 많은 환자가 모이면서 <<person1>><<person_ ga>> 뒷걸음질 친다.
+	<br>
+	잠시 후, <<person_ nun>> 눈살을 찌푸리며 자리를 뜬다. <<suspicion 2>><<gsuspicion>>
+	<br><br>
+	다른 환자들이 고개를 끄덕이고, 미소를 지으며 당신의 어깨를 토닥인 후 하던 일로 되돌아간다.
+	<br><br>
+	<<link [[다음|Asylum]]>><</link>>
+	<br>
+<<else>>
+	<span class="red"><<person2>><<person_ ga>> 당신을 붙잡고 바닥에 패대기친다.</span>
+	당신이 몸을 추스르기도 전에 <<he_ ga>> 당신의 팔을 고통스럽게 비틀어 쥐고는, 함께 더 많은 잡역부들이 기다리고 있는 '직원 전용'이라고 적힌
+	문으로 데려간다.<<gpain>><<pain 2>>
+	<br>
+	그들이 문을 열고, 당신을 밝지만 텅 빈 감방에 넣는다. 한쪽 벽을 커다란 거울이 덮고 있다.
+	<br><br>
+	<<link [[다음|Asylum Fake Treatment]]>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Asylum Fake Treatment
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+"하퍼 선생님이 저 반투명 거울 뒤에 있어," <<person1>><<person_ ga>> 말하며, 거울을 가리킨다.
+"여기서 일어나는 모든 일을 관찰하고 완벽하게 기록하고 있어. 하퍼 선생님은 이게
+네 평가의 중요한 부분이니 최선을 다해 행동해야 한다고 강조했어.
+<<if $phase is 1>>조금 전에 네가 행동했던 것 이후에는 특히 말이야.<</if>> 알아들었어?"
+<br>
+
+<<if $speech_attitude is "meek">>
+	"네, <<sirPost>>," 당신이 말한다. "이해했어요."
+<<elseif $speech_attitude is "bratty">>
+	당신은 아무 말도 하지 않고, 그들을 노려본다.
+<<else>>
+	당신은 고개를 끄덕인다.
+<</if>>
+<br><br>
+<<set $ft_count to 5>>
+<<if $rng gte 66 and $lactating gte 1 and $breastfeedingdisable is "f" and $milk_amount gte 500>>
+	<<set $ft_event to "milk">><<person2>>
+	<<if $worn.upper.name isnot "straightjacket">>
+		<<bind>><<upperwear 35>>
+		<<person_ ga>> 당신에게 의료용 구속복을 입히고, 팔을 묶는다.
+	<</if>>
+	<br><br>
+	당신은 거울 맞은편 벽으로 인도된다 - 당신은 벽에 수많은 쇠사슬 고리가 다양한 높이로 박혀 있는 것을 발견한다.
+	<<person1>><<person_ ga>> 당신을 돌려서 방을 바라보게 한다. 수많은 잡역부들이 문 근처에 모인다.
+	<<person_ ga>> 당신을 벽에 밀착시키는 동안, <<person2>><<person_ nun>> 당신의 구속복 뒷면을 벽의 고리에 걸고
+	- 허리에 한 번 그리고 목에 한 번 - 당신을 제자리에 선 채로 고정시킨다. <<person_ ga>> 당신의 구속복 옆쪽의 무언가를 풀더니,
+	<<person1>><<person_ ga>> 앞에서 잡아당긴다. 옷의 일부가 떨어져 나가면서, 당신의 팔은 묶여 있지만 당신의
+	<<if !$worn.under_upper.type.includes("naked")>>
+		<<undertop_ ga>> 노출된다. <<person_ ga>> 당신의 <<worn_under_upper_name_ rul>> 잡고 위로 당겨서, 당신의 <<breasts_ rul>> 완전히 노출시킨다.
+	<<else>>
+		<<breasts_ i>> 완전히 노출된다.
+	<</if>>
+	<<He_ ga>> 당신의 유방 한 쪽을 꽉 쥐자 모유가 뿜어져 나온다.
+	<br><br>
+	"많은 환자들이 섭식 장애를 앓고 있어," <<person_ ga>> 말한다. "그들의 치료의 일환이자 네 치료의 일환으로,
+	잠시 동안, 환자들을 데려와서 네게서 모유을 마시게 할 거야. 하퍼 선생님은 네가 긴장을 풀고
+	다른 사람들에게 영양을 공급하고 삶을 유지하는 데 얼마나 도움을 주고 있는지 생각하는게 매우 중요하다고 말했어. 이 두건이 네 얼굴을 가려서 네 존엄성을 지켜줄 거야."
+	<br><br>
+	머리 위로 두건이 씌워지면서, 당신을 어둠 속에 빠뜨린다.
+	<br>
+	거의 즉각적으로, 입술이 당신의 <<nipples_ rul>> 문다.
+	<br><br>
+	<<link [[다음|Asylum Fake Treatment Milked]]>><<set $ft_count to 8>><</link>>
+<<elseif $rng gte 33 and !playerChastity()>>
+	<<set $ft_event to "masturbation">>
+	<<person2>><<person_ ga>>
+	<<if $worn.upper.name isnot "straightjacket">>
+		<<bind>><<upperwear 35>>
+		당신에게 팔을 묶는 의료용 구속복을 입히고,
+	<<else>>
+		당신의 구속복을 확인하고,
+	<</if>>
+	<<if $worn.under_lower.type.includes("naked") and $worn.genitals.type.includes("naked")>>
+		
+	<<else>>
+		<<if !$worn.under_lower.type.includes("naked")>>
+			<<trClothes "under_lower" $worn.under_lower.name "name" "을">><<set _undies to _trResult>>
+		<<elseif !$worn.genitals.type.includes("naked")>>
+			<<trClothes "genitals" $worn.genitals.name "name" "을">><<set _undies to _trResult>>
+		<</if>>
+		<<underlowerstrip>>당신의 _undies 벗긴 뒤
+	<</if>>
+	당신을 거울 앞으로 데려간다. 의자 하나가 당신 뒤에 놓여진다.
+	<br>
+	"앉아," the <<person1>><<person_ ga>> 당신을 아래로 끌어내리며 말한다. <<person2>><<person_ ga>> 당신의 구속복을 의자에 부착하고
+	<<person1>><<person_ ga>> 당신의 종아리와 발목을 의자 다리에 묶어, 당신의 무릎을 강제로 벌린다.
+	<br><br>
+	<<generate3>><<generate4>><<generate5>>
+	<<if $o_long_and_beautiful gte 1 and $o_long_and_beautiful lte 7>><<set $o_long_and_beautiful += 1>> /*Modifies person 4 enough */
+		<<set $NPCList[3].description to "long-haired">><<set $NPCList[3].adult to 0>><<set $NPCList[3].gender = "f">><<set $NPCList[3].pronoun = "f">>
+	<</if>>
+
+	잠시 후 <<person4>><<person_ ga>> 안으로 들어와서 당신 옆에 비슷한 자세로 배치된다. 마침내
+	<<person5>><<personPost "도">> <<person4>><<him_ yi>> 옆에 비슷한 자세로 배치된다.
+	<br><br>
+	<<person1>>"이건 신뢰를 쌓는 훈련이야. 넌 명백하게 취약하지만, 세상은 너를 해치려 하지 않는다는 사실을 배워야 한다.
+	대부분 그저 널 기분 좋게 해주고 싶을 뿐이야. 너희 모두가 스스로를 피해자라고 믿고 있지. 그 대신 접근을... 기회로 받아들이는 법을 배워야 해."
+	<br>
+	옆에 있는 <<person4>><<person_ ga>> <<his_ yi>> 구속에 맞서 몸부림치고 있다.
+	<br>
+
+	<<person3>><<person_ ga>> 의자에 묶인 <<person5>><<person_ yi>> 뒤로 이동한다. <<person2>><<person_ ga>> 당신 옆에 있는 의자에 묶인
+	<<person4>><<person_ yi>> 뒤로 이동한다. 마지막으로 <<person1>><<person_ ga>> 당신 뒤로 이동한다.
+	<br><br>
+	"시작해."
+	<br><br>
+	<<link [[다음|Asylum Fake Treatment Masturbation]]>><<set $ft_count to 20>><<set $ft_five to random(11,15)>><<set $ft_four to random(5,10)>><</link>>
+<<else>>
+	<<set $ft_event to "bukkake">>
+	<<if $worn.upper.name isnot "straightjacket">>
+		<<bind>><<upperwear 35>>
+		<<person_ ga>> 당신에게 의료용 구속복을 입히고, 팔을 묶는다.
+	<</if>>
+	당신은 거울 맞은편 벽으로 인도된다 - 당신은 벽에 수많은 쇠사슬 고리가 다양한 높이로 박혀 있는 것을 발견한다.
+	<<person_ ga>> 당신을 돌려서 방을 바라보게 한다. 수많은 잡역부들이 문 근처에 모인다.
+	<<person_ ga>> 당신을 무릎 꿇린 채 벽에 밀착시키는 동안, <<person2>><<person_ nun>> 당신의 구속복 뒷면을
+	벽의 고리에 걸고 당신의 발을 묶어, 제자리에 고정시킨다.
+	<br><br>
+	"의사 선생님들은 성적 체액에 대한 비이성적인 공포증이 네 상태를 악화시킨다고 믿고 있어," <<person1>><<person_ ga>> 당신에게 말한다.
+	"우리 직원들은 친절하게도 노출 치료 접근법을 돕기로 동의했어."
+	<br>
+	<<if maleChance() gte 1 and $cbchance lt 100 or maleChance() lt 100 and $dgchance gte 1>>
+		뒤를 돌아보니 이미 많은 잡역부들이 자지를 꺼내고 있는 것이 보인다.
+	<</if>>
+	<br><br>
+	<<person_ ga>> <<if $NPCList[0].penis isnot "none">>지퍼를 내려 <<his_ yi>> 발기한 자지를 꺼내고,<<else>><<his_ yi>> 잡역부 유니폼을 끌어내려, <<his_ yi>> 벌써 젖어있는 보지를 드러내고,<</if>>
+	"시작하자."
+	<br><br>
+	<<link [[다음|Asylum Fake Treatment Bukkake]]>><</link>>
+<</if>>
+
+
+:: Asylum Fake Treatment Milked
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<pass 5>>
+<<set _they_drink to either("누군지 모르는 입들이 당신의 모유를 게걸스럽게 빨아댄다.","굶주린 입들이 당신의 유두를 덥석 문다.","입들이 당신의 유두에서 모유를 빨고 마사지한다.","입들이 당신의 유방에 달라붙고 보이지 않는 사람들이 당신의 모유를 마신다.","그들이 끊임없이 당신의 모유를 빨아들인다.")>>
+<<if $ft_count is 8>>
+	그들은 당신의 유방에서 목을 축인다. 잠시 후, <<print either("왼쪽","오른쪽")>> 입이 다 마신후 떠난다.
+	다른 입이 재빨리 그 자리를 차지한다. 1분 정도 지나자, 반대편에서도 같은 일이 벌어진다.
+	<<garousal>><<arousal 200 "breasts">>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+	<</if>>
+	<br><br>
+	<<milk_amount -200>>
+	<<link [[다음|Asylum Fake Treatment Milked]]>><<set $ft_count -= 1>><</link>>
+<<elseif $ft_count gte 1>>
+	<<if $milk_amount gte 300>>
+		_they_drink <<garousal>><<arousal 250 "breasts">>
+		<<set _rand to random(1,10)>>
+		<br>
+		<<if _rand is 1>>
+			누군지 모르는 손이 당신의 <<genitals_ rul>> <<print either("부드럽게","거칠게","리드미컬하게","고집스럽게","감각적으로")>> <<print either("애무한다","문지른다","애태운다")>>.
+			<<garousal>><<arousal 200 "genitals">>
+		<<elseif _rand is 2>>
+			그들 중 한명이 당신의 <<nipple_ rul>> 문다.
+			<<ggpain>><<pain 8>>
+		<<elseif _rand is 3>>
+			혀 하나가 당신의 <<nipple_ rul>> 빨면서 장난스럽게 원을 그리며 애태운다.
+			<<ggarousal>><<arousal 400 "breasts">>
+		<<elseif _rand is 4>>
+			누군가 당신의 <<nipple_ rul>> 튕긴다.
+			<<gpain>><<pain 3>>
+		<<elseif _rand is 5>>
+			당신의 좌우에 있는 사람들이 완벽한 리듬으로 당신의 <<nipples_ rul>> 입으로 빨고 쥐어짜면서 함께 움직인다.
+			<<ggarousal>><<arousal 400 "breasts">>
+		<<elseif _rand is 6>>
+			한 입은 거의 마시지 않고, 당신의 <<nipple_ rul>> 불고 핥기에 집중한다.
+			<<ggarousal>><<arousal 500 "breasts">>
+		<<elseif _rand is 7>>
+			손이 당신의 가슴을 고통스럽게 때린다.
+			<<ggpain>><<pain 8>>
+			<br>
+			"이봐! 진정해," 한 목소리가 말한다.
+			<br>
+			"미안."
+			<br>
+		<<elseif _rand is 8>>
+			<<set _random_milk to random(50, 100)>>
+			한 명이 빠는 동안, 손으로 당신의 <<breasts_ rul>> 쥐어짜서 더 많은 모유가 나오게 한다.<<milk_amount `-_random_milk`>>
+		<</if>>
+		<br>
+		<<if $arousal gte $arousalmax>>
+			<<orgasm>>
+			입들이 당신의 <<nipplesPost "에">> 고정된 채로, 당신이 사정할 때 힘껏 빨아댄다.
+		<</if>>
+		<br>
+		<<set _random_milk to random(200,300)>>
+		<<link [[다음|Asylum Fake Treatment Milked]]>><<milk_amount `-_random_milk`>><<set $ft_count -= 1>><</link>>
+	<<elseif $milk_amount gte 50>>
+		아직 욕심이 많은 또 다른 입이 당신의 유방을 <<print either("빨려고","빨고 쥐어짜려고")>> 하지만
+		당신의 모유가 마르기 시작한다. 곧 양쪽 모유가 거의 다 마르기 시작한다. 손들과 입들이 더 힘차게 모유를 짜내며 빨아댄다.
+		<<ggarousal>><<arousal 400 "breasts">><<gpain>><<pain 3>>
+		<br>
+		<<if $arousal gte $arousalmax>>
+			<<orgasm>>
+		<</if>>
+		<br><br>
+		<<set _random_milk to random(200,300)>>
+		<<link [[다음|Asylum Fake Treatment Milked]]>><<milk_amount `-_random_milk`>><<set $ft_count -= 1>><</link>>
+	<<else>>
+		거의 마르다시피 했는데도, 목마른 입들이 집요하게 당신의 <<breasts_ rul>> <<print either("빨아댄다","잡아당긴다","빨려고 애쓴다")>>.
+		그들이 마지막 남은 모유를 빨아들이자 당신의 유두가 아프고 따끔거린다.
+		<<ggarousal>><<arousal 500 "breasts">><<gpain>><<pain 8>>
+		<br>
+		<<if $arousal gte $arousalmax>>
+			<<orgasm>>
+		<</if>>
+		<br><br>
+		<<link [[다음|Asylum Fake Treatment Milked]]>><<set $milk_amount to 0>><<set $ft_count to 0>><</link>>
+	<</if>>
+<<else>>
+	<<if $milk_amount gt 0>>마침내 한 입이 떠나고 누구도 그 자리를 차지하지 않는다. 반대쪽 입이 1분 정도 더 마신 다음, 역시 자리를 떠난다.
+		<<ggarousal>><<arousal 400 "breasts">>
+	<<else>>
+		아무도 당신에게 오지 않는다.
+	<</if>>
+	<br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+	<<elseif $arousal gte ($arousalmax / 5) * 4>>
+		허공에 노출된 젖꼭지가 따끔거린다.
+		<br>
+		<<if $speech_attitude is "meek">>
+			"조금만 더," 당신이 속삭인다. "제발, 조금만 더."
+			<br>
+		<</if>>
+	<</if>>
+	가슴이 훨씬 가벼워진 느낌이다. <<llstress>><<stress 18>>
+	<br><br>
+	"음... 좋아," <<person_ ga>> 큰 소리로 말한다. "환자들 내보내."
+	<br>
+	문이 열리고 <<if currentSkillValue('science') gte 600 or currentSkillValue('skulduggery') gte 600>>의심스러울 정도로 빠르게 닫힌다.<<else>>닫힌다.<</if>>
+	<br><br>
+	두건이 벗겨지고 구속복이 조여지며 당신의 <<breasts_ rul>> 가린다.
+	<<person2>><<person_ ga>> 벽에서 당신을 풀어주자, <<person1>><<person_ ga>> 당신에게 말한다.
+	<br><br><br>
+	<<link [[다음|Asylum Fake Treatment Finish]]>><<unset $ft_count>><</link>>
+<</if>>
+
+
+:: Asylum Fake Treatment Masturbation
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<pass 5>>
+<<set _respond to either("끙끙거리는","헉 하는 소리를 내는","신음소리를 내는","날카롭게 숨을 들이쉬는","헐떡이는","신음하는")>>
+<<set _ly to either("바쁘게","열정적으로","미친 듯이","단호하게","광적으로","빠르게","격렬하게","가차없이")>>
+<<set _ly2 to either("바쁘게","열정적으로","미친 듯이","단호하게","광적으로","빠르게","격렬하게","가차없이")>>
+<<set _stimulates_him to either("<<persons_ yi>> 자지를 착유하자","<<persons_ yi>> 자지를 문지르자","<<persons_ yi>> 자지를 애무하자","<<persons_ yi>> 좆을 만지작 거리자","<<persons_ yi>> 좆을 짜내자")>>
+<<set _stimulates_her to either("<<persons_ yi>> 보지에 손가락을 넣자","<<persons_ yi>> 질을 문지르자","<<persons_ yi>> 질을 애무하자","<<persons_ yi>> 성기에 손가락을 넣자","<<persons_ yi>> 질에 손가락을 넣자")>>
+<<set _is_done to either("부드럽게 훌쩍거린다.","계속 숨을 헐떡인다.","여전히 숨을 가쁘게 쉬고 있다.","조용히 훌쩍거린다.")>>
+<<if $ft_count lte ($ft_four - 2)>><<set _crowd = "몇몇 잡역부들이 여전히 지켜보고 있다. 다른 이들은 대놓고 돈을 교환하고 있다. 몇 명은 떠났다.">>
+<<elseif $ft_count lt $ft_four>><<set _crowd="일부 잡역부들이 환호하고 있다. 그들은 다시 돈을 교환한다. 그들은 이걸로 도박을 하는 걸까?">>
+<<elseif $ft_count is $ft_four>><<set _crowd="몇몇 잡역부들이 불신에 가득 차 <<person4>><<personPost>>에게 소리를 지른다. 다른 이들은 환호한다.">>
+<<elseif $ft_count lt ($ft_five - 2)>><<set _crowd="잡역부들 중 일부가 당신에게 격려의 함성을 지른다. 다른 사람들은 <<person4>><<person_ rul>> 향해 소리를 지른다.">>
+<<elseif $ft_count lt $ft_five>><<set _crowd="몇몇 잡역부들은 실망한 기색이 역력하고, 몇몇은 즐거워 보인다. 당신은 돈을 주고받는 것을 본 것 같다.">>
+<<elseif $ft_count is $ft_five>><<set _crowd="몇몇 잡역부들이 실망한 듯 탄식하거나 소리를 지른다. 더 많은 환호와 웃음이 쏟아진다.">>
+<<elseif $ft_count gt 18>><<set _crowd="잡역부들이 당신과 <<person4>><<personPost>>, 그리고 <<person5>><<personPost>>에게 격려의 함성을 지른다.<br>'좀만 더 참아!'<br>'넌 할 수 있어.'<br>">>
+<<elseif $ft_count is 0>>
+	<<person1>><<person_ ga>> 당신을 떠나자 아쉬워하는 분위기가 감돈다.
+<<elseif $ft_count%2>><<set _crowd = either("잡역부들이 지켜보고 있다.","관중들이 더 잘 보기 위해 서로 뒤엉켜 있다.","관중들이 격려의 함성을 지른다.")>>
+<<else>><<set _crowd = "">>
+<</if>>
+<br>
+
+<<if $ft_count is 20>>
+	<<person1>><<person_ ga>> 당신을 붙잡고, 한 손으로 당신의 가슴을 문지르면서, 다른 한 손은 당신의 <<genitalsPost "에">> 손을 뻗는다. <<arousal 100 "breasts">><<arousal 100 "genitals">>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+		<<set $ft_count to -10>>
+	<</if>>
+	<br>
+	_crowd
+	<br><br>
+	<<link [[마음껏 즐긴다|Asylum Fake Treatment Masturbation]]>><<arousal 200>><<set $ft_count -=1>><</link>><<garousal>>
+	<br>
+	<<link [[저항한다|Asylum Fake Treatment Masturbation]]>><<arousal -100>><<set $ft_count -=1>><</link>>
+	<br>
+<<elseif $ft_count gte 1>>
+	<<if $ft_count is 19>>
+		<<person1>><<person_ ga>> 한 손을 구속복 아래로 미끄러뜨려 당신의 <<nipple_ rul>> 희롱하고, 다른 한 손으로 당신의 <<genitals_ rul>> 잡는다. <<arousal 200 "breasts">><<arousal 100 "genitals">>
+	<<elseif $ft_count gt $ft_five>>
+		<<if $rng>>
+			당신은 <<person2>><<person_ i>>
+			<<person4>><<if $NPCList[3].penis isnot "none">>_stimulates_him<<else>>_stimulates_her<</if>> <<person4>><<he_ ga>> _respond 것을 듣는다.
+		<<else>>
+			당신은 <<person3>><<person_ i>>
+			<<person5>><<if $NPCList[4].penis isnot "none">>_stimulates_him<<else>>_stimulates_her<</if>> <<person5>><<he_ ga>> _respond 것을 듣는다.
+		<</if>>
+		<<person1>><<persons_ yi>> 양손이 계속해서 당신의 <<genitals_ wa>> <<breasts_ ul>> 계속해서 자극한다.<<arousal 200 "breasts">><<arousal 200 "genitals">>
+	<<elseif $ft_count is $ft_five>>
+		<<person5>><<person_ ga>> 큰 소리로 신음을 내는 소리가 들리고, 당신은 <<if $NPCList[0].penis isnot "none">>정액이 거울을 향해 날아가<<else>>여성의 애액이 내뿜어져<</if>> 바닥에 흩뿌려지는 것을 본다.
+		<br>
+		일부 잡역부들이 환호한다. 당신은 그들이 신나게 서로 돈을 주고받는 것을 본다.
+		<br>
+		<<person2>><<person_ ga>> 양손으로 당신의 <<genitalsPost "에">> 초점을 맞추고 새로운 격렬함으로 희롱을 이어간다.<<arousal 600 "genitals">>
+	<<elseif $ft_count gt $ft_four>>
+		<<if $rng>>
+			당신은 <<person2>><<person_ i>>
+			<<person4>>_ly <<if $NPCList[3].penis isnot "none">>_stimulates_him<<else>>_stimulates_her<</if>> <<person4>><<he_ ga>> _respond 것을 듣는다.
+		<</if>>
+		<<person1>><<persons_ yi>> 양손이 _ly2 당신의 <<genitals_ rul>> 계속 희롱한다. <<arousal 600 "genitals">>
+	<<elseif $ft_count is $ft_four>>
+		옆에 있던 <<person4>><<person_ ga>> 몸을 부르르 떨기 시작하더니, 조용히, <<he_ ga>>
+		<<if $NPCList[3].penis isnot "none">>거울을 향해 커다란 정액 덩어리를 내뿜으며
+		<<else>>힘차게 내뿜으며
+		<</if>><<him_ yi>> 앞쪽 바닥을 난장판으로 만든다.
+		<br>
+		더 많은 잡역부들이 환호한다. 당신은 그들이 신나게 서로 돈을 주고받는 것을 본다.
+		<br>
+		한숨과 함께, <<person1>><<person_ ga>> 당신의 <<genitalsPost "을">> 희롱하는 속도를 줄인다. <<arousal 300 "genitals">>
+	<<else>>/*last one standing*/
+		<<person1>><<person_ ga>> 양손으로 당신의 <<genitals_ rul>> 계속 자극한다.
+		<<set $ft_count to -20>>
+		<<if $arousal gte $arousalmax>><<set $arousal to 9900>><</if>>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+		<<set $ft_count to -10>>
+	<</if>>
+	<br>
+	_crowd
+	<br><br>
+	<<if $ft_count gte 0 or $ft_count is -20>>
+		<<link [[마음껏 즐긴다|Asylum Fake Treatment Masturbation]]>><<arousal 200>><<set $ft_count -=1>><</link>><<garousal>>
+		<br>
+		<<link [[저항한다|Asylum Fake Treatment Masturbation]]>><<arousal -100>><<set $ft_count -=1>><</link>>
+		<br>
+	<<else>>
+		<<link [[진정한다|Asylum Fake Treatment Masturbation]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $ft_count is 0>>
+		<<person1>><<person_ ga>> 마침내 포기한다.
+		<br>
+		"못하겠어," <<he_ ga>> 말한다. "<<pShe_ ga>> 가버리지를 않아."
+	<<elseif $ft_count lte -20>> /* you won */
+		<<person1>><<person_ ga>> 마침내 포기한다.
+		<br>
+		"못하겠어," <<he_ ga>> 말한다. "<<pShe_ ga>> 가버리지를 않아."
+	<<elseif $ft_count lte -10>> /*someone else won*/
+		당신의 절정이 다가오자 환호성이 들려온다. 당신은 잡역부들이 무언가를 주고받고 있다는 것을 알아차린다.
+		<br>
+
+		<<person1>><<person_ ga>> 잡역부들 사이로 걸어 들어가자, 그들이 <<himPost "에게">> 뭔가를 건넨다. <<He_ ga>> 당신을 돌아보며 미소짓는다.
+		잠시 후, 옆에 있던 <<person4>><<person_ ga>> 몸을 부르르 떨기 시작하더니, 조용하게,  <<he_ ga>>
+		<<if $NPCList[3].penis isnot "none">>거울을 향해 커다란 정액 덩어리를 내뿜으며 <<else>>힘차게 내뿜으며<</if>>
+		<<him_ yi>> 앞쪽 바닥을 난장판으로 만든다.
+		<br>
+		더 많은 잡역부들이 환호한다. 당신은 그들이 신나게 서로 무언가를 주고받는 것을 본다.
+	<</if>>
+	<br><br>
+	마침내, 당신은 의자에서 풀려난다. <<person1>><<person_ ga>> 말하기 시작한다.
+	<br><br>
+	<<link [[듣는다|Asylum Fake Treatment Finish]]>><<unset $ft_count>><<unset $ft_five>><<unset $ft_four>><</link>>
+<</if>>
+
+
+:: Asylum Fake Treatment Bukkake
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<pass 5>>
+<<if $ft_count is 5>>
+	<<fullGroup_ i>> 당신 앞에서 자위하기 시작한다.
+	곧 <<person_ ga>> 가버리며, 당신의 얼굴에 <<if $NPCList[0].penis isnot "none">><<bodyliquid "face" "semen">>정액을<<else>><<bodyliquid "face" "goo">>대고 갑작스럽게<</if>> 내뿜는다.
+	다른 잡역부가 <<his_ yi>> 자리를 차지하자 <<person1>><<person_ ga>> 절정에 달한다. <<person_ i>> 가버리면서
+	당신의 눈을 응시하고, <<his_ yi>> 체액이 당신의 뺨에 튀면서 당신의 구속복 옷깃을 타고 흘러내린다.
+	<br>
+	두 잡역부들이 <<his_ yi>> 자리를 차지한다.<<if $NPCList[0].penis isnot "none">><<bodyliquid "neck" "semen">><<else>><<bodyliquid "neck" "goo">><</if>>
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+	<</if>>
+	<br><br>
+	<<link [[다음|Asylum Fake Treatment Bukkake]]>><<set $ft_count -= 1>><</link>>
+<<elseif $ft_count gte 1>>
+	<<if $NPCList[0].penis isnot "none">>
+		<<print either("그들은 계속해서 다가와 사정한다.","당신은 입을 다물려고 노력하지만, 코로 숨을 쉬면 정액 냄새를 맡아야 한다.","당신은 끙끙거리는 소리와 고동치는 성기에 둘러싸인다.","당신은 정액이 눈에 들어가지 않도록 눈을 감는다.")>>
+		<<set _goo to "semen">>
+	<<else>>
+		<<print either("그들은 계속해서 다가와 사정한다.","당신은 최대한 입을 다물려고 애쓰지만, 그럼에도 불구하고 애액이 입술 사이로 스며든다.","당신은 끙끙거리는 소리와 미끈미끈한 성기에 둘러싸인다.","당신은 애액이 눈에 들어가지 않도록 눈을 감는다.")>>
+		<<set _goo to "goo">>
+	<</if>>
+	<br>
+	<<set _rand to random(1,9)>>
+	<<if _rand lte 6>>
+		<<if _rand is 1>>
+			두 잡역부가 동시에 당신의 얼굴에 사정을 한다.
+			<<faceejacstat>><<ejacstat>><<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "face" _goo>>
+		<<elseif _rand is 2>>
+			한 잡역부가 당신의 다리 사이로 손을 밀어넣고 당신의 <<genitals_ rul>> 거칠게 더듬는다.
+			<<arousal 200 "genitals">><<pain 5>>
+		<<elseif _rand is 3>>
+			<<if $NPCList[0].penis isnot "none">>
+				한 잡역부가 당신의 머리를 벽에 밀치고 <<his_ ga>> 사정할 때까지 당신의 얼굴에 <<he_ yi>> 자지를 마구 비벼댄다.
+			<<else>>
+				한 잡역부가 당신의 머리를 벽에 밀치고 <<his_ yi>> 체액이 당신을 뒤덮을 때까지 당신의 얼굴에 <<his_ yi>> 보지를 마구 비벼댄다.
+			<</if>>
+			<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "face" _goo>>
+		<<elseif _rand is 4>>
+			두 잡역부들이 당신의 양옆에서 절정에 이르기 위해 자위를 한다.
+			<<hairejacstat>><<ejacstat>><<bodyliquid "hair" _goo>><<neckejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "neck" _goo>>
+		<<elseif _rand is 5>>
+			한 잡역부가 당신의 머리채를 잡아당겨 당신의 구속복 앞쪽에 <<if $NPCList[0].penis isnot "none">>사정한다<<else>>내뿜는다<</if>>.
+			<<pain 5>><<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "chest" _goo>>
+		<<else>>
+			한 잡역부가 일부러 당신의 눈에 <<if $NPCList[0].penis isnot "none">><<his_ yi>> 정액을 발사한다<<else>><<his_ yi>> 애액을 내뿜는다<</if>>.
+			<<pain 5>><<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "face" _goo>>
+		<</if>>
+
+		<<if _rand % 3 ==2>>
+			당신은 숨을 쉬려다가, 결국 다른 잡역부에게 애액을 한 입 가득 마시게 된다.
+			<<oralejacstat>><<ejacstat>><<if $NPCList[0].penis isnot "none">><<cumswallow "human">><</if>>
+		<<elseif _rand % 3 == 1>>
+			애액이 당신의 목구멍으로 쏟아질 때 끙끙대는 소리가 들린다.
+			<<neckejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "neck" _goo>>
+		<<else>>
+			잠시 후 당신은 뜨거운 애액이 당신의 머리카락을 흠뻑 적시는 것을 느낀다.
+			<<hairejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "hair" _goo>>
+		<</if>>
+	<<elseif _rand is 7 and (maleChance() gte 1 and $cbchance lt 100 or maleChance() lt 100 and $dgchance gte 1)>>
+		한 잡역부가 당신의 입에 자신의 자지를 밀어 넣으려고 한다. 그 자가 다른 사람에게 홱 끌려간다.
+		<br>
+		"어떤 식으로든 삽입을 시도하면 제거될 거라는 걸 모두에게 다시 상기시켜 줘야겠어." <<lstress>><<stress -2>>
+		<br>
+	<</if>><<unset _rand>>
+	<br>
+
+	<<if $speech_attitude is "meek">>
+		<span class="sub">당신은 이런 식으로 모욕을 당하게 되자 흥분을 느낀다.</span><<ggarousal>><<arousal 666>>
+	<<elseif $speech_attitude is "bratty">>
+		<span class="brat">당신은 이 '치료'가 굴욕적이라고 생각한다.</span><<garousal>><<arousal 200>><<gstress>><<stress 2>>
+	<<else>>
+		<<garousal>><<arousal 200>>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+	<</if>>
+	<br><br>
+	<<link [[다음|Asylum Fake Treatment Bukkake]]>><<set $ft_count -= 1>><</link>>
+<<else>>
+	마침내, 더 이상 아무도 오지 않는다.
+	<br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+	<<elseif $arousal gte ($arousalmax / 4) * 3 and $submissive gte 1150>>
+		"조금만 더," 당신이 속삭인다.
+		<br>
+	<</if>>
+	액체가 당신의 몸 아래로 흘러내리자 당신은 흠뻑 젖은 듯한 느낌을 받는다.
+	<br><br>
+	<<link [[다음|Asylum Fake Treatment Finish]]>><<unset $ft_count>><</link>>
+<</if>>
+
+
+:: Asylum Fake Treatment Finish
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+"훌륭해. 하퍼 선생님께서 네 치료가 진척된 것에 매우 만족하셨어. 선생님께서 나한테 이 치료법에 대해 아무에게도 말하지 말라고 네게 전해 달라고 하셨어.
+이건 네 치료에 매우 중요해.  이건 네 치료에 매우 중요해. 만약 네가 다른 사람에게 - 심지어 하퍼 선생님 <<nnpc_himselfPost "Harper">> 에게도 이 사실을 얘기한다면 - <<nnpc_he_ nun "Harper">>
+분명 불같이 화를 낼 거고 네 치료에도 차질이 생길 거야. 이건 비밀로 유지돼야 해. 알겠어?"
+<br>
+
+<<if $speech_attitude is "meek">>
+	당신은 온순하게 고개를 끄덕인다.
+<<elseif $speech_attitude is "bratty">>
+	당신은 <<him_ ga>> 요점을 말할 때까지 기다린다.
+<<else>>
+	당신은 고개를 한 번 끄덕인다.
+<</if>>
+<br><br>
+
+<<if $phase is 1 and ($ft_event is "bukkake" or $ft_event is "milk" or $ft_event is "masturbation")>>
+	"이거 벗겨줘야 하나?" <<person2>><<person_ ga>> 구속복을 잡아당기며 묻는다.
+	<br>
+	<<if $ft_event is "bukkake">>
+		"<<pshe_ ga>> 여기 오자마자 난리를 친 꼴을 보고도?" <<person1>><<he_ ga>> 고개를 절레절레 흔든다.
+		"한동안 <<phim_ rul>> 저런 꼴로 돌아다니게 하면서 <<pher_ yi>> 주제를 깨닫게 해주자."
+		<br>
+		<<person2>><<person_ ga>> 웃는다.
+	<<else>>
+		"<<pshe_ ga>> 여기 오자마자 난리를 친 꼴을 보고도?" <<person1>><<he_ ga>> 고개를 절레절레 흔든다. "이 녀석은 복종하는 법을 배워야 해."
+	<</if>>
+<<else>>
+	<<person2>><<person_ ga>> 구속복을 벗긴다.
+	<<unbind>><<exposure>><<upperwear 87>>
+<</if>>
+<br><br>
+
+<<if $NPCList[3].description is "long-haired">>
+	<<person4>><<person_ ga>> 당신 앞을 지나가면서 - 당신과 눈이 마주친 것 같지만, 그녀의 얼굴이 길고, 엉겨붙고, 지저분한 머리카락에 가려져 있어서 잘 보이지 않는다.
+<</if>>
+
+<<if $ft_event is "milk">>
+	당신이 떠날 때, 많은 잡역부들이 입술이나 턱 주위에 흰 무언가를 묻힌 채로 있는 것을 알아차린다.
+	<br><br>
+<<elseif $ft_event is "masturbation">>
+	당신이 떠날 때, 많은 잡역부들이 함께 모여서 서로 돈을 주고받는 모습이 보인다. 행복해 보이는 사람도 있고 그렇지 않은 사람도 있다.
+	<<print either("한 명이","여러 명이","한 명이 힐끔")>> <<print either("비난하듯","뿌루퉁하게","쾌활하게","음탕하게","굶주린 듯")>> 당신을 바라본다.
+	<br><br>
+<</if>>
+<<endevent>><<unset $ft_event>>
+<<link [[떠난다|Asylum]]>><</link>>
+
+:: Pregnancy Birth Asylum
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<set $first_birth to !$pregnancyStats.humanToysUnlocked>>
+<<npc "Harper">><<person1>>
+<<setKnowsAboutPregnancy "pc" "Harper">>
+
+당신은 병원 침대에서 깨어난다. 흐릿한 형체들이 이리저리 움직인다. 한 형체가 가까이 다가오더니, <<his_ yi>> 모습이 하퍼 선생님의 모습으로 바뀌었다. "놀라지 말렴, 네 양수가 터졌단다. 넌 아직 정신병원에 있어."
+<br><br>
+
+<<if $exposed lt 2>>
+	"옷을 벗으렴," 의사가 말한다.
+<<else>>
+	"심호흡 하렴," 의사가 말한다.
+<</if>>
+<<if playerChastity("hidden")>>
+	<<He_ ga>> 당신의 <<worn_genitals_name_ ul>> 발견하고는, 가슴 높이의 찬장을 연다. <<He_ ga>> 갈고리처럼 생겼지만, 더 커다란 도구를 꺼낸다. "그 장치를 제거해야 해. 아프지 않을 거란다."
+	<br><br>
+	<<He_ ga>> 갈고리로 당신의 <<trClothes "genitals" $worn.genitals.name "name" "을">>_trResult 잡고, 손잡이에 있는 버튼을 누른다. 도구에서 윙윙 거리는 소리가 들리더니, <span class="pink">금속이 끊어지는 소리가 난다.</span>
+	<<set $worn.genitals.type.push("broken")>>
+<</if>>
+<br><br>
+<<wash>><<undress "asylum_birth">><<upperwear 87 "pink">>
+
+<<link [[다음|Pregnancy Birth Asylum 2]]>><</link>>
+<br>
+
+:: Pregnancy Birth Asylum 2
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+조산사가 당신의 얼굴에 마스크를 씌운다. 당신의 의식이 희미해져 간다. 주변에 다른 여러 인물들이 나타나고, 그들의 모습이 흐려진다.
+<br><br>
+
+<<set _pregnancy to getPregnancyObject()>>
+<<if _pregnancy.totalBirthEvents gte 5>>
+	<<set _min to 15>>
+	<<set _max to 60>>
+<<elseif _pregnancy.totalBirthEvents gte 3>>
+	<<set _min to 30>>
+	<<set _max to 120>>
+<<else>>
+	<<set _min to 60>>
+	<<set _max to 180>>
+<</if>>
+
+<<set _max to Math.floor(_max * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+<<set _min to Math.floor(_min * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+
+<<set _timeCalc to random(_min, _max)>>
+<<set _hours to Math.floor(_timeCalc / 60)>>
+<<set _minutes to _timeCalc % 60>>
+
+<<switch playerNormalPregnancyType()>>
+	<<case "human">>
+		하퍼의 목소리가 안개 속을 떠다닌다. "평범한 인간이지만<<if !$player.vaginaExist>>, 비정상적인 출산이니까<</if>>, 만일을 대비해 다른 사람들을 대기시켜 주도록..."
+		<br><br>
+
+		시간이 급격히 빨라지거나 느려지는 것처럼 느껴지면서 통증이 점점 심해진다. 당신은 "숨을 쉬어"와 "힘을 줘"라는 말을 수차례 들으며, 최선을 다해 따른다.
+		<br><br>
+
+		<<link [["다음 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Asylum 3]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+	<<case "wolf">>
+		하퍼의 목소리가 안개 속을 떠다닌다. "인간이 아니에요. 이것은 비정상적인 출산이 될 겁니다. 제 지시를 철저히 따르세요..."
+		<br><br>
+
+		시간이 급격히 빨라지거나 느려지는 것처럼 느껴지면서 통증이 점점 심해진다. 당신은 "숨을 쉬어"와 "힘을 줘"라는 말을 수차례 들으며, 최선을 다해 따른다.
+		<br><br>
+
+		<<link [["다음 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Asylum Wolf]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+<</switch>>
+
+:: Pregnancy Birth Asylum 3
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<endevent>>
+<<generate1>><<person1>>
+<<set $litter_size to getPregnancyObject().fetus.length>>
+당신은 다른 방에서 깨어난다. 미소 띤 조산사가 당신의 침대 옆에 서서,
+<<if $litter_size is 1>>
+	포대기에 싸여 있는 아기를 <<his_ yi>> 품에 안고 있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 당신에게 아기를 건네며 말한다. 아기는 당신의 팔에 앉아서, 눈을 감은 채, 가슴을 오르내리며 부드럽게 숨을 쉰다.
+	<br><br>
+
+	"모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 이름은 생각해 보셨나요?"
+	<br><br>
+
+<<elseif $litter_size is 2>>
+	포대기에 싸여 있는 두 명의 아기를 <<his_ yi>> 품에 안고 있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 당신에게 한 명, 그리고 또 한 명을 건네며 말한다. 당신의 양 팔에 한 명씩 앉아서, 눈을 감은 채, 가슴을 오르내리며 부드럽게 숨을 쉰다.
+	<br><br>
+
+	"모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 그들의 이름은 생각해 보셨나요?" 조산사가 묻는다.
+	<br><br>
+
+<<else>>
+
+	포대기에 싸여 있는 세 아기를 <<his_ yi>> 품에 안고 있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 당신에게 한 명, 그리고 또 한 명을 건네며 말한다. 당신의 양 팔에 한 명씩 앉아 있다. 조산사가 세 번째 아기를 당신의 가슴 바로 앞쪽에서 잡아준다. 아기들이 눈을 감은 채, 가슴을 오르내리며 부드럽게 숨을 쉰다.
+	<br><br>
+
+	"모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 그들의 이름은 생각해 보셨나요?" 조산사가 묻는다.
+	<br><br>
+<</if>>
+
+<<set $bornChildrenIds to []>>
+<<run getPregnancyObject().fetus.forEach(child => $bornChildrenIds.push(child.childId))>>
+<<set $recentBirthId to getPregnancyObject().fetus[0].birthId>>
+<<birthUi "pc" "asylum" "home" "Pregnancy Birth Asylum 4" 120>>
+
+:: Pregnancy Birth Asylum 4
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<getChildrenIds>><<childSelect _childrenIds.last()>>
+<<set _pregFame to ($litter_size * 5)>>
+<<famepregnancy _pregFame>>
+<<if $litter_size is 1>>
+
+	당신은 한참 동안 아기를 안고, <<childhis_ yi>> 작은 숨소리와 움직임을 즐긴다. <<childHe_ nun>> 대부분의 시간을 자면서 보내지만, 가끔 <<childhis_ yi>> 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+
+	<<if $first_birth>>
+		<<He_ ga>> <<childname_ yi>> 기저귀를 갈아주는 방법과, <<childhim_ rul>> 목욕시키는 방법을 알려준다.
+	<<else>>
+		<<He_ ga>> 당신이 <<childname_ yi>> 기저귀를 갈아주는 것과, <<childhim_ ul>> 목욕시키는 것을 도와준다.
+	<</if>>
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 아기는 저희가 대신 돌봐드릴게요."
+	<br><br>
+	당신은 <<childname_ rul>> 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<<elseif $litter_size is 2>>
+	당신은 한참 동안 아기들을 안고, 아기들의 작은 숨소리와 움직임을 즐긴다. 아기들은 대부분의 시간을 잠을 자면서 보내지만, 가끔 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+
+	<<if $first_birth>>
+		<<He_ ga>> 아기들의 기저귀를 갈아주는 방법과, 아기들을 목욕시키는 방법을 알려준다.
+	<<else>>
+		<<He_ ga>> 아기들의 기저귀를 갈아주고, 목욕시키는 것을 도와준다.
+	<</if>>
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 아기들은 저희가 대신 돌봐드릴게요."
+	<br><br>
+	당신은 쌍둥이를 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<<elseif $litter_size is 3>>
+	당신은 한참 동안 아기들을 안고, 아기들의 작은 숨소리와 움직임을 즐긴다. 아기들은 대부분의 시간을 잠을 자면서 보내지만, 가끔 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+
+	<<if $first_birth>>
+		<<He_ ga>> 아기들의 기저귀를 갈아주는 방법과, 아기들을 목욕시키는 방법을 알려준다.
+	<<else>>
+		<<He_ ga>> 아기들의 기저귀를 갈아주고, 목욕시키는 것을 도와준다.
+	<</if>>
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 아기들은 저희가 대신 돌봐드릴게요."
+	<br><br>
+	당신은 세쌍둥이를 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<</if>>
+
+<<link [[다음|Pregnancy Birth Asylum 5]]>><<storeon "asylum_birth">><<pass 24 hour>><<stress -40>><</link>>
+<br><br>
+
+:: Pregnancy Birth Asylum 5
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+<<if $litter_size gte 2>><<childrenNamesPost $bornChildrenIds "가">><<else>><<childname_ ga>><</if>> 요람에 누워 있는 동안 조산사가 당신을 일으켜 세워 준다.
+
+<<if $first_birth or playerNormalPregnancyTotal() is 0>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받지만, <<he_ ga>> 정상적인 현상이라고 단언한다.
+	<br><br>
+
+	통증에도 불구하고, 당신은 출산 전보다 훨씬 더 편안하게 걷고 있다고 느낀다. 뱃속에 사람이 없다면 얼마나 쉽게 움직일 수 있는지 당신은 까맣게 잊고 있었다.
+	<br><br>
+
+	조산사가 당신이 옷을 입는 것을 도와준다.
+<<elseif between(playerNormalPregnancyTotal(), 1, 2)>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받는다. 당신은 지난번 출산할 때 느꼈던 이 느낌을 기억하고 있으며, 이것이 정상적인 현상이라는 것을 알고 있다.
+	<br><br>
+
+	통증에도 불구하고, 당신은 출산 전보다 훨씬 더 편안하게 걷고 있다고 느낀다. 뱃속에 사람이 없다면 얼마나 쉽게 움직일 수 있는지 당신은 까맣게 잊고 있었다.
+	<br><br>
+
+	조산사가 당신이 옷을 입는 것을 도와준다.
+<<elseif between(playerNormalPregnancyTotal(), 3, 7)>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받는다. 당신은 여전히 그 느낌이 익숙하지 않다.
+	<br><br>
+
+	당신은 다시 꽤 쉽게 걸을 수 있게 된다. 조금 어색하지만, 변화가 예전처럼 심하지는 않다. 몸 안에 다른 사람이 없을 때 움직이기가 여전히 더 쉬운 것 같다.
+	<br><br>
+
+	조산사가 여전히 당신이 옷을 입는 것을 돕겠다고 고집한다.
+<<elseif between(playerNormalPregnancyTotal(), 8, 49)>>
+	당신은 아무런 어려움 없이 일어선다. 훨씬 더 민첩해진 느낌은 있지만, 더 이상 느낌의 차이는 거의 없다.
+	<br><br>
+
+	<<He_ ga>> 당신의 움직임에 감탄하며, 당신의 안정을 위해 팔로 당신을 감싼다. "많은 사람들을 봐 왔지만 이렇게 빨리 회복하는 사람은 별로 없었어요. 정말 강인하시네요!"
+	<br><br>
+
+	조산사가 여전히 당신이 옷을 입는 것을 돕겠다고 고집한다.
+<<elseif playerNormalPregnancyTotal() gte 50>>
+	당신은 누군가의 도움 없이 일어서면서, 속이 텅 빈 느낌을 받는다. 당신은 임신했을 때의 느낌이 벌써 그리워진다.
+	<br><br>
+
+	<<He_ ga>> 아무런 도움 없이 걷는 당신을 바라보며, 입을 쩍 벌린다. 당신은 재빨리 옷을 다시 입는다.
+	<br><br>
+
+	"이-이제 가셔도 돼요" <<he_ ga>> 말한다.
+<</if>>
+<<if $innocencestate is 1 or $trauma lte $traumamax / 10>>
+	"하퍼 선생님께서 퇴원 서류를 작성하셨으니, 당신은 이제 퇴원하실 수 있어요. 누군가 밖에서 당신을 기다리고 있어요. 제 생각엔 당신의 <<if C.npc.Bailey.pronoun is "f">>엄마<<else>>아빠<</if>> 같아요."
+	<br><br>
+	<<removeBabyIntro "pc" "Bailey" $recentBirthId>>
+	<<link [[다음|Pregnancy Birth Asylum End]]>><<endevent>><<unset $recentBirthId>><</link>>
+<<else>>
+	"당신의 자녀들은 당신이 퇴원할 때까지 임시 보호를 위해 고아원으로 보내질 거고, 그 후 당신이 정신적으로 건강하다고 판단되면, 당신의 품으로 돌아가게 될 거예요."
+	<br><br>
+	<<setBabyIntro "pc" "Bailey" $recentBirthId>>
+	<<link [[다음|Pregnancy Birth Asylum 6]]>><<endevent>><<unset $recentBirthId>><</link>>
+<</if>>
+
+:: Pregnancy Birth Asylum 6
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+당신은 감방으로 돌아온다. 당신은 벌써 <<childrenNamesPost $bornChildrenIds "의">> 포옹이 그리워진다. 당신은 여길 떠나야겠다는 새로운 결심을 한다. <<stress -10>><<llstress>><<trauma -10>><<lltrauma>>
+<br><br>
+
+<<link [[다음|Asylum Cell]]>><<unset $litter_size>><<unset $first_birth>><<endevent>><<unset $bornChildrenIds>><</link>>
+<br>
+
+:: Pregnancy Birth Asylum End
+<<set $outside to 0>><<set $location to "asylum">><<effects>>
+<<asylumend>>
+
+<<npc "Bailey">><<person1>>
+<<getChildrenIds>><<childSelect _childrenIds.last()>>
+베일리가 정신병원 앞에서 당신을 기다리고 있다. <<He_ ga>> 당신을 보며 미소짓는다. 그것은 거의 진짜처럼 보인다. "장소를 마련해 뒀어," <<he_ ga>> 말한다.
+<<if $litter_size is 1>>
+
+<<elseif $litter_size is 2>>
+	"아기 둘을 위한 장소를 말야."
+<<else>>
+	"아기 셋 모두를 위한 장소를 말야."
+<</if>>
+<<He_ ga>> 당신을 <<his_ yi>> 바깥으로 데려가자, <<his_ yi>> 자동차가 서 있다. <<He_ ga>> 당신에게 조수석 문을 열어준 다음, 반대쪽에서 올라탄다.
+<br><br>
+엔진이 움직이기 시작한다.
+<!-- Bailey may not know about all your pregnancies -->
+<<set _knownPregnancyCount to knowsAboutPregnancyTotal("pc","Bailey","home")>>
+<<if _knownPregnancyCount is 1>>
+	"넌 네 자식들을 보살필 의무가 있어," <<he_ ga>> 말한다. "만약 내가 돌봐야 한다면, 추가 비용 <span class="red">£100</span>를 매주 지불해야 할 거야.<<if $litter_size gte 2>> 한 명당 말야.<</if>>"
+	<br><br>
+	"아기들은 보육원을 벗어나지 못할 거야," <<he_ ga>> 정신병원 주차장에서 숲으로 차를 몰고 가면서 덧붙인다. "영원히."
+<<elseif _knownPregnancyCount lte 4>>
+	"넌 네 자식들을 보살필 의무가 있다는 것을 기억해라," <<he_ ga>> 말한다. "만약 내가 돌봐야 한다면, 추가 비용 <span class="red">£100</span>를 매주 지불해야 할 거야.<<if $litter_size gte 2>> 한 명당 말야.<</if>>"
+	<br><br>
+<<else>>
+	"넌 무책임한 <<slut_ iya>>," <<he_ ga>> 말한다. "만약 내가 네 자식들 돌보는 데 개입해야 한다면, 추가 비용 <span class="red">£100</span>를 매주 지불해야 하는 것을 잊지 마.<<if $litter_size gte 2>> 한 명당 말야.<</if>>"
+<</if>>
+<<if $baileydefeatedchain gte 3>>
+	<<him_ ga>> 비웃는 것이 보이지만, 아주 잠깐 동안만이다. "다른 사람에게 네 애새끼들을 돌보라고 하고 싶지 않지만, 만약 네가 계속 까다롭게 굴면, 다시는 볼 수 없을 줄 알아라."
+<</if>>
+<br><br>
+
+<<if $litter_size is 1>>
+	<<link [[베일리에게 아기의 이름을 알려준다|Pregnancy Birth Hospital 7]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[아기를 꽉 안아준다|Pregnancy Birth Hospital 7]]>><</link>>
+	<br>
+<<else>>
+	<<link [[베일리에게 아기들의 이름을 알려준다|Pregnancy Birth Hospital 7]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[아기들을 꽉 안아준다|Pregnancy Birth Hospital 7]]>><</link>>
+	<br>
+<</if>>
+
+:: Pregnancy Birth Asylum Wolf
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<endevent>>
+<<generate1>><<person1>>
+<<set $litter_size to getPregnancyObject().fetus.length>>
+<<trBeasttypeFun `getPregnancyObject().fetus[0].type`>><<set _baby_type to _trResult>>
+당신은 다른 방에서 깨어난다. 희미하게 낑낑거리는 소리가 들린다. 미소 띤 조산사가 당신의 침대 옆에 서서,
+<<if $litter_size is 1>>
+	포대기에 싸여 있는 _baby_type 강아지를 <<his_ yi>> 품에 안고 있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 강아지를 건네며 말한다. 강아지는 당신의 품에 안겨, 눈을 감은 채, 가슴을 오르락내리락하며 부드럽게 호흡한다.
+	<br><br>
+
+	"모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 이름은 생각해 봤나요?"
+	<br><br>
+
+<<else>>
+	<<trNumber $litter_size>> 마리의 _baby_type 강아지가 안에 있는 유아용 침대를 밀고 있다.
+	<br><br>
+
+	"엄마가 깨어난 것 같네," <<he_ ga>> 유아용 침대를 당신의 손이 닿는 곳으로 밀면서 말한다. 당신이 강아지들을 하나하나 안아주자, 강아지들은 눈을 감고, 가슴을 오르내리며 부드럽게 숨을 내쉰다.
+	<br><br>
+
+	"모든 검사를 다 했어요," 조산사가 말한다. "건강상 문제는 전혀 없어요. 그들의 이름은 생각해 보셨나요?" 조산사가 묻는다.
+	<br><br>
+
+<</if>>
+
+<<set $bornChildrenIds to []>>
+<<run getPregnancyObject().fetus.forEach(child => $bornChildrenIds.push(child.childId))>>
+
+<<birthUi "pc" "asylum" "wolf_cave" "Pregnancy Birth Asylum Wolf 2" 180>>
+
+:: Pregnancy Birth Asylum Wolf 2
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<getChildrenIds>><<childSelect _childrenIds.last()>>
+<<famebestiality $litter_size>>
+<<if $litter_size is 1>>
+
+	당신은 한참 동안 <<childtype_ rul>> 안고, <<childhis_ yi>> 작은 숨소리와 움직임을 즐긴다. <<childHe_ nun>> 대부분의 시간을 자면서 보내지만, 가끔 <<childhis_ yi>> 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 강아지는 저희가 대신 돌봐드릴게요."
+	<br><br>
+	당신은 <<childname_ rul>> 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<<else>>
+	당신은 한참 동안 강아지들을 안고, 그들의 작은 숨소리와 움직임을 즐긴다. 강아지들은 대부분의 시간을 잠을 자면서 보내지만, 가끔 눈을 뜨고, 당신의 눈을 바라본다.
+	<br><br>
+	조산사가 돌아온다.
+	"졸리면 언제든 말해주세요," <<he_ ga>> 말한다. "당신도 휴식이 필요하고, 그 동안 강아지들은 저희가 대신 돌봐드릴게요."
+	<br><br>
+	당신은 강아지들을 계속 안아주고 싶은 마음은 굴뚝같지만, 자꾸만 졸고 있는 자신을 발견한다.
+	<br><br>
+<</if>>
+
+<<link [[다음|Pregnancy Birth Asylum Wolf 3]]>><<storeon "asylum_birth">><<pass 24 hour>><<stress -40>><</link>>
+<br>
+
+:: Pregnancy Birth Asylum Wolf 3
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+<<if $litter_size gte 2>><<childrenNamesPost $bornChildrenIds "가">><<else>><<childname_ ga>><</if>> 요람에 누워 있는 동안 조산사가 당신을 일으켜 세워 준다.
+
+<<if $first_birth or playerNormalPregnancyTotal() is 0>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받지만, <<he_ ga>> 정상적인 현상이라고 단언한다.
+	<br><br>
+
+	통증에도 불구하고, 당신은 출산 전보다 훨씬 더 편안하게 걷고 있다고 느낀다. 뱃속에 늑대들이 없다면 얼마나 쉽게 움직일 수 있는지 당신은 까맣게 잊고 있었다.
+	<br><br>
+
+	조산사가 당신이 옷을 입는 것을 도와준다.
+<<elseif between(playerNormalPregnancyTotal(), 1, 2)>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받는다. 당신은 지난번 출산할 때 느꼈던 이 느낌을 기억하고 있으며, 이것이 정상적인 현상이라는 것을 알고 있다.
+	<br><br>
+
+	통증에도 불구하고, 당신은 출산 전보다 훨씬 더 편안하게 걷고 있다고 느낀다. 뱃속에 늑대들이 없다면 얼마나 쉽게 움직일 수 있는지 당신은 까맣게 잊고 있었다.
+	<br><br>
+
+	조산사가 당신이 옷을 입는 것을 도와준다.
+<<elseif between(playerNormalPregnancyTotal(), 3, 7)>>
+	당신은 일어서자 내장이 떨어지는 듯한 느낌을 받는다. 당신은 여전히 그 느낌이 익숙하지 않다.
+	<br><br>
+
+	당신은 다시 꽤 쉽게 걸을 수 있게 된다. 조금 어색하지만, 변화가 예전처럼 심하지는 않다. 몸 안에 다른 늑대들이 없을 때 움직이기가 여전히 더 쉬운 것 같다.
+	<br><br>
+
+	조산사가 여전히 당신이 옷을 입는 것을 돕겠다고 고집한다.
+<<elseif between(playerNormalPregnancyTotal(), 8, 49)>>
+	당신은 아무런 어려움 없이 일어선다. 훨씬 더 민첩해진 느낌은 있지만, 더 이상 느낌의 차이는 거의 없다.
+	<br><br>
+
+	<<He_ ga>> 당신의 움직임에 감탄하며, 당신의 안정을 위해 팔로 당신을 감싼다. "많은 사람들을 봐 왔지만 이렇게 빨리 회복하는 사람은 별로 없었어요. 정말 강인하시네요!"
+	<br><br>
+
+	조산사가 여전히 당신이 옷을 입는 것을 돕겠다고 고집한다.
+<<elseif playerNormalPregnancyTotal() gte 50>>
+	당신은 누군가의 도움 없이 일어서면서, 속이 텅 빈 느낌을 받는다. 당신은 임신했을 때의 느낌이 벌써 그리워진다.
+	<br><br>
+
+	<<He_ ga>> 아무런 도움 없이 걷는 당신을 바라보며, 입을 쩍 벌린다. 당신은 재빨리 옷을 다시 입는다.
+	<br><br>
+
+	"이-이제 가셔도 돼요" <<he_ ga>> 말한다.
+<</if>>
+"강아지들은 스스로를 보호할 수 있게 되면 숲으로 방생될 거예요."
+<br><br>
+
+<<link [[다음|Pregnancy Birth Asylum 6]]>><<endevent>><</link>>
+<br>

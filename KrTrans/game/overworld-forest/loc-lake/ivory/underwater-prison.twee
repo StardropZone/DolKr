@@ -1,0 +1,1236 @@
+:: Lake Ruin Prison Intro
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<set $wraith.exit to "lake_ruin">><<underwater>><<effects>>
+
+당신은 룬 문자에 손을 댄다. 다른 손으로 주변의 기호를 따라 그리자 붉은빛을 내며 번쩍인다.
+<br><br>
+벽이 우르릉 거린다. 석조 사이로 보라색 증기가 쉬익 하는 소리와 함께 이음새가 나타난다. 이끼 덩어리들이 부서지고 떠내려간다.
+룬 문자 주위의 벽이 뒤로 물러나기 시작하더니, 바닥으로 떨어진다. 당신은 그 틈으로 헤엄쳐 들어간다.
+<br><br>
+당신 앞에는 어둠 속으로 향하는 계단이 있다. 작은 이끼 조각들이 벽의 일부를 비춘다. 꼭대기에서 희미한 빛이 보인다. 당신은 어설프게 벽을 따라 올라간다.
+<br><br>
+<span class="nextLink"><<link [[위로 (0:02)|Lake Ruin Prison Intro 2]]>><<pass 2>><</link>></span>
+<br>
+
+:: Lake Ruin Prison Intro 2
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<set $wraith.exit to "lake_ruin">><<effects>>
+
+당신이 올라갈 때 뒤에서 돌을 긁는 소리가 들린다. 얼마 후, 당신은 앞으로 넘어지면서 손으로 착지한다. <span class="blue">당신은 물에서 빠져나왔다.</span> 이곳엔 공기가 보라색 안개로 가득 차 있다. 당신은 남은 계단을 기어 올라간다.
+<br><br>
+<<if $wraithPrison>>
+	당신은 수중 감옥으로 돌아왔다.
+<<else>>
+	꼭대기에 다다르자 빛의 근원이 보인다. 당신은 빛나는 보라색 이끼 군락이 가득한 거대한 석조 방에 들어선다. 이끼는 벽을 따라 구불구불 나있으며, 때때로 복잡하게 새겨진 무늬를 따라 나있다.
+	주변에는 커다란 철창들이 놓여있고, 대부분 녹슬어있다. 그중 한 철창은 족쇄가 보이고, 또 다른 철창은 이끼 군락의 진원지로 보이며, 이끼로 완전히 덮여있다.
+	<br><br>
+<</if>>
+당신은 고통에 몸부림친다. 창백하고 반투명한 팔이 당신의 가슴에서 차례대로 튀어나온다. 강제로 몸이 뒤로 젖혀지며 그것이 당신의 몸에서 빠져나간다. <<pain 10>><<ggpain>>
+<br><br>
+<<endWraith>>
+<<generateWraith 1 true>>
+당신이 차가운 석조 바닥에 쓰러지자 서서히 감각이 돌아온다. 당신은 헛구역질을 하며 물을 토한다. 급히 숨을 들이마시자 공기 중에서 메스꺼울 정도로 달콤함이 느껴진다. <<hallucinogen 40>><<gghallucinogens>>
+<br><br>
+<<if !$wraithIntro>>
+	<<set $wraithIntro to true>>
+	당신의 앞에 아름다운 창백한 형체가 떠다닌다.
+	<<if $wraith.state is "haunt">>
+		그것이 분노에 찬 붉은 눈으로 당신을 바라보며 자신의 상처 난 목을 움켜쥔다.
+		<br><br>
+		"<span class="wraith">영원히 가둬야 해. 도둑은 그래야 해.</span>"
+		<br><br>
+		그것이 당신의 목을 붙잡아 손쉽게 바닥에 눕힌다. 그것은 바닥으로 내려와 당신의 위로 올라타고선 당신의 목을 누르기 시작한다. <span class="red">당신은 숨을 쉴 수가 없다!</span>
+	<<elseif $wraith.state is "despair">>
+		그것이 초췌하고, 지친 듯한 붉은 눈으로 당신을 바라본다. 그것이 상처투성이가 된 자신의 목을 움켜쥔다.
+		<br><br>
+		"<span class="wraith">내...내 목걸이 봤어...?</span>"
+		<br><br>
+		그것이 부드럽게 당신의 목을 붙잡아 바닥에 눕힌다. 그것이 바닥으로 내려와 당신 위로 올라탄다.
+	<<else>>
+		그것은 커다란 푸른 보석이 박힌 상아 목걸이를 제외하고는 벌거벗고 있다. 그것이 호기심 어린 푸른 눈으로 당신을 바라보며, 손으로 당신의 턱을 들어 올린다. 손이 차갑다.
+		<br><br>
+		"<span class="wraith">순수함을 만끽해. 우린 아름다울 거야.</span>"
+		<br><br>
+		그것이 부드럽게 당신의 목을 붙잡아 바닥에 눕힌다. 그것이 바닥으로 내려와 당신 위로 올라탄다.
+	<</if>>
+<<else>>
+	창백한 형체가 당신 눈앞에서 떠다닌다.
+	<<if $wraith.state is "haunt">>
+		<<if $wraithPrison and $wraithPrison.vision>>
+			그것이 당신의 가슴에 손톱이 돋친 손을 얹는다. 전신에 서늘한 한기가 느껴진다. 방이 빙글빙글 회전하더니 당신의 등이 바닥에 닿는다.
+			<br><br>
+			"<span class="wraith">아직도 모르겠어, 도둑? 두 번 말하게 하지 마.</span>"
+		<<else>>
+			그것이 상처투성이인 자신의 목을 할퀴며, 당신을 손쉽게 바닥으로 밀친다. 그것이 바닥으로 내려와, 당신의 위로 올라타고선 당신의 목을 움켜쥔다. <span class="red">당신은 숨을 쉴 수가 없다!</span>
+			<br><br>
+			"<span class="wraith">죽은 자들의 것을 훔치길 원한다면, 그들과 함께하게 될 거야.</span>"
+		<</if>>
+	<<elseif $wraith.state is "despair">>
+		<<if $wraithPrison and $wraithPrison.vision>>
+			그것이 당신의 가슴에 손톱이 돋친 손을 얹는다. 전신에 서늘한 한기가 느껴진다. 방이 빙글빙글 회전하더니 당신의 등이 바닥에 닿는다.
+			<br><br>
+			"<span class="wraith">목걸이를 못 찾겠어. 목걸이가 없어서 너무 추워. 날 따뜻하게 해줄래, <<pcpetnamePost "Wraith">>?</span>"
+		<<else>>
+			그것이 자신의 목을 할퀴며, 부드럽게 당신을 바닥에 눕힌다. 그것이 바닥으로 내려와 당신 위로 올라탄다.
+			<br><br>
+			"<span class="wraith">목걸이가 없어서 너무 추워. 날 따뜻하게 해줄래, <<pcpetnamePost "Wraith">>?</span>"
+		<</if>>
+	<<else>>
+		그것은 엄지손가락으로 목걸이를 만지며, 부드럽게 당신을 바닥에 눕힌다. 그것이 바닥으로 내려와 당신 위로 올라탄다.
+		<br><br>
+		"<span class="wraith">돌아온 걸 환영해, <<pcpetnamePost "Wraith">>.</span>"
+	<</if>>
+<</if>>
+그것이 당신의 몸이 허약하고, 아무런 반응도 할 수 없게끔 뚫어져라 바라본다.
+<<if C.npc["Ivory Wraith"].lust gte 12 and $wraith.state is "haunt">>
+	그것의 얼굴에 가학적인 미소가 번진다.
+<<else>>
+	그것은 마치 생각에 잠긴 듯 잠시 머뭇거린다.
+<</if>>
+<<if !$wraithPrison>>
+	<br><br>
+	<<link [[애원한다|Lake Prison Intro 3]]>><<set $phase to 1>><<sub 1>><</link>>
+	<br>
+	<<link [[몸부림친다|Lake Prison Intro 3]]>><<set $phase to 2>><<def 1>><</link>>
+	<br>
+<<else>>
+	<<if $parasitedisable is "f" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is "f" and !$noEarSlime>>
+		그것이 손을 옆으로 들어 올리자, 공중에서 소용돌이치는 보라색 원반이 나타난다. 그것은 안으로 손을 뻗어 꿈틀거리는 붉은 덩어리를 꺼낸다. 살아있는 슬라임이다. 그것이 슬라임을 당신의 귀에 가져다 댄다.
+		<br><br>
+		<<link [[몸부림친다|Lake Prison Slime Resist]]>><</link>>
+		<br>
+		<<link [[가만히 있는다|Lake Prison Slime]]>><</link>>
+	<<else>>
+		<<initWraith "abomination">>
+		<<startWraith>>
+		<br><br>
+		<<link [[다음|Lake Prison Intro Fight]]>><</link>>
+	<</if>>
+<</if>>
+<br>
+<<if !$wraithPrison>>
+	<<set $wraithPrison to {timer: 0, timePassed: 0, search: 0, state: "present", possession: false, masturbation: false}>>
+<<else>>
+	<<set $wraithPrison.timer to 0>>
+	<<set $wraithPrison.timePassed to 0>>
+	<<set $wraithPrison.search to 0>>
+	<<set $wraithPrison.state to "present">>
+	<<set $wraithPrison.possession to false>>
+	<<set $wraithPrison.masturbation to false>>
+<</if>>
+
+:: Lake Prison Intro 3
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<set $wraith.exit to "lake_ruin">><<effects>>
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"제-제발 아프게 하지마..." 당신은 애원한다.
+	<<elseif $speech_attitude is "bratty">>
+		"네가 뭐든 간에, 제발 날 내버려 둬!" 당신은 소리친다.
+	<<else>>
+		"제발, 내가 미안해! 날 아프게 하지 마!" 당신은 애원한다.
+	<</if>>
+	<br><br>
+	<<if $wraith.state is "haunt">>
+		"<span class="wraith">도둑이 구걸하면 안 되지.</span>" 그것이 당신의 애원을 무시하며, 당신의 목을 더 거칠게 움켜쥔다. <<pain 8>><<gpain>>
+	<<elseif $wraith.state is "despair">>
+		"<span class="wraith">네가 가져갔어? 아니, 아니...</span>" 그것이 슬픔에 잠긴 표정을 짓다가, 당신의 목을 움켜쥔다. <<pain 4>><<gpain>>
+	<<else>>
+		"<span class="wraith">무한한 즐거움을 약속할게. 이걸로는 부족해?</span>" 그것이 킥킥 웃으며 당신의 목을 움켜쥔다. <<pain 4>><<gpain>>
+	<</if>>
+<<else>>
+	당신은 끝까지 그것의 손을 떼어내려 한다. 그것이 당신에게 미소 짓는다.
+	<<if $wraith.state is "haunt">>
+		"<span class="wraith">몸부림치면 더 빨리 가라앉을 뿐이야.</span>"
+	<<elseif $wraith.state is "despair">>
+		"<span class="wraith">네가 가져갔어? 아니, 아니...</span>"
+	<<else>>
+		"<span class="wraith">힘을 아껴둬. 나중에 필요할 거야.</span>"
+	<</if>>
+<</if>>
+<br><br>
+<<if $parasitedisable is "f" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is "f" and !$noEarSlime>>
+	그것이 손을 옆으로 들어 올리자, 공중에서 소용돌이치는 보라색 원반이 나타난다. 그것은 안으로 손을 뻗어 꿈틀거리는 붉은 덩어리를 꺼낸다. 살아있는 슬라임이다. 그것이 슬라임을 당신의 귀에 가져다 댄다.
+	<br><br>
+	<<link [[몸부림친다|Lake Prison Slime Resist]]>><</link>>
+	<br>
+	<<link [[가만히 있는다|Lake Prison Slime]]>><</link>>
+<<else>>
+	<<initWraith "abomination">>
+	<<startWraith>>
+	<br><br>
+	<<link [[다음|Lake Prison Intro Fight]]>><</link>>
+<</if>>
+<br>
+
+:: Lake Prison Slime Resist
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<set $wraith.exit to "lake_ruin">><<effects>>
+마지막 의지로, 당신은 계속 머리를 움직여 슬라임이 들어오는 것을 막는다.
+<br><br>
+그것이 당신을 내려다보며 속삭인다. "<span class="wraith">너는 굴복하거나, 혹은 망가지겠지.</span>"
+<<initWraith "abomination">>
+<<startWraith>>
+<br><br>
+<<link [[다음|Lake Prison Intro Fight]]>><</link>>
+<br>
+
+:: Lake Prison Slime
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<set $wraith.exit to "lake_ruin">><<effects>>
+<<set $wraithParasite to true>>
+그것이 슬라임을 당신의 
+<<if $parasite.left_ear.name is undefined>>
+	왼쪽 귀에 가져다 대자, <span class="lewd">슬라임이 꿈틀거리며 안으로 들어간다.</span>
+	<<parasite left_ear slime>>
+<<elseif $parasite.right_ear.name is undefined>>
+	오른쪽 귀에 가져다 대자, <span class="lewd">슬라임이 꿈틀거리며 안으로 들어간다.</span>
+	<<parasite right_ear slime>>
+<</if>>
+<br><br>
+당신은 그 형체의 손길에 몸을 떤다. 당신은 부자연스러운 흥분을 느낀다. 특히 그것이 당신을 올라타고 있으니 말이다. 처음에는 작은 느낌이었지만 <span class="lewd">압도적인 음란한 욕망이 점점 커져간다.</span> 그것은 기뻐 보인다. <<lobsession>>
+<br><br>
+<<if numberOfEarSlime() is 1>>
+	<i>캐릭터 특성창에 오염도가 생겼다.</i>
+	<br><br>
+<</if>>
+그것의 손아귀가 느슨해<<if $wraith.state is "haunt">>지고, 당신은 숨을 헐떡인다<<else>>진다<</if>>. 사방에서 속삭이는 소리가 들려온다.
+
+<<if numberOfEarSlime() gte 2>>
+	<span class="lewd">귓속의 슬라임들은 이제 배가되어, 더 강해져 있다. 그것들은 당신에게 당신 자신을 창백한 형체에게 주라고 명령한다.</span> 이제 당신은 그 명령을 따르는 것이 얼마나 좋은 기분인지 안다.
+<<else>>
+	<span class="lewd">당신 안쪽의 무엇인가가 당신 자신을 창백한 형체에게 주라고 압박한다.</span> 왜인지, 당신은 그 충동을 따른다면 기분이 좋을 것이고, 따르지 않는다면 고통스러울 것이라는 것을 안다.
+<</if>>
+<<initWraith "abomination">>
+<<startWraith>>
+<br><br>
+<<if hasSexStat("promiscuity", 4) and $submissive gte 1900>>
+	<<link [[굴복한다|Lake Prison Intro Fight]]>>
+		<<set $sexstart to 1>><<corruption 3>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>>
+		<<if $earSlime.promiscuity lt 4>><<set $earSlime.promiscuity to 4>><</if>>
+		<<if $earSlime.deviancy lt 4>><<set $earSlime.deviancy to 4>><</if>>
+		<<set $earSlime.startedThreats to true>>
+	<</link>><<promiscuous4>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+	<br>
+<</if>>
+<<link [[복종한다|Lake Prison Intro Fight]]>>
+	<<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>>
+	<<if $earSlime.promiscuity lt 2>><<set $earSlime.promiscuity to 2>><</if>>
+	<<if $earSlime.deviancy lt 2>><<set $earSlime.deviancy to 2>><</if>>
+<</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+<br>
+<<link [[반항한다|Lake Prison Intro Fight]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+<br>
+
+:: Lake Prison Intro Fight
+<<effects>>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<set $enemytype to $wraith.type>>
+<<elseif $struggle_start is 1>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<if $player.penisExist>>
+		<<set $struggle.penis.creature to "pale slime">><<set $penisuse to "struggle">><<set $penisstate to "struggle">><<set $struggle.enemy[0].location to "penis">>
+	<<else>>
+		<<set $struggle.vagina.creature to "pale slime">><<set $vaginause to "struggle">><<set $vaginastate to "struggle">><<set $struggle.enemy[0].location to "vagina">>
+	<</if>>
+	<<unset $struggle_start>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $enemytype to $wraith.type>>
+<</if>>
+
+<<effectsWraith>>
+
+<<switch $wraith.type>>
+	<<case "man">>
+		<<if _combatend>>
+			<span id="next"><<link [[다음|Lake Prison Intro Fight Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Lake Prison Intro Fight]]>><</link>></span><<nexttext>>
+		<</if>>
+	<<case "tentacles">>
+		<<if $tentacles.active lte ($tentacles.max / 2)>>
+			<span id="next"><<link [[다음|Lake Prison Intro Fight Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Lake Prison Intro Fight]]>><</link>></span><<nexttext>>
+		<</if>>
+	<<case "slime">>
+		<<if $struggle.done gte $struggle.number>>
+			<span id="next"><<link [[다음|Lake Prison Intro Fight Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Lake Prison Intro Fight]]>><</link>></span><<nexttext>>
+		<</if>>
+<</switch>>
+<br>
+
+:: Lake Prison Intro Fight Finish
+<<effects>>
+<<if !$wraithCount>>
+	<<set $wraithCount to 0>>
+<</if>>
+<<if !$wraithMax>>
+	<<set $wraithCount to 0>>
+	<<set $wraithMax to 2>>
+	<<if C.npc["Ivory Wraith"].lust gt 10>>
+		<<set $wraithMax++>>
+	<</if>>
+	<<if $tentacledisable is "t">>
+		<<set $wraithMax -->>
+	<</if>>
+<</if>>
+<<if $wraith.type is "man" and $enemyhealth lte 0>>
+	<<person_ nun>> 뒤로 비틀거리며 충격에 휩싸인 표정으로 당신을 내려다본다
+	<<if $wraith.gen is "abomination">>
+		촉수들은 힘없이 어둠 속으로 곤두박질치더니, 분홍색 연기로 승화된다.
+	<<elseif $wraith.gen is "arms">>
+		<<His_ yi>> 수많은 팔이 물러난다.
+	<</if>>
+	끔찍한 비명소리가 공기를 가르고, 당신을 무릎을 꿇게 한다. 그것이 당신의 목을 잡고 당신을 들어 올린다.
+	<<if $worn.neck.cursed is 1>>
+		섬광이 번쩍이고 금속이 깨지는 소리가 나더니 <<worn_neck_name_ ga>> 사라졌다.
+		<<set $worn.neck.type.push("broken")>>
+		<<neckruined>>
+	<</if>>
+	<br><br>
+	당신은 이끼 군락의 옆에 있는 철창 안으로 끌려간다. 문이 없다. 형체는 점점 더 투명해지더니 희미해지기 시작한다. "<span class="wraith">난 회복해야 해. 넌 기다려.</span>" 그것이 순식간에 사라진다.
+	<br><br>
+	<<tearful>> 당신은 주변을 둘러보며 그것이 정말로 사라졌는지 확인한다.
+	<<set $wraith.defeated++>>
+	<<set $wraithPrison.timer to 120>>
+	<<set $wraithPrison.state to "recovering">>
+	<<clotheson>>
+	<<endcombat>>
+	<<endWraith>>
+	<br><br>
+	<<link [[다음|Lake Ruin Prison]]>><<unset $wraithParasite>><</link>>
+	<br>
+<<elseif $enemyarousal gte $enemyarousalmax or ($wraith.type is "tentacles" and $tentacles.active lte ($tentacles.max / 2)) or ($wraith.type is "slime" and $struggle.done gte $struggle.number)>>
+	<<set $wraithCount++>>
+	<<ejacW>>
+	<<if $wraithCount gte $wraithMax or $wraithCount gte 5>>
+		<<kissWraith>>
+		<br><br>
+		<<if $parasitedisable is "f" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is "f" and !$wraithParasite and !$noEarSlime>>
+			<<set $wraithParasite to true>>
+			그것이 슬라임을 당신의 
+			<<if $parasite.left_ear.name is undefined>>
+				왼쪽 귀에 가져다 대자, <span class="lewd">슬라임이 꿈틀거리며 안으로 들어간다.</span>
+				<<parasite left_ear slime>>
+			<<elseif $parasite.right_ear.name is undefined>>
+				오른쪽 귀에 가져다 대자, <span class="lewd">슬라임이 꿈틀거리며 안으로 들어간다.</span>
+				<<parasite right_ear slime>>
+			<</if>>
+			<br><br>
+			당신은 그 형체의 손길에 몸을 떤다. 당신은 부자연스러운 흥분을 느낀다. 특히 그것이 당신을 올라타고 있으니 말이다. 처음에는 작은 느낌이었지만 <span class="lewd">압도적인 음란한 욕망이 점점 커져간다.</span>
+			<br><br>
+			<<if !$earSlime.corruption>>
+				<i>캐릭터 특성창에 오염도가 생겼다.</i>
+				<br><br>
+			<</if>>
+			그것의 손아귀가 느슨해지고<<if $wraith.state is "haunt">>, 당신은 숨을 헐떡인다<</if>>. 사방에서 속삭이는 소리가 들려온다. <span class="lewd">내면의 무언가가 창백한 형체에게 당신을 바치도록 압박한다.</span> 어째서인지, 당신은 그 욕망에 따르면 기분이 좋을 것이고, 반항하면 고통스러울 것이란 것을 안다.
+			<br><br>
+		<</if>>
+		그것이 갑자기 당신을 들어 올려, 어딘가로 옮기기 시작한다. 당신은 저항할 수가 없다.
+		당신은 이끼 군락의 옆에 있는 낡은 철창에 갇히게 된다. 문이 없다.
+		<<if $wraith.state is "haunt">>
+			<<if !$wraithPrison.vision>>
+				"<span class="wraith">내가 네 마음을 열어서 보여줄게. 그리고 넌. 그걸. 돌려주게. 될 거야.</span>"
+			<<else>>
+				"<span class="wraith">다시 하강이 시작될 거야. 아름답지 않아?</span>"
+			<</if>>
+		<<elseif $wraith.state is "despair">>
+			<<if !$wraithPrison.vision>>
+				"<span class="wraith">찾는 걸 도와줘. 내가 본 것을 확인해 봐. 여기 있어.</span>"
+			<<else>>
+				"<span class="wraith">다시. 다시. 하강. 어디 있어?</span>"
+			<</if>>
+		<</if>>
+		<<if $worn.neck.cursed is 1>>
+			그것이 당신의 <<worn_neck_name_ "에">> 손을 얹자, 섬광이 번쩍이고 금속이 깨지는 소리가 나더니, 금속이 사라졌다.
+			<<set $worn.neck.type.push("broken")>>
+			<<neckruined>>
+		<</if>>
+		그것이 감옥에서 빠져나가 당신의 시야 밖으로 사라진다. <<tearful>> 당신은 빠져나갈 방법을 생각하며 주변을 둘러본다. 그 형체는 어디에도 보이지 않는다.
+		<<set $wraithPrison.timer to 60>>
+		<<set $wraithPrison.state to "recovering">>
+		<<clotheson>>
+		<<endcombat>>
+		<<endWraith>>
+		<br><br>
+		<<link [[다음|Lake Ruin Prison]]>><<unset $wraithParasite>><</link>>
+		<br>
+	<<else>>
+		<<continueWraith>>
+		<br><br>
+		<<link [[다음|Lake Prison Intro Fight]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	그것이 갑자기 당신을 들어 올려, 어딘가로 옮기기 시작한다. 당신은 저항할 수가 없다.
+	당신은 이끼 군락의 옆에 있는 낡은 철창에 갇히게 된다. 문이 없다.
+	<<if $wraith.state is "haunt">>
+		<<if !$wraithPrison.vision>>
+			"<span class="wraith">내가 네 마음을 열어서 보여줄게. 그리고 넌. 그걸. 돌려주게. 될 거야.</span>"
+		<<else>>
+			"<span class="wraith">다시 하강이 시작될 거야. 아름답지 않아?</span>"
+		<</if>>
+	<<elseif $wraith.state is "despair">>
+		<<if !$wraithPrison.vision>>
+			"<span class="wraith">찾는 걸 도와줘. 내가 본 것을 확인해 봐. 여기 있어.</span>"
+		<<else>>
+			"<span class="wraith">다시. 다시. 하강. 어디 있어?</span>"
+		<</if>>
+	<</if>>
+	<<if $worn.neck.cursed is 1>>
+		그것이 당신의 <<worn_neck_name_ "에">> 손을 얹자, 섬광이 번쩍이고 금속이 깨지는 소리가 나더니, 금속이 사라졌다.
+		<<set $worn.neck.type.push("broken")>>
+		<<neckruined>>
+	<</if>>
+	그것이 감옥에서 빠져나가 당신의 시야 밖으로 사라진다. <<tearful>> 당신은 빠져나갈 방법을 생각하며 주변을 둘러본다. 그 형체는 어디에도 보이지 않는다.
+	<<set $wraithPrison.timer to 60>>
+	<<set $wraithPrison.state to "recovering">>
+	<<clotheson>>
+	<<endcombat>>
+	<<endWraith>>
+	<br><br>
+	<<link [[다음|Lake Ruin Prison]]>><<unset $wraithParasite>><</link>>
+	<br>
+<</if>>
+
+:: Lake Ruin Prison
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $wraith.exit to "lake_ruin">><<set $bus to "lake_ruin_prison">><<effects>>
+
+당신은 물에 잠긴 감옥에 있다. 분홍색 안개가 공중에서 소용돌이친다. <<ghallucinogens>>
+<br><br>
+
+<<if $wraithPrison.state is "present">>
+	<<set _wraithEvent to true>>
+<</if>>
+
+<<if isPregnancyEnding() and !$possessed>>
+	<<set $wraithPrison.state to "gone">>
+	<<endWraith>>
+	<<clearWraith>>
+	<<pregnancyPassout "wraith">>
+<<else>>
+	<<if $moonstate is "morning" and Time.hour gte 6 and $wraithPrison.timePassed gte 120 and $wraithPrison.state isnot "gone">>
+		아래로 내려가는 계단 근처에 형체가 있는것이 보인다. 그것이 흔들리고 있다.
+		<br><br>
+		<<if $wraith.state is "haunt">>
+			<<if !$wraithPrison.vision>>
+				그것이 순수한 분노와 증오로 당신을 응시한다. 그것이 빙글빙글 돌면서, 자신의 목을 할퀴고, 비명을 지르며 통곡하기 시작한다.
+				<br><br>
+				그것이 순식간에 사라졌다가 당신 앞에 나타난다. 그것이 손톱이 길게 달린 손으로 당신의 목을 움켜쥔다. 그것은 재빨리 당신을 계단으로 끌고 가서, 당신의 머리를 물속에 집어넣는다. <<stress 24>><<pain 10>><<gpain>><<gstress>>
+				<br><br>
+				당신은 그것에 맞서 싸운다. 그것이 비명을 지른다. "<span class="wraith">네가 정확히 어떤 일을 했는지 보여주지. 다시 찾아낼 거야, 도둑. 넌 충분히 고통받지 않았어. 넌 준비가 안 됐어.</span>" <<gobsession>>
+				<br><br>
+				그것이 뒤에서 깜박거린다. 당신은 고개를 물 위로 올리고 기침을 한다. <<tearful>> 당신은 일어선다. 계단 아래쪽에 있는 룬이 다시 빛난다.
+			<<elseif C.npc["Ivory Wraith"].lust gte 12>>
+				그것은 순수한 분노로 당신을 응시한다. 그것이 으르렁거리며 자신의 목을 잡고 원을 그리며 떠다니기 시작한다.
+				<br><br>
+				그것이 순식간에 사라졌다가 당신 앞에 나타난다. 그것이 손톱이 길게 달린 손으로 당신의 목을 움켜쥔다. 당신은 벽에 눌린다. <<stress 12>><<pain 5>><<gpain>><<gstress>>
+				<br><br>
+				당신은 그것에 맞서 싸운다. 그것이 속삭인다. "<span class="wraith">너도 봤잖아. 속죄하고 싶은가? 더. 고통을 더 먼저.</span>"
+				<br><br>
+				그것이 뒤에서 깜박거린다. 당신은 벽을 타고 미끄러져 내려간다. <<tearful>> 당신은 일어선다. 계단 아래쪽에 있는 룬이 다시 빛난다. <<lobsession>>
+			<<else>>
+				그것이 불안한 듯한 눈빛으로 당신을 쳐다보다가 당신 눈앞에 나타난다. 그것이 공격하려는 듯 손톱을 세운 손을 들어 올리자, 당신은 본능적으로 얼굴을 가린다.
+				<br><br>
+				대신에 당신은 당신의 뺨을 부드럽게 어루만지는 것을 느낀다.당신은 천천히 눈을 뜬다. <span class="green">손톱이 있던 손은 사라지고 창백하고, 유연한 피부로 바뀌었다. 그것의 얼굴에서 희미한 친숙함이 느껴진다.</span>
+				<br><br>
+				"<span class="wraith">우리는 바닥에 가까워진 것이 아니라 여전히 떨어지고 있어. 하지만 우리는 바닥에 닿을 필요가 없을지도 모르지.</span>" <<lobsession>>
+			<</if>>
+		<<elseif $wraith.state is "despair">>
+			<<if !$wraithPrison.vision>>
+				그것이 후회하는 듯한 표정으로 당신을 바라본다. 그것이 빙글빙글 돌면서, 자신의 목을 할퀴고, 비명을 지르며 통곡하기 시작한다.
+				<br><br>
+				그것이 순식간에 사라졌다가 당신 앞에 나타난다. 그것이 손톱이 길게 달린 손을 당신의 목을 향해 뻗는다. 그러나 잠시 멈칫한다. 그것이 훌쩍거리다 당신 앞에서 무너져 내린다.
+				<br><br>
+				"<span class="wraith">미안해. 넌 준비가 안됐어. 우린 더 많이 고통받아야 해.</span>" <<gobsession>>
+				<br><br>
+				그것이 순식간에 당신에게서 멀어진다. 계단 아래쪽의 룬이 다시 빛난다.
+			<<elseif C.npc["Ivory Wraith"].lust gte 12>>
+				그것이 분노와 후회를 담아 당신을 바라본다. 그것이 빙글빙글 돌면서, 자신의 목을 할퀴고, 으르렁거리며 통곡하기 시작한다.
+				<br><br>
+				그것이 순식간에 사라졌다가 당신 앞에 나타난다. 그것이 손톱이 길게 달린 손으로 당신의 목을 움켜쥔다. 당신은 벽에 눌린다. <<stress 12>><<pain 5>><<gpain>><<gstress>>
+				<br><br>
+				당신은 그것에 맞서 싸운다. 그것은 곧바로 겁에 질린 표정으로 당신을 떨어뜨린다. "<span class="wraith">미안해. 네가 아니었어. 네가 아니었어...</span>" <<lobsession>>
+				<br><br>
+				그것이 뒤쪽으로 날아간다. 당신은 벽 아래로 미끄러져 내려간다. <<tearful>> 당신은 일어선다. 계단 아래쪽에 있는 룬이 다시 빛난다.
+			<<else>>
+				그것이 후회하는 듯한 표정으로 당신을 바라본다. 그것이 시야 밖으로 사라졌다가, 곧바로 눈앞에 나타난다.
+				<br><br>
+				"<span class="wraith">봤잖아. 본 적 있어? 날 도와줄래? 날 도와줘야지.</span>" <<lobsession>>
+				<br><br>
+				그것이 뒤쪽으로 날아가면서, 당신에게서 멀어진다. 계단 아래쪽의 룬이 다시 빛난다.
+			<</if>>
+		<<else>>
+			"<span class="wraith">내 시간이 끝났어. 넌 다음 달에 돌아오게 될 거야.</span>"
+			<<if numberOfEarSlime()>>
+				<<if $earSlime.growth gte 200>>
+					그것이 키득거리고, 당신은 머릿속의 슬라임이 재빠르게 당신의 모든 통제권을 뺏어가는 것을 느낀다. "<span class="wraith">결국, 여기가 너와 하나가 된 기생충으로부터 벗어날 수 있는 유일한 장소야.</span>"
+				<<else>>
+					그것이 키득거린다. 머릿속의 슬라임이 꿈틀거리는 것을 느껴진다. "<span class="wraith">결국, 여기가 기생충으로부터 벗어날 수 있는 유일한 장소야.</span>"
+				<</if>>
+			<</if>>
+		<</if>>
+		<br><br>
+		계단에서 급류가 솟구쳐 올라오더니, 그 급류가 지나가자 형체가 사라진다. <span class="blue"><i>당신은 다음 붉은 달이 뜨기까지는 안전하다.</i></span>
+		<br><br>
+		<<set $wraithPrison.state to "gone">>
+		<<unset _wraithEvent>>
+		<<endWraith>>
+		<<clearWraith>>
+	<</if>>
+	<<if _wraithEvent is true>>
+		<<if ["haunt", "despair"].includes($wraith.state) and $trauma gte ($traumamax / 10) * 4 and $wraithPrison.timePassed gte 140>>
+			창백한 형체가 땅에서 모습을 드러낸다. 벌써부터 힘이 빠지는 것이 느껴진다. 당신은 보이지 않는 힘에 의해, 감옥 중 한 곳으로 떠밀려 이끼가 깔린 바닥으로 떨어진다.
+			<br><br>
+			<<if $wraith.state is "haunt">>
+				그것이 차가운 시선으로 당신을 바라보며, 손톱이 돋은 손으로 당신의 뺨을 움켜쥔다.
+				<<if !$wraithPrison.vision>>
+					"<span class="wraith">죽은 자의 물건을 훔칠 때 너는 무엇을 찾고 있었지? 대답을? 내가 이 신전의 잔해와 함께 빠져죽는 것이 어떤 것인지 네게 보여주도록 하지. 파도가 네 뼈들을 갉아먹을 때 네 호기심이 채워지기를. <<pcPetname_ iyo "Wraith">>. <<pcPetname_ iyo "Wraith">>.</span>"
+				<<else>>
+					"<span class="wraith">다시 한번, 아래로. <<pcPetnamePost "Wraith">>.</span>"
+				<</if>>
+			<<else>>
+				그것이 절실한 듯한 눈빛으로 당신을 바라보며, 손톱이 돋은 손으로 당신의 뺨을 움켜쥔다.
+				<<if !$wraithPrison.vision>>
+					"<span class="wraith">반드시 봐야 해. 반드시 이해해야 해. 날 도와줘야 해. 어딨어? <<pcPetnamePost "Wraith">>.</span>"
+				<<else>>
+					"<span class="wraith">도와줘. 어딨어? <<pcPetnamePost "Wraith">>.</span>"
+				<</if>>
+			<</if>>
+			<br><br>
+			그것이 큰 이끼 군락의 중심에서 한 줌의 이끼를 집어 들고, 당신의 머리를 뒤로 젖힌다. 그것이 짓이겨진 이끼를 당신의 입속으로 떨어뜨리기 시작한다.
+			<<if $wraithPrison.vision>>
+				당신은 저항을 시도하는 것이 좋은 방법이 아니라는 것을 알고 있다.
+			<<else>>
+				당신은 이끼를 뱉어내려고 노력하지만, 몸이 말을 듣지 않는다.
+			<</if>>
+			당신의 입에 활짝 핀 이끼가 가득 차자, 그것이 당신에게 키스를 한다.
+			긴장되었지만, 곧 묘한 안도감을 느낀다. <<takeKissVirginity "Ivory Wraith" "rape">>
+			<<stress -200>><<lllstress>><<trauma 36>><<gggtrauma>><<purity -50>><<lllpurity>><<physique_loss 16>><<llphysique>><<pain -15>><<llpain>>
+			<br><br>
+			모든 것이 당신의 주위를 맴돌고, 소용돌이치는 허공의 바다에 당신과 창백한 얼굴만 남게 된다. 당신의 마음이 해방을 간절히 소리치며, 당신의 생각들이 불타 사라진다. <<ggghallucinogens>>
+			<br><br>
+			당신의 시야가 생각지도 못한 방식으로 뒤틀리고 왜곡된다. 촛불에서 녹아내리는 밀랍처럼 당신의 피부가 잔물결을 일으킨다. 당신은 위에서 빛나는 이끼에 비친 자기 자신을 바라본다. 당신은 팔을 내려다보자 부자연스럽게 창백한 것을 발견한다.
+			<br><br>
+			<span class="nextLink"><<link [[일어난다.|Schism]]>><</link>></span>
+			<br>
+		<<else>>
+			<<generateWraith 1>>
+			창백한 형체가 땅에서 모습을 드러낸다. 보이지 않는 힘이 당신을 그것에게 끌고 간다. 그것이 당신을 바라본다.
+			<br><br>
+			<<if $wraith.state is "haunt">>
+				"<span class="wraith"><<print either(
+					"눈을 떠.",
+					"<<pcpetnamePost \"Wraith\">>.",
+					"잠을 자야 깨어날 수 있어.",
+					"마음을 열어야만 속죄할 수 있어.",
+					"넌 아직 볼 준비가 안 됐어, 도둑. 내가 준비시켜줄게.",
+					"네 전부를 가져갈 거야. 그래야만 네가 이해할 수 있어."
+				)>></span>"
+			<<elseif $wraith.state is "despair">>
+				"<span class="wraith"><<print either(
+					"너무 추워.",
+					"미안해.",
+					"본 적 있어?",
+					"우리는 함께 고통받아야 해.",
+					"<<pcpetnamePost \"Wraith\">>.",
+					"넌 내가 가진 전부야."
+				)>></span>"
+			<<else>>
+				"<span class="wraith"><<print either(
+					"저항하지 마.",
+					"굴복하지 않을 거야?",
+					"나와 함께 가라앉아, 영원히.",
+					"<<pcpetnamePost \"Wraith\">>.",
+					"나는 이미 네 안에 있어.",
+					"이것이 네가 가진 전부야."
+				)>></span>"
+			<</if>>
+			<br><br>
+			<<if $rng gte 90>>
+				창백한 형체가 땅에서 모습을 드러낸다. 보이지 않는 힘이 당신을 그것에게 끌고 간다. 그것이 당신을 바라본다.
+				<br><br>
+				<<set $skulduggerydifficulty to 600>>
+				<<link [[받아들인다|Lake Ruin Lichen Eat]]>><<trauma 100>><<stress -50>><<set $phaseWraith to 1>><<hallucinogen 220>><</link>><<gggtrauma>><<lllstress>><<gghallucinogens>>
+				<br>
+				<<link [[먹는 척한다|Lake Ruin Lichen Eat]]>><<set $phaseWraith to 2>><</link>><<skulduggerydifficulty>>
+				<br>
+				<<link [[뱉는다|Lake Ruin Lichen Eat]]>><<set $phaseWraith to 3>><</link>>
+				<br>
+			<<elseif $rng gte 70 and $wraithPrison.possession is false>>
+				<<if !$wraith.will>>
+					<<set $wraith.will to random(1300, 1700)>>
+				<</if>>
+				<<set _wraithWill to Math.floor(1 + $wraith.will)>>
+				그것이 당신의 몸에 들어오려고 한다.
+				<br><br>
+				<<link [[굴복한다|Lake Ruin Prison Possession]]>><<if numberOfEarSlime()>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><</if>><<sub 1>><</link>><<if numberOfEarSlime()>><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+				<br>
+				<<link [[반항한다|Lake Ruin Prison Possession Resist]]>><<set $phase to 1>><<if numberOfEarSlime()>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><</if>><<def 1>><</link>><<if numberOfEarSlime()>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>><</if>><<willpowerdifficulty 1 _wraithWill>>
+				<br>
+			<<elseif $rng gte 50 and !$wraithPrison.masturbation>>
+				<<if !$wraith.will>>
+					<<set $wraith.will to random(1300, 1700)>>
+				<</if>>
+				<<set _wraithWill to Math.floor(1 + $wraith.will)>>
+				그것이 당신의 몸에 들어오려고 한다.
+				<br><br>
+				<<link [[굴복한다|Lake Ruin Prison Masturbation Start]]>><<if numberOfEarSlime()>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><</if>><<sub 1>><</link>><<if numberOfEarSlime()>><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+				<br>
+				<<link [[반항한다|Lake Ruin Prison Masturbation Resist]]>><<set $phase to 1>><<if numberOfEarSlime()>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><</if>><<def 1>><</link>><<if numberOfEarSlime()>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>><</if>><<willpowerdifficulty 1 _wraithWill>>
+				<br>
+			<<else>>
+				<<initWraith>>
+				<<startWraith>>
+				<br><br>
+				<<link [[다음|Lake Ruin Prison Rape]]>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<<elseif $wraithPrison.state is "gone">>
+		<<link [[물 속으로 들어간다|Lake Ruin Prison Leave]]>><<wraith_pass 2>><</link>>
+		<br>
+	<<elseif !$wraithPrison.search>>
+		<<link [[나갈 수 있는 길을 찾는다 (0:30)|Lake Ruin Prison Search]]>><<wraith_pass 30>><</link>>
+		<br>
+	<<else>>
+		<<if $wraithPrison.search is 1>>
+			<<link [[철창 안을 조사한다 (0:15)|Lake Ruin Prison Search]]>><<wraith_pass 15>><</link>>
+			<br>
+		<<elseif $wraithPrison.search is 2>>
+			<<link [[계속 찾는다 (0:30)|Lake Ruin Prison Search]]>><<wraith_pass 30>><</link>>
+			<br>
+		<<elseif $wraithPrison.search is 3>>
+			<<link [[계단 아래로 헤엄쳐 내려간다|Lake Ruin Prison Search]]>><<wraith_pass 2>><</link>>
+			<br>
+		<</if>>
+		<<if $wraithPrison.search gte 2>>
+			<<link [[휴식한다 (1:00)|Lake Ruin Prison Rest]]>><<wraith_pass 60>><<set $tiredness -= 500>><<trauma 50>><</link>><<ltiredness>><<ggtrauma>>
+		<</if>>
+	<</if>>
+<</if>>
+
+:: Lake Ruin Prison Search
+<<effects>>
+<<if !$wraithPrison.search>>
+	<<set $wraithPrison.search to 1>>
+	당신은 커다란 방 안을 둘러본다. 빛나는 이끼 군락은 당신이 여태껏 본 것과는 다른 모습이며, 어떻게 살아남았는지 궁금해진다. 곰곰이 생각해 보니 당신은 이 방도 다른 폐허와 마찬가지로 물에 잠겨있어야 한다는 것을 깨닫는다.
+	<br><br>
+	벽에 변색된 자국과 그 아래 녹슨 족쇄가 남아 있는 것이 보인다. 철창에는 더 이상 아무것도 넣을 수 없지만, 당신은 각 철창마다 같은 구석에 큰 이끼가 잔뜩 끼어 있는 것을 알아차린다.
+<<elseif $wraithPrison.search is 1>>
+	<<set $wraithPrison.search to 2>>
+	당신은 철창을 조사한다. 빛나는 이끼가 군데군데 창살을 완전히 뒤덮고 있다. 당신이 손을 대자 일부 창살이 완전히 부서져 버린다.
+	<br><br>
+	당신은 왜 이끼가 각 감옥의 우측 뒤쪽 모서리에서 시작되는지 생각하면 불안해지기 시작한다. 당신은 자세히 살펴보며, 이끼의 일부를 치우기 시작한다.
+	<br><br>
+	당신은 아래에서, 이끼에 의해 여러 군데 찢어진 상당한 크기의 천 조각을 발견한다. <<if $historytrait gte 4>>고대 침대보의 잔해처럼 보인다.<</if>>
+<<elseif $wraithPrison.search is 2>>
+	<<set $wraithPrison.search to 3>>
+	당신은 방의 맨 끝에서 부서진 작은 조각상의 잔해를 발견한다. 가치가 없을 정도로 손상되었지만 팔과 날개 모양인 것 같다.
+	<br><br>
+	당신은 아래로 이어지는 계단으로 다가간다. 어두운 물이 허공으로 뻗어나간다. 끝에서 희미한 불빛이 보인다.
+<<elseif $wraithPrison.search is 3>>
+	<<set $wraithPrison.search to 4>>
+	당신은 깊게 숨을 들이마시고, 아래로 헤엄친다. 거리가 멀다. <<loxygen>>
+	<br><br>
+	<<water>><<effectswater>>
+	마침내 끝에 다다르자, 똑같이 빛나는 룬이 보인다. 당신은 룬에 손을 대보지만 아무 일도 일어나지 않는다.
+	힘껏 밀어보지만 소용이 없다. 당신은 다시 헤엄쳐 올라간다.
+	<br><br>
+	<span class="red">나가는 길이 없다.</span>
+<</if>>
+<br><br>
+<<link [[다음|Lake Ruin Prison]]>><</link>>
+<br>
+
+:: Lake Ruin Prison Rest
+<<effects>>
+당신은 감옥 한쪽에 자란 이끼를 치우고 찢어진 천 위에 눕는다. 눈을 감아도 여전히 방 전체를 볼 수 있는 것처럼 느껴진다.
+<br><br>
+시간이 얼마나 지났는지 모르겠다. 몸은 상쾌하지만, 정신이 피폐해진 느낌이다.
+<br><br>
+<<link [[다음|Lake Ruin Prison]]>><</link>>
+<br>
+
+:: Lake Ruin Prison Rape
+<<effects>>
+<<if $struggle_start is 1>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<if $player.penisExist>>
+		<<set $struggle.penis.creature to "pale slime">><<set $penisuse to "struggle">><<set $penisstate to "struggle">><<set $struggle.enemy[0].location to "penis">>
+	<<else>>
+		<<set $struggle.vagina.creature to "pale slime">><<set $vaginause to "struggle">><<set $vaginastate to "struggle">><<set $struggle.enemy[0].location to "vagina">>
+	<</if>>
+	<<unset $struggle_start>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $enemytype to $wraith.type>>
+<</if>>
+
+<<effectsWraith>>
+
+<<switch $wraith.type>>
+	<<case "man">>
+		<<if _combatend>>
+			<span id="next"><<link [[다음|Lake Ruin Prison Rape Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Lake Ruin Prison Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+	<<case "tentacles">>
+		<<if $tentacles.active lte ($tentacles.max / 2)>>
+			<span id="next"><<link [[다음|Lake Ruin Prison Rape Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Lake Ruin Prison Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+	<<case "slime">>
+		<<if $struggle.done gte $struggle.number>>
+			<span id="next"><<link [[다음|Lake Ruin Prison Rape Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[다음|Lake Ruin Prison Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+<</switch>>
+<br>
+
+:: Lake Ruin Prison Rape Finish
+<<effects>>
+<<if !$wraithCount>>
+	<<set $wraithCount to 0>>
+<</if>>
+<<if !$wraithMax>>
+	<<set $wraithCount to 0>>
+	<<set $wraithMax to 1>>
+	<<if C.npc["Ivory Wraith"].lust gt 10>>
+		<<set $wraithMax++>>
+	<</if>>
+	<<if $tentacledisable is "t">>
+		<<set $wraithMax -->>
+	<</if>>
+<</if>>
+<<if $wraith.type is "man" and $enemyhealth lte 0>>
+	<<person_ nun>> 뒤로 비틀거리며 충격에 휩싸인 표정으로 당신을 내려다본다
+	<<if $wraith.gen is "abomination">>
+		촉수들은 힘없이 어둠 속으로 곤두박질치더니, 분홍색 연기로 승화된다.
+	<<elseif $wraith.gen is "arms">>
+		<<His_ yi>> 수많은 팔이 물러난다.
+	<</if>>
+	<<His_ yi>> 머리가 뒤로 젖혀지고, 당신의 마음에 울려퍼지는 짧은 비명과 함께 <<he_ ga>> 허공으로 사라진다. 당신의 귀가 울리고, 온 사방에서 그것의 목소리가 들린다. "<span class="wraith">좋아. 계속 저항해.</span>"
+	<br><br>
+	<<tearful>> 당신은 주위를 둘러보며, <<hes_ ga>> 정말로 사라졌는지 확인한다.
+	<<set $wraith.defeated++>>
+	<<set $wraithPrison.timer to 120>>
+	<<set $wraithPrison.state to "recovering">>
+	<<clotheson>>
+	<<endcombat>>
+	<<endWraith>>
+	<br><br>
+	<<link [[다음|Lake Ruin Prison]]>><</link>>
+	<br>
+<<elseif $enemyarousal gte $enemyarousalmax or ($wraith.type is "tentacles" and $tentacles.active lte ($tentacles.max / 2)) or ($wraith.type is "slime" and $struggle.done gte $struggle.number)>>
+	<<set $wraithCount++>>
+	<<ejacW>>
+	<<if $wraithCount gte $wraithMax>>
+		<<kissWraith>>
+		<br><br>
+		<<He_ ga>> 잠시 멈칫하더니 바닥으로 가라앉는다. <<His_ yi>> 웃음소리가 사방에 울려 퍼진다.
+		<br><br>
+		<<tearful>> 당신은 언제 또 공격을 받을지 몰라 주위를 둘러본다.
+		<<set $wraithPrison.timer to 60>>
+		<<set $wraithPrison.state to "recovering">>
+		<<clotheson>>
+		<<endcombat>>
+		<<endWraith>>
+		<br><br>
+		<<link [[다음|Lake Ruin Prison]]>><</link>>
+		<br>
+	<<else>>
+		<<continueWraith>>
+		<br><br>
+		<<link [[다음|Lake Ruin Prison Rape]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Lake Ruin Prison Possession Resist
+<<effects>>
+당신은 그것의 의지를 거스르며, 최선을 다해 저항한다.
+<br><br>
+<<if $willpowerSuccess>>
+	그것이 <span class="green">당신의 몸에 들어가지 못하고 뒤로 밀려난다.</span>
+	<<if $wraith.state is "haunt">>
+		그것이 으르렁거리며, 당신의 목을 움켜쥔다.
+		<br><br>
+		"<span class="wraith">그래, 좋아. 그럼 어렵게 가보자.</span>"
+	<<elseif $wraith.state is "despair">>
+		그것이 인상을 찌푸리며, 당신의 목을 움켜쥔다.
+		<br><br>
+		"<span class="wraith">우린 모든 걸 함께 나눌 거야. 즐거움과 고통.</span>"
+	<<else>>
+		그것이 웃으며, 당신의 어깨에 손을 얹는다.
+		<br><br>
+		"<span class="wraith">이건 단순한 요청이 아냐.</span>"
+	<</if>>
+	<br><br>
+	<<initWraith>>
+	<<startWraith>>
+	<br><br>
+	<<link [[다음|Lake Ruin Prison Rape]]>><</link>>
+	<br>
+<<else>>
+	<<set $possessed to true>><<canvas-model-override "blink" false>>
+	그것이 순간적으로 느려지지만, <span class="red">계속해서 당신의 몸 안으로 들어간다.</span> 팔다리가 경련을 일으키며 의식이 밀어지고 덮어씌워진다.
+	<br><br>
+	<<link [[다음|Lake Ruin Prison Possession]]>><</link>>
+	<br>
+<</if>>
+
+:: Lake Ruin Prison Possession
+<<effects>><<set $possessed to true>><<canvas-model-override "blink" false>><<set $wraithPrison.possession to true>>
+
+<<if $phase is 1>>
+	그것이 하얀 안개가 되어 사라지기 시작한다. 당신은 어떠한 저항도 하지 않고, 온전히 그것에게 몸을 맡긴다. 모든 감정과 감각이 사라진다. 팔다리가 경련을 일으키며 의식이 밀어지고 덮어씌워진다.
+	<br>
+<</if>>
+그것이 당신의 몸으로 일어서서, 철창 창살에 몸을 기댄다. 그것이 당신의 손을 꽉 쥐고, 목을 이리저리 돌린다. 그것이 미소를 짓는다.
+<br><br>
+
+"넌 내 거야," 그것이 당신의 목소리로 말한다.
+<br><br>
+
+<<if $tentacledisable is "f" and $rng gte 25>>
+	그것이 벽에 기대어 앉아 다리를 벌린다. 수많은 창백한 촉수가 시야에 들어온다.
+	<<if $worn.lower.name isnot "naked">>
+		당신의 <<worn_lower_name_ ga>> 순식간에 갈기갈기 찢어진다.<<lowerruined>>
+	<</if>>
+	그것들이 당신의 사타구니 근처로 다가와, 두꺼운 점액으로 당신의 <<genitals_ rul>> 뒤덮는다. 점액이 닿는 곳마다 불현듯 감각이 되살아난다. <<garousal>><<gpain>><<pain 6>>
+	<<if $player.vaginaExist>><<bodyliquid "vaginaoutside" "goo" 2>><</if>><<if $player.penisExist>><<bodyliquid "penis" "goo" 2>><</if>><<bodyliquid "thigh" "goo" 3>>
+	<br><br>
+
+	입술 사이로 거친 숨소리가 새어 나온다. 당신은 스스로 낸 소리인지 아닌지 확신하지 못한다. 흥분의 열기로 인해 머릿속이 흐려진다. 절정에 가까워진 것 같지만 도저히 도달할 수 없다. <<ggarousal>><<set $arousal to $arousalmax - 1>>
+	<br><br>
+
+	촉수가 당신의 몸을 따라 올라가면서 쾌락의 흔적을 남긴다. 마치 살로 이루어진 철창 속에서 빠져나오려 발버둥 치는 것처럼 느껴진다. 고통과 욕정, 공허함이 뒤엉킨다. <<gggarousal>>
+	<<bodyliquid "chest" "goo" 2>><<bodyliquid "rightarm" "goo" 2>><<bodyliquid "leftarm" "goo" 2>>
+<<else>>
+	그것이 앉아서 다리를 벌린다. 아래에서 그림자가 일렁거린다. 그림자가 여러 개의 몸으로 뭉쳐진다.
+	<<if $worn.lower.name isnot "naked" or $worn.upper.name isnot "naked">>
+		사방에서 축축한 손이 몰려와, 당신의 옷을 찢어버린다. 손이 지나간 자리엔 끈적끈적한 자국만이 남는다.
+		<<upperruined>><<lowerruined>>
+	<<else>>
+		사방에서 축축한 손이 당신을 어루만지며, 끈적끈적한 자국이 남긴다.
+	<</if>>
+	손들과 닿을 때마다 뭉근하게 열기가 피어오른다.<<garousal>><<gpain>><<pain 6>>
+	<br><br>
+
+	그들의 손길은 관능적이면서도 혼란스럽다. 부드럽게 쓰다듬던 손길이 당신의 피부를 손톱으로 할퀴기 시작한다. 핥기가 물기로 바뀌고, 신음이 비명이 되어 당신의 귓가에 그대로 꽂힌다. 그들이 당신을 조롱하며 가장자리로 유인한 다음, 마지막 순간에 당신을 다시 끌어당긴다.<<ggarousal>><<set $arousal to $arousalmax - 1>>
+	<br><br>
+
+	몸 하나가 당신을 끌어당기고 다른 몸 쪽으로 밀어 넣기를 반복한다. 찰나의 순간, 당신은 살에 파묻히는 것이 아니라 뜻밖의 신음에 목이 졸린다. 고통과 욕정, 공허함이 뒤엉킨다.<<gggarousal>>
+	<<if $player.vaginaExist>><<bodyliquid "vaginaoutside" "goo" 2>><</if>><<if $player.penisExist>><<bodyliquid "penis" "goo" 2>><</if>><<bodyliquid "thigh" "goo" 3>>
+	<<bodyliquid "chest" "goo" 2>><<bodyliquid "rightarm" "goo" 2>><<bodyliquid "leftarm" "goo" 2>>
+<</if>>
+<br><br>
+
+<<if $wraith.state is "haunt">>
+	당신은 고통에서 벗어나지 못하고, 마치 영원처럼 느껴지는 시간 동안 자신의 몸 안에 갇힌 채 앉아 있다. 당신을 고통스럽게 만드는 것을 즐기고 있다는 듯이, 그것이 당신의 목소리로 웃는다. 방의 조그마한 불빛이 점차 사그라들기 시작하더니 당신은 의식을 잃는다.
+	<br><br>
+
+	<<link [[다음|Lake Ruin Prison Possession 2]]>><</link>>
+	<br>
+<<else>>
+	그것의 상체가 당신의 몸에서 빠져나와 손으로 당신의 얼굴을 어루만진다. 그것이 당신의 몸을 떠날 때 당신은 열기로 가득 찬다. 당신은 앞으로 닥칠 일에 저항할 수 있을지 확신을 갖지 한다. 저항하고 싶은지 확신이 서지 않는다.
+	<br><br>
+
+	<<initWraith "man">>
+	<<link [[다음|Lake Ruin Prison Rape]]>><<wraithExorcise true false>><</link>>
+	<br>
+<</if>>
+
+:: Lake Ruin Prison Possession 2
+<<effects>>
+잠시 후, 그것이 당신을 강제로 깨운다. 그것은 당신의 의식을 붙들고선, 당신이 조금도 안심할 수 없게 만든다. 그것이 당신의 목소리로 히스테릭하게 웃기 시작한다. 그것이 비틀거리며 일어나 당신의 손을 다시 움켜쥔다.
+<br><br>
+<<if C.npc["Ivory Wraith"].lust gte 14 and !playerIsPregnant()>>
+	<span class="red">그것이 당신의 몸이 일반적으로 감당할 수 있는 것보다 훨씬 더 큰 힘으로 당신의 배를 때린다.</span> 바로 그 순간, 온몸의 감각이 되돌아온다. 당신이 몸을 웅크리자, 그것이 당신을 떠난다. 당신은 헛구역질을 하며 숨을 헐떡인다. <<gggpain>><<pain 18>>
+	<br><br>
+	그것이 당신의 등을 짓밟는다. 온몸에 찌릿찌릿한 통증이 느껴지고 당신은 완전히 엎어진다. <<genitalsPost 2 "가">> 돌에 부딪히는 미세한 감각만으로도 마침내 당신은 극도로 고통스러운 오르가즘에 도달한다. <<orgasm>>
+	그것이 웃으며 당신의 등에 발을 들이밀자, 당신은 고통에 비명을 지른다. 당신을 덮고 있는 점액이 고통을 가중시키고 있는 것 같다.
+	<br><br>
+	당신은 간신히 고개를 들어 올린다. 그것이 천진난만한 미소를 지으며 당신 앞에 무릎을 꿇는다. 잠시 그것이 사람처럼 보였지만, 당신은 그것에게 인간적인 면모가 있다고 생각해서는 안 된다는 것을 잘 알고 있다. 그것의 미소가 순식간에 비웃음으로 바뀌더니, 지쳐있는 당신의 몸을 들어 올려 목을 조르기 시작한다.
+<<else>>
+	그러나, 당신의 몸을 이용해 계속해서 당신을 공격하기 직전, <span class="green">그것이 머뭇거린다.</span> 당신과 그것 모두 긴 숨을 내쉰다.
+	<br><br>
+	당신의 몸이 벽에 기대어 앉는다. 다리를 가슴 쪽으로 모은다. 당신과 그것 모두 그곳에 미동도 없이 앉아 있는다. "어째서?"
+	<br><br>
+	둘 중 누가 질문했는지 잘 모르겠다. 당신도 답을 모른다. 창백한 형체가 몸에서 빠져나가기 시작하자, 당신의 손이 목 쪽으로 떨리는 것을 느낀다.
+<</if>>
+<br><br>
+<<initWraith "man">><<set $NPCList[0].lefthand to "throat">><<set $NPCList[0].righthand to "throat">><<set $neckuse to "hand">>
+<<link [[다음|Lake Ruin Prison Rape]]>><<wraithExorcise true false>><</link>>
+<br>
+
+:: Lake Ruin Lichen Eat
+<<effects>>
+<<if $phaseWraith is 1>>
+	당신은 눈을 감고 이끼를 먹는다. 맛이 이상하다. 곧바로 마음속에서 압박감이 느껴진다.
+	<br><br>
+	형체가 가까이 다가온다. <<wraithEyes>> 눈동자 속 형체들이 빙글빙글 돌기 시작한다.
+	<br><br>
+	잠시 후, 그것이 물러난다. 그것이 고개를 끄덕이며 바닥 속으로 사라진다.
+	<<endevent>>
+	<<set $wraithPrison.timer to 30>>
+	<<set $wraithPrison.state to "recovering">>
+	<br><br>
+	<<link [[다음|Lake Ruin Prison]]>><</link>>
+	<br>
+<<elseif $phaseWraith is 2>>
+	당신은 몸을 살짝 뺐다가 입을 다물고 최선을 다해 삼키는 척을 한다. 이상한 맛이 난다. 당신은 실수로라도 삼키지 않게 주의한다.
+	<br><br>
+	형체가 가까이 다가온다. <<wraithEyes>> 눈동자 속 형체들이 빙글빙글 돌기 시작한다.
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+		<span class="green">당신은 그것이 무엇을 하려는지 깨닫는다.</span> 당신은 팔을 축 늘어뜨린 채, 억지로 뚫어져라 쳐다본다. 어렵지 않다. 사실, 한 눈 팔기가 더 어렵다.
+		<br><br>
+		잠시 후, 그것이 물러난다. 그것이 고개를 끄덕이며 바닥 속으로 사라진다. 당신은 잠시 기다렸다가 이끼를 뱉는다.
+		<<skulduggeryuse>>
+		<<endevent>>
+		<<set $wraithPrison.timer to 30>>
+		<<set $wraithPrison.state to "recovering">>
+		<br><br>
+		<<link [[다음|Lake Ruin Prison]]>><</link>>
+		<br>
+	<<else>>
+		당신은 눈을 감고 뒤로 물러선다.
+		<br><br>
+		<<if C.npc["Ivory Wraith"].lust gte 12 and !playerIsPregnant()>>
+			<span class="red">당신은 배를 제대로 걷어차인다.</span> 당신은 곧바로 이끼를 뱉어내고 콜록거린다. <<pain 10>><<trauma 12>><<gtrauma>><<ggpain>>
+		<<else>>
+			당신은 즉시 벽으로 밀려나는 것을 느낀다. 눈을 뜨고 이끼를 뱉는다. 그것이 분노와 후회가 뒤섞인 눈으로 당신을 바라본다.
+			<br><br>
+			"<span class="wraith">고통 받는 걸 더 좋아하니? 그렇다면야.</span>"
+		<</if>>
+		<br><br>
+		그것이 당신의 목을 움켜쥐다.
+		<br><br>
+		<<skulduggeryuse>>
+		<<initWraith "man">><<set $NPCList[0].lefthand to "throat">><<set $NPCList[0].righthand to "throat">><<set $neckuse to "hand">>
+		<<link [[다음|Lake Ruin Prison Rape]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	그것이 당신을 놓아주자마자 이끼를 뱉는다. 그것이 곧바로 당신의 목을 움켜쥔다.
+	<br><br>
+	<<initWraith "abomination">><<set $NPCList[0].lefthand to "throat">><<set $NPCList[0].righthand to "throat">><<set $neckuse to "hand">>
+	<<link [[다음|Lake Ruin Prison Rape]]>><</link>>
+	<br>
+<</if>>
+
+:: Lake Ruin Prison Masturbation Resist
+<<effects>>
+당신은 그것의 의지를 거스르며, 최선을 다해 저항한다.
+<br><br>
+<<if $willpowerSuccess>>
+	그것이 <span class="green">당신의 몸에 들어가지 못하고 뒤로 밀려난다.</span> 그것이 혀를 차며 당신의 팔을 잡는다.
+	<br><br>
+	"<span class="wraith">꿀을 받아들이는 법을 배우게 될거야.</span>"
+	<br><br>
+	<<initWraith>>
+	<<startWraith>>
+	<br><br>
+	<<link [[다음|Lake Ruin Prison Rape]]>><</link>>
+	<br>
+<<else>>
+	<<set $possessed to true>><<canvas-model-override "blink" false>>
+	그것이 순간적으로 느려지지만, <span class="red">계속해서 당신의 몸 안으로 들어간다.</span> 팔다리가 경련을 일으키며 의식이 밀어지고 덮어씌워진다.
+	<br><br>
+	<<link [[다음|Lake Ruin Prison Masturbation Start]]>><</link>>
+	<br>
+<</if>>
+
+:: Lake Ruin Prison Masturbation Start
+<<effects>><<set $wraithPrison.masturbation to true>>
+<<wraithPossess>>
+<<if $phase is 1>>
+	그것이 하얀 안개가 되어 사라지기 시작한다. 당신은 어떠한 저항도 하지 않고, 온전히 그것에게 몸을 맡긴다. 그것이 당신의 몸을 지배하는 동안에도 여전히 감각이 느껴진다. 팔다리가 경련을 일으키며 의식이 밀어지고 덮어씌워진다.
+	<br>
+<</if>>
+그것이 당신의 몸으로 일어서서, 철창 창살에 몸을 기댄다. 그것이 당신의 손을 꽉 쥐고, 목을 이리저리 돌린다. 그것이 미소를 짓는다.
+<br><br>
+그것이 숨을 들이마시자, 당신의 폐에 공기가 가득 찬다. 숨을 내쉴 때, 몸이 차가워지는 느낌이 든다.
+<<set $arousal to 0>><<lllarousal>>
+<br><br>
+"<span class="wraith">넌 이제 결코 이 즐거움을 잊지 못할 거야. 절대 흉내 낼 수 없어. 나 없이는.</span>"
+<br>
+그것이 벽에 기대어 앉아 당신의 다리를 벌린다.
+<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.upper.name isnot "naked" or $worn.lower.name isnot "naked" or $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked">>
+	창백한 촉수 하나가 시야에 들어와 당신의 옷을 휘감는다. 그것이 놀라울 정도로 다정하게 옷을 벗긴다.
+	<<chastityBreakWraith>>
+	<<undress "wraith masturbation">>
+<</if>>
+<br><br>
+<<if $player.penisExist and ($lactating and $breastfeedingdisable is "f")>>
+	<<set $phase to "penisbreast">>
+	<<if $worn.genitals.name is "chastity parasite">>
+		그것이 손가락 하나로 당신의 기생충 정조대를 문지르며
+	<<else>>
+		그것이 손가락 하나로 당신의 <<penis_ rul>> 찌르며
+	<</if>>
+	<<if $player.penisExist and $player.vaginaExist>>, 당신의 <<pussy_ rul>> 철저히 무시한다<</if>>. 그것이 반대편 손으로 당신의 유두를 빙빙 돌린다.
+<<elseif $player.penisExist>>
+	<<set $phase to "penis">>
+
+	<<if $worn.genitals.name is "chastity parasite">>
+		그것이 손가락 하나로 당신의 기생충 정조대를 문지르며<<if $player.penisExist and $player.vaginaExist>>, 당신의 <<pussy_ rul>> 철저히 무시한다<</if>>. 그것이 킥킥 웃으며 부드럽게 그것을 쥐어짜낸다.
+	<<else>>
+		그것이 손가락 하나로 당신의 <<penis_ rul>> 찌르며<<if $player.penisExist and $player.vaginaExist>>, 당신의 <<pussy_ rul>> 철저히 무시한다<</if>>. 그것이 킥킥 웃으며 길이를 따라 움직인다.
+	<</if>>
+<<elseif $lactating and $breastfeedingdisable is "f">>
+	<<set $phase to "breast">>
+
+	그것이 당신의 유두에 손가락 하나로 원을 그리다가 쥐어짜낸다. 유두 끝에서 모유가 흘러나온다.
+<<else>>
+	<<set $phase to "vagina">>
+
+	그것이 손가락 두 개로 당신의 <<pussy_ rul>> 쓸어올린다. 당신의 클리토리스에 손가락이 닿자, 그것이 살짝 꼬집는다.
+<</if>>
+차가울 줄 알았던 당신의 손이 생각보다 따뜻하다. 손이 닿는 순간 음란한 기분이 든다. 몸을 통제할 수는 없지만 평소처럼 모든 것이 느껴진다.
+<br><br>
+그것이 당신의 몸을 애무하기 시작하자, 강제로 활짝 미소를 짓게 되면서, 뱃속에 어두운 구멍이 생긴다.
+<br>
+<span class="red">여기서 오르가즘을 느끼는 건 위험할 수도 있다.</span>
+<br><br>
+<<link [[다음|Lake Ruin Prison Masturbation]]>><<set $masturbationstart to 1>><</link>>
+
+:: Lake Ruin Prison Masturbation
+<<effects>>
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+	<<set $leftarm to "possessed">><<set $rightarm to "possessed">><<set $mouth to "none">>
+	<<if $phase.includes("breast")>>
+		<<set $leftactiondefault to "mbreaststopW">>
+	<<elseif $phase is "penis">>
+		<<set $leftactiondefault to "mpenisstopW">>
+	<<else>>
+		<<set $leftactiondefault to "mvaginastopW">>
+	<</if>>
+	<<if $phase.includes("penis")>>
+		<<set $rightactiondefault to "mpenisstopW">>
+	<<elseif $phase is "breast">>
+		<<set $rightactiondefault to "mbreaststopW">>
+	<<else>>
+		<<set $rightactiondefault to "mvaginastopW">>
+	<</if>>
+<</if>>
+<<masturbationeffects>>
+몸이 부자연스럽게 따뜻해진다. <<arousal 600>><<garousal>>
+<br><br>
+<<masturbationactions>>
+
+<div id="masturbationButtons">
+	<<if $arousal gte $arousalmax or $control gte $controlmax>>
+		<div id="next" class="nextWraith"><<link [[계속|Lake Ruin Prison Masturbation Finish]]>><</link>><<nexttext>></div>
+	<<else>>
+		<div id="next" class="nextWraith"><<link [[계속|Lake Ruin Prison Masturbation]]>><</link>><<nexttext>></div>
+	<</if>>
+</div>
+<br><br><br><br><br>
+
+:: Lake Ruin Prison Masturbation Finish
+<<effects>>
+<<if $control gte $controlmax>>
+	<span class="gold">당신은 멈춘다.</span>
+	<br><br>
+
+	그것이 계속 진행하라고 당신을 밀어붙인다. 그것이 당신의 마음에 가하는 압도적인 힘에 팔이 거의 꺾일 것만 같다. 하지만 몸을 되찾았으니 포기할 수 없다.
+	<br><br>
+
+	결국, 그것이 당신의 눈을 돌린다. 반투명한 팔이 당신의 입에서 빠져나와 당신의 얼굴을 밀면서 몸 밖으로 빠져나온다. <<tearful>> 당신은 옷을 고쳐입는다.
+	<br><br>
+
+	<<storeon "wraith masturbation">>
+	<<endmasturbation>>
+	<<endcombat>><<generateWraith 1>>
+	<<wraithExorcise true true>>
+
+	<<if $wraith.state is "haunt" or $wraith.offspring is "dead">>
+		창백한 형체가 당신을 내려다보며 미소 짓는다. "<span class="wraith">자신의 욕정을 두려워하는 건 현명해. 하지만 지식만으로는 열기를 완전히 잠재울 수 없어.</span>"
+		<br><br>
+		<<initWraith>>
+		<<startWraith>>
+		<br><br>
+		<<link [[다음|Lake Ruin Prison Rape]]>><</link>>
+	<<elseif $wraith.state is "despair">>
+		창백한 형체가 당신을 내려다보며 인상을 찌푸린다. "<span class="wraith">미안해. 무고한 사람이 회개할 수 있을까?</span>"
+		<br><br>
+
+		그것이 당신을 한참 쳐다보다가 물러난다. 그것이 바닥으로 가라앉는다.
+		<<endevent>>
+		<<set $wraithPrison.timer to 30>>
+		<<set $wraithPrison.state to "recovering">>
+		<br><br>
+		<<link [[다음|Lake Ruin Prison]]>><</link>>
+	<<else>>
+		창백한 형체가 당신을 내려다보며 인상을 찌푸린다. "<span class="wraith">이제껏 느껴보지 못한 상상 그 이상의 즐거움...  이게 네가 원했던 게 아닐까?</span>" 그것이 마치 실망한 것처럼 들린다.
+		<br><br>
+
+		그것이 당신을 한참 쳐다보다가 물러난다. 그것이 바닥으로 가라앉는다.
+		<<endevent>>
+		<<set $wraithPrison.timer to 30>>
+		<<set $wraithPrison.state to "recovering">>
+		<br><br>
+		<<link [[다음|Lake Ruin Prison]]>><</link>>
+	<</if>>
+<<else>>
+	<<switch $phase>>
+		<<case "penisbreast">><<set _genitals to "<<penis_ wa>> <<breastsPost>>">>
+		<<case "breast">><<set _genitals to "<<breastsPost>>">>
+		<<case "vagina">><<set _genitals to "<<pussyPost>">>
+		<<case "penis">><<set _genitals to "<<penisPost>>">>
+		<<default>><<set _genitals to "성기">>
+	<</switch>>
+	<<set $masturbationorgasmstat += 1>><<set $masturbationorgasm += 1>>
+	<<pass 5>>
+	당신은 애써 참으며 저항하려 한다. 하지만 쾌락이 당신 몸 안에서부터 위로 솟구쳐 올라온다. _genitals에서 느껴지는 쾌감이 뇌로 직접 전달되자, 마치 중심부가 몸에서 떨어지려고 몸부림치는 것처럼 느껴진다.
+	<br><br>
+
+	절정에 다다르지만 아무것도 나오지 않는다. 잠시 동안 모든 것이 고요해진다.
+	<br><br>
+
+	"타락해," 그것이 당신의 목소리로 속삭인다.
+	<<orgasm>>
+
+	<<if $phase.includes("penis") and !$femaleclimax>>
+		<<if $parasite.penis.name and $parasite.penis.name isnot "parasite">>
+			정액이 당신의 <<penisPost>>에서 거기에 붙어있는 기생충 안으로 흩뿌려진다.
+		<<elseif $worn.genitals.name isnot "chastity parasite">>
+			당신의 <<penisPost>>에서 기생충 정조대 안으로 정액이 뿜어져 나오자, 그 크기가 순간적으로 보통 크기보다 커진다.
+		<<else>>
+			당신의 <<penisPost>>에서 분수처럼 뿜어져 나온다. 욱신거리고 고동치지만 기세가 줄어들지 않는다.
+		<</if>>
+	<<elseif $phase.includes("penis")>>
+		당신의 <<penisPost>>에서 아무것도 나오지 않는데도 불구하고 경련이 일어난다.
+	<</if>>
+	<<if $phase.includes("breast")>>
+		몸이 경련을 일으키자, <<breastsPost>>에서 부자연스럽게 모유 쏟아져 나온다.
+	<</if>>
+	<<if $phase is "vagina">>
+		당신의 <<pussyPost>> 안에 억눌려 있던 열기가, 당신의 몸을 뜨겁게 달구면서 비명과 함께 분출된다.
+	<</if>>
+	<br><br>
+
+	이제껏 경험해본 적 없는 쾌락이다. 당신의 머리부터 발끝까지 온몸에 불이 붙은 듯한 느낌이 들면서, _genitals에서 느껴지는 쾌락이 몸 전체로 퍼져나간다.
+	오르가즘이 끝없이 찾아오는 게 아니라 한 번의 오르가즘이 끝없이 이어진다. 끝없는 쾌락이 피부에 스며들며, 몸속의 모든 쾌락 신경을 자극하지만, 끝까지 지속되지는 않는다.
+	<br><br>
+
+	이는 1분간 지속된다. 그리고 2분. 3분. 시간이 얼마나 지났는지 알 수는 없지만, 시간감각은 마치 <span class="lewd">영원처럼 느껴진다</span>.
+	<br><br>
+
+	<<link [[다음|Lake Ruin Prison Masturbation Finish 2]]>><</link>>
+<</if>>
+<br>
+
+:: Lake Ruin Prison Masturbation Finish 2
+<<effects>>
+<<set _semenLoss to ($semen_volume / 30 + 20) * -1>><<set _milkLoss to ($milk_volume / 30 + 20) * -1>>
+마침내 끝이 나자, 당신은 혀를 입 밖으로 축 늘어뜨린 채, 마치 줄이 끊어진 꼭두각시처럼 바닥에 쓰러진다.
+<br><br>
+
+<<if $phase isnot "vagina">>
+	당신은 여러 방면으로 완전히 공허함을 느낀다. 오르가즘의 강렬함으로 인해
+	<span class="red">당신의
+	<<if $player.penisExist and ($lactating and $breastfeedingdisable is "f") and !$femaleclimax>>
+		정액과 모유가
+		<<set $fluid_forced_stat += $semen_amount + $milk_amount>>
+		<<breast_sensitivity 0.5>><<genital_sensitivity 0.5>>
+		<<semenvolume _semenLoss>><<milkvolume _milkLoss>><<set $semen_amount to 0>><<set $milk_amount to 0>>
+	<<elseif $player.penisExist and !$femaleclimax>>
+		정액이
+		<<set $fluid_forced_stat += $semen_amount>>
+		<<genital_sensitivity 0.5>>
+		<<semenvolume _semenLoss>><<set $semen_amount to 0>>
+	<<else>>
+		모유가
+		<<set $fluid_forced_stat += $milk_amount>>
+		<<breast_sensitivity 0.5>>
+		<<milkvolume _milkLoss>><<set $milk_amount to 0>>
+	<</if>>
+	<<if $player.penisExist and $femaleclimax>>
+		/* Try to lower the semen volume anyway */
+		<<semenvolume _semenLoss>>
+	<</if>>
+	완전히 고갈되어 최대 용량이 줄어들었다.</span>
+<<else>>
+	완전히 고갈되어 마른 걸레처럼 당신의 영혼이 흘러 나오는 것이 느껴진다.
+	<<genital_sensitivity 0.5>>
+<</if>>
+<span class="purple">이성적인 사고가 불가능하고, 전보다 더 예민해진 것 같은 기분이 든다.</span>
+<<tiredness 20>><<purity -20>><<trauma 24>><<drugs 1000>><<ggtrauma>><<gggtiredness>><<llpurity>><<gggdrugged>>
+<br>
+<<if $orgasmtrait is 1>>
+	당신은 가까스로 멍한 미소를 짓는다. 인생 최고의 오르가즘이었다.
+	<<stress -20>><<llstress>>
+	<br>
+<</if>>
+<br>
+
+<<pass 5>>
+<<silently>><<storeactions "wraith masturbation">><</silently>>
+<<if _temp_clothes_present is 1>>
+	<<tearful>> 그것이 당신을 지켜보는 동안, 당신은 옷을 고쳐 입는다.
+	<<storeon "wraith masturbation">>
+<</if>>
+<<endmasturbation>>
+<<endcombat>><<generateWraith 1>>
+<<wraithExorcise true true>>
+
+<<if C.npc["Ivory Wraith"].lust gte 14>>
+	창백한 형체가 당신을 내려다보며 미소 짓는다. "<span class="wraith">너 자신을 소모했군. 이제 나머지는 내가 취하겠어.</span>"
+	<br><br>
+	<<initWraith>>
+	<<startWraith>>
+	<br><br>
+	<<link [[다음|Lake Ruin Prison Rape]]>><</link>>
+<<else>>
+	창백한 형체가 장난스럽게 웃는다. "<span class="wraith">백만, 이백만, 삼백만, 더. 넌 나는 법을 배우고 넘어지는 법을 배우게 될 거야.</span>" 그것이 바닥 속으로 사라진다.
+	<<endevent>>
+	<<set $wraithPrison.timer to 30>>
+	<<set $wraithPrison.state to "recovering">>
+	<br><br>
+	<<link [[다음|Lake Ruin Prison]]>><</link>>
+<</if>>
+
+:: Lake Ruin Prison Leave
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<underwater>><<effects>><<set $oxygen -= 260>>
+당신은 아래로 헤엄친다. 꽤 먼 거리이고 상당한 노력이 필요하지만 당신은 해낸다. <<loxygen>>
+<br><br>
+계단 아래쪽에서 빛나는 룬이 보인다. 가까이 다가가자 룬이 환한 붉은색으로 빛나더니, 문이 내려가면서 돌이 부딪히는 소리가 물속을 가득 채운다.
+<br><br>
+당신은 뒤를 쳐다보지 않으면서, 재빠르게 밖으로 나온다.
+<<if ["haunt", "despair"].includes($wraith.state) and !$wraithPrison.vision>>
+	<<if $wraithPrison.timePassed lt 180>>
+		<span class="blue">당신이 "준비" 되어있었다면 그것이 무엇을 보여줬을지 궁금하다. 당신은 그것이 당신을 고문할 시간이 더 이상 없다는 사실에 안도한다.</span>
+	<<else>>
+		<span class="blue">당신이 "준비" 되어있었다면 그것이 무엇을 보여줬을지 궁금하다. 당신은 당신의 마음이 그다지 취약하지 않다는 사실에 안도한다.</span>
+	<</if>>
+<</if>>
+<br><br>
+<<link [[다음|Lake Ruin]]>><</link>>
+<br>

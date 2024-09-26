@@ -1,0 +1,551 @@
+:: Catacombs Squeeze
+<<effects>>
+
+당신은 팔을 틈새로 밀어 넣고, 잡을 수 있는 것을 찾을 때까지 주위를 더듬거린 후, 틈으로 몸을 밀어넣는다. 
+<br><br>
+<<if $physiquesize lte random(6000, 16000)>>
+	약간의 꿈틀거림이 필요했지만, <span class="green">당신은 틈새로 들어갈 수 있었고,</span> 잔해 반대편으로 기어내려가며 간신히 몸을 빼낸다.
+<<else>>
+	<span class="red">틈새는 당신이 생각한 것만큼 넓지 않다.</span> 당신은 다른 방향으로 지나가려고 하지만, 
+	<<if $worn.upper.name isnot "naked">>
+		<<set $worn.upper.integrity -= 20>>
+		<<set _clothes_torn to true>>
+	<</if>>
+	<<if $worn.lower.name isnot "naked">>
+		<<set $worn.lower.integrity -= 20>>
+		<<set _clothes_torn to true>>
+	<</if>>
+	<<if $worn.under_upper.name isnot "naked">>
+		<<set $worn.under_upper.integrity -= 20>>
+		<<set _clothes_torn to true>>
+	<</if>>
+	<<if $worn.under_lower.name isnot "naked">>
+		<<set $worn.under_lower.integrity -= 20>>
+		<<set _clothes_torn to true>>
+	<</if>>
+	<<if _clothes_torn is true>>
+		옷이 찢어지는 소리가 들린다.
+		<<integritycheck>>
+		<<exposure>>
+	<<else>>
+		몇 군데 긁힌 상처가 생긴다.<<gpain>><<pain 6>><<gstress>><<stress 6>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Detour
+<<effects>>
+
+당신은 왔던 곳으로 되돌아가서, 다른 길을 시도해본다. 당신이 잔해 반대쪽으로 빠져나오는 동안, 동굴은 뒤틀리고 이리저리 굽어 있다. 
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Tear
+<<effects>>
+
+<<if $physiqueSuccess>>
+	<span class="green">당신은 몸에 붙은 거미줄을 거칠게 떼어 뜯어버린다.</span> 몇 가닥은 몸에 그대로 붙어있지만, 문제는 없을 것이다.
+<<else>>
+	당신은 몸에 붙은 거미줄을 떼어내려 하지만, 당신이 몸부림칠수록, <span class="red">거미줄은 더 강하게 조여오고,</span> 아예 팔이 묶여버린다. 여기서는 제거할 수 없다. 최소한 아직 다리는 자유롭다. 
+	<<bind>>
+<</if>>
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Save
+<<effects>>
+
+당신은 호흡을 안정시킨다. 당장 거미줄에서 벗어날 수는 없지만, 적어도 지금 위험한 것은 아니다.
+<br><br>
+
+<<bind>>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Normal Plunder
+<<effects>>
+
+당신은 보화를 약탈하기 위해 구석구석 구멍들을 살펴보고, 튼튼한 박스를 발로 차 열어보며, 먼지가 많은 내부를 뒤지면서 지하 묘지를 수색한다. 
+
+<<if $rng gte 81>>
+	당신은 운이 좋진 않았지만, 오래된 헝겊 조각을 찾을 수 있었다. 
+	<<if $worn.face.type.includes("blindfold")>>
+		그것은 횃불을 밝히는 데 도움이 될 수 있겠지만, <span class="pink">어쨌든 지금은 앞을 볼 수가 없다.</span>
+	<<else>>
+		당신은 헝겊 조각을 횃불에 사용한다.<<gtorch>><<catacombs_torch 10>>
+	<</if>>
+<<elseif $rng gte 61>>
+	당신은 운이 좋진 않았지만, 이내 튼튼한 상자를 발견하고, 그 상자의 자물쇠는 아직 붙어있다. 당신은 재빨리 그 구식 자물쇠를 연다. 안에는 변색된 은 칼날이 있다. 그것이 붙어 있던 칼자루나 손잡이가 무엇이든 간에 오래 전에 썩어 버렸다. 뭔가 가치가 있을 지도 모른다. 
+	<<set $antiquemoney += 60>><<museumAntiqueStatus "antiquesilverblade" "found">><<crimeUp 60 "thievery">>
+<<else>>
+	당신은 부식되고, 글자가 흐려진 구리 동전을 발견한다. 그래도, 수집가에게는 가치가 있을지도 모른다.
+	<<set $antiquemoney += 10>><<museumAntiqueStatus "antiquecoppercoin" "found">><<crimeUp 10 "thievery">>
+<</if>>
+<br><br>
+
+<<if $skulduggery lte 600>>
+	<<skulduggeryskilluse>>
+<</if>>
+
+<<destination_catacombs>>
+
+:: Catacombs Barrow Plunder
+<<effects>>
+
+당신은 무릎을 꿇고, 부서진 금고들이 남긴 잔해들을 뒤지며 가치 있는 것들을 찾아본다.
+
+<<if $rng gte 81>>
+	당신은 운이 좋진 않았지만, 오래된 헝겊 조각을 찾을 수 있었다. 
+	<<if $worn.face.type.includes("blindfold")>>
+		그것은 횃불을 밝히는 데 도움이 될 수 있겠지만, <span class="pink">어쨌든 지금은 앞을 볼 수가 없다.</span>
+	<<else>>
+		당신은 헝겊 조각을 횃불에 사용한다.<<gtorch>><<catacombs_torch 10>>
+	<</if>>
+<<elseif $rng gte 61>>
+	당신의 손가락은 무언가 차갑고, 단단한 것을 발견한다. 당신은 땅에서 그것을 잡아당긴다. 부식된 은 잔이다. 복잡한 무늬로 조각된 선들이, 남아있는 표면을 덮고 있다. 수집가에게는 가치가 있을지도 모른다.
+	<<set $antiquemoney += 60>><<museumAntiqueStatus "antiquesilvergoblet" "found">><<crimeUp 60 "thievery">>
+<<else>>
+	당신은 고무 같은 질감을 느끼며, 진흙에서 이상한 신상을 꺼낸다. 노쇠한 몸에 인간의 것이 아닌 팔들이 매달려 있다. 그래도 수집가에게는 가치가 있을지도 모른다.
+	<<set $antiquemoney += 15>><<museumAntiqueStatus "antiquestrangefetish" "found">><<crimeUp 15 "thievery">>
+<</if>>
+<br><br>
+
+<<if $skulduggery lte 600>>
+	<<skulduggeryskilluse>>
+<</if>>
+
+<<destination_catacombs>>
+
+:: Catacombs Compound Plunder
+<<effects>>
+
+당신은 오래된 금고를 부수고, 그 결과로 생긴 먼지를 피한다.
+
+<<if $rng gte 81>>
+	<<if $worn.face.type.includes("blindfold")>>
+		당신은 운이 좋진 않았지만, 오래된 헝겊 조각을 찾을 수 있었다. 그것은 횃불을 밝히는 데 도움이 될 수 있겠지만, <span class="pink">어쨌든 지금은 앞을 볼 수가 없다.</span>
+	<<else>>
+		당신은 운이 좋진 않았지만, 오래된 헝겊 조각을 찾을 수 있었다. 당신은 헝겊 조각을 횃불에 사용한다.<<gtorch>><<catacombs_torch 10>>
+	<</if>>
+<<elseif $rng gte 61>>
+	금고들을 차례로 뒤져봐도 아무것도 나오지 않다가, 당신은 반짝이는 노란 금속을 발견한다. 시간에 의해 부식되었지만, 의심할 여지 없이, 여전히 가치가 있는 금화다. 오래 전에 이미 죽은 군주의 얼굴이 당신을 응시하고 있다.
+	<<set $antiquemoney += 100>><<museumAntiqueStatus "antiquegoldcoin" "found">><<crimeUp 100 "thievery">>
+<<else>>
+	당신은 폐허가 된 고철 밑에서, 묻혀 있는 은화를 발견한다. 
+	<<set $antiquemoney += 20>><<museumAntiqueStatus "antiquesilvercoin" "found">><<crimeUp 20 "thievery">>
+<</if>>
+<br><br>
+
+<<if $skulduggery lte 600>>
+	<<skulduggeryskilluse>>
+<</if>>
+
+<<destination_catacombs>>
+
+:: Catacombs Whispers Investigate
+<<effects>>
+
+당신은 횃불로 길을 비추며, 어둠 속을 수색했으나, 어떤 사악한 것도 발견하지 못한다. 당신의 머리는 괜찮다고 생각하지만, 몸은 여전히 긴장하고 있다. 
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Whispers Ignore
+<<effects>>
+
+당신은 치솟는 공포를 무시하고 계속 걸으며, 당신이 무언가를 상상하고 있다는 것을 스스로에게 상기시킨다. 그 소리들은 진짜가 아니다.
+<br><br>
+
+<<if $willpowerSuccess>>
+	<span class="green">당신의 불안은 가라앉고,</span> 당신은 안도의 한숨을 내쉰다.
+<<else>>
+	바로 뒤에서, 당신은 탁 하는 소리를 듣고, <span class="red">다리가 전속력으로 움직이는 것을 느낀다.</span> 당신은 바로 뒤에서, 당신의 속도에 맞춰 따라오는 무언가를, 무언가 괴물 같은 것을 감지한다. 
+	<br><br>
+
+	당신은 어둠 속에서 발을 헛디뎌, 땅에 쓰러진다. 계속해서 본능에 의지해, 당신은 최대한 몸을 웅크린다. 그러나 아무 일도 일어나지 않는다. 당신을 쫓던 게 뭐든 간에 그것은 사라졌다.<<gpain>><<gtrauma>><<gstress>><<ltorch>><<pain 4>><<trauma 6>><<stress 6>><<catacombs_torch -5>>
+<</if>>
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Sarcophagus Close
+<<effects>>
+
+당신은 눈을 감고 동굴을 이리저리 갈팡질팡하며 내려가다가, 벽에 부딪혀 거의 <<bottom_ uro>> 바닥에 넘어질 뻔 한다. 최소한, 그 석관은 당신 뒤에 멀리 떨어져 있다.
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Sarcophagus Find
+<<effects>>
+
+당신은 왔던 길로 되돌아가서, 어쩐지 무서운 석관과 관련되지 않은 더 긴 경로를 찾는다. 
+<<if $catacombs_torch gte 1>>
+	당신의 횃불이 깜빡거린다. 
+<<else>>
+	어둠이 당신을 짓누른다.
+<</if>>
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Struggle
+<<effects>>
+
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "lurker">>
+	<<struggle_creatures 3 2>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+
+	<<unset $struggle_start>>
+<</if>>
+
+<<struggle>>
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[다음|Catacombs Struggle End]]>><</link>></span>
+<<else>>
+	<span id="next"><<link [[다음|Catacombs Struggle]]>><</link>></span>
+<</if>>
+
+:: Catacombs Struggle End
+<<effects>>
+
+그 생물체들은 어두운 은신처로 도망친다.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Goop Find
+<<effects>>
+
+당신은 당신이 온 길로 되돌아가서, 지나갈 다른 통로를 찾는다. 마침내, 하나의 통로를 찾는다. 그림자가 드리운다. 
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Goop Wade
+<<effects>>
+
+당신은 하얗고 끈적끈적한 점액에 발을 넣는다. 그것은 불투명하고, 두껍고, 달라붙고, 주변 공기보다 따뜻하다. 바닥이 깊게 내려앉고, 당신은 표면이 허리에 닿을 때까지 아래로 내려간다.
+<br><br>
+
+당신은 웅덩이를 가로질러, 건너편으로 나온다. 끈적끈적한 가닥들이 당신에게 매달리고, 당신은 당신이 가는 길 뒤에 흔적을 남긴다. 
+<<waist_goo>>
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Caught Run
+<<effects>>
+
+<<if $athleticsSuccess>>
+	당신은 어둠 속으로 뛰어들어, 왼쪽으로, 오른쪽으로, 다시 오른쪽으로 달린다. <span class="green">당신은 곧 어두운 동굴에서 그들을 따돌린다.</span>
+	<br><br>
+	<<endevent>>
+	<<destination_catacombs skip>>
+<<else>>
+	당신은 어둠 속으로 뛰어들어, 왼쪽으로, 오른쪽으로, 다시 오른쪽으로, <span class="red">그리고 바로 <<persons_ yi>> 팔 안으로 뛰어들어 버린다.</span>
+	<br><br>
+
+	"네가 우리를 따돌릴 수 있을 줄 알았어?" <<he_ ga>> 혀를 찬다. "이제 가만 있는게 좋을거야."
+	<br><br>
+
+	<<link [[싸운다|Catacombs Caught Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[가만히 있는다|Catacombs Caught Still]]>><</link>>
+<</if>>
+
+:: Catacombs Caught Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Catacombs Caught Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Catacombs Caught Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Catacombs Caught Fight Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	그 두 사람은 절정으로 인해 기진맥진해, 땅바닥에 누워 있다. 당신은 기회를 잡는다. <<tearful>> 당신은 어둠 속으로 도망친다. 그들은 이 어두운 미로에서 당신을 추적할 수 없을 것이다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_catacombs skip>>
+
+<<elseif $enemyhealth lte 0>>
+	그 두 사람은 부상을 치료하며, 땅바닥에 누워 있다. 당신은 기회를 잡는다. <<tearful>> 당신은 어둠 속으로 도망친다. 그들은 이 어두운 미로에서 당신을 추적할 수 없을 것이다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_catacombs skip>>
+
+<<else>>
+	<<tearful>> 당신은 바닥으로 쓰러진다. 당신은 저항하기에는 너무 많이 다쳤다.
+	<br><br>
+	<<link [[다음|Catacombs Caught Still]]>><</link>>
+<</if>>
+
+:: Catacombs Caught Still
+<<effects>>
+
+<<if $worn.face.type.includes("blindfold")>>
+	"이 눈가리개를 하고 뛰어다니다니," <<person2>><<person_ i>> 중얼거린다. "별로 똑똑하지는 않은가 보군, 그렇지?"
+	<br><br>
+
+	"우리는 <<phim_ ul>>-"
+	<br><br>
+
+	"아니. 너는 우리가 해야 할 서류 작업을 상상-"
+	<br><br>
+
+	그것이 당신이 들은 마지막 말이다. 당신은 누더기가 당신의 얼굴을 덮는 것을 느끼고, 모든 것이 어두워진다.
+	<br><br>
+
+	<<endevent>>
+	<<passoutcatacombs>>
+	<br>
+<<else>>
+	"<<phim_ rul>> 가만히 둬라," <<person_ i>> 말하며, 주머니에서 긴 천을 꺼낸다. <<He_ nun>> 그것을 당신의 머리에 묶어, 시야를 차단한다.
+	<br><br>
+
+	"이제는 큰 위협이 되지 않을 거야," <<person1>><<person_ i>> 웃는다. "그렇지?" 한 쌍의 팔이 당신을 여러 번 빙글빙글 돌리더니, 앞으로 밀쳐낸다. 당신은 어지러움 때문에 거의 넘어질 뻔한다. 
+	<br><br>
+
+	당신이 방향을 잡지 못할 때마다 그들의 웃음소리가 뒤따른다. 
+	<br><br>
+
+	<<facewear 5>>
+	<<clotheson>><<endcombat>>
+	<<destination_catacombs skip>>
+<</if>>
+
+:: Catacombs Tentacles
+<<effects>>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<molested>>
+	<<controlloss>>
+
+	<<tentaclestart 5 12 "tendril" "metal">>
+
+<</if>>
+
+<<statetentacles>>
+
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[다음|Catacombs Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Catacombs Tentacles]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Catacombs Tentacles Finish
+<<effects>>
+
+금속 덩굴손이 비활성화되며 바닥에 떨어지고, 붉은 빛이 깜빡거린다.
+<br><br>
+
+<<tearful>> 당신은 계속 미로를 나아간다. 
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Passout
+<<effects>>
+
+<<beastNEWinit 1 spider>>
+<<if $spiderdisable is "f">>
+	당신은 두꺼운 거미줄에 의해 발목이 묶인 채 천장에 매달려, 거꾸로 된 채로 깨어난다. 당신은 몸부림치고 발버둥친다.
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if $monster is 1>>
+			"이런 이런," 어둠 속에서 목소리가 울려 퍼진다. <span class="red"> <<beasttype_ nun>> 갈증어린 눈으로 당신의 몸을 검사하며, 시야에 들어온다.</span>
+			<br><br>
+
+			"나는 방문자를 별로 받지 않는데," <<bhe_ ga>> 말한다. <<bHe_ nun>> 큭큭 웃으며 덧붙인다. "내가 엄청 배고파지거든." <<bHe_ nun>> 능숙하게 거미줄을 타고 올라와, <<bhe_ ga>> 당신의 위에 자리잡는다. <<bHe_ nun>> 앞으로 몸을 숙여, <<bhis_ yi>> 혀로 당신의 뺨을 핥는다.<<ggstress>><<stress 12>>
+			<br><br>
+
+			"그렇게 겁먹지는 마," <<bhe_ ga>> 말한다. "나는 다른 식사를 염두에 두고 있거든. 그렇지만 먼저, 네가 몸부림치지 않도록 해 둬야지."
+		<<else>>
+			<span class="red">어둠 속에서 치르륵거리는 소리가 들리고, 여덟 개의 눈이 보인다.</span> 거대한 거미가 돌을 가로질러, 벽을 타고, 섬세하고 쉽게 거미줄 위로 기어온다.<<ggstress>><<stress 12>>
+		<</if>>
+		<br><br>
+
+		<<link [[다음|Catacombs Passout 2]]>><</link>>
+		<br>
+	<<else>>
+		<<bind>>
+		<<upperwear 104>>
+		<<facewear 5>>
+		<span class="red">당신은 어둠 속에서 치르륵대는 소리를 듣는다.</span>
+		<br><br>
+
+		<<endevent>>
+		당신은 공황 상태로 미친듯이 팔다리를 허우적거린다. 거미줄은 돌고 돌아, 당신의 머리에서 발 끝을 덮을때까지 빙빙 돌다가, 마침내 끊어진다. 당신은 어둠 속으로 도망친다.<<beastescape>>
+		<br><br>
+
+		<<link [[다음|Catacombs Ridge]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<bind>>
+	<<upperwear 104>>
+	<<facewear 5>>
+	당신은 두꺼운 거미줄에 의해 발목이 묶인 채 천장에 매달려, 거꾸로 된 채로 깨어난다. 당신은 몸부림치고 발버둥쳐, 마침내 자유로워질 때까지 거미줄을 느슨하게 한다.<<pass 20>><<beastescape>>
+	<br><br>
+
+	<<endevent>>
+	<<destination_catacombs skip>>
+<</if>>
+
+:: Catacombs Passout 2
+<<effects>>
+<<bind>>
+<<upperwear 104>>
+<<facewear 5>>
+<<beasttype_ un>> 당신을 계속 빙빙 돌려, 당신의 다리를 거미줄로 뒤덮는다. <<bHe_ nun>> 당신의 골반, 허리, 어깨까지 거미줄에 묶이도록, 당신의 몸 전체를 회전시킨다. 당신은 어지러움을 느낀다.
+<br><br>
+
+<<if $monster is 1>>
+	"하나 더," <<bhe_ ga>> 말하며, 마지막으로 당신의 눈 위에 거미줄을 뿜어낸다. "됐다. 넌 보관해 둘 거야. 그렇지만 먼저-" <<bHe_ ga>> 거미줄을 찢어, 당신의 <<genitals_ rul>> 드러낸다.
+	<br><br>
+
+	<<if playerChastity()>>
+		<<set $worn.genitals.integrity -= 100>>
+		<<if $worn.genitals.integrity lte 0>>
+			<<bHe_ nun>> 금속을 잡고, 비틀어, <span class="pink">뜯어내 버린다.</span> "잔치할 시간이네," <<bhe_ nun>> <<bhis_ yi>> 입술을 핥는다.
+			<<genitalsruined>>
+			<br><br>
+
+			<<link [[다음|Catacombs Passout 3]]>><</link>>
+			<br>
+		<<else>>
+			<<bHe_ nun>> 금속을 할퀸다. "너무 힘드네," <<bhe_ nun>> 인정한다. "지금은 말이지만."
+			<br><br>
+
+			<<link [[다음|Catacombs Passout End]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<link [[다음|Catacombs Passout 3]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<bHe_ nun>> 당신의 눈에 마지막으로 거미줄을 뿜어낸다.
+	<br><br>
+
+	<<link [[다음|Catacombs Passout End]]>><</link>>
+	<br>
+<</if>>
+<br><br>
+
+:: Catacombs Passout 3
+<<effects>>
+
+당신은 <<beasttype_ yi>> 숨결을 당신의 <<genitalsPost>> 위에서 느끼며, 뒤따라 길고 따뜻한 혀도 느낀다. 
+<<if $player.penisExist>>
+	그것은 당신의 육봉에 원을 그리고는, 혀 끝이 당신의 귀두를 톡톡 튀기면서 부드럽게 위아래로 펌프질을 한다.
+<<else>>
+	그것은 당신의 클리토리스에 원을 그리고는, 혀 끝이 당신의 음순을 느슨하게 풀면서 부드럽게 누른다.
+<</if>>
+<br><br>
+
+<<bHis_ yi>> 호흡은 <<bhe_ ga>> 당신을 괴롭히면서 점점 빨라져, <<bhe_ nun>> 기대로 인해 숨이 가쁜 것처럼 들린다. 그 감각들은 당신의 머리카락을 견디기 힘들 때까지 곤두서게 한다.
+<br><br>
+
+<<orgasm>>
+
+"맛있네." <<bHe_ ga>> 웃는다. 메아리가 당신 주위를 맴돌고 있다. "메인 요리는 남겨두도록 할게."
+<br><br>
+
+<<link [[다음|Catacombs Passout End]]>><</link>>
+<br>
+
+:: Catacombs Passout End
+<<effects>>
+
+<<bhim_ i>> 서둘러 멀어지는 소리가 들리고, 그러고는 조용해진다.
+<br><br>
+
+당신은 당신의 몸무게를 사용해 당신을 매달고 있는 거미줄을 잡아당기며, <<beasttype_ i>> 짜놓은 것을 느슨하게 하려고 한다. 그것은 조금 느슨해지다가, 탁 끊어져, 당신을 바닥 위로 떨어뜨린다.
+<br><br>
+
+<<link [[다음|Catacombs Ridge]]>><<endevent>><</link>>
+<br>
+
+:: Catacombs Struggle Web
+<<effects>>
+
+<<if $rng gte 71>>
+	당신은 몸을 뒤틀며 거미줄을 구부려, <span class="green">어떻게든 당신 자신을 풀어내는 데 성공했고,</span> 바닥에 엉덩방아를 찧으며 떨어진다. 끈적거리는 거미줄이 아직 당신에게 붙어 있지만, 당신은 바닥에서 몸을 잡아당겨 뜯어낼 수 있었다.
+	<br><br>
+	<<destination_catacombs skip>>
+<<else>>
+	<<if $stress gte $stressmax>>
+		<<passoutcatacombs>>
+	<<else>>
+		당신은 몸을 뒤틀며 거미줄을 구부리지만, <span class="red">소용이 없다.</span> 주위가 어두워진다.
+		<br><br>
+		<<link [[몸부림친다|Catacombs Struggle Web]]>><<pass 5>><<tiredness 1>><<stress 20>><<catacombs_torch -5>><</link>><<difficulty 30>><<gtiredness>><<gggstress>><<ltorch>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Catacombs Spider Look
+<<effects>>
+
+<<if $willpowerSuccess>>
+	당신은 몸을 돌려, 커다란 거미가 당신 어깨에 내려앉아 있는 것을 본다. 그것은 당신의 주먹만큼이나 크다. <span class="green">침착한 상태를 유지하며,</span> 당신은 엄자와 검지로 그것을 잡아, 멀리 집어던진다.
+<<else>>
+	당신은 몸을 돌린다. 당신이 그 여덟 개의 다리가 달린 생물체가 그곳에 내려앉은 것을 의식적으로 알아차리기도 전에 <span class="red">당신의 몸은 공포로 경련한다</span>. 당신은 펄쩍 뛰고, 어깨를 흔들면서 세게 치느라, 거의 쓰러질 뻔 한다.<<lcontrol>><<control -10>><<ggstress>><<stress 12>>
+	<br><br>
+
+	당신이 감히 그곳을 다시 볼 용기를 짜내었을 때에는, 그 생물체는 사라져 버렸다.
+<</if>>
+<br><br>
+
+<<destination_catacombs skip>>
+
+:: Catacombs Spider Brush
+<<effects>>
+
+당신은 어깨를 털면서, 소름끼치는 무게를 느낀다. 그것은 좀 떨어진 곳의 바닥에 쿵 하며 떨어진다. 당신은 녀석의 다리가 녀석을 멀리 옮기느라 다다닥거리는 소리를 듣는다.
+<br><br>
+<<destination_catacombs skip>>

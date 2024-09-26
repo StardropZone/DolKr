@@ -1,0 +1,338 @@
+function init_trFeet()
+{
+    setup.trClothes.feet = [
+        {
+            index: 0,
+            name: "naked",
+            name_ko: "벗음",
+            variable: "naked",
+            description: "naked",
+            post: 0
+        },
+
+        {
+            index: 1,
+            name: "school shoes",
+            name_ko: "학교 신발",
+            variable: "schoolshoes",
+            description: "지적이고 학교에서 신기 적합하지만, 반드시 착용할 필요는 없다.",
+            post: 2
+        },
+
+        {
+            index: 2,
+            name: "tuxedo shoes",
+            name_ko: "턱시도 신발",
+            variable: "tuxedoshoes",
+            description: "지적이고 세련됐다.",
+            post: 2
+        },
+
+        {
+            index: 3,
+            name: "ankle cuffs",
+            name_ko: "족쇄",
+            variable: "anklecuffs",
+            description: "풀려면 특별한 도구가 필요하다.",
+            post: 1
+        },
+
+        {
+            index: 4,
+            name: "sandals",
+            name_ko: "샌들",
+            variable: "sandals",
+            description: "여름에 시원하다.",
+            post: 2
+        },
+
+        {
+            index: 5,
+            name: "dress sandals",
+            name_ko: "드레스 샌들",
+            variable: "dresssandals",
+            description: "유행하는 스타일이고 세련됐다.",
+            post: 2
+        },
+
+        {
+            index: 6,
+            name: "trainers",
+            name_ko: "운동화",
+            variable: "trainers",
+            description: "캐쥬얼하고 실용적이다.",
+            post: 1
+        },
+
+        {
+            index: 7,
+            name: "witch shoes",
+            name_ko: "마녀 신발",
+            variable: "witch",
+            description: "귀엽고 으스스하다.",
+            post: 2
+        },
+
+        {
+            index: 8,
+            name: "wellies",
+            name_ko: "고무장화",
+            variable: "wellies",
+            description: "완전방수된다.",
+            post: 1
+        },
+
+        {
+            index: 9,
+            name: "platform heels",
+            name_ko: "플랫폼 힐",
+            variable: "platformheels",
+            description: "뭔가 여성스러운 기분이 들게 한다.",
+            post: 2
+        },
+
+        {
+            index: 10,
+            name: "kitten heels",
+            name_ko: "키튼 힐",
+            variable: "kittenheels",
+            description: "굽이 3센티 밖에 되지 않아 키튼힐이라 불린다.",
+            post: 2
+        },
+
+        {
+            index: 11,
+            name: "wedge sandals",
+            name_ko: "웨지 샌들",
+            variable: "wedgesandals",
+            description: "해변에서 신기 좋다.",
+            post: 2
+        },
+
+        {
+            index: 12,
+            name: "court heels",
+            name_ko: "코트 힐",
+            variable: "courtheels",
+            description: "꽤 높고 아주 어른스럽다.",
+            post: 2
+        },
+
+        {
+            index: 13,
+            name: "heeled boots",
+            name_ko: "힐 부츠",
+            variable: "bootheels",
+            description: "아주 강렬한 선택이다.",
+            post: 1
+        },
+
+        {
+            index: 14,
+            name: "stripper heels",
+            name_ko: "스트리퍼 힐",
+            variable: "stripperheels",
+            description: "미친 듯이 굽이 높고 매우 천박하다.",
+            post: 2
+        },
+
+        {
+            index: 15,
+            name: "horsebit loafers",
+            name_ko: "홀스빗 로퍼",
+            variable: "horsebitloafers",
+            description: "검은색 홀스빗 로퍼 한 켤레.",
+            post: 1
+        },
+
+        {
+            index: 16,
+            name: "cordovan loafers",
+            name_ko: "코도반 로퍼",
+            variable: "cordovanloafers",
+            description: "쉘 코도반 로퍼 한 켤레. 가격은 비싸나, 품질은 매우 좋다.",
+            post: 1
+        },
+
+        {
+            index: 17,
+            name: "bunny slippers",
+            name_ko: "토끼 슬리퍼",
+            variable: "bunny",
+            description: "발가락을 따뜻하게 유지해준다.",
+            post: 1
+        },
+
+        {
+            index: 18,
+            name: "combat boots",
+            name_ko: "컴뱃 부츠",
+            variable: "combat",
+            description: "튼튼하고 고품질의 재료로 만들어졌다.",
+            post: 1
+        },
+
+        {
+            index: 19,
+            name: "field boots",
+            name_ko: "필드 부츠",
+            variable: "field",
+            description: "신축성이 있다. 전문적인 승마를 위한 신발.",
+            post: 1
+        },
+
+        {
+            index: 20,
+            name: "paddock boots",
+            name_ko: "방목장 신발",
+            variable: "paddock",
+            description: "가벼운 승마를 위한 신발.",
+            post: 2
+        },
+
+        {
+            index: 21,
+            name: "work boots",
+            name_ko: "워크 부츠",
+            variable: "work",
+            description: "발가락을 보호해준다.",
+            post: 1
+        },
+
+        {
+            index: 22,
+            name: "flippers",
+            name_ko: "물갈퀴",
+            variable: "flippers",
+            description: "좀 더 빨리 잠수할 수 있다.",
+            post: 1
+        },
+
+        {
+            index: 23,
+            name: "ice skates",
+            name_ko: "아이스 스케이트",
+            variable: "iceskates",
+            description: "마치 그 속에서 공연하는 사람들처럼 견고하면서, 우아하다.",
+            post: 1
+        },
+
+        {
+            index: 24,
+            name: "long boots",
+            name_ko: "롱 부츠",
+            variable: "long",
+            description: "무릎까지 감싸준다.",
+            post: 1
+        },
+
+        {
+            index: 25,
+            name: "light-up trainers",
+            name_ko: "발광 운동화",
+            variable: "lightuptrainers",
+            description: "더 눈에 띄기 위해서.",
+            post: 1
+        },
+
+        {
+            index: 26,
+            name: "ball and chain",
+            name_ko: "철구와 사슬",
+            variable: "ballchain",
+            description: "풀려면 특별한 도구가 필요하다.",
+            post: 2
+        },
+
+        {
+            index: 27,
+            name: "cowboy boots",
+            name_ko: "카우보이 부츠",
+            variable: "cowboy",
+            description: "박차가 포함되어 있음.",
+            post: 1
+        },
+
+        {
+            index: 28,
+            name: "high top trainers",
+            name_ko: "하이탑 운동화",
+            variable: "hightops",
+            description: "패셔너블하고 실용적이다.",
+            post: 1
+        },
+
+        {
+            index: 29,
+            name: "belly dancer's shoes",
+            name_ko: "밸리 댄서용 댄스화",
+            variable: "belly",
+            description: "걸을 때마다 딸랑거린다.",
+            post: 1
+        },
+
+        {
+            index: 30,
+            name: "canvas loafers",
+            name_ko: "캔버스 로퍼",
+            variable: "canvas loafers",
+            description: "캐쥬얼하고 실용적이다.",
+            post: 1
+        },
+
+        {
+            index: 31,
+            name: "thigh-high heeled boots",
+            name_ko: "사이하이 힐 부츠",
+            variable: "thighhigh_heels",
+            description: "무릎까지 감싸준다.",
+            post: 1
+        },
+
+        {
+            index: 32,
+            name: "fur boots",
+            name_ko: "모피 부츠",
+            variable: "fur_boots",
+            description: "클럽에서 주의를 끌기 위해서.",
+            post: 1
+        },
+
+        {
+            index: 33,
+            name: "mary janes",
+            name_ko: "메리 제인",
+            variable: "maryjanes",
+            description: "지적이고 학교에서 신기 적합하지만, 반드시 착용할 필요는 없다.",
+            post: 0
+        },
+
+        {
+            index: 34,
+            name: "platform mary janes",
+            name_ko: "플랫폼 메리 제인",
+            variable: "platformmaryjanes",
+            description: "학교에서 신기 적합하지만, 반드시 착용할 필요는 없다.",
+            post: 0
+        },
+
+        {
+            index: 35,
+            name: "geta",
+            name_ko: "게다",
+            variable: "geta",
+            description: "이국적이다.",
+            post: 1
+        },
+
+        {
+            index: 36,
+            name: "zori",
+            name_ko: "조리",
+            variable: "zori",
+            description: "이국적이다.",
+            post: 1
+        },
+    ];
+}
+window.init_trFeet = init_trFeet;

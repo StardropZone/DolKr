@@ -1,0 +1,1582 @@
+:: Widgets Prison [widget]
+<<widget "prison_init">>
+	<<if !$prison>>
+		<<set $prison to {}>>
+		<<set $prison.guards to 50>>
+		<<set $prison.inmates to 0>>
+		<<set $prison.hope to 0>>
+		<<set $prison.reb to 0>>
+		<<set $prison.cell_trouble to 0>>
+		<<set $prison.prayer_trouble to 0>>
+		<<set $prison.relaxed to 0>>
+		<<set $prison.anxious to 0>>
+		<<set $prison.veteran to 0>>
+		<<set $prison.methodical to 0>>
+		<<set $prison.scarred to 0>>
+		<<set $prison.tattooed to 0>>
+		<<set $prison.shirt to 1>>
+		<<set $prison.trousers to 1>>
+		<<if $player.gender_appearance is "m">>
+			<<set $prison.briefs to 1>>
+			<<set $prison.vest to 1>>
+		<<else>>
+			<<set $prison.panties to 1>>
+			<<set $prison.bra to 1>>
+		<</if>>
+		<<set $prison.punishments to ["free use","nude","blindfold","topless","leash","underwear","cuffs","bottomless","gag","bindings","rut"]>>
+		<<set $prison.active_punishments to []>>
+		<<set $prison.punishment_intro to 0>>
+		<<set $prison.attention to 0>>
+		<<set $prison.attention_level to 0>>
+		<<set $prison.scarred_level to 0>>
+		<<set $prison.tattooed_level to 0>>
+		<<set $prison.job to "laundry">>
+		<<set $prison.shock to 1>>
+		<<set $prison.teeth to 0>>
+		<<set $prison.pills to 0>>
+		<<set $prison.medical_intro to 0>>
+		<<set $prison.spire_intro to 0>>
+		<<set $prison.hours_worked to 9>>
+		<<set $prison.work_check to 1>>
+		<<set $prison.kylar to 0>>
+
+		<<set $prison_wren_intro to 1>>
+		<<set $prison_wren_boat_intro to 1>>
+		<<set $wardrobe_location to "prison">>
+		<<wardrobeSelection true>>
+		<<uppersend 86 $wardrobe_location>>
+		<<if maleChance() gte 100>>
+			<<underuppersend 22 $wardrobe_location>>
+			<<underuppersend 22 $wardrobe_location>>
+			<<underlowersend 4 $wardrobe_location>>
+			<<underlowersend 4 $wardrobe_location>>
+		<<elseif maleChance() lte 0>>
+			<<underuppersend 12 $wardrobe_location>>
+			<<underuppersend 12 $wardrobe_location>>
+			<<underlowersend 1 $wardrobe_location>>
+			<<underlowersend 1 $wardrobe_location>>
+		<<else>>
+			<<underuppersend 22 $wardrobe_location>>
+			<<underuppersend 12 $wardrobe_location>>
+			<<underlowersend 4 $wardrobe_location>>
+			<<underlowersend 1 $wardrobe_location>>
+		<</if>>
+
+	<</if>>
+	<<if C.npc.Kylar.state is "prison" and $prison.kylar is 0>>
+		<<set $prison_kylar_timer to 2>>
+	<</if>>
+	<<set $prison.morning to 1>>
+<</widget>>
+
+<<widget "prison_attention">>
+	<<if _args[0] and (!$daily.prison.attentionDay or $prison.schedule is "revolt")>>
+		<<set $prison.attention += (_args[0] * 10)>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_end">>
+	<<set $prison.active_punishments to []>>
+	<<set $prison.hours_worked to 9>>
+	<<set $prison.work_check to 1>>
+	<<set $prison.schedule to "lockdown">>
+	<<unset $prison_punished_days>>
+<</widget>>
+
+<<widget "cell_trouble">>
+	<<if _args[0]>>
+		<<set $prison.cell_trouble += _args[0]>>
+		<<set $prison.cell_trouble to Math.clamp($prison.cell_trouble, 0, 10)>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_rep">>
+	<<if _args[0] and _args[1]>>
+		<<set $prison[_args[0]] += _args[1]>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_guards">>
+	<<if _args[0]>>
+		<<set $prison.guards += _args[0]>>
+		<<set $prison.guards = Math.clamp($prison.guards, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_inmates">>
+	<<if _args[0]>>
+		<<set $prison.inmates += _args[0]>>
+		<<set $prison.inmates = Math.clamp($prison.inmates, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_hope">>
+	<<if _args[0]>>
+		<<if $prison.attention_level gte 1>>
+			<<set _prison_hope to $prison.attention_level>>
+		<<else>>
+			<<set _prison_hope to 1>>
+		<</if>>
+		<<set _prison_hope *= _args[0]>>
+		<<set $prison.hope += _prison_hope>>
+		<<set $prison.hope = Math.clamp($prison.hope, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_reb">>
+	<<if _args[0]>>
+		<<if $prison.attention_level gte 1>>
+			<<set _prison_reb to $prison.attention_level>>
+		<<else>>
+			<<set _prison_reb to 1>>
+		<</if>>
+		<<set _prison_reb *= _args[0]>>
+		<<set $prison.reb += _prison_reb>>
+		<<set $prison.reb = Math.clamp($prison.reb, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "effects_prison">>
+	<<if $prison.work_check isnot 1 and Time.hour gte 7>>
+		<<set $prison.work_check to 1>>
+		<<set $prison.hours_worked to 0>>
+	<</if>>
+	<<if $prison.schedule is "hunt">>
+		<span class="red">당신은 쫓기고 있다.</span>
+	<<elseif $prison.schedule is "revolt">>
+		<span class="red">수감자들이 반란을 일으키고 있다.</span>
+	<<else>>
+		<<switch Time.hour>>
+			<<case 6>>
+				<<if $prison.morning is 1>>
+					<<set $prison.schedule to "wake">>
+					아침이 식당에서 제공되고 있다.
+				<<else>>
+					<<set $prison.schedule to "hunt">>
+				<</if>>
+			<<case 7 8 9 10 11>>
+				<<set $prison.schedule to "work">>
+				<<if $prison.job is "laundry">>
+					<span class="red">당신은 빨래실에 있어야 한다.</span>
+				<<elseif $prison.job is "spire">>
+					<span class="red">당신은 첨탑에 있어야 한다.</span>
+				<<elseif $prison.job is "medical">>
+					<span class="red">당신은 의료실에 있어야 한다.</span>
+				<</if>>
+			<<case 12>>
+				<<set $prison.schedule to "lunch">>
+				점심이 식당에서 제공되고 있다.
+			<<case 13>>
+				<<set $prison.schedule to "yard">>
+				수감자들이 마당으로 모이고 있다.
+			<<case 14 15 16 17>>
+				<<set $prison.schedule to "work">>
+				<<if $prison.job is "laundry">>
+					<span class="red">당신은 빨래실에 있어야 한다.</span>
+				<<elseif $prison.job is "spire">>
+					<span class="red">당신은 첨탑에 있어야 한다.</span>
+				<<elseif $prison.job is "medical">>
+					<span class="red">당신은 의료실에 있어야 한다.</span>
+				<</if>>
+			<<case 18>>
+				<<set $prison.schedule to "dinner">>
+				저녁이 식당에서 제공되고 있다.
+			<<case 19>>
+				<<set $prison.schedule to "free time">>
+				<span class="teal">자유 시간이다.</span>
+			<<default>>
+				<<set $prison.schedule to "lockdown">>
+				<span class="red">폐쇄 시간이다.</span>
+		<</switch>>
+	<</if>>
+	<br>
+	<<if $prison.schedule is "revolt">>
+		<span class="pink">하지만 소장이 오고있다:</span>
+	<<else>>
+		주의 레벨:
+		<<switch $prison.attention_level>>
+			<<case 0>>
+				<span class="blue">0</span>
+			<<case 1>>
+				<span class="purple">1</span>
+			<<case 2>>
+				<span class="pink">2</span>
+			<<case 3>>
+				<span class="red">3</span>
+		<</switch>>
+		<<if $prison.protection is "scarred">>
+			| <span class="green">당신은 흉터가 있는 수감자의 보호를 받고 있다.</span>
+		<<elseif $prison.protection is "tattooed">>
+			| <span class="green">당신은 문신이 있는 수감자의 보호를 받고 있다.</span>
+		<</if>>
+		<<if $prison.hours_worked is 8>>
+			| 간수들은 당신이 <span class="blue">한시간을</span> 더 일할 것이라 생각한다.
+		<<elseif $prison.hours_worked gte 9>>
+			| <span class="green">당신은 오늘 일을 전부 끝냈다.</span>
+		<<else>>
+			| 간수들은 당신이 <span class="purple"><<trNumber `($prison.hours_worked - 9) / -1`>>시간을</span> 더 일할 것이라 생각한다.
+		<</if>>
+	<</if>>
+	<<statbar 0 $prison.attention 100>>
+	<br>
+<</widget>>
+
+<<widget "prison_work">>
+	<<if _args[0]>>
+		<<set $prison.hours_worked += _args[0]>>
+	<<else>>
+		<<set $prison.hours_worked += 1>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_day">>
+	<<if $prison>>
+		<<if $prison_job_change isnot undefined>>
+			<<set $prison.job to $prison_job_change>>
+			<<unset $prison_job_change>>
+		<</if>>
+
+		<<set $prison.morning to 0>>
+		<<set $prison.evening to 0>>
+		<<if $prison_punished_days gte 1>>
+			<<set $prison_punished_days -= 1>>
+		<</if>>
+		<<set $prison.work_check to 0>>
+		<<if $location is "prison">>
+			<<cell_trouble -1>>
+			<<set $prison.time -= 1>>
+			<<set $stat_police.prison += 1>>
+		<</if>>
+		<<if $prison.kylar is "active">>
+			<<npcincr Kylar lust 10>>
+			<<unset $prison_kylar_cell>>
+		<</if>>
+		<<if $prison_kylar_timer gte 1>>
+			<<set $prison_kylar_timer -= 1>>
+		<</if>>
+		<<if $prison.kylar is "solitary" and $prison_kylar_timer lte 0>>
+			<<unset $prison_kylar_timer>>
+			<<set $prison.kylar to "active">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+/*Argument is the NPC slot they fill or should fill. */
+<<widget "generate_relaxed_guard">>
+	<<if $prison_intro is 1>>
+		<<loadNPC _args[0] "relaxed_guard">>
+	<<else>>
+		<<generateRole 0 "relaxed" "guard">>
+		<<saveNPC 0 "relaxed_guard">>
+	<</if>>
+<</widget>>
+
+<<widget "generate_anxious_guard">>
+	<<if $prison_intro is 1>>
+		<<loadNPC _args[0] "anxious_guard">>
+	<<else>>
+		<<generateRole 1 "anxious" "guard">>
+		<<saveNPC 1 "anxious_guard">>
+	<</if>>
+<</widget>>
+
+<<widget "generate_veteran_guard">>
+	<<if $prison_intro is 1>>
+		<<set $_id to _args[0]>>
+		<<loadNPC $_id "veteran_guard">>
+		<<if $per_npc.veteran_guard and !$per_npc.veteran_guard.description>>
+			<!-- Fix for the veteran guard being saved over as an empty NPCList object in some saves -->
+			<<clearsinglenpc $_id>>
+			<<generateRole $_id "veteran" "guard">>
+			<<if $per_npc.veteran_guard.name_known is 1>>
+				<<set $NPCList[$_id].name_known to 1>>
+				<<set $NPCList[$_id].fullDescription to $NPCList[0].name>>
+			<</if>>
+			<<clearNPC "veteran_guard">>
+			<<saveNPC $_id "veteran_guard">>
+			<<prison_feat_check>>
+		<</if>>
+	<<else>>
+		<<generateRole 2 "veteran" "guard">>
+		<<saveNPC 2 "veteran_guard">>
+	<</if>>
+<</widget>>
+
+<<widget "generate_methodical_guard">>
+	<<if $prison_intro is 1>>
+		<<loadNPC _args[0] "methodical_guard">>
+	<<else>>
+		<<generateRole 3 "methodical" "guard">>
+		<<saveNPC 3 "methodical_guard">>
+	<</if>>
+<</widget>>
+
+<<widget "generate_scarred_inmate">>
+	<<if $prison_intro is 1>>
+		<<set $_id to _args[0]>>
+		<<loadNPC $_id "scarred_inmate">>
+		<<if $per_npc.scarred_inmate and !$per_npc.scarred_inmate.description>>
+			<!-- Fix for the scarred inmate being saved over as an empty NPCList object in some saves -->
+			<<clearsinglenpc $_id>>
+			<<generateRole $_id "scarred" "inmate">>
+			<<if $per_npc.scarred_inmate.name_known is 1>>
+				<<set $NPCList[$_id].name_known to 1>>
+				<<set $NPCList[$_id].fullDescription to $NPCList[0].name>>
+			<</if>>
+			<<clearNPC "scarred_inmate">>
+			<<saveNPC $_id "scarred_inmate">>
+		<</if>>
+	<<else>>
+		<<generateRole 4 "scarred" "inmate">>
+		<<saveNPC 4 "scarred_inmate">>
+	<</if>>
+<</widget>>
+
+<<widget "generate_tattooed_inmate">>
+	<<if $prison_intro is 1>>
+		<<loadNPC _args[0] "tattooed_inmate">>
+	<<else>>
+		<<generate6>>
+		<<set $NPCList[5].description to "tattooed">>
+		<<set $NPCList[5].role to "inmate">>
+		<<npcClothesType $NPCList[0] "prison">>
+		<<saveNPC 5 "tattooed_inmate">>
+	<</if>>
+<</widget>>
+
+<<widget "save_relaxed_guard">>/*The right NPC fill $NPCList[0] slot */
+	<<if $NPCList[0].role is "guard">>
+		<<set $NPCList[0].fullDescription to $NPCList[0].name>>
+		<<npcClothesType $NPCList[0] "security">>
+		<<clearNPC "relaxed_guard">>
+		<<saveNPC 0 "relaxed_guard">>
+		<<prison_feat_check>>
+	<</if>>
+<</widget>>
+
+<<widget "save_anxious_guard">>
+	<<if $NPCList[0].role is "guard">>
+		<<set $NPCList[0].fullDescription to $NPCList[0].name>>
+		<<npcClothesType $NPCList[0] "security">>
+		<<clearNPC "anxious_guard">>
+		<<saveNPC 0 "anxious_guard">>
+		<<prison_feat_check>>
+	<</if>>
+<</widget>>
+
+<<widget "save_veteran_guard">>
+	<<if $NPCList[0].role is "guard">>
+		<<set $NPCList[0].fullDescription to $NPCList[0].name>>
+		<<npcClothesType $NPCList[0] "security">>
+		<<clearNPC "veteran_guard">>
+		<<saveNPC 0 "veteran_guard">>
+		<<prison_feat_check>>
+	<</if>>
+<</widget>>
+
+<<widget "save_methodical_guard">>
+	<<if $NPCList[0].role is "guard">>
+		<<set $NPCList[0].fullDescription to $NPCList[0].name>>
+		<<npcClothesType $NPCList[0] "security">>
+		<<clearNPC "methodical_guard">>
+		<<saveNPC 0 "methodical_guard">>
+		<<prison_feat_check>>
+	<</if>>
+<</widget>>
+
+<<widget "save_scarred_inmate">>
+	<<if $NPCList[0].role is "inmate">>
+		<<set $NPCList[0].fullDescription to $NPCList[0].name>>
+		<<npcClothesType $NPCList[0] "prison">>
+		<<clearNPC "scarred_inmate">>
+		<<saveNPC 0 "scarred_inmate">>
+		<<prison_feat_check>>
+	<</if>>
+<</widget>>
+
+<<widget "save_tattooed_inmate">>
+	<<if $NPCList[0].role is "inmate">>
+		<<set $NPCList[0].fullDescription to $NPCList[0].name>>
+		<<npcClothesType $NPCList[0] "prison">>
+		<<clearNPC "tattooed_inmate">>
+		<<saveNPC 0 "tattooed_inmate">>
+		<<prison_feat_check>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_feat_check">>
+	<<if $prison_intro is 1 and $per_npc.scarred_inmate.name_known is 1 and $per_npc.relaxed_guard.name_known is 1 and $per_npc.anxious_guard.name_known is 1 and $per_npc.veteran_guard.name_known is 1 and $per_npc.methodical_guard.name_known is 1>>
+		<<earnFeat "More than a Number">>
+	<</if>>
+<</widget>>
+
+<<widget "relaxed_guard">><<silently>>
+	<<if $NPCList[_args[0]].name_known is 1>>
+		<<set _text_output to $NPCList[_args[0]].name>>
+	<<else>>
+		<<if _args[1] is "cap" or _args[1] is "capo">>
+			<<set _text_output to "the relaxed guard".toUpperFirst()>>
+		<<else>>
+			<<set _text_output to "the relaxed guard">>
+		<</if>>
+	<</if>>
+	<<if _args[1] is "apo" or _args[1] is "capo">>
+		<<set _text_output += "'s">>
+	<</if>>
+<</silently>><span class="relaxed"><<print _text_output>></span><</widget>>
+
+<<widget "anxious_guard">><<silently>>
+	<<if $NPCList[_args[0]].name_known is 1>>
+		<<set _text_output to $NPCList[_args[0]].name>>
+	<<else>>
+		<<if _args[1] is "cap" or _args[1] is "capo">>
+			<<set _text_output to "the anxious guard".toUpperFirst()>>
+		<<else>>
+			<<set _text_output to "the anxious guard">>
+		<</if>>
+	<</if>>
+	<<if _args[1] is "apo" or _args[1] is "capo">>
+		<<set _text_output += "'s">>
+	<</if>>
+<</silently>><span class="anxious"><<print _text_output>></span><</widget>>
+
+<<widget "veteran_guard">><<silently>>
+	<<if $NPCList[_args[0]].name_known is 1>>
+		<<set _text_output to $NPCList[_args[0]].name>>
+	<<else>>
+		<<if _args[1] is "cap" or _args[1] is "capo">>
+			<<set _text_output to "the veteran guard".toUpperFirst()>>
+		<<else>>
+			<<set _text_output to "the veteran guard">>
+		<</if>>
+	<</if>>
+	<<if _args[1] is "apo" or _args[1] is "capo">>
+		<<set _text_output += "'s">>
+	<</if>>
+<</silently>><span class="veteran"><<print _text_output>></span><</widget>>
+
+<<widget "methodical_guard">><<silently>>
+	<<if $NPCList[_args[0]].name_known is 1>>
+		<<set _text_output to $NPCList[_args[0]].name>>
+	<<else>>
+		<<if _args[1] is "cap" or _args[1] is "capo">>
+			<<set _text_output to "the methodical guard".toUpperFirst()>>
+		<<else>>
+			<<set _text_output to "the methodical guard">>
+		<</if>>
+	<</if>>
+	<<if _args[1] is "apo" or _args[1] is "capo">>
+		<<set _text_output += "'s">>
+	<</if>>
+<</silently>><span class="methodical"><<print _text_output>></span><</widget>>
+
+<<widget "tattooed_inmate">><<silently>>
+	<<if $NPCList[_args[0]].name_known is 1>>
+		<<set _text_output to $NPCList[_args[0]].name>>
+	<<else>>
+		<<if _args[1] is "cap" or _args[1] is "capo">>
+			<<set _text_output to "the tattooed inmate".toUpperFirst()>>
+		<<else>>
+			<<set _text_output to "the tattooed inmate">>
+		<</if>>
+	<</if>>
+	<<if _args[1] is "apo" or _args[1] is "capo">>
+		<<set _text_output += "'s">>
+	<</if>>
+<</silently>><span class="tattooed"><<print _text_output>></span><</widget>>
+
+<<widget "scarred_inmate">><<silently>>
+	<<if $NPCList[_args[0]].name_known is 1>>
+		<<set _text_output to $NPCList[_args[0]].name>>
+	<<else>>
+		<<if _args[1] is "cap" or _args[1] is "capo">>
+			<<set _text_output to "the scarred inmate".toUpperFirst()>>
+		<<else>>
+			<<set _text_output to "the scarred inmate">>
+		<</if>>
+	<</if>>
+	<<if _args[1] is "apo" or _args[1] is "capo">>
+		<<set _text_output += "'s">>
+	<</if>>
+<</silently>><span class="scarred"><<print _text_output>></span><</widget>>
+
+<<widget "prison_sleep_options">>
+	<<generateSleepLinks "Prison Sleep">>
+
+	<<link [[침대에서 나온다|Prison Cell]]>><<storeon "prison bed">><<set $wardrobe_location to "prison">><<wardrobeSelection>><<loadTempHairStyle>><</link>>
+
+	<br><br>
+<</widget>>
+
+<<widget "prison_list">>
+	2. <span class="red">고행</span> /*free use */
+	<br>
+	3. <span class="pink">심판</span>/*nude */
+	<br>
+	4. <span class="purple">불견</span> /*blindfold */
+	<br>
+	5. <span class="blue">헌신</span> /*topless */
+	<br>
+	6. <span class="lblue">징계</span> /*leash */
+	<br>
+	7. <span class="teal">속죄</span> /*underwear */
+	<br>
+	8. <span class="lblue">속박</span> /*cuffs */
+	<br>
+	9. <span class="blue">처벌</span> /*bottomless */
+	<br>
+	10. <span class="purple">침묵</span> /*gag */
+	<br>
+	11. <span class="pink">무능</span> /*bindings */
+	<br>
+	12. <span class="red">저주</span> /*rut */
+	<br><br>
+<</widget>>
+
+<<widget "prison_list_dark">>
+	2. <span class="red">고행</span> /*free use */
+	<br>
+	3. <span class="pink">심판</span>/*nude */
+	<br>
+	4. <span class="purple">불견</span> /*blindfold */
+	<br>
+	5. <span class="blue">헌신</span> /*topless */
+	<br>
+	6. <span class="lblue">징계</span> /*leash */
+	<br>
+	7. <span class="teal">속죄</span> /*underwear */
+	<br>
+	8. <span class="lblue">속박</span> /*cuffs */
+	<br>
+	9. <span class="blue">처벌</span> /*bottomless */
+	<br>
+	10. <span class="purple">침묵</span> /*gag */
+	<br>
+	11. <span class="pink">무능</span> /*bindings */
+	<br>
+	12. <span class="red">저주</span> /*rut */
+	<br><br>
+<</widget>>
+
+<<widget "prison_list_result">>
+	<<switch $prison_punishment_number>>
+		<<case 2>>
+			<span class="red">고행</span><<set $prison_punishment to "free use">>
+		<<case 3>>
+			<span class="pink">심판</span><<set $prison_punishment to "nude">>
+		<<case 4>>
+			<span class="purple">불견</span><<set $prison_punishment to "blindfold">>
+		<<case 5>>
+			<span class="blue">헌신</span><<set $prison_punishment to "topless">>
+		<<case 6>>
+			<span class="lblue">징계</span><<set $prison_punishment to "leash">>
+		<<case 7>>
+			<span class="teal">속죄</span><<set $prison_punishment to "underwear">>
+		<<case 8>>
+			<span class="lblue">속박</span><<set $prison_punishment to "cuffs">>
+		<<case 9>>
+			<span class="blue">처벌</span><<set $prison_punishment to "bottomless">>
+		<<case 10>>
+			<span class="purple">침묵</span><<set $prison_punishment to "gag">>
+		<<case 11>>
+			<span class="pink">무능</span><<set $prison_punishment to "bindings">>
+		<<default>>
+			<span class="red">저주</span><<set $prison_punishment to "rut">>
+	<</switch>>
+<</widget>>
+
+<<widget "prison_list_speech">>
+	<<if _args[0] is "end">>
+		<<switch $prison_punishment>>
+			<<case "free use">>
+				<span class="red">"고행."</span>
+			<<case "nude">>
+				<span class="pink">"심판."</span>
+			<<case "blindfold">>
+				<span class="purple">"불견."</span>
+			<<case "topless">>
+				<span class="blue">"헌신."</span>
+			<<case "leash">>
+				<span class="lblue">"징계."</span>
+			<<case "underwear">>
+				<span class="teal">"속죄."</span>
+			<<case "cuffs">>
+				<span class="lblue">"속박."</span>
+			<<case "bottomless">>
+				<span class="blue">"처벌."</span>
+			<<case "gag">>
+				<span class="purple">"침묵."</span>
+			<<case "bindings">>
+				<span class="pink">"무능."</span>
+			<<default>>
+				<span class="red">"저주."</span>
+		<</switch>>
+	<<else>>
+		<<switch $prison_punishment>>
+			<<case "free use">>
+				<span class="red">"고행,"</span>
+			<<case "nude">>
+				<span class="pink">"심판,"</span>
+			<<case "blindfold">>
+				<span class="purple">"불견,"</span>
+			<<case "topless">>
+				<span class="blue">"헌신,"</span>
+			<<case "leash">>
+				<span class="lblue">"징계,"</span>
+			<<case "underwear">>
+				<span class="teal">"속죄,"</span>
+			<<case "cuffs">>
+				<span class="lblue">"속박,"</span>
+			<<case "bottomless">>
+				<span class="blue">"처벌,"</span>
+			<<case "gag">>
+				<span class="purple">"침묵,"</span>
+			<<case "bindings">>
+				<span class="pink">"무능,"</span>
+			<<default>>
+				<span class="red">"저주,"</span>
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "destination_prison">>
+	<<switch $bus>>
+		<<case "walkway">>
+			<<link [[다음|Prison Walkway]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "cell_block">>
+			<<link [[다음|Prison Block]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "medical">>
+			<<link [[다음|Prison Medical]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "shower">>
+			<<link [[다음|Prison Shower]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "canteen">>
+			<<link [[다음|Prison Canteen]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "laundry">>
+			<<link [[다음|Prison Laundry]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "spire">>
+			<<link [[다음|Prison Spire]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "library">>
+			<<link [[다음|Prison Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "chapel">>
+			<<link [[다음|Prison Chapel]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case "yard">>
+			<<link [[다음|Prison Yard]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<default>>
+			<<link [[다음|Prison Cell]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+	<</switch>>
+<</widget>>
+
+<<widget "destination_prison_walkway">>
+	<<if $prison.schedule is "lockdown" or $prison.schedule is "wake" or Time.hour is 6>>
+		당신은 감옥으로 돌아오게 된다.
+		<br><br>
+		<<link [[다음|Prison Cell]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Prison Walkway]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "prison_punishment_end">>
+	<<if $prison.schedule is "lockdown">>
+		당신은 다시 복도로 나온다. 몇 명의 수감자들이 고개를 든다. <<relaxed_guard_ ga 1 cap>><<person2>> 호루라기를 불어, 다른 이들에게 알린다.
+	<<else>>
+		당신은 다시 복도로 나온다. 당신은 감옥 속 어둠을 들여다보자, 움직이는 소리와, 수감자들이 난간에 기대니 나는 끼익 소리를 듣는다. <<relaxed_guard_ nun 1 cap>><<person2>> 불을 키고 호루라기를 불면서, 다른 이들을 깨운다.
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "prison_guard_watch">>
+	<<switch _args[0]>>
+		<<case "relaxed">>
+			<<generate_relaxed_guard 0>><<person1>><<relaxed_guard_ ga 0 cap>> 당신을 노려본다.
+		<<case "anxious">>
+			<<generate_anxious_guard 0>><<person1>><<anxious_guard_ yi 0 cap>> 눈이 당신을 바라본다.
+		<<case "veteran">>
+			<<generate_veteran_guard 0>><<person1>><<veteran_guard_ ga 0 cap>> 당신을 지켜본다.
+		<<default>>
+			<<generate_methodical_guard 0>><<person1>><<methodical_guard_ ga 0 cap>> 당신을 관찰한다.
+	<</switch>>
+
+	<<if $prison.active_punishments.includes("free use") and $worn.neck.name isnot "free use collar" and $worn.neck.name isnot "free use collar with leash">>
+		"개목걸이는 어딨지?" <<he_ ga>> 묻는다. "나랑 같이 가는게 좋을거야."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("nude") and ($worn.upper.name isnot "naked" or $worn.lower.name isnot "naked" or $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked")>>
+		"너 옷을 벗고 있어야 하지 않았나?" <<he_ ga>> 묻는다. "나랑 같이 가줘야겠어."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("blindfold") and !$worn.face.type.includes("blindfold")>>
+		"안대는 어딨지?" <<he_ ga>> 묻는다. "나랑 같이 가는게 좋을거야."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("topless") and ($worn.upper.name isnot "naked" or $worn.under_upper.name isnot "naked")>>
+		"넌 상의를 벗고 있어야 할텐데," <<he_ ga>> 말한다. "나랑 같이 가줘야겠어."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("bottomless") and ($worn.lower.name isnot "naked" or $worn.under_lower.name isnot "naked")>>
+		"넌 하의를 벗고 있어야 할텐데," <<he_ ga>> 묻는다. "나랑 같이 가줘야겠어."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("leash") and $worn.neck.collared isnot 1>>
+		"너의 목줄은 어딨지?"<<he_ ga>> 묻는다. "나랑 같이 가줘야겠어."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("underwear") and ($worn.upper.name isnot "naked" or $worn.lower.name isnot "naked")>>
+		"그건 속옷처럼 보이지 않네," <<he_ ga>> 말한다. "나랑 같이 가줘야겠어."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("cuffs") and !$worn.feet.type.includes("shackle")>>
+		"족쇄는 어딨지?" <<he_ ga>> 묻는다. "나랑 같이 가줘야겠어."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("gag") and !$worn.face.type.includes("gag")>>
+		"재갈은 어딨지?" <<he_ ga>> 묻는다. "나랑 같이 가줘야겠어."
+		<<set $phase to 1>>
+	<<elseif $prison.active_punishments.includes("bindings") and ($leftarm isnot "bound" or $rightarm isnot "bound")>>
+		"너의 팔이 자유로우면 안될텐데," <<he_ ga>> 말한다. "나랑 같이 가줘야겠어."
+		<<set $phase to 1>>
+	<<elseif $worn.feet.type.includes("shackle") and !$prison.active_punishments.includes("cuffs")>>
+		"그건 어디서 난거야?" <<he_ ga>> 당신의 족쇄를 보며, 말한다. <<He_ ga>> <<his_ yi>> 주머니에서 열쇠를 꺼낸다.
+		<<set $phase to 2>>
+	<<elseif $worn.neck.type.includes("leash") and !$prison.active_punishments.includes("leash")>>
+		"너 목줄을 맬 필요가 없잖아," <<he_ ga>> <<his_ yi>> 주머니에서 펜치를 꺼내며, 말한다.
+		<<set $phase to 3>>
+	<<elseif !$prison.active_punishments.includes("blindfold") and $worn.face.type.includes("blindfold")>>
+		"안대를 벗을 시간이네," <<he_ ga>> 말한다. 당신은 <<him_ ga>> 가까이 다가오는 것을 듣는다.
+		<<set $phase to 4>>
+	<<elseif !$prison.active_punishments.includes("gag") and $worn.face.type.includes("gag")>>
+		"재갈을 벗을 시간이네," <<he_ ga>> 가까이 다가오며, 말한다.
+		<<set $phase to 5>>
+	<<else>>
+		<<switch _args[0]>>
+			<<case "relaxed">>
+				<<He_ nun>> 어깨를 으쓱하고 다시 <<his_ yi>> 게임에 집중한다.
+			<<case "anxious">>
+				<<He_ nun>> 아래를 보곤 숨을 죽이고 끄덕이며, 무언가를 중얼거린다.
+			<<case "veteran">>
+				<<He_ nun>> 당신을 비웃고 <<his_ yi>> 코를 찌뿌리지만, 그 이외엔 놔둔다.
+			<<default>>
+				<<He_ nun>> 만족한 듯, 주위를 둘러본다.
+		<</switch>>
+		<<set $phase to 0>>
+	<</if>>
+	<br><br>
+	<<if $phase is 5>>
+		<<link [[$NPCList[0].pronouns.he + " 재갈을 제거하도록 둔다"|Prison Remove Gag]]>><</link>>
+		<br>
+	<<elseif $phase is 4>>
+		<<link [[$NPCList[0].pronouns.he + " 안대를 제거하도록 둔다"|Prison Remove Blindfold]]>><</link>>
+		<br>
+	<<elseif $phase is 3>>
+		<<link [[$NPCList[0].pronouns.he + " 목줄을 제거하도록 둔다"|Prison Remove Leash]]>><</link>>
+		<br>
+	<<elseif $phase is 2>>
+		<<trClothes "feet" $worn.feet.name "을">><<link [[$NPCList[0].pronouns.he + " " + _trResult + " 제거하도록 둔다"|Prison Remove Cuffs]]>><</link>>
+		<br>
+	<<elseif $phase is 1>>
+		<<prison_repunishment_options>>
+	<<else>>
+		<<destination_prison>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_guard_greet">>
+	<<switch _args[0]>>
+		<<case "relaxed">>
+			<<set $daily.prison.prisonRelaxedGreet to true>>
+			<<generate_relaxed_guard 0>><<person1>><<relaxed_guard_ nun 0 cap>> 당신이 다가오자 당신을 본다.
+			<<if $prison.relaxed gte 45>>
+				<<He_ ga>> 웃는다. "내 최애의 <<girl_ iyo>>. 오늘의 재수는 어때?"
+				<br><br>
+				<<He_ nun>> 여전히 웃은채, 기대하며 당신과 <<his_ yi>> 손 위에 있는 주사위를 번갈아가며 본다.
+			<<elseif $prison.relaxed gte 30>>
+				<<He_ ga>> 웃는다. "막 지루해지려는 참이었는데." <<He_ nun>> <<his_ yi>> 주사위를 <<his_ yi>> 손바닥 위에서 굴리며, 웃으면서 기댄다.
+			<<else>>
+				"너 어느때보다도 슬퍼보여," <<he_ ga>> <<his_ yi>> 주사위를 하늘로 날리며, 웃는다.
+				<<if random(1, 20) is 1>>
+					<<He_ nun>> 그것을 놓친다. 당신은 주사위 하나가 <<his_ yi>> 머리를 치고 바닥으로 떨어지는 것을 본다.
+					<br>
+					"내 실수야," <<he_ ga>> <<his_ yi>> 앞머리를 문지르면서, 인정한다.<<trauma -2>><<ltrauma>>
+				<</if>>
+			<</if>>
+		<<case "anxious">>
+			<<set $daily.prison.anxiousGreet to true>>
+			<<generate_anxious_guard 0>><<person1>><<anxious_guard_ nun 0 cap>> 당신의 발자국 소리에 놀란다.
+			<<if $prison.anxious gte 45>>
+				<<He_ nun>> 당신을 보고 진정한다. <<his_ yi>> 얼굴에 잠시 미소가 번지더니, <<he_ nun>> 곧바로 근엄한 표정을 짓는다.
+				<br><br>
+				"이상한 짓거리 하지마," <<he_ ga>> 말한다.
+				<<switch random(0, 2)>>
+					<<case 2>>
+						"높으신 분들이 네가 나와 있는 것을 알아차리면 내가 어떻게 해야 할 지 모르겠어."
+					<<case 1>>
+						"아니면 소장이 우리 둘다 죽일거야."
+					<<default>>
+						"이 위는 위험해. 돌아다니지마."
+				<</switch>>
+			<<elseif $prison.anxious gte 30>>
+				<<He_ nun>> 당신을 보고 한숨을 쉰다. "오, 좋아.
+				<<if random(0, 1) is 1>>
+					이 일은 조금 외롭다고."
+				<<else>>
+					오늘은 모든 새들이 바빠. 적어도 그들과 상대할 필요는 없겠지."<<stress 1>><<gstress>>
+				<</if>>
+			<<else>>
+				<<He_ nun>> 당신을 보고 놀란 것 같다..
+				<<switch random(0, 1)>>
+					<<case 1>>
+						"흠, 보통 이렇게 길게 이 일을 하진 않던데."<<stress 1>><<gstress>>
+					<<default>>
+						"난 네가 지금 쯤이면 다른 일을 할 줄 알았어." <<He_ nun>> <<his_ yi>> 이마를 찌뿌리고 중얼거린다, "나라면 그랬을텐데, 말이야."
+				<</switch>>
+			<</if>>
+		<<case "veteran">>
+			<<set $daily.prison.veteranGreet to true>>
+			<<generate_veteran_guard 0>><<person1>>
+			<<if $prison.veteran gte 45>>
+				누군가 당신의 어깨를 토닥인다. <<veteran_guard_ da 0>>. <<He_ nun>> 당신을 보지 않고 지나간다.
+			<<elseif $prison.veteran gte 30>>
+				무언가 당신의 <<bottom_ ul>> 친다. 당신은 어깨 너머로 <<veteran_guard_ ga 0>> 입술에 약간의 웃음을 띠면서, 몸을 돌리고 가는 걸 본다.
+			<<else>>
+				<<veteran_guard_ nun 0 cap>> 능글맞은 미소로 당신에게 인사한다. "여전히 버텨?
+				<<switch random(0, 2)>>
+					<<case 2>>
+						날 내기에서 지게 했네, <<girl_ iyo>>."
+					<<case 1>>
+						보기보다 강인한걸."
+					<<default>>
+						어디까지 버틸지 지켜보지."<<stress 1>><<gstress>>
+				<</switch>>
+			<</if>>
+		<<default>>
+			<<generate_methodical_guard 0>><<person1>><<methodical_guard_ nun 0 cap>> 지나가면서 당신을 흘깃 본다.
+	<</switch>>
+	<br><br>
+	<<destination_prison>>
+<</widget>>
+
+<<widget "prison_repunishment_options">>
+	<<link [[얌전히 간다|Prison Repunishment]]>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+	<<if $prison.shock is 1>>
+	<<link [[싸운다|Prison Punishment Shock]]>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+	<<else>>
+	<<link [[싸운다|Prison Punishment Fight]]>><<set $fightstart to 1>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+	<</if>>
+<</widget>>
+
+<<widget "prison_punishment_init">>
+	<<set $prison_punished_days to 2>>
+	<<set $prison.active_punishments.push($prison_punishment)>>
+	<<unset $prison_punishment>>
+	<<unset $prison_punishment_number>>
+	<<if $prison.active_punishments.includes("nude")>>
+		<<if !$prison.active_punishments.includes("topless")>>
+			<<set $prison.active_punishments.push("topless")>>
+		<</if>>
+		<<if !$prison.active_punishments.includes("bottomless")>>
+			<<set $prison.active_punishments.push("bottomless")>>
+		<</if>>
+		<<if !$prison.active_punishments.includes("underwear")>>
+			<<set $prison.active_punishments.push("underwear")>>
+		<</if>>
+	<<elseif $prison.active_punishments.includes("topless") and $prison.active_punishments.includes("bottomless")>>
+		<<if !$prison.active_punishments.includes("nude")>>
+			<<set $prison.active_punishments.push("nude")>>
+		<</if>>
+		<<if !$prison.active_punishments.includes("underwear")>>
+			<<set $prison.active_punishments.push("underwear")>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "events_prison_triggered">>
+	<<if $prison_event_trigger is "one">>
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			<span class="blue">당신의 팔이 묶인채로 당신을 보호하긴 어렵다.</span>
+			<br>
+		<<else>>
+			<<link [[밀친다|Prison Shove]]>><</link>><<physiquedifficulty 1 16000>>
+			<br>
+		<</if>>
+		<<link [[가만히 있는다|Prison Still]]>><</link>><<difficulty 50>>
+		<br>
+	<<elseif $prison_event_trigger is "two">>
+		<<if $worn.feet.type.includes("shackle")>>
+			<span class="blue">당신의 다리가 묶인채로 당신을 보호하긴 어렵다.</span>
+			<br>
+		<<else>>
+			<<link [[발로 찬다|Prison Kick]]>><</link>><<athleticsdifficulty 1 1000>>
+			<br>
+		<</if>>
+		<<link [[참는다|Prison Endure]]>><<trauma 6>><<stress 6>><<arousal 600>><</link>><<difficulty 70>><<gtrauma>><<gstress>><<garousal>>
+		<br>
+	<<elseif $prison_event_trigger is "three">>
+		<<set $skulduggerydifficulty to random(500, 1000)>>
+		<<link [[숨는다|Prison Hide]]>><</link>><<skulduggerydifficulty>>
+		<br>
+		<<link [[맞선다|Prison Confront]]>><<pain -8>><</link>><<llpain>>
+		<br>
+	<<elseif $prison_event_trigger is "hunt">>
+		<<link [[얌전히 간다|Prison Punishment]]>><</link>>
+		<br>
+		<<if $prison.shock is 1>>
+			<<link [[싸운다|Prison Punishment Shock]]>><</link>>
+			<br>
+		<<else>>
+			<<link [[싸운다|Prison Punishment Fight]]>><<set $fightstart to 1>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<link [[다음|Prison Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+	<<unset $prison_event_trigger>>
+<</widget>>
+
+<<widget "events_prison">>
+	<<if $prison.schedule is "hunt">>
+		<<set $prison.schedule to "free time">>
+		<<generate_anxious_guard 0>>
+		<<person1>>
+		"<<phim_ ul>> 찾았어," <<anxious_guard_ ga 0>> 뒤에서 소리친다. 당신은 몸을 돌리고, 간수들이 당신에게 다가오는 것을 본다.
+		<br><br>
+		<<set $prison.hours_worked to 0>>
+		<<set $prison_event_trigger to "hunt">>
+		<<set $prison.morning to 1>>
+	<<elseif $prison.schedule is "revolt">>
+		<<prison_attention 1>>
+		감옥 전체가 무정부 상태다.
+		<br><br>
+	<<elseif ($worn.neck.name is "free use collar" or $worn.neck.name is "free use collar with leash") and random(1, 2) is 2>>
+		<<set _rng to random(1, 5)>>
+		<<switch _rng>>
+			<<case 1>>
+				<<generate1>><<person1>>
+				찢어진 교도복을 입고 있는 한 <<person_ i>> 당신의 개목걸이를 잡고, 읽기 위해 몸을 앞으로 숙인다.
+				<br><br>
+				<<set $prison_event_trigger to "one">>
+			<<case 2>>
+				<<generate1>><<generate2>><<person1>>
+				<<if $leftarm is "bound" and $rightarm is "bound">>
+					한 <<person2>><<person_ i>> 당신 앞에 서고, 다른 한 <<person1>><<person_ i>> 당신 뒤에서 당신의 머리카락을 잡는다.
+				<<else>>
+					한 <<person2>><<person_ i>> 당신 앞에 서고, 다른 한 <<person1>><<person_ i>> 당신 뒤에서 당신의 팔을 잡는다.
+				<</if>>
+				"우리 차례다, <<slut_ a>>."
+				<br><br>
+				<<set $prison_event_trigger to "two">>
+			<<case 3>>
+				<<generate1>><<generate2>><<generate3>><<person1>>
+				당신은 목소리가 다가오는 것을 듣는다.
+				<<if random(1, 2) is 2>>
+					"그 무료 변소 <<slutPost>> 좀 찾아봐," 하나가 말한다.
+				<<else>>
+					"간수들이 우리에게 알려준 <<whorePost>> 좀 찾아봐," 하나가 말한다.
+				<</if>>
+				<br>
+				<<if random(1, 2) is 2>>
+					"좋은 계획이야," 나머지가 말한다.
+				<<else>>
+					"갇혀있는 게 아깝지 않을 정도라고," 나머지가 말한다.
+				<</if>>
+				<br>
+				<<if random(1, 2) is 2>>
+					<<if $NPCList[2].penis isnot "none">>
+						"내 정액을 무언가에 싸고 싶어," 세번째가 말한다.
+					<<else>>
+						"기다릴 수가 없어. 내 보지가 간지럽다고," 세번째가 말한다.
+					<</if>>
+				<<else>>
+					"걜 내 <<bitch_ ro>> 만들고 싶지만, 그건 너무 번거로워" 세번째가 말한다.
+				<</if>>
+				<br><br>
+				<<set $prison_event_trigger to "three">>
+			<<case 4>>
+				눈들이 당신의 목에 달린 "무료 변소" 표지판으로 향한다. 아무도 움직이진 않지만, 당신은 그들이 하고 싶은게 무엇인지 안다.<<ggattention prison>><<prison_attention 2>>
+				<br><br>
+			<<default>>
+				난폭한 수감자 무리가 다가온다.
+				<<if $leftarm is "bound" and $rightarm is "bound">>
+					당신은 당신의 손으로 "무료 변소" 표지판을 가리려 하지만, 팔이 너무 단단히 묶여있다. 그들의 굶주린 눈이 당신의 개목걸이로 향하고, 당신의 몸으로 몰려든다.<<gggattention prison>><<prison_attention 3>><<gstress>><<stress 6>>
+				<<else>>
+					당신은 당신의 손으로 "무료 변소" 표지판을 가린다.
+				<</if>>
+				<br><br>
+		<</switch>>
+	<<elseif $worn.face.type.includes("blindfold")>>
+		<<set _rng to random(1, 5)>>
+		당신은 당신이 가는 곳이 어딘지 볼 수 없다.
+		<<switch _rng>>
+			<<case 1>>
+				당신은 무언가로 걸어가다, 당신의 <<bottom_ uro>> 넘어진다. 웃음소리가 당신을 둘러싼다.<<gattention prison>><<prison_attention 1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<br><br>
+			<<case 2>>
+				<<generate1>><<person1>>
+				<<if currentSkillValue('skulduggery') gte random(1, 1000)>>
+					<<if $leftarm is "bound" and $rightarm is "bound">>
+						<<if $worn.feet.type.includes("shackle")>>
+							<span class="green">당신은 뒤에서 가벼운 발자국 소리를 듣는다.</span> 당신은 팔이 묶인채로 당신을 보호할 수 없다. 당신은 서둘리 도망치려 하지만, <span class="red">당신의 족쇄가 속도를 늦춘다.</span> 당신은 <<he_ ga>> 당신의 <<breasts_ rul>> 더듬는 걸 막기에 무력하다.
+							<<set $prison_event_trigger to "rape">>
+						<<else>>
+							<span class="green">당신은 뒤에서 가벼운 발자국 소리를 듣는다.</span> 누군가 당신에게 몰래 다가오려 한다. 당신은 <<he_ ga>> 무슨 짓을 하기 전에 서둘리 도망친다.
+							<<endevent>>
+						<</if>>
+					<<else>>
+						<span class="green">당신은 뒤에서 가벼운 발자국 소리를 듣는다.</span> 누군가 당신에게 몰래 다가오려 한다. 당신은 <<he_ ga>> 무슨 짓을 하기 전 몸을 돌려 <<him_ ul>> 때린다.
+						<<endevent>>
+					<</if>>
+				<<else>>
+					<span class="red">누군가 당신에게 몰래 다가와,</span> 당신의 <<breasts_ rul>> 잡는다. 당신은 몸을 돌려 <<him_ ul>> 쫓아낸다.<<ggattention prison>><<prison_attention 2>><<gtrauma>><<trauma 6>><<gstress>><<stress 6>><<garousal>><<arousal 600 "breasts">>
+					<<endevent>>
+				<</if>>
+				<br><br>
+			<<case 3>>
+				당신은 발을 헛딛어, 당신의 <<bottom_ ul>> 하늘로 향한 채로 엎어진다.<<gpain>><<gattention prison>><<pain 4>><<prison_attention 4>>
+				<br><br>
+			<<case 4>>
+				당신은 조심히 걸어, 넘어지지 않으려 한다.
+				<br><br>
+			<<default>>
+				당신은 균형을 잃지만, 발을 딛고 버텨낼 수 있었다.
+				<br><br>
+		<</switch>>
+	<<elseif $exposed gte 2 and random(1, 2) is 2>>
+		<<set _rng to random(1, 5)>>
+		<<switch _rng>>
+			<<case 1>>
+				난폭한 수감자 무더기가 당신을 향해 오고, <span class="pink">숨을 곳은 없다.</span> <<covered>><<gggattention prison>><<prison_attention 3>><<gstress>><<stress 6>>
+				<br><br>
+			<<case 2>>
+				<<generate1>><<generate2>>
+				당신은 <<fullGroup_ i>> 지나가는 동안 모서리를 돌아 숨는다.
+				<<endevent>>
+				<br><br>
+			<<case 3>>
+				당신의 벌거벗은 몸에 눈길이 모인다. <<covered>><<ggattention prison>><<prison_attention 2>><<gstress>><<stress 6>>
+				<br><br>
+			<<case 4>>
+				<<generate1>><<generate2>>
+				당신은 <<fullGroup_ i>> 지나가는 동안 모서리를 돌아 숨지만, <span class="purple">그들은 당신을 향해 다가온다.</span> <<covered>> 당신은 그들의 음흉한 시선을 견뎌낸다.<<gattention prison>><<prison_attention 1>><<gstress>><<stress 6>>
+				<<endevent>>
+				<br><br>
+			<<default>>
+				난폭한 수감자 무더기가 당신을 향해 온다. 당신은 몸을 돌려 반대 방향으로 탈출한다.<<gattention prison>><<prison_attention 1>><<gstress>><<stress 6>>
+				<br><br>
+		<</switch>>
+	<<elseif $exposed is 1 and random(1, 4) is 4>>
+		<<set _rng to random(1, 5)>>
+		<<switch _rng>>
+			<<case 1>>
+				당신은 당신 혼자서만, 그렇게 옷을 입은 것에 대해 의식한다.<<gstress>><<stress 6>>
+				<br><br>
+			<<case 2>>
+				수감자들은 계속해서 당긴의 피부를 음흉한 눈으로 본다. <<covered>><<gattention prison>><<prison_attention 1>><<gstress>><<stress 6>>
+				<br><br>
+			<<case 3>>
+				<<generate1>><<person1>>
+				<<if $worn.lower.name isnot "naked">>
+					한 <<person_ i>> 당신의 <<worn_lower_name_ yi>> 끝자락을 잡고, 당신의 가랑이까지 잡아당긴다.
+				<<elseif $worn.under_lower.name isnot "naked">>
+					한 <<person_ i>> 당신의 <<worn_under_lower_name_ yi>> 끝자락을 잡고, 당신의 가랑이까지 잡아당긴다.
+				<<else>>
+					한 <<person_ i>> 지나가면서 당신의 <<bottom_ ul>> 더듬거린다.
+				<</if>>
+				<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
+					당신은 <<him_>>에게 공격을 날리자, <span class="green">당신의 주먹이 <<his_ yi>> 얼굴에 닿는다.</span> <<He_ ga>> 비틀거리며 도망친다.
+				<<else>>
+					당신은 <<him_>>에게 공격을 날리지만, <span class="red"><<he_ nun>> 당신의 공격을 피한다.</span> 그래도 당신은 <<his_ yi>> 손을 떼어냈다.<<gattention prison>><<prison_attention>><<gstress>><<stress 6>>
+				<</if>>
+				<<endevent>>
+				<br><br>
+			<<case 4>>
+				<<generate1>><<person1>>한 <<person_ i>> 지나가면서 당신을 보곤 당신을 <<whore_ rago>> 부른다.<<gattention prison>><<prison_attention 1>><<gstress>><<stress 6>>
+				<<endevent>>
+				<br><br>
+			<<default>>
+				<<generate1>><<person1>>
+				한 <<person_ i>> 조금 멀리서 당신을 가리키고, <<him_>> 주위 수감자들이 웃는다. <<covered>> <<gattention prison>><<prison_attention 1>><<gstress>><<stress 6>>
+				<<endevent>>
+				<br>
+		<</switch>>
+	<<else>>
+		<<set _rng to random(1, 10)>>
+		<<switch _rng>>
+			<<case 1>>
+				<<generate1>><<generate2>><<person1>>
+				<<if $beauty gte random(1, $beautymax)>>
+					<<fullGroup_ i>> 지나가면서 공개적으로 당신을 음흉한 시선으로 본다.<<gattention prison>><<prison_attention 1>>
+				<<else>>
+					<<fullGroup_ i>> 지나가지만, 당신에게 관심을 가지진 않는다.
+				<</if>>
+				<<endevent>>
+				<br><br>
+			<<case 2>>
+				<<generate1>><<person1>>
+				<<if $worn.neck.type.includes("leash")>>
+					한 <<person_ i>> 당신의 목줄을 잡고 당겨, 당신이 <<him_ urobuter>> 목줄을 당겨서 멀어지기 전에 당신을 당긴다.<<ggattention prison>><<prison_attention 2>>
+				<<else>>
+					한 <<person_ i>> 미소를 띤다. "이 개목걸이가 잘 어울리는데," <<he_ ga>> 지나가면서 말한다. "네가 밖에서도 그걸 입었다 장담한다."<<gattention prison>><<prison_attention 1>>
+				<</if>>
+				<<endevent>>
+				<br><br>
+			<<case 3>>
+				<<if $worn.feet.type.includes("shackle")>>
+					당신은 부서진 석조물에 발을 걸린다. 당신은 <<worn_feet_name_>> 때문에 발을 잘 움직이지 못하고, 당신의 <<bottom_ ul>> 하늘로 향한 채로 엎어진다.<<gpain>><<gattention prison>><<pain 4>><<prison_attention 6>>
+				<<else>>
+					당신은 부서진 석조물에 발을 걸리지만, 스스로를 바로잡는다.
+				<</if>>
+				<br><br>
+			<<case 4>>
+				<<if $worn.face.type.includes("gag")>>
+					<<generate1>><<person1>>한 <<person_ i>> 당신의 <<bottom_ ul>> 음흉한 시선으로 본다. "내가 좀 만져봐도 상관없지, 그렇지?" <<he_ ga>> 묻는다. <span class="purple">당신은 입에 <<worn_face_name_ i>> 있는채로 말할 수 없다.</span> "동의한걸로 알게."
+					<br><br>
+					<<He_ nun>> 당신의 허리 쪽으로 손을 뻗어, 뒤쪽을 더듬는다.
+					<<if $leftarm is "bound" and $rightarm is "bound">>
+						팔이 묶인채로는, 당신이 할 수 있는 거라곤 몸을 비트는 것이지만, <<he_ nun>> 당신을 단단히 붙잡는다.<<ggattention prison>><<prison_attention 2>><<gtrauma>><<trauma 6>><<gstress>><<stress 6>><<garousal>><<arousal 600 "bottom">>
+						<br><br>
+						<<He_ nun>> 당신에게 이별의 한 방을 날리곤, 지나간다.
+					<<else>>
+						<<gattention prison>><<prison_attention 1>><<gstress>><<stress 6>><<garousal>><<arousal 600 "bottom">>
+						<br><br>
+					<</if>>
+				<<else>>
+					<<generate1>><<person1>>
+					한 <<person_ i>> 지나가면서 당신의 <<bottom_ ul>> 음흉한 시선으로 본다.<<gstress>><<stress 6>>
+				<</if>>
+				<br><br>
+				<<endevent>>
+			<<case 5>>
+				당신은 발 밑에서 떨림을 느낀다
+				<br><br>
+			<<case 6>>
+				<<generate1>><<person1>>한 <<person_ i>> 어느정도 멀리서 당신을 바라본다. <<He_ nun>> 당신이 눈을 마주치자 당신을 바라보지 않는다.<<gattention prison>><<prison_attention 1>>
+				<<endevent>>
+				<br><br>
+			<<case 7>>
+				수감자들이 서너명 모여, 진지하게 토론한다.
+				<<if $skulduggery lt 400>>
+					당신은 음모의 단서를 포착한다.<<gskulduggery>><<skulduggery 1>>
+				<<else>>
+					당신은 음모의 단서를 포착한다. 아마추어적인 것들 말이다.
+				<</if>>
+				<br><br>
+			<<case 8>>
+				<<if $hallucinations gte 2>>
+					그림자도 고유의 삶이 있다.<<gstress>><<stress 6>>
+				<<else>>
+					약한 전기 빛이 깜빡거린다.
+				<</if>>
+				<br><br>
+			<<case 9>>
+				당신은 멀리서 비명소리를 듣는다.
+				<br><br>
+			<<default>>
+				<<if $beauty gte random(1, $beautymax)>>
+					당신의 모습이 이목을 끈다.<<gattention prison>><<prison_attention 1>>
+				<<else>>
+					아무도 당신에게 관심을 가지지 않는다.
+				<</if>>
+				<br><br>
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "events_prison_attention">>
+	<<set $prison.attention to 0>>
+	<<set $daily.prison.attentionDay to true>>
+	<<if $prison.schedule is "revolt">>
+		시끄러운 소음이 잠잠해진다. 수감자들이 비틀거리며 지나다니다, 쓰러진다. 당신은 혼자서는 일어나기가 힘들다는 것을 발견한다. <span class="red">무언가 잘못되었다.</span>
+		<br><br>
+
+		<<link [[다음|Prison Warden]]>><</link>>
+		<br>
+	<<elseif $prison.attention_level is 0>>
+		<<generate_scarred_inmate 0>>
+		<<generate_tattooed_inmate 1>>
+		<<generate3>><<generate4>><<generate5>><<generate6>><<person3>>
+		"<<phim_ ul>> 찾았습니다, 보스," <<personsimple_ yi>> 목소리가 말한다. 당신은 몸을 돌린다. <<tattooed_inmate_ ga 0 cap>> <<person3>><<person_ gwa>> <<person4>><<person_ ul>> 옆에 두고, 당신을 향해 걸어온다.
+		<br><br>
+		<<person2>><<He_ nun>> 몇 걸음 앞에 멈춰서, 당신 온몸을 관찰한다. "난 새로운 <<bitch_ ga>> 필요해," <<he_ ga>> 말한다. <<his_ yi>> 몸이 보이는 곳 중에서 잉크가 덮이지 않은 곳이 한 곳도 없다. "예전 녀석은 완전히 지쳐버렸거든."
+		<br><br>
+		"보스 말을 들었겠지," <<person3>><<person_ i>> 말한다. <<He_ nun>> <<his_ yi>> 보스보단 적지만, 문신을 가지고 있다. <<if $awareness gte 300>><span class="blue"><<He_ nun>> 마치 <<his_ yi>> 마음이 다른 곳에 있는 것처럼, 이상한 목소리로 말한다.</span><</if>> "여기로 와라."
+		<br><br>
+		<<link [[얌전히 간다|Prison Attention Quiet]]>><<set $prison.attention_level to 1>><<set $prison.attention to 0>><</link>>
+		<br>
+		<<link [[거절한다|Prison Attention Refuse]]>><<set $prison.attention_level to 1>><<set $prison.attention to 0>><</link>>
+		<br>
+	<<elseif $prison.protection is "scarred">>
+		<<generate_veteran_guard 0>><<generate_scarred_inmate 1>><<person1>><<generate3>><<generate4>>
+		<<set $prison.protection to 0>>
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			거친 목소리가 울려 퍼진다. "수감자여," <<veteran_guard_ ga 0>> 말한다. "벽에 몸을 기대라!"
+		<<else>>
+			거친 목소리가 울려 퍼진다. "수감자여," <<veteran_guard_ ga 0>> 말한다. "벽에 손을 대라!"
+		<</if>>
+		<<He_ ga>> 지휘봉을 준비한 채, 가까이 다가온다. <span class="green">그러나 <<he_ nun>> 멈추고,</span> 당신의 어깨 너머로 본다.
+		<br><br>
+
+		<<scarred_inmate_ ga 1 cap>> 당신 옆에 있다. <<person3>><<person_ gwa>><<person4>><<person_ i>> <<person2>><<him_ yi>> 옆에 있다. "내가 보고 싶던 <<bitch_ guna>>," <<he_ ga>> 당신의 <<bottom_ ul>> 찰싹 치며, 말한다. <<He_ nun>> <<veteran_guard_ rul 0>> 본다. "그래서 <<phim_ ul>> 가지고 뭐하려고? 다른 간수들이 알아도 돼?"
+		<br><br>
+
+		<<veteran_guard_ nun 0 cap>> 비웃고, 걸어간다.
+		<br><br>
+
+		"나중에 보자, <<slut_ a>>," <<scarred_inmate_ ga 1>> 말한다. <span class="red">당신은 흉터가 있는 수감자의 보호를 잃었다.</span>
+		<br><br>
+
+		<<destination_prison>>
+
+	<<elseif $prison.attention_level gte 1>>
+		<<generate_veteran_guard 0>><<person1>>
+		<<set $prison.protection to 0>>
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			거친 목소리가 울려 퍼진다. "수감자여," <<veteran_guard_ ga 0>> 말한다. "벽에 몸을 기대라!"
+		<<else>>
+			거친 목소리가 울려 퍼진다. "수감자여," <<veteran_guard_ ga 0>> 말한다. "벽에 손을 대라!"
+		<</if>>
+		<<He_ ga>> 지휘봉을 준비한 채, 가까이 다가온다. <span class="pink"><<He_ nun>> 무언가 사악한 꿍꿍이를 가지고 있다.</span>
+		<br><br>
+
+		<<link [[지시받은대로 한다|Prison Attention]]>><</link>>
+		<br>
+		<<link [[싸운다|Prison Attention Fight Refuse]]>><</link>>
+		<br>
+		<<if $prison.kylar is "active">>
+			<<if $worn.face.type.includes("gag")>>
+				<span class="blue">카일라가 당신을 도와줄 수 있겠지만, 당신의 입이 막힌채로 부를 순 없다.</span>
+				<br>
+			<<else>>
+				<<link [[카일라를 부른다|Prison Attention Kylar]]>><<set $prison.attention_level to 1>><<set $prison.attention to 0>><<set $prison.kylar to "solitary">><<set $prison_kylar_timer to 3>><</link>>
+				<br>
+			<</if>>
+		<<elseif $prison.kylar is "solitary">>
+			<span class="blue">카일라는 독방에서 당신을 도와줄 수 없다.</span>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_laundry_options">>
+	<<endevent>>
+	<<if Time.hour is 12>>
+		<<generate_relaxed_guard 0>><<person1>>"이동해라," <<relaxed_guard_ ga 0>> 소리친다. "점심시간이다."
+		<br><br>
+		당신은 다른 수감자들과 뒤엉켜 방에서 밀려나온다.
+		<br><br>
+
+		<<link [[다음|Prison Block]]>><<endevent>><</link>>
+		<br>
+	<<elseif Time.hour is 18>>
+		<<generate_relaxed_guard 0>><<person1>>"이동해라," <<relaxed_guard_ ga 0>> 소리친다. "저녁시간이다."
+		<br><br>
+		당신은 다른 수감자들과 뒤엉켜 방에서 밀려나온다
+		<br><br>
+
+		<<link [[다음|Prison Block]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[열심히 일한다 (1:00)|Prison Laundry Work Hard]]>><<prison_work 1>><<pass 1>><<advancetohour>><</link>><<note "의심을 낮출 수 있는 기회" "green">>
+		<br>
+		<<link [[수감자들과 어울린다 (1:00)|Prison Laundry Work Socialise]]>><<prison_work 1>><<pass 1>><<advancetohour>><</link>><<note "존중도를 올릴 수 있는 기회" "green">>
+		<br>
+		<<if !$daily.prison.prisonRelaxedSpoke>>
+			<<link [[간수와 얘기한다|Prison Laundry Work Chat]]>><</link>><<note "사랑을 올릴 수 있는 기회" "green">>
+			<br>
+		<</if>>
+		<<link [[그만둔다|Prison Laundry]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "prison_medical_options">>
+	<<endevent>>
+	<<if Time.hour is 12>>
+		<<generate_methodical_guard 0>><<person1>>"점심시간이다," <<methodical_guard_ ga 0>> 말한다. <<He_ nun>> <<his_ yi>> 주머니에서 기도서를 꺼내고, 문을 향해 걷는다.
+		<br><br>
+
+		<<link [[다음|Prison Medical]]>><<endevent>><</link>>
+		<br>
+	<<elseif Time.hour is 18>>
+		<<generate_methodical_guard 0>><<person1>>"저녁시간이다," <<methodical_guard_ ga 0>> 말한다. <<He_ nun>> <<his_ yi>> 주머니에서 기도서를 꺼내고, 문을 향해 걷는다.
+		<br><br>
+
+		<<link [[다음|Prison Medical]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[도와준다 (1:00)|Prison Medical Work Hard]]>><<prison_work 1>><<pass 1>><<advancetohour>><</link>>
+		<br>
+		<<if !$daily.prison.methodicalSpoke>>
+			<<link [[간수와 얘기한다|Prison Medical Work Chat]]>><</link>>
+			<br>
+		<</if>>
+		<<link [[그만둔다|Prison Medical]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "prison_spire_options">>
+	<<endevent>>
+	<<if Time.hour is 12>>
+		<<generate_anxious_guard 0>><<person1>>"점심시간이다," <<anxious_guard_ ga 0>> 말한다. <<He_ nun>> 깊게 숨을 쉬고선, 계단을 타고 아래로 달려간다.
+		<br><br>
+
+		<<link [[다음|Prison Spire]]>><<endevent>><</link>>
+		<br>
+	<<elseif Time.hour gte 18>>
+		<<generate_anxious_guard 0>><<person1>>"저녁시간이다," <<anxious_guard_ ga 0>> 말한다. <<He_ nun>> 깊게 숨을 쉬고선, 계단을 타고 아래로 달려간다.
+		<br><br>
+
+		<<link [[다음|Prison Spire]]>><<endevent>><</link>>
+		<br>
+	<<elseif $prison.anxious gte 60 and $per_npc.anxious_guard.name_known isnot 1>>
+		<<beastNEWinit 2 "hawk">><<person1>>
+		당신은 비명소리를 듣는다. 두 <<beastsplural_ yi>> 다툼이 격렬해지고 있다. 한 놈이 다른 놈을 잡고, <<bhim_ ul>> <<person2>><<bhis_ yi>> 발톱으로 제압하려는 것 같다.
+		<<endevent>>
+		<br><br>
+		<<generate_anxious_guard 0>><<person1>>
+		"오 이런 안돼," <<anxious_guard_ ga 0>> 말한다. <<He_ nun>> 깊게 숨을 쉬고선, 오두막 속 안전지대에서 나온다. "너-너네 두놈 갈라져," <<he_ ga>> 말한다. "갈라지라고."
+		<br><br>
+
+		위기에 처한 생물체가 빠져 나오지만, 다른 것들은 <<anxious_guard_ ro 0>> 몸을 돌린다. <<He_ nun>> 바로 몸을 돌리지만, 충분히 빠르지 않다. 날개를 퍼덕이며, 그 생물체는 <<him_ ul>> 땅에서 잡아 날아간다.
+		<br><br>
+
+		<<link [[다음|Prison Spire Precipice]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[일한다 (1:00)|Prison Spire Work Hard]]>><<prison_work 1>><<pass 1>><<advancetohour>><</link>>
+		<br>
+		<<if !$daily.prison.anxiousSpoke>>
+			<<link [[간수와 얘기한다|Prison Spire Work Chat]]>><</link>>
+			<br>
+		<</if>>
+		<<link [[그만둔다|Prison Spire]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "prison_teeth">>
+	<<if _args[0]>>
+		<<set $prison.teeth += _args[0]>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_teeth_text">>
+	<<if _args[0] and $statdisable is "f">>
+		| <span class="gold">당신은 상어 이빨 <<trNumber _args[0]>>개를 얻었다.</span>
+	<</if>>
+<</widget>>
+
+<<widget "prison_birds">>
+	<<if _args[0]>>
+		<<set $prison.birds += _args[0]>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_birds_text">>
+	<<if $statdisable is "f">>
+		<span class="green">+ 감시자</span>
+	<</if>>
+<</widget>>
+
+<<widget "prison_unbind">>
+	<<if !$prison.active_punishments.includes("bindings")>>
+		<<set $rightboundcarry to 0>>
+		<<set $leftboundcarry to 0>>
+		<<set $leftarm to 0>>
+		<<set $rightarm to 0>>
+	<</if>>
+	<<if !$prison.active_punishments.includes("cuffs")>>
+		<<remove_shackle>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_detach_leash">>
+	<<if !$prison.active_punishments.includes("leash")>>
+		<<detach_leash>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_bondage_removal">>
+	<<if $worn.face.type.includes("gag") or $worn.face.type.includes("blindfold")>><<set _punishments_removed to true>>
+		<<set $worn.face.type.push("broken")>>
+		<<faceruined>>
+	<</if>>
+	<<if $worn.feet.type.includes("shackle")>><<set _punishments_removed to true>>
+		<<set $worn.feet.type.push("broken")>>
+		<<feetruined>>
+	<</if>>
+	<<if $worn.neck.cursed is 1>><<set _punishments_removed to true>>
+		<<set $worn.neck.type.push("broken")>>
+		<<neckruined>>
+	<</if>>
+	<<if $leftarm is "bound" or $rightarm is "bound">>
+		<<set _punishments_removed to true>>
+	<</if>>
+	<<unbind>>
+<</widget>>
+
+<<widget "gagged_speech">><<silently>>
+	<<set _text_output to '"'>>
+	<<if _args[0]>>
+		<<if $worn.face.type.includes("gag")>>
+			<<if $speech_attitude is "meek">>
+				<<set _text_output += "으으읍">>
+			<<elseif $speech_attitude is "bratty">>
+				<<set _text_output += "읍으으">>
+			<<else>>
+				<<set _text_output += "으읍">>
+			<</if>>
+
+			<<set _text_output += _args[0].slice(-1)>>
+		<<else>>
+			<<set _text_output += _args[0]>>
+		<</if>>
+	<</if>>
+	<<set _text_output += '"'>>
+<</silently>><<print _text_output>><</widget>>
+
+<<widget "passout_prison">>
+	<<if isPregnancyEnding()>>
+		<<if $bus is "canteen">>
+			<<pregnancyPassout "prisonCanteen">>
+		<<elseif $bus is "yard">>
+			<<pregnancyPassout "prisonYard">>
+		<<else>>
+			<<pregnancyPassout "prison">>
+		<</if>>
+	<<else>>
+		<<link [[모든 게 깜깜해진다...->Passout Prison]]>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "passout_rut">>
+	<<if $rut_entry is "rope">>
+		<<set $bus to "cell_block">>
+		<<passout_prison>>
+	<<else>>
+		<<link [[모든 게 깜깜해진다...->Passout Rut]]>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "prison_revolt_options">>
+	당신은 수감자들의 주목을 받고 있다. 한 가지 생각이 당신의 머리를 스쳐간다. 반란에 대한 욕망.
+	<br><br>
+	<<if $prison.shock is 1>>
+		<<if $prison.hope lt 80>>
+			<<if $prison.reb lt 80>>
+				<span class="red">수감자들은 그 마음을 별로 느끼지 못한다. 그들은 너무 절망적이고 전기 충격 목걸이에 억압을 받고 있다.</span>
+				<br>
+			<<else>>
+				수감자들도 그 마음을 느끼지만, <span class="red">그들이 무언가를 바꿀 수 있다 생각하진 않는다. 전기 충격 목걸이 때문에, 아마 그들이 옳을 것이다.</span>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $prison.reb lt 80>>
+				수감자들은 낙관적이지만, <span class="red">반란을 일으킬만큼 억압을 받고 있다 생각하지 않는다. 어쩌든 그건 전기 충격 목걸이가 있으니 상관이 없다.</span>
+				<br>
+			<<else>>
+				수감자들도 같은 열망을 가지고 있지만, <span class="red">전기 충격 목걸이가 이걸 무의미하게 한다.</span>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if $prison.hope lt 80>>
+			<<if $prison.reb lt 80>>
+				전기 충격 목걸이가 작동하고 있진 않지만, <span class="red">그들은 반란을 일으키기엔 절망적이고 억눌려있다.</span>
+				<br>
+			<<else>>
+				전기 충격 목걸이가 작동하고 있지 않고, 수감자들이 반항적이지만, <span class="red">대규모 반란을 일으키기엔 그들은 너무 비관적이다.</span>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $prison.reb lt 80>>
+				전기 충격 목걸이가 작동하고 있지 않고, 수감자들이 낙관적이지만, <span class="red">반란을 일으킬만큼 억압을 받고 있다 생각하지 않는다.</span>
+				<br>
+			<<else>>
+				<span class="green">모든 것이 준비되었다.</span> 하지만, 당신이 하는 짓이 무슨 짓인지 알아야 한다. 계획없는 반란은 좋게 끝나지 않을 것이다.
+				<br>
+				<<link [[반란을 일으킨다|Prison Revolt]]>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<link [[아직 때가 아니다|Prison Revolt Refuse]]>><<pain -4>><<trauma -6>><<stress -6>><</link>><<lpain>><<ltrauma>><<lstress>>
+	<br>
+<</widget>>
+
+
+<<widget "rut_end">>
+	<<unset $rut>>
+	<<unset $rut_entry>>
+<</widget>>
+
+<<widget "remove_punishments">>
+	<<if $worn.neck.name is "collar with leash" or $worn.neck.name is "free use collar with leash">>
+		<<set _punishments_removed to true>>
+	<</if>>
+	<<detach_leash>>
+	<<if $worn.feet.type.includes("shackle")>><<set _punishments_removed to true>>
+		<<set $worn.feet.type.push("broken")>>
+		<<feetruined>>
+	<</if>>
+	<<if $worn.face.type.includes("blindfold") or $worn.face.type.includes("gag")>><<set _punishments_removed to true>>
+		<<set $worn.face.type.push("broken")>>
+		<<faceruined>>
+	<</if>>
+	<<if $worn.neck.name is "free use collar">><<set _punishments_removed to true>>
+		<<set $worn.neck.type.push("broken")>>
+		<<neckruined>>
+		<<neckwear 1>>
+	<</if>>
+	<<if $leftarm is "bound" or $rightarm is "bound">>
+		<<set _punishments_removed to true>>
+	<</if>>
+	<<unbind>>
+<</widget>>
+
+<<widget "prison_map">>
+	<<if $options.images is 1>>
+		<br>
+		<div id="prison_map">
+			<<if Weather.isSnow>>
+				<img src="img/misc/prison_map_winter.gif">
+			<<else>>
+				<img src="img/misc/prison_map.gif">
+			<</if>>
+			<<if $rut isnot undefined>>
+				<img id="prison_map_rut" src="img/misc/prison_rut.gif">
+				<<if random(1, 1000) is 1000>>
+					<div id="prison_map_hide">
+						<img id="prison_map_rut_overlay" src="img/misc/prison_rut_eye.png">
+						<<timed 1s>>
+							<<replace #prison_map_hide>>
+							<</replace>>
+						<</timed>>
+					</div>
+				<</if>>
+			<</if>>
+			<<if _args[0] and _args[0] isnot "rut">>
+				<img id="prison_map_overlay" @src="'img/misc/prison_map_' + _args[0] + '.png'">
+			<<elseif _args[0] is "rut">>
+				<img id="prison_map_rut_overlay" src="img/misc/prison_rut_overlay.png">
+			<</if>>
+		</div>
+	<</if>>
+<</widget>>
+
+<<widget "prisoncrimeUp">>
+	<<if $prison.time gte 0>>
+		<<crimeUp `$prison.time * 250` "resisting" "escape">>
+	<</if>>
+	<<if _args[0] is "kylar">>
+		<<crimeUp 1000 "obstruction" "kylarPrison">>
+	<</if>>
+<</widget>>

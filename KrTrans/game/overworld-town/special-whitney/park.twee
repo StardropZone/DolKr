@@ -1,0 +1,1317 @@
+:: Whitney Milkshake
+	<<set $outside to 0>><<set $location to "park">><<effects>>
+	휘트니는 당신의 손에 들린 밀크셰이크를 발견하고 놀란 듯이 당신을 쳐다본다. <<he_ ga>> 잠시 얼굴을 붉힌 것 같다고 당신은 생각한다. "이거 놀라운데, <<slut_ a>>."
+	<br><br>
+	<<link [[나눠 마신다|Whitney Milkshake Share]]>><</link>>
+	<br>
+	<<link [[준다|Whitney Milkshake Give]]>><</link>>
+	<br>
+
+:: Whitney Milkshake Share
+	<<wearProp "milkshake">>
+	<<if $rng gte 51>>
+		<<if $speech_attitude is "meek">>
+			"호-혹시 함께 마실 수 있지 않을까 해서?" 당신은 미소지으며, <<himPost>>에게 음료를 내민다. 휘트니는 한쪽 팔을 당신에게 두른다.
+			당신은 <<himPost>>에게 기댄 채로, 간혹 몇 모금씩을 마시며 20분을 보낸다.
+		<<elseif $speech_attitude is "bratty">>
+			"멜로 영화도 본 적 없어?" 당신이 말한다. 당신은 한 모금을 마신 후 빨대를 <<himPost>>에게 넘긴다.
+			휘트니는 <<his_ yi>> 눈을 굴리더니, 당신의 손에서 컵을 받아들고 길게 한 모금 마신다.
+		<<else>>
+			"나눠 마시는 게 어떨까 싶었어." 당신은 미소지으며, <<himPost>>에게 빨대를 내민다. <<He_ nun>> 한쪽 팔을 당신에게 두른다. 당신은 <<himPost>>에게 기댄 채로, 간혹 몇 모금씩 마시면서 다음 20분을 보낸다.
+		<</if>>
+		<br><br>
+
+		다 마셔갈 때 즈음, <<he_ ga>> 몸을 기울여, 당신이 잡으려 한 밀크셰이크 컵을 당신에게서 멀리 떨어뜨린다. <<He_ nun>> 얼굴에는 득의양양한 표정이 떠 있다.
+		<br><br>
+
+		<<link [[내버려둔다|Whitney Milkshake Allow]]>><<handheldon>><</link>>
+		<br>
+		<<link [[항의한다|Whitney Milkshake Protest]]>><<handheldon>><</link>>
+		<br>
+		<<if hasSexStat("promiscuity", 3)>>
+			<<link [[주의를 돌린다|Whitney Milkshake Distract]]>><<handheldon>><</link>><<promiscuous3>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $speech_attitude is "meek">>
+			"호-혹시 함께 마실 수 있지 않을까 해서?" 당신은 미소지으며, <<himPost>>에게 음료를 내민다.
+		<<elseif $speech_attitude is "bratty">>
+			"멜로 영화도 본 적 없어?" 당신이 말한다. 당신은 한 모금을 마신 후 빨대를 <<himPost>>에게 넘긴다.
+		<<else>>
+			"나눠 마시는 게 어떨까 싶었어." 당신은 미소지으며, <<himPost>>에게 빨대를 내민다.
+		<</if>>
+		<br><br>
+		<<if Weather.temperature lte 0>>
+			휘트니는 멈칫한다. "여기 밖에서는 내 <<= $NPCList[0].penis isnot "none" ? "불알이" : C.npc.Whitney.pronoun is "m" ? "엉덩이가" : "젖꼭지가">> 얼어붙을 것 같이 추운데도, 너는 망할 밀크셰이크를 나눠먹고 싶다고?"
+			<br><br>
+			당신은 끄덕인다.
+			<br><br>
+		<</if>>
+
+		"좋아," <<he_ ga>> 한 박자 후에 동의한다. 어쨌든, "<<= Weather.temperature gte 30 ? "여기는 존나 후텁지근하기도 하니까" : "내가 기분 좋을 때 네가 왔으니까">>."
+		<br><br>
+		<<if Weather.precipitation is "snow">>
+			당신은 공원 분수 가장자리의 눈을 쓸어내고 눈이 살짝 떨어지는 아래에 같이 앉는다.
+		<<else>>
+			당신은 근처에 나뭇잎이 하늘을 가려주는 벤치를 하나 찾아 같이 앉는다.
+		<</if>>
+		<br><br>
+		당신은 휘트니에 기대어 서로 밀크셰이크를 홀짝인다. 당신은 사람들이 <<= Weather.precipitation isnot "none" ? trWeather(Weather.precipitation, "을") + " 피해 종종걸음치는 것을" : "공원을 거니는 것을">> 보며, 침묵 속에서 당신의 시간을 기꺼이 함께 보낸다.
+		<br><br>
+		휘트니는 <<his_ yi>> 주의를 현재 <<= Weather.precipitation is "snow" and Weather.isFrozen("fountain") ? "분수 그릇에 모이는 눈송이들에" : "분수에">> 빼앗긴 채로, 멍하니 당신에게 빨대를 건넨다. 당신은 앞으로 기울여 한 모금 홀짝이지만, 그 위의 체리가 당신의 주의를 끈다.
+		<br><br>
+
+		<<link [[체리를 먹는다|Whitney Milkshake Cherry]]>><<set $phase to 0>><<handheldon>><<def 1>><<npcincr Whitney dom -1>><</link>><<ldom>>
+		<br>
+		<<link [[<<himPost>>에게 체리를 먹어도 되는지 묻는다|Whitney Milkshake Cherry]]>><<set $phase to 1>><<handheldon>><<sub 1>><<npcincr Whitney dom 1>><</link>><<gdom>>
+		<br>
+		<<link [[무시한다|Whitney Milkshake Cherry]]>><<set $phase to 2>><<handheldon>><</link>>
+		<br>
+	<</if>>
+
+:: Whitney Milkshake Allow
+	<<set _whitney to C.npc.Whitney>>
+
+	<<if _whitney.dom lte 5>>
+		당신이 바라보는 동안 휘트니는 홀짝이기 시작하고, <<he_ ga>> 그것을 싹 비우는 동안 빨대가 시끄러운 소음을 자아낸다.
+		<<He_ nun>> 컵을 땅에 내던지며, 당신을 밀어낸다.
+		<<link [[다음|Park]]>><<endevent>><</link>>
+	<<else>>
+		휘트니는 갑자기 당신을 음흉하게 쳐다보았고, 당신은 <<his_ yi>> 내면에 생각이 자리잡는 게 거의 눈에 보이는 것 같다. 빠른 손짓 한 번으로, <<he_ ga>> <<npcUndressText $NPCList[0] "lower" true>>.
+		<<He_ nun>> 미지근해진 밀크셰이크를 <<his_ yi>> <<print (_whitney.penis isnot "none" ? "단단해진 자지" : "촉촉해진 보지")>>에 쏟아붓고는
+		기대감에 차 <<his_ yi>> 다리를 더 넓게 벌린다. "자, <<slut_ a>>? 네가 좀 닦아야겠지? 존나게 티끌 하나 없이 하면 상을 받을지도 몰라."
+		<br><br>
+
+		<<if hasSexStat("promiscuity", 4)>>
+			<<link [[사랑을 담아 핥는다|Whitney Milkshake Lick Lovingly]]>><</link>><<promiscuous4>>
+			<br>
+		<</if>>
+		<<link [[적극적으로 핥는다|Whitney Milkshake Lick Enthusiastically]]>><</link>>
+		<br>
+		<<link [[마지못해 핥는다|Whitney Milkshake Lick Grudgingly]]>><</link>>
+		<br>
+		<<link [[거절한다|Whitney Milkshake Refuse]]>><</link>>
+		<br>
+	<</if>>
+
+:: Whitney Milkshake Lick Lovingly
+	<<set _whitney to C.npc.Whitney>>
+	당신은 천천히 무릎을 꿇고, <<his_ yi>> 넓적다리를 쓰다듬는다.
+	당신은 <<his_ yi>> <<print (_whitney.penis isnot "none" ? "자지" : "보지")>>를 휘트니로서는 예상치 못한 상냥한 움직임으로 핥기 시작한다.
+	얼마 지나지도 않아서 휘트니는 당신의 얼굴을 <<his_ yi>> 가랑이 사이에 더욱 밀어붙인다.
+	<<if _whitney.penis isnot "none">>
+		<<switch _whitney.penissize>>
+			<<case 4>>
+				휘트니의 <<penisdesc_ nun _whitney.penisdesc>> 당신이 육봉을 핥아올리고 그것을 주의깊게 적시는 동안 당신의 얼굴 위로 솟아올랐고,
+				비록 구석구석까지 닿기는 어려움에도 당신은 크림을 모두 청소하기 위해 최선을 다한다.
+				<<his_ yi>> 자지의 젖은 면이 문질러지는 탓에 당신의 얼굴은 당신 자신의 타액으로 뒤덮이기 시작한다.
+			<<case 3>>
+				You slowly lick up and down Whitney's _whitney.penisdesc with your tongue, travelling across the shaft to clean the cream off of every last inch.
+			<<case 2>>
+				You slowly rub your tongue across <<his>> _whitney.penisdesc, using the friction of your tongue to search every inch for cream.
+			<<default>>
+				You cover <<his>> _whitney.penisdesc with your tongue, quickly licking it spotless and then slowing down to shower it with attention.
+		<</switch>>
+	<<else>>
+		You slowly drag your tongue across Whitney's pussy, collecting as much of the milkshake as you can,
+		licking it spotless before focusing your attention on <<his>> clit.
+		Your face quickly becomes wet with a combination of your own saliva and fluids from Whitney's pussy.
+		The friction of your tongue against <<his>> clit causes <<him>> to shiver, but <<he>> tries to hide it.
+	<</if>>
+	<<promiscuity4>>
+
+	<<if _whitney.penis isnot "none">>
+		Whitney pulls your head away as <<he>> reaches <<his>> peak,
+		grabbing <<his>> _whitney.penisdesc with <<his>> other hand and rapidly stroking it before <<his>> cum shoots from the tip.
+		You open your mouth obediently and stick out your tongue,
+		<<if random(1,100) lte (_whitney.dom * 5)>> <!-- max dom is 20, so * 5 for 100 -->
+			but a wicked grin spreads across <<his>> face, and instead <<he>> rubs <<his>> cock on your face and cheeks as <<he>> climaxes,
+			covering you with <<his>> cum.
+			<<bodyliquid "face" "semen">>
+		<<else>>
+			and <<he>> aims <<his>> cock at your mouth as <<he>> climaxes, quickly giving you a mouthful of <<his>> cum.
+			<br><br>
+
+			The taste of <<his>> cum mixes with what's left of the milkshake, and you swallow it quickly.
+			<<cumswallow "human">>
+		<</if>>
+	<<else>>
+		<<if random(1,100) lte (_whitney.dom * 5)>> <!-- max dom is 20, so * 5 for 100 -->
+			Whitney grinds against your tongue as <<he>> reaches <<his>> peak, but a wicked grin spreads across <<his>> face.
+			<<He>> forces your face against <<his>> groin and buries your nose and mouth in <<his>> pussy,
+			not allowing you to breathe until <<his>> orgasm runs its course.
+			<<bodyliquid "mouth" "goo">>
+		<<else>>
+			Whitney throws <<his>> legs over your shoulders as <<he>> reaches <<his>> peak,
+			paying no heed to your comfort as <<he>> angles as much of <<his>> clit against your tongue as possible.
+			The force of <<his>> legs would have toppled you over, if not for <<his>> hands keeping your head in place.
+			<<He>> orgasms with a low groan, <<his>> thighs trembling against your cheeks as <<his>> fluids drip down your chin.
+			<<bodyliquid "face" "goo">>
+		<</if>>
+	<</if>>
+	<br><br>
+
+	You start to look up, however Whitney shoves you to the ground and abruptly stalks off. You think you saw <<him>> blushing.
+	<<npcincr Whitney love 1>><<npcincr Whitney lust -5>><<glove>><<llust>>
+	<br><br>
+
+	<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+	<br>
+
+:: Whitney Milkshake Lick Enthusiastically
+	<<set _whitney to C.npc.Whitney>>
+	You smirk, dropping to your knees in front of <<him>>, and begin to lick the cream away.
+	You <<oraltext>> clean <<his>> <<print (_whitney.penis isnot "none" ? "cock" : "pussy")>> and Whitney pats your head approvingly as you finish.
+	"Good slut; now finish the job."
+	<br><br>
+
+	<<link [[받아들인다|Whitney Milkshake Fight]]>><<set $sexstart to 1>><</link>>
+	<br>
+	<<link [[거절한다|Whitney Milkshake Fight]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+:: Whitney Milkshake Lick Grudgingly
+	당신은 망설이다가, 무릎을 꿇고, 마지못해 <<himPost>>에게 묻은 밀크셰이크를 핥아내기 시작한다.
+	휘트니는 결국 당신이 미적대는 모습에 불만을 품고, 당신의 얼굴을 <<his_ yi>> 가랑이에 더 세게 눌러 밀착시킨다.
+	<br><br>
+
+	<<link [[거절한다|Whitney Milkshake Fight]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+:: Whitney Milkshake Refuse
+	휘트니는 얼굴을 찌푸리고, 강제로 당신을 잡아끌어서 무릎을 꿇린다. "못 알아들은 모양인데, <<slut_ a>>; 청소 시작해."
+	<br><br>
+
+	<<link [[다음|Whitney Milkshake Fight]]>><<set $molestationstart to 1>><<set $whitneyRefusal to true>><</link>>
+	<br>
+
+:: Whitney Milkshake Fight
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<npcoral>>
+
+	휘트니는 당신의 얼굴을 <<his_ 의>> 가랑이에 누르고, 조급하게 당신의 얼굴에다 비벼댄다.
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<npcoral>>
+
+	<<if $whitneyRefusal>>
+		<<unset $whitneyRefusal>>
+		휘트니는 당신을 노려보며, 당신을 붙잡고 땅으로 밀어버린다. "못 알아들은 모양인데. 일 시작하라고, <<slut_ a>>."
+	<<else>>
+		"반도 못 끝내고 퇴근하면 못 쓰지 <<slut_ a>>; 일 시작하라고 내가 다시 말하게 만들지 마."
+		휘트니는 당신의 머리카락을 잡아당기며, 조급하게 당신의 얼굴에다 비벼댄다.
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $alarm is 1>>
+	<span id="next"><<link [[다음|Whitney Milkshake Fight Finish]]>><</link>></span>
+<<else>>
+	<span id="next"><<link [[다음|Whitney Milkshake Fight]]>><</link>></span>
+<</if>>
+<br>
+
+:: Whitney Milkshake Fight Finish
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<<ejaculation>>
+		<<He_ nun>> 몸을 뒤로 젖히고, <<his_ yi>> 무릎에서 당신을 밀쳐낸다.
+		"누가 보기 전에 가서 씻어, <<slut_ a>>. 다른 새끼들이 이상한 생각 떠올릴라."
+		휘트니는 <<print playerBellyVisible() ? "일어서서, <<his_ yi>> 옷을 고쳐입는다. <<He_ nun>> 당신이 건강에 이상이 없을 정도로 멀어질 때 까지 기다렸다가 담배에 불을 붙인다" : "<<his_ yi>> 옷을 고쳐입고, 일어서서 담배에 불을 붙인다">>.
+		<<npcincr Whitney lust -20>><<llust>>
+	<<elseif $enemyhealth lte 0>>
+		당신은 휘트니를 뒤로 밀치고, 허둥지둥 물러나서 달리기 시작한다. <<tearful>> 당신은 도망친다. 뒤돌아보았을 때에는 휘트니는 사라져 있다.
+	<<elseif $alarm is 1>>
+		당신의 도와달라는 외침이 주의를 끌자, 휘트니는 미간을 찌푸리며 당신을 밀쳐낸다.
+		"이번엔 운 좋네." <<he_ ga>> 말하고, <<his_ yi>> 옷을 고쳐입고 뛰쳐나간다.
+		<br><br>
+
+		<<tearful>> 당신은 일어선다.
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<<link [[다음|Whitney Park]]>><</link>>
+	<<else>>
+		<<link [[다음|Park]]>><<endevent>><</link>>
+	<</if>>
+	<br>
+
+:: Whitney Milkshake Protest
+	<<if $speech_attitude is "meek">>
+		"부-부탁이니 그거 돌려줘." 당신은 입술을 비죽이며 휘트니에게 말한다.
+	<<elseif $speech_attitude is "bratty">>
+		"이리 내놔," 당신은 휘트니를 노려보며 요구한다. "안 그러면 가만 안 둬."
+	<<else>>
+		"그거 돌려줘," 당신은 휘트니를 바라보며 항의한다.
+	<</if>>
+
+	<<He_ nun>> 웃음치나, 그쯤 해두고 당신의 마지막 한 모금을 위해 빨대를 내밀어준다.
+	빨대로 빨아먹는 동안 당신은 휘트니가 당신의 입술을 너무 가까이서 쳐다보고 있다는 걸 알아차렸지만, 무슨 말을 하기도 전에 <<he_ ga>> 당신을 밀어낸다.
+	<<npcincr Whitney love 1>><<glove>><<npcincr Whitney lust 5>><<glust>>
+	<br><br>
+
+	<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+	<br>
+
+:: Whitney Milkshake Distract
+	<<set _whitney to C.npc.Whitney>>
+	<<if $player.breastsize gte 3>>
+		You slowly straddle Whitney, planting your knees on either side of <<his>> lap and leaning back on <<his>> thighs.
+		<<set _chest to (_whitney.breastsize gte 2 ? _whitney.breastsdesc : "chest")>>
+		<<set _own to (_whitney.breastsize gte 2 ? "own" : "")>>
+		Then, you inch forward until your stomach touches <<his>> _chest,
+
+		<<if $player.breastsize gte 9>>
+			and your _own <<breasts>> hang heavily in front of <<his>> face. You drape yourself across Whitney, pressing <<his>> face firmly in your cleavage.
+			<<His>> breathing is heavy and hot against your chest.
+		<<elseif $player.breastsize gte 6>>
+			and your _own <<breasts>> sit against <<his>> collar. You lean forward, drawing <<his>> attention more firmly and prominently displaying yourself.
+			Whitney's eyes are glued to your chest.
+		<<else>>
+			and your _own <<breasts>> are pressed forward. You reach out and wrap your arms around <<his>> neck.
+			You lean forward, trying to draw attention to your <<breasts>> and puffing your chest out.
+			<<He>> watches with rapt attention, leering.
+		<</if>>
+	<<else>>
+		<<if _whitney.penis isnot "none">>
+			You slowly straddle Whitney, planting your knees on either side of <<his>> lap and leaning back on <<his>> thighs.
+			Next, you press your crotch against <<his>> _whitney.penisdesc, purposefully angling to cause the most friction through <<his>> clothes.
+			You can feel <<him>> getting hard as you press up against <<him>>, and Whitney's breathing grows laboured.
+		<<else>>
+			You slowly straddle Whitney, planting one of your knees between <<his>> thighs and pressing it up against <<his>> crotch.
+			You wrap one arm around <<his>> neck, pushing your chests together, and grab <<his>> hip,
+			digging your fingers into <<his>> ass cheek as you guide <<his>> pelvis so your knee presses directly against <<his>> clit.
+			Whitney rubs <<himself>> against you, and you watch <<him>> grow flushed as you firmly grind back,
+			first up and down, then back and forth, never letting <<him>> get used to the rhythm.
+			The fabric separating you from <<his>> pussy starts to feel warm and damp.
+		<</if>>
+	<</if>>
+	<<promiscuity3>>
+
+	Whitney loses focus for a second, and the hand holding the milkshake begins to droop. You're able to snatch it from <<his>> hand before <<he>> realises it.
+
+	Whitney barks a laugh as you lean back triumphantly and loudly sip the last of the treat before leisurely getting off of <<him>>.
+	<<npcincr Whitney love 2>><<npcincr Whitney lust 10>><<gglove>><<gglust>>
+	<br><br>
+
+	<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+	<br>
+
+:: Whitney Milkshake Give
+	휘트니는 당신이 <<himPost>>에게 밀크셰이크를 건네자 어리둥절한 듯 보이며, 거칠게 <<his_ yi>> 팔을 당신의 어깨에 두른다.
+	당신은 <<himPost>>에게 기대어, 휘트니가 <<print playerBellyVisible() ? "음료를 마시는" : "음료를 마시며 담배를 피우는">> 동안 한가롭게 수다를 떨며 20분을 보낸다.
+	<<hes_ ga>> 말을 마치자, <<he_ 가>> 몸을 기울이고 놀라울 정도로 부드럽게 당신에게 키스했다. <<HePost>>에게서는 바닐라와 담배 맛이 난다.
+	<br><br>
+
+	그런 다음 휘트니는 즉시 당신을 밀쳐낸다.
+	<<npcincr Whitney love 1>><<glove>>
+	<br><br>
+
+	<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+	<br>
+
+:: Whitney Milkshake Fail
+	<<set _whitney to C.npc.Whitney>>
+	휘트니는 당신의 손에 있는 밀크셰이크를 쳐다보고 있다. 당신은 잠시 머뭇거리지만, 마음을 다잡고 말없이 밀크셰이크를 건넨다. <<He_ 가>> 말 없이 당신을 바라본다.
+	당신은 음료를 도로 가져오려고 했지만, 눈 깜짝할 새에, 휘트니는 그것을 당신의 얼굴에다 냅다 부어버린다.
+	<span class="red">액체가 당신의 옷에 스며들어 뚝뚝 흐른다.</span><<trauma 3>><<stress 8>><<gtrauma>><<ggstress>>
+	<br><br>
+
+	휘트니는 <<his_ yi>> 손놀림에 만족한 듯 킥킥거리며, 당신의 뺨을 어루만지며 크림을 깨끗이 핥는다.
+	"이런 깜짝선물이 다 있나, 젖어서 질질 흘리는 <<slutPost>> 하나라니. 누가 유용하게 쓰기로 결정하기 전에 가서 씻는 게 좋을 걸."
+	<<npcincr Whitney love 2>><<npcincr Whitney lust 10>><<gglove>><<gglust>>
+	<br><br>
+	<<whitneyexit>>
+	<br>
+
+:: Whitney Milkshake Cherry
+<<effects>>
+
+<<if $phase is 0>> /* Eat the cherry */
+	While Whitney is distracted, you take the cherry and eat it. <<He>> catches you red-handed.
+	<br><br>
+	"Greedy little shit." <<He>> grins at you. "Maybe I wanted that."
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		Guilt washes over you. "...Oh! I-I'm so sorry! D-did you?"<<stress 6>><<gstress>>
+	<<elseif $speech_attitude is "bratty">>
+		"I bought it. It's only fair that I get it," you huff.
+	<<else>>
+		"Sorry, I didn't think you'd want it," you say.
+	<</if>>
+	<br><br>
+	<<if $player.virginity.penile is true and $player.virginity.vaginal is true>>
+		<<His>> line of sight not-so-subtly flickers between your legs. "If anyone gets your cherry, it's gonna be me." <<He>> chews on the milkshake straw.<<npcincr Whitney lust 5>><<glust>>
+		<br><br>
+		"I get the next one."
+	<<else>>
+		"It's polite to ask, <<= $worn.face.type.includes("glasses") ? "four-eyes" : either("freak", "slut", "stupid", "idiot")>>. Learn some fucking manners. I get the next one."
+	<</if>>
+	<<He>> flicks your forehead. "Or else."<<pain 1>><<gpain>>
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"S-so... you're saying you want me to bring you another milkshake sometime?" you ask with a coy smile.
+	<<elseif $speech_attitude is "bratty">>
+		"So you're saying you don't totally hate this?" you ask, leaning against <<his>> arm. "And we can do it again sometime?"
+	<<else>>
+		"So you're saying we can do this again sometime?" you grin.
+	<</if>>
+	<br><br>
+	Whitney ignores you as <<he>> takes long sips from the shake, but doesn't move away. <<He>> soon finishes with a loud slurp, then shoves you off the <<= Weather.precipitation is "snow" ? "ledge" : "bench">>.
+	<br><br>
+	By the time you pick yourself up, <<hes>> returned to <<his>> spot under the tree.
+	<br><br>
+
+	<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+	<br>
+<<elseif $phase is 1>> /* Ask for the cherry */
+	<<if $speech_attitude is "meek">>
+		"H-hey, um... if it's okay, c-can I please have the cherry?" you ask.
+	<<elseif $speech_attitude is "bratty">>
+		"You gonna eat that or what?" you ask.
+	<<else>>
+		"Can I have the cherry?" you ask.
+	<</if>>
+	<br><br>
+	Whitney peeks inside the cup, then at you. "You want it, huh?" <<He>> grins. "<<= C.npc.Whitney.dom gte 8 ? "What makes you think you deserve it" : "And why should I let you have it">>, slut?"
+	<br><br>
+
+	<<if hasSexStat("promiscuity", 2)>>
+		<<link [[Convince <<him>>|Whitney Milkshake Cherry 2]]>><<set $phase to 0>><</link>><<skill_difficulty `currentSkillValue("oralskill")` "Oral Skill" 400 1200>><<promiscuous2>>
+		<br>
+	<</if>>
+	<<link [[Offer a kiss|Whitney Milkshake Cherry 2]]>><<set $phase to 1>><</link>><<promiscuous1>>
+	<br>
+	<<set $skulduggerydifficulty to 500>>
+	<<link [[훔친다|Whitney Milkshake Cherry 2]]>><<set $phase to 2>><</link>><<skulduggerydifficulty>>
+	<br>
+	<<if $submissive gte 1500>>
+		<<link [[Beg|Whitney Milkshake Cherry 2]]>><<set $phase to 3>><<sub 3>><</link>><<submissivetext>>
+		<br>
+	<</if>>
+<<else>> /* Ignore */
+	You decide to leave the cherry for <<him>> if <<he>> wants it.
+	<br><br>
+	When it does catch <<his>> attention, <<he>> spears it with the straw and eats it. <<He>> realises you're looking at <<him>>. "What?" <<he>> asks with <<his>> mouth full.
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"N-nothing!" you stutter.
+	<<elseif $speech_attitude is "bratty">>
+		"Not a damn thing." You smirk.
+	<<else>>
+		"Nothing," you say.
+	<</if>>
+	<br><br>
+	"Uh-huh. Then quit staring at me, <<= $worn.face.type.includes("glasses") ? "four-eyes" : either("freak", "slut", "stupid", "idiot")>>." <<He>> takes another sip to wash it down. "But I get it. I am <<= either("pretty fucking hot", "pretty damn sexy", "hot shit")>>, huh?" <<He>> flashes you a sly grin.<<npcincr Whitney love 1>><<glove>>
+	<br><br>
+	When you finish the treat, <<he>> thrusts the empty cup into your hands. "There. I shared your stupid milkshake. Now go bother someone else." <<He>> returns to <<his>> spot under the tree.
+	<br><br>
+
+	<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Whitney Milkshake Cherry 2
+<<effects>>
+
+<<if $phase is 0>> /* Convince */
+	"I can tie the stem in my mouth, you know."
+	<<promiscuity2>>
+
+	Whitney's eyes light up. "Oh yeah? <<= either("Prove it", "This I gotta see")>>," <<he>> says, offering the cup to you.
+	<br><br>
+	You eat the cherry with a pleased hum, then pop the stem into your mouth.
+
+	<<if currentSkillValue("oralskill") gte random(400, 1200)>>
+		You manoeuvre it with your tongue. Whitney watches your lips with rapt attention. It's not long before you pluck it out of your mouth, <span class="green">twisted into a loose knot.</span>
+		<br><br>
+		"Ta-da!" You beam proudly.
+		<br><br>
+		"Nice," Whitney says as <<he>> inspects it. <<He>> looks genuinely impressed. "My slut really is the best with <<pher>> mouth, huh?" <<He>> draws you into <<his>> arms and kisses you with entirely too much tongue. "But we both already knew that."<<npcincr Whitney love 1>><<glove>>
+		<br><br>
+		<<if $speech_attitude is "meek">>
+			You bite your lip and lower your gaze demurely. "I-I, um... D-didn't realise I had a fan<<nnpc_gendery "Whitney">>..."
+		<<elseif $speech_attitude is "bratty">>
+			"Of course I'd expect my biggest fan<<nnpc_gendery "Whitney">> to know that," you say with a wink.
+		<<else>>
+			"It's still nice to hear it from my biggest fan<<nnpc_gendery "Whitney">>."
+		<</if>>
+		<br><br>
+		Whitney's cheeks go beet red. <<He>> hides it by pushing your face away with <<his>> palm. "You ever call me that again and I'll fucking gut you." <<He>> chews on the straw, refusing to make eye contact.
+		<br><br>
+		You finish the milkshake together within a few minutes. "Thanks for the show, slut," <<he>> says when it's gone. "Now go bother someone else." <<He>> returns to <<his>> spot under the tree.
+		<br><br>
+
+		<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		You manoeuvre the stem with your tongue. Whitney watches with a dubious smirk. It's unnerving to have <<him>> watching so intensely.<<stress 6>><<gstress>>
+		<br><br>
+		After a few failed attempts, you only succeed at biting your tongue. <span class="red">Hard.</span> You wince and curse under your breath.<<pain 4>><<gpain>>
+		<br><br>
+		Whitney sputters out a surprised laugh. "I would say I just got ripped off, but honestly it was worth it just to see that." <<He>> ruffles your hair. "Keep practising, slut. I still wanna see it one day."<<npcincr Whitney love 1>><<glove>>
+		<br><br>
+		<<He>> offers the milkshake to you in consolation. You sip it tentatively, the cool and creamy treat soothing your tongue.
+		<br><br>
+		<<if C.npc.Whitney.lust gte 40>>
+			"I can even help you practise, if you want," <<he>> grins, leading your hand <<= $rng gte 51 ? either("to <<his>> zipper", "to <<his>> groin") : (C.npc.Whitney.pronoun is "m" ? "to the waistband of <<his>> bottoms" : "under <<his>> skirt")>>. "Aren't I nice?"
+			<br><br>
+
+			<<link [[Give oral|Whitney Milkshake Cherry Oral]]>><<set $phase to 0>><<sub 1>><<oralskill 1>><<npcincr Whitney love 1>><<npcincr Whitney dom 1>><</link>><<goralskill>><<glove>><<gdom>>
+			<br>
+			<<link [[거절한다|Whitney Milkshake Cherry Oral]]>><<set $phase to 1>><<def 1>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llove>><<ldom>>
+			<br>
+		<<else>>
+			You spend the next few minutes sharing what remains of the milkshake with light conversation. When it's gone, Whitney stands and stretches. You catch a glimpse of <<his>> midriff.
+			<br><br>
+			"Fuck," <<he>> laughs to <<himself>>, sticking an unlit cigarette between <<his>> lips. "Need a fag after that sorry display."
+
+			<<if playerBellyVisible()>>
+				<<He>> reaches for <<his>> lighter out of habit, but your baby bump stops him. <<He>> groans and rolls <<his>> eyes, tucking it away.
+				<br><br>
+			<</if>>
+
+			<<He>> collects <<his>> umbrella and returns to <<his>> spot under the tree.
+			<br><br>
+
+			<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+
+<<elseif $phase is 1>> /* Offer a kiss */
+	<<if $speech_attitude is "meek">>
+		"B-because... I'll kiss you for it?" you manage to eke out.
+	<<elseif $speech_attitude is "bratty">>
+		"How about a kiss from your hot <<girlfriend>>?" you purr.
+	<<else>>
+		"I'll give you a kiss for it," you say. "Fair trade!"
+	<</if>>
+	<<promiscuity1>>
+
+	<<if C.npc.Whitney.dom gte 10>>
+		<<if C.npc.Whitney.lust gte 60>>
+			Whitney considers your offer for a moment.
+			<br><br>
+			"<span class="green">Deal,</span>" <<he>> says, offering the cup to you. You eat the cherry. It's just as tasty as you'd hoped. Whitney is already leaning in for the kiss. "But I get to decide when it's done."
+			<br><br>
+			Whitney smothers you in a searing kiss. <<His>> free hand gathers in your hair, tugging near the roots to keep you in place. <<He>> knocks the milkshake to the ground somewhere in the midst of it to start groping your <<outfitChecks>><<= $player.breastsize gte 4 ? "chest over your _top.name" : "butt over your _bottom.name">>. <<He>> stuffs <<his>> tongue down your throat while <<his>> hands relentlessly paw at your body.<<arousal 600 "mouth">><<npcincr Whitney lust 5>><<garousal>><<glust>>
+			<br><br>
+			When you manage to pry yourself away, Whitney yanks you right back. "Did I say I was fucking done?" <<he>> pants.
+			<br><br>
+
+			<<link [[Go with it|Whitney Milkshake Cherry Sex]]>><<set $sexstart to 1>><<sub 1>><<npcincr Whitney dom 1>><</link>><<gdom>>
+			<br>
+			<<link [[거절한다|Whitney Milkshake Cherry Sex]]>><<set $molestationstart to 1>><<def 1>><<stress 6>><<trauma 6>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<gstress>><<gtrauma>><<llove>><<ldom>>
+			<br>
+		<<else>>
+			Whitney barks out a laugh, <span class="red">then eats the cherry <<himself>>.</span><<stress 6>><<npcincr Whitney dom 1>><<gstress>><<gdom>>
+			<br><br>
+			"Don't forget who owns you, slut. I can kiss you anytime I damn please," <<he>> says. "Think I fancy one right now, actually."
+			<br><br>
+			Whitney forcefully grabs your face in one hand, puckering your lips to pull you into a dizzying kiss. Your lips are still touching as <<he>> murmurs, "Who owns you?"
+			<br><br>
+			<<if $speech_attitude is "meek">>
+				"Y-you, Whitney..."<<arousal 200 >><<garousal>>
+			<<elseif $speech_attitude is "bratty">>
+				You scowl and jerk out of <<his>> grip. <<He>> gives you a sharp look, and your defiance dies in your throat. "You do," you sigh, defeated.<<stress 6>><<gstress>>
+			<<else>>
+				"You, Whitney..."<<arousal 200 >><<garousal>>
+			<</if>>
+			<br><br>
+			<<He>> pats your cheek. "Good <<girl>>."<<npcincr Whitney lust 5>><<glust>>
+			<br><br>
+			Whitney goes back to sipping the milkshake with a self-satisfied grin while you quietly sulk. <<He>> rests <<his>> arm on <<= Weather.precipitation is "snow" ? "your shoulders" : "the back of the bench">> and plays with your hair. When <<hes>> done, <<he>> kisses your temple. "Thanks for that, slut," <<he>> says before sauntering over to <<his>> spot under the tree.<<npcincr Whitney love 1>><<glove>>
+			<br><br>
+
+			<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		"On what planet is that a fair trade?" Whitney scoffs. "I'll need something better than that."
+		<br><br>
+		<<if $speech_attitude is "meek">>
+			"S-so... My kisses aren't good enough...?" You give <<him>> your best pout.
+		<<elseif $speech_attitude is "bratty">>
+			"What's better than my mouth on yours?" you scoff right back.
+		<<else>>
+			"Are you saying you don't want to kiss me?" you ask.
+		<</if>>
+		<br><br>
+		<<His>> eyes flicker to your lips. "Fine," <<he>> says, offering you the cup. You eat the cherry in one bite. "But you'd better make it a good one."
+		<br><br>
+		You draw <<him>> into a firm kiss that lasts for several minutes. Every time you try to pull away, Whitney presses <<his>> hand behind your head to stop you. <<He>> swipes <<his>> warm tongue along your bottom lip before slipping it inside your mouth. You slide your tongues together, lips sensually smacking and matching each other's pace. You're disappointed when <<he>> does finally withdraw.<<arousal 600 "mouth">><<npcincr Whitney lust 5>><<garousal>><<glust>>
+		<br><br>
+		<<if C.npc.Whitney.lust gte 40>>
+			You notice <<him>> <<= $NPCList[0].penis isnot "none" ? "adjust <<himself>> under <<his>> <<npcClothesText `C.npc.Whitney` 'lower'>>" : "squeezing <<his>> thighs together">>, and there's a warm flush across <<his>> cheeks.
+			<br><br>
+		<</if>>
+
+		<<if $speech_attitude is "meek">>
+			"U-um," you gulp. "Thank you... for the cherry... I hope that was okay."
+		<<elseif $speech_attitude is "bratty">>
+			Your wide grin reflects your hubris. "Well? I'm pretty damn good at kissing, huh?"
+		<<else>>
+			"Thank you for the cherry," you say. "Hope that was worth it."
+		<</if>>
+		<br><br>
+		<<He>> grunts dismissively.
+		<br><br>
+		You spend the next few minutes finishing the milkshake together in silence. When it's done, <<he>> hands the empty cup to you and walks off to <<his>> spot under the tree.
+		<br><br>
+
+		<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $phase is 2>> /* Steal */
+	You tap <<his>> shoulder and point behind <<him>>. "Hey, aren't those your friends over there?"
+	<br><br>
+	<<if currentSkillValue('skulduggery') gte 500>>
+		Whitney's eyes widen. <<He>> twists around to look where you're pointing, and you snatch the milkshake out of <<his>> hand while <<hes>> distracted.
+		<br><br>
+		<<He>> turns back just in time to watch you eat the cherry. <<He>> looks pissed when <<he>> realises that <<hes>> been duped. <<if $speech_attitude is "bratty">>Feeling cocky, you wink at <<him>> and take a sip of the shake.<</if>>
+		<br><br>
+		"Wh–! You cheeky fucking cunt!" Whitney tries to stay mad, but <<his>> lips only end up twisting into a sardonic grin. "You really are getting too comfortable around me," <<he>> laughs.<<npcincr Whitney love 1>><<glove>>
+		<br><br>
+		You laugh with <<him>>, until <<he>> snatches the drink back and shoves you off the <<= Weather.precipitation is "snow" ? "fountain" : "bench">>. "Don't do that again."<<stress 6>><<gstress>>
+		<br><br>
+		You apprehensively take your seat next to <<him>> and continue sharing the milkshake until Whitney polishes it off with a loud slurp. <<He>> thrusts the empty cup into your hands. "There. I shared your stupid milkshake. Now go bother someone else." <<He>> returns to <<his>> spot under the tree.
+		<br><br>
+
+		<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		Whitney's eyes widen. <<He>> reacts faster than you expected, twisting around to look where you're pointing while shoving you off the <<= Weather.precipitation is "snow" ? "fountain ledge" : "bench">> in the same motion.
+		<br><br>
+		When <<he>> realises what you were trying to do, <<he>> looks livid. <<He>> raises <<his>> fist at you. "Do I look fucking stupid to you?"
+		<br><br>
+		<<He>> dumps the remainder of the shake on your head, soaking your clothes and ruining your hair. <<He>> gives a mean laugh. "Fuck around and find out, dumbass."
+		<<wet_upper>><<ruffleHair>>
+		<br><br>
+		<<He>> tosses the cup at your feet, collects <<his>> umbrella, and storms out of the park.<<trauma 6>><<npcincr Whitney love -2>><<gtrauma>><<lllove>>
+		<br><br>
+
+		<<endevent>>
+		<<whitneyexit>>
+	<</if>>
+
+<<else>> /* Beg */
+	You offer Whitney your best pout, leaning in close. "Pretty please, can I have the cherry? I-I need it so bad. I've been such a good <<girl>>, h-haven't I? P-please, Whitney?"
+	<br><br>
+	Whitney smirks, plucking the cherry from the cup <<himself>>. "What, this?" <<He>> dangles it over <<his>> mouth like <<hes>> going to eat it. "If you can't beg me any better than that, maybe I'll just eat it myself."
+	<br><br>
+	"N-no! Please!" you say. "I'll do anything you ask..."
+	<br><br>
+	That piques <<his>> interest. "Anything, huh? I dunno..." <<He>> snickers while you continue to mewl out pleas, but ultimately offers the cherry to you.
+	<br><br>
+	<<if C.npc.Whitney.dom gte 16>>
+		"Okay," <<he>> concedes.
+		<br><br>
+		Just before you go in for a bite, <<he>> tugs it away and <span class="red">eats it <<himself>>.</span> "Too bad I don't negotiate with needy <<= $worn.neck.collared is 1 ? "mutts" : "sluts">>."<<stress 6>><<gstress>>
+		<br><br>
+		Your shoulders slump in defeat, but Whitney <<if $worn.neck.collared is 1>>hooks a finger under your collar and<</if>> draws you into a bruising kiss. <<He>> tastes like candied cherries. "But I do reward them for being so <<= either("obedient", "submissive", "well-behaved")>>," <<he>> says.
+		<br><br>
+
+		<<link [[다음|Whitney Milkshake Cherry Reward]]>><</link>>
+		<br>
+	<<else>>
+		"Ugh, fine," <<he>> concedes. "Here. You're lucky you're cute when you beg."
+		<br><br>
+		You mumble out your thanks after eating your prize. <<He>> pats your cheek, and you lean into <<his>> touch. <<if C.npc.Whitney.love gte 25>><<He>> spends a few seconds fondly caressing your cheek with <<his>> thumb. At least, until <<he>> realises what <<hes>> doing.<</if>>
+		<br><br>
+		With a grunt, <<he>> pushes you away and chews on the straw. You think <<his>> cheeks seem flushed, but <<= Weather.temperature lte 0 or Weather.temperature gte 30 ? "it could just be the weather" : "you could just be imagining it">>.
+		<br><br>
+
+		<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Whitney Milkshake Cherry Oral
+<<effects>>
+
+<<if $phase is 0>> /* Give Oral */
+	You quickly glance around the park, but no one seems to be watching.
+
+	<<if $NPCList[0].penis isnot "none">>
+		You properly displace <<his>> <<npcClothesText `C.npc.Whitney` "lower">> to reveal <<his>> <<print $NPCList[0].penisdesc>>, already eager for your lips. You lean over <<his>> lap and take <<him>> into your mouth. Whitney sighs and eases into <<his>> seat, <<his>> hands gathering in your hair. "I'll turn you into a world-class cocksucker yet."
+		<br><br>
+		<<switch C.npc.Whitney.penissize>>
+			<<case 4>>
+				You can barely fit the tip in your mouth, but your tongue laps at the beads of precum that leak from <<his>> slit. With enough determination and several deep breaths, you manage to fit a few inches, picking up the slack by pumping both hands around the shaft. "Can't even fit it all? Cute. Keep trying, slut. You'll learn to take me."
+			<<case 3>>
+				You struggle to take <<him>> more than a few inches, but Whitney isn't satisfied until your nose is flush against <<his>> groin. <<He>> holds you there, your throat convulsing from the intrusion. "Love it when you gag on me. Fuck..." You begin bobbing your head up and down as <<he>> guides you, keeping your hair out of the way as you work.
+			<<case 2>>
+				You hollow your cheeks around <<him>>. "God, you're warm. Fuck. Use your tongue more." <<His>> breath hitches when you flick your tongue along the sensitive underside. "S-shit..." <<He>> bucks a little into your mouth, and you feel <<his>> fingers tightening their grip in your hair.
+			<<default>>
+				<<He>> groans as you swirl your tongue along <<his>> penis. "That's it. Take it, fuck, just like that. Take it all." You resist telling <<him>> that it's not exactly a challenge given <<his>> size, instead focusing on surrounding the sensitive glans with your warm, wet mouth.
+		<</switch>>
+		<br><br>
+		It's not long before Whitney doubles over when <<he>> cums, keeping <<his>> <<print $NPCList[0].penisdesc>> lodged in your mouth until <<hes>> finished pumping hot, thick ejaculate down your throat.<<arousal 600 "mouth">><<garousal>><<bodyliquid "mouth" "semen">>
+	<<else>>
+		You kneel on the ground and properly displace <<his>> <<npcClothesText `C.npc.Whitney` "lower">> to reveal <<his>> pussy, already eager for your tongue. You kiss <<his>> inner thigh before burying your nose and lips deep in <<his>> folds. Whitney sighs and eases into <<his>> seat, <<his>> hands gathering in your hair to forcefully guide you. "I'll turn you into a world class carpet muncher yet."
+		<br><br>
+		<<He>> gasps and moans as you switch between lapping and suckling at <<his>> swollen clit. "Oh, fuck, that's good. Use your tongue more, and your fingers, too." You stuff a single finger in <<his>> dripping pussy, then another, and begin pumping them in earnest. "D-damn it, when did you learn how to...?" <<His>> words devolve into sordid moans that have your own <<genitals>> eager for more.
+		<br><br>
+		It's not long before Whitney throws <<his>> head back as <<he>> cums, shoving your face into <<his>> pussy as <<he>> grinds against your nose and lips. <<His>> hot slick drenches your face, even running down your chin.<<arousal 600 "mouth">><<garousal>><<bodyliquid "face" "goo">>
+	<</if>>
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+		Whitney looks at you with a bewildered smirk. "Did you just cum from that? Should have known you'd get off on being used, slut."
+		<br><br>
+	<</if>>
+
+	<<He>> sighs in contentment.<<npcincr Whitney lust -20>><<llust>>
+	<br><br>
+	"Not a bad start, but you're still gonna need more guidance. "<<He>> thumbs at <<= $NPCList[0].penis isnot "none" ? "some stray semen near your lips" : "the slick on your cheek">> before pushing it back onto your tongue. "I'll make sure to drill you 'til you get it down."
+	<br><br>
+	<<He>> leans in for a kiss, then shoves you off the <<= Weather.precipitation is "snow" ? "ledge" : "bench">>. "Lesson over." By the time you pick yourself up, <<hes>> already stalking out of the park.
+	<br><br>
+
+	<<endevent>>
+	<<whitneyexit>>
+<<else>> /* Refuse */
+	Whitney rolls <<his>> eyes, but releases your hand. "Whatever. Just trying to help."
+	<br><br>
+	You finish the milkshake in silence. Whitney thrusts the empty cup in your hands. "There. Happy? Now piss off already."
+	<br><br>
+	<<He>> collects <<his>> umbrella and returns to <<his>> spot under the tree.
+	<br><br>
+
+	<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+:: Whitney Milkshake Cherry Sex
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+ 	<<consensual>>
+ 	<<set $consensual to 1>>
+ 	<<neutral 1>>
+	<<maninit>>
+	<<if Weather.precipitation isnot "snow">>
+		<<prop bench>>
+	<</if>>
+	<<set $phase to 0>>
+ 	Whitney smirks and pushes you down onto the <<= Weather.precipitation is "snow" ? "ledge" : "bench">>, climbing on top of you. "That a <<girl>>. I knew my slut would be good for it."
+	<<promiscuity1>>
+
+ 	<<enable_rescue>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if Weather.precipitation isnot "snow">>
+		<<prop bench>>
+	<</if>>
+	<<set $phase to 1>>
+	Whitney shoves you down onto the <<= Weather.precipitation is "snow" ? "ledge" : "bench">> and climbs on top of you. "A deal's a deal, slut. Shut up and pucker up."
+	<<if !$worn.face.type.includes("covered") and !$worn.face.type.includes("gag")>>
+		<<set $mouthuse to "kiss">><<set $mouthstate to "kissentrance">><<set $NPCList[0].mouth to "kissentrance">>
+	<</if>>
+
+ 	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Whitney Milkshake Cherry Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Whitney Milkshake Cherry Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Whitney Milkshake Cherry Sex Finish
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	You manage to throw Whitney off of you.
+	<<if $phase is 0>> /* Go with it */
+		"What the fuck is your problem?" <<he>> shouts, but you've already leapt from the <<= Weather.precipitation is "snow" ? "fountain ledge" : "park bench">> to sprint across the park.
+	<<else>> /* Refuse */
+		<<tearful>> you leap from the <<= Weather.precipitation is "snow" ? "fountain ledge" : "park bench">> and take off in a sprint across the park.
+	<</if>>
+	You don't look back, and Whitney doesn't follow you.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<whitneyexit>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<if $consensual is 1>>
+		Whitney sits back on the <<= Weather.precipitation is "snow" ? "fountain ledge" : "park bench">> with a contented sigh. "Fuck, I needed that."<<npcincr Whitney lust -20>><<llust>>
+		<br><br>
+		<<if C.npc.Whitney.dom gte 10 and $orgasmcurrent is 0 and (($player.penisExist and (!playerChastity("penis") or $worn.genitals.name is "chastity parasite")) or ($player.vaginaExist and !playerChastity("hidden")))>>
+			<<if $player.penisExist and $penisuse isnot 0>>
+				<<set $penisuse to 0>>
+			<</if>>
+			<<He>> runs <<his>> hand through <<his>> fringe. "Can't believe you didn't cum from that." <<He>> sighs and reaches between your legs. "Damn, you're high maintenance."
+			<br><br>
+			<<if $player.penisExist and (!$player.vaginaExist or random(1, 2) is 2) and (!playerChastity("penis") or $worn.genitals.name is "chastity parasite")>>
+				Whitney draws you into another kiss as <<he>> curls <<his>> fingers around your <<= $worn.genitals.name is "chastity parasite" ? "chastity parasite" : "<<penis>>">>. <<He>> <<= $worn.genitals.name is "chastity parasite" ? "squeezes lightly" : "pumps <<his>> fist up and down in long, practised strokes">> before building up the tempo. It doesn't take much more at this pace to send you over the edge.
+			<<else>>
+				Whitney draws you into another kiss as <<he>> stuffs <<his>> fingers in your <<pussy>>. <<He>> uses the heel of <<his>> palm to grind against your swollen <<clit>> while vigorously finger-fucking you to completion.
+			<</if>>
+			<<orgasm>>
+			You feel Whitney's smirk against your lips as 
+			<<if ($parasite.penis.name and $parasite.penis.name isnot "parasite") or $worn.genitals.name is "chastity parasite" or ($player.penisExist and $femaleclimax is 1)>>
+				you convulse in orgasmic bliss.
+			<<else>>
+				your fluids gush over <<his>> hand. <<He>> wipes it clean on your <<outfitChecks>><<= !_shirtless ? "_top.name" : "chest">>.
+			<</if>>
+			<br><br>
+		<</if>>
+
+		<<He>> stands from the <<= Weather.precipitation is "snow" ? "fountain ledge" : "park bench">> and fixes <<his>> clothes.
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Whitney>><<person1>>
+		<<if $exposed gte 1>>
+			<<link [[다음|Whitney Milkshake Cherry Sex Exposed]]>><</link>>
+			<br>
+		<<else>>
+			"Pleasure doing business, slut." <<He>> walks out of the park without another word.
+			<br><br>
+
+			<<whitneyexit>>
+		<</if>>
+	<<else>>
+		Whitney sits back on the <<= Weather.precipitation is "snow" ? "fountain ledge" : "park bench">> with a contented sigh.<<npcincr Whitney lust -20>><<llust>>
+		<br><br>
+		"There. That wasn't so bad, was it? Don't make deals you don't intend on keeping, <<girl>>. It won't end well for you."
+
+		<<if $exposed gte 1>>
+			<br><br>
+			<<= playerBellyVisible() ? "<<He>> places an unlit cigarette between <<his>> lips, admiring your exposed body." : "<<He>> lights another cigarette and takes a lazy drag, admiring your exposed body.">> "You better run home and grab something to cover up. The people that come around here don't mind sloppy seconds." <<He>> pats your thigh with a curt laugh before sauntering out of the park.
+			<br><br>
+
+			<<clotheson>>
+			<<endcombat>>
+
+			<<whitneyexit>>
+		<<else>>
+			<<He>> pats your thigh before <<he>> saunters out of the park.
+			<br><br>
+
+			<<clotheson>>
+			<<endcombat>>
+
+			<<whitneyexit>>
+		<</if>>
+	<</if>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	Whitney's head snaps up when <<he>> notices a couple of park goers looking in your direction. "Damn, you've got a set of lungs," Whitney grumbles, fixing <<his>> clothes as <<he>> <<= $consensual is 1 ? "climbs" : "crawls">> off of you. "You're in for it next time." <<He>> picks up <<his>> umbrella and makes <<his>> exit from the park without turning back.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<whitneyexit>>
+<<else>>
+	Whitney rolls <<his>> eyes and climbs off of you. "Fine. See if I ever let you have anything after this." <<He>> fixes <<his>> clothes and sticks an unlit cigarette between <<his>> lips. "You're gonna make it up to me later. Count on it." <<He>> shoves you off the bench and stalks out of the park without looking back.<<npcincr Whitney love -1>><<npcincr Whitney dom -1>><<llove>><<ldom>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<whitneyexit>>
+<</if>>
+
+:: Whitney Milkshake Cherry Sex Exposed
+<<effects>><<set $outside to 1>><<set $location to "town">><<pass 20>>
+
+Whitney notices your exposed state. "Just can't keep your clothes on around me, huh? Figures. Come on." <<He>> takes your wrist and starts tugging you out of the park.<<takeHandholdingVirginity "Whitney" "romantic">>
+<br><br>
+"I'll take you home. Can't have you out and about like that." <<His>> grip tightens. "<<= C.npc.Whitney.dom gte 16 ? "For free, at least" : "Slut">>."
+<br><br>
+You cover your bits during the short journey as best you're able, but any lingering glances at you are cowed by one of Whitney's colourful threats. <<He>> sees you to the front door of the orphanage. "Now fuck off inside. I'm not a babysitter," is all <<he>> offers before storming off down the street.
+<br><br>
+
+<<link [[Hurry inside|Orphanage]]>><<endevent>><</link>>
+<br>
+
+:: Whitney Milkshake Cherry Reward
+<<effects>><<outfitChecks>>
+
+Whitney hauls you into <<his>> lap and slips <<his>> hand under your <<= _bottomIsSkirt is 1 ? "skirt" : "waistband">>.
+
+<<if playerChastity() and $worn.genitals.name isnot "chastity parasite">>
+	"When's the last time my slut had a..." <<He>> trails off when <<he>> reaches your <<print $worn.genitals.name>>.
+	<br><br>
+	<<if $worn.genitals.origin is "Whitney">>
+		"Oh. Right." Whitney shakes <<his>> head and sighs, but smirks nonetheless. "You really are a good slut, huh?" <<He>> gives you another kiss instead. It seems a little less aggressive than the last one. "Keep it up."<<npcincr Whitney love 1>><<npcincr Whitney lust 5>><<glove>><<glust>>
+		<br><br>
+		You go back to sharing the milkshake. When you finish the treat, <<he>> thrusts the empty cup into your hands. "There. I shared your stupid milkshake. Now go bother someone else." <<He>> returns to <<his>> spot under the tree.
+	<<else>>
+		<<He>> furrows <<his>> brows, then looks to you for an answer. You shrug sheepishly. <<He>> remains unamused, almost disappointed. "Whatever. Your loss." Whitney shoves you off <<his>> lap and retrieves <<his>> umbrella, returning to <<his>> spot under the tree.
+		<br><br>
+		"Wh-what about the milkshake?" you call after <<him>>. Whitney doesn't acknowledge you.
+	<</if>>
+	<br><br>
+
+	<<link [[다음|Whitney Park]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if $player.penisExist and (!$player.vaginaExist or random(1, 2) is 2)>>
+		"When's the last time my slut had a good handy, huh?"
+		<br><br>
+		<<if $worn.genitals.name is "chastity parasite">>
+			<<He>> slides <<his>> hand beneath your _bottom.name, trailing along your skin before grasping your chastity parasite.<<= !_shirtless ? "<<He>> uses <<his>> free hand to displace your <<allTopsUnderwear>>" : "<<He>> trails his free hand to your exposed chest">>, kissing and fondling your <<breasts>>.
+			<br><br>
+			"Your face says it all," <<he>> laughs. "Needy fucking slut." You start to rock your hips in time with <<his>> intense squeezing and groping. You whimper at <<his>> touch. A few minutes is all it takes for <<him>> to draw a final shuddering gasp from your throat as you reach your peak.
+		<<else>>
+			<<= !_shirtless ? "<<He>> uses <<his>> free hand to displace your <<allTopsUnderwear>>" : "<<He>> trails his free hand to your exposed chest">>, kissing and fondling your <<breasts>>. <<His>> fingers trail along your length until you're hard enough for <<him>> to start stroking your <<penis>> in earnest.
+			<br><br>
+			"Such a <<= either("cute", "pretty")>> cock," <<he>> says. "You gonna cream all over my hand?" You start to rock your hips in time with <<his>> fist twisting up and down. Sensing that you're already getting close, <<he>> squeezes the base of the shaft to stave off your release. You whimper at <<his>> touch. A few minutes is all it takes for <<him>> to draw a final shuddering gasp from your throat as you reach your peak.
+		<</if>>
+	<<else>>
+		"When's the last time my slut had a good finger fuck, huh?"
+		<br><br>
+		<<= !_shirtless ? "<<He>> uses <<his>> free hand to displace your <<allTopsUnderwear>>" : "<<He>> trails his free hand to your exposed chest">>, kissing and fondling your <<breasts>>. <<His>> fingers skillfully circle your clit until you're wet enough for <<him>> to ease two fingers inside your pussy.
+		<br><br>
+		"Such a tight little cunt," <<he>> says. "You gonna cream all over my hand?" You start to rock your hips on <<his>> hand to meet <<his>> thrusts. <<He>> grinds the heel of <<his>> palm against your clit, sending sparks through your body. A few minutes is all it takes for <<him>> to draw a shuddering gasp from your throat as you reach your peak.
+	<</if>>
+	<br><br>
+	<<orgasm>>
+	<<if ($parasite.penis.name and $parasite.penis.name isnot "parasite") or $worn.genitals.name is "chastity parasite" or ($player.penisExist and $femaleclimax is 1)>>
+		Whitney seems disappointed at the lack of fluids on <<his>> hand. "Well, at least that fucked out expression on your face tells me you liked it. You're welcome, by the way," <<he>> says.
+	<<else>>
+		Whitney licks <<his>> fingers clean. "Thanks for the treat," <<he>> laughs. "My favourite flavour."
+	<</if>>
+	<<npcincr Whitney love 1>><<npcincr Whitney lust 5>><<glove>><<glust>>
+	<br><br>
+	Whitney retrieves <<his>> umbrella and saunters out of the park. Your legs are too shaky to follow <<him>>.
+	<br><br>
+
+	<<whitneyexit>>
+<</if>>
+
+:: Whitney Park Whore
+<<effects>>
+
+Whitney drags you to the pair and shoves you in front of them. They look over you, a hunger in their eyes.
+<br><br>
+
+"£50." <<He>> looks between the two of them. "Each."
+<br><br>
+
+<<endevent>><<loadNPC 0 "park_whore1">><<loadNPC 1 "park_whore2">>
+The <<fullGroup>> look between each other, before hastily pulling out their wallets. They look like if they don't get their money out fast enough, you'll disappear.
+<br><br>
+
+<<link [[Just let it happen|Whitney Park Whore 2]]>><<set $phase to 0>><</link>>
+<br>
+<<if hasSexStat("promiscuity", 4)>>
+	<<link [[Encourage them|Whitney Park Whore 2]]>><<set $phase to 1>><</link>><<promiscuous4>>
+	<br>
+<</if>>
+<<link [[도망간다|Whitney Park Whore Run]]>><<npcincr Whitney dom -1>><</link>><<athleticsdifficulty>><<ldom "Whitney">>
+
+:: Whitney Park Whore 2
+<<effects>><<set $daily.whitney.parkWhore to "paid">>
+
+<<if $phase is 0>>
+	They practically throw the money at Whitney before setting their sights on you again. Whitney counts the cash carefully, then steps aside. "Have at it," <<nnpc_he "Whitney">> says.
+	<br><br>
+
+	The <<fullGroup>> pull you into a nearby alleyway. When you get there, they don't waste a second before pouncing on you.
+	<br><br>
+
+	<<link [[다음|Whitney Park Whore Sex]]>><<set $molestationstart to 1>><</link>>
+<<else>>
+	You pretend to pick something up from the ground, letting them get a peek down your shirt in the process. "Do you see something you like?" you coo.
+	<br><br>
+
+	They practically throw the money at Whitney, who pockets it. "Have fun, slut," <<nnpc_he "Whitney">> laughs, smacking you in the ass as <<nnpc_he "Whitney">> walks away.
+	<br><br>
+
+	The <<fullGroup>> lead you into a nearby alleyway. When you get there, they don't waste a second before pouncing on you.
+	<br><br>
+
+	<<link [[다음|Whitney Park Whore Sex]]>><<set $phase to 0>><<set $sexstart to 1>><</link>>
+<</if>>
+
+:: Whitney Park Whore Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<endevent>><<npc Whitney 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 150>>
+	<<npcidlegenitals>>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[다음|Whitney Park Whore Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Whitney Park Whore Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Whitney Park Whore Fight Finish
+<<effects>>
+<<if $pain gte 100 and $willpowerpain is 0>>
+	<<set $phase to 1>>
+	You collapse to the ground, too hurt to move.
+	<br><br>
+
+	Whitney drags you by your hair to the pair and dumps you to the ground in front of them.
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $phase to 1>>
+	The pair from before rush over at your shout. Smirking, Whitney shoves you into them.
+<<elseif $enemyhealth lte 0>>
+	<<set $phase to 0>>
+	You shove Whitney away from you.
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<set $phase to 0>>
+	<<ejaculation>>
+	Whitney steps away from you, dazed.
+<</if>>
+
+<<if $phase is 0>> <!-- Victory -->
+	<<clearNPC "park_whore1">><<clearNPC "park_whore2">>
+	With a cry, <<he>> stumbles backwards into the <<if Weather.precipitation is "snow">>snow<<else>>mud<</if>>. <<tearful>> you put some distance between you and <<him>>. When you look back, Whitney is gone.
+	<<npcincr Whitney dom -1>><<ldom>>
+	<br><br>
+	<<endcombat>><<clotheson>>
+	<<whitneyexit>>
+<<else>> <!-- Defeat -->
+	<<endevent>><<loadNPC 0 "park_whore1">><<loadNPC 1 "park_whore2">>
+	"You want the slut?" Whitney scowls. "£100 each." <<tearful>> you're dragged away from Whitney, who counts the money the <<person1>><<person>> gave <<nnpc_him "Whitney">>.
+	<br><br>
+
+	"You better be quiet and enjoy this," the <<person2>><<person>> says, dragging you into an alley. The pair advance.
+	<br><br>
+
+	<<link [[다음|Whitney Park Whore Sex]]>><<set $daily.whitney.parkWhore to "paid">><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+<</if>>
+
+:: Whitney Park Whore Run
+<<effects>>
+<<if $athleticsSuccess>>
+	<<set $daily.whitney.parkWhore to "run">>
+	<<pass 5>>
+	You wait until they're distracted with handing Whitney the money, then bolt into a nearby alleyway, trying to put some distance between you and the park. You hear footsteps behind you, <span class="green">but they dwindle away as you leave the pair in the dust.</span>
+	<br><br>
+
+	After a few minutes, you stop to catch your breath. With a quick check of your surroundings to make sure no one is still chasing you, you fix your clothes and continue about your day.
+	<br><br>
+
+	<<link [[다음|Park]]>><<clearNPC "park_whore1">><<clearNPC "park_whore2">><<endevent>><</link>>
+<<else>>
+	<<set $daily.whitney.parkWhore to "runFail">>
+	The moment their attention leaves you, you break into a sprint towards a nearby alley. You hear footsteps behind you, <span class="red">growing louder and louder.</span>
+	<br><br>
+
+	Soon, your legs give out beneath you and the <<person1>><<person>> grabs you, grappling at your clothes. "We'll show you what happens to stupid sluts who don't listen," the <<person2>><<person>> snarls.
+	<br><br>
+
+	<<link [[다음|Whitney Park Whore Sex]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+<</if>>
+
+:: Whitney Park Whore Sex
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $phase is 1>>
+		<<set $enemyanger += 50>>
+	<</if>>
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<set $noFinish to 1>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Whitney Park Whore Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Whitney Park Whore Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Whitney Park Whore Sex Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemyanger gte ($enemyangermax / 5) * 3>>
+		The <<person1>><<person>> throws you against the pavement. "I've half a mind to demand a refund." <<He>> storms in Whitney's direction, but the <<person2>><<person>> drags <<person1>><<him>> away.
+		<<violence 3>>
+	<<elseif $enemyanger gte 1>>
+		Without a word, they leave.
+	<<else>>
+		Smiling, the <<person1>><<person>> kisses you on the cheek. "This is for you. Consider it a tip." <<He>> gets up and leaves you lying on the ground. The <<person2>><<person>> follows.
+		<br>
+		You've gained <<moneyGain 5>>.
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	The <<person1>><<person>> collapses in pain, dragging the <<person2>><<person>> down with <<person1>><<him>>. <<tearful>> you escape into the park.
+<</if>>
+<br><br>
+
+<<endcombat>><<clotheson>>
+
+<<link [[다음|Park]]>><<clearNPC "park_whore1">><<clearNPC "park_whore2">><<endevent>><</link>>
+
+:: Whitney Park Whore Beg
+<<effects>>
+
+"Please, I don't want this!" you cry. You tug against <<his>> grasp, making <<him>> stop for a second. <<He>> turns to you with an annoyed look on <<his>> face. You glance at the pair, then back to <<him>>. "Please... they scare me. Don't make me go to them."
+<br><br>
+
+<<His>> face softens for a second, before <<he>> scoffs and looks away.
+<<if $whitneyromance is 1>>
+	"Whatever, slut," <<he>> says. "But you owe me for this." <span class="green"><<He>> lets go of your arm</span> and leans back against the tree.
+	<br><br>
+
+	<<endevent>><<clearNPC "park_whore1">><<clearNPC "park_whore2">><<npc Whitney>>
+	<<whitneyoptions>>
+<<else>>
+	"Save it for someone who cares," <<he>> mutters. <span class="red"><<He>> tightens <<his>> grip and keeps walking,</span> uninhibited by your protest.
+	<br><br>
+
+	<<link [[다음|Whitney Park Whore]]>><</link>>
+<</if>>
+
+:: Whitney Park Whore Share
+<<effects>>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"난 그거 싫었어," 당신은 중얼거린다. "다시는 그러지 말아줘."
+		<br><br>
+
+		<<He_ nun>> 웃는다. "언제 이런 배짱을 키웠대?"
+	<<elseif $speech_attitude is "bratty">>
+		"대체 뭐하자는 건데?" 당신은 따져묻는다. "너 자신이 나랑 할 수 없어서 무섭기라도 해?"
+		<br><br>
+
+		<<He_ nun>> 웃는다. "소원을 빌 때는 조심하는 게 좋을 텐데."
+	<<else>>
+		"나는 <<whore_ ga>> 아니야," 당신이 말한다. "다시는 하지 마."
+		<br><br>
+
+		<<He_ nun>> 웃는다. "선택권이 있는 것처럼 말하네."
+	<</if>>
+	<<if Weather.precipitation is "rain">>빗줄기와<</if>> 휘트니가 <<print playerBellyVisible() ? "<<his_ yi>> 껌을 딱딱 씹는" : "<<his_ yi>> 담배를 깊게 빨아들이는">> 사이에, 긴 침묵이 흐른다. <<He_ ga>> 한숨으로 침묵을 깬다.
+	<br><br>
+
+	<<if $whitneyromance is 1>>
+		"미안."
+	<<else>>
+		"깐깐한 <<slut_ iya>>."
+	<</if>>
+	<br><br>
+
+	<<He_ nun>> 다시 <<his_ yi>> <<print playerBellyVisible() ? "껌을 씹는다" : "담배를 피운다">>. 더 이상 논쟁하지는 않는다.
+<<else>>
+	You quietly pocket the money. Whitney glances at you <<print playerBellyVisible() ? "between smacks of gum" : "between puffs of smoke">>.
+	<br><br>
+
+	<<if $whitneyromance is 1>>
+		"Should be grateful I'm giving up that much," <<he>> mutters.
+	<<else>>
+		"You can piss off, now," <<he>> says. "Not in the mood for a used slut."
+	<</if>>
+<</if>>
+<br><br>
+
+<<whitneyoptions>>
+
+:: Whitney Park Whore Romance
+<<effects>>
+
+<<if $phase is 1>>
+	<<He>> doesn't hesitate to take advantage. Your neck is assaulted in a non-stop barrage of licking, sucking and biting. <<Hes>> rough with <<his>> fondling. Your <<print $worn.lower.name>> <<plural "lower">> nearly torn off your body as <<he>> squeezes your <<bottom>>.
+	<br><br>
+
+	<<He>> parts from you with a smack. "There's your share."
+	<br><br>
+
+	You feel around your backside and find a small roll of banknotes. You've gained <<moneyGain 50>>.
+	<br><br>
+
+	<<whitneyoptions>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"I'm sorry," you say. "I think I've had enough for today."
+	<<elseif $speech_attitude is "bratty">>
+		"After what you just pulled?" you say. "Not happening."
+	<<else>>
+		"I'm not in the mood, anymore," you say.
+	<</if>>
+	<br><br>
+
+	<<He>> hardly flinches as you push <<him>> back. <<He>> starts to speak, but settles for a scoff. A roll of cash flicks over <<his>> shoulder as <<he>> turns to leave.
+	<br><br>
+
+	"Your cut," <<he>> says. "Don't thank me."
+	<br><br>
+
+	You scoop up the discarded bills. You've gained <<moneyGain 50>>. By the time you gather it all, Whitney's gone.
+	<br><br>
+
+	<<whitneyexit>>
+<</if>>
+
+:: Whitney Park Run Advice
+<<effects>>
+
+<<if $phase is 2>>
+	<<if $speech_attitude is "meek">>
+		"I-I was scared," you stammer. "I'm sorry."
+	<<elseif $speech_attitude is "bratty">>
+		"Didn't think you cared," you say. "Sorry."
+	<<else>>
+		"I don't know what I was thinking," you say. "I'm sorry."
+	<</if>>
+	<br><br>
+<<elseif $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"N-no," you murmur. "I don't wanna do that again."
+	<<elseif $speech_attitude is "bratty">>
+		"Try that again, and I'll fuck you up," you spit.
+	<<else>>
+		"Next time?" you say. "Don't even think about it."
+	<</if>>
+	<br><br>
+<</if>>
+
+<<He>> kicks off the tree and starts out of the park.
+<<if $phase gte 1>>
+	You're not sure <<he>> even heard you,
+<<else>>
+	You assume <<hes>> done with you,
+<</if>>
+until <<he>> snatches your wrist.
+<br><br>
+
+"Come on," <<he>> says, dragging you along. "You'll thank me for this."
+<br><br>
+
+<<link [["Go with " + $NPCList[0].pronouns.him + " (0:10)"|Whitney Park Run Advice 2]]>><<stress 4>><<npcincr Whitney love 1>><</link>><<gstress>><<glove>>
+<br>
+<<link [[반항한다|Whitney Park Run Resist]]>><<def 1>><</link>>
+<br>
+
+:: Whitney Park Run Resist
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"P-please," you whimper. "Not again."
+<<elseif $speech_attitude is "bratty">>
+	"Fuck off," you growl. "We're not doing this again."
+<<else>>
+	"I'm not letting you sell me off again," you say.
+<</if>>
+<br><br>
+
+"I'm not gonna-" <<He>> cuts <<himself>> off with a groan, then releases you. "Fuck it. You're not worth the trouble."
+<br><br>
+
+<<He>> storms out of the park without a second glance.
+<br><br>
+
+<<whitneyexit>>
+
+:: Whitney Park Run Advice 2
+<<set $location to "alley">><<set $bus to "commercial">><<set $outside to 0>><<effects>>
+
+Against your better judgement, you follow <<him>> out of the park and into an alley. The same one you tried to escape to.
+<br><br>
+
+"Running makes you look like a bitch," <<he>> starts. "But getting caught makes us look like idiots. Both of us. So pay attention."
+<br><br>
+
+The next few minutes are spent taking pointers from Whitney. You feel silly, running back and forth,
+<<if Weather.precipitation is "rain">>
+	slipping in puddles and
+<<elseif Weather.precipitation is "snow">>
+	sliding on ice and
+<</if>>
+falling on your ass, but <<hes>> surprisingly patient. Or <<hes>> just too amused for anger.
+<br><br>
+
+<<link [[다음|Whitney Park Run Advice 3]]>><</link>>
+<br>
+
+:: Whitney Park Run Advice 3
+<<set $outside to 1>><<effects>>
+
+Despite the chill in the air, you're sweating by the end.
+<<athletics 2>><<gathletics>><<pass 10>>
+<br><br>
+
+"And if that doesn't work," <<he>> says, marching up to you.
+<<if $whitneyromance is 1>>
+	"Imagine you're running from me."
+	<br><br>
+
+	<<He>> follows the last word with a lunge. You nearly tumble into a gutter in shock, but <<he>> catches you. With a smirk, <<he>> leans in, pecks you on the forehead, then drops you to the ground.
+	<<npcincr Whitney lust 5>><<glust>>
+<<else>>
+	"Play dirty."
+	<br><br>
+
+	<<He>> follows the last word with a shove. You land bottom-first in a gutter, <span class="lewd">soaked from the waist down in <<if Weather.precipitation is "snow">>slush<<else>>runoff<</if>>.</span>
+	<<water waist>><<if $uncomfortable.nude is true>><<trauma 6>><<stress 6>><<gtrauma>><<gstress>><<else>><<arousal 500>><<garousal>><</if>>
+<</if>>
+<br><br>
+
+<<He>> leaves the alley, laughing. <<He>> doesn't wait for you.
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>
