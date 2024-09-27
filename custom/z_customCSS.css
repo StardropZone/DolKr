@@ -1,0 +1,126 @@
+
+/******* base.css *******/
+
+/* 사이드바 접힌 상태 스탯 */
+
+#mobileStats {
+	top: 20px;
+}
+
+#mobileStats .stat {
+	border: none;
+	margin-left: 4px;
+}
+
+/* 사이드바 토글버튼 */
+
+#ui-bar-toggle {
+	font-size: 0.8em;
+    top: calc(50vh - 5em);
+    right: -1.25em;
+    padding: 3.4em 0.85em 3.4em;
+    border-right: 1px solid var(--600);
+}
+
+#ui-bar.stowed #ui-bar-toggle {
+    padding: 3.4em 0.85em 3.4em;
+    right: -1px;
+}
+
+/* 사이드바 히스토리 버튼 */
+
+#ui-bar-history {
+    position: fixed;
+    top: 10px;
+    left: 300px;
+    right: auto;
+	padding-right: 0;
+	font-size: 1em;
+    transition: left 200ms ease-in;
+}
+
+#ui-bar.stowed #ui-bar-history {
+    visibility: visible;
+    left: 50px;
+    transition: left 200ms ease-in;
+}
+
+/* 사이드바 돈+시계 영역 */
+
+#stats {
+	height: 2em;
+	line-height: 1em;
+}
+
+#stats .content {
+	grid-column: 1 / span 2;
+	padding: 0.4em 0;
+}
+
+#storyCaptionDiv.statsExtended > #stats {
+	height: 2em;
+	display: block;
+	padding-bottom: 1.5em;
+}
+
+.moneySymbol {
+	font-weight: 800;
+	color: #ffd438;
+	-webkit-text-stroke: 0.5px #bf8600;
+	padding-right: 4px;
+}
+
+.left-fixed.expanded {
+	position: fixed;
+	padding: 1.2em 20px;
+	/* top: 220px;
+	left: 24px; (padding 대신 쓸 경우 좌표) */
+}
+
+#stats .second-row {
+	padding-top: 0.5em;
+}
+
+
+/* 사이드바 캡션 영역 */
+
+body.has-images #story-caption #storyCaptionDiv {
+	height: calc(100% - 50px - 1.32em);
+}
+
+body.has-images #storyCaptionContent {
+	top: calc(5px + 3.82em);
+    width: 208px;
+    left: 26px;
+	padding-right: 0px;
+	scrollbar-width: none;
+}
+
+#storyCaptionDiv.statsExtended > #storyCaptionContent {
+	top: calc(20px + 4.64em);
+}
+
+#storyCaptionContent #overlayButtons {
+	padding-bottom: 40px;
+}
+
+
+
+/* 사이드바 스탯 - 텍스트 꺼짐 */
+
+.rightMeterText {
+	width: 30%;
+	padding-right: 8px;
+}
+
+.rightMeter {
+	float: left;
+}
+
+/* 사이드바 캐릭터 캔버스 위치 */
+
+/* #img > * {
+	position: absolute;
+	top: 0;
+	left: 0px;
+} */

@@ -1,0 +1,215 @@
+name: Update En
+
+on:
+  schedule:
+    - cron: '0 0 5,20 * *'  # 매달 5일, 20일 자정에 자동 실행
+  workflow_dispatch:  # 수동 실행을 위한 옵션
+
+jobs:
+  update_en_version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: pip install -r $GITHUB_WORKSPACE/scripts/requirements.txt
+
+      - name: Install Mega CLI
+        run: |
+          sudo apt update
+          sudo apt install -y megatools
+
+      - name: Get latest Chrome and ChromeDriver versions
+        run: |
+          cd $GITHUB_WORKSPACE/scripts
+          python DoLEnScraper3.py > $GITHUB_WORKSPACE/version_info.txt
+          cat $GITHUB_WORKSPACE/version_info.txt
+        id: get_latest_versions
+
+      - name: Set environment variables from versions
+        run: |
+          source $GITHUB_WORKSPACE/version_info.txt
+          echo "CHROME_VERSION=$CHROME_VERSION" >> $GITHUB_ENV
+          echo "CHROME_DOWNLOAD_URL=$CHROME_DOWNLOAD_URL" >> $GITHUB_ENV
+          echo "CHROMEDRIVER_DOWNLOAD_URL=$CHROMEDRIVER_DOWNLOAD_URL" >> $GITHUB_ENV
+
+      - name: Install Chrome and ChromeDriver
+        run: |
+          wget -O /tmp/chrome.zip $CHROME_DOWNLOAD_URL
+          unzip -o /tmp/chrome.zip -d $GITHUB_WORKSPACE/chrome
+          sudo mv $GITHUB_WORKSPACE/chrome/chrome-linux64/chrome /usr/bin/google-chrome
+          wget -O /tmp/chromedriver.zip $CHROMEDRIVER_DOWNLOAD_URL
+          unzip -o /tmp/chromedriver.zip -d $GITHUB_WORKSPACE/chromedriver
+          sudo mv $GITHUB_WORKSPACE/chromedriver/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+
+      - name: Get current version
+        id: get_version
+        run: |
+          echo "CURRENT_VERSION=$(cat $GITHUB_WORKSPACE/scripts/current_version_En.txt)" >> $GITHUB_ENV
+          echo "Current Version: ${{ env.CURRENT_VERSION }}"
+
+      - name: Scrape for matching version link
+        id: scrape_version
+        run: |
+          cd $GITHUB_WORKSPACE/scripts
+          download_link=$(python DoLEnScraper.py)
+          echo "download_link=$download_link" >> $GITHUB_ENV
+        env:
+          GITHUB_ENV: $GITHUB_ENV
+
+      - name: Check if link was found and versions match
+        if: env.download_link == '' || env.CURRENT_VERSION == env.LATEST_VERSION  
+        run: echo "No matching version found or versions match. Skipping download."
+
+      - name: Download the file
+        if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION
+        run: |
+          echo "Download Link: ${{ env.download_link }}"
+          cd $GITHUB_WORKSPACE/scripts
+          output_filename="downloaded_file.zip"
+          python DoLEnScraper2.py "${{ env.download_link }}" "$output_filename"
+          ls -al "$GITHUB_WORKSPACE/scripts"
+
+      - name: Verify downloaded file and unzip
+        if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION
+        run: |
+          cd "$GITHUB_WORKSPACE/scripts"
+          echo "Checking if file exists: downloaded_file.zip"
+          if [ ! -f "downloaded_file.zip" ]; then
+            echo "Error: File not found! Files in directory:"
+            ls -al
+            exit 1
+          fi
+          rm -rf "$GITHUB_WORKSPACE/DoLEn/*"
+          unzip -o "downloaded_file.zip" -d $GITHUB_WORKSPACE/DoLEn/
+          ls -al "$GITHUB_WORKSPACE/DoLEn"
+          rm -f "downloaded_file.zip"
+
+      - name: List files in DoL directory
+        if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION
+        run: |
+          ls -al "$GITHUB_WORKSPACE/DoLEn"
+
+      - name: Move HTML file and rename
+        if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION   
+        run: |
+          cd "$GITHUB_WORKSPACE/DoLEn/Degrees of Lewdity"
+          mv "Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "DoLEn.html"
+
+      - name: Move all files to DoL directory
+        if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION  
+        run: |
+          cd "$GITHUB_WORKSPACE/DoLEn/Degrees of Lewdity"
+          for file in *; do
+            if [ -e "$GITHUB_WORKSPACE/DoLEn/$file" ]; then
+              if [ -d "$GITHUB_WORKSPACE/DoLEn/$file" ]; then
+                rm -rf "$GITHUB_WORKSPACE/DoLEn/$file"
+              else
+                rm -f "$GITHUB_WORKSPACE/DoLEn/$file"
+              fi
+            fi
+            mv "$file" "$GITHUB_WORKSPACE/DoLEn/"
+          done
+
+      - name: Remove empty folder
+        if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION
+        run: |
+          rm -rf "$GITHUB_WORKSPACE/DoLEn/Degrees of Lewdity"
+
+      - name: Update version file
+        if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION  
+        run: echo ${{ env.LATEST_VERSION }} > $GITHUB_WORKSPACE/scripts/current_version_En.txt
+
+
+      - name: Clean up Chrome ChromeDriver and version_info
+        if: always()
+        run: |
+          echo "Starting cleanup process..."
+
+          echo "Deleting Google Chrome..."
+          if [ -f /usr/bin/google-chrome ]; then
+            sudo rm -f /usr/bin/google-chrome
+            if [ $? -eq 0 ]; then
+              echo "Google Chrome deleted successfully."
+            else
+              echo "Failed to delete Google Chrome."
+            fi
+          else
+            echo "Google Chrome not found."
+          fi
+
+          echo "Deleting ChromeDriver..."
+          if [ -f /usr/local/bin/chromedriver ]; then
+            sudo rm -f /usr/local/bin/chromedriver
+            if [ $? -eq 0 ]; then
+              echo "ChromeDriver deleted successfully."
+            else
+              echo "Failed to delete ChromeDriver."
+            fi
+          else
+            echo "ChromeDriver not found."
+          fi
+
+          echo "Deleting Chrome workspace directories..."
+          if [ -d "$GITHUB_WORKSPACE/chrome" ]; then
+            sudo chmod -R 777 "$GITHUB_WORKSPACE/chrome"
+            sudo rm -rf "$GITHUB_WORKSPACE/chrome"
+            if [ $? -eq 0 ]; then
+              echo "Chrome workspace directory deleted successfully."
+            else
+              echo "Failed to delete Chrome workspace directory."
+            fi
+          else
+            echo "Chrome workspace directory not found."
+          fi
+
+          if [ -d "$GITHUB_WORKSPACE/chromedriver" ]; then
+            sudo chmod -R 777 "$GITHUB_WORKSPACE/chromedriver"
+            sudo rm -rf "$GITHUB_WORKSPACE/chromedriver"
+            if [ $? -eq 0 ]; then
+              echo "ChromeDriver workspace directory deleted successfully."
+            else
+              echo "Failed to delete ChromeDriver workspace directory."
+            fi
+          else
+            echo "ChromeDriver workspace directory not found."
+          fi
+
+          echo "Deleting version_info.txt..."
+          if [ -f "$GITHUB_WORKSPACE/version_info.txt" ]; then
+            sudo chmod 777 "$GITHUB_WORKSPACE/version_info.txt"
+            sudo rm "$GITHUB_WORKSPACE/version_info.txt"
+            if [ $? -eq 0 ]; then
+              echo "version_info.txt deleted successfully."
+            else
+              echo "Failed to delete version_info.txt."
+            fi
+          else
+            echo "version_info.txt not found."
+          fi
+
+          echo "Cleanup process completed."
+
+
+      - name: Commit and push changes
+        if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION  
+        run: |
+          git config --global http.postBuffer 157286400
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com' 
+          
+          git add -A
+          git stash
+          git pull --rebase origin main || true
+          git stash pop || true
+          git add -A
+          git commit -m "${{ LATEST_VERSION }}"
+          git push || git push --force

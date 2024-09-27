@@ -1,0 +1,36 @@
+실행 중: ui수정 스크립트 customset.py
+현재 스크립트의 경로: C:\Users\User\Documents\GitHub\DolKr\custom
+
+진행 단계: 시작화면 warning 지우기
+이미 수정된 텍스트입니다:
+<<settingsStart>>
+파일이 수정되었습니다: game/01-config/start.twee
+
+진행 단계: 시작화면 warning 지우기
+이미 수정된 텍스트입니다:
+<<startCaption>>
+파일이 수정되었습니다: game/base-system/caption.twee
+
+진행 단계: 온도계 색깔 수정
+텍스트를 찾았습니다:
+const color = {
+		min: "#000dff",
+		mid: "#00ff91",
+		max: "#ff0000",
+		warn: "#ddff00",
+	};
+파일이 수정되었습니다: game/03-JavaScript/weather/03-canvas/01-src/01-main/00-thermometer.js
+
+진행 단계: 스탯창 돈 아이콘 수정
+이미 수정된 텍스트입니다:
+"<span class='moneySymbol'>£</span>"
+파일이 수정되었습니다: game/base-system/widgets.twee
+
+진행 단계: 캔버스 모델 수정
+파일이 복사되었습니다: game/04-Variables/canvasmodel-main_custom.js
+
+진행 단계: ui 수정
+파일이 복사되었습니다: modules/css/z_customCSS.css
+
+
+SUCCESS
