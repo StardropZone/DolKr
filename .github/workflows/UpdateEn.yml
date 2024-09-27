@@ -104,7 +104,7 @@ jobs:
         if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION   
         run: |
           cd "$GITHUB_WORKSPACE/DoLEn/Degrees of Lewdity"
-          mv "Degrees of Lewdity ${{ env.CURRENT_VERSION }}.html" "DoLEn.html"
+          mv "Degrees of Lewdity ${{ env.LATEST_VERSION }}.html" "DoLEn.html"
 
       - name: Move all files to DoL directory
         if: env.download_link != '' && env.CURRENT_VERSION != env.LATEST_VERSION  
