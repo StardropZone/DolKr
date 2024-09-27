@@ -213,5 +213,5 @@ jobs:
           git pull --rebase origin main || true
           git stash pop || true
           git add -A
-          git commit -m "${{ LATEST_VERSION }}"
+          git commit -m "${{ env.LATEST_VERSION }}"
           git push || git push --force
