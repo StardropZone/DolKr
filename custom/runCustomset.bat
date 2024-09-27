@@ -62,6 +62,10 @@ REM 복수의 폴더로 복사-이동하는 코드는 주석처리됨. 필요 �
 :: copy /y "%~dp0..\DoL\setA\%output_html%" "%~dp0..\DoL\setB\%output_html%"
 :: copy /y "%~dp0..\DoL\setA\%output_html%" "%~dp0..\DoL\setC\%output_html%"
 
+REM Step 9: KrVersionChecker.txt의 내용을 current_version_Kr.txt에 덮어쓰기
+echo current_version_Kr를 갱신합니다.
+copy /y "%~dp0..\scripts\KrVersionChecker.txt" "%~dp0..\scripts\current_version_Kr.txt"
+
 REM 작업 완료
 echo 작업이 완료되었습니다.
 
