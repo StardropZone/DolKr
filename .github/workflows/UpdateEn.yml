@@ -60,6 +60,8 @@ jobs:
         id: scrape_version
         run: |
           cd $GITHUB_WORKSPACE/scripts
+          latest_version=$(python DoLEnScraper.py)
+          echo "LATEST_VERSION=$latest_version" >> $GITHUB_ENV
           download_link=$(python DoLEnScraper.py)
           echo "download_link=$download_link" >> $GITHUB_ENV
         env:
