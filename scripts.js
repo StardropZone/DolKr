@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const startGameLink = document.getElementById("startGameLink");
 
     // const githubToken = window.GIST_TOKEN;
-    const gistId = baed44b4e955027fc7d931daee4a54cf;
+    const gistId = 'baed44b4e955027fc7d931daee4a54cf';
 
     // 세이브 관리 모달 열기
     manageSavesBtn.addEventListener("click", () => {
