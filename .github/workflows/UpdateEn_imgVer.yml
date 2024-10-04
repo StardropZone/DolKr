@@ -1,0 +1,41 @@
+name: Img Update Checker
+
+on:
+  push:
+    paths:
+      - 'DoLEn/DoLEn.html'  # 이 파일이 커밋되었을 때만 실행
+  workflow_dispatch:  # 수동 실행 옵션 추가
+
+jobs:
+  compare_directories:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 리포지토리 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Python 설치
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # 필요한 의존성 설치
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tabulate
+
+      # 디렉토리 비교 Python 스크립트 실행
+      - name: Run verImgCompare script
+        run: python scripts/verImgCompare.py
+
+      # HTML 파일을 커밋하여 리포지토리에 반영
+      - name: Commit and push HTML file
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add scripts/verImgCompare.html
+          git commit -m "Update directory comparison result"
+          git push
