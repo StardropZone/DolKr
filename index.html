@@ -1,47 +1,54 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Game Save Manager</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>언제 고치지?!</h1>
+    <div class="enter">
+        <a id="startGameLink" href="DoL/setA/DoLKr.html">Enter</a>
+    </div>
+    <div id="manageSavesBtn" class="button">세이브관리</div>
+    <div id="retextureBtn" class="button">리텍스쳐</div>
 
-    <header></header>
-
-    <main>
-    <div class="container">
-        <content>
-            <h1>테스트입니다</h1>
-            <div>
-                <a href="/DolKr/DoL/DoLKr.html">눌러서 실행하세요(한글)</a>
-                <br><a href="/DolKr/DoL/DoLEn.html">눌러서 실행하세요(영어)</a>
+    <!-- 세이브 관리 모달 구조 -->
+    <div id="saveModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Save Management</h2>
+            <div id="toast" class="toast"></div> <!-- 토스트 팝업 -->
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h3>Latest Save</h3>
+                    <div id="latestSaveComment">No data</div>
+                    <div id="loadLatestSaveBtn" class="button">불러오기</div>
+                    <div id="showBackupSlotsBtn" class="button">백업</div>
+                    <textarea id="commentInput" placeholder="슬롯 코멘트를 입력하세요"></textarea>
+                    <div id="saveClipboardDataBtn" class="button">저장하기</div>
+                </div>
+                <div class="flex-item">
+                    <h3>Backup List</h3>
+                    <div id="backupList" class="saveList"></div>
+                </div>
             </div>
-        </content>
-        <nav>
-            <ul class="menu">
-                <li>리텍스쳐</li>
-                <li>세이브</li>
-                <li>크레딧</li>
-            </ul>
-        </nav>
+        </div>
     </div>
 
-    </main>
-
-    <div class="vChecker">
-        <p id="version-info">Current Version: Loading...</p>
-        <p id="version-status"></p>
-        <button id="check-version-button">버전 확인</button>
-        <p class="checkResultNew">최신 버전입니다.</p>
-        <p class="checkResultOld">업데이트가 필요합니다.</p>
+    <!-- 리텍스쳐 모달 구조 -->
+    <div id="retextureModal" class="modal">
+        <div class="modal-content">
+            <span class="close-retexture">&times;</span>
+            <h2>리텍스쳐 선택</h2>
+            <div id="toast-retexture" class="toast"></div> <!-- 토스트 팝업 -->
+            <div class="button" id="preset1">프리셋1</div>
+            <div class="button" id="preset2">프리셋2</div>
+            <div class="button" id="preset3">프리셋3</div>
+            <div class="button" id="preset4">Vanilla(En)</div>
+        </div>
     </div>
 
-    <footer>
-
-    </footer>
-    
-    <script src="script.js"></script>
-
+    <script src="scripts.js"></script>
 </body>
 </html>

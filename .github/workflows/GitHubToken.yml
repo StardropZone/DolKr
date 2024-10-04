@@ -14,8 +14,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set environment variable
+      # GITHUB_TOKEN 설정
+      - name: Set GitHub Token environment variable
         run: echo "GITHUB_TOKEN=${{ secrets.G_TOKEN }}" >> $GITHUB_ENV
 
-      # - name: Run script.js
-      #   run: node script.js
+      # GIST_TOKEN 설정
+      - name: Set Gist Token environment variable
+        run: echo "GIST_TOKEN=${{ secrets.GIST_TOKEN }}" >> $GITHUB_ENV
+
+      # GIST_ID 설정
+      - name: Set Gist ID environment variable
+        run: echo "GIST_ID=${{ secrets.GIST_ID }}" >> $GITHUB_ENV
+
+      # 자바스크립트 실행
+      - name: Run JavaScript script
+        run: node script.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
