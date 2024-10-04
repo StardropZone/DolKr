@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 20px auto;
 }
 h1 {
     text-align: center;
@@ -8,7 +8,9 @@ h1 {
 table {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 th, td {
     border: 1px solid #dddddd;
@@ -21,4 +23,20 @@ tr:nth-child(even) {
 th {
     background-color: #4CAF50;
     color: white;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 16px;
+}
+
+.color1 {
+    background-color: #e6f7ff;
+    /* font-weight: bold; */
+    font-size: 1.1em;
+    padding: 12px;
+}
+
+.color2 {
+    background-color: #ffffff;
+    text-align: right;
+    font-size: 1em;
 }
