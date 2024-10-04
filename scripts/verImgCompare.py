@@ -75,7 +75,7 @@ with open(html_file_path, "w") as f:
     <html>
     <head>
     <title>Directory Comparison Results</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="verImg.css">
     </head>
     <body>
     <h1>{current_version} 버전 이미지 변동 내역</h1>

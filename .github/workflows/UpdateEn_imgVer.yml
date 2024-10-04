@@ -27,9 +27,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install tabulate
 
-      # 디렉토리 비교 Python 스크립트 실행
-      - name: Run verImgCompare script
-        run: python scripts/verImgCompare.py
+      # 디렉토리 비교 Python 스크립트 실행 및 버전 정보 추출
+      - name: Run verImgCompare script and capture version
+        id: compare_directories
+        run: |
+          VERSION=$(cat scripts/current_version_En.txt)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          python scripts/verImgCompare.py
 
       # HTML 파일을 커밋하여 리포지토리에 반영
       - name: Commit and push HTML file
@@ -37,5 +41,5 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add scripts/verImgCompare.html
-          git commit -m "Update directory comparison result"
+          git commit -m "${{ env.VERSION }}"
           git push
