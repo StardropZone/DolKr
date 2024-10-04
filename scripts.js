@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startGameLink = document.getElementById("startGameLink");
 
-    const githubToken = process.env.GIST_TOKEN;
-    const gistId = process.env.GIST_ID;
+    const githubToken = window.GIST_TOKEN;
+    const gistId = window.GIST_ID;
 
     // 세이브 관리 모달 열기
     manageSavesBtn.addEventListener("click", () => {
