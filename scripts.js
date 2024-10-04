@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startGameLink = document.getElementById("startGameLink");
 
-    const githubToken = window.GIST_TOKEN;
-    const gistId = window.GIST_ID;
+    // const githubToken = window.GIST_TOKEN;
+    const gistId = baed44b4e955027fc7d931daee4a54cf;
 
     // 세이브 관리 모달 열기
     manageSavesBtn.addEventListener("click", () => {
@@ -89,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch(`https://api.github.com/gists/${gistId}`, {
                 method: 'PATCH',
                 headers: {
-                    'Authorization': `token ${githubToken}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -109,14 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error(err.message));
         });
     }
+    
 
     // Gist에서 데이터를 가져오는 함수
     function loadFromGist(callback) {
-        fetch(`https://api.github.com/gists/${gistId}`, {
-            headers: {
-                'Authorization': `token ${githubToken}`
-            }
-        }).then(response => {
+        fetch(`https://api.github.com/gists/${gistId}`)
+        .then(response => {
             if (response.ok) {
                 return response.json();
             }
@@ -128,6 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => console.error(err.message));
     }
+    
+    
 
     // Latest Save를 불러오는 함수
     function loadLatestSave() {
@@ -220,7 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch(`https://api.github.com/gists/${gistId}`, {
                 method: 'PATCH',
                 headers: {
-                    'Authorization': `token ${githubToken}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
