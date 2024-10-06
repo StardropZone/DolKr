@@ -90,7 +90,9 @@ body {
 #latestSaveComment {
     display: block;
     font-size: 18px;
-margin-bottom: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    word-break: break-all;
 }
 
 .saveList {
@@ -122,6 +124,7 @@ margin-bottom: 20px;
     align-items: center;
     text-align: center;
     overflow: hidden;
+    word-break: break-all;
     min-width: 0;
     width: calc(100% - 160px);
     font-size: 14px;

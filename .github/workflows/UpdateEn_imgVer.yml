@@ -38,8 +38,8 @@ jobs:
       # HTML 파일을 커밋하여 리포지토리에 반영
       - name: Commit and push HTML file
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --local user.email 'github-actions[bot]@users.noreply.github.com' 
+          git config --local user.name 'github-actions[bot]'
           git add scripts/verImgCompare.html
           git commit -m "${{ env.VERSION }}"
           git push
