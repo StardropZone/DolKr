@@ -80,6 +80,14 @@ body {
     pointer-events: none; /* 마우스 이벤트 무시 */
 }
 
+/*대문 페이지*/
+.enter {
+    width: 400px;
+    height: 150px;
+    margin: 40px auto;
+    background-color: rgb(218, 240, 255);
+}
+
 /* 세이브 리스트 */
 
 #saveModal h3 {
