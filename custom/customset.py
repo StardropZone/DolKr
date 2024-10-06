@@ -98,6 +98,12 @@ replacements = [
         [
             (r'''"£"''', r'''"<span class='moneySymbol'>£</span>"''')
         ]
+    ),
+    ("작업단계", 
+        'game/04-Variables/colours.js',
+        [
+            (r'#00d5ff', r'#abdcff')
+        ]
     )
 #   ,("작업단계", 
 #         'modules/css/base.css(경로)',
