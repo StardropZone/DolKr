@@ -10,8 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startGameLink = document.getElementById("startGameLink");
 
-    // const githubToken = window.GIST_TOKEN;
-    const gistId = 'baed44b4e955027fc7d931daee4a54cf';
+    const serverUrl = 'https://savedata-for-personaluse.glitch.me';
 
     // 세이브 관리 모달 열기
     manageSavesBtn.addEventListener("click", () => {
@@ -62,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
             retextureModal.style.display = "none";
         });
     });
+
     document.getElementById("preset4").addEventListener("click", () => {
         startGameLink.href = "DoLEn/DoLEn.html";
         showToast("프리셋4가 적용되었습니다", "toast-retexture", () => {
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function saveClipboardData() {
         navigator.clipboard.readText().then(text => {
             const comment = document.getElementById("commentInput").value;
-            saveToGist({ latestSaveData: text, latestSaveComment: comment }, () => {
+            saveToServer({ latestSaveData: text, latestSaveComment: comment }, () => {
                 document.getElementById("latestSaveComment").innerText = comment || "No comment";
                 showToast("Save data saved successfully!", "toast");
             });
@@ -82,55 +82,42 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Gist로 데이터를 저장하는 함수
-    function saveToGist(data, callback) {
-        loadFromGist(existingData => {
-            const updatedData = { ...existingData, ...data };
-            fetch(`https://api.github.com/gists/${gistId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    files: {
-                        'saveData.json': {
-                            content: JSON.stringify(updatedData)
-                        }
-                    }
-                })
-            }).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Failed to save data to Gist');
-            })
-            .then(callback)
-            .catch(err => console.error(err.message));
-        });
+    // 서버로 데이터를 저장하는 함수
+    function saveToServer(data, callback) {
+        fetch(`${serverUrl}/save-data`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Failed to save data to server');
+        })
+        .then(callback)
+        .catch(err => console.error(err.message));
     }
-    
 
-    // Gist에서 데이터를 가져오는 함수
-    function loadFromGist(callback) {
-        fetch(`https://api.github.com/gists/${gistId}`)
+    // 서버에서 데이터를 가져오는 함수
+    function loadFromServer(callback) {
+        fetch(`${serverUrl}/load-data`)
         .then(response => {
             if (response.ok) {
                 return response.json();
             }
-            throw new Error('Failed to load data from Gist');
+            throw new Error('Failed to load data from server');
         })
         .then(data => {
-            const content = data.files['saveData.json'].content;
-            callback(JSON.parse(content));
+            callback(data);
         })
         .catch(err => console.error(err.message));
     }
-    
-    
 
     // Latest Save를 불러오는 함수
     function loadLatestSave() {
-        loadFromGist(data => {
+        loadFromServer(data => {
             if (data.latestSaveData) {
                 navigator.clipboard.writeText(data.latestSaveData).then(() => {
                     showToast("Latest save data copied to clipboard!", "toast");
@@ -154,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Latest Save를 백업하는 함수
     window.backupLatestSave = function(slot) {
-        loadFromGist(data => {
+        loadFromServer(data => {
             const latestSaveData = data.latestSaveData;
             const latestSaveComment = data.latestSaveComment;
             if (!latestSaveData) {
@@ -165,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data[`backupSaveData_${slot}`] = latestSaveData;
             data[`backupSaveComment_${slot}`] = latestSaveComment;
 
-            saveToGist(data, () => {
+            saveToServer(data, () => {
                 updateBackupList();
                 showToast(`Latest save data backed up to slot ${slot}!`, "toast");
             });
@@ -174,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 백업 리스트를 업데이트하는 함수
     function updateBackupList() {
-        loadFromGist(data => {
+        loadFromServer(data => {
             const backupList = document.getElementById("backupList");
             backupList.innerHTML = '';
 
@@ -196,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 백업 데이터를 로드하는 함수
     window.loadBackupSave = function(slot) {
-        loadFromGist(data => {
+        loadFromServer(data => {
             const backupData = data[`backupSaveData_${slot}`];
             if (backupData) {
                 navigator.clipboard.writeText(backupData).then(() => {
@@ -212,38 +199,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 백업 데이터를 삭제하는 함수
     window.deleteBackupSave = function(slot) {
-        loadFromGist(data => {
+        loadFromServer(data => {
             delete data[`backupSaveData_${slot}`];
             delete data[`backupSaveComment_${slot}`];
 
-            fetch(`https://api.github.com/gists/${gistId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    files: {
-                        'saveData.json': {
-                            content: JSON.stringify(data)
-                        }
-                    }
-                })
-            }).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Failed to delete data from Gist');
-            })
-            .then(() => {
+            saveToServer(data, () => {
                 updateBackupList();
                 showToast(`Backup save data from slot ${slot} deleted!`, "toast");
-            })
-            .catch(err => console.error(err.message));
+            });
         });
     }
 
     // 페이지 로드 시 최신 세이브 데이터 표시
-    loadFromGist(data => {
+    loadFromServer(data => {
         const latestComment = data.latestSaveComment;
         document.getElementById("latestSaveComment").innerText = latestComment || "No data";
         updateBackupList();
@@ -256,33 +224,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 토스트 팝업 표시 함수
     function showToast(message, toastId, callback) {
-    const toast = document.getElementById(toastId);
-    toast.innerText = message;
-    toast.classList.add("show");
-    toast.classList.remove("hide");
-
-    setTimeout(() => {
-        toast.classList.add("hide");
-        toast.classList.remove("show");
+        const toast = document.getElementById(toastId);
+        toast.innerText = message;
+        toast.classList.add("show");
+        toast.classList.remove("hide");
 
         setTimeout(() => {
-            toast.style.visibility = 'hidden';
-            toast.style.pointerEvents = 'none';
-            if (callback) {
-                callback();
-            }
-        }, 300); // 애니메이션 지속 시간과 일치시킴
-    }, 1500);
+            toast.classList.add("hide");
+            toast.classList.remove("show");
 
-    // 애니메이션 시작 전에 visibility와 pointer-events를 설정
-    toast.style.visibility = 'visible';
-    toast.style.pointerEvents = 'auto';
-}
+            setTimeout(() => {
+                toast.style.visibility = 'hidden';
+                toast.style.pointerEvents = 'none';
+                if (callback) {
+                    callback();
+                }
+            }, 300); // 애니메이션 지속 시간과 일치시킴
+        }, 1500);
+
+        // 애니메이션 시작 전에 visibility와 pointer-events를 설정
+        toast.style.visibility = 'visible';
+        toast.style.pointerEvents = 'auto';
+    }
 });
 
-
 // 버전 체커
-
 document.addEventListener("DOMContentLoaded", () => {
     const versionCheckerDiv = document.getElementById('versionChecker');
     const updateStatusDiv = document.getElementById('updateStatus');
@@ -318,8 +284,8 @@ document.addEventListener("DOMContentLoaded", () => {
         versionCheckerDiv.innerText = `현재 버전(A): ${version1.trim()}`;
 
         // 버전2와 버전3의 버전 넘버만 추출
-        const version2 = version2Full.split('-')[0]; 
-        const version3 = version3Full.split('-')[0]; 
+        const version2 = version2Full.split('-')[0];
+        const version3 = version3Full.split('-')[0];
 
         // 버전2와 버전3을 비교하여 업데이트 여부 확인
         if (version2Full.trim() === version3Full.trim()) {
@@ -332,4 +298,3 @@ document.addEventListener("DOMContentLoaded", () => {
     // 페이지 로드 후 버전 비교 실행
     compareVersions();
 });
-
