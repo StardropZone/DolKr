@@ -83,22 +83,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 서버로 데이터를 저장하는 함수
-    function saveToServer(data, callback) {
-        fetch(`${serverUrl}/save-data`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Failed to save data to server');
-        })
-        .then(callback)
-        .catch(err => console.error(err.message));
+    function saveToServer(newData, callback) {
+        // 먼저 서버에서 기존 데이터를 불러옴
+        loadFromServer(existingData => {
+            // 기존 데이터와 새로운 데이터를 병합
+            const updatedData = { ...existingData, ...newData };
+            
+            // 병합된 데이터를 서버에 저장
+            fetch(`${serverUrl}/save-data`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Failed to save data to server');
+            })
+            .then(callback)
+            .catch(err => console.error(err.message));
+        });
     }
+    
 
     // 서버에서 데이터를 가져오는 함수
     function loadFromServer(callback) {
@@ -271,9 +279,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 버전들을 읽고 비교하는 함수
     async function compareVersions() {
-        const version1 = await fetchVersion('scripts/current_version_En.txt');
-        const version2Full = await fetchVersion('scripts/current_version_Kr.txt');
-        const version3Full = await fetchVersion('scripts/KrVersionChecker.txt');
+        const version1 = await fetchVersion('/scripts/current_version_En.txt');
+        const version2Full = await fetchVersion('/scripts/current_version_Kr.txt');
+        const version3Full = await fetchVersion('/scripts/KrVersionChecker.txt');
 
         if (!version1 || !version2Full || !version3Full) {
             updateStatusDiv.innerText = "버전 정보를 가져오는 데 실패했습니다.";
