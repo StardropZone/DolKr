@@ -208,15 +208,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // 백업 데이터를 삭제하는 함수
     window.deleteBackupSave = function(slot) {
         loadFromServer(data => {
-            delete data[`backupSaveData_${slot}`];
-            delete data[`backupSaveComment_${slot}`];
-
+            // 데이터 삭제: null 값을 할당하여 명시적으로 표시
+            data[`backupSaveData_${slot}`] = null;
+            data[`backupSaveComment_${slot}`] = null;
+    
+            // 수정된 데이터를 서버에 저장
             saveToServer(data, () => {
                 updateBackupList();
                 showToast(`Backup save data from slot ${slot} deleted!`, "toast");
             });
         });
     }
+    
 
     // 페이지 로드 시 최신 세이브 데이터 표시
     loadFromServer(data => {
