@@ -6,7 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const isGitHubPages = window.location.hostname.endsWith("github.io");
 
     // GitHub Pages와 로컬 환경에 따른 base URL 설정
-    const baseURL = isGitHubPages ? window.location.origin : "";
+    const baseURL = isGitHubPages 
+        ? window.location.origin + window.location.pathname.split('/').slice(0, 2).join('/')
+        : "";
 
     // 서버에서 파일 내용을 가져오는 함수
     async function fetchVersion(filePath) {
