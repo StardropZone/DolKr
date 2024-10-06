@@ -1,12 +1,17 @@
-// 버전 체커
 document.addEventListener("DOMContentLoaded", () => {
     const versionCheckerDiv = document.getElementById('versionChecker');
     const updateStatusDiv = document.getElementById('updateStatus');
 
+    // GitHub Pages에서 실행되는지 확인 (URL이 GitHub Pages의 도메인일 경우)
+    const isGitHubPages = window.location.hostname.endsWith("github.io");
+
+    // GitHub Pages와 로컬 환경에 따른 base URL 설정
+    const baseURL = isGitHubPages ? window.location.origin : "";
+
     // 서버에서 파일 내용을 가져오는 함수
     async function fetchVersion(filePath) {
         try {
-            const response = await fetch(filePath);
+            const response = await fetch(`${baseURL}${filePath}`);
             if (response.ok) {
                 return response.text();
             } else {
