@@ -14,11 +14,15 @@ jobs:
       - name: Checkout this repository
         uses: actions/checkout@v3
 
+      # GITHUB_TOKEN 설정
+      - name: Set GitHub Token environment variable
+        run: echo "GITHUB_TOKEN=${{ secrets.G_TOKEN }}" >> $GITHUB_ENV
+
       # 최신 태그 정보 가져오기
       - name: Get latest tag from source repository
         id: get_latest_tag
         run: |
-          LATEST_TAG=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/tags | jq -r '.[0].name')
+          LATEST_TAG=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/tags | jq -r '.[0].name')
           echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
 
       # 현재 리포지토리에서 scripts 폴더 내 KrVersionChecker.txt에 저장된 버전 가져오기
