@@ -45,10 +45,46 @@ jobs:
           fi
 
       # 변경된 파일들 추적 (현재 버전과 최신 버전 사이의 커밋 차이 확인)
-      - name: Get list of changed files
+      - name: Get list of changed files using GraphQL
         if: env.COPY_NEEDED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          CHANGED_FILES=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/compare/$CURRENT_VERSION...$LATEST_TAG | jq -r '.files[].filename')
+          query='
+          query($owner: String!, $repo: String!, $base: String!, $head: String!) {
+            repository(owner: $owner, name: $repo) {
+              compare(base: $base, head: $head) {
+                files(first: 100, after: null) {
+                  pageInfo {
+                    hasNextPage
+                    endCursor
+                  }
+                  nodes {
+                    path
+                  }
+                }
+              }
+            }
+          }
+          '
+          
+          CHANGED_FILES=""
+          CURSOR="null"
+          
+          while true; do
+            RESPONSE=$(curl -s -H "Authorization: bearer $GH_TOKEN" -X POST -d "$(jq -n --arg query "$query" --arg owner "uotalkie" --arg repo "dol-kr" --arg base "$CURRENT_VERSION" --arg head "$LATEST_TAG" --arg cursor "$CURSOR" '{query: $query, variables: {owner: $owner, repo: $repo, base: $base, head: $head, cursor: $cursor}}')" https://api.github.com/graphql)
+            
+            NEW_FILES=$(echo "$RESPONSE" | jq -r '.data.repository.compare.files.nodes[].path')
+            CHANGED_FILES="$CHANGED_FILES$NEW_FILES"$'\n'
+            
+            HAS_NEXT_PAGE=$(echo "$RESPONSE" | jq -r '.data.repository.compare.files.pageInfo.hasNextPage')
+            CURSOR=$(echo "$RESPONSE" | jq -r '.data.repository.compare.files.pageInfo.endCursor')
+            
+            if [ "$HAS_NEXT_PAGE" = "false" ]; then
+              break
+            fi
+          done
+          
           echo "$CHANGED_FILES" > scripts/KrChangedFiles.txt
           echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
           echo "$CHANGED_FILES" >> $GITHUB_ENV
