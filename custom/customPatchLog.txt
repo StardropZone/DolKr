@@ -1,5 +1,5 @@
 실행 중: ui수정 스크립트 customset.py
-현재 스크립트의 경로: C:\Users\User\Documents\GitHub\DolKr\custom
+현재 스크립트의 경로: C:\Users\user\Documents\GitHub\DolKr\custom
 
 진행 단계: 시작화면 warning 지우기
 이미 수정된 텍스트입니다:
@@ -25,6 +25,11 @@ const color = {
 이미 수정된 텍스트입니다:
 "<span class='moneySymbol'>£</span>"
 파일이 수정되었습니다: game/base-system/widgets.twee
+
+진행 단계: 작업단계
+텍스트를 찾았습니다:
+#00d5ff
+파일이 수정되었습니다: game/04-Variables/colours.js
 
 진행 단계: 캔버스 모델 수정
 파일이 복사되었습니다: game/04-Variables/canvasmodel-main_custom.js

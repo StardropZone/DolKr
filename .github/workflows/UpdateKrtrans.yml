@@ -50,15 +50,20 @@ jobs:
         run: |
           CHANGED_FILES=$(curl -s https://api.github.com/repos/uotalkie/dol-kr/compare/$CURRENT_VERSION...$LATEST_TAG | jq -r '.files[].filename')
           echo "$CHANGED_FILES" > scripts/KrChangedFiles.txt
-
+          echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
+          echo "$CHANGED_FILES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       # 변경된 파일을 복사 (경로 유지 및 덮어쓰기)
       - name: Copy changed files from source repository
         if: env.COPY_NEEDED == 'true'
         run: |
-          for file in $CHANGED_FILES; do
-            curl -L -o ./KrTrans/$file https://raw.githubusercontent.com/uotalkie/dol-kr/main/$file
-          done
+          mkdir -p KrTrans
+          while IFS= read -r file; do
+            dir=$(dirname "./KrTrans/$file")
+            mkdir -p "$dir"
+            curl -L -o "./KrTrans/$file" "https://raw.githubusercontent.com/uotalkie/dol-kr/main/$file"
+          done <<< "$CHANGED_FILES"
 
       # 최신 태그를 scripts 폴더 내 KrVersionChecker.txt에 기록
       - name: Update version in scripts/KrVersionChecker.txt
@@ -77,6 +82,3 @@ jobs:
           git add .
           git commit -m "$LATEST_TAG" || echo "Nothing to commit"
           git push
-
-
-
