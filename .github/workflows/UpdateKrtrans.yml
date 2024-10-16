@@ -58,7 +58,7 @@ jobs:
 
           while true; do
             RESPONSE=$(curl -s "https://api.github.com/repos/uotalkie/dol-kr/compare/$CURRENT_VERSION...$LATEST_TAG?per_page=$PER_PAGE&page=$PAGE")
-            NEW_FILES=$(echo "$RESPONSE" | jq -r '.files[].filename')
+            NEW_FILES=$(echo "$RESPONSE" | jq -r '.files[]?.filename | select(. != null)')
             
             if [ -z "$NEW_FILES" ]; then
               break
