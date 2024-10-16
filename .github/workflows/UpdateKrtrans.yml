@@ -48,29 +48,32 @@ jobs:
             echo "COPY_NEEDED=false" >> $GITHUB_ENV
           fi
 
-      # 트리 비교 후 SHA가 다른 파일들에 대해 diff를 확인하는 방식
+      # 변경된 파일들 추적 (compare API 사용)
       - name: Get list of changed files
         if: env.COPY_NEEDED == 'true'
         run: |
-          BASE_TREE_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/refs/tags/$CURRENT_VERSION | jq -r '.object.sha')
-          HEAD_TREE_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/refs/tags/$LATEST_TAG | jq -r '.object.sha')
+          CHANGED_FILES=""
+          PAGE=1
+          PER_PAGE=100
 
-          BASE_COMMIT_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/commits/$BASE_TREE_SHA | jq -r '.tree.sha')
-          HEAD_COMMIT_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/commits/$HEAD_TREE_SHA | jq -r '.tree.sha')
+          while true; do
+            RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/uotalkie/dol-kr/compare/$CURRENT_VERSION...$LATEST_TAG?per_page=$PER_PAGE&page=$PAGE")
+            NEW_FILES=$(echo "$RESPONSE" | jq -r '.files[]?.filename | select(. != null)')
+            
+            if [ -z "$NEW_FILES" ]; then
+              break
+            fi
 
-          BASE_TREE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/trees/$BASE_COMMIT_SHA?recursive=1 | jq -r '.tree[] | .path + " " + .sha')
-          HEAD_TREE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/trees/$HEAD_COMMIT_SHA?recursive=1 | jq -r '.tree[] | .path + " " + .sha')
+            CHANGED_FILES="$CHANGED_FILES$NEW_FILES"$'\n'
+            PAGE=$((PAGE + 1))
+          done
 
-          echo "$BASE_TREE" > base_tree.txt
-          echo "$HEAD_TREE" > head_tree.txt
-
-          CHANGED_FILES=$(comm -3 <(sort base_tree.txt) <(sort head_tree.txt) | awk '{print $1}')
-
+          CHANGED_FILES=$(echo "$CHANGED_FILES" | sort -u)
           echo "$CHANGED_FILES" > scripts/KrChangedFiles.txt
           echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
           echo "$CHANGED_FILES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-
+          echo "Total changed files: $(echo "$CHANGED_FILES" | wc -l)"
 
       # 변경된 파일을 복사 (경로 유지 및 덮어쓰기)
       - name: Copy changed files from source repository
