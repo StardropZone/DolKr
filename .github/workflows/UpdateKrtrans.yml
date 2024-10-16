@@ -53,8 +53,9 @@ jobs:
         if: env.COPY_NEEDED == 'true'
         run: |
           # 소스 리포지토리의 트리 SHA를 태그 기준으로 가져옴
-          BASE_TREE_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/refs/tags/$CURRENT_VERSION | jq -r '.object.sha')
-          HEAD_TREE_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/refs/tags/$LATEST_TAG | jq -r '.object.sha')
+          BASE_TREE_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/refs/tags/$CURRENT_VERSION | jq -r '.object.sha // empty')
+          HEAD_TREE_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/refs/tags/$LATEST_TAG | jq -r '.object.sha // empty')
+
 
           # BASE 트리 SHA에서 실제 커밋의 트리 SHA 가져오기
           BASE_COMMIT_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/commits/$BASE_TREE_SHA | jq -r '.tree.sha')
