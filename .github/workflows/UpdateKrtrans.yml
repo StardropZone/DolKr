@@ -48,7 +48,7 @@ jobs:
             echo "COPY_NEEDED=false" >> $GITHUB_ENV
           fi
 
-      # 변경된 파일들 추적 (현재 버전과 최신 버전 사이의 커밋 차이 확인)
+      # 변경된 파일들 추적 (compare API 사용)
       - name: Get list of changed files
         if: env.COPY_NEEDED == 'true'
         run: |
@@ -65,14 +65,15 @@ jobs:
             fi
 
             CHANGED_FILES="$CHANGED_FILES$NEW_FILES"$'\n'
-
             PAGE=$((PAGE + 1))
           done
 
+          CHANGED_FILES=$(echo "$CHANGED_FILES" | sort -u)
           echo "$CHANGED_FILES" > scripts/KrChangedFiles.txt
           echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
           echo "$CHANGED_FILES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
+          echo "Total changed files: $(echo "$CHANGED_FILES" | wc -l)"
 
       # 변경된 파일을 복사 (경로 유지 및 덮어쓰기)
       - name: Copy changed files from source repository
@@ -83,7 +84,10 @@ jobs:
             if [ -n "$file" ]; then
               dir=$(dirname "./KrTrans/$file")
               mkdir -p "$dir"
-              curl -L -H "Authorization: token $GITHUB_TOKEN" -o "./KrTrans/$file" "https://raw.githubusercontent.com/uotalkie/dol-kr/$LATEST_TAG/$file"
+              echo "Copying file: $file"
+              URL="https://raw.githubusercontent.com/uotalkie/dol-kr/$LATEST_TAG/$file"
+              echo "URL: $URL"
+              curl -L -H "Authorization: token $GITHUB_TOKEN" -o "./KrTrans/$file" "$URL" || echo "Failed to download: $file"
             fi
           done <<< "$CHANGED_FILES"
 
