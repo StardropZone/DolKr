@@ -117,6 +117,14 @@ jobs:
             fi
           done <<< "$CHANGED_FILES"
 
+      # 파일 인코딩 확인 및 변환
+      - name: Check and convert file encoding
+        run: |
+          ENCODING=$(file -bi KrTrans/README.md | awk -F "=" '{print $2}')
+          if [ "$ENCODING" != "utf-8" ]; then
+            iconv -f $ENCODING -t UTF-8 KrTrans/README.md -o KrTrans/README.md
+          fi
+
       # 삭제된 파일을 리포지토리에서 삭제하는 단계 추가
       - name: Delete files from repository
         if: env.COPY_NEEDED == 'true'
