@@ -1,5 +1,3 @@
-/* globals traverse, traversePair */
-
 const DoLSave = ((Story, Save) => {
 	"use strict";
 
@@ -545,13 +543,13 @@ window.importSettings = function (data, type) {
 	let reader;
 	switch (type) {
 		case "text":
-			V.importString = document.getElementById("settingsDataInput")?.value;
+			V.importString = document.getElementById("settingsDataInput").value;
 			Wikifier.wikifyEval('<<displaySettings "importConfirmDetails">>');
 			break;
 		case "file":
 			reader = new FileReader();
 			reader.addEventListener("load", function (e) {
-				V.importString = e.target?.result;
+				V.importString = e.target.result;
 				Wikifier.wikifyEval('<<displaySettings "importConfirmDetails">>');
 			});
 			reader.readAsBinaryString(data[0]);
@@ -562,142 +560,121 @@ window.importSettings = function (data, type) {
 	}
 };
 
-/**
- * Using the incoming configuration object, replace all active variables (V | $ | State.variables)
- *
- * @param {string} data
- */
-function importSettingsData(data) {
-	if (data == null) {
-		return;
-	}
-	// console.log("json",JSON.parse(result));
-	const overrides = JSON.parse(data);
-	if (V.passage === "Start" && overrides.starting != null) {
-		overrides.starting = settingsConvert(false, "starting", overrides.starting);
-	}
-	if (overrides.general != null) {
-		overrides.general = settingsConvert(false, "general", overrides.general);
-	}
-
-	/**
-	 * @param {object} source
-	 * @param {object} target
-	 * @param {string} key
-	 * @returns {any?}
-	 */
-	const validateAndSet = (source, target, key) => {
-		if (!validateValue(source[key], target[key])) {
-			console.debug(`Validation fail - Key ${key} Source`, source, "Target", target);
-			return null;
+const importSettingsData = function (data) {
+	let S = null;
+	const result = data;
+	if (result != null && result != null) {
+		// console.log("json",JSON.parse(result));
+		S = JSON.parse(result);
+		if (V.passage === "Start" && S.starting != null) {
+			S.starting = settingsConvert(false, "starting", S.starting);
 		}
-		return target[key];
-	};
-
-	/**
-	 * @param {object} source
-	 * @param {object} target
-	 * @param {string} key
-	 * @returns {any?}
-	 */
-	const setValue = (source, target, key) => {
-		target[key] = source[key];
-		return target[key];
-	};
-
-	if (V.passage === "Start" && overrides.starting != null) {
-		const startingConfig = settingsObjects("starting");
-
-		traversePair(startingConfig, overrides.starting, "root", settingContainers, validateAndSet);
-		traversePair(overrides.starting, V, "root", settingContainers, setValue);
-	}
-
-	if (overrides.general != null) {
-		const listObject = settingsObjects("general");
-		const listKey = Object.keys(listObject);
-		const namedObjects = ["map", "shopDefaults", "options"];
-		// correct swapped min/max values
-		if (overrides.general.breastsizemin > overrides.general.breastsizemax) {
-			const temp = overrides.general.breastsizemin;
-			overrides.general.breastsizemin = overrides.general.breastsizemax;
-			overrides.general.breastsizemax = temp;
-		}
-		if (overrides.general.penissizemin > overrides.general.penissizemax) {
-			const temp = overrides.general.penissizemin;
-			overrides.general.penissizemin = overrides.general.penissizemax;
-			overrides.general.penissizemax = temp;
+		if (S.general != null) {
+			S.general = settingsConvert(false, "general", S.general);
 		}
 
-		for (let i = 0; i < listKey.length; i++) {
-			if (namedObjects.includes(listKey[i]) && overrides.general[listKey[i]] != null) {
-				const itemKey = Object.keys(listObject[listKey[i]]);
-				for (let j = 0; j < itemKey.length; j++) {
-					if (V[listKey[i]][itemKey[j]] != null && overrides.general[listKey[i]][itemKey[j]] != null) {
-						if (validateValue(listObject[listKey[i]][itemKey[j]], overrides.general[listKey[i]][itemKey[j]])) {
-							V[listKey[i]][itemKey[j]] = overrides.general[listKey[i]][itemKey[j]];
+		if (V.passage === "Start" && S.starting != null) {
+			const listObject = settingsObjects("starting");
+			const listKey = Object.keys(listObject);
+			const namedObjects = ["player", "skinColor"];
+
+			for (let i = 0; i < listKey.length; i++) {
+				if (namedObjects.includes(listKey[i]) && S.starting[listKey[i]] != null) {
+					const itemKey = Object.keys(listObject[listKey[i]]);
+					for (let j = 0; j < itemKey.length; j++) {
+						if (V[listKey[i]][itemKey[j]] != null && S.starting[listKey[i]][itemKey[j]] != null) {
+							if (validateValue(listObject[listKey[i]][itemKey[j]], S.starting[listKey[i]][itemKey[j]])) {
+								V[listKey[i]][itemKey[j]] = S.starting[listKey[i]][itemKey[j]];
+							}
+						}
+					}
+				} else if (!namedObjects.includes(listKey[i])) {
+					if (V[listKey[i]] != null && S.starting[listKey[i]] != null) {
+						if (validateValue(listObject[listKey[i]], S.starting[listKey[i]])) {
+							V[listKey[i]] = S.starting[listKey[i]];
 						}
 					}
 				}
-			} else if (!namedObjects.includes(listKey[i])) {
-				if (V[listKey[i]] != null && overrides.general[listKey[i]] != null) {
-					if (validateValue(listObject[listKey[i]], overrides.general[listKey[i]])) {
-						V[listKey[i]] = overrides.general[listKey[i]];
+			}
+		}
+
+		if (S.general != null) {
+			const listObject = settingsObjects("general");
+			const listKey = Object.keys(listObject);
+			const namedObjects = ["map", "skinColor", "shopDefaults", "options"];
+			// correct swapped min/max values
+			if (S.general.breastsizemin > S.general.breastsizemax) {
+				const temp = S.general.breastsizemin;
+				S.general.breastsizemin = S.general.breastsizemax;
+				S.general.breastsizemax = temp;
+			}
+			if (S.general.penissizemin > S.general.penissizemax) {
+				const temp = S.general.penissizemin;
+				S.general.penissizemin = S.general.penissizemax;
+				S.general.penissizemax = temp;
+			}
+
+			for (let i = 0; i < listKey.length; i++) {
+				if (namedObjects.includes(listKey[i]) && S.general[listKey[i]] != null) {
+					const itemKey = Object.keys(listObject[listKey[i]]);
+					for (let j = 0; j < itemKey.length; j++) {
+						if (V[listKey[i]][itemKey[j]] != null && S.general[listKey[i]][itemKey[j]] != null) {
+							if (validateValue(listObject[listKey[i]][itemKey[j]], S.general[listKey[i]][itemKey[j]])) {
+								V[listKey[i]][itemKey[j]] = S.general[listKey[i]][itemKey[j]];
+							}
+						}
+					}
+				} else if (!namedObjects.includes(listKey[i])) {
+					if (V[listKey[i]] != null && S.general[listKey[i]] != null) {
+						if (validateValue(listObject[listKey[i]], S.general[listKey[i]])) {
+							V[listKey[i]] = S.general[listKey[i]];
+						}
+					}
+				}
+			}
+		}
+
+		if (S.npc != null) {
+			const listObject = settingsObjects("npc");
+			// eslint-disable-next-line no-var
+			const listKey = Object.keys(listObject);
+			// eslint-disable-next-line no-var
+			for (let i = 0; i < V.NPCNameList.length; i++) {
+				if (S.npc[V.NPCNameList[i]] != null) {
+					// eslint-disable-next-line no-var
+					for (let j = 0; j < listKey.length; j++) {
+						// Overwrite to allow for "none" default value in the start passage to allow for rng to decide
+						if (
+							V.passage === "Start" &&
+							["pronoun", "gender", "skincolour"].includes(listKey[j]) &&
+							S.npc[V.NPCNameList[i]][listKey[j]] === "none"
+						) {
+							V.NPCName[i][listKey[j]] = S.npc[V.NPCNameList[i]][listKey[j]];
+						} else if (validateValue(listObject[listKey[j]], S.npc[V.NPCNameList[i]][listKey[j]])) {
+							V.NPCName[i][listKey[j]] = S.npc[V.NPCNameList[i]][listKey[j]];
+						}
 					}
 				}
 			}
 		}
 	}
+};
 
-	if (overrides.npc != null) {
-		const listObject = settingsObjects("npc");
-		// eslint-disable-next-line no-var
-		const listKey = Object.keys(listObject);
-		// eslint-disable-next-line no-var
-		for (let i = 0; i < V.NPCNameList.length; i++) {
-			if (overrides.npc[V.NPCNameList[i]] != null) {
-				// eslint-disable-next-line no-var
-				for (let j = 0; j < listKey.length; j++) {
-					// Overwrite to allow for "none" default value in the start passage to allow for rng to decide
-					if (
-						V.passage === "Start" &&
-						["pronoun", "gender", "skincolour"].includes(listKey[j]) &&
-						overrides.npc[V.NPCNameList[i]][listKey[j]] === "none"
-					) {
-						V.NPCName[i][listKey[j]] = overrides.npc[V.NPCNameList[i]][listKey[j]];
-					} else if (validateValue(listObject[listKey[j]], overrides.npc[V.NPCNameList[i]][listKey[j]])) {
-						V.NPCName[i][listKey[j]] = overrides.npc[V.NPCNameList[i]][listKey[j]];
-					}
-					// Prevent the changing of gender with pregnant npc's
-					if (V.NPCName[i].pregnancy.type) {
-						V.NPCName[i].gender = "f";
-					}
-				}
-			}
-		}
-	}
-}
-window.importSettingsData = importSettingsData;
-
-/**
- * @param {object} configuration
- * @param {object} value
- * @returns {boolean}
- */
-function validateValue(configuration, value) {
+function validateValue(keys, value) {
 	// console.log("validateValue", keys, value);
-	const keyArray = Object.keys(configuration);
+	const keyArray = Object.keys(keys);
 	let valid = false;
 	if (keyArray.length === 0) {
 		valid = true;
 	}
 	if (keyArray.includes("min")) {
-		if (configuration.min <= value && configuration.max >= value) {
+		if (keys.min <= value && keys.max >= value) {
 			valid = true;
 		}
 	}
 	if (keyArray.includes("decimals") && value != null) {
 		// eslint-disable-next-line eqeqeq
-		if (value.toFixed(configuration.decimals) != value) {
+		if (value.toFixed(keys.decimals) != value) {
 			valid = false;
 		}
 	}
@@ -712,7 +689,7 @@ function validateValue(configuration, value) {
 		}
 	}
 	if (keyArray.includes("strings") && value != null) {
-		if (configuration.strings.includes(value)) {
+		if (keys.strings.includes(value)) {
 			valid = true;
 		}
 	}
@@ -721,9 +698,10 @@ function validateValue(configuration, value) {
 window.validateValue = validateValue;
 
 function exportSettings(data, type) {
-	const output = {
+	const S = {
 		general: {
 			map: {},
+			skinColor: {},
 			shopDefaults: {},
 			options: {},
 		},
@@ -731,23 +709,39 @@ function exportSettings(data, type) {
 	};
 	let listObject;
 	let listKey;
+	let namedObjects;
 	if (V.passage === "Start") {
-		const startingConfig = settingsObjects("starting");
-		const startingOutput = traversePair(startingConfig, V, "root", settingContainers, (source, target, key) => {
-			console.debug(source, target, key);
-			if (!validateValue(source[key], target[key])) {
-				console.debug(`Target ${key} does not contain a valid value:`, target[key], "configuration:", source[key]);
-				return null;
-			}
-			return target[key];
-		});
+		S.starting = {
+			player: {},
+			skinColor: {},
+		};
+		listObject = settingsObjects("starting");
+		listKey = Object.keys(listObject);
+		namedObjects = ["player", "skinColor"];
 
-		output.starting = startingOutput;
+		for (let i = 0; i < listKey.length; i++) {
+			if (namedObjects.includes(listKey[i]) && V[listKey[i]] != null) {
+				const itemKey = Object.keys(listObject[listKey[i]]);
+				for (let j = 0; j < itemKey.length; j++) {
+					if (V[listKey[i]][itemKey[j]] != null) {
+						if (validateValue(listObject[listKey[i]][itemKey[j]], V[listKey[i]][itemKey[j]])) {
+							S.starting[listKey[i]][itemKey[j]] = V[listKey[i]][itemKey[j]];
+						}
+					}
+				}
+			} else if (!namedObjects.includes(listKey[i])) {
+				if (V[listKey[i]] != null) {
+					if (validateValue(listObject[listKey[i]], V[listKey[i]])) {
+						S.starting[listKey[i]] = V[listKey[i]];
+					}
+				}
+			}
+		}
 	}
 
 	listObject = settingsObjects("general");
 	listKey = Object.keys(listObject);
-	const namedObjects = ["map", "shopDefaults", "options"];
+	namedObjects = ["map", "skinColor", "shopDefaults", "options"];
 
 	for (let i = 0; i < listKey.length; i++) {
 		if (namedObjects.includes(listKey[i]) && V[listKey[i]] != null) {
@@ -755,14 +749,14 @@ function exportSettings(data, type) {
 			for (let j = 0; j < itemKey.length; j++) {
 				if (V[listKey[i]][itemKey[j]] != null) {
 					if (validateValue(listObject[listKey[i]][itemKey[j]], V[listKey[i]][itemKey[j]])) {
-						output.general[listKey[i]][itemKey[j]] = V[listKey[i]][itemKey[j]];
+						S.general[listKey[i]][itemKey[j]] = V[listKey[i]][itemKey[j]];
 					}
 				}
 			}
 		} else if (!namedObjects.includes(listKey[i])) {
 			if (V[listKey[i]] != null) {
 				if (validateValue(listObject[listKey[i]], V[listKey[i]])) {
-					output.general[listKey[i]] = V[listKey[i]];
+					S.general[listKey[i]] = V[listKey[i]];
 				}
 			}
 		}
@@ -770,24 +764,24 @@ function exportSettings(data, type) {
 	listObject = settingsObjects("npc");
 	listKey = Object.keys(listObject);
 	for (let i = 0; i < V.NPCNameList.length; i++) {
-		output.npc[V.NPCNameList[i]] = {};
+		S.npc[V.NPCNameList[i]] = {};
 		for (let j = 0; j < listKey.length; j++) {
 			// Overwrite to allow for "none" default value in the start passage to allow for rng to decide
 			if (V.passage === "Start" && ["pronoun", "gender", "skincolour"].includes(listKey[j]) && V.NPCName[i][listKey[j]] === "none") {
-				output.npc[V.NPCNameList[i]][listKey[j]] = V.NPCName[i][listKey[j]];
+				S.npc[V.NPCNameList[i]][listKey[j]] = V.NPCName[i][listKey[j]];
 			} else if (validateValue(listObject[listKey[j]], V.NPCName[i][listKey[j]])) {
-				output.npc[V.NPCNameList[i]][listKey[j]] = V.NPCName[i][listKey[j]];
+				S.npc[V.NPCNameList[i]][listKey[j]] = V.NPCName[i][listKey[j]];
 			}
 		}
 	}
 
 	if (V.passage === "Start") {
-		output.starting = settingsConvert(true, "starting", output.starting);
+		S.starting = settingsConvert(true, "starting", S.starting);
 	}
-	output.general = settingsConvert(true, "general", output.general);
+	S.general = settingsConvert(true, "general", S.general);
 
 	// console.log(S);
-	const result = JSON.stringify(output);
+	const result = JSON.stringify(S);
 	if (type === "text") {
 		const textArea = document.getElementById("settingsDataInput");
 		textArea.value = result;
@@ -797,8 +791,6 @@ function exportSettings(data, type) {
 	}
 }
 window.exportSettings = exportSettings;
-
-const settingContainers = ["player", "skin"];
 
 function settingsObjects(type) {
 	let result;
@@ -909,13 +901,6 @@ function settingsObjects(type) {
 						textMap: { m: "Masculine", f: "Feminine", a: "Androgynous" },
 						randomize: "characterAppearance",
 					},
-					skin: {
-						color: {
-							strings: ["light", "medium", "dark", "gyaru", "ylight", "ymedium", "ydark", "ygyaru"],
-							randomize: "characterAppearance",
-							displayName: "Natural Skintone:",
-						},
-					},
 					ballsExist: { bool: true, displayName: "Balls:", textMap: { true: "Existent", false: "Nonexistent" }, randomize: "characterAppearance" },
 					freckles: {
 						bool: true,
@@ -948,6 +933,14 @@ function settingsObjects(type) {
 						textMap: { 0: "Slender", 1: "Slim", 2: "Modest", 3: "Cushioned" },
 						randomize: "characterAppearance",
 					},
+				},
+				skinColor: {
+					natural: {
+						strings: ["light", "medium", "dark", "gyaru", "ylight", "ymedium", "ydark", "ygyaru"],
+						randomize: "characterAppearance",
+						displayName: "Natural Skintone:",
+					},
+					range: { min: 0, max: 100, decimals: 0, randomize: "characterAppearance", displayName: "Initial Tan Value:" },
 				},
 			};
 			break;
@@ -1176,6 +1169,7 @@ function settingsObjects(type) {
 					bodywritingImages: { bool: true, displayName: "Bodywriting images:" },
 					silhouetteEnabled: { bool: true, displayName: "NPC silhouettes:" },
 					tanImgEnabled: { bool: true, displayName: "Visual representation of skin colours:" },
+					tanningEnabled: { bool: true, displayName: "Tanning due to sun exposure:" },
 					sidebarAnimations: { bool: true, displayName: "Sidebar images:" },
 					blinkingEnabled: { bool: true, displayName: "Animated blinking:" },
 					combatAnimations: { bool: true, displayName: "Combat animations:" },
@@ -1188,6 +1182,7 @@ function settingsObjects(type) {
 					lightCombat: { min: 0, max: 1, decimals: 2, displayName: "Combat light:" },
 					lightTFColor: { min: 0, max: 1, decimals: 2, displayName: "Angel/Devil TF colour components:" },
 					maxStates: { min: 1, max: 20, decimals: 0, displayName: "History depth:" },
+					maxSessionStates: { min: 1, max: 20, decimals: 0, displayName: "Session history depth:" },
 					historyControls: { bool: true, displayName: "Show history controls:" },
 					useNarrowMarket: { bool: true, displayName: "Use 'narrow screen' version of market inventory:" },
 					skipStatisticsConfirmation: { bool: true, displayName: "Skip confirmation when viewing extra stats:" },
@@ -1281,7 +1276,7 @@ function settingsConvert(exportType, type, settings) {
 	const keys = Object.keys(listObject);
 	for (let i = 0; i < keys.length; i++) {
 		if (result[keys[i]] === undefined) continue;
-		if (["map", "player", "shopDefaults", "options"].includes(keys[i])) {
+		if (["map", "skinColor", "player", "shopDefaults", "options"].includes(keys[i])) {
 			const itemKey = Object.keys(listObject[keys[i]]);
 			for (let j = 0; j < itemKey.length; j++) {
 				if (result[keys[i]][itemKey[j]] === undefined) continue;
@@ -1342,64 +1337,58 @@ window.loadExternalExportFile = function () {
 		});
 };
 
-/**
- * @param {string} filter
- * @returns {string}
- */
-function randomizeSettings(filter) {
-	const result = {};
-
-	/**
-	 * @param {object} source
-	 * @param {string} key
-	 * @returns {any?}
-	 */
-	const setRandomValue = (source, key) => {
-		const value = source[key];
-		if ((!filter && value.randomize) || (filter && filter === value.randomize)) {
-			return randomizeSettingSet(value);
+window.randomizeSettings = function (filter) {
+	const settingsResult = {};
+	const settingContainers = ["player", "skinColor"];
+	const randomizeSettingLoop = function (settingsObject, mainObject, subObject) {
+		if (mainObject && !settingsResult[mainObject]) {
+			settingsResult[mainObject] = {};
 		}
-		return null;
+		if (subObject) {
+			if (!settingsResult[mainObject][subObject]) settingsResult[mainObject][subObject] = {};
+		}
+		Object.entries(settingsObject).forEach(setting => {
+			if (settingContainers.includes(setting[0])) {
+				randomizeSettingLoop(setting[1], mainObject, setting[0]);
+			} else if ((!filter && setting[1].randomize) || (filter && filter === setting[1].randomize)) {
+				if (subObject) {
+					settingsResult[mainObject][subObject][setting[0]] = randomizeSettingSet(setting[1]);
+				} else {
+					settingsResult[mainObject][setting[0]] = randomizeSettingSet(setting[1]);
+				}
+			}
+		});
 	};
-
+	const randomNumber = function (min, max, decimals = 0) {
+		const decimalsMult = Math.pow(10, decimals);
+		const minMult = min * decimalsMult;
+		const maxMult = (max + 1) * decimalsMult;
+		const rn = Math.floor(Math.random() * (maxMult - minMult)) / decimalsMult + min;
+		return parseFloat(rn.toFixed(decimals));
+	};
+	const randomizeSettingSet = function (setting) {
+		let result;
+		const keys = Object.keys(setting);
+		if (keys.includes("min")) {
+			result = randomNumber(setting.min, setting.max, setting.decimals);
+		}
+		if (keys.includes("strings")) {
+			result = setting.strings.pluck();
+		}
+		if (keys.includes("boolLetter")) {
+			result = ["t", "f"].pluck();
+		}
+		if (keys.includes("bool")) {
+			result = [true, false].pluck();
+		}
+		return result;
+	};
 	if (V.passage === "Start") {
-		const startingConfig = settingsObjects("starting");
-		const starting = traverse(startingConfig, "root", settingContainers, setRandomValue);
-		result.starting = starting;
+		randomizeSettingLoop(settingsObjects("starting"), "starting");
 	}
+	randomizeSettingLoop(settingsObjects("general"), "general");
 
-	const generalConfig = settingsObjects("general");
-	const general = traverse(generalConfig, "root", settingContainers, setRandomValue);
-	result.general = general;
-
-	return JSON.stringify(result);
-}
-window.randomizeSettings = randomizeSettings;
-
-const randomNumber = function (min, max, decimals = 0) {
-	const decimalsMult = Math.pow(10, decimals);
-	const minMult = min * decimalsMult;
-	const maxMult = (max + 1) * decimalsMult;
-	const rn = Math.floor(Math.random() * (maxMult - minMult)) / decimalsMult + min;
-	return parseFloat(rn.toFixed(decimals));
-};
-
-const randomizeSettingSet = function (setting) {
-	let result;
-	const keys = Object.keys(setting);
-	if (keys.includes("min")) {
-		result = randomNumber(setting.min, setting.max, setting.decimals);
-	}
-	if (keys.includes("strings")) {
-		result = setting.strings.pluck();
-	}
-	if (keys.includes("boolLetter")) {
-		result = ["t", "f"].pluck();
-	}
-	if (keys.includes("bool")) {
-		result = [true, false].pluck();
-	}
-	return result;
+	return JSON.stringify(settingsResult);
 };
 
 // !!Hack warning!! Don't use it maybe?

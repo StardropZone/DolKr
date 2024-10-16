@@ -7,13 +7,12 @@ var Renderer;
     const millitime = function () {
         return performance.now();
     };
-    function rescaleImageToCanvasHeight(scale, image, targetHeight) {
+    function rescaleImageToCanvasHeight(image, targetHeight) {
         const aspectRatio = image.width / image.height;
-        const scaledWidth = scale ? targetHeight * aspectRatio : image.width;
-        const scaledHeight = scale ? targetHeight : image.height;
-        const i2 = createCanvas(scaledWidth, scaledHeight);
+        const scaledWidth = targetHeight * aspectRatio;
+        const i2 = createCanvas(scaledWidth, targetHeight);
         i2.imageSmoothingEnabled = false;
-        i2.drawImage(image, 0, 0, scaledWidth, scaledHeight);
+        i2.drawImage(image, 0, 0, scaledWidth, targetHeight);
         return i2.canvas;
     }
     Renderer.DefaultImageLoader = {
@@ -25,7 +24,7 @@ var Renderer;
                 const image = new Image();
                 image.onload = () => {
                     // Rescale the image to the canvas height, if layer.scale is true
-                    const rescaledImage = rescaleImageToCanvasHeight(layer.scale, image, layer.model.height);
+                    const rescaledImage = layer.scale ? rescaleImageToCanvasHeight(image, layer.model.height) : image;
                     successCallback(src, layer, rescaledImage);
                 };
                 image.onerror = (event) => {
@@ -125,8 +124,8 @@ var Renderer;
      * Cuts out from base a shape in form of stencil.
      * Modifies and returns base.
      */
-    function cutoutFrom(base, stencil, operation) {
-        base.globalCompositeOperation = operation ?? 'destination-in';
+    function cutoutFrom(base, stencil) {
+        base.globalCompositeOperation = 'destination-in';
         base.drawImage(stencil, 0, 0);
         return base;
     }
@@ -272,7 +271,6 @@ var Renderer;
     Renderer.composeUnderRect = composeUnderRect;
     Renderer.ImageCaches = {};
     Renderer.ImageErrors = {};
-    Renderer.imageIsLoading = false;
     /**
      * Switch between compose(Over|Under)(Rect|Cutout)
      */
@@ -604,25 +602,21 @@ var Renderer;
         condition(layer, context) {
             return !!layer.mask;
         },
-        render(image, compositeLayer, renderContext) {
-            const maskCanvas = Renderer.ensureCanvas(image).getContext('2d');
-            let finalMask = compositeLayer.mask;
-            if (Array.isArray(compositeLayer.mask)) {
-                const combinedCtx = Renderer.createCanvas(image.width, image.height);
-                compositeLayer.mask.forEach((maskItem, index) => {
-                    const offset = compositeLayer.maskOffsets[index] || { x: 0, y: 0 };
-                    combinedCtx.drawImage(maskItem, offset.x, offset.y);
+        render(image, layer, context) {
+            if (Array.isArray(layer.mask)) {
+                let combinedCtx = Renderer.createCanvas(image.width, image.height);
+                combinedCtx.fillRect(0, 0, combinedCtx.canvas.width, combinedCtx.canvas.height);
+                combinedCtx.globalCompositeOperation = 'destination-in';
+                layer.mask.forEach(mask => {
+                    if (!mask)
+                        return Renderer.ensureCanvas(image).getContext('2d').canvas;
+                    combinedCtx.drawImage(mask, 0, 0);
                 });
-                finalMask = combinedCtx.canvas;
+                return Renderer.cutoutFrom(Renderer.ensureCanvas(image).getContext('2d'), combinedCtx.canvas).canvas;
             }
-            else if (compositeLayer.maskOffsets[0]?.x || compositeLayer.maskOffsets[0]?.y) {
-                const offsetCtx = Renderer.createCanvas(image.width, image.height);
-                const offset = compositeLayer.maskOffsets[0] || { x: 0, y: 0 };
-                offsetCtx.drawImage(compositeLayer.mask, offset.x, offset.y);
-                finalMask = offsetCtx.canvas;
+            else {
+                return Renderer.cutoutFrom(Renderer.ensureCanvas(image).getContext('2d'), layer.mask).canvas;
             }
-            maskCanvas.globalAlpha = compositeLayer.maskAlpha;
-            return Renderer.cutoutFrom(maskCanvas, finalMask, compositeLayer.maskBlendMode).canvas;
         }
     };
     const RenderingStepCutout = {
@@ -698,8 +692,6 @@ var Renderer;
         else {
             targetCanvas.globalAlpha = 1.0;
         }
-        targetCanvas.save();
-        targetCanvas.globalCompositeOperation = layer.compositeOperation ?? "source-over";
         const { frameWidth, frameCount, subspriteWidth, subspriteHeight, subspriteFrameCount, dx, dy } = rects;
         if (rects.subspriteFrameCount === frameCount && !layer.frames) {
             targetCanvas.drawImage(image, dx, dy);
@@ -710,7 +702,6 @@ var Renderer;
                 targetCanvas.drawImage(image, imageFrameIndex * subspriteWidth, 0, subspriteWidth, subspriteHeight, dx + i * frameWidth, dy, subspriteWidth, subspriteHeight);
             }
         }
-        targetCanvas.restore();
     }
     Renderer.composeProcessedLayer = composeProcessedLayer;
     function composeLayers(targetCanvas, layerSpecs, frameCount, listener) {
@@ -784,8 +775,6 @@ var Renderer;
             if (rendered)
                 return;
             for (const layer of layers) {
-                if (Renderer.imageIsLoading === true)
-                    return;
                 if (layer.show !== false && !layer.image)
                     return;
                 if (layer.masksrc && !layer.mask)
@@ -881,24 +870,11 @@ var Renderer;
                     loadLayerImage(layer);
                 }
             }
-            layer.maskOffsets = [];
             if (Array.isArray(layer.masksrc)) {
-                layer.masksrc = layer.masksrc
-                    .map(item => {
-                    if (item?.path) {
-                        layer.maskOffsets.push({ x: item.offsetX || 0, y: item.offsetY || 0 });
-                        return item.path;
-                    }
-                    return item;
-                })
-                    .filter(value => value != null);
+                layer.masksrc = layer.masksrc.filter(value => value != null);
                 if (layer.masksrc.length === 0 || layer.masksrc.every(value => value == null)) {
                     layer.masksrc = null;
                 }
-            }
-            else if (layer.masksrc?.path) {
-                layer.maskOffsets.push({ x: layer.masksrc.offsetX || 0, y: layer.masksrc.offsetY || 0 });
-                layer.masksrc = layer.masksrc.path;
             }
             let needMask = !!layer.masksrc;
             if (layer.mask) {
@@ -945,18 +921,12 @@ var Renderer;
     }
     Renderer.composeLayers = composeLayers;
     function refresh(model) {
-        if (!model.canvas)
-            return;
-        clearCaches(model);
-        model.redraw();
-    }
-    Renderer.refresh = refresh;
-    function clearCaches(model) {
         Renderer.ImageCaches = {};
         Renderer.ImageErrors = {};
         invalidateLayerCaches(model.layerList);
+        model.redraw();
     }
-    Renderer.clearCaches = clearCaches;
+    Renderer.refresh = refresh;
     function invalidateLayerCaches(layers) {
         for (let layer of layers) {
             delete layer.image;
@@ -973,14 +943,6 @@ var Renderer;
     }
     Renderer.animateLayersAgain = animateLayersAgain;
     const animatingCanvases = new WeakMap();
-    function getAnimatingCanvas(targetCanvas) {
-        return animatingCanvases.get(targetCanvas);
-    }
-    Renderer.getAnimatingCanvas = getAnimatingCanvas;
-    function getAnimatingCanvases() {
-        return animatingCanvases;
-    }
-    Renderer.getAnimatingCanvases = getAnimatingCanvases;
     Renderer.Animations = {};
     /**
      * Animation spec provider; default implementation is look up in Renderer.Animations by layer's `animation` property.

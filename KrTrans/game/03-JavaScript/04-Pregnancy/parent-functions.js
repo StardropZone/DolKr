@@ -1,15 +1,15 @@
 /* eslint-disable jsdoc/require-returns-type */
 // Format for storing the parents of a child.
 const parentList = {
-	mothers: [{ name: "pc", npc: false, births: 0, kids: 0, id: 0 }],
-	fathers: [{ name: "pc", npc: false, kids: 0, id: 0 }],
+	mothers: [{ name: "pc", compressed: "none", births: 0, kids: 0, id: 0 }],
+	fathers: [{ name: "pc", compressed: "none", kids: 0, id: 0 }],
 };
 
 // basic constructor for the parent list.
-const parent = ({ name = null, npc = false, kids = 0, id = null, births = undefined }) => {
+const parent = ({ name = null, compressed = null, kids = 0, id = null, births = undefined }) => {
 	return {
 		name,
-		npc,
+		compressed,
 		kids,
 		id,
 		births,
@@ -105,36 +105,13 @@ function totalKids(parentId, parentType = 0, byName = false) {
  * @param {number} passedID The id number of the NPC is they already have one. If the id is a duplicate, it will assign a new id.
  */
 function addToParentList(name, npcObject, parentType = 0, passedID = null) {
-	let npc = false;
+	let compressed = "none";
 	const births = parentType === 0 ? 0 : undefined;
 	const parent = parentType === 0 ? "mothers" : "fathers";
-	if (npcObject) {
-		npc = {
-			adult: npcObject.adult,
-			breastsize: npcObject.breastsize,
-			breastdesc: npcObject.breastdesc,
-			breastsdesc: npcObject.breastsdesc,
-			description: npcObject.description,
-			fullDescription: npcObject.fullDescription,
-			gender: npcObject.gender,
-			insecurity: npcObject.insecurity,
-			name: npcObject.name,
-			monster: npcObject.monster,
-			penis: npcObject.penis,
-			penisdesc: npcObject.penisdesc,
-			penissize: npcObject.penissize,
-			pregnancy: npcObject.pregnancy,
-			pregnancyAvoidance: npcObject.pregnancyAvoidance,
-			pronoun: npcObject.pronoun,
-			skincolour: npcObject.skincolour,
-			teen: npcObject.teen,
-			type: npcObject.type,
-			vagina: npcObject.vagina,
-		};
-	}
+	if (npcObject) compressed = npcCompressor(npcObject);
 	const idNum = passedID && findParent(passedID) === -1 ? passedID : findMaxParentId(parentType) + 1;
 
-	V.parentList[parent].push({ name, npc, kids: 0, id: idNum, births });
+	V.parentList[parent].push({ name, compressed, kids: 0, id: idNum, births });
 	return V.parentList[parent].last();
 }
 

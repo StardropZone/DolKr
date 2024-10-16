@@ -6,7 +6,7 @@
 	Otherwise locations will match the folder name
 */
 setup.Locations = {
-	alex_farm: () => (V.bus === "woodland" ? "forest" : V.bus === "farm_fields" ? "fields" : "alex_farm"),
+	alex_farm: () => (V.bus === "woodland" ? "forest" : "alex_farm"),
 	alley: () => {
 		if (V.bus === "industrial") return "ind_alley";
 		if (V.bus === "residential") return "res_alley";
@@ -20,11 +20,12 @@ setup.Locations = {
 	castle: () => {
 		return "tower";
 	},
+	chalets: () => {
+		return "beach";
+	},
 	hotel: () => {
 		return "town";
 	},
-	estate: () => (V.bus === "estate_cottage" ? "estate_cottage" : "estate"),
-	farm: () => (["farmroad6", "farm"].includes(V.bus) ? "farm" : "underground_farm"),
 	get() {
 		if (typeof this[V.location] === "function") {
 			return this[V.location]();
@@ -523,7 +524,7 @@ setup.LocationImages = {
 				image: "drip.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(5, 15, true) * 1000,
+					cycleDelay: () => random(5, 15) * 1000,
 				},
 			},
 		},
@@ -547,25 +548,6 @@ setup.LocationImages = {
 			},
 		},
 	},
-	chalets: {
-		folder: "chalets",
-		base: {
-			default: {
-				image: "base.png",
-			},
-			snow: {
-				condition: () => Weather.isSnow,
-				image: "snow.png",
-			},
-			water: {
-				image: "water.png",
-				animation: {
-					frameDelay: 250,
-					cycleDelay: 1500,
-				},
-			},
-		},
-	},
 	churchyard: {
 		folder: "churchyard",
 		base: {
@@ -584,59 +566,6 @@ setup.LocationImages = {
 			size: 2,
 		},
 	},
-	coastpath: {
-		folder: "coastal_path",
-		base: {
-			default: {
-				image: "base.png",
-				animation: {
-					frameDelay: 200,
-					cycleDelay: () => random(5, 15, true) * 1000,
-				},
-			},
-			snow: {
-				condition: () => Weather.isSnow,
-				image: "snow.png",
-				animation: {
-					frameDelay: 200,
-					cycleDelay: () => random(5, 15, true) * 1000,
-				},
-			},
-			flower: {
-				condition: () => !Weather.isSnow,
-				image: "flower.png",
-				animation: {
-					frameDelay: 500,
-					cycleDelay: () => random(5, 30, true) * 1000,
-				},
-			},
-			bunny: {
-				condition: () => Time.dayState !== "night",
-				image: "bunny.png",
-				animation: {
-					frameDelay: 150,
-					cycleDelay: () => random(10, 40, true) * 1000,
-				},
-			},
-		},
-		reflective: {
-			mask: {
-				image: "reflective.png",
-				compositeOperation: "overlay",
-				verticalFactor: 4,
-				amplitude: 20,
-				frequency: 15,
-			},
-			overlay: {
-				image: "water.png",
-				compositeOperation: "overlay",
-				animation: {
-					frameDelay: 250,
-					cycleDelay: () => 0,
-				},
-			},
-		},
-	},
 	com_alley: {
 		folder: "com_alley",
 		base: {
@@ -645,7 +574,7 @@ setup.LocationImages = {
 				image: "base.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(5, 30, true) * 1000,
+					cycleDelay: () => random(5, 30) * 1000,
 				},
 			},
 			blood: {
@@ -653,7 +582,7 @@ setup.LocationImages = {
 				image: "bloodmoon.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(10, 60, true) * 1000,
+					cycleDelay: () => random(10, 60) * 1000,
 				},
 			},
 			snow: {
@@ -732,8 +661,8 @@ setup.LocationImages = {
 				image: "boat.png",
 				animation: {
 					frameDelay: 6000,
-					cycleDelay: () => random(2, 20, true) * 1000,
-					startFrame: () => random(1, 24, true),
+					cycleDelay: () => random(2, 20) * 1000,
+					startFrame: () => random(1, 24),
 				},
 			},
 			cruiser: {
@@ -743,8 +672,8 @@ setup.LocationImages = {
 				image: "cruiser.png",
 				animation: {
 					frameDelay: 9000,
-					cycleDelay: () => random(2, 20, true) * 1000,
-					startFrame: () => (random(0, 1, true) ? random(0, 24, true) : 0),
+					cycleDelay: () => random(2, 20) * 1000,
+					startFrame: () => (random(0, 1) ? random(0, 24) : 0),
 				},
 			},
 		},
@@ -866,7 +795,7 @@ setup.LocationImages = {
 				waitForAnimation: "lorry_moving",
 				animation: {
 					frameDelay: 150,
-					cycleDelay: () => random(5, 15, true) * 1000,
+					cycleDelay: () => random(5, 15) * 1000,
 				},
 			},
 			lorry_moving: {
@@ -875,7 +804,7 @@ setup.LocationImages = {
 				waitForAnimation: "inside",
 				animation: {
 					frameDelay: 150,
-					cycleDelay: () => random(10, 30, true) * 1000,
+					cycleDelay: () => random(10, 30) * 1000,
 				},
 			},
 		},
@@ -921,63 +850,13 @@ setup.LocationImages = {
 		folder: "farm",
 		base: {
 			default: {
-				condition: () => !Weather.isSnow && Time.season !== "winter",
+				condition: () => !Weather.isSnow,
 				image: "base.png",
 			},
-			winter: {
-				condition: () => !Weather.isSnow && Time.season === "winter",
-				image: "winter.png",
-			},
 			snow: {
 				condition: () => Weather.isSnow,
 				image: "snow.png",
 			},
-			wind_base: {
-				condition: () => !Weather.isSnow && Time.season !== "winter",
-				image: "wind_base.png",
-				animation: {
-					frameDelay: 1000,
-				},
-			},
-			wind_winter: {
-				condition: () => !Weather.isSnow && Time.season === "winter",
-				image: "wind_winter.png",
-				animation: {
-					frameDelay: 1000,
-				},
-			},
-		},
-	},
-	fields: {
-		folder: "fields",
-		base: {
-			watchtower: {
-				condition: () => V.farm.tower >= 1,
-				image: "watchtower.png",
-			},
-			default: {
-				condition: () => !Weather.isSnow,
-				image: `${Time.season}.png`,
-			},
-			snow: {
-				condition: () => Weather.isSnow,
-				image: "snow.png",
-			},
-			wind: {
-				image: "wind.png",
-				animation: {
-					frameDelay: 100,
-					cycleDelay: () => 4000,
-					startDelay: () => 150,
-				},
-			},
-		},
-		emissive: {
-			condition: () => V.farm.tower >= 1 && Weather.lightsOn,
-			image: "emissive.png",
-			color: "#deae66",
-			blur: 0,
-			intensity: 0.8,
 		},
 	},
 	flats: {
@@ -1041,7 +920,7 @@ setup.LocationImages = {
 				image: "birds_light.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(5, 15, true) * 1000,
+					cycleDelay: () => random(5, 15) * 1000,
 				},
 			},
 			bloodmoon: {
@@ -1049,7 +928,7 @@ setup.LocationImages = {
 				image: "bloodmoon.png",
 				animation: {
 					frameDelay: 300,
-					cycleDelay: () => random(2, 7, true) * 1000,
+					cycleDelay: () => random(2, 7) * 1000,
 				},
 			},
 		},
@@ -1059,7 +938,7 @@ setup.LocationImages = {
 				image: "emissive_blood0.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(2, 7, true) * 1000,
+					cycleDelay: () => random(2, 7) * 1000,
 				},
 				color: "#e63e3e",
 			},
@@ -1068,7 +947,7 @@ setup.LocationImages = {
 				image: "emissive_blood1.png",
 				animation: {
 					frameDelay: 2000,
-					cycleDelay: () => random(4, 10, true) * 1000,
+					cycleDelay: () => random(4, 10) * 1000,
 				},
 				color: "#e63e3e",
 			},
@@ -1077,7 +956,7 @@ setup.LocationImages = {
 				image: "emissive_blood2.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(4, 11, true) * 1000,
+					cycleDelay: () => random(4, 11) * 1000,
 				},
 				color: "#e63e3e",
 			},
@@ -1086,7 +965,7 @@ setup.LocationImages = {
 				image: "emissive_blood3.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(3, 12, true) * 1000,
+					cycleDelay: () => random(3, 12) * 1000,
 				},
 				color: "#e63e3e",
 			},
@@ -1160,7 +1039,7 @@ setup.LocationImages = {
 				image: "base.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(4, 15, true) * 1000,
+					cycleDelay: () => random(4, 15) * 1000,
 				},
 			},
 			snow: {
@@ -1168,7 +1047,7 @@ setup.LocationImages = {
 				image: "snow.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(4, 15, true) * 1000,
+					cycleDelay: () => random(4, 15) * 1000,
 				},
 			},
 		},
@@ -1255,7 +1134,7 @@ setup.LocationImages = {
 				image: "blood0.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(2, 7, true) * 1000,
+					cycleDelay: () => random(2, 7) * 1000,
 				},
 				color: "#e63e3e",
 			},
@@ -1264,7 +1143,7 @@ setup.LocationImages = {
 				image: "blood1.png",
 				animation: {
 					frameDelay: 2000,
-					cycleDelay: () => random(4, 10, true) * 1000,
+					cycleDelay: () => random(4, 10) * 1000,
 				},
 				color: "#e63e3e",
 			},
@@ -1273,7 +1152,7 @@ setup.LocationImages = {
 				image: "blood2.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(4, 11, true) * 1000,
+					cycleDelay: () => random(4, 11) * 1000,
 				},
 				color: "#e63e3e",
 			},
@@ -1401,32 +1280,6 @@ setup.LocationImages = {
 			},
 		},
 	},
-	townhall: {
-		folder: "town_hall",
-		base: {
-			default: {
-				image: "base.png",
-			},
-			trees: {
-				condition: () => Time.season !== "winter",
-				image: "trees.png",
-			},
-			trees_winter: {
-				condition: () => Time.season === "winter",
-				image: "trees_winter.png",
-			},
-			snow: {
-				condition: () => Weather.isSnow,
-				image: "snow.png",
-			},
-		},
-		emissive: {
-			image: "emissive.png",
-			condition: () => Weather.lightsOn,
-			color: "#deae66",
-			strength: 2,
-		},
-	},
 	meadow: {
 		folder: "meadow",
 		base: {
@@ -1442,7 +1295,7 @@ setup.LocationImages = {
 				image: "wind.png",
 				animation: {
 					frameDelay: 100,
-					cycleDelay: () => random(5, 15, true) * 1000,
+					cycleDelay: () => random(5, 15) * 1000,
 				},
 			},
 		},
@@ -1473,14 +1326,14 @@ setup.LocationImages = {
 				image: "grass.png",
 				animation: {
 					frameDelay: 300,
-					cycleDelay: () => random(1, 8, true) * 1000,
+					cycleDelay: () => random(1, 8) * 1000,
 				},
 			},
 			wind: {
 				image: "wind.png",
 				animation: {
 					frameDelay: 100,
-					cycleDelay: () => random(5, 15, true) * 1000,
+					cycleDelay: () => random(5, 15) * 1000,
 				},
 			},
 		},
@@ -1522,7 +1375,7 @@ setup.LocationImages = {
 				condition: () => Time.dayState === "morning",
 				animation: {
 					frameDelay: 300,
-					cycleDelay: () => random(1, 5, true) * 1000,
+					cycleDelay: () => random(1, 5) * 1000,
 				},
 			},
 			drip: {
@@ -1544,7 +1397,7 @@ setup.LocationImages = {
 				image: "rat.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(10, 30, true) * 1000,
+					cycleDelay: () => random(10, 30) * 1000,
 				},
 			},
 		},
@@ -1643,7 +1496,7 @@ setup.LocationImages = {
 				image: "treebirds.png",
 				animation: {
 					frameDelay: 300,
-					cycleDelay: () => random(2, 10, true) * 1000,
+					cycleDelay: () => random(2, 10) * 1000,
 				},
 			},
 			flyingbird: {
@@ -1653,7 +1506,7 @@ setup.LocationImages = {
 				image: "flyingbird.png",
 				animation: {
 					frameDelay: 200,
-					cycleDelay: () => random(10, 30, true) * 1000,
+					cycleDelay: () => random(10, 30) * 1000,
 				},
 			},
 		},
@@ -1661,27 +1514,6 @@ setup.LocationImages = {
 			image: "emissive.png",
 			condition: () => Weather.lightsOn,
 			color: "#deae66a5",
-		},
-	},
-	estate_cottage: {
-		folder: "estate_cottage",
-		base: {
-			default: {
-				condition: () => !Weather.isSnow,
-				image: "base.png",
-			},
-			snow: {
-				condition: () => Weather.isSnow,
-				image: "snow.png",
-				animation: {
-					frameDelay: 300,
-					cycleDelay: () => 1200,
-				},
-			},
-		},
-		emissive: {
-			image: "emissive.png",
-			condition: () => Weather.lightsOn,
 		},
 	},
 	police_station: {
@@ -1746,7 +1578,7 @@ setup.LocationImages = {
 				image: "cage.png",
 				animation: {
 					frameDelay: 500,
-					cycleDelay: () => random(3, 15, true) * 1000,
+					cycleDelay: () => random(3, 15) * 1000,
 				},
 			},
 		},
@@ -1823,7 +1655,7 @@ setup.LocationImages = {
 				image: "base.png",
 				animation: {
 					frameDelay: 1000,
-					cycleDelay: () => random(4, 15, true) * 1000,
+					cycleDelay: () => random(4, 15) * 1000,
 				},
 			},
 			snow: {
@@ -1831,7 +1663,7 @@ setup.LocationImages = {
 				image: "snow.png",
 				animation: {
 					frameDelay: 1000,
-					cycleDelay: () => random(4, 15, true) * 1000,
+					cycleDelay: () => random(4, 15) * 1000,
 				},
 			},
 		},
@@ -1897,7 +1729,7 @@ setup.LocationImages = {
 			mask: {
 				image: "reflective.png",
 				alpha: 1,
-				compositeOperation: "overlay",
+				compositeOperation: "overlay"
 			},
 			overlay: {
 				image: "water.png",
@@ -2184,7 +2016,7 @@ setup.LocationImages = {
 				image: "moving_tentacle.png",
 				animation: {
 					frameDelay: 300,
-					cycleDelay: () => random(1, 9, true) * 1000,
+					cycleDelay: () => random(1, 9) * 1000,
 				},
 			},
 		},
@@ -2204,7 +2036,7 @@ setup.LocationImages = {
 				image: "wind.png",
 				animation: {
 					frameDelay: 100,
-					cycleDelay: () => random(5, 15, true) * 1000,
+					cycleDelay: () => random(5, 15) * 1000,
 				},
 			},
 		},
@@ -2214,7 +2046,7 @@ setup.LocationImages = {
 				image: "bonfire.png",
 				animation: {
 					frameDelay: 300,
-					cycleDelay: () => random(0, 700, true),
+					cycleDelay: () => random(0, 700),
 				},
 				color: "#deae66",
 				size: 5,
@@ -2246,7 +2078,7 @@ setup.LocationImages = {
 				alwaysDisplay: false,
 				animation: {
 					frameDelay: 150,
-					cycleDelay: () => random(5, 15, true) * 1000,
+					cycleDelay: () => random(5, 15) * 1000,
 				},
 			},
 			parkedCar: {
@@ -2258,7 +2090,7 @@ setup.LocationImages = {
 				image: "cat.png",
 				animation: {
 					frameDelay: 300,
-					cycleDelay: () => random(3, 9, true) * 1000,
+					cycleDelay: () => random(3, 9) * 1000,
 				},
 			},
 		},
@@ -2282,26 +2114,13 @@ setup.LocationImages = {
 				size: 4,
 				animation: {
 					frameDelay: 250,
-					cycleDelay: () => random(2, 20, true) * 1000,
+					cycleDelay: () => random(2, 20) * 1000,
 				},
 			},
 		},
 	},
 	underground: {
 		folder: "underground",
-		base: {
-			default: {
-				condition: () => !Weather.isSnow,
-				image: "base.png",
-			},
-			snow: {
-				condition: () => Weather.isSnow,
-				image: "snow.png",
-			},
-		},
-	},
-	underground_farm: {
-		folder: "underground_farm",
 		base: {
 			default: {
 				condition: () => !Weather.isSnow,

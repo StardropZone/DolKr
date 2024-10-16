@@ -1,1 +1,16 @@
-404: Not Found
+:: Widgets Consensual Man [widget]
+<<widget "consensualman">>
+	<!-- Unused -->
+<</widget>>
+:: Widgets Consensual Actions [widget]
+/*
+<<widget "consensualman">>
+	<!-- Unused -->
+<</widget>>
+*/
+:: Widgets Consensual Effects [widget]
+/*
+<<widget "consensualman">>
+	<!-- Unused -->
+<</widget>>
+*/

@@ -46,6 +46,18 @@ Renderer.CanvasModels.sexdemo = {
 			 */
 			balls: false,
 			/**
+			 * Item index in setup.clothes.under_lower.
+			 */
+			worn_under_lower: 0,
+			/**
+			 * Item state, "" (none) | "totheside".
+			 */
+			worn_under_lower_state: "",
+			/**
+			 * Item colour, key in setup.colours.clothes.
+			 */
+			worn_under_lower_colour: "red",
+			/**
 			 * Show/hide xray-anal slot.
 			 */
 			xray_vaginal_show: false,
@@ -109,12 +121,12 @@ Renderer.CanvasModels.sexdemo = {
 			// "" means use global
 			options.close_vagina_speed = options.animation_speed;
 		}
-		if (options.worn.under_lower) {
-			const record = setup.colours.clothes_map[options.worn.under_lower.colour];
+		if (options.worn_under_lower) {
+			const record = setup.colours.clothes_map[options.worn_under_lower_colour];
 			if (record) {
 				options.filters.under_lower = record.canvasfilter;
 			} else {
-				console.error("Unknown under_lower colour " + options.worn.under_lower.colour);
+				console.error("Unknown under_lower colour " + options.worn_under_lower_colour);
 				options.filters.under_lower = {};
 			}
 		}
@@ -264,7 +276,7 @@ Renderer.CanvasModels.sexdemo = {
 		close_vagina_panties: {
 			z: 253,
 			showfn(options) {
-				return options.close_vagina_show && !!options.worn.under_lower.index && options.worn.under_lower.state === "totheside";
+				return options.close_vagina_show && !!options.worn_under_lower && options.worn_under_lower_state === "totheside";
 			},
 			srcfn(options) {
 				return "img/sex/close/" + options.position + "/vaginatotheside.png";

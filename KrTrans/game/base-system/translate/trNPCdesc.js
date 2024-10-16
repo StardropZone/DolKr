@@ -19,8 +19,6 @@ function trNPCdesc(npcinfo, post, sep)
 		trinit_beastsList();
 		trinit_beastAdjList();
 	}
-	if (!setup.trCreatures)
-		trinit_creature();
 	if (!setup.trNPCdescAdjList)
 		trinit_NPCdescAdj();
 	if (!setup.trGenderList)
@@ -50,11 +48,6 @@ function trNPCdesc(npcinfo, post, sep)
 		{
 			/* NPCName (the NPCRole) */
 			T.trResult = (tempArray[2]?trRole(tempArray[2]) + " ":"") + trNPCname(tempArray[0], post, sep);
-		}
-		else if (setup.trCreatures.nameIndex[tempArray[tempArray.length - 1]])
-		{
-			/* Creature? */
-			T.trResult = trCreature("all", name, 1, post, sep);
 		}
 		else
 		{

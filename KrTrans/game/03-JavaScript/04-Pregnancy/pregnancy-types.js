@@ -47,7 +47,7 @@ function npcPregObject(person, mother) {
 				gender: V.player.gender,
 				type: "human",
 				parentId: Array.isArray(parentId) ? parentId[0] : parentId,
-				skinColour: Skin.color.natural,
+				skinColour: V.skinColor.natural,
 				hairColour: V.naturalhaircolour,
 				eyeColour: V.eyeselect,
 			};
@@ -77,7 +77,7 @@ function npcPregObject(person, mother) {
 				name: person,
 				type: "unknown",
 				parentId: Array.isArray(parentId) ? parentId[0] : parentId,
-				skinColour: random(0, 100) >= V.blackchance ? "dark" : "light",
+				skinColour: random(0, 100) >= V.blackchance ? "black" : "white",
 			};
 		}
 	} else {
@@ -249,10 +249,8 @@ function hairColourCalc(colour) {
 }
 
 function skinColourCalc(colour) {
-	if (colour === "black") return "dark";
-	if (colour === "white") return "light";
 	if (colour) return colour;
-	return ["light", "medium", "dark", "gyaru", "ylight", "ymedium", "ydark", "ygyaru"].random();
+	return ["light", "medium", "dark", "ylight", "ymedium", "ydark"][random(0, 5)];
 }
 
 // Only applies to the pc

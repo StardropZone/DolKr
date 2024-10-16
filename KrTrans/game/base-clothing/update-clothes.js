@@ -24,8 +24,6 @@ function updateClothingColours(item, itemRef) {
 		case "round shades":
 		case "witch shoes":
 		case "mesh shirt":
-		case "fishnet stockings":
-		case "fishnet tights":
 			if (item.colour === 0) item.colour = "black";
 			break;
 		case "square shades":
@@ -90,13 +88,6 @@ function updateClothingColours(item, itemRef) {
 		case "argyle sweater vest":
 			if (item.accessory_colour === 0) item.accessory_colour = item.colour;
 			if (item.colourCustom) item.accessory_colourCustom = item.colourCustom;
-			break;
-		case "karate jacket":
-			if (item.colour === 0) item.colour = "white";
-			if (item.accessory_colour === 0) item.accessory_colour = "red";
-			break;
-		case "karate trousers":
-			if (item.colour === 0) item.colour = "white";
 			break;
 		default:
 			// Catch-all case if people forget to adjust this widget for whatever clothing item is updated. Can make weird looking clothes if "custom" is selected.
@@ -536,11 +527,11 @@ function wardrobesUpdate() {
 		V.wardrobes.birdTower.isolated = true;
 		V.wardrobes.birdTower.space = 15;
 	}
-	if (!V.wardrobes.birdTower.locationRequirement?.length) {
+	if (!V.wardrobes.birdTower.locationRequirement) {
 		V.wardrobes.birdTower.locationRequirement = ["tower", "moor"];
 	}
 
-	if (!V.wardrobes.prison.locationRequirement?.length) {
+	if (!V.wardrobes.prison.locationRequirement) {
 		V.wardrobes.prison.locationRequirement = ["prison"];
 	}
 }

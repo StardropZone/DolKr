@@ -16,10 +16,6 @@ setup.debugMenu.eventList = {
 			widgets: [`<<endcombat>>`],
 		},
 		{
-			link: [`Test`, `Test`],
-			widgets: [`<<endcombat>>`],
-		},
-		{
 			link: [`Pass 1 minute`, stayOnPassageFn],
 			widgets: [`<<pass 1>>`],
 		},
