@@ -14,6 +14,10 @@ jobs:
       - name: Checkout this repository
         uses: actions/checkout@v3
 
+      # GITHUB_TOKEN 설정
+      - name: Set GitHub Token environment variable
+        run: echo "GITHUB_TOKEN=${{ secrets.G_TOKEN }}" >> $GITHUB_ENV
+
       # 최신 태그 정보 가져오기
       - name: Get latest tag from source repository
         id: get_latest_tag
