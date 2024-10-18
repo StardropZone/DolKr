@@ -36,7 +36,7 @@ jobs:
           fi
           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
 
-      # 태그 비교 및 복사 여부 확인
+      # 태그 비교
       - name: Compare versions
         id: compare_versions
         run: |
@@ -48,95 +48,39 @@ jobs:
             echo "COPY_NEEDED=false" >> $GITHUB_ENV
           fi
 
-      # 변경된 파일들 추적 (트리 비교 방식 사용 및 삭제된 파일 포함)
-      - name: Get list of changed and deleted files
+      # KrTrans 폴더 내의 기존 파일 삭제
+      - name: Remove existing files in KrTrans
         if: env.COPY_NEEDED == 'true'
         run: |
-          # 소스 리포지토리의 트리 SHA를 태그 기준으로 가져옴
-          BASE_TREE_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/refs/tags/$CURRENT_VERSION | jq -r '.object.sha // empty')
-          HEAD_TREE_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/refs/tags/$LATEST_TAG | jq -r '.object.sha // empty')
+          rm -rf KrTrans/*
 
+      # 최신 태그의 소스 리포지토리에서 KrTrans 폴더로 모든 파일 복사
+      - name: Copy all files from source repository to KrTrans
+        if: env.COPY_NEEDED == 'true'
+        run: |
+          # 임시 디렉토리 생성 및 소스 리포지토리 클론
+          mkdir temp_repo
+          git clone --depth 1 --branch $LATEST_TAG https://$GITHUB_TOKEN@github.com/uotalkie/dol-kr.git temp_repo
+          
+          # KrTrans 폴더로 파일 복사
+          cp -r temp_repo/* KrTrans/
+          
+          # 임시 디렉토리 제거
+          rm -rf temp_repo
 
-          # BASE 트리 SHA에서 실제 커밋의 트리 SHA 가져오기
-          BASE_COMMIT_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/commits/$BASE_TREE_SHA | jq -r '.tree.sha')
-          HEAD_COMMIT_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/commits/$HEAD_TREE_SHA | jq -r '.tree.sha')
-
-          # 두 트리 비교 후 변경된 파일 및 삭제된 파일 추출
-          BASE_TREE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/trees/$BASE_COMMIT_SHA?recursive=1 | jq -r '.tree[] | .path + " " + .sha')
-          HEAD_TREE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/uotalkie/dol-kr/git/trees/$HEAD_COMMIT_SHA?recursive=1 | jq -r '.tree[] | .path + " " + .sha')
-
-          # 트리 비교 및 삭제된 파일 추출
-          echo "$BASE_TREE" > base_tree.txt
-          echo "$HEAD_TREE" > head_tree.txt
-
-          # 삭제된 파일: BASE에는 있지만 HEAD에는 없는 파일 (comm -23 사용)
-          DELETED_FILES=$(comm -23 <(sort base_tree.txt | awk '{print $1}') <(sort head_tree.txt | awk '{print $1}'))
-
-          # 변경된 파일: HEAD에는 있지만 BASE에는 없는 파일 또는 수정된 파일 (SHA 비교)
-          CHANGED_FILES=""
-          while read -r head_file head_sha; do
-            base_sha=$(grep "^$head_file " base_tree.txt | awk '{print $2}')
-            if [ -z "$base_sha" ] || [ "$head_sha" != "$base_sha" ]; then
-              # SHA가 다르거나 base에 없는 파일 -> diff로 확인
-              DIFF_URL="https://api.github.com/repos/uotalkie/dol-kr/compare/$CURRENT_VERSION...$LATEST_TAG"
-              DIFF_CHECK=$(curl -s -H "Authorization: token $GITHUB_TOKEN" $DIFF_URL | jq -r --arg file "$head_file" '.files[] | select(.filename == $file) | .status')
-
-              if [ "$DIFF_CHECK" == "modified" ] || [ "$DIFF_CHECK" == "added" ]; then
-                CHANGED_FILES="$CHANGED_FILES$head_file"$'\n'
+      # 파일 인코딩 확인 및 변환 (UTF-8로 인코딩되지 않은 경우 변환)
+      - name: Check and convert file encoding to UTF-8
+        if: env.COPY_NEEDED == 'true'
+        run: |
+          for file in KrTrans/*; do
+            if [ -f "$file" ]; then
+              ENCODING=$(file -bi "$file" | awk -F "=" '{print $2}')
+              if [ "$ENCODING" != "utf-8" ]; then
+                echo "Converting $file from $ENCODING to utf-8"
+                iconv -f $ENCODING -t UTF-8 "$file" -o "$file"
               fi
             fi
-          done < <(awk '{print $1 " " $2}' head_tree.txt)
-
-          # 변경된 파일 및 삭제된 파일 기록
-          echo "$CHANGED_FILES" > scripts/KrChangedFiles.txt
-          echo "$DELETED_FILES" > scripts/KrDeletedFiles.txt
-
-          echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
-          echo "$CHANGED_FILES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-          echo "DELETED_FILES<<EOF" >> $GITHUB_ENV
-          echo "$DELETED_FILES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-          echo "Total changed files: $(echo "$CHANGED_FILES" | wc -l)"
-          echo "Total deleted files: $(echo "$DELETED_FILES" | wc -l)"
-
-      # 변경된 파일을 복사 (경로 유지 및 덮어쓰기)
-      - name: Copy changed files from source repository
-        if: env.COPY_NEEDED == 'true'
-        run: |
-          mkdir -p KrTrans
-          while IFS= read -r file; do
-            if [ -n "$file" ]; then
-              dir=$(dirname "./KrTrans/$file")
-              mkdir -p "$dir"
-              echo "Copying file: $file"
-              URL="https://raw.githubusercontent.com/uotalkie/dol-kr/$LATEST_TAG/$file"
-              echo "URL: $URL"
-              curl -L -H "Authorization: token $GITHUB_TOKEN" -o "./KrTrans/$file" "$URL" || echo "Failed to download: $file"
-            fi
-          done <<< "$CHANGED_FILES"
-
-      # 파일 인코딩 확인 및 변환
-      - name: Check and convert file encoding
-        run: |
-          ENCODING=$(file -bi KrTrans/README.md | awk -F "=" '{print $2}')
-          if [ "$ENCODING" != "utf-8" ]; then
-            iconv -f $ENCODING -t UTF-8 KrTrans/README.md -o KrTrans/README.md
-          fi
-
-      # 삭제된 파일을 리포지토리에서 삭제하는 단계 추가
-      - name: Delete files from repository
-        if: env.COPY_NEEDED == 'true'
-        run: |
-          while IFS= read -r file; do
-            if [ -n "$file" ]; then
-              echo "Deleting file: $file"
-              git rm "$file" || echo "Failed to delete: $file"
-            fi
-          done < scripts/KrDeletedFiles.txt
-
+          done
 
       # 최신 태그를 scripts 폴더 내 KrVersionChecker.txt에 기록
       - name: Update version in scripts/KrVersionChecker.txt
