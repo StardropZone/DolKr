@@ -77,7 +77,8 @@ jobs:
               ENCODING=$(file -bi "$file" | awk -F "=" '{print $2}')
               if [ "$ENCODING" != "utf-8" ]; then
                 echo "Converting $file from $ENCODING to utf-8"
-                iconv -f $ENCODING -t UTF-8 "$file" -o "$file"
+                TEMP_FILE="${file}.tmp"
+                iconv -f $ENCODING -t UTF-8 "$file" -o "$TEMP_FILE" && mv "$TEMP_FILE" "$file" || echo "Failed to convert $file"
               fi
             fi
           done
