@@ -1,19 +1,19 @@
-# Degrees of Lewdity 한국어 번역판에 대하여
+# Degrees of Lewdity ÇÑ±¹¾î ¹ø¿ªÆÇ¿¡ ´ëÇÏ¿©
 
-이 번역본은 Vrelnir의 Degrees of Lewdity (https://vrelnir.blogspot.com/) 게임 원본을 원본의 CC-BY-NC-SA 라이센스에 의거 동일조건으로 아카라이브 DOL 채널 (https://arca.live/b/dolgame)에서 번역중인 번역본입니다.
+ÀÌ ¹ø¿ªº»Àº VrelnirÀÇ Degrees of Lewdity (https://vrelnir.blogspot.com/) °ÔÀÓ ¿øº»À» ¿øº»ÀÇ CC-BY-NC-SA ¶óÀÌ¼¾½º¿¡ ÀÇ°Å µ¿ÀÏÁ¶°ÇÀ¸·Î ¾ÆÄ«¶óÀÌºê DOL Ã¤³Î (https://arca.live/b/dolgame)¿¡¼­ ¹ø¿ªÁßÀÎ ¹ø¿ªº»ÀÔ´Ï´Ù.
 
-이 번역본을 기반으로 하는 2차저작물은 CC-BY-NC-SA 라이센스를 따르는 이상 자유롭게 공유(배포 등) 및 변경하실 수 있습니다.
+ÀÌ ¹ø¿ªº»À» ±â¹ÝÀ¸·Î ÇÏ´Â 2Â÷ÀúÀÛ¹°Àº CC-BY-NC-SA ¶óÀÌ¼¾½º¸¦ µû¸£´Â ÀÌ»ó ÀÚÀ¯·Ó°Ô °øÀ¯(¹èÆ÷ µî) ¹× º¯°æÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
 
-1. BY - 원본과 번역본의 저작자 (출처)가 명기되어야 합니다.
-2. NC - 비영리 목적으로만 이용 가능합니다.
-3. SA - 원본과 동일한 CC-BY-NC-SA 라이센스를 적용하여야 합니다.
+1. BY - ¿øº»°ú ¹ø¿ªº»ÀÇ ÀúÀÛÀÚ (ÃâÃ³)°¡ ¸í±âµÇ¾î¾ß ÇÕ´Ï´Ù.
+2. NC - ºñ¿µ¸® ¸ñÀûÀ¸·Î¸¸ ÀÌ¿ë °¡´ÉÇÕ´Ï´Ù.
+3. SA - ¿øº»°ú µ¿ÀÏÇÑ CC-BY-NC-SA ¶óÀÌ¼¾½º¸¦ Àû¿ëÇÏ¿©¾ß ÇÕ´Ï´Ù.
 
-## 참고
-- 원본의 CC-BY-NC-SA 라이센스 (영문): 이 번역본에도 포함되어 있는 LICENSE 파일을 참조
-- CC-BY-NC-SA 라이센스 한글번역본: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.ko
-- CC-BY-NC-SA 라이센스 권리 한글번역본: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ko
+## Âü°í
+- ¿øº»ÀÇ CC-BY-NC-SA ¶óÀÌ¼¾½º (¿µ¹®): ÀÌ ¹ø¿ªº»¿¡µµ Æ÷ÇÔµÇ¾î ÀÖ´Â LICENSE ÆÄÀÏÀ» ÂüÁ¶
+- CC-BY-NC-SA ¶óÀÌ¼¾½º ÇÑ±Û¹ø¿ªº»: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.ko
+- CC-BY-NC-SA ¶óÀÌ¼¾½º ±Ç¸® ÇÑ±Û¹ø¿ªº»: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ko
 
-이 아래부터는 원본의 README.md 의 내용이 이어집니다.
+ÀÌ ¾Æ·¡ºÎÅÍ´Â ¿øº»ÀÇ README.md ÀÇ ³»¿ëÀÌ ÀÌ¾îÁý´Ï´Ù.
 ---------------------------------------
 # Degrees of Lewdity
 
