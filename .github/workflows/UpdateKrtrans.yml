@@ -14,10 +14,6 @@ jobs:
       - name: Checkout this repository
         uses: actions/checkout@v3
 
-      # GITHUB_TOKEN 설정
-      - name: Set GitHub Token environment variable
-        run: echo "GITHUB_TOKEN=${{ secrets.G_TOKEN }}" >> $GITHUB_ENV
-
       # 최신 태그 정보 가져오기
       - name: Get latest tag from source repository
         id: get_latest_tag
@@ -68,20 +64,18 @@ jobs:
           # 임시 디렉토리 제거
           rm -rf temp_repo
 
-      # 파일 인코딩 확인 및 변환 (UTF-8로 인코딩되지 않은 경우 변환)
-      - name: Check and convert file encoding to UTF-8
+      # Python 설치 및 인코딩 변환
+      - name: Set up Python and convert encoding
+        if: env.COPY_NEEDED == 'true'
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install chardet and convert encoding
         if: env.COPY_NEEDED == 'true'
         run: |
-          for file in KrTrans/*; do
-            if [ -f "$file" ]; then
-              ENCODING=$(file -bi "$file" | awk -F "=" '{print $2}')
-              if [ "$ENCODING" != "utf-8" ]; then
-                echo "Converting $file from $ENCODING to utf-8"
-                TEMP_FILE="${file}.tmp"
-                iconv -f $ENCODING -t UTF-8 "$file" -o "$TEMP_FILE" && mv "$TEMP_FILE" "$file" || echo "Failed to convert $file"
-              fi
-            fi
-          done
+          pip install chardet
+          python scripts/convertEncoding.py
 
       # 최신 태그를 scripts 폴더 내 KrVersionChecker.txt에 기록
       - name: Update version in scripts/KrVersionChecker.txt
