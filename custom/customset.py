@@ -94,7 +94,7 @@ replacements = [
         ]
     ),
     ("스탯창 돈 아이콘 수정", 
-        'game/base-system/widgets.twee',
+        'game/03-JavaScript/ingame.js',
         [
             (r'''"£"''', r'''"<span class='moneySymbol'>£</span>"''')
         ]

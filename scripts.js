@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("preset2").addEventListener("click", () => {
-        startGameLink.href = "#";
+        startGameLink.href = "DoL/setB/DoLKr.html";
         showToast("준비중", "toast-retexture", () => {
             retextureModal.style.display = "none";
         });
@@ -301,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // 버전1 표시 (현재 버전)
-        versionCheckerDiv.innerText = `현재 버전(A): ${version1.trim()}`;
+        versionCheckerDiv.innerText = `En v${version1.trim()}`;
 
         // 버전2와 버전3의 버전 넘버만 추출
         const version2 = version2Full.split('-')[0];
@@ -309,9 +309,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 버전2와 버전3을 비교하여 업데이트 여부 확인
         if (version2Full.trim() === version3Full.trim()) {
-            updateStatusDiv.innerText = `현재 버전(B): ${version2.trim()}`;
+            updateStatusDiv.innerText = `Kr v${version2.trim()}`;
         } else {
-            updateStatusDiv.innerText = `현재 버전(B): ${version2.trim()} - 업데이트가 존재합니다.`;
+            updateStatusDiv.innerText = `Kr v${version2.trim()} - 업데이트가 존재합니다.`;
         }
     }
 

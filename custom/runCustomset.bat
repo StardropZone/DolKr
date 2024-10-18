@@ -43,7 +43,7 @@ pushd "%~dp0..\KrTrans"
 :: 컴파일된 HTML 파일명을 원하는 이름으로 설정
 set "output_html=DoLKr.html"
 
-echo 컴파일을 시작합니다.
+echo Type 1: 컴파일을 시작합니다.
 :: Run the appropriate compiler for the user's CPU architecture.
 if %PROCESSOR_ARCHITECTURE% == AMD64 (
     CALL "%~dp0..\KrTrans\devTools\tweego\tweego_win64.exe" -f sugarcube-2-ko -o "%~dp0..\KrTrans\%output_html%" --head "%~dp0..\KrTrans\devTools\head.html" "%~dp0..\KrTrans\game" --module "%~dp0..\KrTrans\modules"
@@ -51,18 +51,28 @@ if %PROCESSOR_ARCHITECTURE% == AMD64 (
     CALL "%~dp0..\KrTrans\devTools\tweego\tweego_win86.exe" -f sugarcube-2-ko -o "%~dp0..\KrTrans\%output_html%" --head "%~dp0..\KrTrans\devTools\head.html" "%~dp0..\KrTrans\game" --module "%~dp0..\KrTrans\modules"
 )
 
-echo 컴파일 완료. 결과 파일이 생성되었는지 확인합니다.
-
 REM Step 8: 생성된 HTML 파일을 목표 폴더로 이동
 echo 생성된 파일을 이동합니다.
 move /y "%~dp0..\KrTrans\%output_html%" "%~dp0..\DoL\setA\%output_html%"
+@REM copy /y "%~dp0..\DoL\setA\%output_html%" "%~dp0..\DoL\setD\%output_html%"
 
-REM 복수의 폴더로 복사-이동하는 코드는 주석처리됨. 필요 시 주석 해제
-:: echo [DEBUG] 복수의 폴더로 파일을 복사합니다.
-:: copy /y "%~dp0..\DoL\setA\%output_html%" "%~dp0..\DoL\setB\%output_html%"
-:: copy /y "%~dp0..\DoL\setA\%output_html%" "%~dp0..\DoL\setC\%output_html%"
+REM Step 9: canvasmodel-main_custom.js 파일 삭제 및 두 번째 컴파일 실행
+echo 팔 레이어 커스텀 파일을 삭제합니다.
+del "%~dp0..\KrTrans\game\04-Variables\canvasmodel-main_custom.js"
 
-REM Step 9: KrVersionChecker.txt의 내용을 current_version_Kr.txt에 덮어쓰기
+echo Type 2: 컴파일을 시작합니다.
+if %PROCESSOR_ARCHITECTURE% == AMD64 (
+    CALL "%~dp0..\KrTrans\devTools\tweego\tweego_win64.exe" -f sugarcube-2-ko -o "%~dp0..\KrTrans\%output_html%" --head "%~dp0..\KrTrans\devTools\head.html" "%~dp0..\KrTrans\game" --module "%~dp0..\KrTrans\modules"
+) else (
+    CALL "%~dp0..\KrTrans\devTools\tweego\tweego_win86.exe" -f sugarcube-2-ko -o "%~dp0..\KrTrans\%output_html%" --head "%~dp0..\KrTrans\devTools\head.html" "%~dp0..\KrTrans\game" --module "%~dp0..\KrTrans\modules"
+)
+
+echo 생성된 파일을 이동합니다.
+if exist "%~dp0..\DoL\setB\%output_html%" del "%~dp0..\DoL\setB\%output_html%"
+move /y "%~dp0..\KrTrans\%output_html%" "%~dp0..\DoL\setB\%output_html%"
+@REM copy /y "%~dp0..\DoL\setC\%output_html%" "%~dp0..\DoL\setC\%output_html%"
+
+REM Step 10: KrVersionChecker.txt의 내용을 current_version_Kr.txt에 덮어쓰기
 echo current_version_Kr를 갱신합니다.
 copy /y "%~dp0..\scripts\KrVersionChecker.txt" "%~dp0..\scripts\current_version_Kr.txt"
 

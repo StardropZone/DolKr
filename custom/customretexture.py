@@ -70,17 +70,46 @@ def manage_files():
     except Exception as e:
         print(f"오류가 발생했습니다: {e}")
 
+    
+    try:
+        print("setB 업데이트 시작.")
+
+        target_folders = ["0_vanilla", "1_base", "2_custom"]
+        destination_folder = "../DoL/setB/img"
+
+        if os.path.exists(destination_folder):
+            print(f"{destination_folder} : 기존 파일을 삭제 중입니다.")
+            shutil.rmtree(destination_folder)
+
+        os.makedirs(destination_folder, exist_ok=True)
+
+        for folder in target_folders:
+            src = f"../custom/retexture/{folder}"
+            print(f"{src} 복사 중...")
+            for root, dirs, files in os.walk(src):
+                for file in files:
+                    rel_path = os.path.relpath(root, src)
+                    dest_path = os.path.join(destination_folder, rel_path)
+                    os.makedirs(dest_path, exist_ok=True)
+                    shutil.copy(os.path.join(root, file), dest_path)
+            print(f"{src} 복사 완료")
+
+        print("setB 설정이 완료되었습니다.")
+
+    except Exception as e:
+        print(f"오류가 발생했습니다: {e}")
+
 
 # 주석 처리된 추가 수정용 코드 예시 (추후 사용을 위해 추가 조합 작성)
 """
 try:
-    print("setB 업데이트 시작.")
+    print("set(N)) 업데이트 시작.")
 
     target_folders = ["0_vanilla", "3_custom2"]
-    destination_folder = "../DoL/setB/img"
+    destination_folder = "../DoL/set(N))/img"
 
     if os.path.exists(destination_folder):
-        print(f"{destination_folder} : 기존 파일을 삭제 중입니다."")
+        print(f"{destination_folder} : 기존 파일을 삭제 중입니다.")
         shutil.rmtree(destination_folder)
 
     os.makedirs(destination_folder, exist_ok=True)
@@ -96,7 +125,7 @@ try:
                 shutil.copy(os.path.join(root, file), dest_path)
         print(f"{src} 복사 완료")
 
-    print("setB 설정이 완료되었습니다.")
+    print("set(N) 설정이 완료되었습니다.")
 
 except Exception as e:
     print(f"오류가 발생했습니다: {e}")
