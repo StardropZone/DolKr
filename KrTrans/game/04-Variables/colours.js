@@ -442,7 +442,7 @@ setup.colours.hair = [
 		natural: false,
 		dye: true,
 		canvasfilter: {
-			blend: "#abdcff",
+			blend: "#00d5ff",
 		},
 	},
 	{
@@ -971,7 +971,7 @@ setup.colours.clothes = [
 		name: "neon blue",
 		name_cap: "Neon Blue",
 		csstext: "neon-blue",
-		canvasfilter: { blend: "#abdcff" },
+		canvasfilter: { blend: "#00d5ff" },
 	},
 	{
 		variable: "white",
