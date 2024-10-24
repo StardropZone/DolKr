@@ -1,5 +1,5 @@
 실행 중: ui수정 스크립트 customset.py
-현재 스크립트의 경로: C:\Users\User\Documents\GitHub\DolKr\custom
+현재 스크립트의 경로: C:\Users\user\Documents\GitHub\DolKr\custom
 
 진행 단계: 시작화면 warning 지우기
 이미 수정된 텍스트입니다:

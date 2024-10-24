@@ -43,28 +43,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // 리텍스쳐 버튼 기능
     document.getElementById("preset1").addEventListener("click", () => {
         startGameLink.href = "DoL/setA/DoLKr.html";
-        showToast("프리셋1이 적용되었습니다", "toast-retexture", () => {
+        showToast("Bees 리텍이 적용되었습니다", "toast-retexture", () => {
             retextureModal.style.display = "none";
         });
     });
 
     document.getElementById("preset2").addEventListener("click", () => {
         startGameLink.href = "DoL/setB/DoLKr.html";
-        showToast("준비중", "toast-retexture", () => {
+        showToast("Goose 리텍이 적용되었습니다", "toast-retexture", () => {
             retextureModal.style.display = "none";
         });
     });
 
     document.getElementById("preset3").addEventListener("click", () => {
-        startGameLink.href = "#";
-        showToast("준비중", "toast-retexture", () => {
+        startGameLink.href = "DoL/setC/DoLKr.html";
+        showToast("Goose 리텍이 적용되었습니다", "toast-retexture", () => {
             retextureModal.style.display = "none";
         });
     });
 
     document.getElementById("preset4").addEventListener("click", () => {
         startGameLink.href = "DoLEn/DoLEn.html";
-        showToast("프리셋4가 적용되었습니다", "toast-retexture", () => {
+        showToast("바닐라(En)가 적용되었습니다", "toast-retexture", () => {
             retextureModal.style.display = "none";
         });
     });

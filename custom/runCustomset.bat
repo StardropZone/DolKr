@@ -70,7 +70,8 @@ if %PROCESSOR_ARCHITECTURE% == AMD64 (
 echo 생성된 파일을 이동합니다.
 if exist "%~dp0..\DoL\setB\%output_html%" del "%~dp0..\DoL\setB\%output_html%"
 move /y "%~dp0..\KrTrans\%output_html%" "%~dp0..\DoL\setB\%output_html%"
-@REM copy /y "%~dp0..\DoL\setC\%output_html%" "%~dp0..\DoL\setC\%output_html%"
+copy /y "%~dp0..\DoL\setB\%output_html%" "%~dp0..\DoL\setC\%output_html%"
+@REM copy /y "%~dp0..\DoL\setC\%output_html%" "%~dp0..\DoL\setD\%output_html%"
 
 REM Step 10: KrVersionChecker.txt의 내용을 current_version_Kr.txt에 덮어쓰기
 echo current_version_Kr를 갱신합니다.
