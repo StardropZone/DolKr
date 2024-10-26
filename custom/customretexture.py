@@ -135,7 +135,7 @@ def manage_files():
 
     #setD
     try:
-        print("setD) 업데이트 시작.")
+        print("setD 업데이트 시작.")
 
         target_folders = ["0_vanilla", "6_mikili_base"]
         destination_folder = "../DoL/setD/img"
