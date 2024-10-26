@@ -41,6 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 리텍스쳐 버튼 기능
+
+    document.getElementById("preset0").addEventListener("click", () => {
+        startGameLink.href = "DoLEn/DoLEn.html";
+        showToast("바닐라(En)가 적용되었습니다", "toast-retexture", () => {
+            retextureModal.style.display = "none";
+        });
+    });
+
     document.getElementById("preset1").addEventListener("click", () => {
         startGameLink.href = "DoL/setA/DoLKr.html";
         showToast("Bees 리텍이 적용되었습니다", "toast-retexture", () => {
@@ -63,11 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("preset4").addEventListener("click", () => {
-        startGameLink.href = "DoLEn/DoLEn.html";
-        showToast("바닐라(En)가 적용되었습니다", "toast-retexture", () => {
+        startGameLink.href = "DoL/setD/DoLKr.html";
+        showToast("Mikili 리텍이 적용되었습니다", "toast-retexture", () => {
             retextureModal.style.display = "none";
         });
     });
+
+
 
     // 클립보드에서 데이터를 가져와 저장하는 함수
     function saveClipboardData() {
