@@ -348,7 +348,7 @@
 		<div id="startingPlayerImage" class="hidden"></div>
 	<</if>>
 	<div id="startCaption">
-		<<startCaption>>
+		<<if _warningConfirm>><<startCaption>><<else>><<coveredStartCaption>><</if>>
 	</div>
 <</if>>
 
