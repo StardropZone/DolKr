@@ -642,6 +642,203 @@ Fixes, thanks to KnotLikeThis:
 - Fixed manual adjustments being ignored after randomizing some settings.
 
 
+0.5.3.5:
+
+**Features:**
+- Adjusted some truancy penalties that were a bit broken. Truancy now applies only after two weeks instead of one, and no longer applies every day after that. It will now only apply once per week once the threshold is crossed. Additionally, it will no longer stack detention infinitely (or at all), instead applying delinquency as was intended, and the $lessonmissed variable will no longer keep going up forever, leading to impossible-to-recover-from penalties should the player continue to miss lessons. Thanks to majou.
+
+
+**Fixes:**
+- Fixed Robin ragequitting DoL when their virginity is taken at the pillory.
+- Fixed being able to steal keys for the underground farm outside of the underground farm, or even if the player has never met Remy!
+- Kylar will no longer be so disgusted by the player's dry heaving when pregnant that they'll leave and take all of the current passage links with them.
+- Fixed a couple English skill checks that were accidentally made impossible. One at Eden's cabin, another at the pub.
+- Regression fix for tanlines using the wrong alpha. Tanlines should be back to normal again. Thanks to Xao.
+- Fixed an error that occurred on saves from before the time overhaul, thanks to Xao and Ybyx.
+- Chimera demon-harpy wings in combat should now correctly hide normal demon wings. Thanks to Stadler76.
+- Adjusted the clothing check at the school pool orgy to be slightly less restrictive. Players with collars should no longer be locked out of the event. Thanks to LupusXLass1404.
+- Thanks to Catwheezle and variegations for a mountain of typo and formatting fixes.
+
+Fixes, thanks to Jimmy:
+- Fixed pillory logic which had a guaranteed chance for a new victim after freeing someone.
+- Fixed rice not having supermarket quantity specified.
+- Fixed logic issue with sex toys and NPC speech.
+- Fixed prison issue where daily object didn't exist.
+- Fixed Sewer Lizard Vore not ending its event properly and causing an error.
+- Fixed several typos that led to handheld errors when hunting with the Great Hawk.
+- Fixed some arm layering issues.
+- Fixed a combat error in Housekeeping class.
+
+Fixes, thanks to BlueMuffin:
+- Adjusted the orphanage stove icon slightly to make the alignment more even.
+- Linked the missing wild honeycomb icon.
+- Fixed the half-closed eyelid for the sweet face style, sprite by Aile.
+- Applied the tan filter to the lashes to avoid gray lashes on darker skin tones.
+
+Fixes, thanks to Kirsty:
+- Fired Kylar from their desk job at the police station.
+- Fixed duplicate "mys" in Avery's pet names.
+- Fixed underwear being torn off through trousers.
+- Fixed strap-ons being equated to erect penises in blowjob scenes.
+- Fixed errors being logged for certain hair colours.
+- Fixed pubic bodywriting being exposed while wearing one-piece swimsuits.
+- Fixed football shorts being redubbed foreign football shorts.
+- The player will no longer eat their shorts alongside their popcorn at the movie theatre.
+- Edited cat tail and chest/navel-length bubble tail sprites that were missing pixels.
+- Added missing "tunnel filled with sculptures" icon to sewers. Sprite by BlueMuffin.
+- Fixed closeup sprite display errors when wearing both a strapon and a chastity belt.
+- Students sewing your sleeves together in housekeeping class will no longer transform class into maths class.
+- Sydney will no longer wear their temple robes to the library.
+- Getting your shorts trapped in a locker and picking your way free is no longer considered a crime.
+- Corrected "You think you can promise your chastity belt and just show up in a chastity belt?"
+- Fixed the soft body type darkening lowerwear when the player's wearing a separated outfit as upperwear.
+- Fixed underwear floating above massive pregnant bellies.
+- Wearing a brown/black leather jacket while modeling for Niki will now equip a leather jacket in the correct colour.
+- Corrected further instances of strap-ons being treated like penises in combat.
+- Kylar will no longer break into Alex's cottage or teleport into the bog to abduct PC.
+
+Fixes, thanks to variegations:
+- Blackjack victory scene now only mentions confiscated clothes if clothes were actually confiscated.
+- Makes the security guard report field burning progress accurately, instead of reporting one step in advance and then running out of lines.
+- NPCs' strap-ons should no longer ejaculate onto the dance stage.
+- Zephyr will no longer forget they've met you.
+- You can no longer trick the police into removing your collar by tampering with the leash.
+- Getting hosed down by Leighton now washes off lewd fluids as well as cream.
+- Rags cut off in museum demonstrations will no longer be re-bought.
+- The journal now always shows the time of escort appointments.
+- Checking/unchecking options during Sydney's mall date no longer counts as a haircut.
+- Fixed subject-verb agreement in clothing re-buy messages.
+- Fixed misspelled variable that prevented "Show"/"Hide" link text from toggling.
+- Players who've met the Ivory Wraith will now properly refer to it as "it" at the farm.
+
+
+0.5.3.6:
+
+**Features:**
+
+- Implemented combat hair gradients. Thanks to Kirsty.
+
+
+**Fixes:**
+
+- Removed Engine.play() calls from versionUpdate and passageHeader, fixing double canvas bugs and save/load event inconsistency. Thanks to majou.
+- Reworked $NPCList update logic to support saves at least as old as 0.2.22, possibly older. Thanks to majou.
+- Fixed some logic issues with Mickey's Bailey task. Thanks to LupusXLass1404.
+- Added a new Passout scene specifically for the moor horse event in order to prevent an error. Thanks to LupusXLass1404.
+
+Fixes, thanks to BlueMufin:
+- Sam will now pay the player the correct amount when serving lewd coffee. Thanks to BlueMuffin.
+- Consistency fixes for the cafe's description when it is being renovated etc, including during some exhibitionism events, thanks to BlueMuffin.
+- Indexed tending icons.
+
+Fixes, thanks to SevenSeriousShadows:
+- Fixed kiss virginity using a nebulous "they" in the default case.
+- Fixed the player being able to slap the doctors when they attempt to force pills on the PC, if both arms are bound.
+- Fixed a missing bestiality bypass when being brought in by Remy's dogs after escaping.
+- Fixed a math issue with Bailey collecting rent. Bailey had graciously allowed you to subtract your childcare fees from their weekly debt payments. This meant that, theoretically, you could have gotten Bailey to pay you every week if you had more than twenty children. The government has stepped in, and this is no longer the case.
+- Fixed some missing school naked repuation checks.
+- Fixed line spacing in a Photography Studio link.
+- Improves the School Detention scene
+- Fixes a missing case for player wearing chastity devices.
+- Fixed a case of Sydney using two rulers once, rather than one ruler twice.
+- Fixes a case of odd grammar in the brothel virginity show.
+- Fixed a bunch of bad <br>s.
+
+Fixes, thanks to Kirsty:
+- Fixed facewear being sent to the wardrobe with the wrong colour during a date with Avery.
+- Fixed the monocle icon not being coloured correctly.
+- Fixed "thin cups of wheat are sprouting" and similar weirdness with planted crops.
+- Fixed missing acc error for the starter outfit swim shorts.
+- Fixed the soft body type darkening leggings and longjohns.
+- Fixed Sydney status error when moaning.
+- Removed mannequin sentience. (They will no longer spring to life like some fucked up horror movie and cover their crotch with a custom-coloured umbrella)
+- Strapons will no longer cover the player's ass in a deluge of cum.
+- Avery's card date will now count as an actual date, and should no longer cause duplicate love interest notifications.
+- Added the office manager to the persistent NPC settings.
+- Smoothed out antique coin icons.
+- Whitney's Large Dark Red Strapon Cock™ will now be dark red in combat.
+- Robin will no longer kick the player out in the nude before school.
+- Fixed incorrect combat hair lengths for certain styles.
+- Fixed errors being logged during combat for the original aviator shades.
+- Typo fixes.
+
+Fixes, thanks to variegations:
+- Staying up all night to weaken your leash no longer reduces fatigue.
+- Shackles no longer protect the soles of your feet from sharp objects.
+- Made PC sprite stop holding the golden chastity belt after putting it on.
+- Fixed an error preventing total blackjack winnings from printing.
+- Filled in missing stat-change text on two of Eden's chores.
+- You can now show Winter the gold chastity belt you're wearing without having to sell other antiques first.
+- You can no longer donate a gold chastity belt that's been destroyed.
+- Typo fixes.
+
+Fixes, thanks to Lollipop Scythe:
+- Fixed a stat issue when drinking other NPCs' breast milk.
+- Fixed an issue with Robin not immediately being sent to the pillory after you escape the underground farm at night.
+- Fixed the player being confused about how they dressed in the school changing rooms.
+- Fixed being able to see Dr Harper multiple times on a Friday.
+- Fixed a major issue with the clothing shop allowing access to inaccessible items and causing various errors.
+- Fix to some combat text being a passage late.
+- Fix to a kicking action pointing to the wrong target and causing an error.
+- Fixed a softlock related to bodyliquid.
+- Fix to the Tailor taking cheated or invalid items away.
+- Trimmed clothing values that are not needed in outside of setup/shop.
+- Fixed a version update clothing reference issue.
+
+
+0.5.3.7:
+
+**Fixes:**
+
+- Fixed the player being unable to confess their guilt after stealing a book from the library if Whitney had also stolen a book.
+- Fixed the player's aforementioned guilt never being forgotten. Book criminals are not, in fact, forever.
+- Fixed being able to find an oyster pearl in a whale's stomach.
+- Added missing icons to the thicket shortcut from the forest and the Main Hall link in the orphanage kitchen.
+- Kylar can no longer whine about their hallucinations of Sydney at the library while they're at the manor.
+- Getting dressed to walk to school with Robin while in their room naked no longer takes an extra 5 minutes.
+- Re-enabled the option to disable combat animations. Thanks to Jimmy.
+- Fixed a typo when not deviant enough at the underground brothel. Thanks to sugarcoma.
+
+Fixes, thanks to Kirsty:
+- Fixed incorrectly coloured TF parts for players without gradients.
+- Fixed oral dialogue relating to strapons; NPCs will no longer comment about 'tasting dick' when using one.
+- Fixed an error that occurred when checking for Love Interests when the player has none set.
+- The player will no longer bring their umbrella into the hot tub with Avery.
+
+Fixes, thanks to SevenSeriousShadows:
+- Fixed many issues with Whitney's vibrator scene.
+- More combat stat changes now respect the option to disable stat change displays.
+- Lots of typo, formatting, linebreak and span fixes.
+- Makes heel lessons properly indicate that they increase fatigue more than dance or yoga lessons.
+- Adds the missing dance studio icon to dance lessons.
+- Changes combat dissociation stat notes to use <<note>> rather than a manual equivalent
+- Adds bestiality toggle support for the Beach Phallus dog event
+- Adds missing dog icons and pronoun widget calls to related links.
+- Player may no longer instantly jack off Remy's steeds.
+- Player may no longer torment Remy's steeds with infinite timeless handjobs.
+- Player may now lewd Remy's steeds after brushing them. Scene was previously unreachable due to an oversight by RNJesus.
+- Fixed a weird case of Brushing link being mid-passage.
+- Fixed trailing spaces after day displays in the journal.
+- Removes the option to ignore Alex's call to arms, thus setting that Alex free.
+- Yip.
+
+Fixes, thanks to Lollipop Scythe:
+- Fix to the ear slime preventing the gangbang brothel show when school is closed. Thanks to Lollipop Scythe.
+- Fixed Undefined toy during masturbation.
+- Fixed farming plot display error.
+- Fix to the free Spray message only showing up at the end of struggle combat.
+- Added missing sex toy caption text when completely naked.
+
+Fixes, thanks to variegations:
+- Your cruise ship captors no longer let you stop dancing because they groped you.
+- Fallen angels will no longer switch wing styles when growing feathers.
+- "You feel different yet again" no longer prints twice in a row when wearing the feminizing clothes.
+- Zephyr will now acknowledge if they had to wake up to break up a fight on deck.
+- Fixed a bug where thugs could fight you after your farm dogs chased them off.
+- Possessed players no longer conjure outdoor windows to check their reflection in.
+- Typo and formatting fixes.
+
+
 
 0.5.2.8:
 **Fixes:**

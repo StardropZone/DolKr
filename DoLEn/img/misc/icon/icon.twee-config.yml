@@ -1378,15 +1378,16 @@ sugarcube-2:
         ![rubble](./rubble.png)
         ![rubbish](./rubbish.png)
         ![ruins](./ruins.png)
+        ![sculpture](./scrap.png)
         ![scrap](./scrap.png)
         ![waterfall](./waterfall.png)
         ![default](./sewer.png)
 
         `<<sewericon iconName?>>`
         - **iconName** _optional_: `string` - interest point
-          - `"algae"` | "breeze"` | `"drain"` | `"litter"` | `"main"` | `"mud"` | `"wood"` | `"webs"` | `"rubble"` | `"rubbish"` | `"ruins"` | `"scrap"` | `"waterfall"` | `default`
+          - `"algae"` | "breeze"` | `"drain"` | `"litter"` | `"main"` | `"mud"` | `"wood"` | `"webs"` | `"rubble"` | `"rubbish"` | `"ruins"` | `"sculpture"` | `"scrap"` | `"waterfall"` | `default`
       parameters:
-        - '|+ "algae"|"breeze"|"drain"|"litter"|"main"|"mud"|"wood"|"webs"|"rubble"|"rubbish"|"ruins"|"scrap"|"waterfall"'
+        - '|+ "algae"|"breeze"|"drain"|"litter"|"main"|"mud"|"wood"|"webs"|"rubble"|"rubbish"|"ruins"|"sculpture"|"scrap"|"waterfall"'
       tags: ["img"]
     sextoysicon:
       description: |-
