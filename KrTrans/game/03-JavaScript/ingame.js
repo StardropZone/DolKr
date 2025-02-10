@@ -2166,7 +2166,7 @@ function formatMoney(amount) {
 			formattedAmount += "." + ("0" + Math.floor(Math.abs(decimalPart))).slice(-2);
 		}
 	}
-	T.printmoney = (amount >= 0 ? "" : "-") + "£" + formattedAmount;
+	T.printmoney = (amount >= 0 ? "" : "-") + "<span class='moneySymbol'>£</span>" + formattedAmount;
 	return T.printmoney;
 }
 window.formatMoney = formatMoney;

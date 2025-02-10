@@ -30,7 +30,7 @@ Degrees of Lewdity
 <<set $settingsExitPassage to "Start2">>
 <<initsettings>>
 <div id="settingsStart">
-	<<if _warningConfirm>><<settingsStart>><<else>><<koTransWarning>><</if>>
+	<<settingsStart>>
 </div>
 
 :: Start2 [nosave exitCheckBypass]
