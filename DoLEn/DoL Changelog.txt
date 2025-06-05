@@ -535,6 +535,163 @@ Fixes, thanks to Kirsty:
 - Prevented wolf pups who somehow have no eye colour from breaking the wolf cave.
 
 
+0.5.4.6:
+
+**Features:**
+
+- Added another 'handheld' 'item' to the end of the Hopeless Cycle sequence. Thanks to Jacko again.
+
+**Fixes:**
+
+- Avery will now correctly describe where they're going when inviting the player to the cards date, thanks to Juniaki.
+- Fixed an NPC at the pub who was bringing the player to the wrong location. Thanks to SevenSeriousShadows.
+- When using the repair crate, and selecting the "damaged items" option, all non-broken outfits will now be skipped regardless of damage. This fixes an issue where only one half of an outfit would be taken, resulting in a bugged clothing item. The "outfits" and "all clothes" options still take outfits for repair.
+- The gaoler will no longer be mistaken as a girl if the real player character was overwhelmingly female-appearing and missed an endcombat check.
+- Gave the gaoler some cool new boots as an apology, thanks to void.
+- Fixed an error that occurred when the gaoler left a bedsheet on the witch, but did not grant her clothing.
+- Snow and parasites will no longer travel back through time.
+- Fixed "- trauma" displaying twice when renewing the torch fuel in the dungeon, while not actually reducing trauma. This was the true hopeless cycle.
+- Restored Black Wolf to having their own unique combat sprites.
+- Fixed a years-old bug where saving a towel to an outfit would cause the player to wear an invisible towel.
+- Male players who gain insecurity about breasts will now see it displayed as `Insecurity: Male Breasts` rather than their current breast size, which was misleading, as the insecurity was due to having breasts as a male at all.
+- Said male players can now correctly pray or meditate for smaller breasts at any breast size above zero, if any insecurity is gained.
+- Halved an absurd school status loss by failing games of tag.
+- Fixed a missing deviancy option at the farm for those with bestiality disabled but monster people enabled.
+- The player can no longer break reality by kicking the space where an NPC would be had their choices been different. The holes haven't spread that far just yet.
+- Fixed a machine in the farmlands that could take the player's non-existent vaginal virginity.
+- Restored a missing physique gain when going for a run on the beach.
+- Restored missing physique gain messages for running in the park.
+- Once again fixed the Danube dance job having incorrect options.
+- Fixed a group of orphans leaving a `</span>` in a box of sweets. Always check your candy!
+- Fixed an event at school that wasn't properly using the "Next" button at the bottom.
+- Fixed escaped stat text in an ear slime event.
+- Robin will no longer exploit a money duplication glitch at the lemonade stand. Just because they were traumatised doesn't make it okay. Other people have problems too.
+- Saving an orphan from bullying at school will now increase kindness fame.
+- Fixed an error found when letting the black wolf clean you.
+- Fixed a pronoun issue during one of the farmland manor events.
+- Fixed a "you remove your naked" bug found during a photo shoot with Niki.
+
+Fixes, thanks to KnotLikeThis:
+- Fixed an issue that could occur when loading old saves in the wolf cave.
+- Broke some of Kylar's condoms.
+- Fixed some links when entering the changing rooms from the pool at school.
+- Fixed Wren forgetting some events.
+- Fixed supermarket search being case sensitive.
+- Fixed range sliders interfering with the sidebar on mobile.
+- Fixed some settings not being exported properly.
+- Fixed some settings being shown as unrecognized on import.
+- Fixed Lucida Console font option using a different font.
+
+Fixes, thanks to majou:
+- Unhidden br links in radio columns view.
+- Allowed chunky mobiles to play with the uibar open.
+- Convinced radio buttons to not leave their descriptions alone on the next line.
+- Removed trailing | at the last radio action.
+- Fixed switcher to the old save menu being empty.
+- Fixed swimwear sometimes inheriting wetness values from other clothes and thus failing to act as swimwear.
+
+Fixes, thanks to Kirsty:
+- Fixed bunny collar icon not displaying correctly.
+- Corrected a very confused Kylar's dialogue when a crossdressing PC's genitals are exposed.
+- Whitney will no longer tug your naked off you during the maths competition.
+- Fixed file names for temple spear.
+
+
+0.5.4.7:
+
+**Features:**
+
+- Adds more detail to the 'handheld' 'item' at the end of the Hopeless Cycle scene. Thanks to Jacko.
+- Students at the school pool can now actually generate naked, and will do so more often as the event to make the class swim naked progresses.
+
+
+**Fixes:**
+
+- The gaoler will no longer hold the new 'handheld' 'item' in the characteristics tab.
+- The gaoler may no longer sleep in the cell when they hear someone approaching.
+- The 'Second Chance' scene can no longer lead to an early end.
+- The notification for items being found in the Hopeless cycle scene previously would only display when the hour ticked over, and only if the player was in a location where other members of the temple would be, and never at night time. This led to the notification being delayed by hours or even days if the player wasn't in one of these locations when the hour ticked over, and often led to feeling as though a non-existent item was found. The notification will now display as soon as the player enters any location with other monks and nuns.
+- Fixed NPCs licking the player's penis appearing as though they were penetrating the player.
+- In missionary, the player's penis and/or chastity device will no longer appear to be slightly disconnected from their body when legs are down.
+- Also in missionary, NPCs will no longer appear to be orally penetrating the player in the 'entrance' or 'imminent' states.
+- Restored missing chastity penis, parasite penis, and player condom images to the new renderer.
+- Fixed an invalid colour error with the anal beads and cards props.
+- Made escaped handheld props on the pirate ship walk the plank.
+- The player's hands will no longer be melded with the pillory and take skin tone into account now.
+- Fixed wolf TF hirsute layering.
+- Fixed an issue where the pubic hair setting was undefined for players that began the game through quick start. It's still disabled by default.
+- Having a 'random' colour preset for outfits should now properly search through custom-coloured clothing again.
+- Fixed several instances of beast NPCs being unable to break the player's temple vow.
+- It is no longer impossible to fail securing your clothes with your left hand in combat.
+- Fixed one outcome of the street fan event that always gave the player the micro-pleated set and could never give the pimp set.
+- The belted boots will no longer devour the player's lower clothes for a single passage when they're tucked in.
+- Fixed pig penis being removed from local spacetime by the player's butt.
+- Fixed a pricing error with the repair crate.
+- Fixed an error that could appear when repairing all clothes.
+- Fixed duplicating split outfit parts when repairing all clothes.
+- Fixed skin semen sprites layering over hand items.
+- Fixed being able to steal from completely naked NPCs.
+- Taking the thicket shortcut to the residential alleyways will now correctly end forest hunts.
+- Fixed a sprite error with the sundress in missionary combat.
+- Fixed an issue with eye lens presets, thanks to Frostberg.
+- Caught an escaped fox in the meadow.
+
+Fixes, thanks to majou:
+- Fixed weather errors when going back in history to the :: Start passage.
+- Fixed robin staying in your bed for longer than intended.
+- Fixed default combat controls being asymmetrical.
+- Fixed a few scenes using his instead of <<his>>.
+- Fixed usb return scene having no escape.
+- Fixed one detention punishment ending prematurely.
+- Kylar was taught the difference between girls' bathroom and girls' bathroom.
+- Fixed nightmare "run" and "stay still" choices both leading to the "run" outcome.
+- Contained robin from escaping when pc is naked.
+- Prevented cat tf dancers from infinitely lapping up _liq.
+- Fixed generation that prioritises NPCs that can take the player's virginity again.
+- Returned the rare toast.
+
+
+0.5.4.8
+**Fixes:**
+- Fixed time and weather. The earth will now rotate again.
+- Fixed an error found when starting Hopeless Cycle.
+
+
+0.5.4.9:
+
+**Features:**
+
+- Pubic tattoos will now move to the correct place as the player's pregnant belly grows.
+
+**Fixes:**
+
+- Mickey will no longer introduce themselves twice if the player recruits them to finish the police computer password quest and the fame reduction quest at the same time. Thanks to Crimson Tide.
+- Many spacing and indentation fixes, thanks to Klorpa.
+- Fixed missing max breast size image for the brown leather jacket.
+- Fixed missing 'cat' and 'creature' beast images from the front in doggy.
+- Fixed a misnamed toggle check that was causing an event in the maze to never trigger.
+- Fixed a missing eventskip that was causing the maze basilisk to ignore the player.
+- Fixed removing your naked for Niki.
+- Fixed a case of awkward missing text after being molested while praying at the temple.
+- Fixed being able to banish twice if the player only has one banish charge left but uses both hands.
+- The gaoler may no longer delay fate by cuddling with the witch.
+- Fixed the witch's bandages not becoming as dirty as intended when she's very injured.
+- Fixed the witch's warning nightmare displaying twice.
+- Meditating in the Hopeless Cycle prayer room is now functional on repeat meditations.
+- Corrected cases of "gray" to "grey" in the Hopeless Cycle.
+- Fixed having your towel stolen in the boy's locker rooms causing a lower item to be destroyed upon going to the locker.
+- Fixed an error with Avery's rage stat when refusing their ride offer.
+- Captured an escaped Whitney from the canteen.
+- If the player breaks down to Robin late in the morning just before school, it was possible to entirely skip their walking to school trigger and would make Robin skip school. Robin will now correctly comment that you're both late for school and no longer skip.
+- Fixed NPCs speaking about exposed genitals or breasts when the player's underwear is still in the way.
+- Fixed being unable to break the lock on the underground farm's cell after it's replaced by another weak lock.
+- Fixed a strange case of losing your lower clothes and receiving a nonexistent towel at the riding school.
+- The player display at the hairdressers will now wear a towel. Sitting naked for a haircut isn't an event just yet.
+- Fixed a pronoun error in Quinn's outcome of the Avery cards date.
+- Laced up heels will no longer devour the player's lower clothes while tucked in.
+- Caught an escaped Robin found when teasing them in their bedroom, an escaped NPC found when stripping on the beach, and an escaped janitor at the school gloryhole.
+
+
 
 0.5.3.7:
 
